@@ -25,25 +25,29 @@ Designed to:
 File:
 [`tools/duckweed_scooper/duckweed_scooper.scad`](tools/duckweed_scooper/duckweed_scooper.scad)
 
+Render:
+`scripts/render_duckweed_scooper.sh` → `stl/duckweed_scooper/duckweed_scooper.stl`
+
 ## 📂 Structure
 ```
 aquiloop/
+├─ .github/
+│  └─ workflows/
+│     └─ cad-duckweed-scooper.yml
+├─ docs/
+│  └─ prompt-docs-summary.md
+├─ scripts/
+│  └─ render_duckweed_scooper.sh
 ├─ tools/
 │  └─ duckweed_scooper/
 │     └─ duckweed_scooper.scad
-├─ scripts/
-│  └─ build_stl.py
-├─ tests/
-│  └─ test_scad_build.py
-├─ docs/
-│  └─ prompt-docs-summary.md
 ├─ .gitignore
 ├─ LICENSE
 └─ README.md
 ```
 
 ## 🔄 Workflow
-- `scripts/build_stl.py` renders `.scad` → `.stl` with the OpenSCAD CLI.
+- `scripts/render_duckweed_scooper.sh` renders `.scad` → `.stl` with the OpenSCAD CLI.
 - CI runs linting, spellcheck, and smoke tests.
 - Contributions follow the same conventions as **flywheel**:
   - Pre-commit hooks

@@ -21,5 +21,9 @@ module scooper_head() {
     }
 }
 
-translate([0, 0, wall_thickness]) rotate([90, 0, 0]) handle();
-translate([-scooper_width / 2, -scooper_depth, 0]) scooper_head();
+module duckweed_scooper() {
+    translate([0, 0, wall_thickness]) rotate([90, 0, 0]) handle();
+    translate([-scooper_width / 2, -scooper_depth, 0]) scooper_head();
+}
+
+duckweed_scooper();

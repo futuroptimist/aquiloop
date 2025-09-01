@@ -1,0 +1,33 @@
+name: Build Duckweed Scooper (STL)
+
+on:
+  push:
+    paths:
+      - 'tools/duckweed_scooper/duckweed_scooper.scad'
+      - 'scripts/render_duckweed_scooper.sh'
+      - '.github/workflows/cad-duckweed-scooper.yml'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OpenSCAD (headless)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad xvfb
+
+      - name: Make render script executable
+        run: chmod +x scripts/render_duckweed_scooper.sh
+
+      - name: Render STL
+        run: scripts/render_duckweed_scooper.sh
+
+      - name: Upload STLs
+        uses: actions/upload-artifact@v4
+        with:
+          name: duckweed_scooper-stl
+          path: stl/duckweed_scooper/duckweed_scooper.stl
+          if-no-files-found: error
