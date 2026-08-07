@@ -8,8 +8,9 @@ operation is not considered until the Phase 2 exit criteria are met.
 
 ## 1. Problem statement
 
-Evaporation lowers the aquarium level and concentrates dissolved solids. The
-system must recognize a low waterline and move a bounded amount of freshwater
+Evaporation lowers the waterline and concentrates dissolved constituents,
+including increased salinity when the aquarium is saltwater. The system must
+recognize a low waterline and move a bounded amount of freshwater
 from a reservoir to the aquarium without creating a credible path for an
 uncontrolled fill, siphon, electrical hazard, or network-dependent safety
 failure. A garage adds heat, humidity, contamination, and temperature
@@ -73,8 +74,9 @@ measurable phases.
 flowchart LR
   subgraph SP[Local safety plane - network independent]
     SST[SST normal-level sensor] --> IO[Protected and fail-safe input]
-    FLOAT[NC high-high float] --> RELAY[Normally-off safety relay enable]
-    FLOAT --> IO
+    FLOATS[Dual NC high-high floats] --> EOL[Dual supervised EOL loops]
+    EOL --> RELAY[Normally-off safety relay enable]
+    EOL -->|protected / isolated feedback| IO
     RES[Reservoir-low sensor] --> IO
     LEAK[Leak sensors] --> IO
     TOF[VL53L4CD diagnostic level] --> MCU[ESP32-S3 state machine]
@@ -143,9 +145,12 @@ separately wired, independently powered-down-safe high-high layer.
 - Use an external listed low-voltage AC/DC supply sized for pump startup and
   electronics conversion. Fuse the low-voltage branches and never place exposed
   mains wiring in the project enclosure.
-- Keep the reservoir below the aquarium where practical. Secure the outlet tube
-  above the maximum waterline with a visible air gap so neither direction can
-  siphon. Do not submerge or loosely drape the outlet.
+- Secure the outlet tube above the maximum aquarium waterline with a visible air
+  gap to prevent aquarium backflow. The air gap does not stop gravity flow from
+  a reservoir whose water surface is above the outlet: keep the reservoir's
+  maximum source-water level below the delivery outlet, or use a separately
+  validated, fail-safe anti-siphon mechanism. Do not submerge or loosely drape
+  the outlet.
 - Use GFCI-protected mains, drip loops on every cable/tube approaching powered
   equipment, strain relief, splash-resistant separation, and labeled DISABLE.
   Secondary containment becomes mandatory as the system matures.
@@ -202,7 +207,7 @@ boot-count telemetry help detect loops, but do not relax local behavior.
 | Choice | Decision and rationale |
 | --- | --- |
 | Fixed SST optical point sensor | Phase 1 normal-level switch: compact and no moving parts. Fixed horizontal placement permits repeatable wet/dry behavior and inspection. Fouling, bubbles, film, wiring, and retained droplets remain credible failures. |
-| NC polypropylene float/reed switch | Phase 2 high-high cutoff. Normally closed below high-high lets an open wire or loss of power remove relay enable. Its buoyancy/mechanical failure modes differ from the optical sensor. |
+| Dual NC polypropylene float/reed switches | Phase 2 high-high cutoff channels. Each is normally closed below high-high and has a separately supervised end-of-line loop. High water or a wiring/power fault removes relay enable independently of firmware. Their buoyancy/mechanical failure modes differ from the optical sensor. |
 | Two identical SST sensors | Rejected as the only redundancy: shared fouling, optical, mounting, supply, and interpretation failures can affect both. Diverse optical plus mechanical sensing improves failure independence. |
 | Capacitive through-glass high sensor | A no-moving-sensor alternative when glass and geometry validate it. It avoids wetted moving parts, but shares sensitivity to wall thickness, condensation, deposits, nearby water, calibration drift, and electronics/common power; therefore its failure independence is weaker than a separately wired mechanical float. |
 | Pressure/depth sensor | Deferred: wetted compatibility, drift, vent/reference handling, and extra penetrations are unnecessary for point control. |
@@ -294,7 +299,8 @@ valve for safety (1 set, $5-$15), and PLA/fasteners (1 set, $10-$25).
 2. With pump disconnected, exercise dry/wet/chatter/open/short/unpowered sensor,
    boot, brownout, reset, corrupt persistence, watchdog, budget, and local latch.
 3. With the safely limited reservoir and an observer, verify pulse/settle/retry,
-   manual DISABLE, freeboard, air gap, outlet retention, and power removal.
+   manual DISABLE, freeboard, air gap, outlet retention, maximum source-water
+   level below the delivery outlet, and power removal.
 4. Soak and splash-test unpowered printed fixtures; inspect clamp creep over the
    expected garage temperature range. Never intentionally wet energized parts.
 5. Review source-to-part mapping and render every `.scad` in CI once implemented.
@@ -312,18 +318,27 @@ air gap remain secure; calibration and test records are reviewed. Passing Phase
 
 #### Included hardware/software
 
-- Add an independent, aquarium-compatible polypropylene normally-closed
-  high-high float/reed sensor above the normal SST setpoint on its own fixed
-  bracket channel.
-- Wire the closed-below-high loop into a low-current, normally-off safety-relay
-  enable circuit. Relay de-energization physically removes pump power outside
-  firmware. High water, a broken float wire, connector removal, or lost enable
-  power opens the loop. Select a force-guided/safety-rated architecture where
-  practicable and verify contact ratings; the relay enables the pump power path
-  rather than switching motor current through the sensor.
-- Also monitor isolated auxiliary state at the ESP32 for disagreement. Any
-  normal-low/high-high combination, stale input, or relay feedback mismatch
-  latches a fault. Reset is explicit and local/manual after inspection.
+- Add two independently mounted, aquarium-compatible polypropylene
+  normally-closed high-high float/reed sensors above the normal SST setpoint.
+- Give each float a separate, firmware-independent supervised end-of-line loop
+  with a distinct EOL resistance and its own safety-controller channel. The
+  controller must require both channels to be in their closed, in-range state
+  and use channel test pulses or equivalent cross-short monitoring. High water,
+  an open/broken wire, connector removal, lost loop or relay power, a
+  short-to-supply/ground or cross-channel short, or a conductor bridge that
+  bypasses either NC contact must make at least one channel invalid and
+  de-energize the normally-off safety relay. The future circuit design must
+  document resistance windows, tolerances, test coverage, reset behavior, and
+  single-fault analysis; this document does not provide a schematic.
+- Relay de-energization physically removes pump power outside firmware. Select
+  a force-guided/safety-rated controller and relay architecture where
+  practicable, verify contact ratings, and switch the pump power-enable path
+  rather than motor current through either sensor.
+- Feed separately protected or isolated channel state and relay auxiliary
+  feedback to the ESP32, without allowing GPIO faults to hold the safety loop
+  valid. Channel disagreement, an invalid loop, a normal-low/high-high
+  contradiction, stale feedback, or relay mismatch latches a fault and drives
+  the `high_high` metric. Reset is explicit and local/manual after inspection.
 - Optionally evaluate a fixed capacitive through-glass sensor, but only after
   fault-independence analysis; it is not the preferred hardware cutoff.
 - Export bounded metrics to Prometheus; add a dedicated Aquiloop Grafana
@@ -333,7 +348,7 @@ air gap remain secure; calibration and test records are reviewed. Passing Phase
 
 #### Failure modes addressed
 
-Single optical false state; broken high-high wire;
+Single optical false state; open, bridged, or cross-shorted high-high wiring;
 lost controller/enable power; firmware unable to stop a commanded driver;
 sensor disagreement; lack of remote awareness.
 
@@ -345,21 +360,29 @@ sensors, no source inventory, and network alert delay/outage.
 
 #### BOM delta
 
-$35-$115: NC polypropylene float (1, $10-$30), normally-off
-relay/contactor and socket plus feedback/interface parts (1, $15-$45), separate
-fusing/connectors/bracket material (1 set, $5-$20), and optional through-glass
-capacitive evaluation sensor (1, $5-$20). Cluster resources are existing
+$85-$235: NC polypropylene floats (2, $20-$60), dual-channel
+supervised safety controller, normally-off relay/contactor, EOL and isolated
+feedback/interface parts (1 set, $55-$135), separate fusing/connectors/bracket
+material (1 set, $5-$20), and optional through-glass capacitive evaluation
+sensor (1, $5-$20). Cluster resources are existing
 infrastructure or separately budgeted.
 
 #### Validation tests
 
-- Raise the high-high float during a pulse; measure physical pump-power removal
-  without firmware cooperation. Repeat for cut/shorted wires as the circuit
-  fault analysis dictates, unplugged ESP32, frozen task, and lost relay power.
-- Prove that each SST/float truth-table disagreement latches, persists across
-  reboot, and requires DISABLE-inspect-local-reset.
+- Raise each high-high float, separately and together, during a pulse; measure
+  physical pump-power removal without firmware cooperation. Using safe test
+  fixtures, repeat for each open/broken conductor, connector removal,
+  short-to-supply/ground, cross-channel short, bridge bypassing each NC contact,
+  unplugged ESP32, frozen task, and loss of loop or relay power.
+- Prove that each SST/float/channel truth-table disagreement latches, persists
+  across reboot, and requires DISABLE-inspect-local-reset.
 - Confirm high-high placement remains below overflow but above normal ripple;
   independently measure the maximum post-cutoff delivery from tube/pump inertia.
+- Under worst-case reservoir fill and placement, verify the air gap remains
+  visible and aquarium backflow cannot occur, and prove either that the maximum
+  source-water level is below the delivery outlet or that a separate fail-safe
+  anti-siphon mechanism stops gravity flow during power loss and relevant
+  single faults.
 - Drop Wi-Fi, Prometheus, Grafana, Alertmanager, DNS, and cluster power while
   filling: local cutoff must remain unchanged. Separately verify controller-down
   and safety alerts reach a PagerDuty test service with no credential on device.
@@ -369,12 +392,14 @@ infrastructure or separately budgeted.
 #### Objective exit criteria before unattended operation is considered
 
 The
-hardwired cutoff passes at least 100 induced trips and all wire/power fault
+dual-channel cutoff passes at least 100 induced trips and every enumerated
+wire, bridge, cross-short, channel, and power fault
 cases; 30 days of supervised operation stay within calibrated budgets with no
 unexplained disagreement; maximum single-fault delivered volume stays below
 safe freeboard; alarms and runbook drills pass; electrical, plumbing, mount,
-GFCI, air-gap, containment plan, and maintenance records receive a documented
-human review. “Considered” is not blanket approval: the specific installation
+GFCI, air-gap, source-height or validated anti-siphon protection, containment
+plan, and maintenance records receive a documented human review. “Considered”
+is not blanket approval: the specific installation
 requires a risk review, and Phase 3 protections are strongly preferred.
 
 ### 8.3 Phase 3 - source-water and leak protection
@@ -492,9 +517,9 @@ fit, creep, splash, temperature, and 100-cycle mounting tests.
 | Phase | Main additions | Approx. phase cost | Approx. cumulative cost |
 | --- | --- | ---: | ---: |
 | 1 | ESP32-S3, SST interface, 12 V pump/driver, listed supply, controls, tubing, PLA fixtures | $105-$265 | $105-$265 |
-| 2 | NC high-high float, normally-off hardware enable/feedback, observability integration | $35-$115 | $140-$380 |
-| 3 | Reservoir-low, two leak zones, containment, optional load cell | $45-$160 | $185-$540 |
-| 4 | VL53L4CD, waterproof temperature probe, baffle/material validation | $25-$90 | $210-$630 |
+| 2 | Dual NC high-high floats, supervised safety controller/relay and isolated feedback, observability integration | $85-$235 | $190-$500 |
+| 3 | Reservoir-low, two leak zones, containment, optional load cell | $45-$160 | $235-$660 |
+| 4 | VL53L4CD, waterproof temperature probe, baffle/material validation | $25-$90 | $260-$750 |
 
 Quantities and ranges are preliminary. Before purchase, the BOM must identify
 manufacturer part number, voltage/current/contact ratings, wetted materials,
@@ -640,10 +665,14 @@ remote “pump on” recovery.
    power transitions, and connector faults; then lock and witness-mark height.
 4. In Phase 2, independently position high-high with space for ripple but below
    unsafe freeboard. Measure volume delivered after the contact opens.
-5. Calibrate reservoir-low against the actual HDPE wall/content and load cell
+5. Verify the visible outlet air gap and demonstrate that the reservoir's
+   maximum possible source-water level remains below the delivery outlet. If
+   that geometry cannot be guaranteed, validate a separate fail-safe
+   anti-siphon mechanism under worst-case source level and power-loss faults.
+6. Calibrate reservoir-low against the actual HDPE wall/content and load cell
    with traceable known masses if fitted. Calibrate ToF only in its final baffle
    and mount; temperature-check against a reference instrument.
-6. Version, date, and sign calibration records. Any pump, tube, supply, mount,
+7. Version, date, and sign calibration records. Any pump, tube, supply, mount,
    reservoir, sensor, firmware constant, or aquarium geometry change invalidates
    the affected calibration.
 
@@ -676,7 +705,8 @@ metric, alert, and reset steps for:
   safe test fixtures, contradiction, and fouling/occlusion;
 - boot during demand, reset/brownout, watchdog stall, corrupt/stale persistence,
   exhausted per-attempt/retry/daily budget, and rapid reset loop;
-- high-high actuation, broken enable wire, lost relay power, welded-contact
+- each high-high actuation, broken enable wire, conductor bridge across each NC
+  contact, channel cross-short, lost loop/relay power, welded-contact
   analysis/test substitute, and controller/network/cluster outage;
 - reservoir empty/low, pump stall or safely pinched tube, disconnected tubing
   into containment, each leak zone, abnormal repeated demand, and load-cell
