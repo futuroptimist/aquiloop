@@ -26,7 +26,7 @@ requirements begin when later phases add structural components.
 - 1 × SparkFun SST Liquid Level Sensor, `SEN-13835` /
   `LLC200D3SH-LLPK1`.
 - 1 × solderless breadboard and suitable jumper wires or test leads.
-- 1 × data-capable Micro-USB/Micro-B cable for the board's USB-to-UART port.
+- 1 × data-capable USB-C cable for the board's USB-to-UART port.
 - 1 × regulated bench power supply.
 - 3 × 10 kΩ, ¼ W, 5% resistors: one upper-divider resistor and two in series
   for the 20 kΩ lower-divider resistance. Their four-band code is
@@ -64,7 +64,7 @@ SST green ---- 10 kΩ ----+---- GPIO4
 GPIO5 ---- 330 Ω ---- LED anode
 ```
 
-1. Power the ESP32-S3 through its USB-to-UART Micro-B connector with the
+1. Power the ESP32-S3 through its USB-to-UART USB-C connector with the
    data-capable cable.
 2. Set the bench supply to exactly 5.00 V with an approximately 50 mA current
    limit, and use it to power only the SST.

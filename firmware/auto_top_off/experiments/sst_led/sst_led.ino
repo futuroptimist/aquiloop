@@ -9,9 +9,10 @@ void reportState(int level) {
   // The SST polarity is inverted: HIGH is dry and LOW is wet.
   const bool wet = level == LOW;
   digitalWrite(LED_PIN, wet ? HIGH : LOW);
-  Serial.printf("GPIO4: %s -> %s; GPIO5 LED: %s\n",
+  Serial.printf("GPIO%u: %s -> %s; GPIO%u LED: %s\n",
+                static_cast<unsigned int>(SENSOR_PIN),
                 level == HIGH ? "HIGH" : "LOW", wet ? "WET" : "DRY",
-                wet ? "ON" : "OFF");
+                static_cast<unsigned int>(LED_PIN), wet ? "ON" : "OFF");
 }
 
 void setup() {
