@@ -14,6 +14,11 @@ This repo continues the spirit of
 
 ## ✨ Tools
 
+### Aquarium Auto-Top-Off
+
+The phased, safety-first auto-top-off system is specified in the
+[aquarium auto-top-off design](docs/design/aquarium-auto-top-off.md).
+
 ### Duckweed Scooper
 A narrow, solid-state scooper to quickly remove duckweed from planted aquariums.
 Designed to:
