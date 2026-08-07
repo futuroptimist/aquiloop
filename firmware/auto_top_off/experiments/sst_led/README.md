@@ -26,7 +26,7 @@ requirements begin when later phases add structural components.
 - 1 × SparkFun SST Liquid Level Sensor, `SEN-13835` /
   `LLC200D3SH-LLPK1`.
 - 1 × solderless breadboard and suitable jumper wires or test leads.
-- 1 × data-capable USB-C cable for the board's USB-to-UART port.
+- 1 × data-capable Standard-A-to-Micro-B cable for the board's USB-to-UART port.
 - 1 × regulated bench power supply.
 - 3 × 10 kΩ, ¼ W, 5% resistors: one upper-divider resistor and two in series
   for the 20 kΩ lower-divider resistance. Their four-band code is
@@ -64,29 +64,40 @@ SST green ---- 10 kΩ ----+---- GPIO4
 GPIO5 ---- 330 Ω ---- LED anode
 ```
 
-1. Power the ESP32-S3 through its USB-to-UART USB-C connector with the
-   data-capable cable.
-2. Set the bench supply to exactly 5.00 V with an approximately 50 mA current
-   limit, and use it to power only the SST.
-3. Connect SST red to bench +5.00 V and SST blue to bench ground.
-4. Connect bench ground to an ESP32 pin labeled GND, establishing a common
-   reference, and to the LED cathode.
-5. Connect SST green through one 10 kΩ resistor to a junction node.
-6. Connect the junction to the ESP32 header pin labeled GPIO4.
-7. From that junction, connect two 10 kΩ resistors in series to ground; these
-   are the 20 kΩ lower-divider resistance and external pull-down.
-8. Connect GPIO5 through the 330 Ω resistor to the LED anode.
-9. Do **not** connect bench +5 V to the ESP32 5 V pin while USB powers the board.
-10. Never connect the raw green SST output directly to an ESP32 GPIO.
+1. Put the unpowered ESP32, breadboard, and bench supply on a dry surface.
+2. Leave the USB cable disconnected and the bench-supply output OFF while
+   making or changing connections.
+3. Identify the ESP32 header pins labeled GPIO4, GPIO5, and GND; use the printed
+   labels rather than counting header positions.
+4. Set the bench supply to exactly 5.00 V with an approximately 50 mA current
+   limit, keep its output OFF, and reserve it for powering only the SST.
+5. Connect bench ground to the breadboard ground rail.
+6. Connect an ESP32 pin labeled GND to that rail to establish common ground.
+7. Connect the SST blue wire separately to the common-ground rail.
+8. Connect the LED cathode separately to the common-ground rail.
+9. Connect two 10 kΩ resistors in series from a new divider junction to common
+   ground; together they form the 20 kΩ lower leg and external pull-down.
+10. Connect that divider junction to the ESP32 header pin labeled GPIO4.
+11. Connect the SST green wire through the remaining 10 kΩ resistor to the
+    divider junction. Never connect the raw SST output directly to GPIO4 or any
+    other ESP32 GPIO.
+12. Connect GPIO5 through the 330 Ω resistor to the LED anode.
+13. Connect the SST red wire separately to bench +5.00 V.
+14. Reinspect every connection, then power the ESP32-S3 only through its
+    USB-to-UART Micro-USB (Micro-B) connector with the data-capable cable. Do
+    **not** connect bench +5 V to the ESP32 5 V pin while USB powers the board.
 
 The SST is a 5 V-class push-pull source. The upper resistance is 10 kΩ and the
 lower resistance is 20 kΩ:
 
 `Vgpio = Vsensor_out × 20 kΩ / (10 kΩ + 20 kΩ)`
 
-Thus a nominal 5.00 V sensor HIGH becomes approximately 3.33 V. Allowing for
-the sensor output range, expect approximately 2.67–3.33 V when dry. A sensor
-LOW of at most approximately 0.5 V becomes at most approximately 0.33 V. The
+Thus a nominal 5.00 V sensor HIGH becomes approximately 3.33 V. With nominal
+resistor values and the documented sensor output range, expect 2.67–3.33 V when
+dry and 0–0.33 V when wet. Accounting for the specified 5% tolerance of all
+three divider resistors, approximately 2.58–3.44 V dry and 0–0.34 V wet are
+possible for a correctly assembled circuit. These tolerance-inclusive ranges,
+not only the nominal-resistor expectations, determine voltage validation. The
 divider protects the 3.3 V ESP32 input from the output; the GPIO absolute
 maximum is 3.6 V. The SST must not be powered from 3.3 V, which is below its
 documented operating range, and its output must always pass through the
@@ -135,12 +146,14 @@ actual water from a power or wiring failure.
     fault-conservative electrical state, not proof that water is present.
 15. Turn on the 5.00 V SST supply with its optical tip dry.
 16. Verify GPIO4 HIGH/DRY, LED OFF, and the corresponding serial transition.
-17. If available, measure GPIO4 to common ground: expect 2.67–3.33 V dry. Stop
+17. If available, measure GPIO4 to common ground: expect approximately
+    2.58–3.44 V dry (the nominal-resistor expectation is 2.67–3.33 V). Stop
     immediately and turn power off if it exceeds 3.6 V.
 18. Touch or dip only the optical prism tip into the fresh-water cup. Never
     immerse its wire exit, connector, breadboard, or electronics.
 19. Verify GPIO4 LOW/WET, LED ON, and the serial transition.
-20. If available, verify approximately 0–0.33 V at GPIO4 while wet.
+20. If available, verify approximately 0–0.34 V at GPIO4 while wet (the
+    nominal-resistor expectation is 0–0.33 V).
 21. Remove the SST and gently blot only the optical tip dry.
 22. Verify return to GPIO4 HIGH/DRY and LED OFF.
 23. Repeat at least five wet/dry cycles and record every result below.
@@ -180,8 +193,8 @@ physical observations have been claimed.
 | Test | Expected GPIO4 | Expected interpretation | Expected LED | Observed result | Pass/fail | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | Sensor supply OFF | LOW | WET (fault-conservative) | ON |  |  |  |
-| Sensor powered and dry | HIGH; 2.67–3.33 V if measured | DRY | OFF |  |  |  |
-| Sensor tip wet | LOW; 0–0.33 V if measured | WET | ON |  |  |  |
+| Sensor powered and dry | HIGH; 2.58–3.44 V if measured (2.67–3.33 V nominal) | DRY | OFF |  |  |  |
+| Sensor tip wet | LOW; 0–0.34 V if measured (0–0.33 V nominal) | WET | ON |  |  |  |
 | Sensor removed and blotted dry | HIGH | DRY | OFF |  |  |  |
 | Five repeated wet/dry cycles | Alternating HIGH/LOW without unexpected transitions | DRY/WET | OFF/ON |  |  |  |
 
