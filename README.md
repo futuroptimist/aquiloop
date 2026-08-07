@@ -7,6 +7,7 @@ This repo continues the spirit of
 [flywheel](https://github.com/futuroptimist/flywheel),
 [sugarkube](https://github.com/futuroptimist/sugarkube), and
 [sigma](https://github.com/futuroptimist/sigma) with a focus on aquarium gear:
+
 - Lightweight
 - Modular
 - Reproducible
@@ -18,10 +19,14 @@ This repo continues the spirit of
 
 The phased, safety-first auto-top-off system is specified in the
 [aquarium auto-top-off design](docs/design/aquarium-auto-top-off.md).
+Start with the supervised
+[Phase 0 SST + LED experiment](firmware/auto_top_off/experiments/sst_led/README.md).
 
 ### Duckweed Scooper
+
 A narrow, solid-state scooper to quickly remove duckweed from planted aquariums.
 Designed to:
+
 - Fit into 10-gallon tanks, even with driftwood, rocks, and plants.
 - Be parametric (handle length, scoop width, wall thickness).
 - Print cleanly without supports.
@@ -34,7 +39,8 @@ Render:
 `scripts/render_duckweed_scooper.sh` → `stl/duckweed_scooper/duckweed_scooper.stl`
 
 ## 📂 Structure
-```
+
+```text
 aquiloop/
 ├─ .github/
 │  └─ workflows/
@@ -52,6 +58,7 @@ aquiloop/
 ```
 
 ## 🔄 Workflow
+
 - `scripts/render_duckweed_scooper.sh` renders `.scad` → `.stl` with the OpenSCAD CLI.
 - CI runs linting, spellcheck, and smoke tests.
 - Contributions follow the same conventions as **flywheel**:
@@ -60,13 +67,16 @@ aquiloop/
   - Clear commit hygiene
 
 ## 🤝 Contributing
+
 - Fork & PR.
 - Keep designs parametric and documented.
 - Run checks before pushing:
+
   ```sh
   pre-commit run --all-files
   pytest -q
   ```
 
 ## 📜 License
+
 MIT

@@ -1,9 +1,9 @@
 # Aquarium Auto-Top-Off System Design
 
-**Status:** Initial design; no implementation is included.
+**Status:** Phase 0 experiment implemented; physical validation is pending.
 **Target:** A 20-gallon garage aquarium supplied from a five-gallon freshwater
 reservoir.
-**Safety posture:** Phase 1 is **supervised experimental use only**. Unattended
+**Safety posture:** Phases 0 and 1 are **supervised experimental use only**. Unattended
 operation is not considered until the Phase 2 exit criteria are met.
 
 ## 1. Problem statement
@@ -50,8 +50,8 @@ measurable phases.
 - Remote or scheduled unrestricted pump-on control.
 - Using Wi-Fi, Kubernetes, Prometheus, Grafana, Alertmanager, or PagerDuty in a
   local shutdown path.
-- Firmware, schematics, CAD, meshes, dashboards, manifests, or cluster resources
-  in this initial documentation change.
+- Production firmware, completed schematics/CAD, meshes, dashboards, manifests,
+  or cluster resources in Phase 0.
 - A motorized sensor dipper or any other moving normal-level sensor.
 
 ## 3. Terminology
@@ -220,7 +220,195 @@ boot-count telemetry help detect loops, but do not relax local behavior.
 
 Costs are planning ranges in 2026 USD before shipping/tax, not quotations.
 
-### 8.1 Phase 1 - supervised minimal prototype
+### 8.1 Phase 0 — SST water-detection hello world
+
+**Classification: SUPERVISED, LOW-ENERGY, DRY-BENCH EXPERIMENT; PHYSICAL
+VALIDATION PENDING.** Phase 0 proves only the ESP32-S3 protected SST input,
+external LED, serial reporting, and a supervised cup-of-water test. It has no
+pump, relay, MOSFET, Wi-Fi, metrics, other sensor, enclosure, or aquarium
+installation. Use a separate cup, not the aquarium. Passing does not authorize
+unattended use or aquarium installation.
+
+#### Phase 0 hardware
+
+Required:
+
+- 1 × Espressif ESP32-S3-DevKitC-1-N8R8.
+- 1 × SparkFun SST Liquid Level Sensor, `SEN-13835` /
+  `LLC200D3SH-LLPK1`.
+- 1 × solderless breadboard and suitable jumper wires or test leads.
+- 1 × data-capable Micro-USB/Micro-B cable for the USB-to-UART port.
+- 1 × regulated bench power supply.
+- 3 × 10 kΩ, ¼ W, 5% resistors: one upper divider resistor and two in
+  series for the 20 kΩ lower resistance.
+- 1 × 330 Ω, ¼ W, 5% resistor and 1 × ordinary external LED.
+- 1 × clean cup containing fresh water.
+
+A 10 kΩ four-band resistor is brown-black-orange, typically with a gold
+tolerance band. A 330 Ω four-band resistor is orange-orange-brown, typically
+with a gold tolerance band. Resistors have no orientation. The LED anode is
+normally the longer lead; the cathode is normally shorter and corresponds to
+the flat side. A digital multimeter, eye protection, and lint-free drying cloth
+are recommended but not required. No capacitor is required.
+
+#### Circuit and divider
+
+1. Power the ESP32-S3 through its USB-to-UART Micro-B connector with a
+   data-capable cable.
+2. Power the SST from a bench supply at exactly 5.00 V.
+3. Set an approximately 50 mA current limit.
+4. Connect SST red to bench +5.00 V.
+5. Connect SST blue to bench ground.
+6. Connect bench ground to an ESP32 GND pin to share a reference.
+7. Connect SST green to one end of a 10 kΩ resistor.
+8. Connect its other end to a junction node.
+9. Connect that junction to the header pin labeled GPIO4.
+10. From the junction, connect two 10 kΩ resistors in series to ground, making
+    the 20 kΩ lower divider resistance.
+11. Connect GPIO5 through the 330 Ω resistor to the LED anode.
+12. Connect the LED cathode to ground.
+13. Do not connect bench +5 V to the ESP32 5 V pin while USB powers the board.
+14. Never connect the raw green sensor output directly to an ESP32 GPIO.
+
+```text
+Bench +5.00 V ---------------- SST red
+
+Bench GND -------------------- SST blue
+    |
+    +------------------------- ESP32 GND
+    |
+    +------------------------- LED cathode
+
+SST green ---- 10 kΩ ----+---- GPIO4
+                         |
+                       10 kΩ
+                         |
+                       10 kΩ
+                         |
+                        GND
+
+GPIO5 ---- 330 Ω ---- LED anode
+```
+
+The upper resistance is 10 kΩ and the lower is 20 kΩ:
+
+`Vgpio = Vsensor_out × 20 kΩ / (10 kΩ + 20 kΩ)`
+
+A nominal 5.00 V sensor HIGH becomes approximately 3.33 V. Across the sensor
+output range, expect approximately 2.67–3.33 V dry. A sensor LOW of at most
+approximately 0.5 V becomes at most approximately 0.33 V. The divider protects
+the 3.3 V ESP32 input from the 5 V-class push-pull output. Its 20 kΩ lower leg
+pulls GPIO4 LOW if the sensor is disconnected or unpowered, so that condition
+appears WET. This is conservative for future pump safety, but Phase 0 cannot
+distinguish water from a sensor-power or wiring failure.
+
+#### Arduino IDE 2.x setup
+
+1. Add `https://espressif.github.io/arduino-esp32/package_esp32_index.json` as
+   an Additional Boards Manager URL.
+2. Install `esp32` by Espressif Systems, pinned to Arduino-ESP32 core **3.3.8**.
+3. Select **ESP32S3 Dev Module** and configure Flash Size **8 MB**, Partition
+   Scheme **8M with spiffs**, Flash Mode **QIO 80MHz**, PSRAM **OPI PSRAM**, and
+   Upload Mode **UART0 / Hardware CDC**.
+4. Select the serial port for the ESP32 USB-to-UART connection and upload
+   [`sst_led.ino`](../../firmware/auto_top_off/experiments/sst_led/sst_led.ino).
+   If upload fails, verify the cable carries data and the port is correct. Then
+   use Espressif's BOOT/reset sequence: hold BOOT, press and release reset,
+   release BOOT, and retry.
+
+#### Complete setup and test procedure
+
+1. Place the breadboard, ESP32, supply, and exposed wiring on a dry surface away
+   from the aquarium.
+2. Leave USB disconnected and the bench-supply output OFF while wiring.
+3. Configure 5.00 V and an approximately 50 mA limit with output still OFF.
+4. Identify header labels GPIO4, GPIO5, and GND; never count physical pin
+   positions because orientation and variants can mislead.
+5. Build and inspect the 10 kΩ/20 kΩ voltage divider.
+6. Build and inspect the GPIO5, 330 Ω, LED circuit.
+7. Connect common ground.
+8. Connect the red, blue, and green sensor wires last.
+9. If a multimeter is available, verify resistor values and check for a +5 V to
+   ground short before power is applied.
+10. Connect the ESP32 through USB while leaving the sensor supply OFF.
+11. Install core 3.3.8 and upload using the Arduino IDE procedure above.
+12. Open Serial Monitor at 115200 baud.
+13. Press reset after opening Serial Monitor to see the banner and initial state.
+14. With sensor power OFF, verify LOW/WET and LED ON. This is a
+    fault-conservative electrical state, not proof water is present.
+15. Turn on the 5.00 V sensor supply with the optical tip dry.
+16. Verify HIGH/DRY, LED OFF, and the corresponding serial message.
+17. If a multimeter is available, measure GPIO4 to common ground and expect
+    2.67–3.33 V dry. Stop immediately if it exceeds 3.6 V.
+18. Touch or dip only the optical prism tip into fresh water. Do not immerse the
+    wire exit, connector, breadboard, or electronics.
+19. Verify LOW/WET, LED ON, and the corresponding serial message.
+20. If available, verify approximately 0–0.33 V at GPIO4 wet.
+21. Remove the sensor and gently blot the optical tip dry.
+22. Verify return to HIGH/DRY and LED OFF.
+23. Repeat at least five wet/dry cycles and record the results below.
+24. Turn the bench-supply output OFF before changing or disconnecting wiring.
+25. Disconnect USB, dry the sensor, empty the cup, and store electronics dry.
+
+The sketch prints the initial state and transitions only:
+
+```text
+Aquiloop SST + LED Phase 0
+GPIO4: LOW -> WET; GPIO5 LED: ON
+GPIO4: HIGH -> DRY; GPIO5 LED: OFF
+```
+
+#### Safety, troubleshooting, and shutdown
+
+Only the optical tip may contact water. Keep the ESP32, breadboard, USB cable,
+bench supply, and exposed conductors dry, and turn power off before rewiring.
+The ESP32 GPIO absolute maximum is 3.6 V. Never power the SST at 3.3 V, which is
+below its documented range, and never bypass its divider. No pump or actuator
+may be connected. Phase 0 has no independent high-water cutoff. No structural
+part is needed, so it creates no OpenSCAD or STL; PLA/OpenSCAD requirements
+begin when later phases introduce structural components.
+
+| Symptom | Corrective action |
+| --- | --- |
+| No serial port | Use the USB-to-UART connector and a known data cable; check the OS port/driver. |
+| Upload failure | Recheck board, options, port, cable, and use the BOOT/reset sequence above. |
+| No serial text | Set 115200 baud, verify upload, open Serial Monitor, and press reset. |
+| LED never on | With supply OFF expect ON; check GPIO5, 330 Ω, ground, and reversed LED polarity. |
+| LED always on | Blot the tip; check SST power, common ground, divider, and red/blue/green wiring. |
+| Inverted LED behavior | GPIO5 must feed resistor/anode; firmware meaning remains LOW=WET. |
+| GPIO4 above 3.6 V | Switch OFF immediately and correct the 10 kΩ/20 kΩ divider. |
+| Powered sensor ignores water | Dip a clean prism only; check 5.00 V, wire colors, and optical surface. |
+| Wet after removal | Blot the retained droplet from the optical tip. |
+| Noisy/rapid state | Stabilize leads/supply, clean the tip, and check current limit, common ground, and resistors. |
+| Missing common ground | Power OFF and join bench ground to ESP32 GND. |
+| Reversed LED | Put long anode toward GPIO5/330 Ω and short flat-side cathode to ground. |
+| Incorrect resistor values | Verify 10 kΩ brown-black-orange and 330 Ω orange-orange-brown, normally gold tolerance. |
+| Incorrect sensor wires | Power OFF: red is +5.00 V, blue ground, green only through upper 10 kΩ. |
+
+For shutdown, turn the bench output OFF before touching wiring, disconnect USB,
+blot the prism, empty the cup, and store electronics dry.
+
+#### Validation record and exit criteria
+
+**Physical validation status: PENDING.** Do not infer a physical pass from the
+compiled sketch. A person must complete this record.
+
+| Test | Expected GPIO4 | Expected interpretation | Expected LED | Observed result | Pass/fail | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Sensor supply OFF | LOW | WET (fault-conservative) | ON |  |  |  |
+| Sensor powered and dry | HIGH, 2.67–3.33 V if measured | DRY | OFF |  |  |  |
+| Sensor tip wet | LOW, 0–0.33 V if measured | WET | ON |  |  |  |
+| Sensor removed and blotted dry | HIGH | DRY | OFF |  |  |  |
+| Five repeated wet/dry cycles | Alternating HIGH/LOW | DRY/WET | OFF/ON |  |  |  |
+
+Phase 0 costs approximately **$45–$75**, including the reusable ESP32 and SST.
+Exit requires: compilation for the N8R8 configuration; dry HIGH/LED OFF; wet
+LOW/LED ON; sensor-off conservative LOW; at least five recorded physical cycles
+without unexpected transitions; GPIO4 never above 3.6 V if measured; and
+recorded wiring and observations. Compilation may be verified independently,
+but every physical criterion remains pending until recorded by a person.
+
+### 8.2 Phase 1 - supervised minimal prototype
 
 **Classification: SUPERVISED EXPERIMENTAL USE ONLY; NOT FOR UNATTENDED
 OPERATION.** It lacks an independent high-water cutoff, reservoir-low detection,
@@ -230,6 +418,9 @@ reservoir with no more water than measured aquarium freeboard can safely accept,
 even if that amount is far below five gallons.
 
 #### Included hardware/software
+
+Phase 1 builds on the verified Phase 0 input path and introduces pump driving
+and the first supervised top-off behavior.
 
 - ESP32-S3 development board; 12 V SST; protected level-shifting input; 12 V
   peristaltic pump selected from measured lift; default-off fused MOSFET/flyback
@@ -287,11 +478,12 @@ blocked/kinked tubing, calibration drift, structural creep, or remote alarm.
 
 #### BOM delta
 
-Approximately $105-$265: ESP32-S3 (1, $10-$25), SST (1,
-$25-$55), pump (1, $20-$60), driver/protection/converter parts (1 set,
-$10-$30), listed supply (1, $15-$35), ARM control/indicators/connectors/fuse
-(1 set, $10-$20), tubing/check-compatible fittings without relying on a check
-valve for safety (1 set, $5-$15), and PLA/fasteners (1 set, $10-$25).
+Incremental Phase 1 cost is approximately $60-$190; cumulative cost including
+reusable Phase 0 hardware remains approximately $105-$265. The increment covers
+the pump ($20-$60), driver/protection/converter parts ($10-$30), listed supply
+($15-$35), ARM control/indicators/connectors/fuse ($10-$20), tubing and fittings
+($5-$15), and PLA/fasteners ($10-$25). These are planning ranges rather than a
+claim that every component minimum or maximum will occur together.
 
 #### Validation tests
 
@@ -315,7 +507,7 @@ margin; power-cycle/latch persistence passes 20 consecutive trials; mount and
 air gap remain secure; calibration and test records are reviewed. Passing Phase
 1 does **not** authorize unattended use.
 
-### 8.2 Phase 2 - redundant sensing and hardware cutoff
+### 8.3 Phase 2 - redundant sensing and hardware cutoff
 
 #### Included hardware/software
 
@@ -403,7 +595,7 @@ plan, and maintenance records receive a documented human review. “Considered�
 is not blanket approval: the specific installation
 requires a risk review, and Phase 3 protections are strongly preferred.
 
-### 8.3 Phase 3 - source-water and leak protection
+### 8.4 Phase 3 - source-water and leak protection
 
 #### Included hardware/software
 
@@ -457,7 +649,7 @@ spill; 60 days of trend data show stable source calibration; commanded-versus-
 observed delivery agrees within the documented tolerance; tubing and cleaning
 intervals are recorded; no unexplained excessive-frequency event remains open.
 
-### 8.4 Phase 4 - continuous and environmental sensing
+### 8.5 Phase 4 - continuous and environmental sensing
 
 #### Included hardware/software
 
@@ -517,7 +709,8 @@ fit, creep, splash, temperature, and 100-cycle mounting tests.
 
 | Phase | Main additions | Approx. phase cost | Approx. cumulative cost |
 | --- | --- | ---: | ---: |
-| 1 | ESP32-S3, SST interface, 12 V pump/driver, listed supply, controls, tubing, PLA fixtures | $105-$265 | $105-$265 |
+| 0 | ESP32-S3, protected SST input, LED, supervised bench setup | $45-$75 | $45-$75 |
+| 1 | Pump/driver, listed supply, controls, tubing, PLA fixtures added to Phase 0 | $60-$190 | $105-$265 |
 | 2 | Dual NC high-high floats, supervised safety controller/relay and isolated feedback, observability integration | $85-$235 | $190-$500 |
 | 3 | Reservoir-low, two leak zones, containment, optional load cell | $45-$160 | $235-$660 |
 | 4 | VL53L4CD, waterproof temperature probe, baffle/material validation | $25-$90 | $260-$750 |
@@ -529,7 +722,7 @@ gauge, connector ingress strategy, and whether optional items are included.
 
 ## 10. Planned repository structure
 
-These are **future paths**, not files added by this design change:
+Phase 0 includes the experiment files shown below; the other paths are future plans:
 
 ```text
 docs/
@@ -542,6 +735,9 @@ docs/
     sensors.md                           # setpoint and sensor characterization
   runbooks/auto_top_off.md               # alarms, DISABLE, inspection, reset
 firmware/auto_top_off/
+  experiments/sst_led/
+    README.md                           # Phase 0 procedure and blank record
+    sst_led.ino                         # Arduino-ESP32 Phase 0 sketch
   platformio.ini                         # if Arduino-ESP32 is selected
   CMakeLists.txt                         # instead, if ESP-IDF is selected
   src/                                   # state machine and hardware adapters
