@@ -8,13 +8,14 @@ operation is not considered until the Phase 2 exit criteria are met.
 
 ## 1. Problem statement
 
-Evaporation changes aquarium level and salinity. The system must recognize a
-low waterline and move a bounded amount of freshwater from a reservoir to the
-aquarium without creating a credible path for an uncontrolled fill, siphon,
-electrical hazard, or network-dependent safety failure. A garage adds heat,
-humidity, contamination, and temperature variation. The design therefore
-starts small and supervised, then adds independent containment, source and
-leak protection, and diagnostic sensing in measurable phases.
+Evaporation lowers the aquarium level and concentrates dissolved solids. The
+system must recognize a low waterline and move a bounded amount of freshwater
+from a reservoir to the aquarium without creating a credible path for an
+uncontrolled fill, siphon, electrical hazard, or network-dependent safety
+failure. A garage adds heat, humidity, contamination, and temperature
+variation. The design therefore starts small and supervised, then adds
+independent containment, source and leak protection, and diagnostic sensing in
+measurable phases.
 
 ## 2. Goals, assumptions, and non-goals
 
@@ -280,7 +281,7 @@ blocked/kinked tubing, calibration drift, structural creep, or remote alarm.
 
 #### BOM delta
 
-Approximately $95-$235: ESP32-S3 (1, $10-$25), SST (1,
+Approximately $105-$265: ESP32-S3 (1, $10-$25), SST (1,
 $25-$55), pump (1, $20-$60), driver/protection/converter parts (1 set,
 $10-$30), listed supply (1, $15-$35), ARM control/indicators/connectors/fuse
 (1 set, $10-$20), tubing/check-compatible fittings without relying on a check
@@ -490,10 +491,10 @@ fit, creep, splash, temperature, and 100-cycle mounting tests.
 
 | Phase | Main additions | Approx. phase cost | Approx. cumulative cost |
 | --- | --- | ---: | ---: |
-| 1 | ESP32-S3, SST interface, 12 V pump/driver, listed supply, controls, tubing, PLA fixtures | $95-$235 | $95-$235 |
-| 2 | NC high-high float, normally-off hardware enable/feedback, observability integration | $35-$115 | $130-$350 |
-| 3 | Reservoir-low, two leak zones, containment, optional load cell | $45-$160 | $175-$510 |
-| 4 | VL53L4CD, waterproof temperature probe, baffle/material validation | $25-$90 | $200-$600 |
+| 1 | ESP32-S3, SST interface, 12 V pump/driver, listed supply, controls, tubing, PLA fixtures | $105-$265 | $105-$265 |
+| 2 | NC high-high float, normally-off hardware enable/feedback, observability integration | $35-$115 | $140-$380 |
+| 3 | Reservoir-low, two leak zones, containment, optional load cell | $45-$160 | $185-$540 |
+| 4 | VL53L4CD, waterproof temperature probe, baffle/material validation | $25-$90 | $210-$630 |
 
 Quantities and ranges are preliminary. Before purchase, the BOM must identify
 manufacturer part number, voltage/current/contact ratings, wetted materials,
