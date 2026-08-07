@@ -14,6 +14,11 @@ This repo continues the spirit of
 
 ## ✨ Tools
 
+### Aquarium Auto-Top-Off
+The phased safety and implementation design for an ESP32-S3-controlled,
+peristaltic-pump auto-top-off is in
+[`docs/design/aquarium-auto-top-off.md`](docs/design/aquarium-auto-top-off.md).
+
 ### Duckweed Scooper
 A narrow, solid-state scooper to quickly remove duckweed from planted aquariums.
 Designed to:
@@ -35,6 +40,8 @@ aquiloop/
 │  └─ workflows/
 │     └─ cad-duckweed-scooper.yml
 ├─ docs/
+│  ├─ design/
+│  │  └─ aquarium-auto-top-off.md
 │  └─ prompt-docs-summary.md
 ├─ scripts/
 │  └─ render_duckweed_scooper.sh
