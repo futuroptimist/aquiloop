@@ -60,7 +60,7 @@ measurable phases.
 | --- | --- |
 | **Normal level** | Desired waterline, detected by the fixed SST optical point sensor. |
 | **Low/dry** | Debounced SST state that may request a bounded dispense attempt. |
-| **High-high** | Abnormal upper level detected independently by the Phase 2 float/reed switch. |
+| **High-high** | Abnormal upper level detected independently by either of the two Phase 2 float/reed sensors and their supervised channels. |
 | **Safety plane** | Local sensing, state machine, hardwired cutoff, driver, and plumbing that prevent delivery. |
 | **Observability plane** | Metrics, dashboards, alerts, and notifications; diagnostic only and never required to stop the pump. |
 | **Attempt** | One bounded sequence of dispense pulses and settling observations. |
@@ -162,7 +162,8 @@ separately wired, independently powered-down-safe high-high layer.
 2. Missing, unstable, stale, impossible, or contradictory safety input means
    pump off and, after the allowed debounce, a latched fault.
 3. A fill requires local ARM, healthy inputs, budget remaining, successful boot
-   self-test, and (Phase 2+) a physically closed high-high enable loop.
+   self-test, and (Phase 2+) both supervised high-high channels closed and
+   in-range with valid safety-relay enable and feedback.
 4. Every pulse, attempt, retry series, and rolling 24-hour delivery is bounded
    by both runtime and calibrated volume. No integer rollover or reboot resets a
    consumed budget.
@@ -387,7 +388,7 @@ infrastructure or separately budgeted.
   filling: local cutoff must remain unchanged. Separately verify controller-down
   and safety alerts reach a PagerDuty test service with no credential on device.
 - Perform continuous soak, EMI/load switching, power-cycle, and accelerated
-  sensor fouling tests; inspect both diverse sensors after each run.
+  sensor fouling tests; inspect the SST and both high-high floats after each run.
 
 #### Objective exit criteria before unattended operation is considered
 
@@ -630,9 +631,10 @@ names (subject to the repository's eventual naming review):
 Representative Phase 2+ alert conditions, with final thresholds taken from
 calibration, include:
 
-- **Critical, immediate:** high-high open/tripped; any leak; pump commanded
-  while not armed or safety enable absent; latched fault; rolling delivery at
-  100% of local budget. Local hardware/firmware has already stopped delivery.
+- **Critical, immediate:** either high-high channel open/tripped; any leak; pump
+  commanded while not armed or safety enable absent; latched fault; rolling
+  delivery at 100% of local budget. Local hardware/firmware has already stopped
+  delivery.
 - **Critical controller-down:** Prometheus `up == 0` for a short, noise-tolerant
   interval, and absent expected controller heartbeat/recent samples. Alerting is
   awareness; a dead controller is already default off.
@@ -663,8 +665,9 @@ remote “pump on” recovery.
 3. Set the horizontal SST at the desired waterline in calm water. Record wet/dry
    transition repeatability during slow fill/drain, ripple, bubbles, fouling film,
    power transitions, and connector faults; then lock and witness-mark height.
-4. In Phase 2, independently position high-high with space for ripple but below
-   unsafe freeboard. Measure volume delivered after the contact opens.
+4. In Phase 2, independently position each high-high float with space for ripple
+   but below unsafe freeboard. Validate each channel independently and measure
+   cutoff latency and volume delivered when either channel opens.
 5. Verify the visible outlet air gap and demonstrate that the reservoir's
    maximum possible source-water level remains below the delivery outlet. If
    that geometry cannot be guaranteed, validate a separate fail-safe
@@ -680,11 +683,13 @@ remote “pump on” recovery.
 
 - **Before every Phase 1 session / weekly later:** test DISABLE and indicators;
   inspect air gap, tubing retention/kinks, connectors, drip loops, GFCI status,
-  float movement, sensor faces, containment, leaks, and printed parts.
-- **Monthly:** clean SST and float with aquarium-safe methods from their
+  both high-high floats' movement and channel wiring, sensor faces, containment,
+  leaks, and printed parts.
+- **Monthly:** clean the SST and both floats with aquarium-safe methods from their
   manufacturers; never scratch optics or leave cleaner residue. Exercise the
-  high-high cutoff and each leak zone, review budgets/alerts, and inspect pump
-  tubing for flattening, cracks, hardening, or leaks.
+  cutoff by opening each high-high channel independently, exercise each leak
+  zone, review budgets/alerts, and inspect pump tubing for flattening, cracks,
+  hardening, or leaks.
 - **Quarterly or manufacturer interval, whichever is shorter:** repeat measured
   pump delivery and sensor transition checks; deliberately run the fault matrix;
   inspect fuse/terminal torque with power isolated; test PagerDuty routing.
@@ -705,8 +710,9 @@ metric, alert, and reset steps for:
   safe test fixtures, contradiction, and fouling/occlusion;
 - boot during demand, reset/brownout, watchdog stall, corrupt/stale persistence,
   exhausted per-attempt/retry/daily budget, and rapid reset loop;
-- each high-high actuation, broken enable wire, conductor bridge across each NC
-  contact, channel cross-short, lost loop/relay power, welded-contact
+- each high-high float and channel actuation independently, broken enable wire,
+  conductor bridge across each NC contact, channel cross-short, lost loop/relay
+  power, welded-contact
   analysis/test substitute, and controller/network/cluster outage;
 - reservoir empty/low, pump stall or safely pinched tube, disconnected tubing
   into containment, each leak zone, abnormal repeated demand, and load-cell
@@ -721,11 +727,11 @@ affected test subset passes. Do not clear a latch merely to continue filling.
 - What are measured freeboard, evaporation distribution, garage extremes, rim
   geometry, and maximum lift/tube length at the actual site?
 - Which exact pump, duty cycle, tubing material, supply, fuse, MOSFET, protected
-  input, relay architecture, and float have documented compatible ratings?
+  input, relay architecture, and floats have documented compatible ratings?
 - What SST output polarity is observed in the final wiring, and how will open,
   short-to-ground, and short-to-supply faults be distinguished or contained?
-- Can high-high placement tolerate waves, maintenance, snails, and bracket
-  movement while retaining enough freeboard for post-cutoff delivery?
+- Can both floats' high-high placement tolerate waves, maintenance, snails, and
+  bracket movement while retaining enough freeboard for post-cutoff delivery?
 - What maximum credible spill defines containment capacity and leak-pad layout?
 - How will garage Wi-Fi loss and controller clock uncertainty affect only
   telemetry while the local rolling ledger remains conservative?
