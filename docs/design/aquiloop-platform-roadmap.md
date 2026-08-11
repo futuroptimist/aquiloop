@@ -155,7 +155,7 @@ flowchart TB
 
   subgraph OP[Observability plane — not a shutdown dependency]
     ING[Prometheus-compatible ingestion] --> PROM[Prometheus]
-    PROM --> GRAF[Dedicated Aquiloop dashboard<br/>in existing Grafana deployment]
+    PROM --> GRAF[Dedicated Aquiloop dashboard in existing Grafana deployment]
     PROM --> AM[Alertmanager] --> PD[PagerDuty or similar]
   end
 
@@ -452,7 +452,10 @@ supervised; fleet expansion has not begun.
 
 **Work:** Add independent high-high cutoff, reservoir-low sensing, leak
 detection, hardware power removal, persistent faults, maintenance controls,
-containment, and the complete fault matrix.
+containment, and the complete fault matrix. Add the minimum safety observability
+required by the authoritative exit criteria: bounded safety and controller-health
+telemetry, Prometheus ingestion, Alertmanager and PagerDuty test routing, and a
+runbook with deliberate alarm and controller-down drills.
 
 **Exit:** Existing detailed safety criteria are satisfied and evidence receives
 independent review. Unattended operation remains a deliberate decision, not an
@@ -460,9 +463,9 @@ automatic consequence.
 
 ### Horizon 3: observability
 
-**Work:** Add bounded telemetry, Prometheus integration, the dedicated Aquiloop
-Grafana dashboard, Alertmanager and PagerDuty routing, a runbook,
-controller-down detection, and maintenance/calibration visibility.
+**Work:** Expand the safety telemetry established in Horizon 2 with the
+dedicated Aquiloop Grafana dashboard, operational alert routing, richer trend
+views, and maintenance/calibration visibility.
 
 **Exit:** Loss of observability does not alter local safety; alerts and runbooks
 pass deliberate tests; no secrets are committed.
