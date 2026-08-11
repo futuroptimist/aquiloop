@@ -1,0 +1,16 @@
+name: Link Check
+on: [push, pull_request]
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --config .lychee.toml
+            .
+          fail: true
