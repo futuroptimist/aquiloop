@@ -452,23 +452,24 @@ supervised; fleet expansion has not begun.
 
 **Work:** Add independent high-high cutoff, reservoir-low sensing, leak
 detection, hardware power removal, persistent faults, maintenance controls,
-containment, and the complete fault matrix. Add the minimum safety observability
-required by the authoritative exit criteria: bounded safety and controller-health
-telemetry, Prometheus ingestion, Alertmanager and PagerDuty test routing, and a
-runbook with deliberate alarm and controller-down drills.
+containment, and the complete fault matrix.
 
-**Exit:** Existing detailed safety criteria are satisfied and evidence receives
-independent review. Unattended operation remains a deliberate decision, not an
-automatic consequence.
+**Exit:** The local hardware, firmware, cutoff, containment, persistence, and
+fault-matrix criteria receive independent review. Horizon 2 alone does not
+constitute completion of the authoritative Phase 2 criteria. Unattended
+operation remains a deliberate decision, not an automatic consequence.
 
 ### Horizon 3: observability
 
-**Work:** Expand the safety telemetry established in Horizon 2 with the
-dedicated Aquiloop Grafana dashboard, operational alert routing, richer trend
-views, and maintenance/calibration visibility.
+**Work:** Add bounded safety and controller-health telemetry,
+Prometheus-compatible ingestion, the dedicated Aquiloop Grafana dashboard,
+operational alert routing, controller-down tests, deliberate runbook drills,
+richer trend views, and maintenance/calibration visibility.
 
 **Exit:** Loss of observability does not alter local safety; alerts and runbooks
-pass deliberate tests; no secrets are committed.
+pass deliberate tests; no secrets are committed. The authoritative Phase 2
+criteria can be considered complete only after the required observability,
+alert, and runbook evidence also passes.
 
 ### Horizon 4: first additional vessel
 
