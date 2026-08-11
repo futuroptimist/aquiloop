@@ -19,6 +19,8 @@ This repo continues the spirit of
 
 The phased, safety-first auto-top-off system is specified in the
 [aquarium auto-top-off design](docs/design/aquarium-auto-top-off.md).
+See the complementary [Aquiloop platform roadmap](docs/design/aquiloop-platform-roadmap.md)
+for the proposed multi-vessel and hydroponics evolution.
 Start with the supervised, dry-bench
 [SST + LED Phase 0 experiment](firmware/auto_top_off/experiments/sst_led/README.md).
 
@@ -47,7 +49,8 @@ aquiloop/
 │     └─ cad-duckweed-scooper.yml
 ├─ docs/
 │  ├─ design/
-│  │  └─ aquarium-auto-top-off.md
+│  │  ├─ aquarium-auto-top-off.md
+│  │  └─ aquiloop-platform-roadmap.md
 │  └─ prompt-docs-summary.md
 ├─ firmware/
 │  └─ auto_top_off/experiments/sst_led/
