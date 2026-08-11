@@ -38,7 +38,9 @@ File:
 [`tools/duckweed_scooper/duckweed_scooper.scad`](tools/duckweed_scooper/duckweed_scooper.scad)
 
 Render:
-`scripts/render_duckweed_scooper.sh` → `stl/duckweed_scooper/duckweed_scooper.stl`
+`scripts/render_scad.sh tools/duckweed_scooper/duckweed_scooper.scad` →
+`stl/duckweed_scooper/duckweed_scooper.stl` +
+`obj/duckweed_scooper/duckweed_scooper.obj`
 
 ## 📂 Structure
 
@@ -46,7 +48,7 @@ Render:
 aquiloop/
 ├─ .github/
 │  └─ workflows/
-│     └─ cad-duckweed-scooper.yml
+│     └─ cad-render.yml
 ├─ docs/
 │  ├─ design/
 │  │  ├─ aquarium-auto-top-off.md
@@ -57,7 +59,7 @@ aquiloop/
 │     ├─ README.md
 │     └─ sst_led.ino
 ├─ scripts/
-│  └─ render_duckweed_scooper.sh
+│  └─ render_scad.sh
 ├─ tools/
 │  └─ duckweed_scooper/
 │     └─ duckweed_scooper.scad
@@ -68,7 +70,10 @@ aquiloop/
 
 ## 🔄 Workflow
 
-- `scripts/render_duckweed_scooper.sh` renders `.scad` → `.stl` with the OpenSCAD CLI.
+- `scripts/render_scad.sh <path/to/model.scad>` renders `.scad` → `.stl` with
+  the OpenSCAD CLI, then converts that `.stl` → `.obj` with `assimp` (OpenSCAD's
+  own OBJ export needs a newer build than Ubuntu's apt package ships). CI runs
+  it for every `tools/**/*.scad` file on push.
 - CI runs linting, spellcheck, and smoke tests.
 - Contributions follow the same conventions as **flywheel**:
   - Pre-commit hooks

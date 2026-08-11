@@ -1,0 +1,40 @@
+name: Build CAD Assets (STL/OBJ)
+
+on:
+  push:
+    paths:
+      - 'tools/**/*.scad'
+      - 'scripts/render_scad.sh'
+      - '.github/workflows/cad-render.yml'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OpenSCAD and assimp (headless)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad xvfb assimp-utils
+
+      - name: Make render script executable
+        run: chmod +x scripts/render_scad.sh
+
+      - name: Render STL and OBJ for every .scad source
+        run: find tools -name '*.scad' -print0 | xargs -0 -n1 scripts/render_scad.sh
+
+      - name: Upload STLs
+        uses: actions/upload-artifact@v4
+        with:
+          name: cad-stl
+          path: stl/
+          if-no-files-found: error
+
+      - name: Upload OBJs
+        uses: actions/upload-artifact@v4
+        with:
+          name: cad-obj
+          path: obj/
+          if-no-files-found: error
