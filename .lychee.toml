@@ -1,0 +1,21 @@
+cache = true
+max_concurrency = 6
+max_redirects = 5
+max_retries = 2
+retry_wait_time = 2
+timeout = 20
+scheme = ["https", "file"]
+
+# HTTP statuses that won't break CI
+accept = [200, 206, 429]
+
+exclude = [
+  "mailto:*",
+  "http://localhost:*",
+  "http://127.0.0.1:*",
+  "https://localhost:*",
+  "https://127.0.0.1:*",
+  # Rejects lychee's HTTP/2 client even though the page loads fine in a
+  # browser; a known false positive for this host.
+  "https://www.st.com/*"
+]
