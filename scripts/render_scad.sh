@@ -12,9 +12,15 @@ if [[ ! -f "$scad_file" ]]; then
   exit 1
 fi
 case "$scad_file" in
-  *.scad) ;;
+  tools/*.scad) ;;
   *)
-    echo "Expected .scad file: $scad_file" >&2
+    echo "Expected a .scad file under tools/: $scad_file" >&2
+    exit 1
+    ;;
+esac
+case "$scad_file" in
+  *..*)
+    echo "Refusing path with '..' segment: $scad_file" >&2
     exit 1
     ;;
 esac
@@ -31,9 +37,24 @@ obj_path="obj/${name}.obj"
 mkdir -p "$(dirname "$stl_path")" "$(dirname "$obj_path")"
 
 if [[ -z "${DISPLAY:-}" ]]; then
-  xvfb-run -a openscad -o "$stl_path" "$scad_file"
+  render_cmd=(xvfb-run -a openscad -o "$stl_path" "$scad_file")
 else
-  openscad -o "$stl_path" "$scad_file"
+  render_cmd=(openscad -o "$stl_path" "$scad_file")
+fi
+
+if output=$("${render_cmd[@]}" 2>&1); then
+  printf '%s\n' "$output"
+else
+  printf '%s\n' "$output" >&2
+  # Shared/library sources (e.g. parameters.scad, lib/common.scad) have no
+  # top-level geometry of their own and are meant to be included by other
+  # files, not rendered directly, so skip them instead of failing the job.
+  if printf '%s\n' "$output" | grep -q "Current top level object is empty."; then
+    echo "Skipping STL/OBJ export for empty model: $scad_file" >&2
+    rm -f "$stl_path"
+    exit 0
+  fi
+  exit 1
 fi
 
 # OBJ export isn't available in the OpenSCAD build shipped by Ubuntu's apt

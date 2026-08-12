@@ -23,7 +23,7 @@ jobs:
         run: chmod +x scripts/render_scad.sh
 
       - name: Render STL and OBJ for every .scad source
-        run: find tools -name '*.scad' -print0 | xargs -0 -n1 scripts/render_scad.sh
+        run: find tools -name '*.scad' -print0 | xargs -0 -r -n1 scripts/render_scad.sh
 
       - name: Upload STLs
         uses: actions/upload-artifact@v4
