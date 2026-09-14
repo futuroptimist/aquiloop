@@ -17,5 +17,9 @@ exclude = [
   "https://127.0.0.1:*",
   # Rejects lychee's HTTP/2 client even though the page loads fine in a
   # browser; a known false positive for this host.
-  "https://www.st.com/*"
+  "https://www.st.com/*",
+  # Supplied retailer references retained for provenance in the care-binder
+  # brief; both endpoints reject automated inspection with HTTP 403.
+  "https://greg.app/brand/oasis-labels/sedum-loves-fire-010444/",
+  "https://greg.app/brand/oasis-labels/kalanchoe-humilis-desert-surprise-010315/"
 ]
