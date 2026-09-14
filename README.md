@@ -24,6 +24,11 @@ describes the longer-term multi-vessel and hydroponics direction.
 Start with the supervised, dry-bench
 [SST + LED Phase 0 experiment](firmware/auto_top_off/experiments/sst_led/README.md).
 
+### Care Binder
+
+The concept-first requirements for a printable plant and aquarium reference are
+captured in the [care binder design brief](docs/design/care-binder.md).
+
 ### Duckweed Scooper
 
 A narrow, solid-state scooper to quickly remove duckweed from planted aquariums.
