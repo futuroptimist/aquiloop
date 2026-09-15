@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "access_date": "2026-09-15",
+  "sources": [
+    {
+      "key": "BOP-NCSU-R",
+      "authority": "NC State Extension",
+      "title": "Strelitzia reginae",
+      "url": "https://plants.ces.ncsu.edu/plants/strelitzia-reginae/",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "light_exposure",
+          "soil_substrate",
+          "water",
+          "temperature_season",
+          "feeding_maintenance",
+          "propagation",
+          "troubleshooting",
+          "natural_history"
+        ],
+        "claims": [
+          "taxonomy, habit, cultivation, propagation, pests and flower traits"
+        ]
+      }
+    },
+    {
+      "key": "BOP-NCSU-N",
+      "authority": "NC State Extension",
+      "title": "Strelitzia nicolai",
+      "url": "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "light_exposure",
+          "soil_substrate",
+          "water",
+          "temperature_season",
+          "feeding_maintenance",
+          "propagation",
+          "troubleshooting",
+          "natural_history"
+        ],
+        "claims": [
+          "taxonomy, larger woody habit, cultivation and propagation"
+        ]
+      }
+    },
+    {
+      "key": "BOP-UF",
+      "authority": "University of Florida IFAS Extension",
+      "title": "Bird-of-Paradise",
+      "url": "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/bird-of-paradise/",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "light_exposure",
+          "soil_substrate",
+          "water",
+          "temperature_season",
+          "feeding_maintenance",
+          "propagation",
+          "troubleshooting"
+        ],
+        "claims": [
+          "genus-level siting, irrigation, fertilization, division and maintenance"
+        ]
+      }
+    }
+  ]
+}

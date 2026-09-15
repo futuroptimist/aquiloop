@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "access_date": "2026-09-15",
+  "sources": [
+    {
+      "key": "KAL-RHS-PLANT",
+      "authority": "Royal Horticultural Society",
+      "title": "Kalanchoe humilis ‘Desert Surprise’",
+      "url": "https://www.rhs.org.uk/plants/310184/kalanchoe-humilis-desert-surprise/details",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "light_exposure",
+          "soil_substrate",
+          "water",
+          "temperature_season",
+          "feeding_maintenance",
+          "propagation",
+          "troubleshooting",
+          "natural_history"
+        ],
+        "claims": [
+          "cultivar name, family, habit, foliage, broad cultivation and propagation"
+        ]
+      }
+    },
+    {
+      "key": "KAL-POWO",
+      "authority": "Royal Botanic Gardens, Kew — Plants of the World Online",
+      "title": "Kalanchoe humilis Britten",
+      "url": "https://powo.science.kew.org/results?q=Kalanchoe%20humilis",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "natural_history"
+        ],
+        "claims": [
+          "accepted name, family, native range"
+        ]
+      },
+      "access_note": "Automated URL check returned HTTP 403 on 2026-09-15; retain as an identified research lead, but re-check the record before final copy."
+    },
+    {
+      "key": "KAL-RHS-GROW",
+      "authority": "Royal Horticultural Society",
+      "title": "How to grow kalanchoe",
+      "url": "https://www.rhs.org.uk/plants/kalanchoe/growing-guide",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "light_exposure",
+          "soil_substrate",
+          "water",
+          "temperature_season",
+          "feeding_maintenance",
+          "propagation",
+          "troubleshooting"
+        ],
+        "claims": [
+          "genus-level indoor care, seasonal watering, feeding, propagation and problems"
+        ]
+      },
+      "access_note": "Automated URL check returned HTTP 404 on 2026-09-15; retain as an identified research lead, but re-check the record before final copy."
+    }
+  ]
+}

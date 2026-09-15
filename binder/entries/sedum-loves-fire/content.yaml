@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "display_name": "Sedum “Love’s Fire”",
+  "reported_label": "Sedum “Love’s Fire”; Sedum adolphii; PPAF",
+  "identity": {
+    "status": "provisional",
+    "preferred_name": "Sedum adolphi Raym.-Hamet ‘Love’s Fire’",
+    "confidence": "low until label and specimen are reviewed",
+    "notes": [
+      "Retain the reported Sedum adolphii spelling as label text; current taxonomic spelling is Sedum adolphi.",
+      "PPAF is stale if the specimen is the patented US cultivar: USPP37238P2 was granted 2026-01-27. Do not print a patent notice until label/specimen linkage is reviewed."
+    ]
+  },
+  "alternate_candidates": [
+    "Unidentified Sedum or related Crassulaceae if morphology conflicts; no authoritative evidence supports choosing Echeveria now."
+  ],
+  "unresolved_fields": [
+    "label photographs",
+    "whole-plant and leaf/stem morphology",
+    "link between specimen and patented cultivar",
+    "measured exposure, substrate, and dry-down"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Give bright light; acclimate gradually to stronger direct sun and watch for scorch or stretching.",
+        "sources": [
+          "SED-UMN"
+        ],
+        "caveat": "General succulent guidance; patent color trials do not establish a universal household exposure."
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a freely draining succulent medium in a container with drainage; the local recipe is unknown.",
+        "sources": [
+          "SED-UMN"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Water thoroughly, then wait until the medium has dried before watering again; use plant and soil observations rather than a fixed interval.",
+        "sources": [
+          "SED-UMN"
+        ],
+        "caveat": "Dry-down varies with season, container, weather, and medium."
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Protect from frost and reduce watering when cool or growth slows.",
+        "sources": [
+          "SED-UMN",
+          "SED-PATENT"
+        ],
+        "caveat": "Patent trial temperatures describe one nursery trial, not a hard tolerance."
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Feed lightly only during active growth; remove dead material and inspect routinely for pests.",
+        "sources": [
+          "SED-UMN"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: take a healthy stem cutting; starting material: a cut stem section; establish after the cut end calluses in a drained medium; pitfall: wet medium before rooting can promote rot.",
+        "sources": [
+          "SED-UMN",
+          "SED-PATENT"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Soft/translucent tissue or leaf drop → possible excess moisture → check drainage and root-zone moisture before watering. Stretching/pale growth → possibly insufficient light → compare new growth and increase exposure gradually.",
+        "sources": [
+          "SED-UMN"
+        ],
+        "caveat": "Symptoms are not diagnoses."
+      }
+    ],
+    "natural_history": [
+      {
+        "text": "The patented selection was reported as a 2022 naturally occurring mutation of Sedum adolphi ‘Strawberry’.",
+        "sources": [
+          "SED-PATENT"
+        ],
+        "caveat": "Cultivar-specific only if specimen linkage is later verified."
+      }
+    ]
+  }
+}
