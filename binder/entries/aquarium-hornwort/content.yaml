@@ -69,7 +69,11 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: Washington Ecology lists plant fragments as a propagation route for C. demersum. Retain a healthy fragment and float it; whether this provisional specimen establishes must be observed rather than assumed.",
+        "claim": "For candidate C. demersum, use a plant fragment and let it float freely below the surface. Its stems break easily, so handle it gently and remove unintended loose fragments rather than spreading them through the tank.",
+        "method": "fragment propagation (candidate C. demersum example)",
+        "starting_material": "a C. demersum plant fragment",
+        "establishment_condition": "float the fragment freely below the water surface",
+        "pitfall": "stems break easily and handling can create unintended loose fragments",
         "sources": [
           "HOR-WA"
         ]

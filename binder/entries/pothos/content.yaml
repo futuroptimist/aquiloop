@@ -67,7 +67,11 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: take a healthy vine cutting. NCSU reports that pothos vines root readily in water and climb using aerial roots; retain a stem section rather than presenting an unsupported leaf-only method.",
+        "claim": "Take a stem cutting from a vine and root it in water. Avoid keeping the resulting plant in over-wet potting medium, which can cause root rot.",
+        "method": "stem cutting",
+        "starting_material": "a vine stem cutting",
+        "establishment_condition": "place the cutting in water until it roots",
+        "pitfall": "over-wet potting medium after establishment can cause root rot",
         "sources": [
           "POT-NCSU"
         ]

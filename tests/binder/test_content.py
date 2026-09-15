@@ -22,6 +22,9 @@ ENTRIES = {
         "aquarium_compatibility_troubleshooting", "natural_history_trivia",
     },
 }
+PROPAGATION_FIELDS = {
+    "method", "starting_material", "establishment_condition", "pitfall",
+}
 
 
 class ContentWorksheetTests(unittest.TestCase):
@@ -30,6 +33,20 @@ class ContentWorksheetTests(unittest.TestCase):
         # does not add a repository dependency.
         path = ROOT / "binder" / "entries" / slug / filename
         return json.loads(path.read_text(encoding="utf-8"))
+
+    def assertPropagationContract(self, slug: str, content: dict) -> None:
+        claims = content["cards"]["propagation"]
+        self.assertTrue(claims, f"{slug}/propagation must not be empty")
+        for index, claim in enumerate(claims):
+            for field in PROPAGATION_FIELDS:
+                self.assertIsInstance(
+                    claim.get(field), str,
+                    f"{slug}/propagation[{index}] must define {field}",
+                )
+                self.assertTrue(
+                    claim[field].strip(),
+                    f"{slug}/propagation[{index}] must not have empty {field}",
+                )
 
     def test_source_and_content_contracts(self):
         for slug, expected_cards in ENTRIES.items():
@@ -52,6 +69,7 @@ class ContentWorksheetTests(unittest.TestCase):
 
                 self.assertEqual(set(content["cards"]), expected_cards)
                 self.assertIn("propagation", content["cards"])
+                self.assertPropagationContract(slug, content)
                 self.assertTrue(content["identity"]["status"])
                 self.assertTrue(content["identity"]["decision"])
                 self.assertTrue(content["identity"]["sources"])
@@ -73,6 +91,12 @@ class ContentWorksheetTests(unittest.TestCase):
                         self.assertTrue(claim["sources"])
                         cited.update(claim["sources"])
                 self.assertLessEqual(cited, keys)
+
+    def test_propagation_contract_rejects_an_empty_required_field(self):
+        content = self.load("pothos", "content.yaml")
+        content["cards"]["propagation"][0]["pitfall"] = ""
+        with self.assertRaisesRegex(AssertionError, "must not have empty pitfall"):
+            self.assertPropagationContract("pothos", content)
 
     def test_source_support_metadata_covers_every_citation(self):
         for slug in ENTRIES:

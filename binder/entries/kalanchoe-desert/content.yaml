@@ -70,7 +70,11 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: RHS directly lists stem cuttings in spring or summer for the candidate cultivar. Iowa State’s general succulent method is to take a clean stem section, remove lower leaves, let the end callus, and place it in well-drained medium; do not present leaf propagation as cultivar-verified.",
+        "claim": "For the candidate cultivar, take stem cuttings in spring or summer. Iowa State’s Kalanchoe-applicable method uses a clean stem section with lower leaves removed; let it callus before placing it in well-drained medium so it is less likely to rot before rooting.",
+        "method": "stem cutting",
+        "starting_material": "a clean stem section with its lower leaves removed",
+        "establishment_condition": "let the cut end callus, then place it in well-drained medium",
+        "pitfall": "an uncallused cutting is more likely to rot before roots develop",
         "sources": [
           "KAL-RHS",
           "KAL-PROP"

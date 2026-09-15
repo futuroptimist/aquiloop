@@ -69,6 +69,10 @@
     "propagation": [
       {
         "claim": "Method/material: take a healthy stem or leaf cutting. Let the wound callus, then establish in a well-drained medium; excess moisture before rooting is the key rot pitfall.",
+        "method": "stem or leaf cutting",
+        "starting_material": "a healthy stem or whole leaf cutting",
+        "establishment_condition": "let the wound callus, then place it in well-drained medium",
+        "pitfall": "excess moisture before rooting can cause rot",
         "sources": [
           "SED-IA"
         ]

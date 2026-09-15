@@ -73,10 +73,13 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: division is listed for both candidate species. Defer division details until the species, plant maturity, and root system can be reviewed.",
+        "claim": "Candidate example for S. reginae: divide an old clump with four to five shoots into single-stem divisions in late spring or early summer. Replant at the original depth and keep moist until rooted; dry or soggy establishment conditions can kill foliage.",
+        "method": "division (candidate S. reginae example)",
+        "starting_material": "an old S. reginae clump with four to five shoots, separated into single-stem divisions",
+        "establishment_condition": "replant at the original depth and keep the soil moist until roots establish",
+        "pitfall": "dry or soggy establishment conditions can yellow and kill leaves",
         "sources": [
-          "BOP-REG",
-          "BOP-NIC"
+          "BOP-UF"
         ]
       }
     ],
