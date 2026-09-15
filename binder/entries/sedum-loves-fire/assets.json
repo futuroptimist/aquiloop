@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "sedum-draft-placeholder",
+      "path": "assets/PLACEHOLDER.md",
+      "kind": "placeholder",
+      "subjects": ["whole plant"],
+      "alt": "Visible draft placeholder for a future whole-specimen photograph.",
+      "caption": "Draft placeholder; no specimen photograph is present.",
+      "source": {
+        "photographer": "unknown",
+        "provenance": "template-only placeholder; not a photograph",
+        "rights": "unknown"
+      }
+    },
+    {
+      "id": "sedum-detail-placeholder",
+      "path": "assets/PLACEHOLDER.md",
+      "kind": "placeholder",
+      "subjects": ["detail"],
+      "alt": "Visible draft placeholder for a future specimen detail photograph.",
+      "caption": "Optional detail placeholder; no specimen photograph is present.",
+      "source": {
+        "photographer": "unknown",
+        "provenance": "template-only placeholder; not a photograph",
+        "rights": "unknown"
+      }
+    }
+  ]
+}
