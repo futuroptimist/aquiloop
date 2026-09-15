@@ -1,8 +1,3 @@
 stl/
 obj/
 .lycheecache
-build/
-*.aux
-*.log
-*.out
-__pycache__/

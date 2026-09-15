@@ -8,7 +8,8 @@ from pathlib import Path
 
 from PIL import Image, ImageCms, ImageOps
 
-FRAMES = {"hero": (3.30, 3.30, 500 * 1024), "detail": (2.05, 1.35, 1024 * 1024)}
+FRAMES = {"hero": (3.30, 3.30, 500 * 1024), "detail": (2.05, 1.35, 500 * 1024)}
+HARD_CEILING = 1024 * 1024
 
 
 def crop_box(value: str) -> tuple[int, int, int, int]:
@@ -22,7 +23,7 @@ def crop_box(value: str) -> tuple[int, int, int, int]:
 
 
 def prepare(source: Path, output: Path, frame: str, crop: tuple[int, int, int, int] | None, overwrite: bool) -> dict:
-    if source.resolve() == output.resolve():
+    if source.resolve() == output.resolve() or (output.exists() and source.samefile(output)):
         raise ValueError("output must differ from the original")
     if output.exists() and not overwrite:
         raise ValueError("output exists; pass --overwrite to replace the derivative")
@@ -33,7 +34,7 @@ def prepare(source: Path, output: Path, frame: str, crop: tuple[int, int, int, i
             if crop[0] < 0 or crop[1] < 0 or crop[2] > image.width or crop[3] > image.height or crop[2] <= crop[0] or crop[3] <= crop[1]:
                 raise ValueError("crop is outside the oriented image")
             image = image.crop(crop)
-        width_in, height_in, target_bytes = FRAMES[frame]
+        width_in, height_in, soft_target = FRAMES[frame]
         ratio = width_in / height_in
         if abs(image.width / image.height - ratio) > .005:
             raise ValueError(f"crop aspect must match the {width_in:.2f} x {height_in:.2f} inch frame")
@@ -53,15 +54,15 @@ def prepare(source: Path, output: Path, frame: str, crop: tuple[int, int, int, i
         while True:
             buffer = io.BytesIO()
             image.save(buffer, "JPEG", quality=quality, optimize=True, icc_profile=ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB")).tobytes())
-            if len(buffer.getvalue()) <= target_bytes or quality <= 72:
+            if len(buffer.getvalue()) <= soft_target or quality <= 72:
                 break
             quality -= 4
-        if len(buffer.getvalue()) > target_bytes:
-            raise ValueError(f"cannot meet {target_bytes}-byte frame budget at minimum quality")
+        if len(buffer.getvalue()) > HARD_CEILING:
+            raise ValueError("prepared raster exceeds the 1 MiB hard ceiling")
         output.write_bytes(buffer.getvalue())
     if source.read_bytes() != original:
         raise RuntimeError("original changed unexpectedly")
-    return {"width": image.width, "height": image.height, "bytes": output.stat().st_size, "effective_ppi": min(image.width / width_in, image.height / height_in), "preferred_300_ppi": min(image.width / width_in, image.height / height_in) >= 300}
+    return {"width": image.width, "height": image.height, "bytes": output.stat().st_size, "effective_ppi": min(image.width / width_in, image.height / height_in), "preferred_300_ppi": min(image.width / width_in, image.height / height_in) >= 300, "soft_size_goal_met": output.stat().st_size <= soft_target}
 
 
 def main() -> int:
@@ -76,7 +77,7 @@ def main() -> int:
         result = prepare(args.source, args.output, args.frame, args.crop, args.overwrite)
     except (OSError, ValueError, RuntimeError) as exc:
         parser.exit(1, f"error: {exc}\n")
-    print(f"wrote {args.output}: {result['width']} x {result['height']} px, {result['bytes']} bytes, {result['effective_ppi']:.1f} effective ppi; 300-ppi preference {'met' if result['preferred_300_ppi'] else 'not met'}")
+    print(f"wrote {args.output}: {result['width']} x {result['height']} px, {result['bytes']} bytes, {result['effective_ppi']:.1f} effective ppi; 300-ppi preference {'met' if result['preferred_300_ppi'] else 'not met'}; 500-KiB soft goal {'met' if result['soft_size_goal_met'] else 'not met'}")
     return 0
 
 

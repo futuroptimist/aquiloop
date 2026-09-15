@@ -543,3 +543,19 @@ Only that later physical check can justify calling the binder print-worthy.
   conditions are pending evidence collection and review.
 - Actual specimen assets, remaining catalogs/pages, combined assembly, broader
   regression coverage, CI workflow, and generated PDF artifacts remain pending.
+
+### Local verification outputs (Step 06a)
+
+This scoped foundation deliberately does not broaden the repository-wide ignore
+policy. Before building locally, add `/build/` and `__pycache__/` as separate
+lines in `.git/info/exclude`; this keeps proof PDFs, renders, and Python caches
+untracked without changing the shared root `.gitignore`. Broader documentation
+and ignore-policy changes are deferred to a follow-up.
+
+Prepared hero and detail crops must exactly match their 1:1 and 41:27 frames.
+The builder rejects selected rasters below 240 ppi (792 × 792 hero or 492 × 324
+detail), prefers 300 ppi (990 × 990 or 615 × 405), and rejects files above the
+1 MiB hard ceiling. Photo preparation attempts a 500 KiB soft goal at acceptable
+JPEG quality and reports when it is unmet; failure to meet that soft goal alone
+is not an error. Every final selection requires `source.rights_reviewed: true`;
+unselected, structurally valid draft records may retain honest unknown rights.
