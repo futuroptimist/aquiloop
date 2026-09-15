@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "accessed": "2026-09-15",
+  "sources": [
+    {
+      "key": "SED-POWO",
+      "authority": "Royal Botanic Gardens, Kew — Plants of the World Online",
+      "title": "Search results for Sedum adolphi",
+      "url": "https://powo.science.kew.org/results?q=Sedum%20adolphi",
+      "accessed": "2026-09-15",
+      "access_status": "inaccessible to automated check (HTTP 403); title and accepted spelling recorded for interactive review",
+      "supports": [
+        "identity"
+      ]
+    },
+    {
+      "key": "SED-PATENT",
+      "authority": "United States Patent and Trademark Office record via Google Patents",
+      "title": "USPP37238P2 — Sedum plant named ‘LOVE’S FIRE’",
+      "url": "https://patents.google.com/patent/USPP37238P2/en",
+      "accessed": "2026-09-15",
+      "access_status": "available",
+      "supports": [
+        "identity",
+        "light_exposure",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "SED-ALT-PATENT",
+      "authority": "United States Patent and Trademark Office record via Google Patents",
+      "title": "USPP31095P2 — Echeveria plant named ‘Love’s Fire’",
+      "url": "https://patents.google.com/patent/USPP31095P2/en",
+      "accessed": "2026-09-15",
+      "access_status": "available",
+      "supports": [
+        "identity"
+      ]
+    },
+    {
+      "key": "SED-NCSU",
+      "authority": "North Carolina State Extension",
+      "title": "Sedum",
+      "url": "https://plants.ces.ncsu.edu/plants/sedum/",
+      "accessed": "2026-09-15",
+      "access_status": "available",
+      "supports": [
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting"
+      ]
+    },
+    {
+      "key": "SED-UMN",
+      "authority": "University of Minnesota Extension",
+      "title": "Cacti and succulents",
+      "url": "https://extension.umn.edu/houseplants/cacti-and-succulents",
+      "accessed": "2026-09-15",
+      "access_status": "available",
+      "supports": [
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting"
+      ]
+    }
+  ]
+}

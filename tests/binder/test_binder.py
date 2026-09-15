@@ -16,6 +16,75 @@ import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
 
 
+class CareContentTests(unittest.TestCase):
+    entries = {
+        "sedum-loves-fire": {
+            "light_exposure", "soil_substrate", "water", "temperature_season",
+            "feeding_maintenance", "propagation", "troubleshooting", "natural_history_trivia",
+        },
+        "kalanchoe-desert-surprise": {
+            "light_exposure", "soil_substrate", "water", "temperature_season",
+            "feeding_maintenance", "propagation", "troubleshooting", "natural_history_trivia",
+        },
+        "pothos": {
+            "light_exposure", "soil_substrate", "water", "temperature_season",
+            "feeding_maintenance", "propagation", "troubleshooting", "natural_history_trivia",
+        },
+        "bird-of-paradise": {
+            "light_exposure", "soil_substrate", "water", "temperature_season",
+            "feeding_maintenance", "propagation", "troubleshooting", "natural_history_trivia",
+        },
+        "aquarium-hornwort": {
+            "light", "water_parameters_temperature", "placement", "nutrient_context",
+            "growth_trimming", "propagation", "compatibility_troubleshooting", "natural_history_trivia",
+        },
+    }
+
+    def test_claim_worksheets_are_complete_and_source_mapped(self):
+        for slug, expected_cards in self.entries.items():
+            base = ROOT / "binder" / "entries" / slug
+            # JSON is a strict YAML subset, so these files need no extra parser dependency.
+            content = json.loads((base / "content.yaml").read_text(encoding="utf-8"))
+            source_file = json.loads((base / "sources.yaml").read_text(encoding="utf-8"))
+            self.assertEqual(content["schema_version"], 1)
+            self.assertEqual(source_file["schema_version"], 1)
+            self.assertEqual(content["entry"], slug)
+            self.assertEqual(source_file["entry"], slug)
+            self.assertEqual(set(content["cards"]), expected_cards)
+            self.assertTrue(content["unresolved_fields"])
+
+            identity = content["identity"]
+            for key in ("display_name", "reported_label", "working_name", "status", "confidence", "unresolved"):
+                self.assertTrue(identity[key], f"{slug}: missing identity {key}")
+
+            sources = {item["key"]: item for item in source_file["sources"]}
+            self.assertEqual(len(sources), len(source_file["sources"]), f"{slug}: duplicate source key")
+            for key, source in sources.items():
+                for field in ("authority", "title", "url", "accessed", "access_status", "supports"):
+                    self.assertTrue(source[field], f"{slug}/{key}: missing {field}")
+                self.assertTrue(source["url"].startswith("https://"))
+
+            for card, claims in content["cards"].items():
+                self.assertTrue(claims, f"{slug}/{card}: no claims")
+                for item in claims:
+                    self.assertTrue(item["text"])
+                    self.assertTrue(item["evidence_status"])
+                    self.assertTrue(item["sources"])
+                    for key in item["sources"]:
+                        self.assertIn(key, sources, f"{slug}/{card}: unknown source {key}")
+                        self.assertIn(card, sources[key]["supports"], f"{slug}/{card}: source scope mismatch")
+
+            propagation = " ".join(item["text"] for item in content["cards"]["propagation"])
+            for required in ("Method:", "Start", "Pitfall:"):
+                self.assertIn(required, propagation, f"{slug}: propagation lacks {required}")
+
+    def test_hornwort_watering_interval_is_na(self):
+        path = ROOT / "binder" / "entries" / "aquarium-hornwort" / "content.yaml"
+        content = json.loads(path.read_text(encoding="utf-8"))
+        water = " ".join(item["text"] for item in content["cards"]["water_parameters_temperature"])
+        self.assertIn("Watering interval: N/A", water)
+
+
 class CatalogTests(unittest.TestCase):
     def test_draft_loads_and_has_no_empty_detail_placements(self):
         _, records, selected = build_binder.load_entry("sedum-loves-fire", "draft")

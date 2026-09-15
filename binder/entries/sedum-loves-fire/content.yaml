@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "identity": {
+    "display_name": "Sedum “Love’s Fire”",
+    "reported_label": "Sedum “Love’s Fire”; user supplied Sedum adolphii",
+    "working_name": "Sedum adolphi ‘Love’s Fire’",
+    "status": "provisional cultivar match",
+    "confidence": "moderate",
+    "alternatives": [
+      "Echeveria ‘Love’s Fire’ (USPP31095P2; retained as a name-confusion candidate only)"
+    ],
+    "unresolved": [
+      "Confirm the pot label and specimen against the patented Sedum traits.",
+      "Confirm the Kew taxon record interactively; automated access returned HTTP 403."
+    ]
+  },
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Give strong light, but acclimate any move into direct sun and watch new growth for scorch or stretching.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "SED-PATENT"
+        ],
+        "caveat": "The patent observed one greenhouse light regime, not a universal household target; actual exposure is unknown."
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a freely draining succulent substrate in a container with drainage; Daniel’s present mix and any local recipe remain unknown.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "SED-NCSU"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Check that the root zone has dried before watering thoroughly and allowing drainage; no calendar interval is established.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "SED-NCSU"
+        ],
+        "caveat": "Starting cue only; rain, season, container, and observed dry-down control timing."
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Protect from freezing and reassess water and exposure as seasons change.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "SED-PATENT"
+        ],
+        "caveat": "Patent observations (about 0–32 °C) describe trial conditions/tolerance, not a recommended operating range."
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Remove damaged material and rotate or prune only as needed for balanced container growth; feeding need is unknown.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "SED-PATENT"
+        ],
+        "caveat": "No specimen history is available; avoid cultivar-performance promises."
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: terminal stem cutting. Start with a healthy shoot; let the wound dry, then establish in a freely draining medium. Pitfall: wet media before roots form can promote rot.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "SED-PATENT",
+          "SED-NCSU"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Soft or translucent tissue → excess moisture or cold is plausible → first check drainage, root-zone moisture, and recent temperature; stretched growth → first check usable light.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "SED-NCSU"
+        ],
+        "caveat": "These are checks, not diagnoses; source URL needs repair before final copy."
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "The patented ‘Love’s Fire’ arose as a whole-plant mutation of ‘Strawberry’ and was first propagated by terminal cuttings.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "SED-PATENT"
+        ],
+        "caveat": "Applies only if the specimen is confirmed as the patented cultivar."
+      }
+    ]
+  },
+  "unresolved_fields": [
+    "specimen identity",
+    "current substrate and drainage",
+    "measured exposure",
+    "watering and rain history",
+    "feeding history",
+    "local temperature range"
+  ],
+  "editorial_notes": [
+    "Draft card copy only; retain the visible image placeholder until Step 04 supplies reviewed specimen photographs.",
+    "Environmental guidance is a starting point and must be edited against recorded specimen conditions."
+  ]
+}

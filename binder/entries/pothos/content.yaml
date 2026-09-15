@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "identity": {
+    "display_name": "Pothos",
+    "reported_label": "Pothos",
+    "working_name": "Epipremnum aureum",
+    "status": "provisional species identity",
+    "confidence": "moderate",
+    "alternatives": [
+      "Philodendron hederaceum",
+      "Scindapsus species",
+      "other Epipremnum cultivar or species"
+    ],
+    "unresolved": [
+      "Confirm nodes, grooved petioles, leaf surfaces, variegation, and label; do not infer a cultivar from color alone."
+    ]
+  },
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Bright indirect light is preferred; prolonged low light is tolerated but may reduce variegation. Avoid an abrupt move into strong direct sun.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a well-drained, organic potting medium in a container with drainage; the specimen’s current medium is unknown.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Let the potting medium dry between waterings, then water evenly and drain; no fixed interval is justified.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "POT-NCSU"
+        ],
+        "caveat": "Starting cue only; pot size, season, light, and room conditions alter dry-down."
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Treat as a tropical houseplant and keep away from cold drafts; reduce feeding while dormant in winter.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "POT-NCSU"
+        ],
+        "caveat": "The source does not establish Daniel’s room-temperature range."
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Wipe dusty leaves and prune long bare stems to maintain a bushier habit; the source suggests feeding every other month except winter dormancy.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "POT-NCSU"
+        ],
+        "caveat": "Adjust only after observing growth and the existing potting mix."
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: stem cutting. Start with a healthy vine section containing at least one node and root it in water. Establish after roots develop. Pitfall: a leaf without a node cannot extend the vine.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "POT-NCSU"
+        ],
+        "caveat": "The source supports stem cuttings and easy rooting in water; the node wording follows the plant’s adventitious-rooting stem structure."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Black leaf margins or root decline → first check for overwatering and poor drainage; fading variegation → check light; also inspect for mealybugs, scale, and thrips.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "POT-NCSU"
+        ],
+        "caveat": "Symptoms are not diagnoses."
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "This Araceae vine is native to the Society Islands and climbs using aerial roots; supported mature growth produces much larger leaves.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ]
+  },
+  "unresolved_fields": [
+    "species and cultivar identity",
+    "pot and substrate",
+    "window exposure or grow light",
+    "room temperature and humidity",
+    "watering history",
+    "pets/placement risk"
+  ],
+  "editorial_notes": [
+    "Draft card copy only; retain the visible image placeholder until Step 04 supplies reviewed specimen photographs.",
+    "Environmental guidance is a starting point and must be edited against recorded specimen conditions."
+  ]
+}

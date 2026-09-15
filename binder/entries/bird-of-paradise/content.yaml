@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "identity": {
+    "display_name": "Bird of paradise",
+    "reported_label": "Bird of paradise",
+    "working_name": "Strelitzia species",
+    "status": "unresolved at genus level",
+    "confidence": "low for species",
+    "alternatives": [
+      "Strelitzia reginae",
+      "Strelitzia nicolai"
+    ],
+    "unresolved": [
+      "Use whole-habit, stem/base, leaf, label, and flower evidence before selecting a species."
+    ]
+  },
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Provide a well-lit position; sunny to partially shaded conditions are supported. Acclimate any indoor-to-outdoor move rather than changing exposure abruptly.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ],
+        "caveat": "Species and measured exposure remain unresolved."
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a fertile, organic, well-drained medium and a container with drainage; do not assume the current medium meets this description.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "During active growth water freely without leaving the root zone waterlogged; keep somewhat drier in winter and use observed moisture as the trigger.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "BOP-NCSU-R"
+        ],
+        "caveat": "No fixed interval is justified; pot, species, season, and indoor conditions are unknown."
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Protect from freezing and cold drafts; reassess light and water during seasonal moves.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-UF"
+        ],
+        "caveat": "UF’s brief 24 °F tolerance applies to established S. reginae landscape plants, not this unidentified container specimen."
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Feed only during active spring–summer growth; remove damaged leaves and inspect the crowded base before dividing or repotting.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: division of an established clump or offshoot. Start with a section carrying roots and shoots; keep it warm in well-drained medium while it re-establishes. Pitfall: unnecessary root damage can delay recovery.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ],
+        "caveat": "Confirm species and that the specimen has a divisible clump before acting."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Yellowing or collapse → first check root-zone saturation and drainage; stippling/webbing or bumps → inspect for spider mites, scale, or mealybugs.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N"
+        ],
+        "caveat": "Symptoms do not establish cause."
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "S. reginae is a clumping South African rhizomatous plant; S. nicolai can become a woody-stemmed plant 15–30 ft tall, so habit is useful identity evidence.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ],
+        "caveat": "Do not apply either species description to the specimen until verified."
+      }
+    ]
+  },
+  "unresolved_fields": [
+    "species identity",
+    "pot and substrate",
+    "window/light measurements",
+    "temperature and humidity",
+    "watering history",
+    "planned outdoor conditions"
+  ],
+  "editorial_notes": [
+    "Draft card copy only; retain the visible image placeholder until Step 04 supplies reviewed specimen photographs.",
+    "Environmental guidance is a starting point and must be edited against recorded specimen conditions."
+  ]
+}

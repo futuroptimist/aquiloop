@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert-surprise",
+  "identity": {
+    "display_name": "Kalanchoe “Desert Surprise”",
+    "reported_label": "Kalanchoe humilis “Desert Surprise”",
+    "working_name": "Kalanchoe humilis ‘Desert Surprise’",
+    "status": "provisional cultivar identity",
+    "confidence": "moderate",
+    "alternatives": [
+      "Unresolved Kalanchoe cultivar if label or morphology conflicts"
+    ],
+    "unresolved": [
+      "Verify label spelling and specimen traits from photographs."
+    ]
+  },
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Provide full light with good ventilation; acclimate changes in direct exposure and watch for scorch or stretched growth.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "KAL-RHS"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a peat-free loam-based potting medium with added grit and reliable drainage; the current grow-bag mix is unknown.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "KAL-RHS"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Water moderately, more sparingly in winter, using dryness of the medium as the decision cue rather than a fixed interval.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "KAL-RHS"
+        ],
+        "caveat": "Starting cue only; rain, temperature, container, and observed dry-down change demand."
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Keep frost-free; RHS H1B indicates summer outdoor conditions but protection when temperatures fall below roughly 10–15 °C.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "KAL-RHS"
+        ],
+        "caveat": "RHS hardiness bands describe UK conditions; local exposure remains unmeasured."
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "During active growth, RHS suggests liquid feed two or three times; routine pruning is not required.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "KAL-RHS"
+        ],
+        "caveat": "Strength and product are not specified here; withhold feeding from a stressed or newly rooted plant."
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: stem cutting or removal of plantlets. Start in spring or summer with healthy material and establish in a gritty, freely drained medium. Pitfall: excess moisture around unrooted material can encourage decay.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "KAL-RHS"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Distorted or sticky growth → inspect for aphids or mealybugs; spotted leaves → isolate affected tissue and review moisture/airflow before acting.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "KAL-RHS"
+        ],
+        "caveat": "Symptoms do not establish a diagnosis."
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "This Crassulaceae cultivar is described as a compact evergreen succulent with patterned, fleshy leaves.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "KAL-RHS"
+        ]
+      }
+    ]
+  },
+  "unresolved_fields": [
+    "specimen identity",
+    "current substrate and drainage",
+    "measured exposure",
+    "watering and rain history",
+    "feeding history",
+    "local temperature range"
+  ],
+  "editorial_notes": [
+    "Draft card copy only; retain the visible image placeholder until Step 04 supplies reviewed specimen photographs.",
+    "Environmental guidance is a starting point and must be edited against recorded specimen conditions."
+  ]
+}

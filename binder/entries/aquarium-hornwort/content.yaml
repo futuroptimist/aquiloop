@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "identity": {
+    "display_name": "Aquarium hornwort",
+    "reported_label": "Aquarium hornwort",
+    "working_name": "Ceratophyllum demersum",
+    "status": "provisional species identity",
+    "confidence": "moderate",
+    "alternatives": [
+      "Another Ceratophyllum species or named aquarium selection"
+    ],
+    "unresolved": [
+      "Confirm package/source plus forked leaves, nodes, and stem in close photographs."
+    ]
+  },
+  "cards": {
+    "light": [
+      {
+        "text": "Begin with modest light and adjust only from observed growth; the identifiable grower rates its selection as low light demand.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "HORN-TROPICA"
+        ],
+        "caveat": "Fixture, intensity, and photoperiod are unknown; performance of an unknown specimen may differ."
+      }
+    ],
+    "water_parameters_temperature": [
+      {
+        "text": "Watering interval: N/A. Keep aquarium temperature and chemistry stable and record actual pH, GH/KH, nitrogen compounds, and water-change history before setting ranges.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "HORN-USGS"
+        ],
+        "caveat": "No source-backed household target is assigned without tank and specimen context."
+      }
+    ],
+    "placement": [
+      {
+        "text": "Hornwort has no true roots; allow it to float or place stems at the bottom without treating burial as root planting.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "HORN-TROPICA",
+          "HORN-USGS"
+        ]
+      }
+    ],
+    "nutrient_context": [
+      {
+        "text": "Treat growth as drawing nutrients from the water column; record fertilizer, CO₂, livestock load, and test results before changing dosing.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "HORN-TROPICA",
+          "HORN-USGS"
+        ],
+        "caveat": "The grower rates supplemental CO₂ demand low, but that is not a command to alter this tank."
+      }
+    ],
+    "growth_trimming": [
+      {
+        "text": "Expect potentially fast stem and side-shoot growth; trim as needed and remove loose fragments during maintenance.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "HORN-TROPICA",
+          "HORN-USGS"
+        ],
+        "caveat": "Growth rate depends on the aquarium environment."
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: stem fragmentation/cuttings. Start with a healthy intact stem section and float or place it where light and flow are suitable. Pitfall: unnoticed fragments can spread or clog equipment.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "HORN-USGS",
+          "HORN-TROPICA"
+        ]
+      }
+    ],
+    "compatibility_troubleshooting": [
+      {
+        "text": "Poor growth or shedding → first check stability, light, temperature, nutrients, and physical damage; keep fragments away from intakes and never release aquarium material outdoors.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "HORN-USGS",
+          "HORN-TROPICA"
+        ],
+        "caveat": "Tank volume, livestock, filtration, and local disposal rules remain unknown."
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "C. demersum is a rootless, submerged, cosmopolitan aquatic plant whose whorled, forked leaves help distinguish it.",
+        "evidence_status": "general guidance",
+        "sources": [
+          "HORN-USGS",
+          "HORN-TROPICA"
+        ]
+      }
+    ]
+  },
+  "unresolved_fields": [
+    "species/selection identity",
+    "tank volume and livestock",
+    "temperature and photoperiod",
+    "fixture/intensity",
+    "filtration and flow",
+    "fertilizer and CO2",
+    "measured water chemistry",
+    "maintenance history"
+  ],
+  "editorial_notes": [
+    "Draft card copy only; retain the visible image placeholder until Step 04 supplies reviewed specimen photographs.",
+    "Environmental guidance is a starting point and must be edited against recorded specimen conditions."
+  ]
+}
