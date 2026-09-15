@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "display_name": "Aquarium hornwort",
+  "reported_label": "Aquarium hornwort",
+  "identity": {
+    "status": "provisional species identification",
+    "preferred_name": "Ceratophyllum demersum L.",
+    "confidence": "moderate at species level; specimen unverified",
+    "notes": [
+      "Watering interval: N/A. Aquarium top-offs, changes, tests, and trimming are separate maintenance events."
+    ]
+  },
+  "alternate_candidates": [
+    "Other Ceratophyllum species or aquarium plants marketed as hornwort."
+  ],
+  "unresolved_fields": [
+    "package/source and rights metadata",
+    "node, forked-leaf and stem photographs",
+    "tank volume, livestock, filtration and placement",
+    "temperature, photoperiod/intensity, fertilizer/CO2 and measured chemistry"
+  ],
+  "cards": {
+    "light": [
+      {
+        "text": "Start with moderate aquarium light and adjust from observed growth; avoid assigning an exact intensity or photoperiod until tank data are known.",
+        "sources": [
+          "HOR-TROPICA"
+        ],
+        "caveat": "Growth response varies with nutrients, temperature, shading, and the marketed form."
+      }
+    ],
+    "water_parameters_temperature": [
+      {
+        "text": "Use stable freshwater conditions within the livestock-safe range; no specimen-specific pH, hardness, or temperature target is established. Watering interval is N/A.",
+        "sources": [
+          "HOR-USFS",
+          "HOR-TROPICA"
+        ],
+        "caveat": "Wild occurrence across varied waters is not a prescription for abrupt or extreme aquarium parameters."
+      }
+    ],
+    "placement": [
+      {
+        "text": "Hornwort is rootless: float it or hold stems loosely near the bottom; do not bury it as though it had roots.",
+        "sources": [
+          "HOR-UF",
+          "HOR-TROPICA"
+        ]
+      }
+    ],
+    "nutrient_context": [
+      {
+        "text": "It takes nutrients from the water column; rapid growth depends on available light and nutrients. Correct a measured imbalance rather than dosing blindly.",
+        "sources": [
+          "HOR-USFS",
+          "HOR-TROPICA"
+        ]
+      }
+    ],
+    "growth_trimming": [
+      {
+        "text": "Fast growth can shade other plants; trim excess and remove loose fragments during routine maintenance.",
+        "sources": [
+          "HOR-TROPICA",
+          "HOR-USFS"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: stem fragmentation/cuttings; starting material: a healthy shoot section with several nodes; establish it floating or loosely secured under suitable light; pitfall: unmanaged fragments can spread or clog equipment.",
+        "sources": [
+          "HOR-UF",
+          "HOR-USFS",
+          "HOR-TROPICA"
+        ]
+      }
+    ],
+    "compatibility_troubleshooting": [
+      {
+        "text": "Needle shedding or weak growth → first check recent temperature, light, nutrient, and water-quality changes. Dense mats → thin them to preserve circulation and light. Confirm that loose pieces cannot obstruct an intake and that livestock needs remain primary.",
+        "sources": [
+          "HOR-USFS",
+          "HOR-TROPICA"
+        ],
+        "caveat": "Do not infer one cause from shedding alone."
+      }
+    ],
+    "natural_history": [
+      {
+        "text": "Ceratophyllum demersum is a free-floating, rootless submerged plant; it can overwinter using compact shoot buds and also spreads by fragments.",
+        "sources": [
+          "HOR-UF",
+          "HOR-USFS",
+          "HOR-POWO"
+        ]
+      }
+    ]
+  }
+}

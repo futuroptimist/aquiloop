@@ -14,6 +14,28 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
+import validate_binder_content  # noqa: E402
+
+
+class ContentWorksheetTests(unittest.TestCase):
+    def test_all_source_and_content_worksheets_validate(self):
+        validate_binder_content.validate_all()
+
+    def test_unknown_claim_source_is_rejected(self):
+        original = validate_binder_content.ENTRIES
+        with tempfile.TemporaryDirectory() as name:
+            copied = Path(name) / "entries"
+            shutil.copytree(original, copied)
+            content_path = copied / "pothos" / "content.yaml"
+            content = json.loads(content_path.read_text(encoding="utf-8"))
+            content["cards"]["water"][0]["sources"] = ["MISSING"]
+            content_path.write_text(json.dumps(content), encoding="utf-8")
+            validate_binder_content.ENTRIES = copied
+            try:
+                with self.assertRaisesRegex(ValueError, "unknown source keys"):
+                    validate_binder_content.validate_entry("pothos")
+            finally:
+                validate_binder_content.ENTRIES = original
 
 
 class CatalogTests(unittest.TestCase):

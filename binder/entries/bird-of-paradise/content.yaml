@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "display_name": "Bird of paradise",
+  "reported_label": "Bird of paradise",
+  "identity": {
+    "status": "resolved to genus only",
+    "preferred_name": "Strelitzia sp.",
+    "confidence": "species unresolved",
+    "notes": [
+      "Do not choose Strelitzia reginae or Strelitzia nicolai from the common name alone. Their mature habit and flowers differ."
+    ]
+  },
+  "alternate_candidates": [
+    "Strelitzia reginae",
+    "Strelitzia nicolai"
+  ],
+  "unresolved_fields": [
+    "label",
+    "full habit and base/stem photographs",
+    "leaf and any flower photographs",
+    "indoor exposure, pot, medium, temperature",
+    "planned outdoor transition"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Provide very bright light; acclimate gradually before stronger direct sun, especially when moving outdoors.",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ],
+        "caveat": "Flowering response and outdoor exposure depend on species and climate."
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a fertile, well-drained medium in a stable container with drainage.",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Water thoroughly when the surface layer has dried, then let excess drain; reduce frequency as light and growth slow. No fixed interval is established.",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Protect this tropical genus from frost and cold drafts; make indoor/outdoor transitions gradually.",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Feed during active growth according to product directions; remove dead leaves at the base and monitor scale, mealybugs, and mites.",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: division; starting material: an established clump with roots and a growing point; replant in well-drained medium and keep evenly moist while establishing; pitfall: divisions without adequate roots establish slowly.",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Split leaves can be normal or wind/mechanical damage; inspect new growth and placement. Yellowing/wilting → check both root-zone moisture and drainage. Poor flowering → review plant maturity, species, and light rather than adding water.",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N",
+          "BOP-UF"
+        ],
+        "caveat": "Identity remains unresolved and symptoms are nonspecific."
+      }
+    ],
+    "natural_history": [
+      {
+        "text": "Strelitzia reginae is a clumping South African species with orange-and-blue flowers; S. nicolai develops a much larger, trunk-like habit and white-and-blue flowers.",
+        "sources": [
+          "BOP-NCSU-R",
+          "BOP-NCSU-N"
+        ],
+        "caveat": "Comparison explains the unresolved candidates; it does not identify this specimen."
+      }
+    ]
+  }
+}

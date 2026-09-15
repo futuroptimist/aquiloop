@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "display_name": "Pothos",
+  "reported_label": "Pothos",
+  "identity": {
+    "status": "provisional species identification",
+    "preferred_name": "Epipremnum aureum (Linden & André) G.S.Bunting",
+    "confidence": "moderate at species level; cultivar unknown",
+    "notes": [
+      "Keep the user-facing common name; do not infer a cultivar from variegation alone."
+    ]
+  },
+  "alternate_candidates": [
+    "Other aroid vines sold as pothos, including Scindapsus or Philodendron."
+  ],
+  "unresolved_fields": [
+    "label and node/petiole/leaf photographs",
+    "cultivar",
+    "window and supplemental-light conditions",
+    "pot, medium, watering observations"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Use bright, indirect light; it tolerates lower light, but growth and variegation may diminish. Avoid abrupt strong direct sun.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEMSON"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a loose, well-drained houseplant medium in a pot with drainage; the current medium is unknown.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEMSON"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Water when the upper medium has dried, then drain excess; do not leave roots continuously saturated. Treat timing as observation-based, not calendared.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEMSON"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Keep warm and away from chilling drafts; growth and water use can slow in lower winter light.",
+        "sources": [
+          "POT-NCSU",
+          "POT-UF"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Feed modestly during active growth; prune above a node to manage vines and rotate/clean foliage as needed.",
+        "sources": [
+          "POT-CLEMSON",
+          "POT-UF"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: stem cutting; starting material: a vine section with at least one node; establish with the node in water or moist medium under warm, indirect light; pitfall: a leaf without a node cannot make a new vine.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEMSON"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Yellowing/collapse → possible saturated roots → inspect moisture and drainage. Long gaps/small leaves → possibly low light → compare node spacing and move gradually brighter. Brown tips → review uneven moisture, salts, heat, and humidity before acting.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEMSON",
+          "POT-UF"
+        ],
+        "caveat": "Multiple stresses share symptoms."
+      }
+    ],
+    "natural_history": [
+      {
+        "text": "This Araceae vine is native to the Society Islands and climbs by aerial roots; indoor juvenile leaves differ from mature climbing foliage.",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ]
+  }
+}

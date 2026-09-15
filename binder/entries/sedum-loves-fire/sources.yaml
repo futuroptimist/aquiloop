@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "access_date": "2026-09-15",
+  "sources": [
+    {
+      "key": "SED-POWO",
+      "authority": "Royal Botanic Gardens, Kew — Plants of the World Online",
+      "title": "Sedum adolphi Raym.-Hamet",
+      "url": "https://powo.science.kew.org/results?q=Sedum%20adolphi",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "natural_history"
+        ],
+        "claims": [
+          "accepted spelling, family, native range"
+        ]
+      },
+      "access_note": "Automated URL check returned HTTP 403 on 2026-09-15; retain as an identified research lead, but re-check the record before final copy."
+    },
+    {
+      "key": "SED-PATENT",
+      "authority": "United States Patent and Trademark Office / Google Patents mirror",
+      "title": "Sedum plant named LOVE’S FIRE (USPP37238P2)",
+      "url": "https://patents.google.com/patent/USPP37238P2/en",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "light_exposure",
+          "water",
+          "temperature_season",
+          "propagation",
+          "natural_history"
+        ],
+        "claims": [
+          "cultivar denomination and parentage",
+          "filing and grant dates",
+          "breeder trial conditions and asexual propagation method"
+        ]
+      }
+    },
+    {
+      "key": "SED-UMN",
+      "authority": "University of Minnesota Extension",
+      "title": "Cacti and succulents",
+      "url": "https://extension.umn.edu/houseplants/cacti-and-succulents",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "light_exposure",
+          "soil_substrate",
+          "water",
+          "temperature_season",
+          "feeding_maintenance",
+          "propagation",
+          "troubleshooting"
+        ],
+        "claims": [
+          "general succulent light, drainage, watering, feeding, propagation, and pest guidance"
+        ]
+      }
+    }
+  ]
+}

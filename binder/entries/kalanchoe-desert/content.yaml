@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "display_name": "Kalanchoe “Desert Surprise”",
+  "reported_label": "Kalanchoe humilis “Desert Surprise”",
+  "identity": {
+    "status": "provisional cultivar identification",
+    "preferred_name": "Kalanchoe humilis ‘Desert Surprise’",
+    "confidence": "moderate for the reported name; specimen unverified",
+    "notes": [
+      "Use single quotation marks for the cultivar denomination after label/specimen review."
+    ]
+  },
+  "alternate_candidates": [
+    "Another Kalanchoe humilis selection if the label or morphology differs."
+  ],
+  "unresolved_fields": [
+    "label and specimen photographs",
+    "measured exposure and winter conditions",
+    "current medium and dry-down"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Provide very bright light with some direct sun; acclimate to avoid scorch.",
+        "sources": [
+          "KAL-RHS-PLANT",
+          "KAL-RHS-GROW"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a free-draining cactus/succulent compost and a pot with drainage.",
+        "sources": [
+          "KAL-RHS-PLANT",
+          "KAL-RHS-GROW"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "In active growth, water thoroughly and let the compost dry before repeating; keep appreciably drier in winter. No fixed interval is established.",
+        "sources": [
+          "KAL-RHS-GROW"
+        ],
+        "caveat": "Drying rate changes with heat, rain, pot, and medium."
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Keep frost-free; growth and watering needs decline in the cooler, lower-light season.",
+        "sources": [
+          "KAL-RHS-PLANT",
+          "KAL-RHS-GROW"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Feed sparingly during active growth and remove spent flowers or damaged leaves.",
+        "sources": [
+          "KAL-RHS-GROW"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Method: leaf or stem cutting; starting material: a healthy mature leaf or non-flowering shoot; establish in free-draining medium after the wound dries; pitfall: excess moisture encourages rot.",
+        "sources": [
+          "KAL-RHS-PLANT",
+          "KAL-RHS-GROW"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Soft/yellowing growth → possible excess water → check compost moisture and drainage. Pale or scorched patches → possible abrupt intense light → review recent exposure change.",
+        "sources": [
+          "KAL-RHS-GROW"
+        ],
+        "caveat": "Check conditions and pests; do not diagnose from appearance alone."
+      }
+    ],
+    "natural_history": [
+      {
+        "text": "Kalanchoe humilis is an evergreen succulent in Crassulaceae, noted for fleshy leaves patterned with purple markings.",
+        "sources": [
+          "KAL-RHS-PLANT",
+          "KAL-POWO"
+        ]
+      }
+    ]
+  }
+}

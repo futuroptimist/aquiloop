@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "access_date": "2026-09-15",
+  "sources": [
+    {
+      "key": "HOR-POWO",
+      "authority": "Royal Botanic Gardens, Kew — Plants of the World Online",
+      "title": "Ceratophyllum demersum L.",
+      "url": "https://powo.science.kew.org/results?q=Ceratophyllum%20demersum",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "natural_history"
+        ],
+        "claims": [
+          "accepted name, family and broad native distribution"
+        ]
+      },
+      "access_note": "Automated URL check returned HTTP 403 on 2026-09-15; retain as an identified research lead, but re-check the record before final copy."
+    },
+    {
+      "key": "HOR-UF",
+      "authority": "University of Florida IFAS Center for Aquatic and Invasive Plants",
+      "title": "Ceratophyllum demersum",
+      "url": "https://plants.ifas.ufl.edu/plant-directory/ceratophyllum-demersum/",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "placement",
+          "growth_trimming",
+          "propagation",
+          "compatibility_troubleshooting",
+          "natural_history"
+        ],
+        "claims": [
+          "rootless submerged habit, morphology, reproduction and habitat"
+        ]
+      },
+      "access_note": "Automated URL check returned HTTP 404 on 2026-09-15; retain as an identified research lead, but re-check the record before final copy."
+    },
+    {
+      "key": "HOR-USFS",
+      "authority": "U.S. Forest Service Fire Effects Information System",
+      "title": "Ceratophyllum demersum",
+      "url": "https://www.fs.usda.gov/database/feis/plants/forb/cerdem/all.html",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "identity",
+          "water_parameters_temperature",
+          "placement",
+          "nutrient_context",
+          "growth_trimming",
+          "propagation",
+          "compatibility_troubleshooting",
+          "natural_history"
+        ],
+        "claims": [
+          "habitat, water chemistry associations, seasonal buds, fragmentation and ecological effects"
+        ]
+      },
+      "access_note": "Automated URL check returned HTTP 404 on 2026-09-15; retain as an identified research lead, but re-check the record before final copy."
+    },
+    {
+      "key": "HOR-TROPICA",
+      "authority": "Tropica Aquarium Plants",
+      "title": "Ceratophyllum demersum “Foxtail”",
+      "url": "https://tropica.com/en/plants/plantdetails/?id=4434",
+      "access_date": "2026-09-15",
+      "supports": {
+        "cards": [
+          "light",
+          "water_parameters_temperature",
+          "placement",
+          "nutrient_context",
+          "growth_trimming",
+          "propagation",
+          "compatibility_troubleshooting"
+        ],
+        "claims": [
+          "identifiable-grower aquarium placement, growth and trimming guidance"
+        ]
+      },
+      "access_note": "Grower guidance applies as a starting point, not proof of specimen identity or universal performance."
+    }
+  ]
+}
