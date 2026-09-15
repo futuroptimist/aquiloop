@@ -139,8 +139,8 @@ class PhotoPreparationTests(unittest.TestCase):
 
 
 class ComprehensiveRegressionTests(unittest.TestCase):
-    def fixture(self, details=0, extra=None, page_suffix=""):
-        context = tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries")
+    def fixture(self, details=0, extra=None, page_suffix="", prefix="tmp"):
+        context = tempfile.TemporaryDirectory(prefix=prefix, dir=ROOT / "binder" / "entries")
         base = Path(context.name); (base / "assets").mkdir()
         records = []
         specs = [("hero", (990, 990))] + [(f"detail{i}", (615, 405)) for i in range(1, details + 1)]
@@ -251,7 +251,7 @@ class ComprehensiveRegressionTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError,message): build_binder.load_entry(base.name,"draft")
 
     def test_unresolved_selected_rights_values_are_rejected(self):
-        for rights in ("unknown", "permission requested", "TBD", "not reviewed", "permission denied"):
+        for rights in ("unknown", "pending", "unresolved", " Pending ", "UNRESOLVED", "permission requested", "TBD", "not reviewed", "permission denied"):
             for review in (True, False, None):
                 with self.subTest(rights=rights, rights_reviewed=review):
                     context,base=self.fixture()
@@ -287,6 +287,12 @@ class ComprehensiveRegressionTests(unittest.TestCase):
                             build_binder.load_entry(base.name, "final")
                     else:
                         build_binder.load_entry(base.name, "final")
+
+        for prefix in ("entry#", "entry%"):
+            with self.subTest(entry_directory=prefix):
+                context, base = self.fixture(prefix=prefix)
+                with context, self.assertRaisesRegex(ValueError, "unsupported TeX characters"):
+                    build_binder.load_entry(base.name, "final")
 
     def test_hard_link_is_rejected_before_write(self):
         with tempfile.TemporaryDirectory() as name:
