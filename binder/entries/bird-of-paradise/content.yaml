@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "display_name": "Bird of paradise",
+  "reported_label": "Bird of paradise",
+  "identity": {
+    "status": "unresolved at species level",
+    "working_name": "Strelitzia sp.",
+    "confidence": "high at genus only if the common label is accurate; species unresolved",
+    "alternatives": [
+      "Strelitzia reginae",
+      "Strelitzia nicolai"
+    ],
+    "decision": "Do not select S. reginae or S. nicolai from the common name alone. The candidates differ strongly in mature habit and flowers; retain a genus-level card until evidence supports one.",
+    "sources": [
+      "BOP-REG",
+      "BOP-NIC"
+    ]
+  },
+  "environmental_variability": "Genus-level container guidance only. Species, indoor exposure, temperature, container, and any outdoor transition plan remain unknown.",
+  "unresolved_fields": [
+    "species",
+    "full habit, stem/base, leaf and flower evidence",
+    "window exposure and supplemental light",
+    "container and medium",
+    "temperature/humidity and outdoor-transition plan"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "claim": "Provide very bright light and acclimate gradually before direct outdoor sun. Insufficient light can limit growth and flowering; abrupt exposure can scorch leaves.",
+        "sources": [
+          "BOP-REG",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "claim": "Use a fertile, well-drained medium in a stable container with drainage; confirm the existing pot and medium before recommending repotting.",
+        "sources": [
+          "BOP-REG",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "claim": "Starting cue: water thoroughly during active growth after the upper medium begins to dry, then drain excess; reduce frequency when growth and light slow. Never leave roots continually saturated.",
+        "sources": [
+          "BOP-REG",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "claim": "Protect this tropical genus from frost and cold drafts. Any indoor-to-outdoor move should be gradual and based on recorded night temperatures.",
+        "sources": [
+          "BOP-REG",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "claim": "Feed during active growth according to product directions; remove only dead or badly damaged leaves and wipe broad leaves to monitor pests. Repot or divide only when needed.",
+        "sources": [
+          "BOP-UF"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Method/material: divide an established clump or rhizome so each piece retains roots and a growing point. Replant in well-drained medium and keep evenly, not excessively, moist while re-establishing; root damage and rot are pitfalls.",
+        "sources": [
+          "BOP-REG",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "claim": "Split edges can reflect physical stress, while yellowing or collapse can involve root moisture or cold; inspect moisture, drainage, drafts, and pests before diagnosing.",
+        "sources": [
+          "BOP-REG",
+          "BOP-UF"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "S. reginae is a clumping South African perennial; S. nicolai develops a much larger, woody, tree-like habit. Mature habit can help later identification but does not resolve this specimen today.",
+        "sources": [
+          "BOP-REG",
+          "BOP-NIC"
+        ]
+      }
+    ]
+  }
+}

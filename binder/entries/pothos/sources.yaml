@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "sources": [
+    {
+      "key": "POT-NCSU",
+      "authority": "North Carolina State University Extension",
+      "title": "Epipremnum aureum",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "accessed": "2026-09-15",
+      "supports": [
+        "identity",
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "POT-PSU",
+      "authority": "Penn State Extension",
+      "title": "Pothos as a Houseplant",
+      "url": "https://extension.psu.edu/pothos-as-a-houseplant",
+      "accessed": "2026-09-15",
+      "supports": [
+        "light_exposure",
+        "water",
+        "feeding_maintenance",
+        "troubleshooting"
+      ]
+    },
+    {
+      "key": "POT-CLEM",
+      "authority": "Clemson Cooperative Extension Home & Garden Information Center",
+      "title": "How to Grow Pothos Indoors (Epipremnum spp.): Care, Cultivars, and Common Problems",
+      "url": "https://hgic.clemson.edu/factsheet/how-to-grow-pothos-indoors-epipremnum-spp-care-cultivars-and-common-problems/",
+      "accessed": "2026-09-15",
+      "supports": [
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting"
+      ],
+      "access_note": "Automated URL check returned HTTP 403 on 2026-09-15; claims are also mapped to accessible extension sources where used."
+    }
+  ]
+}

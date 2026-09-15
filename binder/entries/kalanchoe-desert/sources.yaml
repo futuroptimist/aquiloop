@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert",
+  "sources": [
+    {
+      "key": "KAL-RHS",
+      "authority": "Royal Horticultural Society",
+      "title": "Kalanchoe humilis ‘Desert Surprise’",
+      "url": "https://www.rhs.org.uk/plants/310184/kalanchoe-humilis-desert-surprise/details",
+      "accessed": "2026-09-15",
+      "supports": [
+        "identity",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "KAL-IA",
+      "authority": "Iowa State University Extension and Outreach",
+      "title": "How do I care for Kalanchoe?",
+      "url": "https://yardandgarden.extension.iastate.edu/faq/how-do-i-care-kalanchoe",
+      "accessed": "2026-09-15",
+      "supports": [
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "troubleshooting"
+      ]
+    },
+    {
+      "key": "KAL-PROP",
+      "authority": "Iowa State University Extension and Outreach",
+      "title": "How to Propagate Succulents",
+      "url": "https://yardandgarden.extension.iastate.edu/how-to/how-propagate-succulents",
+      "accessed": "2026-09-15",
+      "supports": [
+        "propagation"
+      ]
+    }
+  ]
+}

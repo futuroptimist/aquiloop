@@ -22,8 +22,11 @@ the final committed photographs must show the user's actual specimens.
 
 The facts currently supplied are intentionally sparse. “Soil plus additives”
 does not establish a recipe, and Pacifica, California is prior location context,
-not a measured growing-site condition. Final copy depends on photographs and
-the inputs listed under [Required specimen inputs](#required-specimen-inputs).
+not a measured growing-site condition. Draft content and pages may use clearly
+provisional identities, general source-backed guidance, unresolved fields, and
+the visible placeholder; they do not wait for photographs. Photograph-qualified
+final copy depends on reviewed specimen images, rights, and the inputs listed
+under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
 
 ## Visual references
 
@@ -372,7 +375,7 @@ cultivar denominations, and patent status.
   HTTP 403 during inspection on 2026-09-14. Their contents remain unverified;
   neither is evidence for identity or care unless later retrieved and assessed.
 
-### Required specimen inputs
+### Required specimen inputs for final photograph qualification
 
 Before final identity/care review, collect:
 

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "sources": [
+    {
+      "key": "BOP-REG",
+      "authority": "North Carolina State University Extension",
+      "title": "Strelitzia reginae",
+      "url": "https://plants.ces.ncsu.edu/plants/strelitzia-reginae/",
+      "accessed": "2026-09-15",
+      "supports": [
+        "identity",
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "BOP-NIC",
+      "authority": "North Carolina State University Extension",
+      "title": "Strelitzia nicolai",
+      "url": "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/",
+      "accessed": "2026-09-15",
+      "supports": [
+        "identity",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "BOP-UF",
+      "authority": "University of Florida IFAS Extension",
+      "title": "Bird-of-Paradise",
+      "url": "https://edis.ifas.ufl.edu/publication/MG106",
+      "accessed": "2026-09-15",
+      "supports": [
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting"
+      ]
+    }
+  ]
+}

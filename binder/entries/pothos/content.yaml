@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "display_name": "Pothos",
+  "reported_label": "Pothos",
+  "identity": {
+    "status": "provisional species identification",
+    "working_name": "Epipremnum aureum",
+    "confidence": "moderate at species level; cultivar unknown",
+    "alternatives": [
+      "another Epipremnum species or cultivar",
+      "a superficially similar vining aroid"
+    ],
+    "decision": "Use Pothos as the page title and mark Epipremnum aureum provisional until label, node, petiole, and leaf photographs are reviewed.",
+    "sources": [
+      "POT-NCSU"
+    ]
+  },
+  "environmental_variability": "Indoor light, temperature, container, and dry-down vary. Use plant and medium observations rather than a calendar.",
+  "unresolved_fields": [
+    "species and cultivar",
+    "window exposure and distance",
+    "pot and medium",
+    "watering history",
+    "room temperature/humidity and drafts"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "claim": "Bright indirect light supports fuller, more variegated growth; avoid abrupt strong direct sun. Lower light may reduce variegation and increase spacing.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEM"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "claim": "Use a loose, well-drained houseplant medium in a container with drainage; do not infer the current medium from appearance.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEM"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "claim": "Starting cue: feel the medium and water when the upper layer has dried, then drain excess. Wilt can have multiple causes, so also check root-zone moisture.",
+        "sources": [
+          "POT-PSU",
+          "POT-CLEM"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "claim": "Keep in normal warm indoor conditions and away from cold drafts; slower winter growth usually means slower water use.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEM"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "claim": "Feed modestly during active growth, prune vines to manage shape, and wipe leaves when dusty; do not fertilize a stressed or waterlogged plant.",
+        "sources": [
+          "POT-PSU",
+          "POT-CLEM"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Method/material: cut a healthy vine section with at least one node and root it in water or moist medium. Keep the node in contact with the rooting environment; a leaf without a node will not make a new vine.",
+        "sources": [
+          "POT-NCSU",
+          "POT-CLEM"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "claim": "Yellowing/wilt → water stress or root trouble is plausible → check moisture and drainage. Bleached patches → excess sun is plausible → verify exposure. Inspect leaf joints and undersides for pests.",
+        "sources": [
+          "POT-PSU",
+          "POT-CLEM"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "Epipremnum aureum is a climbing/trailing evergreen aroid native to the Society Islands and can climb by aerial roots.",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ]
+  }
+}

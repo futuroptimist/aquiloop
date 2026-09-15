@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert",
+  "display_name": "Kalanchoe “Desert Surprise”",
+  "reported_label": "Kalanchoe humilis “Desert Surprise”",
+  "identity": {
+    "status": "provisional cultivar identification",
+    "working_name": "Kalanchoe humilis ‘Desert Surprise’",
+    "confidence": "moderate for the reported trade label; specimen match unreviewed",
+    "alternatives": [
+      "Kalanchoe humilis at species level",
+      "another patterned Kalanchoe cultivar"
+    ],
+    "decision": "Use single quotes for the cultivar denomination in botanical copy while preserving the reported double-quoted label separately.",
+    "sources": [
+      "KAL-RHS"
+    ]
+  },
+  "environmental_variability": "General Kalanchoe and succulent guidance; outdoor exposure, rain, potting medium, and temperature require specimen-specific adjustment.",
+  "unresolved_fields": [
+    "label and specimen match",
+    "grow-bag drainage and medium",
+    "measured sun and acclimation",
+    "rain and dry-down history",
+    "local temperatures"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "claim": "Give bright light; acclimate in stages before stronger direct sun and use leaf scorch or stretching as cues to reassess exposure.",
+        "sources": [
+          "KAL-IA"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "claim": "Use a well-drained potting medium and a container with an open drain; the existing soil composition is unknown.",
+        "sources": [
+          "KAL-IA"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "claim": "Starting cue: water thoroughly, then wait until the medium is dry before watering again; rainfall and season can lengthen the cooldown.",
+        "sources": [
+          "KAL-IA"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "claim": "Keep above freezing and avoid cold, wet conditions; bring indoors before frost unless local observations support a safer plan.",
+        "sources": [
+          "KAL-IA"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "claim": "Fertilize lightly during active growth rather than on a rigid schedule; remove spent or damaged growth and reassess light if stems stretch.",
+        "sources": [
+          "KAL-IA"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Method/material: use a healthy stem or leaf cutting. Allow the cut surface to callus, then place in a well-drained medium; keeping an unrooted cutting wet invites rot.",
+        "sources": [
+          "KAL-PROP"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "claim": "Soft/yellowing growth → wet roots are plausible → check moisture and drainage. Pale or stretched growth → light may be low → verify exposure before moving abruptly into sun.",
+        "sources": [
+          "KAL-IA"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "RHS describes ‘Desert Surprise’ as a compact, evergreen succulent with fleshy grey-green leaves marked by purple-red bands.",
+        "sources": [
+          "KAL-RHS"
+        ]
+      }
+    ]
+  }
+}
