@@ -28,63 +28,64 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "Provide very bright light and acclimate gradually before direct outdoor sun. Insufficient light can limit growth and flowering; abrupt exposure can scorch leaves.",
+        "claim": "Both candidate species need bright conditions: NCSU recommends a sunny indoor site for S. reginae and bright indirect light for S. nicolai. Select exposure only after species and current conditions are reviewed.",
         "sources": [
           "BOP-REG",
-          "BOP-UF"
+          "BOP-NIC"
         ]
       }
     ],
     "soil_substrate": [
       {
-        "claim": "Use a fertile, well-drained medium in a stable container with drainage; confirm the existing pot and medium before recommending repotting.",
+        "claim": "NCSU describes well-drained loamy media for both candidate species. Confirm the existing pot and medium before making a species-specific recommendation.",
         "sources": [
           "BOP-REG",
-          "BOP-UF"
+          "BOP-NIC"
         ]
       }
     ],
     "water": [
       {
-        "claim": "Starting cue: water thoroughly during active growth after the upper medium begins to dry, then drain excess; reduce frequency when growth and light slow. Never leave roots continually saturated.",
+        "claim": "NCSU says to water S. reginae freely in spring and summer and keep it drier in winter; for S. nicolai it says to water when the top soil layer feels dry. These are candidate-specific starting cues, not a fixed interval for this unresolved specimen.",
         "sources": [
           "BOP-REG",
-          "BOP-UF"
+          "BOP-NIC"
         ]
       }
     ],
     "temperature_season": [
       {
-        "claim": "Protect this tropical genus from frost and cold drafts. Any indoor-to-outdoor move should be gradual and based on recorded night temperatures.",
+        "claim": "NCSU describes moderate indoor temperatures for S. reginae and says S. nicolai does not tolerate temperatures below 50°F or cold drafts. Record conditions and confirm species before adopting a limit.",
         "sources": [
           "BOP-REG",
-          "BOP-UF"
+          "BOP-NIC"
         ]
       }
     ],
     "feeding_maintenance": [
       {
-        "claim": "Feed during active growth according to product directions; remove only dead or badly damaged leaves and wipe broad leaves to monitor pests. Repot or divide only when needed.",
+        "claim": "NCSU recommends regular spring/summer fertilizer for S. reginae and monthly balanced liquid fertilizer in spring/summer for S. nicolai. Defer a schedule until species and active growth are confirmed.",
         "sources": [
-          "BOP-UF"
+          "BOP-REG",
+          "BOP-NIC"
         ]
       }
     ],
     "propagation": [
       {
-        "claim": "Method/material: divide an established clump or rhizome so each piece retains roots and a growing point. Replant in well-drained medium and keep evenly, not excessively, moist while re-establishing; root damage and rot are pitfalls.",
+        "claim": "Method/material: division is listed for both candidate species. Defer division details until the species, plant maturity, and root system can be reviewed.",
         "sources": [
           "BOP-REG",
-          "BOP-UF"
+          "BOP-NIC"
         ]
       }
     ],
     "troubleshooting": [
       {
-        "claim": "Split edges can reflect physical stress, while yellowing or collapse can involve root moisture or cold; inspect moisture, drainage, drafts, and pests before diagnosing.",
+        "claim": "NCSU lists overwatering or poor drainage as root-rot risks for S. reginae and lists wind damage, root rot, and several pests for S. nicolai. Inspect conditions and species before diagnosing this specimen.",
         "sources": [
           "BOP-REG",
-          "BOP-UF"
+          "BOP-NIC"
         ]
       }
     ],

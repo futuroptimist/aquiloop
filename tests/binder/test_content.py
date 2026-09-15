@@ -57,6 +57,13 @@ class ContentWorksheetTests(unittest.TestCase):
                 self.assertTrue(content["identity"]["sources"])
                 self.assertTrue(content["unresolved_fields"])
                 self.assertTrue(content["environmental_variability"])
+                if slug == "aquarium-hornwort":
+                    self.assertIn("Watering interval is N/A", content["environmental_variability"])
+                    water_claims = content["cards"]["water_parameters_temperature"]
+                    self.assertTrue(
+                        any("Watering interval is N/A" in claim["claim"] for claim in water_claims),
+                        "aquarium-hornwort water card must preserve the N/A watering contract",
+                    )
 
                 cited = set(content["identity"]["sources"])
                 for claims in content["cards"].values():

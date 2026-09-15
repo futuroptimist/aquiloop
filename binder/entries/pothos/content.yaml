@@ -27,10 +27,9 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "Bright indirect light supports fuller, more variegated growth; avoid abrupt strong direct sun. Lower light may reduce variegation and increase spacing.",
+        "claim": "Penn State recommends moderate to bright light and avoiding direct sun; it notes that prolonged low light can reduce variegation or foliage brightness. Treat this as a starting point while the cultivar and exposure remain unknown.",
         "sources": [
-          "POT-NCSU",
-          "POT-CLEM"
+          "POT-PSU"
         ]
       }
     ],
@@ -38,53 +37,47 @@
       {
         "claim": "Use a loose, well-drained houseplant medium in a container with drainage; do not infer the current medium from appearance.",
         "sources": [
-          "POT-NCSU",
-          "POT-CLEM"
+          "POT-NCSU"
         ]
       }
     ],
     "water": [
       {
-        "claim": "Starting cue: feel the medium and water when the upper layer has dried, then drain excess. Wilt can have multiple causes, so also check root-zone moisture.",
+        "claim": "Penn State recommends watering when the soil is dry and warns that excess water can cause root rot while too little can cause temporary drooping. Check root-zone moisture rather than watering by calendar.",
         "sources": [
-          "POT-PSU",
-          "POT-CLEM"
+          "POT-PSU"
         ]
       }
     ],
     "temperature_season": [
       {
-        "claim": "Keep in normal warm indoor conditions and away from cold drafts; slower winter growth usually means slower water use.",
+        "claim": "NCSU describes winter dormancy for pothos and excludes that period from its feeding schedule. Observe growth and medium dry-down rather than inferring a temperature limit or seasonal watering interval.",
         "sources": [
-          "POT-NCSU",
-          "POT-CLEM"
+          "POT-NCSU"
         ]
       }
     ],
     "feeding_maintenance": [
       {
-        "claim": "Feed modestly during active growth, prune vines to manage shape, and wipe leaves when dusty; do not fertilize a stressed or waterlogged plant.",
+        "claim": "NCSU advises periodic fertilizer outside winter dormancy, wiping dusty leaves, and pruning stems to maintain a bushy habit. Adjust only after observing this specimen’s growth and medium.",
         "sources": [
-          "POT-PSU",
-          "POT-CLEM"
+          "POT-NCSU"
         ]
       }
     ],
     "propagation": [
       {
-        "claim": "Method/material: cut a healthy vine section with at least one node and root it in water or moist medium. Keep the node in contact with the rooting environment; a leaf without a node will not make a new vine.",
+        "claim": "Method/material: take a healthy vine cutting. NCSU reports that pothos vines root readily in water and climb using aerial roots; retain a stem section rather than presenting an unsupported leaf-only method.",
         "sources": [
-          "POT-NCSU",
-          "POT-CLEM"
+          "POT-NCSU"
         ]
       }
     ],
     "troubleshooting": [
       {
-        "claim": "Yellowing/wilt → water stress or root trouble is plausible → check moisture and drainage. Bleached patches → excess sun is plausible → verify exposure. Inspect leaf joints and undersides for pests.",
+        "claim": "Penn State links excess water with root rot, too little water with temporary drooping, and direct sun with yellowing. Inspect moisture and exposure before diagnosing; other causes remain possible.",
         "sources": [
-          "POT-PSU",
-          "POT-CLEM"
+          "POT-PSU"
         ]
       }
     ],

@@ -27,63 +27,67 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "Give bright light; acclimate in stages before stronger direct sun and use leaf scorch or stretching as cues to reassess exposure.",
+        "claim": "RHS recommends full light indoors for the candidate cultivar, while Iowa State recommends a bright indoor location for Kalanchoe generally. The specimen’s present exposure remains unknown.",
         "sources": [
+          "KAL-RHS",
           "KAL-IA"
         ]
       }
     ],
     "soil_substrate": [
       {
-        "claim": "Use a well-drained potting medium and a container with an open drain; the existing soil composition is unknown.",
+        "claim": "For the candidate cultivar, RHS recommends a loam-based potting compost with added grit; Iowa State says good drainage is essential and containers must not stand in water. The existing medium is unknown.",
         "sources": [
+          "KAL-RHS",
           "KAL-IA"
         ]
       }
     ],
     "water": [
       {
-        "claim": "Starting cue: water thoroughly, then wait until the medium is dry before watering again; rainfall and season can lengthen the cooldown.",
+        "claim": "For Kalanchoe generally, Iowa State says to let soil dry between waterings but not to wilting. RHS says to water the candidate cultivar moderately and more sparingly in winter; use those as scoped starting cues, not a fixed interval.",
         "sources": [
+          "KAL-RHS",
           "KAL-IA"
         ]
       }
     ],
     "temperature_season": [
       {
-        "claim": "Keep above freezing and avoid cold, wet conditions; bring indoors before frost unless local observations support a safer plan.",
+        "claim": "RHS rates the candidate cultivar H1B: grown under glass all year and outdoors in summer at 10–15°C. Treat that UK rating as cultivar guidance, not a measured threshold for the unverified specimen.",
         "sources": [
-          "KAL-IA"
+          "KAL-RHS"
         ]
       }
     ],
     "feeding_maintenance": [
       {
-        "claim": "Fertilize lightly during active growth rather than on a rigid schedule; remove spent or damaged growth and reassess light if stems stretch.",
+        "claim": "RHS advises liquid fertilizer two or three times in the growing season for the candidate cultivar and says no pruning is required. Do not infer a broader feeding or corrective-pruning schedule for this specimen.",
         "sources": [
-          "KAL-IA"
+          "KAL-RHS"
         ]
       }
     ],
     "propagation": [
       {
-        "claim": "Method/material: use a healthy stem or leaf cutting. Allow the cut surface to callus, then place in a well-drained medium; keeping an unrooted cutting wet invites rot.",
+        "claim": "Method/material: RHS directly lists stem cuttings in spring or summer for the candidate cultivar. Iowa State’s general succulent method is to take a clean stem section, remove lower leaves, let the end callus, and place it in well-drained medium; do not present leaf propagation as cultivar-verified.",
         "sources": [
+          "KAL-RHS",
           "KAL-PROP"
         ]
       }
     ],
     "troubleshooting": [
       {
-        "claim": "Soft/yellowing growth → wet roots are plausible → check moisture and drainage. Pale or stretched growth → light may be low → verify exposure before moving abruptly into sun.",
+        "claim": "RHS lists mealybugs, aphids, downy mildews, and leaf spot as possible problems for the candidate cultivar. For this unverified specimen, inspect before diagnosing; other symptom causes remain unknown.",
         "sources": [
-          "KAL-IA"
+          "KAL-RHS"
         ]
       }
     ],
     "natural_history_trivia": [
       {
-        "claim": "RHS describes ‘Desert Surprise’ as a compact, evergreen succulent with fleshy grey-green leaves marked by purple-red bands.",
+        "claim": "RHS describes ‘Desert Surprise’ as a compact perennial succulent with rosettes of fleshy, rounded olive-green leaves patterned dark red; that description applies to the candidate cultivar, not yet to this specimen.",
         "sources": [
           "KAL-RHS"
         ]

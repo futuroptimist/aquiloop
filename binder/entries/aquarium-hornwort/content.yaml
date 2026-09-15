@@ -28,61 +28,58 @@
   "cards": {
     "light": [
       {
-        "claim": "For Tropica’s C. demersum ‘Foxtail’ form, the grower recommends moderate aquarium light. Treat that as form-specific guidance, not a target for this unverified specimen; no local intensity or photoperiod is yet known.",
+        "claim": "Washington Ecology reports that C. demersum tolerates low light. Tropica separately lists low light demand for its particular C. demersum selection; neither statement supplies a local intensity or photoperiod target for this unverified specimen.",
         "sources": [
+          "HOR-WA",
           "HOR-TROP"
         ]
       }
     ],
     "water_parameters_temperature": [
       {
-        "claim": "Tropica lists a broad aquarium temperature and pH range for its C. demersum ‘Foxtail’ form. Do not transfer those limits to this unverified specimen; record temperature and chemistry before setting local limits. Watering interval is N/A.",
+        "claim": "Washington Ecology describes C. demersum as tolerant of hard water and used in cool-water aquaria, but the retained sources do not establish numeric aquarium chemistry or temperature targets. Record the tank conditions and specimen response before setting any. Watering interval is N/A.",
         "sources": [
-          "HOR-TROP"
+          "HOR-WA"
         ]
       }
     ],
     "placement_anchoring_floating": [
       {
-        "claim": "It is rootless and may be floated or loosely retained near the bottom. Do not bury a nonexistent root system; secure gently if needed and confirm it cannot foul an intake.",
+        "claim": "C. demersum is rootless and can float freely or anchor to the bottom with modified leaves. Until the specimen is confirmed, floating it rather than treating it as a rooted plant is the conservative editorial choice.",
         "sources": [
-          "HOR-WA",
-          "HOR-TROP"
+          "HOR-WA"
         ]
       }
     ],
     "nutrient_context": [
       {
-        "claim": "Tropica reports fast growth and water-column nutrient uptake for its C. demersum ‘Foxtail’ form. Do not assume the same performance or add fertilizer for this specimen until its identity, livestock, water tests, and existing regimen are known.",
+        "claim": "Washington Ecology reports dense C. demersum colonies in nutrient-rich water. This is habitat context, not evidence that this specimen needs fertilizer; defer additions until identity, livestock, water tests, and the existing regimen are known.",
         "sources": [
-          "HOR-TROP"
+          "HOR-WA"
         ]
       }
     ],
     "growth_trimming": [
       {
-        "claim": "Trim excessive growth to preserve circulation and light, and remove loose fragments intentionally. Growth rate will vary with light, temperature, and nutrient supply.",
+        "claim": "C. demersum can form dense colonies and has easily broken stems. As a conservative maintenance step, observe its spread and remove excess or detached growth deliberately rather than assigning an unsupported growth-rate target.",
         "sources": [
-          "HOR-WA",
-          "HOR-TROP"
+          "HOR-WA"
         ]
       }
     ],
     "propagation": [
       {
-        "claim": "Method/material: retain a healthy stem tip or fragment and float it or secure it gently in suitable tank conditions. Keep good light and water quality; crushing or burying stems and allowing fragments to clog equipment are pitfalls.",
+        "claim": "Method/material: Washington Ecology lists plant fragments as a propagation route for C. demersum. Retain a healthy fragment and float it; whether this provisional specimen establishes must be observed rather than assumed.",
         "sources": [
-          "HOR-WA",
-          "HOR-TROP"
+          "HOR-WA"
         ]
       }
     ],
     "aquarium_compatibility_troubleshooting": [
       {
-        "claim": "Rapid growth can shade neighbors and loose needles/fragments can become debris; trim and inspect intake flow. Sudden shedding → first check temperature, chemistry, light change, and handling rather than assigning one cause.",
+        "claim": "Because C. demersum stems break easily, inspect and remove loose fragments as a conservative housekeeping step. No retained source establishes a cause for aquarium shedding, algae, or decline, so record changes in light, water, handling, and livestock and leave the cause unknown.",
         "sources": [
-          "HOR-WA",
-          "HOR-TROP"
+          "HOR-WA"
         ]
       }
     ],

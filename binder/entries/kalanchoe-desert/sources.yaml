@@ -10,8 +10,16 @@
       "accessed": "2026-09-15",
       "supports": [
         "identity",
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
         "natural_history_trivia"
-      ]
+      ],
+      "applicability": "Cultivar profile for K. humilis ‘Desert Surprise’; supports its description and cultivar-specific cultivation, H1B hardiness, feeding, stem-cutting/plantlet propagation, and listed pests and diseases. Applicability to the specimen depends on later label and specimen confirmation."
     },
     {
       "key": "KAL-IA",
@@ -22,11 +30,9 @@
       "supports": [
         "light_exposure",
         "soil_substrate",
-        "water",
-        "temperature_season",
-        "feeding_maintenance",
-        "troubleshooting"
-      ]
+        "water"
+      ],
+      "applicability": "Short general Kalanchoe FAQ. It supports bright indoor light, stated indoor temperature ranges, drying between waterings, and drainage, plus reblooming conditions. It does not support feeding, acclimation, frost exposure, or symptom diagnosis."
     },
     {
       "key": "KAL-PROP",
@@ -36,7 +42,8 @@
       "accessed": "2026-09-15",
       "supports": [
         "propagation"
-      ]
+      ],
+      "applicability": "General succulent propagation article; it expressly includes Kalanchoe among genera suited to its stem-cutting method. RHS, rather than this general article, establishes stem cuttings for the candidate cultivar."
     }
   ]
 }
