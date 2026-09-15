@@ -1,6 +1,8 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: approved design direction; no renderer or final care copy exists.
+Status: approved design direction; the Step 06a single-entry draft renderer and
+photo-preparation workflow are implemented. Final care copy, the remaining
+profiles, the care log, and combined-PDF automation remain future work.
 
 ## Purpose and sequence
 
@@ -193,9 +195,9 @@ crowd out the photograph or care grid.
 
 ### Species image catalogs and page placements
 
-The planned source layout gives each species a reusable image catalog. This tree
-is illustrative; none of these photographs, catalogs, or page sources is claimed
-to exist yet:
+The implemented source layout gives each species a reusable image catalog. The
+Sedum draft entry and shared template exist; `sources.yaml`, real photographs,
+other entries, and future propagation pages shown here remain illustrative:
 
 ```text
 binder/
@@ -285,7 +287,7 @@ behavior; and practical capture guidance. Initial frame contracts are:
 | Slot | Printed frame | Preferred crop | Minimum crop | Capture guidance |
 | --- | --- | --- | --- | --- |
 | Hero | 3.30 × 3.30 in, 1:1 square | 990 × 990 px (300 ppi) | 792 × 792 px (240 ppi) | Leave crop room around the whole plant and keep identifying features sharp. |
-| Detail 1 or 2 | 2.05 × 1.35 in, about 3:2 landscape | 615 × 405 px (300 ppi) | 492 × 324 px (240 ppi) | Fill the frame with the relevant root, node, leaf, or procedure while retaining context. |
+| Detail 1 or 2 | 2.05 × 1.35 in, exact 41:27 landscape | 615 × 405 px (300 ppi) | 492 × 324 px (240 ppi) | Fill the frame with the relevant root, node, leaf, or procedure while retaining context. |
 
 These dimensions are starting points subject to rendered-page qualification;
 the comment must describe the placement actually used. Reuse at a larger print
@@ -297,7 +299,7 @@ explicitly authored future pages with their own budgets. An image must never
 cause type to shrink below the minimum, care text to be discarded, or content to
 silently spill onto another page.
 
-### Future photograph preparation workflow
+### Photograph preparation workflow
 
 1. Capture and retain the original outside the repository.
 2. Apply orientation, choose an intentional crop, convert to sRGB, and resize
@@ -311,9 +313,44 @@ silently spill onto another page.
 5. Upload the derivative into the species' `assets/` directory, add or update
    its catalog record, and select its ID from a page only when desired.
 
-A later, simple preparation helper should preserve originals and report the
-derivative's measured dimensions, bytes, and effective print resolution. It is
-not a media-management service, and implementing it is outside this brief.
+The implemented helper preserves originals and reports the derivative's measured
+dimensions, bytes, and effective print resolution. It is not a media-management
+service.
+
+Run the template proof from the repository root:
+
+```sh
+python scripts/build_binder.py --entry sedum-loves-fire --mode draft \
+  --output build/binder/sedum-loves-fire-draft.pdf
+```
+
+The builder requires Python 3.11 or newer, Pillow, LuaLaTeX with `fontspec`, and
+the locally installed TeX Gyre Pagella/Heros fonts. PDF inspection commands also
+require Poppler's `pdfinfo` and `pdftoppm`. The Step 06a proof was tested with
+Python 3.12.13, Pillow 12.3.0, LuaHBTeX 1.17.0 (TeX Live 2023), and Poppler
+24.02.0. Compilation performs no downloads.
+
+Install the pinned Python dependency with
+`python -m pip install -r requirements-binder.txt`; install the TeX and Poppler
+programs through the host operating system's package manager.
+
+Prepare a photograph non-destructively before cataloging it:
+
+```sh
+python scripts/prepare_binder_photo.py ORIGINAL.jpg \
+  binder/entries/sedum-loves-fire/assets/overview.jpg \
+  --frame hero --focus 0.5 0.5
+```
+
+Keep `ORIGINAL.jpg` outside git. Choose the crop focus deliberately, inspect the
+new sRGB JPEG derivative, copy it into the species `assets/` directory, update
+`assets.json`, select its stable asset ID in `page.tex`, then rebuild. The helper
+applies EXIF orientation before cropping, strips EXIF (including GPS), never
+upscales, and requires `--overwrite` before replacing a derivative. It targets
+500 KiB for a hero and enforces the 1 MiB raster ceiling without lowering real
+pixel dimensions below the 240-ppi contract. Draft mode may visibly render a
+selected placeholder. Final mode rejects selected placeholders or unresolved
+rights, while an unselected draft catalog record does not block final output.
 
 ### Aquatic adaptation
 

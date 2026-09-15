@@ -1,0 +1,2 @@
+# Runtime and focused-test dependency for the local care-binder workflow.
+Pillow==12.3.0

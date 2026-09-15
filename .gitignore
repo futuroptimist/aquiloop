@@ -1,3 +1,9 @@
 stl/
 obj/
 .lycheecache
+build/
+*.aux
+*.log
+*.out
+__pycache__/
+*.py[cod]

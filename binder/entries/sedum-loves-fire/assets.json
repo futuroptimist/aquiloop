@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "sedum-draft-placeholder-001",
+      "path": "assets/specimen-overview.jpg",
+      "kind": "placeholder",
+      "subjects": ["whole plant", "growth habit"],
+      "alt": "Draft placeholder for a future whole-specimen photograph.",
+      "caption": "DRAFT — specimen photograph not yet supplied.",
+      "source": {
+        "provenance": "placeholder only; no photograph exists in the repository",
+        "photographer": "unknown",
+        "rights": "unknown"
+      }
+    },
+    {
+      "id": "sedum-unselected-placeholder-002",
+      "path": "assets/future-detail.jpg",
+      "kind": "placeholder",
+      "subjects": ["future detail"],
+      "alt": "Unselected draft placeholder for a possible detail photograph.",
+      "caption": "Not selected by this page.",
+      "source": {
+        "provenance": "placeholder only; no photograph exists in the repository",
+        "photographer": "unknown",
+        "rights": "unknown"
+      }
+    }
+  ]
+}
