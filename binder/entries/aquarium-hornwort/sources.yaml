@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "sources": [
+    {
+      "key": "USGS-CD",
+      "authority": "U.S. Geological Survey Nonindigenous Aquatic Species",
+      "title": "Ceratophyllum demersum fact sheet",
+      "url": "https://nas.er.usgs.gov/queries/FactSheet.aspx?SpeciesID=314",
+      "access_date": "2026-09-15",
+      "supports": "taxonomy, identification, habitat, distribution, reproduction, and ecological effects",
+      "access_status": "accessible"
+    },
+    {
+      "key": "RUTGERS-CD",
+      "authority": "Rutgers New Jersey Agricultural Experiment Station",
+      "title": "Coontail (Ceratophyllum demersum), a native aquatic plant of New Jersey",
+      "url": "https://njaes.rutgers.edu/fs1236/",
+      "access_date": "2026-09-15",
+      "supports": "rootless submerged habit, seasonal growth, habitat value, fragmentation, and management",
+      "access_status": "accessible"
+    },
+    {
+      "key": "TROPICA-CD",
+      "authority": "Tropica Aquarium Plants",
+      "title": "Ceratophyllum demersum",
+      "url": "https://tropica.com/en/plants/plantdetails/?id=4434",
+      "access_date": "2026-09-15",
+      "supports": "aquarium light, temperature, growth rate, floating/placed use, nutrient uptake, and trimming guidance",
+      "access_status": "accessible"
+    }
+  ]
+}

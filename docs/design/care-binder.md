@@ -22,8 +22,11 @@ the final committed photographs must show the user's actual specimens.
 
 The facts currently supplied are intentionally sparse. “Soil plus additives”
 does not establish a recipe, and Pacifica, California is prior location context,
-not a measured growing-site condition. Final copy depends on photographs and
-the inputs listed under [Required specimen inputs](#required-specimen-inputs).
+not a measured growing-site condition. Draft copy and pages may use explicitly
+provisional identities, general sourced care, and the labeled placeholder; they
+do not wait for photographs. Final photograph-qualified copy depends on reviewed
+specimen images, image rights, and the inputs listed under
+[Required specimen inputs](#required-specimen-inputs).
 
 ## Visual references
 
@@ -512,7 +515,9 @@ selected for final output must remain excluded from the PDF; unresolved rights
 or review for those unselected records alone do not block final qualification.
 These exceptions do not relax catalog schema or duplicate-ID checks. Final
 builds also require real, reviewed images and verified identity/care content.
-The draft/final mode must be explicit rather than inferred from filenames.
+The draft/final mode must be explicit rather than inferred from filenames. This
+final gate does not prevent draft one-pagers or a draft combined binder from
+using the documented provisional identities and visible placeholders.
 
 Fixtures must include a deliberately overlong single profile and assert that its
 **entry-level pagination** check fails, even if a manipulated combined document

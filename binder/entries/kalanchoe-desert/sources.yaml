@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert",
+  "sources": [
+    {
+      "key": "RHS-KHD",
+      "authority": "Royal Horticultural Society",
+      "title": "Kalanchoe humilis ‘Desert Surprise’",
+      "url": "https://www.rhs.org.uk/plants/310184/kalanchoe-humilis-desert-surprise/details",
+      "access_date": "2026-09-15",
+      "supports": "name, family, habit, foliage, exposure, substrate, hardiness, and propagation methods",
+      "access_status": "accessible"
+    },
+    {
+      "key": "UMN-SUCC",
+      "authority": "University of Minnesota Extension",
+      "title": "Cacti and succulents",
+      "url": "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/cacti-and-succulents",
+      "access_date": "2026-09-15",
+      "supports": "general succulent light, substrate, water, temperature, feeding, propagation, and troubleshooting",
+      "access_status": "accessible"
+    }
+  ]
+}

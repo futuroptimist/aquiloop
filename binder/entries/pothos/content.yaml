@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "profile_type": "terrestrial",
+  "identity": {
+    "reported_label": "Pothos",
+    "working_name": "Pothos (provisionally Epipremnum aureum)",
+    "status": "provisional species; cultivar unresolved",
+    "confidence": "moderate at species level from common name only",
+    "alternatives": [
+      "another Epipremnum cultivar or a trade look-alike"
+    ]
+  },
+  "watering_interval": "observation cue; interval unknown",
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Use bright, indirect light; tolerate lower light but expect slower growth or reduced variegation, and avoid abrupt harsh sun.",
+        "sources": [
+          "NCSU-EA"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a loose, well-drained houseplant medium in a pot with drainage. Record the current pot and medium before changing them.",
+        "sources": [
+          "NCSU-EA"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Water when the upper medium has dried, then drain excess; do not leave roots continuously wet. Interval remains unknown until dry-down is observed.",
+        "sources": [
+          "NCSU-EA"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Keep warm and away from cold drafts; growth and water use commonly slow with lower winter light.",
+        "sources": [
+          "NCSU-EA"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Prune vines to manage size and train them on a support if larger growth is wanted; fertilize conservatively during active growth.",
+        "sources": [
+          "NCSU-EA"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Root a stem cutting that includes at least one node in water or moist medium; a leaf without a node cannot produce a new vine.",
+        "sources": [
+          "NCSU-EA"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Yellowing or collapse: check wetness and drainage. Sparse or weak growth: check light. Also inspect for scale and mealybugs before treating.",
+        "sources": [
+          "NCSU-EA"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "Epipremnum aureum is an evergreen climbing vine in Araceae, native to the Society Islands; all parts are poisonous if eaten.",
+        "sources": [
+          "NCSU-EA"
+        ]
+      }
+    ]
+  },
+  "propagation": {
+    "method": "stem cutting",
+    "starting_material": "vine section with at least one node",
+    "establishment_condition": "keep the node in water or evenly moist aerated medium with indirect light",
+    "pitfall": "a node-free leaf will not establish a new vine"
+  },
+  "unresolved_fields": [
+    "species and cultivar identity",
+    "window exposure, pot, medium, temperature, watering and dry-down history"
+  ],
+  "editorial_note": "Draft-card research only. General guidance must be adjusted after Step 04 conditions and specimen evidence arrive."
+}
