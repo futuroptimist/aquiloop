@@ -462,12 +462,13 @@ Image and content validation must additionally check:
 
 - supported JSON schema versions and duplicate asset IDs;
 - every selected asset ID and referenced local file resolving correctly;
-- required alt text, captions, and photographer/source, rights, and provenance
-  fields, with unknowns represented honestly;
+- required alt text and captions, plus a `source` object containing
+  `photographer`, `provenance`, and `rights` fields, with unknowns represented
+  honestly in draft or unselected catalog records;
 - measured raster format, pixel dimensions and byte budgets, plus effective
   resolution after the rendered crop;
 - each adjacent placement comment agreeing with the actual frame definition;
-- a visibly labeled Propagation section on all five summaries;
+- a visibly labeled Propagation care card on all five summaries;
 - replacement of photographs preserving each page budget and combined order;
 - omission of optional details producing a clean layout with no empty boxes;
 - an overfull image/content combination failing instead of shrinking type,
@@ -477,9 +478,11 @@ Image and content validation must additionally check:
 Clearly marked draft builds may use explicit placeholders while templates and
 content are developed before real photographs arrive. Unselected draft assets
 may remain in a catalog without entering the PDF or blocking final qualification
-solely because they are unreviewed. Final builds require real, reviewed images
-and verified identity/care content; the draft/final mode must be explicit rather
-than inferred from filenames.
+solely because they are unreviewed. Final builds require real, reviewed images,
+an affirmative verified permission or license statement in `source.rights` for
+every selected asset, and verified identity/care content; `"unknown"` rights are
+not permitted for selected final assets. The draft/final mode must be explicit
+rather than inferred from filenames.
 
 Fixtures must include a deliberately overlong single profile and assert that its
 **entry-level pagination** check fails, even if a manipulated combined document
