@@ -91,6 +91,16 @@ class ContentWorksheetTests(unittest.TestCase):
                         self.assertTrue(claim["sources"])
                         cited.update(claim["sources"])
                 self.assertLessEqual(cited, keys)
+                background_only = {
+                    source["key"] for source in sources
+                    if source.get("background_only") is True
+                }
+                self.assertEqual(
+                    keys,
+                    cited | background_only,
+                    f"{slug} has source records that are neither cited nor "
+                    "marked background_only: true",
+                )
 
     def test_propagation_contract_rejects_an_empty_required_field(self):
         content = self.load("pothos", "content.yaml")
