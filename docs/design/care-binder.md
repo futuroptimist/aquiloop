@@ -1,6 +1,6 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: design brief for concept review; no renderer or final care copy exists.
+Status: approved design direction; no renderer or final care copy exists.
 
 ## Purpose and sequence
 
@@ -14,9 +14,8 @@ The first release is one directly printable, six-page PDF in this exact order:
 5. Aquarium hornwort profile.
 6. Handwritten watering log.
 
-Each profile occupies exactly one page. Concept images must be generated,
-compared, iterated, and explicitly approved before PDF-source implementation.
-They are layout studies, not evidence: generated plants are provisional, and
+Each profile occupies exactly one page. The concept studies below are retained
+as historical exploration, not evidence: generated plants are provisional, and
 the final committed photographs must show the user's actual specimens.
 
 The facts currently supplied are intentionally sparse. “Soil plus additives”
@@ -39,6 +38,10 @@ statement before reuse. Final production should prefer original specimen photos.
 | [Nature Journaling](https://www.nps.gov/kefj/learn/education/classrooms/nature-journaling.htm) | Kenai Fjords National Park, U.S. National Park Service | Observation-led page with drawing, labels, date/place context, questions, and handwritten character | Design inspiration only. U.S. government material is often public domain, but verify credits and exceptions for each image/download. |
 
 ### Comparable concept directions
+
+These directions record the exploration that preceded approval; their prompts
+are not current production requirements and do not imply that generated images
+or chat artifacts are repository assets.
 
 All three prompts deliberately use the same specimen and content load so the
 review compares composition rather than subject matter. Every concept must
@@ -119,16 +122,29 @@ measurements or specimen history.
 
 ## Page and content contract
 
+### Approved visual direction
+
+The approved profile combines **A's typography** with **B's layout**: a large
+serif common-name heading, italic botanical name, and restrained botanical
+accents; title and identity at upper left; a prominent framed hero photograph
+at upper right; and a two-column care-card grid below. The approved **H care
+log** uses thin dark rules, a pale header tint, date/time plus five plant
+columns, and comfortable handwriting space. These choices supersede the
+full-width photograph in the exploratory prompts while preserving their useful
+historical record.
+
 ### Physical page and typography
 
 - Page box: US Letter portrait, exactly 8.5 × 11 inches (612 × 792 PDF points).
 - Safe area: 1.0-inch left margin for three-hole punching; 0.55 inch at top,
   right, and bottom. No essential ink enters those margins. The resulting usable
   rectangle is 6.95 × 9.9 inches.
-- Photograph: target 6.95 × 3.7 inches (about 37% of usable height), cropped
-  without misleading scale. Require sufficient source resolution for at least
-  240 ppi at final crop (prefer 300 ppi), an embedded color profile, descriptive
-  alt/source metadata, and a grayscale contrast check.
+- Hero photograph: an initial 3.30 × 3.30-inch square frame at upper right,
+  cropped without misleading scale. The rendered crop requires at least
+  792 × 792 pixels (240 ppi) and preferably 990 × 990 pixels (300 ppi), plus
+  appropriate color interpretation, descriptive alt/source metadata, and a
+  grayscale contrast check. Later rendered-page qualification may adjust the
+  chosen starting frame dimensions.
 - Grid: two equal content columns with a 0.22-inch gutter; one category per
   bounded item. Keep headings with their content and prohibit stranded labels.
 - Type: 24–30 pt common name; 14–17 pt binomial/status line; 11–12 pt category
@@ -144,37 +160,169 @@ Every assertion should fit one of these labeled items and carry an evidence
 status where ambiguity matters: **reported**, **verified**, **general guidance**,
 or **local starting point**.
 
-1. **Identity:** reported nursery name and retailer; verified botanical name,
-   cultivar and family only when supported; origin; growth habit.
-2. **Light / exposure:** broadly supported needs, actual measured exposure,
+Place identity, family, origin, and growth habit in the header rather than a
+care card. The terrestrial grid has these eight distinctly labeled cards:
+
+1. **Light / exposure:** broadly supported needs, actual measured exposure,
    acclimation steps, and sunburn or etiolation cues.
-3. **Soil / substrate:** observed current medium and a practical composition by
+2. **Soil / substrate:** observed current medium and a practical composition by
    volume only when an authoritative or identifiable grower source supports it.
    A proposed local mix must be labeled as a starting point, not universal fact.
-4. **Water:** observable trigger first, thoroughness/method and drainage second,
+3. **Water:** observable trigger first, thoroughness/method and drainage second,
    then a conditional interval range if observations support one. Calendar
    intervals never override moisture, plant condition, rain, or season.
-5. **Temperature / season:** supported tolerances, frost/heat response, seasonal
+4. **Temperature / season:** supported tolerances, frost/heat response, seasonal
    light, water, and indoor/outdoor transition adjustments.
-6. **Feeding / maintenance:** conditional feeding, pruning, repotting, cleaning,
-   propagation or aquarium trimming as appropriate.
+5. **Feeding / maintenance:** conditional feeding, pruning, repotting, cleaning,
+   or aquarium trimming as appropriate.
+6. **Propagation:** a supported method, the starting material, and one key
+   establishment condition or pitfall. Every profile must show this card;
+   detailed propagation guides are future entries with explicit page budgets.
 7. **Troubleshooting:** a compact symptom → plausible cause → safe next check
    table; avoid a diagnosis from appearance alone.
-8. **Trivia:** one sourced species/genus fact that cannot be mistaken for care.
-9. **Evidence footer:** short source keys, revision date/version, reviewer, and
-   unresolved identity or measurement flags.
+8. **Natural history / trivia:** one sourced species/genus fact that cannot be
+   mistaken for care.
+
+An **evidence footer** carries short source keys, revision date/version,
+reviewer, and unresolved identity or measurement flags.
 
 Optional diagrams are allowed only when they clarify a task or observation—for
 example, a leaf/node detail, pruning point, planting depth, or grow-bag moisture
 sampling locations. They need a caption and source/“schematic” label and must not
 crowd out the photograph or care grid.
 
+### Species image catalogs and page placements
+
+The planned source layout gives each species a reusable image catalog. This tree
+is illustrative; none of these photographs, catalogs, or page sources is claimed
+to exist yet:
+
+```text
+binder/
+  manifest.yaml
+  template.tex
+  entries/
+    sedum-loves-fire/
+      page.tex
+      sources.yaml
+      assets.json
+      assets/
+        overview.jpg
+        roots.jpg
+        leaf-discoloration.jpg
+```
+
+Other species follow the same pattern. A future source such as
+`propagation.tex` may live beside `page.tex` and share that species'
+`assets.json` and `assets/`. Factual care citations belong in `sources.yaml`,
+not in the image catalog.
+
+Catalog records use stable IDs that describe assets independently of page roles.
+Adding a record never selects an image for the PDF. The following small,
+versioned example is valid JSON but entirely hypothetical:
+
+```json
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "sedum-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": ["whole plant", "growth habit"],
+      "alt": "Hypothetical Sedum specimen shown from the side in its grow bag.",
+      "caption": "Whole-plant view of the documented specimen.",
+      "source": {
+        "photographer": "unknown",
+        "provenance": "hypothetical example; not a repository asset",
+        "rights": "unknown"
+      },
+      "specimen_id": "example-specimen-01",
+      "capture_date": "2026-09-01",
+      "observations": ["Multiple stems are visible above the bag rim."]
+    },
+    {
+      "id": "sedum-leaf-001",
+      "path": "assets/leaf-discoloration.jpg",
+      "kind": "photograph",
+      "subjects": ["leaf", "discoloration"],
+      "alt": "Hypothetical close view of one lower leaf with yellow coloration.",
+      "caption": "Yellow coloration observed on one lower leaf; cause not established.",
+      "source": {
+        "photographer": "unknown",
+        "provenance": "hypothetical example; not a repository asset",
+        "rights": "unknown"
+      }
+    }
+  ]
+}
+```
+
+Unknown metadata remains absent or explicitly `"unknown"`; it must never be
+guessed. Pixel dimensions, encoded format, and byte size are measured from the
+file during preparation and validation rather than duplicated as manually
+maintained JSON values. Optional `specimen_id`, `capture_date`, and factual
+`observations` associate an image with evidence without turning an observation
+into a diagnosis. In particular, a yellow lower leaf does not establish its
+cause, and a photograph alone cannot establish root-zone moisture or a universal
+watering trigger.
+
+A page selects each image explicitly by asset ID and supplies its placement/slot,
+printed dimensions, fit/crop behavior, and an optional contextual caption
+override. **Hero** and **detail** are placement roles, not asset properties, so a
+page may reuse an asset without copying its binary. A summary supports one hero
+and up to two optional details only when all required care text still fits.
+Absent details leave no reserved empty boxes and do not block publication.
+Useful details may show roots, nodes, leaf discoloration, or a moisture-check
+procedure; roots and diagnostic views must not be forced into the hero crop.
+
+Every source-level placement must have an adjacent comment that states the asset
+ID and resolvable file reference; printed dimensions, aspect ratio, and
+orientation; preferred and minimum pixels for the rendered crop; fit/crop
+behavior; and practical capture guidance. Initial frame contracts are:
+
+| Slot | Printed frame | Preferred crop | Minimum crop | Capture guidance |
+| --- | --- | --- | --- | --- |
+| Hero | 3.30 × 3.30 in, 1:1 square | 990 × 990 px (300 ppi) | 792 × 792 px (240 ppi) | Leave crop room around the whole plant and keep identifying features sharp. |
+| Detail 1 or 2 | 2.05 × 1.35 in, about 3:2 landscape | 615 × 405 px (300 ppi) | 492 × 324 px (240 ppi) | Fill the frame with the relevant root, node, leaf, or procedure while retaining context. |
+
+These dimensions are starting points subject to rendered-page qualification;
+the comment must describe the placement actually used. Reuse at a larger print
+size requires a new effective-resolution check. DPI metadata changes and
+upscaling do not replace captured detail.
+
+Catalog capacity is independent of page capacity. Excess images appear only on
+explicitly authored future pages with their own budgets. An image must never
+cause type to shrink below the minimum, care text to be discarded, or content to
+silently spill onto another page.
+
+### Future photograph preparation workflow
+
+1. Capture and retain the original outside the repository.
+2. Apply orientation, choose an intentional crop, convert to sRGB, and resize
+   once while preserving enough real detail for the intended frame.
+3. Create a separate compressed JPEG derivative for a photograph. Remove
+   unnecessary EXIF and GPS metadata while preserving appropriate color
+   interpretation.
+4. Aim for approximately 500 KiB or less for each hero and retain the planned
+   1 MiB ceiling for any raster, without sacrificing minimum resolution or
+   useful detail.
+5. Upload the derivative into the species' `assets/` directory, add or update
+   its catalog record, and select its ID from a page only when desired.
+
+A later, simple preparation helper should preserve originals and report the
+derivative's measured dimensions, bytes, and effective print resolution. It is
+not a media-management service, and implementing it is outside this brief.
+
 ### Aquatic adaptation
 
-Hornwort uses **identity and growth form**, **light**, **water parameters and
-temperature**, **placement/anchoring or floating**, **nutrient context**,
-**growth/trimming**, **aquarium compatibility**, **troubleshooting**, and
-**trivia**. It must not receive terrestrial soil or watering instructions.
+Hornwort keeps identity and growth form in the header, then adapts the eight
+cards to **light**, **water parameters and temperature**, **placement/anchoring
+or floating**, **nutrient context**, **growth/trimming**, **propagation**,
+**aquarium compatibility/troubleshooting**, and **natural history/trivia**. Its
+Propagation card follows the same method, starting-material, and establishment
+condition/pitfall contract. It must not receive terrestrial soil or watering
+instructions.
 Record tank volume, temperature, light schedule/intensity, livestock, filtration,
 fertilization, and measured chemistry only after the user supplies them. Separate
 top-offs, water changes, testing, and trimming from “watering.”
@@ -241,6 +389,7 @@ by five plant columns in manifest order. Each plant header contains its short
 display name, location marker, and a blank field `Typical interval: ___ days`.
 The adjacent printed note reads: “Planning estimate only—check moisture or plant
 condition, rain, and season first.” No interval is populated during design.
+Use thin dark rules and a pale header tint that remains distinct in grayscale.
 
 Each dated row is one watering event. Every plant cell provides ruled space for
 **amount or method** and a **brief observation**; leave a plant's cell blank when
@@ -309,11 +458,35 @@ The validator must fail on:
 - blank/near-blank pages, content outside the safe/content boxes, clipped text,
   overfull boxes, or unintended overflow pages.
 
+Image and content validation must additionally check:
+
+- supported JSON schema versions and duplicate asset IDs;
+- every selected asset ID and referenced local file resolving correctly;
+- required alt text, captions, and photographer/source, rights, and provenance
+  fields, with unknowns represented honestly;
+- measured raster format, pixel dimensions and byte budgets, plus effective
+  resolution after the rendered crop;
+- each adjacent placement comment agreeing with the actual frame definition;
+- a visibly labeled Propagation section on all five summaries;
+- replacement of photographs preserving each page budget and combined order;
+- omission of optional details producing a clean layout with no empty boxes;
+- an overfull image/content combination failing instead of shrinking type,
+  removing content, or spilling to a new page; and
+- draft placeholders being rejected during final qualification.
+
+Clearly marked draft builds may use explicit placeholders while templates and
+content are developed before real photographs arrive. Unselected draft assets
+may remain in a catalog without entering the PDF or blocking final qualification
+solely because they are unreviewed. Final builds require real, reviewed images
+and verified identity/care content; the draft/final mode must be explicit rather
+than inferred from filenames.
+
 Fixtures must include a deliberately overlong single profile and assert that its
 **entry-level pagination** check fails, even if a manipulated combined document
 still totals six pages. Also test a reordered manifest, absent image/content
-field, wrong page dimensions, and inserted blank page. Positive tests assert
-individual budgets plus combined order/count—not only total page count.
+field, wrong page dimensions, inserted blank page, optional-detail omission,
+photo replacement, and an overfull image/content combination. Positive tests
+assert individual budgets plus combined order/count—not only total page count.
 
 ### Human acceptance gates
 
@@ -330,8 +503,10 @@ Only that later physical check can justify calling the binder print-worthy.
 
 ## Deferred decisions
 
-- Concept direction and image studies are pending user iteration and approval.
+- The approved direction is A typography + B profile layout + H care log;
+  implementation details and rendered-page adjustments remain pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- PDF sources, renderer/dependencies, workflow, tests, generated concepts, and
-  PDF artifacts are outside this brief and have not been added.
+- PDF sources, actual catalogs/assets, renderer/dependencies, workflow, tests,
+  generated concepts, and PDF artifacts are outside this brief and have not
+  been added.
