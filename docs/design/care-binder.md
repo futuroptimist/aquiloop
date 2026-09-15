@@ -191,6 +191,10 @@ care card. The terrestrial grid has these eight distinctly labeled cards:
 An **evidence footer** carries short source keys, revision date/version,
 reviewer, and unresolved identity or measurement flags.
 
+Every record in an entry's `sources.yaml` must be cited by its identity or card
+content. A source retained only for research context must instead declare
+`"background_only": true`; this exception should be uncommon and intentional.
+
 Optional diagrams are allowed only when they clarify a task or observation—for
 example, a leaf/node detail, pruning point, planting depth, or grow-bag moisture
 sampling locations. They need a caption and source/“schematic” label and must not

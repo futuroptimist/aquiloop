@@ -32,23 +32,6 @@
         "feeding_maintenance",
         "troubleshooting"
       ]
-    },
-    {
-      "key": "POT-CLEM",
-      "authority": "Clemson Cooperative Extension Home & Garden Information Center",
-      "title": "How to Grow Pothos Indoors (Epipremnum spp.): Care, Cultivars, and Common Problems",
-      "url": "https://hgic.clemson.edu/factsheet/how-to-grow-pothos-indoors-epipremnum-spp-care-cultivars-and-common-problems/",
-      "accessed": "2026-09-15",
-      "supports": [
-        "light_exposure",
-        "soil_substrate",
-        "water",
-        "temperature_season",
-        "feeding_maintenance",
-        "propagation",
-        "troubleshooting"
-      ],
-      "access_note": "Automated URL check returned HTTP 403 on 2026-09-15; claims are also mapped to accessible extension sources where used."
     }
   ]
 }
