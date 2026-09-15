@@ -21,8 +21,9 @@ The phased, safety-first auto-top-off system is specified in the
 [aquarium auto-top-off design](docs/design/aquarium-auto-top-off.md).
 The complementary [Aquiloop platform roadmap](docs/design/aquiloop-platform-roadmap.md)
 describes the longer-term multi-vessel and hydroponics direction.
-The [care binder design brief](docs/design/care-binder.md) defines a future
-printable set of plant profiles and a handwritten watering log.
+The [care binder design brief](docs/design/care-binder.md) defines the printable
+plant profiles and watering log; its Step 06a section documents the current
+single-entry draft proof and local photo workflow.
 Start with the supervised, dry-bench
 [SST + LED Phase 0 experiment](firmware/auto_top_off/experiments/sst_led/README.md).
 

@@ -1,0 +1,35 @@
+\documentclass[letterpaper]{article}
+\usepackage[paperwidth=8.5in,paperheight=11in,left=1in,right=.55in,top=.55in,bottom=.55in]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor,graphicx,tikz,tabularx,array}
+\usepackage[most]{tcolorbox}
+\usepackage{microtype}
+\pagestyle{empty}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\definecolor{ink}{HTML}{202722}
+\definecolor{sage}{HTML}{52695A}
+\definecolor{rust}{HTML}{9A4E32}
+\definecolor{paper}{HTML}{FCFBF6}
+\definecolor{rule}{HTML}{68736B}
+\pagecolor{paper}\color{ink}
+\setlength{\parindent}{0pt}
+\providecommand{\BinderMode}{draft}
+\providecommand{\EntryDir}{.}
+\providecommand{\AssetPath}[1]{}
+\newcommand{\AssetCaption}[1]{}
+\providecommand{\AssetIsPlaceholder}[1]{1}
+\newcommand{\PhotoFrame}[4]{%
+  \begin{minipage}[t][#3][c]{#2}\centering
+  \ifnum\AssetIsPlaceholder{#1}=1
+    \begin{tikzpicture}\clip (0,0) rectangle (#2,#3);\draw[rust,dashed,line width=.7pt] (0,0) rectangle (#2,#3);
+      \node[align=center,text=rust,font=\sffamily\bfseries\small] at (#2/2,#3/2) {DRAFT PHOTO\\PLACEHOLDER\\\texttt{#1}};\end{tikzpicture}%
+  \else\includegraphics[width=#2,height=#3,keepaspectratio=false]{\AssetPath{#1}}\fi
+  \end{minipage}}
+\newtcolorbox{carecard}[1]{enhanced,boxrule=.55pt,colframe=rule,colback=white,
+  sharp corners,left=7pt,right=7pt,top=4pt,bottom=4pt,height=.94in,
+  before upper={\sffamily\fontsize{9.5}{12}\selectfont},
+  title={#1},fonttitle=\sffamily\bfseries\fontsize{11}{13}\selectfont,
+  coltitle=ink,colbacktitle=white,toptitle=4pt,bottomtitle=1pt}
+\input{\EntryDir/page.tex}
+\end{document}

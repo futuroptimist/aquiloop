@@ -1,6 +1,8 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: approved design direction; no renderer or final care copy exists.
+Status: approved design direction; the Step 06a draft template and photo
+workflow are implemented, but final care copy and the six-page binder do not
+yet exist.
 
 ## Purpose and sequence
 
@@ -297,7 +299,7 @@ explicitly authored future pages with their own budgets. An image must never
 cause type to shrink below the minimum, care text to be discarded, or content to
 silently spill onto another page.
 
-### Future photograph preparation workflow
+### Implemented photograph preparation workflow
 
 1. Capture and retain the original outside the repository.
 2. Apply orientation, choose an intentional crop, convert to sRGB, and resize
@@ -311,9 +313,25 @@ silently spill onto another page.
 5. Upload the derivative into the species' `assets/` directory, add or update
    its catalog record, and select its ID from a page only when desired.
 
-A later, simple preparation helper should preserve originals and report the
-derivative's measured dimensions, bytes, and effective print resolution. It is
-not a media-management service, and implementing it is outside this brief.
+`scripts/prepare_binder_photo.py` implements this focused workflow. Pillow is
+required. For example, prepare an intentional square hero crop with:
+
+```sh
+python scripts/prepare_binder_photo.py ORIGINAL.jpg \
+  binder/entries/sedum-loves-fire/assets/overview.jpg \
+  --frame hero --crop 120,40,1200,1200
+```
+
+The helper applies EXIF orientation before the deliberate crop, converts to
+sRGB, resizes at most once without upscaling, removes EXIF/GPS, writes a separate
+compressed JPEG, and reports pixels, bytes, and effective print resolution. It
+rejects crops below 240 ppi, wrong frame ratios, same-file output, implicit
+overwrite, and output above the 1 MiB ceiling. The hero encoder aims at about
+500 KiB without reducing dimensions below the approved print minimum. Keep the
+camera original outside git; prepare the derivative; place it in the species
+`assets/` directory; update `assets.json`; explicitly select its stable ID in
+`page.tex`; then rebuild. `--overwrite` is consent to replace only an existing
+derivative, never the original.
 
 ### Aquatic adaptation
 
@@ -403,7 +421,7 @@ compact aquarium event such as water change/top-off/test/trimming plus amount or
 result and observation. The legend must state that aquarium maintenance is not
 watering. Do not collapse unrelated tank events into a fictional interval.
 
-## Future implementation and verification contract
+## Implementation and verification contract
 
 ### Recommended toolchain
 
@@ -412,8 +430,34 @@ Use **LuaLaTeX** with a small, data-driven document layer (for example,
 physical-page control, mature typography and tables, local OpenType font support,
 robust image placement, and deterministic PDF builds without introducing a web
 runtime. Pin the TeX Live release and directly used package versions in build
-documentation or a container image digest. Installation and implementation are
+documentation or a container image digest. The five completed summaries, care
+log, combined assembly, comprehensive regression matrix, and CI automation are
 explicitly deferred.
+
+### Step 06a draft build
+
+Required tools are Python 3, Pillow, LuaLaTeX with `fontspec`, `tcolorbox`,
+TikZ, `microtype`, and TeX Gyre fonts, plus Poppler (`pdfinfo` and `pdftoppm`)
+for inspection. The implementation uses distribution-provided local fonts and
+never downloads an asset during compilation. Build the representative proof:
+
+```sh
+python scripts/build_binder.py --entry sedum-loves-fire --mode draft \
+  --output build/binder/sedum-loves-fire-draft.pdf
+```
+
+The builder validates schema version 1, metadata and unique IDs; confines paths
+to the entry; measures raster dimensions, format, and bytes directly; resolves
+only explicit page selections; and enforces selected crop minimums. Draft mode
+permits a conspicuous placeholder. Final mode rejects selected placeholders or
+unresolved rights while ignoring the rights status of valid unselected records.
+The proof is a template demonstration, not verified care guidance or a
+print-worthy binder. Tested tool versions are recorded with the proof review in
+the repository history/PR because environment package revisions can vary. The
+Step 06a proof was tested on 2026-09-15 with Python 3.12.13, Pillow 12.3.0,
+LuaHBTeX 1.17.0 from TeX Live 2023 (`texlive-luatex`, `texlive-latex-extra`,
+`texlive-pictures`, and `texlive-fonts-recommended` Ubuntu package revision
+`2023.20240207-1`), TeX Gyre fonts package `20180621-6`, and Poppler 24.02.0.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -509,10 +553,11 @@ Only that later physical check can justify calling the binder print-worthy.
 
 ## Deferred decisions
 
-- The approved direction is A typography + B profile layout + H care log;
-  implementation details and rendered-page adjustments remain pending.
+- The approved direction is A typography + B profile layout + H care log. The
+  profile foundation is implemented without a design deviation; rendered
+  qualification of the remaining pages and the H care log remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- PDF sources, actual catalogs/assets, renderer/dependencies, workflow, tests,
-  generated concepts, and PDF artifacts are outside this brief and have not
-  been added.
+- Real specimen assets, remaining catalogs/pages, care citations, combined
+  renderer, comprehensive tests, GitHub Actions, and committed PDF artifacts
+  have not been added. Generated proof PDFs and renders remain ignored outputs.

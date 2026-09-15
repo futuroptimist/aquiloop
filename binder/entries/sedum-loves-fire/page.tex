@@ -1,0 +1,55 @@
+% HERO PLACEMENT — asset sedum-draft-placeholder / assets/PLACEHOLDER.md; 3.30 x 3.30 in,
+% 1:1 square; minimum 792 x 792 px, preferred 990 x 990 px; crop to fill after
+% orientation. Capture the whole plant sharply with generous crop room and an uncluttered background.
+\def\HeroAsset{sedum-draft-placeholder}
+% DETAIL 1 PLACEMENT (optional) — asset sedum-detail-placeholder / assets/PLACEHOLDER.md;
+% 2.05 x 1.35 in, exact 41:27 landscape ratio; minimum 492 x 324 px, preferred
+% 615 x 405 px; crop to fill after orientation. Frame a useful node/leaf feature with context.
+\def\DetailOneAsset{}
+% DETAIL 2 PLACEMENT (optional) — no asset selected; when used, require 2.05 x 1.35 in,
+% exact 41:27 landscape, minimum 492 x 324 px, preferred 615 x 405 px, crop to fill.
+% Frame a useful root, leaf, or procedure detail without implying diagnosis.
+\def\DetailTwoAsset{}
+
+\begin{document}
+\begin{minipage}[t][3.30in][t]{3.43in}
+  {\color{rust}\sffamily\bfseries\fontsize{9}{11}\selectfont DRAFT PROOF · IDENTITY PENDING}\par\vspace{.12in}
+  {\fontsize{28}{30}\selectfont Sedum ``Love's Fire''}\par\vspace{.10in}
+  {\itshape\fontsize{15}{18}\selectfont Reported label; botanical identity not verified}\par\vspace{.17in}
+  {\color{sage}\rule{2.75in}{.8pt}}\par\vspace{.16in}
+  {\sffamily\fontsize{10}{13}\selectfont
+  \textbf{Family / origin / habit}\par
+  PLACEHOLDER — awaiting identity review, specimen photographs, and verified sources. No botanical claim is made on this draft page.}
+\end{minipage}\hfill
+\PhotoFrame{\HeroAsset}{3.30in}{3.30in}{crop}
+
+\vspace{.12in}
+\begin{minipage}[t]{3.365in}
+\begin{carecard}{LIGHT / EXPOSURE}PLACEHOLDER — add verified guidance, measured exposure, acclimation steps, and observable cues.\end{carecard}\vspace{.07in}
+\begin{carecard}{WATER}PLACEHOLDER — add an observable trigger, method, drainage, and only supported conditional timing.\end{carecard}\vspace{.07in}
+\begin{carecard}{FEEDING / MAINTENANCE}PLACEHOLDER — add sourced, conditional feeding, pruning, repotting, or cleaning guidance.\end{carecard}\vspace{.07in}
+\begin{carecard}{TROUBLESHOOTING}PLACEHOLDER — add symptom → plausible cause → safe next check; do not diagnose from appearance alone.\end{carecard}
+\end{minipage}\hfill
+\begin{minipage}[t]{3.365in}
+\begin{carecard}{SOIL / SUBSTRATE}PLACEHOLDER — record the observed medium; add a supported recipe or clearly labeled local starting point.\end{carecard}\vspace{.07in}
+\begin{carecard}{TEMPERATURE / SEASON}PLACEHOLDER — add supported tolerances and seasonal or indoor/outdoor adjustments.\end{carecard}\vspace{.07in}
+\begin{carecard}{PROPAGATION}PLACEHOLDER — add a supported method, starting material, and one establishment condition or pitfall.\end{carecard}\vspace{.07in}
+\begin{carecard}{NATURAL HISTORY / TRIVIA}PLACEHOLDER — add one sourced fact that cannot be mistaken for care guidance.\end{carecard}
+\end{minipage}
+
+% Optional detail frames are emitted only for explicit non-empty selections;
+% omitted details consume no page space and leave no empty outlined boxes.
+\if\relax\detokenize\expandafter{\DetailOneAsset}\relax\else
+  \vspace{.10in}\PhotoFrame{\DetailOneAsset}{2.05in}{1.35in}{crop}
+\fi
+\if\relax\detokenize\expandafter{\DetailTwoAsset}\relax\else
+  \if\relax\detokenize\expandafter{\DetailOneAsset}\relax\vspace{.10in}\else\hspace{.18in}\fi
+  \PhotoFrame{\DetailTwoAsset}{2.05in}{1.35in}{crop}
+\fi
+
+\vfill
+{\color{sage}\rule{\linewidth}{.6pt}}\vspace{3pt}
+{\sffamily\fontsize{8}{10}\selectfont\textbf{EVIDENCE / REVISION}\quad
+Sources: PLACEHOLDER — none approved. \quad Revision: draft 0.1 · 2026-09-15.\quad
+Reviewer: pending.\quad Flags: identity, measurements, photographs, and care copy unresolved.}
+\end{document}
