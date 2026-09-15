@@ -15,6 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {"id", "path", "kind", "subjects", "alt", "caption", "source"}
 SOURCE_REQUIRED = {"photographer", "provenance", "rights"}
+ASPECT_TOLERANCE = .005
+KINDS = {"photograph", "placeholder"}
 PLACEMENT = re.compile(r"^% binder-placement (hero|detail[12]) ([^;]+);")
 
 
@@ -28,14 +30,20 @@ def load_entry(entry: str, mode: str) -> tuple[Path, dict[str, dict], dict[str, 
         raise ValueError("assets.json must use supported schema_version 1")
     records: dict[str, dict] = {}
     for record in data.get("assets", []):
+        if not isinstance(record, dict):
+            raise ValueError("each asset must be an object")
         missing = REQUIRED - record.keys()
-        if missing or not isinstance(record.get("source"), dict):
+        if missing:
             raise ValueError(f"asset missing required metadata: {sorted(missing)}")
+        if not isinstance(record["source"], dict):
+            raise ValueError(f"asset {record['id']} source metadata must be an object")
         source_missing = SOURCE_REQUIRED - record["source"].keys()
         if source_missing:
             raise ValueError(f"asset {record['id']} missing source metadata: {sorted(source_missing)}")
         if record["id"] in records:
             raise ValueError(f"duplicate asset ID: {record['id']}")
+        if record["kind"] not in KINDS:
+            raise ValueError(f"asset {record['id']} has unsupported kind: {record['kind']}")
         records[record["id"]] = record
     selected = {}
     for line in (base / "page.tex").read_text().splitlines():
@@ -51,7 +59,7 @@ def load_entry(entry: str, mode: str) -> tuple[Path, dict[str, dict], dict[str, 
         path = (base / record["path"]).resolve()
         if base not in path.parents or not path.is_file():
             raise ValueError(f"asset path must resolve within entry: {record['path']}")
-        if mode == "final" and (record["kind"] == "placeholder" or record["source"]["rights"].strip().lower() in {"", "unknown", "pending", "unresolved"}):
+        if mode == "final" and (record["kind"] == "placeholder" or record["source"].get("rights_reviewed") is not True):
             raise ValueError(f"selected asset {asset_id} is not qualified for final mode")
         if record["kind"] == "photograph":
             try:
@@ -67,6 +75,9 @@ def load_entry(entry: str, mode: str) -> tuple[Path, dict[str, dict], dict[str, 
             required = (792, 792) if role == "hero" else (492, 324)
             if width < required[0] or height < required[1]:
                 raise ValueError(f"selected {role} {asset_id} is below {required[0]} x {required[1]} px")
+            frame_ratio = 1 if role == "hero" else 2.05 / 1.35
+            if abs(width / height - frame_ratio) > ASPECT_TOLERANCE:
+                raise ValueError(f"selected {role} {asset_id} aspect ratio does not match its frame")
             print(f"asset {asset_id}: {width} x {height} px, {image_format}, {path.stat().st_size} bytes")
     return base, records, selected
 
@@ -90,8 +101,11 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
             if record["kind"] == "placeholder":
                 rendered = r"\HeroPlaceholder" if role == "hero" else ""
             else:
-                path = (base / record["path"]).resolve().as_posix().replace("%", r"\%")
-                rendered = rf"\HeroImage{{{path}}}" if role == "hero" else rf"\DetailImage{{{path}}}"
+                path = (base / record["path"]).resolve().as_posix()
+                if any(character in path for character in "{}\r\n"):
+                    raise ValueError(f"asset path contains unsupported characters: {record['path']}")
+                latex_path = rf"\detokenize{{{path}}}"
+                rendered = rf"\HeroImage{{{latex_path}}}" if role == "hero" else rf"\DetailImage{{{latex_path}}}"
             lines.append(rf"\newcommand{{\{command}}}{{{rendered}}}")
         details = [rf"\{commands[role]}" for role in ("detail1", "detail2") if role in selected]
         lines.append(r"\newcommand{\AssetDetails}{" + (r"\par\vspace{.08in}" + r"\hfill".join(details) if details else "") + "}")

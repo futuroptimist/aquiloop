@@ -503,8 +503,10 @@ Image and content validation must additionally check:
 
 Clearly marked draft builds may use explicit placeholders while templates and
 content are developed before real photographs arrive. Every asset selected for
-final output must have documented, reviewed ownership, permission, or a license
-that permits the intended use. Missing, `"unknown"`, pending, or otherwise
+final output must document ownership, permission, or a license that permits the
+intended use in `source.rights`, and set `source.rights_reviewed` to the boolean
+`true` after review. A descriptive rights string alone does not qualify an
+asset. Missing, `"unknown"`, pending, or otherwise
 unresolved rights must fail final qualification. Draft assets that are not
 selected for final output must remain excluded from the PDF; unresolved rights
 or review for those unselected records alone do not block final qualification.

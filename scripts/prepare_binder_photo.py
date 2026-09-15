@@ -56,8 +56,8 @@ def prepare(source: Path, output: Path, frame: str, crop: tuple[int, int, int, i
             if len(buffer.getvalue()) <= target_bytes or quality <= 72:
                 break
             quality -= 4
-        if len(buffer.getvalue()) > 1024 * 1024:
-            raise ValueError("cannot meet 1 MiB ceiling without silently sacrificing required resolution")
+        if len(buffer.getvalue()) > target_bytes:
+            raise ValueError(f"cannot meet {target_bytes}-byte frame budget at minimum quality")
         output.write_bytes(buffer.getvalue())
     if source.read_bytes() != original:
         raise RuntimeError("original changed unexpectedly")
