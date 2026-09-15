@@ -365,6 +365,8 @@ cultivar denominations, and patent status.
   breeder, patent, label, or identifiable grower for cultivar-specific claims.
 - Cite sources at claim level in working data. A retailer listing can document
   a marketed name, but cannot alone verify taxonomy or a user's specimen.
+- Every source record must be cited by identity or card content. A source kept
+  only for context must instead declare `"background_only": true` explicitly.
 - Separate consensus principles (for example, use an observable water trigger)
   from **suggested starting recipes** and **local adaptations**. Every numeric
   mix, interval, threshold, or tolerance needs a source and applicability note.
