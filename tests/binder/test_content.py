@@ -91,6 +91,17 @@ class ContentWorksheetTests(unittest.TestCase):
                         self.assertTrue(claim["sources"])
                         cited.update(claim["sources"])
                 self.assertLessEqual(cited, keys)
+                unexplained = {
+                    source["key"]
+                    for source in sources
+                    if source["key"] not in cited
+                    and source.get("background_only") is not True
+                }
+                self.assertFalse(
+                    unexplained,
+                    f"{slug} has uncited sources not marked background_only: "
+                    f"{sorted(unexplained)}",
+                )
 
     def test_propagation_contract_rejects_an_empty_required_field(self):
         content = self.load("pothos", "content.yaml")
