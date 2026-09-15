@@ -259,13 +259,14 @@ versioned example is valid JSON but entirely hypothetical:
 ```
 
 Unknown metadata remains absent or explicitly `"unknown"`; it must never be
-guessed. Pixel dimensions, encoded format, and byte size are measured from the
-file during preparation and validation rather than duplicated as manually
-maintained JSON values. Optional `specimen_id`, `capture_date`, and factual
-`observations` associate an image with evidence without turning an observation
-into a diagnosis. In particular, a yellow lower leaf does not establish its
-cause, and a photograph alone cannot establish root-zone moisture or a universal
-watering trigger.
+guessed. Draft and unselected catalog entries may retain unknown rights, subject
+to the final-selection rules below. Pixel dimensions, encoded format, and byte
+size are measured from the file during preparation and validation rather than
+duplicated as manually maintained JSON values. Optional `specimen_id`,
+`capture_date`, and factual `observations` associate an image with evidence
+without turning an observation into a diagnosis. In particular, a yellow lower
+leaf does not establish its cause, and a photograph alone cannot establish
+root-zone moisture or a universal watering trigger.
 
 A page selects each image explicitly by asset ID and supplies its placement/slot,
 printed dimensions, fit/crop behavior, and an optional contextual caption
@@ -462,9 +463,9 @@ Image and content validation must additionally check:
 
 - supported JSON schema versions and duplicate asset IDs;
 - every selected asset ID and referenced local file resolving correctly;
-- required alt text and captions, plus a `source` object containing
-  `photographer`, `provenance`, and `rights` fields, with unknowns represented
-  honestly in draft or unselected catalog records;
+- required `alt`, `caption`, `source.photographer`, `source.provenance`, and
+  `source.rights` values, with unknowns represented honestly in draft or
+  unselected catalog records;
 - measured raster format, pixel dimensions and byte budgets, plus effective
   resolution after the rendered crop;
 - each adjacent placement comment agreeing with the actual frame definition;
@@ -476,13 +477,15 @@ Image and content validation must additionally check:
 - draft placeholders being rejected during final qualification.
 
 Clearly marked draft builds may use explicit placeholders while templates and
-content are developed before real photographs arrive. Unselected draft assets
-may remain in a catalog without entering the PDF or blocking final qualification
-solely because they are unreviewed. Final builds require real, reviewed images,
-an affirmative verified permission or license statement in `source.rights` for
-every selected asset, and verified identity/care content; `"unknown"` rights are
-not permitted for selected final assets. The draft/final mode must be explicit
-rather than inferred from filenames.
+content are developed before real photographs arrive. Every asset selected for
+final output must have documented, reviewed ownership, permission, or a license
+that permits the intended use. Missing, `"unknown"`, pending, or otherwise
+unresolved rights must fail final qualification. Draft assets that are not
+selected for final output must remain excluded from the PDF; unresolved rights
+or review for those unselected records alone do not block final qualification.
+These exceptions do not relax catalog schema or duplicate-ID checks. Final
+builds also require real, reviewed images and verified identity/care content.
+The draft/final mode must be explicit rather than inferred from filenames.
 
 Fixtures must include a deliberately overlong single profile and assert that its
 **entry-level pagination** check fails, even if a manipulated combined document
