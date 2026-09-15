@@ -170,7 +170,7 @@ class ComprehensiveRegressionTests(unittest.TestCase):
                 self.assertAlmostEqual(float(reader.pages[0].mediabox.width), 612, delta=.1)
                 self.assertAlmostEqual(float(reader.pages[0].mediabox.height), 792, delta=.1)
                 text = reader.pages[0].extract_text()
-                self.assertIn("PROPAGATION", text); self.assertIn("PLACEHOLDER", text)
+                self.assertIn("PROPAGATION", text); self.assertIn("DRAFT", text)
                 self.assertEqual(set(loaded[2]), {"hero"} | {f"detail{i}" for i in range(1, count + 1)})
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
