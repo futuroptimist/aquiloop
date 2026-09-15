@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert-surprise",
+  "accessed": "2026-09-15",
+  "sources": [
+    {
+      "key": "KAL-RHS",
+      "authority": "Royal Horticultural Society",
+      "title": "Kalanchoe humilis ‘Desert Surprise’",
+      "url": "https://www.rhs.org.uk/plants/310184/kalanchoe-humilis-desert-surprise/details",
+      "accessed": "2026-09-15",
+      "access_status": "available",
+      "supports": [
+        "identity",
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "KAL-POWO",
+      "authority": "Royal Botanic Gardens, Kew — Plants of the World Online",
+      "title": "Search results for Kalanchoe humilis",
+      "url": "https://powo.science.kew.org/results?q=Kalanchoe%20humilis",
+      "accessed": "2026-09-15",
+      "access_status": "inaccessible to automated check (HTTP 403); retain for interactive taxonomic review",
+      "supports": [
+        "identity",
+        "natural_history_trivia"
+      ]
+    }
+  ]
+}

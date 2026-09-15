@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "accessed": "2026-09-15",
+  "sources": [
+    {
+      "key": "HORN-TROPICA",
+      "authority": "Tropica Aquarium Plants",
+      "title": "Ceratophyllum demersum",
+      "url": "https://tropica.com/en/plants/plantdetails/?id=4434",
+      "accessed": "2026-09-15",
+      "access_status": "available",
+      "supports": [
+        "identity",
+        "light",
+        "water_parameters_temperature",
+        "placement",
+        "nutrient_context",
+        "growth_trimming",
+        "propagation",
+        "compatibility_troubleshooting",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "HORN-USGS",
+      "authority": "U.S. Geological Survey, Nonindigenous Aquatic Species",
+      "title": "Ceratophyllum demersum species profile",
+      "url": "https://nas.er.usgs.gov/queries/FactSheet.aspx?speciesID=1117",
+      "accessed": "2026-09-15",
+      "access_status": "available",
+      "supports": [
+        "identity",
+        "water_parameters_temperature",
+        "placement",
+        "growth_trimming",
+        "nutrient_context",
+        "propagation",
+        "compatibility_troubleshooting",
+        "natural_history_trivia"
+      ]
+    }
+  ]
+}

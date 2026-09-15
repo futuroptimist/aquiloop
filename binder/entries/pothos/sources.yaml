@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "accessed": "2026-09-15",
+  "sources": [
+    {
+      "key": "POT-NCSU",
+      "authority": "North Carolina State Extension",
+      "title": "Epipremnum aureum",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "accessed": "2026-09-15",
+      "access_status": "available",
+      "supports": [
+        "identity",
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
+        "natural_history_trivia"
+      ]
+    }
+  ]
+}
