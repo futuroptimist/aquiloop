@@ -10,6 +10,8 @@ SOURCE_REQUIRED = {"photographer", "provenance", "rights"}
 KINDS = {"photograph", "placeholder"}
 ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PLACEMENT = re.compile(r"^% binder-placement (hero|detail1|detail2) ([a-z0-9]+(?:-[a-z0-9]+)*);(?: .+)?$")
+UNRESOLVED_RIGHTS = {"unknown", "permission requested", "tbd", "not reviewed", "permission denied"}
+UNSAFE_TEX_PATH_CHARS = frozenset("#%{}\\\r\n")
 
 
 def _nonempty(value: object) -> bool:
@@ -78,10 +80,15 @@ def load_entry(entry: str, mode: str) -> tuple[Path, dict[str, dict], dict[str, 
         if asset_id not in records:
             raise ValueError(f"selected {role} references unknown asset: {asset_id}")
         record = records[asset_id]
-        if mode == "final" and (record["kind"] == "placeholder" or record["source"].get("rights_reviewed") is not True):
+        rights = record["source"]["rights"].strip().casefold()
+        if mode == "final" and (record["kind"] == "placeholder" or
+                                record["source"].get("rights_reviewed") is not True or
+                                rights in UNRESOLVED_RIGHTS):
             raise ValueError(f"selected asset {asset_id} is not qualified for final mode")
         if record["kind"] == "placeholder":
             continue
+        if any(char in record["path"] for char in UNSAFE_TEX_PATH_CHARS):
+            raise ValueError(f"asset path contains unsupported TeX characters: {record['path']}")
         path = (base / record["path"]).resolve()
         try:
             from PIL import Image
@@ -122,8 +129,8 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
                 rendered = rf"\HeroPlaceholder{{{selected[role]}}}" if role == "hero" else rf"\DetailPlaceholder{{{selected[role]}}}"
             else:
                 path = (base / record["path"]).resolve().as_posix()
-                if any(c in path for c in "{}\r\n"):
-                    raise ValueError(f"asset path contains unsupported characters: {record['path']}")
+                if any(c in record["path"] for c in UNSAFE_TEX_PATH_CHARS):
+                    raise ValueError(f"asset path contains unsupported TeX characters: {record['path']}")
                 rendered = (r"\HeroImage" if role == "hero" else r"\DetailImage") + rf"{{\detokenize{{{path}}}}}"
             lines.append(rf"\newcommand{{\{command}}}{{{rendered}}}")
         details = [rf"\{commands[r]}" for r in ("detail1", "detail2") if r in selected]

@@ -81,16 +81,12 @@ class CatalogTests(unittest.TestCase):
         data = json.loads((real / "assets.json").read_text())
         record = data["assets"][0]
         record.update({"path": "assets/photo.jpg", "kind": "photograph"})
-        record["source"]["rights"] = "permission requested"
+        record["source"].update(rights="owned test fixture", rights_reviewed=True)
         with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as name:
             base = Path(name); (base / "assets").mkdir()
             Image.new("RGB", (1200, 800)).save(base / "assets" / "photo.jpg")
             (base / "assets.json").write_text(json.dumps(data))
             (base / "page.tex").write_text("% binder-placement hero sedum-placeholder-001; test\n")
-            with self.assertRaisesRegex(ValueError, "not qualified"):
-                build_binder.load_entry(base.name, "final")
-            record["source"]["rights_reviewed"] = True
-            (base / "assets.json").write_text(json.dumps(data))
             with self.assertRaisesRegex(ValueError, "aspect ratio"):
                 build_binder.load_entry(base.name, "final")
 
@@ -255,12 +251,42 @@ class ComprehensiveRegressionTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError,message): build_binder.load_entry(base.name,"draft")
 
     def test_unresolved_selected_rights_values_are_rejected(self):
-        for rights in ("permission requested","TBD","not reviewed","permission denied"):
-            context,base=self.fixture()
-            with context:
-                data=json.loads((base/"assets.json").read_text()); data["assets"][0]["source"].update(rights=rights,rights_reviewed=False)
-                (base/"assets.json").write_text(json.dumps(data))
-                with self.assertRaisesRegex(ValueError,"not qualified"): build_binder.load_entry(base.name,"final")
+        for rights in ("unknown", "permission requested", "TBD", "not reviewed", "permission denied"):
+            for review in (True, False, None):
+                with self.subTest(rights=rights, rights_reviewed=review):
+                    context,base=self.fixture()
+                    with context:
+                        data=json.loads((base/"assets.json").read_text())
+                        source=data["assets"][0]["source"]
+                        source["rights"] = rights
+                        if review is None:
+                            source.pop("rights_reviewed")
+                        else:
+                            source["rights_reviewed"] = review
+                        (base/"assets.json").write_text(json.dumps(data))
+                        with self.assertRaisesRegex(ValueError,"not qualified"):
+                            build_binder.load_entry(base.name,"final")
+
+        context, base = self.fixture()
+        with context:
+            build_binder.load_entry(base.name, "final")
+
+    def test_tex_special_asset_paths(self):
+        for filename, rejected in (("ordinary.jpg", False), ("photo#1.jpg", True), ("photo%crop.jpg", True)):
+            with self.subTest(filename=filename):
+                context, base = self.fixture()
+                with context:
+                    data = json.loads((base / "assets.json").read_text(encoding="utf-8"))
+                    old_path = base / data["assets"][0]["path"]
+                    new_path = base / "assets" / filename
+                    old_path.rename(new_path)
+                    data["assets"][0]["path"] = f"assets/{filename}"
+                    (base / "assets.json").write_text(json.dumps(data), encoding="utf-8")
+                    if rejected:
+                        with self.assertRaisesRegex(ValueError, "unsupported TeX characters"):
+                            build_binder.load_entry(base.name, "final")
+                    else:
+                        build_binder.load_entry(base.name, "final")
 
     def test_hard_link_is_rejected_before_write(self):
         with tempfile.TemporaryDirectory() as name:
