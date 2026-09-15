@@ -1,0 +1,27 @@
+\documentclass[10pt]{article}
+\usepackage[paperwidth=8.5in,paperheight=11in,left=1in,right=.55in,top=.55in,bottom=.55in]{geometry}
+\usepackage{fontspec,graphicx,xcolor,tikz,array,enumitem,xparse}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\definecolor{ink}{HTML}{202522}\definecolor{sage}{HTML}{52665A}\definecolor{rust}{HTML}{9A4E32}\definecolor{paper}{HTML}{FCFBF7}\definecolor{line}{HTML}{A8ADA8}
+\pagecolor{paper}\color{ink}\pagestyle{empty}\setlength{\parindent}{0pt}
+\ExplSyntaxOn
+\keys_define:nn { binder } {
+ common-name .tl_set:N=\l_common_tl, botanical-name .tl_set:N=\l_botanical_tl,
+ identity .tl_set:N=\l_identity_tl, hero .tl_set:N=\l_hero_tl, details .tl_set:N=\l_details_tl,
+ light .tl_set:N=\l_light_tl, soil .tl_set:N=\l_soil_tl, water .tl_set:N=\l_water_tl,
+ temperature .tl_set:N=\l_temperature_tl, feeding .tl_set:N=\l_feeding_tl,
+ propagation .tl_set:N=\l_propagation_tl, troubleshooting .tl_set:N=\l_trouble_tl,
+ history .tl_set:N=\l_history_tl, evidence .tl_set:N=\l_evidence_tl }
+\NewDocumentCommand\CareCard{mm}{\begin{minipage}[t][1.12in][t]{3.365in}\color{sage}\rule{3.365in}{.6pt}\par\vspace{3pt}\sffamily\bfseries\fontsize{11}{13}\selectfont #1\par\vspace{3pt}\normalfont\fontsize{9.5}{12}\selectfont\color{ink}#2\end{minipage}}
+\NewDocumentCommand\BinderEntry{m}{\keys_set:nn{binder}{#1}
+\begin{minipage}[t][3.30in][t]{3.39in}\vspace{0pt}{\color{rust}\sffamily\bfseries\fontsize{9}{11}\selectfont FIELD~CARE~PROFILE~·~\BinderMode}\par\vspace{10pt}{\fontsize{27}{30}\selectfont\bfseries\l_common_tl}\par\vspace{5pt}{\fontsize{15}{18}\selectfont\itshape\l_botanical_tl}\par\vspace{13pt}{\color{sage}\rule{.7in}{1.2pt}}\par\vspace{9pt}{\sffamily\fontsize{9.5}{12}\selectfont\l_identity_tl}\end{minipage}\hfill
+\begin{minipage}[t][3.30in][t]{3.30in}\vspace{0pt}\BinderHero\end{minipage}
+\vspace{.18in}\par
+\noindent\CareCard{LIGHT~/~EXPOSURE}{\l_light_tl}\hfill\CareCard{SOIL~/~SUBSTRATE}{\l_soil_tl}\par\vspace{.08in}
+\noindent\CareCard{WATER}{\l_water_tl}\hfill\CareCard{TEMPERATURE~/~SEASON}{\l_temperature_tl}\par\vspace{.08in}
+\noindent\CareCard{FEEDING~/~MAINTENANCE}{\l_feeding_tl}\hfill\CareCard{PROPAGATION}{\l_propagation_tl}\par\vspace{.08in}
+\noindent\CareCard{TROUBLESHOOTING}{\l_trouble_tl}\hfill\CareCard{NATURAL~HISTORY~/~TRIVIA}{\l_history_tl}
+\BinderDetails\vfill{\color{line}\rule{\linewidth}{.6pt}}\par\vspace{4pt}{\sffamily\fontsize{8}{10}\selectfont\l_evidence_tl}\par}
+\ExplSyntaxOff
+\begin{document}\input{ENTRY_FILE}\end{document}
