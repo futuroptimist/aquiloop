@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "profile_type": "terrestrial",
+  "identity": {
+    "reported_label": "Sedum “Love’s Fire”; user also reported Sedum adolphii",
+    "working_name": "Sedum “Love’s Fire” (provisionally Sedum adolphi ‘LOVE’S FIRE’)",
+    "status": "provisional; specimen-to-cultivar match unverified",
+    "confidence": "low until label and morphology are reviewed",
+    "alternatives": [
+      "other Sedum or a look-alike succulent; no Echeveria assignment supported"
+    ],
+    "nomenclature_note": "Kew records Sedum adolphi (one i) as the accepted spelling; retain the reported “Sedum adolphii” separately.",
+    "patent_note": "PPAF is stale for USPP37238P2: the application was filed 2025-07-09 and the patent granted 2026-01-27; do not imply the specimen is the patented clone until reviewed."
+  },
+  "watering_interval": "observation cue; interval unknown",
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Give bright light; acclimate gradually to stronger direct sun and watch for scorch or stretching.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a fast-draining cactus/succulent medium in a container with drainage; the existing grow-bag recipe is unknown.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Water thoroughly, then wait until the medium is dry before watering again; rain, season, and observed dry-down override a calendar.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Protect from freezing and reduce watering as light and growth slow; exact outdoor thresholds remain unknown.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Feed sparingly only during active growth; remove dead material and inspect rather than diagnosing from appearance alone.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Take a healthy stem cutting, let the cut surface dry/callus, then place in a well-drained medium; excess moisture promotes rot.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Soft/translucent growth or leaf drop: first check persistent wetness and drainage. Stretching: first check insufficient light, then acclimate rather than moving abruptly to hard sun.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "The patent describes ‘LOVE’S FIRE’ as a 2022 mutation of Sedum ‘Strawberry’; this does not prove the user’s specimen is that clone.",
+        "sources": [
+          "USPTO-PP37238"
+        ]
+      },
+      {
+        "text": "“PPAF” no longer describes USPP37238P2 after its 2026-01-27 grant; any patent notice must remain separate from the unverified specimen identity.",
+        "sources": [
+          "USPTO-PP37238"
+        ]
+      }
+    ]
+  },
+  "propagation": {
+    "method": "stem cutting",
+    "starting_material": "healthy nonflowering stem section",
+    "establishment_condition": "callus first; use a well-drained medium in bright indirect light",
+    "pitfall": "wet medium before roots establish can cause rot"
+  },
+  "unresolved_fields": [
+    "specimen identity and cultivar match",
+    "original label spelling and patent notice on the specimen",
+    "grow-bag mix, exposure, climate, rain, and dry-down observations"
+  ],
+  "editorial_note": "Draft-card research only. General guidance must be adjusted after Step 04 conditions and specimen evidence arrive."
+}

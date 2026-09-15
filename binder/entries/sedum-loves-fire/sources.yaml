@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "sources": [
+    {
+      "key": "KEW-SED",
+      "authority": "Royal Botanic Gardens, Kew — Plants of the World Online",
+      "title": "Sedum adolphi Raym.-Hamet",
+      "url": "https://powo.science.kew.org/results?q=Sedum%20adolphi",
+      "access_date": "2026-09-15",
+      "supports": "accepted spelling, family, native range, and taxonomic status",
+      "access_status": "HTTP 403 to automated check; retain for interactive review"
+    },
+    {
+      "key": "USPTO-PP37238",
+      "authority": "United States Patent and Trademark Office / Google Patents mirror",
+      "title": "Sedum plant named “LOVE’S FIRE” (USPP37238P2)",
+      "url": "https://patents.google.com/patent/USPP37238P2/en",
+      "access_date": "2026-09-15",
+      "supports": "cultivar denomination, parentage, inventor, filing/grant dates, and described traits",
+      "access_status": "accessible"
+    },
+    {
+      "key": "UMN-SUCC",
+      "authority": "University of Minnesota Extension",
+      "title": "Cacti and succulents",
+      "url": "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/cacti-and-succulents",
+      "access_date": "2026-09-15",
+      "supports": "general succulent light, substrate, water, temperature, feeding, propagation, and troubleshooting",
+      "access_status": "accessible"
+    }
+  ]
+}

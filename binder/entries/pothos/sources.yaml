@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "sources": [
+    {
+      "key": "NCSU-EA",
+      "authority": "NC State Extension",
+      "title": "Epipremnum aureum",
+      "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "access_date": "2026-09-15",
+      "supports": "taxonomy, origin, habit, light, soil, water, temperature, maintenance, propagation, pests, and toxicity",
+      "access_status": "accessible"
+    }
+  ]
+}

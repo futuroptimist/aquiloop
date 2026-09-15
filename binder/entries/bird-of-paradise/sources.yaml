@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "sources": [
+    {
+      "key": "NCSU-SR",
+      "authority": "NC State Extension",
+      "title": "Strelitzia reginae",
+      "url": "https://plants.ces.ncsu.edu/plants/strelitzia-reginae/",
+      "access_date": "2026-09-15",
+      "supports": "S. reginae taxonomy, range, habit, light, soil, water, maintenance, propagation, and problems",
+      "access_status": "accessible"
+    },
+    {
+      "key": "NCSU-SN",
+      "authority": "NC State Extension",
+      "title": "Strelitzia nicolai",
+      "url": "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/",
+      "access_date": "2026-09-15",
+      "supports": "S. nicolai taxonomy, range, woody habit, mature size, light, soil, water, propagation, and problems",
+      "access_status": "accessible"
+    },
+    {
+      "key": "UF-BIRD",
+      "authority": "University of Florida IFAS Extension",
+      "title": "Bird-of-Paradise",
+      "url": "https://ask.ifas.ufl.edu/publication/MG106",
+      "access_date": "2026-09-15",
+      "supports": "genus-level culture, cold sensitivity, irrigation, fertilizer, division, and pest checks",
+      "access_status": "accessible"
+    }
+  ]
+}

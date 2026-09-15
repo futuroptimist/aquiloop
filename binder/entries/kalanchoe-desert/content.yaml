@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert",
+  "profile_type": "terrestrial",
+  "identity": {
+    "reported_label": "Kalanchoe humilis “Desert Surprise”",
+    "working_name": "Kalanchoe humilis ‘Desert Surprise’",
+    "status": "provisional cultivar identity",
+    "confidence": "moderate for the published name; specimen match pending",
+    "alternatives": [
+      "Kalanchoe humilis without confirmed cultivar"
+    ]
+  },
+  "watering_interval": "observation cue; interval unknown",
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Provide bright light or sun, introduced gradually; leaf pattern and compactness vary with conditions.",
+        "sources": [
+          "RHS-KHD",
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use a sharply drained cactus/succulent medium and a container with drainage; local mix proportions remain unknown.",
+        "sources": [
+          "RHS-KHD",
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Water thoroughly and allow the medium to dry between waterings; use observed dryness, not a fixed interval.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Treat as frost tender and protect from cold; water less when light and growth slow.",
+        "sources": [
+          "RHS-KHD",
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Feed sparingly during active growth; remove spent flowers or damaged leaves with clean tools.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "RHS lists seed, offsets, and stem or leaf cuttings; for a clone, use a healthy offset or cutting in free-draining medium and avoid early overwatering.",
+        "sources": [
+          "RHS-KHD"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Soft tissue or leaf loss: check wet medium and drainage. Pale stretched growth: check light. Inspect leaf axils for common succulent pests.",
+        "sources": [
+          "UMN-SUCC"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "This compact, evergreen succulent is grown for fleshy green leaves patterned with purplish markings.",
+        "sources": [
+          "RHS-KHD"
+        ]
+      }
+    ]
+  },
+  "propagation": {
+    "method": "offset division or stem/leaf cutting",
+    "starting_material": "healthy offset, stem section, or intact leaf",
+    "establishment_condition": "free-draining medium with restrained moisture",
+    "pitfall": "overwatering unrooted material encourages rot"
+  },
+  "unresolved_fields": [
+    "cultivar match and exact label typography",
+    "grow-bag medium, exposure, rain, temperature, and dry-down observations"
+  ],
+  "editorial_note": "Draft-card research only. General guidance must be adjusted after Step 04 conditions and specimen evidence arrive."
+}

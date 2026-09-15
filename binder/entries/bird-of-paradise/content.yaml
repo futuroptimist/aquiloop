@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "profile_type": "terrestrial",
+  "identity": {
+    "reported_label": "Bird of paradise",
+    "working_name": "Bird of paradise (Strelitzia species)",
+    "status": "genus-level; Strelitzia reginae versus S. nicolai unresolved",
+    "confidence": "low at species level without specimen evidence",
+    "alternatives": [
+      "Strelitzia reginae",
+      "Strelitzia nicolai"
+    ]
+  },
+  "watering_interval": "observation cue; interval unknown",
+  "cards": {
+    "light_exposure": [
+      {
+        "text": "Provide very bright light; acclimate gradually to direct sun, especially before any indoor-to-outdoor move.",
+        "sources": [
+          "NCSU-SR",
+          "NCSU-SN",
+          "UF-BIRD"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "text": "Use fertile, well-drained potting medium and a container with drainage; do not infer the existing mix.",
+        "sources": [
+          "NCSU-SR",
+          "NCSU-SN"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "text": "Water thoroughly when the surface begins to dry, then drain; avoid both prolonged saturation and extended drought. Establish an interval only from observations.",
+        "sources": [
+          "NCSU-SR",
+          "NCSU-SN",
+          "UF-BIRD"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "text": "Protect this tropical genus from frost and cold drafts; reassess water as indoor light and seasonal growth change.",
+        "sources": [
+          "NCSU-SR",
+          "NCSU-SN",
+          "UF-BIRD"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "text": "Feed during active growth according to product directions; remove dead leaves and allow space appropriate to the eventual species size.",
+        "sources": [
+          "UF-BIRD",
+          "NCSU-SN"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Divide an established clump or separate rooted suckers; retain roots on each division, replant at the prior depth, and avoid keeping a stressed division soggy.",
+        "sources": [
+          "NCSU-SR",
+          "NCSU-SN",
+          "UF-BIRD"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "text": "Leaf-edge browning or curling is nonspecific: check moisture, salts, humidity, drafts, and pests before changing care. Inspect for scale, mealybugs, and spider mites.",
+        "sources": [
+          "NCSU-SR",
+          "NCSU-SN",
+          "UF-BIRD"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "The candidates differ strongly in habit: S. reginae is clumping, while S. nicolai can become a large woody-stemmed plant; habit evidence can help later identification.",
+        "sources": [
+          "NCSU-SR",
+          "NCSU-SN"
+        ]
+      }
+    ]
+  },
+  "propagation": {
+    "method": "division or rooted-sucker separation",
+    "starting_material": "healthy division with shoots and attached roots",
+    "establishment_condition": "replant at prior depth in draining medium and keep stable while roots recover",
+    "pitfall": "rootless pieces or saturated medium can prevent establishment"
+  },
+  "unresolved_fields": [
+    "species identity",
+    "full habit and stem/base evidence",
+    "window and outdoor-transition plan",
+    "pot, medium, temperatures, watering and dry-down observations"
+  ],
+  "editorial_note": "Draft-card research only. General guidance must be adjusted after Step 04 conditions and specimen evidence arrive."
+}

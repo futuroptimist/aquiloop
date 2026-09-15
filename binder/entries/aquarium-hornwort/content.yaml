@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "profile_type": "aquatic",
+  "identity": {
+    "reported_label": "Aquarium hornwort",
+    "working_name": "Aquarium hornwort (provisionally Ceratophyllum demersum)",
+    "status": "provisional species",
+    "confidence": "moderate at genus/common-name level; specimen unverified",
+    "alternatives": [
+      "another Ceratophyllum species"
+    ]
+  },
+  "watering_interval": "N/A",
+  "cards": {
+    "light": [
+      {
+        "text": "Start with moderate aquarium light and adjust to observed growth; the grower rates this plant low-demand but tank response varies.",
+        "sources": [
+          "TROPICA-CD"
+        ]
+      }
+    ],
+    "water_parameters_temperature": [
+      {
+        "text": "The grower lists a broad 10–28 °C range; treat it as general cultivation guidance, not a measured tank target. Record temperature and chemistry before tailoring care.",
+        "sources": [
+          "TROPICA-CD"
+        ]
+      }
+    ],
+    "placement": [
+      {
+        "text": "Hornwort is rootless and may float freely or be held near the bottom; do not bury it as though it had roots.",
+        "sources": [
+          "RUTGERS-CD",
+          "TROPICA-CD"
+        ]
+      }
+    ],
+    "nutrient_context": [
+      {
+        "text": "It takes nutrients from the water column and can grow rapidly; nutrient/light advice must be adjusted to measured tank conditions rather than assumed.",
+        "sources": [
+          "TROPICA-CD"
+        ]
+      }
+    ],
+    "growth_trimming": [
+      {
+        "text": "Trim excessive growth and remove loose fragments; rapid growth can shade other plants and fragments can establish elsewhere.",
+        "sources": [
+          "RUTGERS-CD",
+          "TROPICA-CD"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "text": "Propagate vegetatively from a healthy stem fragment or tip kept submerged with adequate light; do not discard fragments into natural waters.",
+        "sources": [
+          "USGS-CD",
+          "RUTGERS-CD"
+        ]
+      }
+    ],
+    "compatibility_troubleshooting": [
+      {
+        "text": "Dense growth can provide habitat but can also crowd or shade; shedding or poor growth is nonspecific, so first check temperature, light, water chemistry, flow, livestock disturbance, and recent changes.",
+        "sources": [
+          "RUTGERS-CD",
+          "TROPICA-CD"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "text": "Ceratophyllum demersum is a submerged rootless plant that reproduces by fragmentation and, seasonally, by turions as well as seed.",
+        "sources": [
+          "USGS-CD",
+          "RUTGERS-CD"
+        ]
+      }
+    ]
+  },
+  "propagation": {
+    "method": "vegetative stem fragmentation",
+    "starting_material": "healthy submerged stem tip or section",
+    "establishment_condition": "keep submerged or floating with adequate light and stable water conditions",
+    "pitfall": "escaped fragments can spread; never release aquarium plants outdoors"
+  },
+  "unresolved_fields": [
+    "species identity",
+    "tank volume, temperature, light, flow, livestock, nutrients/CO2, and measured chemistry",
+    "current placement and observed shedding/growth"
+  ],
+  "editorial_note": "Draft-card research only. General guidance must be adjusted after Step 04 conditions and specimen evidence arrive."
+}
