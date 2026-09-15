@@ -1,0 +1,37 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,left=1in,right=.55in,top=.55in,bottom=.55in]{geometry}
+\usepackage{fontspec,graphicx,xcolor,array}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\definecolor{ink}{HTML}{202521}\definecolor{sage}{HTML}{52665A}\definecolor{rust}{HTML}{8B4932}\definecolor{paper}{HTML}{FCFBF6}\definecolor{pale}{HTML}{EEF0EA}
+\color{ink}\pagecolor{paper}
+\input{\EntrySource}
+\input{\ResolvedAssets}
+\newcommand{\carecard}[2]{%
+  \fcolorbox{sage}{paper}{\begin{minipage}[t][.84in][t]{2.99in}\vspace{.055in}%
+  {\sffamily\bfseries\fontsize{11}{13}\selectfont\color{sage}#1}\par\vspace{.035in}%
+  {\sffamily\fontsize{9.5}{12}\selectfont #2}\end{minipage}}}
+\begin{document}
+\noindent\begin{minipage}[t][3.42in][t]{3.42in}
+  {\color{rust}\rule{.72in}{1.2pt}}\par\vspace{.12in}
+  {\fontsize{27}{29}\selectfont\bfseries \BinderCommonName}\par\vspace{.09in}
+  {\fontsize{15}{18}\selectfont\itshape \BinderBotanicalName}\par\vspace{.16in}
+  {\sffamily\fontsize{9.8}{12.4}\selectfont \BinderIdentity}
+\end{minipage}\hfill
+\begin{minipage}[t][3.42in][t]{3.30in}\BinderHero\end{minipage}\par
+\vspace{.12in}
+
+\BinderDetails\ifx\BinderDetails\empty\else\par\vspace{.08in}\fi
+
+\begin{tabular}{@{}p{3.20in}@{\hspace{.22in}}p{3.20in}@{}}
+\carecard{LIGHT / EXPOSURE}{\CardLight} & \carecard{SOIL / SUBSTRATE}{\CardSoil}\\[.11in]
+\carecard{WATER}{\CardWater} & \carecard{TEMPERATURE / SEASON}{\CardTemperature}\\[.11in]
+\carecard{FEEDING / MAINTENANCE}{\CardFeeding} & \carecard{PROPAGATION}{\CardPropagation}\\[.11in]
+\carecard{TROUBLESHOOTING}{\CardTroubleshooting} & \carecard{NATURAL HISTORY / TRIVIA}{\CardTrivia}
+\end{tabular}
+\vfill
+{\color{sage}\rule{\linewidth}{.6pt}}\par\vspace{.04in}
+{\sffamily\fontsize{8}{10}\selectfont \BinderEvidence}
+\end{document}
