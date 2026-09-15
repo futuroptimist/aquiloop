@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert",
+  "sources": [
+    {
+      "key": "KAL-RHS",
+      "authority": "Royal Horticultural Society",
+      "title": "Kalanchoe humilis ‘Desert Surprise’",
+      "url": "https://www.rhs.org.uk/plants/310184/kalanchoe-humilis-desert-surprise/details",
+      "accessed": "2026-09-15",
+      "supports": [
+        "identity",
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
+        "natural_history_trivia"
+      ],
+      "applicability": "Cultivar profile for K. humilis ‘Desert Surprise’; supports its description and cultivar-specific cultivation, H1B hardiness, feeding, stem-cutting/plantlet propagation, and listed pests and diseases. Applicability to the specimen depends on later label and specimen confirmation."
+    },
+    {
+      "key": "KAL-IA",
+      "authority": "Iowa State University Extension and Outreach",
+      "title": "How do I care for Kalanchoe?",
+      "url": "https://yardandgarden.extension.iastate.edu/faq/how-do-i-care-kalanchoe",
+      "accessed": "2026-09-15",
+      "supports": [
+        "light_exposure",
+        "soil_substrate",
+        "water"
+      ],
+      "applicability": "Short general Kalanchoe FAQ. It supports bright indoor light, stated indoor temperature ranges, drying between waterings, and drainage, plus reblooming conditions. It does not support feeding, acclimation, frost exposure, or symptom diagnosis."
+    },
+    {
+      "key": "KAL-PROP",
+      "authority": "Iowa State University Extension and Outreach",
+      "title": "How to Propagate Succulents",
+      "url": "https://yardandgarden.extension.iastate.edu/how-to/how-propagate-succulents",
+      "accessed": "2026-09-15",
+      "supports": [
+        "propagation"
+      ],
+      "applicability": "General succulent propagation article; it expressly includes Kalanchoe among genera suited to its stem-cutting method. RHS, rather than this general article, establishes stem cuttings for the candidate cultivar."
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "display_name": "Aquarium hornwort",
+  "reported_label": "Aquarium hornwort",
+  "identity": {
+    "status": "provisional species identification",
+    "working_name": "Ceratophyllum demersum",
+    "confidence": "moderate at species level; specimen/source unreviewed",
+    "alternatives": [
+      "another Ceratophyllum species",
+      "an aquarium trade form not identifiable from the common name alone"
+    ],
+    "decision": "Retain hornwort as the user-facing name and mark C. demersum provisional until package/source and forked-leaf/node photographs are reviewed.",
+    "sources": [
+      "HOR-USDA",
+      "HOR-FWS"
+    ]
+  },
+  "environmental_variability": "Aquarium guidance is a starting point. Tank temperature, chemistry, light, livestock, flow, fertilizer, and observed response must be recorded before local thresholds are set. Watering interval is N/A.",
+  "unresolved_fields": [
+    "species and trade form",
+    "tank volume and livestock",
+    "temperature, pH, GH/KH and nitrogen-cycle readings",
+    "light and photoperiod",
+    "filtration/flow, placement, fertilizer and CO2"
+  ],
+  "cards": {
+    "light": [
+      {
+        "claim": "Washington Ecology reports that C. demersum tolerates low light. Tropica separately lists low light demand for its particular C. demersum selection; neither statement supplies a local intensity or photoperiod target for this unverified specimen.",
+        "sources": [
+          "HOR-WA",
+          "HOR-TROP"
+        ]
+      }
+    ],
+    "water_parameters_temperature": [
+      {
+        "claim": "Washington Ecology describes C. demersum as tolerant of hard water and used in cool-water aquaria, but the retained sources do not establish numeric aquarium chemistry or temperature targets. Record the tank conditions and specimen response before setting any. Watering interval is N/A.",
+        "sources": [
+          "HOR-WA"
+        ]
+      }
+    ],
+    "placement_anchoring_floating": [
+      {
+        "claim": "C. demersum is rootless and can float freely or anchor to the bottom with modified leaves. Until the specimen is confirmed, floating it rather than treating it as a rooted plant is the conservative editorial choice.",
+        "sources": [
+          "HOR-WA"
+        ]
+      }
+    ],
+    "nutrient_context": [
+      {
+        "claim": "Washington Ecology reports dense C. demersum colonies in nutrient-rich water. This is habitat context, not evidence that this specimen needs fertilizer; defer additions until identity, livestock, water tests, and the existing regimen are known.",
+        "sources": [
+          "HOR-WA"
+        ]
+      }
+    ],
+    "growth_trimming": [
+      {
+        "claim": "C. demersum can form dense colonies and has easily broken stems. As a conservative maintenance step, observe its spread and remove excess or detached growth deliberately rather than assigning an unsupported growth-rate target.",
+        "sources": [
+          "HOR-WA"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "For candidate C. demersum, use a plant fragment and let it float freely below the surface. Its stems break easily, so handle it gently and remove unintended loose fragments rather than spreading them through the tank.",
+        "method": "fragment propagation (candidate C. demersum example)",
+        "starting_material": "a C. demersum plant fragment",
+        "establishment_condition": "float the fragment freely below the water surface",
+        "pitfall": "stems break easily and handling can create unintended loose fragments",
+        "sources": [
+          "HOR-WA"
+        ]
+      }
+    ],
+    "aquarium_compatibility_troubleshooting": [
+      {
+        "claim": "Because C. demersum stems break easily, inspect and remove loose fragments as a conservative housekeeping step. No retained source establishes a cause for aquarium shedding, algae, or decline, so record changes in light, water, handling, and livestock and leave the cause unknown.",
+        "sources": [
+          "HOR-WA"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "Ceratophyllum demersum is a submerged, rootless aquatic plant with forked leaves arranged in whorls; fragments can form new plants.",
+        "sources": [
+          "HOR-FWS",
+          "HOR-WA"
+        ]
+      }
+    ]
+  }
+}

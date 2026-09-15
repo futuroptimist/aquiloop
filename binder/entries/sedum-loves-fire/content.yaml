@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "display_name": "Sedum “Love’s Fire”",
+  "reported_label": "Sedum “Love’s Fire”; user-reported botanical label Sedum adolphii",
+  "identity": {
+    "status": "provisional",
+    "working_name": "Sedum adolphi Raym.-Hamet ‘Love’s Fire’",
+    "confidence": "low until label and specimen photographs are reviewed",
+    "alternatives": [
+      "Sedum adolphi at species level",
+      "unresolved look-alike or trade-name plant"
+    ],
+    "decision": "Retain the user-facing label, but use accepted spelling adolphi only in the provisional working name. USPP37238P2 now identifies LOVE’S FIRE as a patented cultivar, so PPAF is stale in the United States. Do not associate the specimen with that cultivar until compared with its label and traits.",
+    "sources": [
+      "SED-POWO",
+      "SED-PAT"
+    ]
+  },
+  "environmental_variability": "General succulent guidance only. Exposure, container, weather, medium, and observed dry-down must govern local adjustments.",
+  "unresolved_fields": [
+    "specimen identity and cultivar match",
+    "actual exposure and acclimation history",
+    "grow-bag volume, drainage, and medium",
+    "observed dry-down and rain",
+    "local temperature history"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "claim": "Provide strong light, but acclimate gradually to more direct sun; watch for scorch or stretched growth rather than assuming the grow-bag location is suitable.",
+        "sources": [
+          "SED-MSU"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "claim": "Use a freely draining succulent medium in a container with drainage; the current soil-plus-additives recipe remains unknown.",
+        "sources": [
+          "SED-MSU"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "claim": "Starting cue: water thoroughly only after the medium has dried; recheck after rain and do not substitute a fixed interval for observation.",
+        "sources": [
+          "SED-MSU"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "claim": "Protect this provisional tender succulent from frost and reduce watering as light and active growth decline. Exact outdoor thresholds remain unknown.",
+        "sources": [
+          "SED-MSU"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "claim": "Feed sparingly during active growth and withhold fertilizer when growth slows; remove damaged tissue only with clean tools.",
+        "sources": [
+          "SED-MSU"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Method/material: take a healthy stem or leaf cutting. Let the wound callus, then establish in a well-drained medium; excess moisture before rooting is the key rot pitfall.",
+        "method": "stem or leaf cutting",
+        "starting_material": "a healthy stem or whole leaf cutting",
+        "establishment_condition": "let the wound callus, then place it in well-drained medium",
+        "pitfall": "excess moisture before rooting can cause rot",
+        "sources": [
+          "SED-IA"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "claim": "Soft or translucent tissue → excess moisture or cold is plausible → check drainage, medium moisture, and recent temperatures before acting. Stretched growth → insufficient light is plausible → verify exposure and acclimate gradually.",
+        "sources": [
+          "SED-MSU"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "The LOVE’S FIRE patent describes a mutation selected in 2022 from Sedum ‘Strawberry’; that history applies to the patented cultivar, not yet to this specimen.",
+        "sources": [
+          "SED-PAT"
+        ]
+      }
+    ]
+  }
+}

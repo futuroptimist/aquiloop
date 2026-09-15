@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "sources": [
+    {
+      "key": "HOR-USDA",
+      "authority": "United States Department of Agriculture, Natural Resources Conservation Service",
+      "title": "Ceratophyllum demersum L. — coon’s tail",
+      "url": "https://plants.usda.gov/home/plantProfile?symbol=CEDE4",
+      "accessed": "2026-09-15",
+      "supports": [
+        "identity",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "HOR-FWS",
+      "authority": "U.S. Fish and Wildlife Service",
+      "title": "Coon’s-tail (Ceratophyllum demersum)",
+      "url": "https://www.fws.gov/species/coons-tail-ceratophyllum-demersum",
+      "accessed": "2026-09-15",
+      "supports": [
+        "identity",
+        "natural_history_trivia"
+      ]
+    },
+    {
+      "key": "HOR-WA",
+      "authority": "Washington State Department of Ecology",
+      "title": "Ceratophyllum demersum — coontail, hornwort",
+      "url": "https://fortress.wa.gov/ecy/gisresources/lakes/AquaticPlantGuide/descriptions/cerdem.html",
+      "accessed": "2026-09-15",
+      "supports": [
+        "light",
+        "water_parameters_temperature",
+        "placement_anchoring_floating",
+        "nutrient_context",
+        "growth_trimming",
+        "propagation",
+        "aquarium_compatibility_troubleshooting",
+        "natural_history_trivia"
+      ],
+      "applicability": "Species account for wild C. demersum: supports rootless habit, floating/anchoring, fragments, easily broken stems, dense growth in nutrient-rich water, hard-water and low-light tolerance, and cool-water aquarium use. It does not give aquarium maintenance, algae, shedding-cause, fertilizer, or numeric temperature/chemistry advice."
+    },
+    {
+      "key": "HOR-TROP",
+      "authority": "Tropica Aquarium Plants",
+      "title": "Ceratophyllum demersum “Foxtail” plant details",
+      "url": "https://tropica.com/en/plants/plantdetails/Ceratophyllumdemersum(021)/4434",
+      "accessed": "2026-09-15",
+      "supports": [
+        "light"
+      ],
+      "applicability": "Grower page for a particular C. demersum selection collected in Bolivia. It supports that selection’s low light demand and describes its compact leaves, lateral shoots, hardier stems, and possible bottom placement; it does not provide pH or temperature values, nutrient/algae/shedding advice, or general maintenance evidence. Do not transfer selection-specific performance to the unverified specimen."
+    }
+  ]
+}

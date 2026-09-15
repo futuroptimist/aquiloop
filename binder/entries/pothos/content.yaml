@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "display_name": "Pothos",
+  "reported_label": "Pothos",
+  "identity": {
+    "status": "provisional species identification",
+    "working_name": "Epipremnum aureum",
+    "confidence": "moderate at species level; cultivar unknown",
+    "alternatives": [
+      "another Epipremnum species or cultivar",
+      "a superficially similar vining aroid"
+    ],
+    "decision": "Use Pothos as the page title and mark Epipremnum aureum provisional until label, node, petiole, and leaf photographs are reviewed.",
+    "sources": [
+      "POT-NCSU"
+    ]
+  },
+  "environmental_variability": "Indoor light, temperature, container, and dry-down vary. Use plant and medium observations rather than a calendar.",
+  "unresolved_fields": [
+    "species and cultivar",
+    "window exposure and distance",
+    "pot and medium",
+    "watering history",
+    "room temperature/humidity and drafts"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "claim": "Penn State recommends moderate to bright light and avoiding direct sun; it notes that prolonged low light can reduce variegation or foliage brightness. Treat this as a starting point while the cultivar and exposure remain unknown.",
+        "sources": [
+          "POT-PSU"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "claim": "Use a loose, well-drained houseplant medium in a container with drainage; do not infer the current medium from appearance.",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "claim": "Penn State recommends watering when the soil is dry and warns that excess water can cause root rot while too little can cause temporary drooping. Check root-zone moisture rather than watering by calendar.",
+        "sources": [
+          "POT-PSU"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "claim": "NCSU describes winter dormancy for pothos and excludes that period from its feeding schedule. Observe growth and medium dry-down rather than inferring a temperature limit or seasonal watering interval.",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "claim": "NCSU advises periodic fertilizer outside winter dormancy, wiping dusty leaves, and pruning stems to maintain a bushy habit. Adjust only after observing this specimen’s growth and medium.",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Take a stem cutting from a vine and root it in water. Avoid keeping the resulting plant in over-wet potting medium, which can cause root rot.",
+        "method": "stem cutting",
+        "starting_material": "a vine stem cutting",
+        "establishment_condition": "place the cutting in water until it roots",
+        "pitfall": "over-wet potting medium after establishment can cause root rot",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "claim": "Penn State links excess water with root rot, too little water with temporary drooping, and direct sun with yellowing. Inspect moisture and exposure before diagnosing; other causes remain possible.",
+        "sources": [
+          "POT-PSU"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "Epipremnum aureum is a climbing/trailing evergreen aroid native to the Society Islands and can climb by aerial roots.",
+        "sources": [
+          "POT-NCSU"
+        ]
+      }
+    ]
+  }
+}

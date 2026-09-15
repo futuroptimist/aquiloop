@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "display_name": "Bird of paradise",
+  "reported_label": "Bird of paradise",
+  "identity": {
+    "status": "unresolved at species level",
+    "working_name": "Strelitzia sp.",
+    "confidence": "high at genus only if the common label is accurate; species unresolved",
+    "alternatives": [
+      "Strelitzia reginae",
+      "Strelitzia nicolai"
+    ],
+    "decision": "Do not select S. reginae or S. nicolai from the common name alone. The candidates differ strongly in mature habit and flowers; retain a genus-level card until evidence supports one.",
+    "sources": [
+      "BOP-REG",
+      "BOP-NIC"
+    ]
+  },
+  "environmental_variability": "Genus-level container guidance only. Species, indoor exposure, temperature, container, and any outdoor transition plan remain unknown.",
+  "unresolved_fields": [
+    "species",
+    "full habit, stem/base, leaf and flower evidence",
+    "window exposure and supplemental light",
+    "container and medium",
+    "temperature/humidity and outdoor-transition plan"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "claim": "Both candidate species need bright conditions: NCSU recommends a sunny indoor site for S. reginae and bright indirect light for S. nicolai. Select exposure only after species and current conditions are reviewed.",
+        "sources": [
+          "BOP-REG",
+          "BOP-NIC"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "claim": "NCSU describes well-drained loamy media for both candidate species. Confirm the existing pot and medium before making a species-specific recommendation.",
+        "sources": [
+          "BOP-REG",
+          "BOP-NIC"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "claim": "NCSU says to water S. reginae freely in spring and summer and keep it drier in winter; for S. nicolai it says to water when the top soil layer feels dry. These are candidate-specific starting cues, not a fixed interval for this unresolved specimen.",
+        "sources": [
+          "BOP-REG",
+          "BOP-NIC"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "claim": "NCSU describes moderate indoor temperatures for S. reginae and says S. nicolai does not tolerate temperatures below 50°F or cold drafts. Record conditions and confirm species before adopting a limit.",
+        "sources": [
+          "BOP-REG",
+          "BOP-NIC"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "claim": "NCSU recommends regular spring/summer fertilizer for S. reginae and monthly balanced liquid fertilizer in spring/summer for S. nicolai. Defer a schedule until species and active growth are confirmed.",
+        "sources": [
+          "BOP-REG",
+          "BOP-NIC"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Candidate example for S. reginae: divide an old clump with four to five shoots into single-stem divisions in late spring or early summer. Replant at the original depth and keep moist until rooted; dry or soggy establishment conditions can kill foliage.",
+        "method": "division (candidate S. reginae example)",
+        "starting_material": "an old S. reginae clump with four to five shoots, separated into single-stem divisions",
+        "establishment_condition": "replant at the original depth and keep the soil moist until roots establish",
+        "pitfall": "dry or soggy establishment conditions can yellow and kill leaves",
+        "sources": [
+          "BOP-UF"
+        ]
+      }
+    ],
+    "troubleshooting": [
+      {
+        "claim": "NCSU lists overwatering or poor drainage as root-rot risks for S. reginae and lists wind damage, root rot, and several pests for S. nicolai. Inspect conditions and species before diagnosing this specimen.",
+        "sources": [
+          "BOP-REG",
+          "BOP-NIC"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "S. reginae is a clumping South African perennial; S. nicolai develops a much larger, woody, tree-like habit. Mature habit can help later identification but does not resolve this specimen today.",
+        "sources": [
+          "BOP-REG",
+          "BOP-NIC"
+        ]
+      }
+    ]
+  }
+}
