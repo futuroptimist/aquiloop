@@ -1,0 +1,18 @@
+\documentclass[letterpaper]{article}
+\usepackage[paperwidth=8.5in,paperheight=11in,left=1in,right=.55in,top=.55in,bottom=.55in]{geometry}
+\usepackage{fontspec,graphicx,xcolor,tikz,tabularx,array}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\definecolor{ink}{HTML}{202824}\definecolor{sage}{HTML}{557064}\definecolor{rust}{HTML}{994F35}\definecolor{paper}{HTML}{FCFBF7}\definecolor{pale}{HTML}{EEF1EC}
+\pagecolor{paper}\color{ink}
+\newcommand{\CareCard}[2]{\begin{minipage}[t][.78in][t]{3.365in}\color{sage}\rule{\linewidth}{.6pt}\par\vspace{2pt}{\sffamily\bfseries\fontsize{11}{13}\selectfont #1}\par\vspace{2pt}{\sffamily\fontsize{9.5}{12}\selectfont #2}\end{minipage}}
+\newcommand{\CareRow}[4]{\CareCard{#1}{#2}\hfill\CareCard{#3}{#4}\par}
+\newcommand{\HeroPlaceholder}{\begin{tikzpicture}\path[use as bounding box] (0,0) rectangle (3.30in,3.30in);\draw[rust,line width=.8pt] (.4pt,.4pt) rectangle (3.294in,3.294in);\node[align=center,text width=2.7in,font=\sffamily\bfseries] at (1.65in,1.65in) {DRAFT PLACEHOLDER\\Actual specimen photo pending};\end{tikzpicture}}
+\newcommand{\HeroImage}[1]{\includegraphics[width=3.30in,height=3.30in,keepaspectratio=false]{#1}}
+\newcommand{\DetailImage}[1]{\includegraphics[width=2.05in,height=1.35in,keepaspectratio=false]{#1}}
+\begin{document}
+\input{resolved-assets.tex}
+\input{page.tex}
+\end{document}

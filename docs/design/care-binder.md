@@ -1,6 +1,8 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: approved design direction; no renderer or final care copy exists.
+Status: approved design direction; the single-entry draft template and local
+photo workflow are implemented. Final care copy, five-entry assembly, care log,
+and release automation remain future work.
 
 ## Purpose and sequence
 
@@ -297,7 +299,7 @@ explicitly authored future pages with their own budgets. An image must never
 cause type to shrink below the minimum, care text to be discarded, or content to
 silently spill onto another page.
 
-### Future photograph preparation workflow
+### Photograph preparation workflow
 
 1. Capture and retain the original outside the repository.
 2. Apply orientation, choose an intentional crop, convert to sRGB, and resize
@@ -311,9 +313,19 @@ silently spill onto another page.
 5. Upload the derivative into the species' `assets/` directory, add or update
    its catalog record, and select its ID from a page only when desired.
 
-A later, simple preparation helper should preserve originals and report the
-derivative's measured dimensions, bytes, and effective print resolution. It is
-not a media-management service, and implementing it is outside this brief.
+The implemented helper preserves originals and reports the derivative's measured
+dimensions, bytes, and effective print resolution. For example:
+
+```sh
+python scripts/prepare_binder_photo.py original.jpg \
+  binder/entries/sedum-loves-fire/assets/overview.jpg \
+  --frame hero --crop 100,0,1300,1200
+```
+
+Retain `original.jpg` outside Git; choose the crop deliberately; create the
+derivative; add its metadata to `assets.json`; select its stable ID in the
+adjacent `page.tex` placement comment; then rebuild. Existing derivatives need
+an explicit `--overwrite`. This is intentionally not a media-management service.
 
 ### Aquatic adaptation
 
@@ -411,9 +423,22 @@ Use **LuaLaTeX** with a small, data-driven document layer (for example,
 `expl3`/document commands and a checked-in ordered manifest). It provides exact
 physical-page control, mature typography and tables, local OpenType font support,
 robust image placement, and deterministic PDF builds without introducing a web
-runtime. Pin the TeX Live release and directly used package versions in build
-documentation or a container image digest. Installation and implementation are
-explicitly deferred.
+runtime. The Step 06a proof uses LuaLaTeX and distribution-provided TeX Gyre
+Pagella and Heros fonts; compilation performs no downloads. The tested
+environment was Python 3.12.13, TeX Live 2023 / LuaHBTeX 1.17.0, Pillow 12.3.0,
+pypdf 6.18.1, and Poppler 24.02.0. Required commands/packages are `lualatex`,
+`pdfinfo`, `pdftoppm`, Pillow, and pypdf. Build the proof with:
+
+```sh
+python scripts/build_binder.py --entry sedum-loves-fire --mode draft \
+  --output build/binder/sedum-loves-fire-draft.pdf
+```
+
+The builder validates catalog schema and selections before compiling, then uses
+pypdf independently to enforce one page and a 612 × 792-point MediaBox. Draft
+mode visibly permits placeholders; final mode rejects a selected placeholder or
+unresolved rights. This foundation does not implement final factual copy, all
+species, the care log, combined assembly, CI, or full regressions.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -509,10 +534,10 @@ Only that later physical check can justify calling the binder print-worthy.
 
 ## Deferred decisions
 
-- The approved direction is A typography + B profile layout + H care log;
-  implementation details and rendered-page adjustments remain pending.
+- The approved direction is A typography + B profile layout + H care log. The
+  profile foundation is implemented; qualification of final pages and the H
+  care log remain pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- PDF sources, actual catalogs/assets, renderer/dependencies, workflow, tests,
-  generated concepts, and PDF artifacts are outside this brief and have not
-  been added.
+- Actual specimen assets, remaining catalogs/pages, combined assembly, broader
+  regression coverage, CI workflow, and generated PDF artifacts remain pending.
