@@ -1,6 +1,6 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: approved design direction; no renderer or final care copy exists.
+Status: approved design direction; the Step 06a single-page draft foundation is implemented. Final care copy, real specimen photographs, the other profiles, care log, combined binder, comprehensive regressions, and CI remain future work.
 
 ## Purpose and sequence
 
@@ -193,9 +193,9 @@ crowd out the photograph or care grid.
 
 ### Species image catalogs and page placements
 
-The planned source layout gives each species a reusable image catalog. This tree
-is illustrative; none of these photographs, catalogs, or page sources is claimed
-to exist yet:
+The implemented source layout gives each species a reusable image catalog. The
+Sedum draft entry exists as the representative proof; the filenames below show
+the intended future shape and do not claim that real photographs exist:
 
 ```text
 binder/
@@ -297,7 +297,7 @@ explicitly authored future pages with their own budgets. An image must never
 cause type to shrink below the minimum, care text to be discarded, or content to
 silently spill onto another page.
 
-### Future photograph preparation workflow
+### Implemented photograph preparation workflow
 
 1. Capture and retain the original outside the repository.
 2. Apply orientation, choose an intentional crop, convert to sRGB, and resize
@@ -311,9 +311,23 @@ silently spill onto another page.
 5. Upload the derivative into the species' `assets/` directory, add or update
    its catalog record, and select its ID from a page only when desired.
 
-A later, simple preparation helper should preserve originals and report the
-derivative's measured dimensions, bytes, and effective print resolution. It is
-not a media-management service, and implementing it is outside this brief.
+`scripts/prepare_binder_photo.py` implements this deliberately small workflow.
+It applies EXIF orientation before an optional explicit crop, converts to sRGB,
+resizes at most once without upscaling, strips other metadata, and writes a
+separate JPEG. It rejects a crop below 240 ppi, reports effective resolution,
+and requires `--overwrite` before replacing a derivative. For example:
+
+```sh
+python scripts/prepare_binder_photo.py camera-original.jpg \
+  binder/entries/sedum-loves-fire/assets/overview.jpg \
+  --frame hero --crop 120 40 1400 1400
+```
+
+Keep `camera-original.jpg` outside Git. After preparation, add the derivative
+under the species `assets/` directory, update `assets.json`, select its stable ID
+in `page.tex`, and rebuild. The helper targets approximately 500 KiB for heroes
+and enforces the 1 MiB raster ceiling without reducing pixel dimensions below
+the selected frame's minimum.
 
 ### Aquatic adaptation
 
@@ -412,13 +426,29 @@ Use **LuaLaTeX** with a small, data-driven document layer (for example,
 physical-page control, mature typography and tables, local OpenType font support,
 robust image placement, and deterministic PDF builds without introducing a web
 runtime. Pin the TeX Live release and directly used package versions in build
-documentation or a container image digest. Installation and implementation are
-explicitly deferred.
+documentation or a container image digest. The single-entry foundation below is
+implemented; a pinned CI image remains deferred to Step 07b.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
 assets during the build, and document one clean checkout-to-PDF command and all
 required tool versions.
+
+The representative build uses distribution-provided TeX Gyre Pagella and Heros
+fonts and performs no network access. Install Python 3, Pillow, LuaLaTeX (TeX
+Live with `fontspec`, `graphicx`, `xcolor`, `tikz`, and `geometry`), and Poppler
+for inspection. The foundation was tested with Python 3.12.13, Pillow 11.3.0,
+LuaHBTeX 1.17.0 / TeX Live 2023, and Poppler 24.02.0. Build it with:
+
+```sh
+python scripts/build_binder.py --entry sedum-loves-fire --mode draft \
+  --output build/binder/sedum-loves-fire-draft.pdf
+```
+
+The builder validates schema version 1, required metadata, unique IDs, local
+paths, explicit selections, selected raster measurements, and final-mode rights
+and placeholder rules before invoking LuaLaTeX. Its scope is one entry; ordered
+six-page assembly and its manifest are intentionally deferred to Step 06c.
 
 ### Manifest and page budgets
 
@@ -509,10 +539,11 @@ Only that later physical check can justify calling the binder print-worthy.
 
 ## Deferred decisions
 
-- The approved direction is A typography + B profile layout + H care log;
-  implementation details and rendered-page adjustments remain pending.
+- The approved direction is A typography + B profile layout + H care log. The
+  profile foundation implements that direction; the care log and adjustments
+  discovered during full rendered-page qualification remain pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- PDF sources, actual catalogs/assets, renderer/dependencies, workflow, tests,
-  generated concepts, and PDF artifacts are outside this brief and have not
-  been added.
+- Real specimen assets, the other entries, combined renderer/manifest, complete
+  regression matrix, workflow, and distributable PDF artifact have not been
+  added. The checked-in Sedum catalog intentionally contains placeholders only.
