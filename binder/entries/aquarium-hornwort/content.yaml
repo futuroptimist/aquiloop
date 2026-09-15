@@ -28,7 +28,7 @@
   "cards": {
     "light": [
       {
-        "claim": "Begin with moderate aquarium light and adjust from observed growth; excessive light and nutrient imbalance can accompany algae, while inadequate light can weaken lower growth. No local intensity or photoperiod is yet known.",
+        "claim": "For Tropica’s C. demersum ‘Foxtail’ form, the grower recommends moderate aquarium light. Treat that as form-specific guidance, not a target for this unverified specimen; no local intensity or photoperiod is yet known.",
         "sources": [
           "HOR-TROP"
         ]
@@ -36,7 +36,7 @@
     ],
     "water_parameters_temperature": [
       {
-        "claim": "Hornwort tolerates a broad aquarium range, but stability matters more than choosing an unsourced target. Record temperature and chemistry before setting limits; watering interval is N/A.",
+        "claim": "Tropica lists a broad aquarium temperature and pH range for its C. demersum ‘Foxtail’ form. Do not transfer those limits to this unverified specimen; record temperature and chemistry before setting local limits. Watering interval is N/A.",
         "sources": [
           "HOR-TROP"
         ]
@@ -53,7 +53,7 @@
     ],
     "nutrient_context": [
       {
-        "claim": "It takes nutrients from the water column and can grow rapidly when light and dissolved nutrients are available. Do not add fertilizer until livestock, water tests, and the existing regimen are known.",
+        "claim": "Tropica reports fast growth and water-column nutrient uptake for its C. demersum ‘Foxtail’ form. Do not assume the same performance or add fertilizer for this specimen until its identity, livestock, water tests, and existing regimen are known.",
         "sources": [
           "HOR-TROP"
         ]

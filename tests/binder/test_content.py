@@ -78,10 +78,17 @@ class ContentWorksheetTests(unittest.TestCase):
                 }
                 for card, claims in content["cards"].items():
                     for claim in claims:
-                        self.assertTrue(
-                            any(card in supported[key] for key in claim["sources"]),
-                            f"{slug}/{card} lacks matching source support metadata",
-                        )
+                        for key in claim["sources"]:
+                            self.assertIn(
+                                key,
+                                supported,
+                                f"{slug}/{card} cites unknown source {key}",
+                            )
+                            self.assertIn(
+                                card,
+                                supported.get(key, set()),
+                                f"{slug}/{card} lacks support metadata for {key}",
+                            )
 
 
 if __name__ == "__main__":

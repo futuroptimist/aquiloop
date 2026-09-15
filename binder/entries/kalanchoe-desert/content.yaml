@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "entry": "kalanchoe-desert",
-  "display_name": "Kalanchoe “Desert Surprise”",
+  "display_name": "Kalanchoe “Desert Surprise” (reported label)",
   "reported_label": "Kalanchoe humilis “Desert Surprise”",
   "identity": {
-    "status": "provisional cultivar identification",
-    "working_name": "Kalanchoe humilis ‘Desert Surprise’",
+    "status": "unverified reported-label identification",
+    "working_name": "Candidate: Kalanchoe humilis ‘Desert Surprise’",
     "confidence": "moderate for the reported trade label; specimen match unreviewed",
     "alternatives": [
       "Kalanchoe humilis at species level",
       "another patterned Kalanchoe cultivar"
     ],
-    "decision": "Use single quotes for the cultivar denomination in botanical copy while preserving the reported double-quoted label separately.",
+    "decision": "Retain the reported label without treating the cultivar denomination as confirmed; use the formally styled name only to describe the candidate documented by RHS until label and specimen review is complete.",
     "sources": [
       "KAL-RHS"
     ]
