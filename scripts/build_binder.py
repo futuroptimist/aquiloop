@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate one binder entry and compile its one-page LuaLaTeX proof."""
+"""Build individual binder pages or an ordered draft binder manifest."""
 from __future__ import annotations
 import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
@@ -12,6 +12,15 @@ ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PLACEMENT = re.compile(r"^% binder-placement (hero|detail1|detail2) ([a-z0-9]+(?:-[a-z0-9]+)*);(?: .+)?$")
 UNRESOLVED_RIGHTS = {"unknown", "pending", "unresolved", "permission requested", "tbd", "not reviewed", "permission denied"}
 UNSAFE_TEX_PATH_CHARS = frozenset("#%{}\\\r\n")
+EXPECTED_BINDER_PAGES = 6
+EXPECTED_MANIFEST = (
+    ("sedum-loves-fire", "profile"),
+    ("kalanchoe-desert", "profile"),
+    ("pothos", "profile"),
+    ("bird-of-paradise", "profile"),
+    ("aquarium-hornwort", "profile"),
+    ("watering-log", "supplemental"),
+)
 
 
 def _nonempty(value: object) -> bool:
@@ -148,15 +157,119 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         from pypdf import PdfReader
         reader = PdfReader(pdf)
         if len(reader.pages) != 1: raise RuntimeError(f"entry rendered {len(reader.pages)} pages, expected 1")
-        box = reader.pages[0].mediabox
-        if abs(float(box.width)-612) > .1 or abs(float(box.height)-792) > .1: raise RuntimeError("page geometry is not US Letter")
+        _validate_page(reader.pages[0], base.name)
         shutil.copyfile(pdf, output)
         print(f"built {output} (1 page, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
 
 
+def supplemental_path(name: str) -> Path:
+    root = (ROOT / "binder" / "supplemental").resolve()
+    base = (root / name).resolve()
+    if root not in base.parents or not base.is_dir() or not (base / "page.tex").is_file():
+        raise ValueError(f"unknown supplemental page: {name}")
+    return base
+
+
+def compile_supplemental(name: str, mode: str, output: Path) -> None:
+    if mode != "draft":
+        raise ValueError("supplemental pages are currently available only in draft mode")
+    compile_entry(supplemental_path(name), {}, {}, output)
+
+
+def load_manifest(path: Path) -> list[dict]:
+    manifest_path = path.resolve()
+    if manifest_path != (ROOT / "binder" / "manifest.yaml").resolve():
+        raise ValueError("binder/manifest.yaml is the sole supported assembly manifest")
+    document = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(document, dict) or document.get("schema_version") != 1:
+        raise ValueError("manifest must use supported schema_version 1")
+    entries = document.get("entries")
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("manifest entries must be a nonempty array")
+    for item in entries:
+        if not isinstance(item, dict) or set(item) != {"id", "kind", "page_budget"}:
+            raise ValueError("each manifest entry must define only id, kind, and page_budget")
+        if not _nonempty(item["id"]) or not ID.fullmatch(item["id"]):
+            raise ValueError(f"malformed manifest entry ID: {item['id']!r}")
+        if item["kind"] not in {"profile", "supplemental"}:
+            raise ValueError(f"unsupported manifest kind: {item['kind']}")
+        if type(item["page_budget"]) is not int or item["page_budget"] != 1:
+            raise ValueError("manifest page_budget must be integer 1")
+    actual = tuple((item["id"], item["kind"]) for item in entries)
+    if actual != EXPECTED_MANIFEST:
+        raise ValueError("manifest entries must match the canonical six-entry order and kinds")
+    return entries
+
+
+def _validate_page(page: object, label: str) -> None:
+    media = page.mediabox
+    crop = page.cropbox
+    media_coordinates = tuple(float(value) for value in (*media.lower_left, *media.upper_right))
+    crop_coordinates = tuple(float(value) for value in (*crop.lower_left, *crop.upper_right))
+    expected = (0, 0, 612, 792)
+    if (any(abs(actual - wanted) > .1 for actual, wanted in zip(media_coordinates, expected)) or
+            any(abs(actual - wanted) > .1 for actual, wanted in zip(crop_coordinates, expected)) or
+            any(abs(actual - wanted) > .1 for actual, wanted in zip(crop_coordinates, media_coordinates))):
+        raise RuntimeError(f"{label} page geometry is not US Letter")
+    if (page.get("/Rotate") or 0) != 0:
+        raise RuntimeError(f"{label} page rotation is not 0")
+    if not (page.extract_text() or "").strip():
+        raise RuntimeError(f"{label} page is blank or has no extractable text")
+
+
+def compile_manifest(path: Path, mode: str, output: Path) -> None:
+    if mode != "draft":
+        raise ValueError("manifest assembly is currently available only in draft mode")
+    from pypdf import PdfReader, PdfWriter
+    entries = load_manifest(path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    writer = PdfWriter()
+    with tempfile.TemporaryDirectory(prefix="binder-manifest-") as tmp_name:
+        for index, item in enumerate(entries, 1):
+            individual = Path(tmp_name) / f"{index:02d}-{item['id']}.pdf"
+            if item["kind"] == "profile":
+                compile_entry(*load_entry(item["id"], mode), individual)
+            else:
+                compile_supplemental(item["id"], mode, individual)
+            reader = PdfReader(individual)
+            if len(reader.pages) != item["page_budget"]:
+                raise RuntimeError(
+                    f"{item['id']} rendered {len(reader.pages)} pages, "
+                    f"expected page_budget {item['page_budget']}"
+                )
+            for page in reader.pages:
+                _validate_page(page, item["id"])
+                writer.add_page(page)
+        writer.add_metadata({"/Title": "Aquiloop care binder — draft", "/Producer": "Aquiloop deterministic binder builder"})
+        with output.open("wb") as stream:
+            writer.write(stream)
+    assembled = PdfReader(output)
+    if len(assembled.pages) != EXPECTED_BINDER_PAGES:
+        raise RuntimeError(
+            f"combined binder rendered {len(assembled.pages)} pages, "
+            f"expected {EXPECTED_BINDER_PAGES}"
+        )
+    for index, page in enumerate(assembled.pages, 1):
+        _validate_page(page, f"combined page {index}")
+    print(f"built {output} ({EXPECTED_BINDER_PAGES} pages, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
+
+
 def main() -> int:
-    parser=argparse.ArgumentParser(); parser.add_argument("--entry",required=True); parser.add_argument("--mode",choices=("draft","final"),required=True); parser.add_argument("--output",type=Path,required=True); args=parser.parse_args()
-    try: compile_entry(*load_entry(args.entry,args.mode),args.output)
+    parser = argparse.ArgumentParser()
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--entry")
+    source.add_argument("--supplemental")
+    source.add_argument("--manifest", type=Path)
+    parser.add_argument("--mode", choices=("draft", "final"), required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    try:
+        if args.entry:
+            compile_entry(*load_entry(args.entry, args.mode), args.output)
+        elif args.supplemental:
+            compile_supplemental(args.supplemental, args.mode, args.output)
+        else:
+            compile_manifest(args.manifest, args.mode, args.output)
     except (OSError,ValueError,RuntimeError,json.JSONDecodeError) as exc: parser.exit(1,f"error: {exc}\n")
     return 0
 if __name__ == "__main__": raise SystemExit(main())

@@ -1,8 +1,8 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: approved design direction; the single-entry draft template and local
-photo workflow are implemented. Final care copy, five-entry assembly, care log,
-and release automation remain future work.
+Status: approved design direction; the six-page draft binder, single-entry
+template, watering log, and local photo workflow are implemented. Final care
+copy, photograph qualification, and release automation remain future work.
 
 ## Purpose and sequence
 
@@ -443,8 +443,25 @@ python scripts/build_binder.py --entry sedum-loves-fire --mode draft \
 The builder validates catalog schema and selections before compiling, then uses
 pypdf independently to enforce one page and a 612 × 792-point MediaBox. Draft
 mode visibly permits placeholders; final mode rejects a selected placeholder or
-unresolved rights. This foundation does not implement final factual copy, all
-species, the care log, combined assembly, CI, or full regressions.
+unresolved rights. The watering log deliberately uses a small supplemental-page
+path rather than the profile loader, so it does not invent a hero asset or relax
+profile asset checks. Build that page independently with:
+
+```sh
+python scripts/build_binder.py --supplemental watering-log --mode draft \
+  --output build/binder/watering-log-draft.pdf
+```
+
+Build the ordered six-page draft from its sole assembly authority with:
+
+```sh
+python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
+  --output build/binder/aquiloop-binder-draft.pdf
+```
+
+Combined assembly is intentionally draft-only until profiles have qualified
+photographs and final content. CI and the broader regression matrix remain
+future work.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -543,12 +560,12 @@ Only that later physical check can justify calling the binder print-worthy.
 ## Deferred decisions
 
 - The approved direction is A typography + B profile layout + H care log. The
-  profile foundation is implemented; qualification of final pages and the H
-  care log remain pending.
+  profile foundation, H care log, ordered manifest, and deterministic draft
+  assembly are implemented; final page qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, remaining catalogs/pages, combined assembly, broader
-  regression coverage, CI workflow, and generated PDF artifacts remain pending.
+- Actual specimen assets, broader regression coverage, CI workflow, and
+  generated PDF artifacts remain pending.
 
 ### Local verification outputs (Step 06a)
 

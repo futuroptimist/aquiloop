@@ -5,6 +5,7 @@ import tempfile
 import unittest
 import os
 import shutil
+from unittest import mock
 from pathlib import Path
 from PIL import Image
 
@@ -89,6 +90,144 @@ class CatalogTests(unittest.TestCase):
             (base / "page.tex").write_text("% binder-placement hero sedum-placeholder-001; test\n")
             with self.assertRaisesRegex(ValueError, "aspect ratio"):
                 build_binder.load_entry(base.name, "final")
+
+
+class AssemblyTests(unittest.TestCase):
+    def test_manifest_is_the_ordered_single_page_assembly_authority(self):
+        manifest = build_binder.load_manifest(ROOT / "binder" / "manifest.yaml")
+        self.assertEqual(
+            [item["id"] for item in manifest],
+            [
+                "sedum-loves-fire", "kalanchoe-desert", "pothos",
+                "bird-of-paradise", "aquarium-hornwort", "watering-log",
+            ],
+        )
+        self.assertEqual(
+            [item["kind"] for item in manifest],
+            ["profile"] * 5 + ["supplemental"],
+        )
+        self.assertTrue(all(item["page_budget"] == 1 for item in manifest))
+
+    def test_manifest_rejects_noncanonical_entries_kinds_order_and_budgets(self):
+        original = json.loads((ROOT / "binder" / "manifest.yaml").read_text())
+        mutations = (
+            lambda entries: entries.pop(),
+            lambda entries: entries.append(entries[-1].copy()),
+            lambda entries: entries.__setitem__(1, entries[0].copy()),
+            lambda entries: entries.reverse(),
+            lambda entries: entries[0].__setitem__("kind", "supplemental"),
+            lambda entries: entries[0].__setitem__("page_budget", 2),
+            lambda entries: entries[0].__setitem__("page_budget", True),
+        )
+        for mutation in mutations:
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as name:
+                root = Path(name)
+                path = root / "binder" / "manifest.yaml"
+                path.parent.mkdir()
+                manifest = json.loads(json.dumps(original))
+                mutation(manifest["entries"])
+                path.write_text(json.dumps(manifest))
+                with mock.patch.object(build_binder, "ROOT", root):
+                    with self.assertRaises(ValueError):
+                        build_binder.load_manifest(path)
+
+    def test_page_validation_rejects_shifted_crop_blank_and_rotation(self):
+        class Box:
+            def __init__(self, coordinates):
+                self.lower_left = coordinates[:2]
+                self.upper_right = coordinates[2:]
+
+        class Page:
+            mediabox = Box((0, 0, 612, 792))
+            cropbox = Box((0, 0, 612, 792))
+
+            def __init__(self, text="content", rotation=0, crop=None):
+                self.text = text
+                self.rotation = rotation
+                if crop:
+                    self.cropbox = Box(crop)
+
+            def get(self, key):
+                return self.rotation if key == "/Rotate" else None
+
+            def extract_text(self):
+                return self.text
+
+        build_binder._validate_page(Page(), "valid")
+        for page, message in (
+            (Page(crop=(20, 20, 632, 812)), "geometry"),
+            (Page(text=" \n\t"), "blank"),
+            (Page(rotation=90), "rotation"),
+        ):
+            with self.subTest(message=message), self.assertRaisesRegex(RuntimeError, message):
+                build_binder._validate_page(page, "invalid")
+
+    def test_supplemental_rejects_final_mode(self):
+        with tempfile.TemporaryDirectory() as name:
+            output = Path(name) / "watering-log.pdf"
+            with self.assertRaisesRegex(ValueError, "only in draft mode"):
+                build_binder.compile_supplemental("watering-log", "final", output)
+            self.assertFalse(output.exists())
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_watering_log_and_manifest_build_with_required_text_and_order(self):
+        from pypdf import PdfReader
+
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            log = base / "watering-log.pdf"
+            first = base / "binder-first.pdf"
+            second = base / "binder-second.pdf"
+            build_binder.compile_supplemental("watering-log", "draft", log)
+            log_reader = PdfReader(log)
+            self.assertEqual(len(log_reader.pages), 1)
+            log_text = log_reader.pages[0].extract_text()
+            for text in (
+                "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
+                "Hornwort", "Planning estimate only", "Rain/amount",
+                "Watering interval:", "N/A", "Aquarium maintenance", "not watering",
+                "Event:", "Amount/result:",
+            ):
+                self.assertIn(text, log_text)
+            labels = {"Date:", "Time:", "Amount/method:", "Observation:",
+                      "Rain/amount:", "Event:", "Amount/result:"}
+            sizes = []
+            date_positions = []
+            aquarium_observation_positions = []
+
+            def inspect_text(text, _cm, tm, _font, font_size):
+                stripped = text.strip()
+                if any(label in stripped for label in labels):
+                    sizes.append(font_size)
+                if "Date:" in stripped:
+                    date_positions.append(tm[5])
+                if "Observation:" in stripped and tm[4] > 430:
+                    aquarium_observation_positions.append(tm[5])
+
+            log_reader.pages[0].extract_text(visitor_text=inspect_text)
+            self.assertTrue(sizes)
+            self.assertGreaterEqual(min(sizes), 7.9)
+            row_tops = sorted(set(round(position, 1) for position in date_positions), reverse=True)
+            self.assertEqual(len(row_tops), 14)
+            self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
+            self.assertEqual(len(aquarium_observation_positions), 14)
+
+            manifest = ROOT / "binder" / "manifest.yaml"
+            build_binder.compile_manifest(manifest, "draft", first)
+            build_binder.compile_manifest(manifest, "draft", second)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            reader = PdfReader(first)
+            self.assertEqual(len(reader.pages), 6)
+            expected = (
+                "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
+                "Aquarium hornwort", "Watering & aquarium log",
+            )
+            for page, title in zip(reader.pages, expected):
+                text = page.extract_text()
+                self.assertIn(title, text)
+                if title != "Watering & aquarium log":
+                    self.assertIn("PROPAGATION", text)
+                build_binder._validate_page(page, title)
 
 
 class PhotoPreparationTests(unittest.TestCase):
