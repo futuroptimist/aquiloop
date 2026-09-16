@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "hornwort-placeholder-001",
+      "path": "assets/draft-placeholder.txt",
+      "kind": "placeholder",
+      "subjects": [
+        "whole plant pending"
+      ],
+      "alt": "Visible draft placeholder; an actual specimen photograph has not been supplied.",
+      "caption": "Draft placeholder — actual specimen photograph pending.",
+      "source": {
+        "provenance": "synthetic text placeholder created for draft page development",
+        "photographer": "not applicable",
+        "rights": "unknown"
+      }
+    }
+  ]
+}
