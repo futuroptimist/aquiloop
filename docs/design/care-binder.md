@@ -1,8 +1,9 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: approved design direction; the single-entry draft template and local
-photo workflow are implemented. Final care copy, five-entry assembly, care log,
-and release automation remain future work.
+Status: approved design direction; the draft template, five profile pages,
+watering log, ordered six-page assembly, and local photo workflow are
+implemented. Photograph qualification, broader regression coverage, and release
+automation remain future work.
 
 ## Purpose and sequence
 
@@ -443,8 +444,22 @@ python scripts/build_binder.py --entry sedum-loves-fire --mode draft \
 The builder validates catalog schema and selections before compiling, then uses
 pypdf independently to enforce one page and a 612 × 792-point MediaBox. Draft
 mode visibly permits placeholders; final mode rejects a selected placeholder or
-unresolved rights. This foundation does not implement final factual copy, all
-species, the care log, combined assembly, CI, or full regressions.
+unresolved rights. The watering log is intentionally an asset-free supplemental
+page rather than a profile, so it does not fake a hero image or bypass profile
+asset validation. Build it independently and assemble the ordered draft with:
+
+```sh
+python scripts/build_binder.py --supplemental watering-log --mode draft \
+  --output build/binder/watering-log-draft.pdf
+python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
+  --output build/binder/aquiloop-binder-draft.pdf
+```
+
+The checked-in manifest is the sole assembly authority. The builder first
+compiles and validates every entry against its declared budget, then merges the
+validated pages and rechecks combined page count, MediaBox, CropBox, and
+rotation. This foundation does not implement final photograph-qualified copy,
+CI, or the broader Step 07a regression matrix.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -453,7 +468,8 @@ required tool versions.
 
 ### Manifest and page budgets
 
-Maintain one ordered manifest as the sole assembly authority:
+`binder/manifest.yaml` implements the ordered manifest as the sole assembly
+authority:
 
 ```text
 01 sedum-loves-fire       profile       page_budget=1

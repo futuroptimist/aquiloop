@@ -16,6 +16,59 @@ import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
 
 
+class ManifestAndSupplementalTests(unittest.TestCase):
+    EXPECTED = [
+        ("sedum-loves-fire", "profile", 1),
+        ("kalanchoe-desert", "profile", 1),
+        ("pothos", "profile", 1),
+        ("bird-of-paradise", "profile", 1),
+        ("aquarium-hornwort", "profile", 1),
+        ("watering-log", "supplemental", 1),
+    ]
+
+    def test_manifest_is_the_ordered_six_page_authority(self):
+        entries = build_binder.load_manifest(ROOT / "binder" / "manifest.yaml")
+        self.assertEqual(
+            [(entry["id"], entry["kind"], entry["page_budget"]) for entry in entries],
+            self.EXPECTED,
+        )
+
+    def test_watering_log_contract_is_explicit(self):
+        page = (ROOT / "binder/supplemental/watering-log/page.tex").read_text()
+        for text in (
+            "Planning estimate only---check moisture or plant condition, rain, and season first.",
+            "Sedum", "Kalanchoe", "Pothos", "Bird of paradise", "Hornwort",
+            "Typical interval:", "Watering interval:", "N/A", "Rain/amount:",
+            "Aquarium maintenance is not watering", "amount / method:",
+            "event + amount/result:", "observation:",
+        ):
+            self.assertIn(text, page)
+        self.assertIn(r"\def\RowHeight{.49}", page)
+        self.assertIn(r"\foreach \i in {0,...,13}", page)
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_supplemental_and_manifest_build_in_order_deterministically(self):
+        from pypdf import PdfReader
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            log = base / "log.pdf"
+            first = base / "first.pdf"
+            second = base / "second.pdf"
+            build_binder.compile_supplemental("watering-log", log)
+            build_binder.compile_manifest(ROOT / "binder/manifest.yaml", "draft", first)
+            build_binder.compile_manifest(ROOT / "binder/manifest.yaml", "draft", second)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            self.assertEqual(len(PdfReader(log).pages), 1)
+            reader = PdfReader(first)
+            self.assertEqual(len(reader.pages), 6)
+            expected_text = [
+                "Sedum “Love’s", "Kalanchoe “Desert", "Pothos",
+                "Bird of paradise", "Aquarium hornwort", "Watering & aquarium care log",
+            ]
+            for page, marker in zip(reader.pages, expected_text):
+                self.assertIn(marker, page.extract_text())
+
+
 class CatalogTests(unittest.TestCase):
     def test_draft_loads_and_has_no_empty_detail_placements(self):
         _, records, selected = build_binder.load_entry("sedum-loves-fire", "draft")

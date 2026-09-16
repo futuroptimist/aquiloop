@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"id": "sedum-loves-fire", "kind": "profile", "page_budget": 1},
+    {"id": "kalanchoe-desert", "kind": "profile", "page_budget": 1},
+    {"id": "pothos", "kind": "profile", "page_budget": 1},
+    {"id": "bird-of-paradise", "kind": "profile", "page_budget": 1},
+    {"id": "aquarium-hornwort", "kind": "profile", "page_budget": 1},
+    {"id": "watering-log", "kind": "supplemental", "page_budget": 1}
+  ]
+}

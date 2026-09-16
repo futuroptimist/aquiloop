@@ -1,3 +1,6 @@
 stl/
 obj/
 .lycheecache
+build/
+__pycache__/
+*.pyc
