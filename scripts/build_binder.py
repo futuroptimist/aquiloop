@@ -13,6 +13,14 @@ PLACEMENT = re.compile(r"^% binder-placement (hero|detail1|detail2) ([a-z0-9]+(?
 UNRESOLVED_RIGHTS = {"unknown", "pending", "unresolved", "permission requested", "tbd", "not reviewed", "permission denied"}
 UNSAFE_TEX_PATH_CHARS = frozenset("#%{}\\\r\n")
 EXPECTED_BINDER_PAGES = 6
+EXPECTED_MANIFEST = (
+    ("sedum-loves-fire", "profile"),
+    ("kalanchoe-desert", "profile"),
+    ("pothos", "profile"),
+    ("bird-of-paradise", "profile"),
+    ("aquarium-hornwort", "profile"),
+    ("watering-log", "supplemental"),
+)
 
 
 def _nonempty(value: object) -> bool:
@@ -149,8 +157,7 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         from pypdf import PdfReader
         reader = PdfReader(pdf)
         if len(reader.pages) != 1: raise RuntimeError(f"entry rendered {len(reader.pages)} pages, expected 1")
-        box = reader.pages[0].mediabox
-        if abs(float(box.width)-612) > .1 or abs(float(box.height)-792) > .1: raise RuntimeError("page geometry is not US Letter")
+        _validate_page(reader.pages[0], base.name)
         shutil.copyfile(pdf, output)
         print(f"built {output} (1 page, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
 
@@ -179,32 +186,35 @@ def load_manifest(path: Path) -> list[dict]:
     entries = document.get("entries")
     if not isinstance(entries, list) or not entries:
         raise ValueError("manifest entries must be a nonempty array")
-    seen = set()
     for item in entries:
         if not isinstance(item, dict) or set(item) != {"id", "kind", "page_budget"}:
             raise ValueError("each manifest entry must define only id, kind, and page_budget")
         if not _nonempty(item["id"]) or not ID.fullmatch(item["id"]):
             raise ValueError(f"malformed manifest entry ID: {item['id']!r}")
-        if item["id"] in seen:
-            raise ValueError(f"duplicate manifest entry: {item['id']}")
-        seen.add(item["id"])
         if item["kind"] not in {"profile", "supplemental"}:
             raise ValueError(f"unsupported manifest kind: {item['kind']}")
-        if type(item["page_budget"]) is not int or item["page_budget"] < 1:
-            raise ValueError("manifest page_budget must be a positive integer")
-    if sum(item["page_budget"] for item in entries) != EXPECTED_BINDER_PAGES:
-        raise ValueError(f"manifest page budgets must total {EXPECTED_BINDER_PAGES}")
+        if type(item["page_budget"]) is not int or item["page_budget"] != 1:
+            raise ValueError("manifest page_budget must be integer 1")
+    actual = tuple((item["id"], item["kind"]) for item in entries)
+    if actual != EXPECTED_MANIFEST:
+        raise ValueError("manifest entries must match the canonical six-entry order and kinds")
     return entries
 
 
 def _validate_page(page: object, label: str) -> None:
     media = page.mediabox
     crop = page.cropbox
-    boxes = (float(media.width), float(media.height), float(crop.width), float(crop.height))
-    if any(abs(actual - expected) > .1 for actual, expected in zip(boxes, (612, 792, 612, 792))):
+    media_coordinates = tuple(float(value) for value in (*media.lower_left, *media.upper_right))
+    crop_coordinates = tuple(float(value) for value in (*crop.lower_left, *crop.upper_right))
+    expected = (0, 0, 612, 792)
+    if (any(abs(actual - wanted) > .1 for actual, wanted in zip(media_coordinates, expected)) or
+            any(abs(actual - wanted) > .1 for actual, wanted in zip(crop_coordinates, expected)) or
+            any(abs(actual - wanted) > .1 for actual, wanted in zip(crop_coordinates, media_coordinates))):
         raise RuntimeError(f"{label} page geometry is not US Letter")
     if (page.get("/Rotate") or 0) != 0:
         raise RuntimeError(f"{label} page rotation is not 0")
+    if not (page.extract_text() or "").strip():
+        raise RuntimeError(f"{label} page is blank or has no extractable text")
 
 
 def compile_manifest(path: Path, mode: str, output: Path) -> None:
@@ -233,7 +243,6 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
         writer.add_metadata({"/Title": "Aquiloop care binder — draft", "/Producer": "Aquiloop deterministic binder builder"})
         with output.open("wb") as stream:
             writer.write(stream)
-    expected = sum(item["page_budget"] for item in entries)
     assembled = PdfReader(output)
     if len(assembled.pages) != EXPECTED_BINDER_PAGES:
         raise RuntimeError(
@@ -242,7 +251,7 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
         )
     for index, page in enumerate(assembled.pages, 1):
         _validate_page(page, f"combined page {index}")
-    print(f"built {output} ({expected} pages, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
+    print(f"built {output} ({EXPECTED_BINDER_PAGES} pages, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
 
 
 def main() -> int:
