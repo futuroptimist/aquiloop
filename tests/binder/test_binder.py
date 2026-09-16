@@ -91,6 +91,57 @@ class CatalogTests(unittest.TestCase):
                 build_binder.load_entry(base.name, "final")
 
 
+class AssemblyTests(unittest.TestCase):
+    def test_manifest_is_the_ordered_single_page_assembly_authority(self):
+        manifest = build_binder.load_manifest(ROOT / "binder" / "manifest.yaml")
+        self.assertEqual(
+            [item["id"] for item in manifest],
+            [
+                "sedum-loves-fire", "kalanchoe-desert", "pothos",
+                "bird-of-paradise", "aquarium-hornwort", "watering-log",
+            ],
+        )
+        self.assertEqual(
+            [item["kind"] for item in manifest],
+            ["profile"] * 5 + ["supplemental"],
+        )
+        self.assertTrue(all(item["page_budget"] == 1 for item in manifest))
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_watering_log_and_manifest_build_with_required_text_and_order(self):
+        from pypdf import PdfReader
+
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            log = base / "watering-log.pdf"
+            first = base / "binder-first.pdf"
+            second = base / "binder-second.pdf"
+            build_binder.compile_supplemental("watering-log", log)
+            log_reader = PdfReader(log)
+            self.assertEqual(len(log_reader.pages), 1)
+            log_text = log_reader.pages[0].extract_text()
+            for text in (
+                "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
+                "Hornwort", "Planning estimate only", "Rain/amount",
+                "Watering interval: N/A", "Aquarium maintenance", "not watering",
+            ):
+                self.assertIn(text, log_text)
+
+            manifest = ROOT / "binder" / "manifest.yaml"
+            build_binder.compile_manifest(manifest, "draft", first)
+            build_binder.compile_manifest(manifest, "draft", second)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            reader = PdfReader(first)
+            self.assertEqual(len(reader.pages), 6)
+            expected = (
+                "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
+                "Aquarium hornwort", "Watering & aquarium log",
+            )
+            for page, title in zip(reader.pages, expected):
+                self.assertIn(title, page.extract_text())
+                build_binder._validate_page(page, title)
+
+
 class PhotoPreparationTests(unittest.TestCase):
     def test_prepares_derivative_without_changing_original_or_gps(self):
         with tempfile.TemporaryDirectory() as name:

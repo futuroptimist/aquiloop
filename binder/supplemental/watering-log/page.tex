@@ -1,0 +1,29 @@
+\newcommand{\LogHeader}[3]{\cellcolor{headergray}\centering\sffamily\fontsize{7.2}{8.2}\selectfont\shortstack{\bfseries #1\\[-1pt]\mdseries #2\\[-1pt]\fontsize{6.4}{7.2}\selectfont #3}\arraybackslash}
+\newcommand{\TerrestrialCell}[1]{\parbox[t][.48in][t]{\linewidth}{\vspace{2pt}\sffamily\fontsize{5.8}{7}\selectfont Amount/method: \hrulefill\\[3pt]Observation: \hrulefill#1}}
+\newcommand{\OutdoorCell}{\TerrestrialCell{\\[3pt]Rain/amount: \hrulefill}}
+\newcommand{\AquariumCell}{\parbox[t][.48in][t]{\linewidth}{\vspace{2pt}\sffamily\fontsize{5.8}{7}\selectfont Event + amount/result: \hrulefill\\[3pt]Observation: \hrulefill}}
+\newcommand{\DateCell}{\parbox[t][.48in][t]{\linewidth}{\vspace{2pt}\sffamily\fontsize{6}{7}\selectfont Date: \hrulefill\\[3pt]Time: \hrulefill}}
+\newcommand{\LogRow}{\DateCell&\OutdoorCell&\OutdoorCell&\TerrestrialCell{}&\TerrestrialCell{}&\AquariumCell\\\hline}
+
+{\color{rust}\sffamily\bfseries\fontsize{9}{11}\selectfont DRAFT • HANDWRITTEN CARE RECORD}\par\vspace{3pt}
+{\fontsize{26}{29}\selectfont Watering \& aquarium log}\par\vspace{4pt}
+{\sffamily\fontsize{8.5}{10}\selectfont Planning estimate only—check moisture or plant condition, rain, and season first.}\par\vspace{3pt}
+{\sffamily\fontsize{7.2}{8.5}\selectfont\textbf{Legend:} Leave a plant cell blank when it was not watered. Aquarium maintenance (water change, top-off, test, or trimming) is not watering.}\par\vspace{5pt}
+
+\begingroup
+\setlength{\tabcolsep}{2pt}
+\setlength{\arrayrulewidth}{.5pt}
+\definecolor{headergray}{gray}{.89}
+\begin{tabular}{|p{.53in}|p{1.205in}|p{1.205in}|p{1.205in}|p{1.205in}|p{1.205in}|}
+\hline
+\rowcolor{headergray}
+\centering\sffamily\bfseries\fontsize{7}{8}\selectfont Date / time\arraybackslash &
+\LogHeader{Sedum}{outdoor grow bag}{Typical interval: \_\_\_ days} &
+\LogHeader{Kalanchoe}{outdoor grow bag}{Typical interval: \_\_\_ days} &
+\LogHeader{Pothos}{indoors}{Typical interval: \_\_\_ days} &
+\LogHeader{Bird of paradise}{indoors}{Typical interval: \_\_\_ days} &
+\LogHeader{Hornwort}{aquarium}{Watering interval: N/A}\\[2pt]\hline
+\LogRow\LogRow\LogRow\LogRow\LogRow\LogRow\LogRow
+\LogRow\LogRow\LogRow\LogRow\LogRow\LogRow\LogRow
+\end{tabular}
+\endgroup
