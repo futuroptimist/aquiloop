@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate one binder entry and compile its one-page LuaLaTeX proof."""
+"""Build one binder page or an ordered, validated binder manifest."""
 from __future__ import annotations
 import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
@@ -154,9 +154,106 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         print(f"built {output} (1 page, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
 
 
+def compile_supplemental(entry: str, output: Path) -> None:
+    base = (ROOT / "binder" / "supplemental" / entry).resolve()
+    supplemental = (ROOT / "binder" / "supplemental").resolve()
+    if supplemental not in base.parents or not (base / "page.tex").is_file():
+        raise ValueError(f"unknown supplemental entry: {entry}")
+    if not shutil.which("lualatex"):
+        raise RuntimeError("lualatex is required")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="binder-supplemental-") as tmp_name:
+        tmp = Path(tmp_name)
+        shutil.copy(base / "page.tex", tmp / "page.tex")
+        env = {**os.environ, "SOURCE_DATE_EPOCH": "0", "FORCE_SOURCE_DATE": "1"}
+        for _ in range(2):
+            result = subprocess.run(["lualatex", "-halt-on-error", "-interaction=nonstopmode", "page.tex"], cwd=tmp, text=True, encoding="utf-8", capture_output=True, env=env)
+            if result.returncode:
+                sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
+        log = (tmp / "page.log").read_text(encoding="utf-8", errors="replace")
+        if "Overfull" in log:
+            raise RuntimeError("LuaLaTeX reported an overfull box")
+        validate_pdf(tmp / "page.pdf", 1, entry)
+        shutil.copyfile(tmp / "page.pdf", output)
+    print(f"built {output} (1 page, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
+
+
+def validate_pdf(path: Path, pages: int, label: str) -> None:
+    from pypdf import PdfReader
+    reader = PdfReader(path)
+    if len(reader.pages) != pages:
+        raise RuntimeError(f"{label} rendered {len(reader.pages)} pages, expected {pages}")
+    for page in reader.pages:
+        for name, box in (("MediaBox", page.mediabox), ("CropBox", page.cropbox)):
+            if abs(float(box.width) - 612) > .1 or abs(float(box.height) - 792) > .1:
+                raise RuntimeError(f"{label} {name} is not US Letter")
+        if (page.get("/Rotate") or 0) != 0:
+            raise RuntimeError(f"{label} page rotation is not 0")
+
+
+def load_manifest(path: Path) -> list[dict]:
+    resolved = path.resolve()
+    if resolved != (ROOT / "binder" / "manifest.yaml").resolve():
+        raise ValueError("manifest must be binder/manifest.yaml")
+    data = json.loads(resolved.read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or data.get("schema_version") != 1 or not isinstance(data.get("entries"), list):
+        raise ValueError("manifest must use schema_version 1 and contain an entries array")
+    entries = data["entries"]
+    ids = []
+    for item in entries:
+        if not isinstance(item, dict) or set(item) != {"id", "kind", "page_budget"}:
+            raise ValueError("each manifest entry must contain only id, kind, and page_budget")
+        if item["kind"] not in {"profile", "supplemental"} or type(item["page_budget"]) is not int or item["page_budget"] != 1:
+            raise ValueError("manifest entries require a supported kind and integer page_budget: 1")
+        if not isinstance(item["id"], str) or not ID.fullmatch(item["id"]) or item["id"] in ids:
+            raise ValueError("manifest entry IDs must be unique slugs")
+        ids.append(item["id"])
+    if ids != ["sedum-loves-fire", "kalanchoe-desert", "pothos", "bird-of-paradise", "aquarium-hornwort", "watering-log"]:
+        raise ValueError("manifest order does not match the approved six-page binder")
+    return entries
+
+
+def compile_manifest(path: Path, mode: str, output: Path) -> None:
+    from pypdf import PdfReader, PdfWriter
+    entries = load_manifest(path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="binder-manifest-") as tmp_name:
+        tmp = Path(tmp_name)
+        parts = []
+        for index, item in enumerate(entries):
+            part = tmp / f"{index:02d}-{item['id']}.pdf"
+            if item["kind"] == "profile":
+                compile_entry(*load_entry(item["id"], mode), part)
+            else:
+                compile_supplemental(item["id"], part)
+            validate_pdf(part, item["page_budget"], item["id"])
+            parts.append(part)
+        writer = PdfWriter()
+        for part in parts:
+            writer.append(PdfReader(part))
+        writer.add_metadata({"/Title": "Aquiloop care binder (draft)" if mode == "draft" else "Aquiloop care binder", "/CreationDate": "D:19700101000000Z", "/ModDate": "D:19700101000000Z"})
+        with output.open("wb") as stream:
+            writer.write(stream)
+    validate_pdf(output, sum(item["page_budget"] for item in entries), "combined binder")
+    print(f"built {output} (6 pages, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
+
+
 def main() -> int:
-    parser=argparse.ArgumentParser(); parser.add_argument("--entry",required=True); parser.add_argument("--mode",choices=("draft","final"),required=True); parser.add_argument("--output",type=Path,required=True); args=parser.parse_args()
-    try: compile_entry(*load_entry(args.entry,args.mode),args.output)
+    parser = argparse.ArgumentParser()
+    target = parser.add_mutually_exclusive_group(required=True)
+    target.add_argument("--entry")
+    target.add_argument("--supplemental")
+    target.add_argument("--manifest", type=Path)
+    parser.add_argument("--mode", choices=("draft", "final"), required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    try:
+        if args.entry:
+            compile_entry(*load_entry(args.entry, args.mode), args.output)
+        elif args.supplemental:
+            compile_supplemental(args.supplemental, args.output)
+        else:
+            compile_manifest(args.manifest, args.mode, args.output)
     except (OSError,ValueError,RuntimeError,json.JSONDecodeError) as exc: parser.exit(1,f"error: {exc}\n")
     return 0
 if __name__ == "__main__": raise SystemExit(main())

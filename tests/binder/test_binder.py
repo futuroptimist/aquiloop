@@ -17,6 +17,44 @@ import prepare_binder_photo  # noqa: E402
 
 
 class CatalogTests(unittest.TestCase):
+    def test_manifest_is_the_approved_order_with_one_page_budgets(self):
+        entries = build_binder.load_manifest(ROOT / "binder" / "manifest.yaml")
+        self.assertEqual(
+            [item["id"] for item in entries],
+            ["sedum-loves-fire", "kalanchoe-desert", "pothos",
+             "bird-of-paradise", "aquarium-hornwort", "watering-log"],
+        )
+        self.assertEqual([item["kind"] for item in entries], ["profile"] * 5 + ["supplemental"])
+        self.assertTrue(all(type(item["page_budget"]) is int and item["page_budget"] == 1 for item in entries))
+
+    def test_watering_log_has_required_fields_and_fourteen_rows(self):
+        page = (ROOT / "binder/supplemental/watering-log/page.tex").read_text(encoding="utf-8")
+        for text in ("Sedum", "Kalanchoe", "Pothos", "Bird of paradise", "Hornwort",
+                     "Typical interval:", "Watering interval: N/A", "Rain/amount:",
+                     "Planning estimate only", "maintenance is not watering"):
+            self.assertIn(text, page)
+        self.assertEqual(page.count("& \\raincell & \\raincell & \\landcell & \\landcell & \\aquacell"), 14)
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_supplemental_and_manifest_build_are_deterministic(self):
+        from pypdf import PdfReader
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            log = base / "log.pdf"
+            first = base / "first.pdf"
+            second = base / "second.pdf"
+            build_binder.compile_supplemental("watering-log", log)
+            build_binder.compile_manifest(ROOT / "binder/manifest.yaml", "draft", first)
+            build_binder.compile_manifest(ROOT / "binder/manifest.yaml", "draft", second)
+            self.assertEqual(first.read_bytes(), second.read_bytes())
+            self.assertEqual(len(PdfReader(log).pages), 1)
+            reader = PdfReader(first)
+            self.assertEqual(len(reader.pages), 6)
+            text = [page.extract_text() for page in reader.pages]
+            for index in range(5):
+                self.assertIn("PROPAGATION", text[index])
+            self.assertIn("Watering & care log", text[5])
+
     def test_draft_loads_and_has_no_empty_detail_placements(self):
         _, records, selected = build_binder.load_entry("sedum-loves-fire", "draft")
         self.assertEqual(selected, {"hero": "sedum-placeholder-001"})

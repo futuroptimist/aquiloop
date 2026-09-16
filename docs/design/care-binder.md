@@ -1,8 +1,9 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: approved design direction; the single-entry draft template and local
-photo workflow are implemented. Final care copy, five-entry assembly, care log,
-and release automation remain future work.
+Status: approved design direction; the five draft profiles, local photo
+workflow, watering log, and deterministic six-page draft assembly are
+implemented. Photograph qualification and release automation remain future
+work.
 
 ## Purpose and sequence
 
@@ -27,6 +28,27 @@ provisional identities, general source-backed guidance, unresolved fields, and
 the visible placeholder; they do not wait for photographs. Photograph-qualified
 final copy depends on reviewed specimen images, rights, and the inputs listed
 under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
+
+`binder/manifest.yaml` is the sole assembly authority. It records the five
+profiles above followed by the `watering-log` supplemental entry, with an
+explicit kind and integer `page_budget: 1` for every entry. Build the combined
+draft with:
+
+```sh
+python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
+  --output build/binder/aquiloop-binder-draft.pdf
+```
+
+The watering log deliberately uses a small supplemental-page path rather than
+the photograph-aware profile loader. Build it independently with:
+
+```sh
+python scripts/build_binder.py --supplemental watering-log --mode draft \
+  --output build/binder/watering-log.pdf
+```
+
+This preserves profile asset validation and final-mode rejection of selected
+placeholders or unresolved image rights.
 
 ## Visual references
 
@@ -543,12 +565,12 @@ Only that later physical check can justify calling the binder print-worthy.
 ## Deferred decisions
 
 - The approved direction is A typography + B profile layout + H care log. The
-  profile foundation is implemented; qualification of final pages and the H
-  care log remain pending.
+  profile foundation, H care log, manifest, and draft assembly are implemented;
+  photograph qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, remaining catalogs/pages, combined assembly, broader
-  regression coverage, CI workflow, and generated PDF artifacts remain pending.
+- Actual specimen assets, broader regression coverage, CI workflow, and
+  generated release PDF artifacts remain pending.
 
 ### Local verification outputs (Step 06a)
 

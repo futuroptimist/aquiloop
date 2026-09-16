@@ -1,0 +1,48 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,left=1in,right=.55in,top=.55in,bottom=.55in]{geometry}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Heros}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\definecolor{ink}{HTML}{24322C}
+\definecolor{tint}{gray}{0.90}
+\arrayrulecolor{ink}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\planthead}[3]{\textbf{#1}\par\textit{#2}\par\vspace{2pt}#3}
+\newcommand{\landcell}{\rule[-.05in]{0pt}{.475in}\fontsize{4.8}{5.2}\selectfont\shortstack[l]{Amount/method: \rule{.28in}{.3pt}\\[3pt]Observation: \rule{.35in}{.3pt}}}
+\newcommand{\raincell}{\rule[-.05in]{0pt}{.475in}\fontsize{4.8}{5.2}\selectfont\shortstack[l]{Amount/method: \rule{.28in}{.3pt}\\Rain/amount: \rule{.36in}{.3pt}\\Observation: \rule{.35in}{.3pt}}}
+\newcommand{\aquacell}{\rule[-.05in]{0pt}{.475in}\fontsize{4.8}{5.2}\selectfont\shortstack[l]{Event/result: \rule{.4in}{.3pt}\\[3pt]Observation: \rule{.35in}{.3pt}}}
+\begin{document}
+{\color{ink}\fontsize{20}{21}\selectfont Watering \& care log}\hfill
+{\sffamily\bfseries\fontsize{9}{11}\selectfont DRAFT • HANDWRITTEN RECORD}\par\vspace{-6pt}
+{\fontsize{8}{9.5}\selectfont Planning estimate only---check moisture or plant condition, rain, and season first.}\par
+{\fontsize{7}{8}\selectfont \textbf{Aquarium legend:} maintenance is not watering. Record water change, top-off, test, or trimming; add amount/result and an observation. A cell may remain blank when no action occurred.}\par
+\fontsize{6}{7}\selectfont
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1}
+\begin{tabular}{|L{.54in}|L{1.12in}|L{1.12in}|L{1.12in}|L{1.12in}|L{1.20in}|}
+\hline
+\rowcolor{tint}\rule[-.05in]{0pt}{.45in}\textbf{Date / time} &
+\planthead{Sedum}{Outdoor grow bag}{Typical interval: \_\_\_ days} &
+\planthead{Kalanchoe}{Outdoor grow bag}{Typical interval: \_\_\_ days} &
+\planthead{Pothos}{Indoors}{Typical interval: \_\_\_ days} &
+\planthead{Bird of paradise}{Indoors initially}{Typical interval: \_\_\_ days} &
+\planthead{Hornwort}{Aquarium}{Watering interval: N/A} \\\hline
+\rule[-.05in]{0pt}{.475in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\rule[-.05in]{0pt}{.43in} & \raincell & \raincell & \landcell & \landcell & \aquacell \\\hline
+\end{tabular}
+\end{document}
