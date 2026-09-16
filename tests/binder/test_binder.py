@@ -5,6 +5,7 @@ import tempfile
 import unittest
 import os
 import shutil
+from unittest import mock
 from pathlib import Path
 from PIL import Image
 
@@ -107,6 +108,25 @@ class AssemblyTests(unittest.TestCase):
         )
         self.assertTrue(all(item["page_budget"] == 1 for item in manifest))
 
+    def test_manifest_rejects_a_page_budget_total_other_than_six(self):
+        manifest = json.loads((ROOT / "binder" / "manifest.yaml").read_text())
+        manifest["entries"].pop()
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            path = root / "binder" / "manifest.yaml"
+            path.parent.mkdir()
+            path.write_text(json.dumps(manifest))
+            with mock.patch.object(build_binder, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "must total 6"):
+                    build_binder.load_manifest(path)
+
+    def test_supplemental_rejects_final_mode(self):
+        with tempfile.TemporaryDirectory() as name:
+            output = Path(name) / "watering-log.pdf"
+            with self.assertRaisesRegex(ValueError, "only in draft mode"):
+                build_binder.compile_supplemental("watering-log", "final", output)
+            self.assertFalse(output.exists())
+
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_watering_log_and_manifest_build_with_required_text_and_order(self):
         from pypdf import PdfReader
@@ -116,7 +136,7 @@ class AssemblyTests(unittest.TestCase):
             log = base / "watering-log.pdf"
             first = base / "binder-first.pdf"
             second = base / "binder-second.pdf"
-            build_binder.compile_supplemental("watering-log", log)
+            build_binder.compile_supplemental("watering-log", "draft", log)
             log_reader = PdfReader(log)
             self.assertEqual(len(log_reader.pages), 1)
             log_text = log_reader.pages[0].extract_text()

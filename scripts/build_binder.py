@@ -12,6 +12,7 @@ ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PLACEMENT = re.compile(r"^% binder-placement (hero|detail1|detail2) ([a-z0-9]+(?:-[a-z0-9]+)*);(?: .+)?$")
 UNRESOLVED_RIGHTS = {"unknown", "pending", "unresolved", "permission requested", "tbd", "not reviewed", "permission denied"}
 UNSAFE_TEX_PATH_CHARS = frozenset("#%{}\\\r\n")
+EXPECTED_BINDER_PAGES = 6
 
 
 def _nonempty(value: object) -> bool:
@@ -162,7 +163,9 @@ def supplemental_path(name: str) -> Path:
     return base
 
 
-def compile_supplemental(name: str, output: Path) -> None:
+def compile_supplemental(name: str, mode: str, output: Path) -> None:
+    if mode != "draft":
+        raise ValueError("supplemental pages are currently available only in draft mode")
     compile_entry(supplemental_path(name), {}, {}, output)
 
 
@@ -189,6 +192,8 @@ def load_manifest(path: Path) -> list[dict]:
             raise ValueError(f"unsupported manifest kind: {item['kind']}")
         if type(item["page_budget"]) is not int or item["page_budget"] < 1:
             raise ValueError("manifest page_budget must be a positive integer")
+    if sum(item["page_budget"] for item in entries) != EXPECTED_BINDER_PAGES:
+        raise ValueError(f"manifest page budgets must total {EXPECTED_BINDER_PAGES}")
     return entries
 
 
@@ -215,7 +220,7 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
             if item["kind"] == "profile":
                 compile_entry(*load_entry(item["id"], mode), individual)
             else:
-                compile_supplemental(item["id"], individual)
+                compile_supplemental(item["id"], mode, individual)
             reader = PdfReader(individual)
             if len(reader.pages) != item["page_budget"]:
                 raise RuntimeError(
@@ -230,8 +235,11 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
             writer.write(stream)
     expected = sum(item["page_budget"] for item in entries)
     assembled = PdfReader(output)
-    if len(assembled.pages) != expected:
-        raise RuntimeError(f"combined binder rendered {len(assembled.pages)} pages, expected {expected}")
+    if len(assembled.pages) != EXPECTED_BINDER_PAGES:
+        raise RuntimeError(
+            f"combined binder rendered {len(assembled.pages)} pages, "
+            f"expected {EXPECTED_BINDER_PAGES}"
+        )
     for index, page in enumerate(assembled.pages, 1):
         _validate_page(page, f"combined page {index}")
     print(f"built {output} ({expected} pages, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
@@ -250,7 +258,7 @@ def main() -> int:
         if args.entry:
             compile_entry(*load_entry(args.entry, args.mode), args.output)
         elif args.supplemental:
-            compile_supplemental(args.supplemental, args.output)
+            compile_supplemental(args.supplemental, args.mode, args.output)
         else:
             compile_manifest(args.manifest, args.mode, args.output)
     except (OSError,ValueError,RuntimeError,json.JSONDecodeError) as exc: parser.exit(1,f"error: {exc}\n")
