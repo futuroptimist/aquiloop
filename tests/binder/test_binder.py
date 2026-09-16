@@ -22,11 +22,13 @@ import prepare_binder_photo  # noqa: E402
 def _log_row_cells(row_anchors, column_anchors, field_positions):
     """Assign every extracted label to one non-overlapping rendered cell."""
     rows = sorted(row_anchors, reverse=True)
-    boundaries = [(upper + lower) / 2 for upper, lower in zip(rows, rows[1:])]
+    # Date baselines are row starts, not row centers.  A row owns everything
+    # below its Date baseline down to (but not including) the next baseline.
+    boundaries = rows[1:]
     cells = [[Counter() for _ in column_anchors] for _ in rows]
     for label, x, y in field_positions:
         column = min(range(len(column_anchors)), key=lambda index: abs(x - column_anchors[index]))
-        row = next((index for index, boundary in enumerate(boundaries) if y > boundary), len(rows) - 1)
+        row = next((index for index, boundary in enumerate(boundaries) if y > boundary + 1), len(rows) - 1)
         cells[row][column][label] += 1
     return cells
 
@@ -111,14 +113,44 @@ def _assert_optional_detail_rendering(page, detail_count):
     painted_details = sum(
         145 < width < 150 and 95 < height < 100 for width, height in image_sizes
     )
-    detail_frames = sum(
-        146 < box[2] - box[0] < 150 and 96 < box[3] - box[1] < 100
-        for box in strokes
-    )
-    if painted_details != detail_count or detail_frames != detail_count:
+    detail_images = [
+        box for box in images
+        if 145 < box[2] - box[0] < 150 and 95 < box[3] - box[1] < 100
+    ]
+    # TikZ emits the template frame as four separately stroked edges.  Fold
+    # those edges into a rectangle while retaining support for a single `re`
+    # stroke, as used by the unwanted-empty-frame regression below.
+    frames = [
+        box for box in strokes
+        if 146 < box[2] - box[0] < 150 and 96 < box[3] - box[1] < 100
+    ]
+    horizontal = [box for box in strokes if 146 < box[2] - box[0] < 150 and box[3] - box[1] < .2]
+    vertical = [box for box in strokes if box[2] - box[0] < .2 and 96 < box[3] - box[1] < 100]
+    for bottom in horizontal:
+        for top in horizontal:
+            candidate = (bottom[0], bottom[1], bottom[2], top[1])
+            if not 96 < candidate[3] - candidate[1] < 100:
+                continue
+            if any(
+                abs(left[0] - candidate[0]) < .5
+                and abs(left[1] - candidate[1]) < .5
+                and abs(left[3] - candidate[3]) < .5
+                for left in vertical
+            ) and any(
+                abs(right[0] - candidate[2]) < .5
+                and abs(right[1] - candidate[1]) < .5
+                and abs(right[3] - candidate[3]) < .5
+                for right in vertical
+            ):
+                frames.append(candidate)
+    frames = list({tuple(round(value, 1) for value in frame) for frame in frames})
+    if len(frames) != detail_count or any(
+        not any(all(abs(a - b) < 1 for a, b in zip(frame, image)) for frame in frames)
+        for image in detail_images
+    ):
         raise AssertionError(
             f"expected {detail_count} painted details/frames, "
-            f"found {painted_details}/{detail_frames}"
+            f"found {painted_details}/{len(frames)}"
         )
 
 
@@ -418,25 +450,31 @@ class AssemblyTests(unittest.TestCase):
                 build_binder._validate_page(page, title)
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
-        rows = [100.0, 60.9, 21.8]
+        rows = [606.8, 567.7, 528.6, 489.5]
         columns = [10.0, 20.0]
         expected = ({"Date:"}, {"Observation:"})
-        positions = [
-            (label, x, y)
-            for y in rows
-            for label, x in (("Date:", columns[0]), ("Observation:", columns[1]))
-        ]
+        positions = []
+        for y in rows:
+            positions.extend((
+                ("Date:", columns[0], y),
+                ("Observation:", columns[1], y - 20.9),
+            ))
         _assert_log_row_cells(rows, columns, positions, expected)
 
-        # Preserve the global count while moving row 2's aquarium observation
-        # into row 1. Non-overlapping ownership must expose both bad cells.
-        mutated = list(positions)
-        second = mutated.index(("Observation:", columns[1], rows[1]))
-        mutated[second] = ("Observation:", columns[1], rows[0])
-        self.assertEqual(Counter(label for label, _, _ in mutated),
-                         Counter(label for label, _, _ in positions))
-        with self.assertRaisesRegex(AssertionError, r"row [12], column 2"):
-            _assert_log_row_cells(rows, columns, mutated, expected)
+        # Preserve global counts while moving an aquarium Observation into an
+        # adjacent row. Exercise both outer rows so neither can borrow a label.
+        for source, destination in ((0, 1), (3, 2)):
+            mutated = list(positions)
+            occurrence = ("Observation:", columns[1], rows[source] - 20.9)
+            index = mutated.index(occurrence)
+            mutated[index] = ("Observation:", columns[1], rows[destination] - 20.9)
+            self.assertEqual(Counter(label for label, _, _ in mutated),
+                             Counter(label for label, _, _ in positions))
+            cells = _log_row_cells(rows, columns, mutated)
+            self.assertEqual(cells[source][1]["Observation:"], 0)
+            self.assertEqual(cells[destination][1]["Observation:"], 2)
+            with self.assertRaisesRegex(AssertionError, r"row [1-4], column 2"):
+                _assert_log_row_cells(rows, columns, mutated, expected)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_every_profile_builds_independently_with_complete_visible_content(self):
