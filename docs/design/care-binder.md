@@ -507,6 +507,13 @@ The validator must fail on:
 - blank/near-blank pages, content outside the safe/content boxes, clipped text,
   overfull boxes, or unintended overflow pages.
 
+The watering-log regression requests 8-point TeX labels and accepts the
+approximately 7.97011-point size exposed by LuaLaTeX PDF text extraction (with
+a 7.9-point lower comparison tolerance for conversion noise). This extraction
+tolerance does not lower the physical 8-point design contract. Automated page
+geometry and text checks complement, but do not replace, the later physical
+print and handwriting qualification.
+
 Image and content validation must additionally check:
 
 - supported JSON schema versions and duplicate asset IDs;

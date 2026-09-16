@@ -82,6 +82,13 @@ class ContentWorksheetTests(unittest.TestCase):
                         any("Watering interval is N/A" in claim["claim"] for claim in water_claims),
                         "aquarium-hornwort water card must preserve the N/A watering contract",
                     )
+                    self.assertNotIn("soil_substrate", content["cards"])
+                    self.assertNotIn("water", content["cards"])
+                    aquatic_text = " ".join(
+                        claim["claim"] for claims in content["cards"].values() for claim in claims
+                    ).casefold()
+                    self.assertNotIn("water thoroughly", aquatic_text)
+                    self.assertNotIn("potting soil", aquatic_text)
 
                 cited = set(content["identity"]["sources"])
                 for claims in content["cards"].values():

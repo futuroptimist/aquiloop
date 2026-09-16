@@ -213,8 +213,9 @@ def _validate_page(page: object, label: str) -> None:
         raise RuntimeError(f"{label} page geometry is not US Letter")
     if (page.get("/Rotate") or 0) != 0:
         raise RuntimeError(f"{label} page rotation is not 0")
-    if not (page.extract_text() or "").strip():
-        raise RuntimeError(f"{label} page is blank or has no extractable text")
+    extracted = "".join((page.extract_text() or "").split())
+    if len(extracted) < 20:
+        raise RuntimeError(f"{label} page is blank or near-blank")
 
 
 def compile_manifest(path: Path, mode: str, output: Path) -> None:
