@@ -185,11 +185,12 @@ class AssemblyTests(unittest.TestCase):
             for text in (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
                 "Hornwort", "Planning estimate only", "Rain/amount",
-                "Watering interval: N/A", "Aquarium maintenance", "not watering",
+                "Watering interval:", "N/A", "Aquarium maintenance", "not watering",
+                "Event:", "Amount/result:",
             ):
                 self.assertIn(text, log_text)
             labels = {"Date:", "Time:", "Amount/method:", "Observation:",
-                      "Rain/amount:", "Event + amount/result:"}
+                      "Rain/amount:", "Event:", "Amount/result:"}
             sizes = []
             date_positions = []
 
