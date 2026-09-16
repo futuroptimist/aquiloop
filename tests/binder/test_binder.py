@@ -144,9 +144,14 @@ def _assert_optional_detail_rendering(page, detail_count):
             ):
                 frames.append(candidate)
     frames = list({tuple(round(value, 1) for value in frame) for frame in frames})
-    if len(frames) != detail_count or any(
-        not any(all(abs(a - b) < 1 for a, b in zip(frame, image)) for frame in frames)
-        for image in detail_images
+    if (
+        painted_details != detail_count
+        or len(detail_images) != detail_count
+        or len(frames) != detail_count
+        or any(
+            not any(all(abs(a - b) < 1 for a, b in zip(frame, image)) for frame in frames)
+            for image in detail_images
+        )
     ):
         raise AssertionError(
             f"expected {detail_count} painted details/frames, "
