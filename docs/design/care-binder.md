@@ -1,8 +1,9 @@
 # Home, garden, and aquarium care binder design brief
 
-Status: approved design direction; the single-entry draft template and local
-photo workflow are implemented. Final care copy, five-entry assembly, care log,
-and release automation remain future work.
+Status: approved design direction; the five draft profiles, local photo
+workflow, watering log, and manifest-driven six-page draft assembly are
+implemented. Final photograph-qualified copy and release automation remain
+future work.
 
 ## Purpose and sequence
 
@@ -440,11 +441,24 @@ python scripts/build_binder.py --entry sedum-loves-fire --mode draft \
   --output build/binder/sedum-loves-fire-draft.pdf
 ```
 
+The watering log is intentionally a supplemental page rather than a profile:
+it has no hero image or asset catalog and therefore does not pass through (or
+weaken) profile image validation. Build it independently and assemble the
+ordered draft with:
+
+```sh
+python scripts/build_binder.py --entry watering-log --kind supplemental \
+  --mode draft --output build/binder/watering-log-draft.pdf
+python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
+  --output build/binder/aquiloop-binder-draft.pdf
+```
+
 The builder validates catalog schema and selections before compiling, then uses
-pypdf independently to enforce one page and a 612 × 792-point MediaBox. Draft
-mode visibly permits placeholders; final mode rejects a selected placeholder or
-unresolved rights. This foundation does not implement final factual copy, all
-species, the care log, combined assembly, CI, or full regressions.
+pypdf independently to enforce the declared page count, 612 × 792-point
+MediaBox and CropBox, and zero rotation. Draft mode visibly permits placeholders;
+final mode rejects a selected placeholder or unresolved rights. Combined
+assembly is deliberately draft-only until the profiles are photograph-qualified.
+Binder CI and the broader negative regression matrix remain future work.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch

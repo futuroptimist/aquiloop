@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate one binder entry and compile its one-page LuaLaTeX proof."""
+"""Validate and compile one binder page or an ordered binder manifest."""
 from __future__ import annotations
 import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
@@ -154,9 +154,104 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         print(f"built {output} (1 page, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
 
 
+def validate_pdf(path: Path, expected_pages: int) -> None:
+    from pypdf import PdfReader
+    reader = PdfReader(path)
+    if len(reader.pages) != expected_pages:
+        raise RuntimeError(f"{path} rendered {len(reader.pages)} pages, expected {expected_pages}")
+    for number, page in enumerate(reader.pages, 1):
+        for label, box in (("MediaBox", page.mediabox), ("CropBox", page.cropbox)):
+            if abs(float(box.width) - 612) > .1 or abs(float(box.height) - 792) > .1:
+                raise RuntimeError(f"{path} page {number} {label} is not 612 x 792 pt")
+        if page.get("/Rotate", 0) != 0:
+            raise RuntimeError(f"{path} page {number} rotation is not 0")
+
+
+def compile_supplemental(entry: str, output: Path) -> None:
+    base = (ROOT / "binder" / "supplemental" / entry).resolve()
+    supplemental = (ROOT / "binder" / "supplemental").resolve()
+    if supplemental not in base.parents or not (base / "page.tex").is_file():
+        raise ValueError(f"unknown supplemental entry: {entry}")
+    if not shutil.which("lualatex"):
+        raise RuntimeError("lualatex is required")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="binder-supplemental-") as tmp_name:
+        tmp = Path(tmp_name)
+        shutil.copy(base / "page.tex", tmp / "page.tex")
+        env = {**os.environ, "SOURCE_DATE_EPOCH": "0", "FORCE_SOURCE_DATE": "1"}
+        result = subprocess.run(["lualatex", "-halt-on-error", "-interaction=nonstopmode", "page.tex"], cwd=tmp, text=True, encoding="utf-8", capture_output=True, env=env)
+        if result.returncode:
+            sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
+        log = (tmp / "page.log").read_text(encoding="utf-8", errors="replace")
+        if "Overfull" in log:
+            raise RuntimeError("LuaLaTeX reported an overfull box")
+        shutil.copyfile(tmp / "page.pdf", output)
+    validate_pdf(output, 1)
+    print(f"built {output} (1 page, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
+
+
+def load_manifest(path: Path) -> list[dict]:
+    manifest_path = path.resolve()
+    binder = (ROOT / "binder").resolve()
+    if binder not in manifest_path.parents or not manifest_path.is_file():
+        raise ValueError("manifest must be a file within binder/")
+    document = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(document, dict) or document.get("schema_version") != 1:
+        raise ValueError("manifest must use supported schema_version 1")
+    entries = document.get("entries")
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("manifest entries must be a nonempty array")
+    seen = set()
+    for item in entries:
+        if not isinstance(item, dict) or set(item) != {"id", "kind", "page_budget"}:
+            raise ValueError("each manifest entry must contain only id, kind, and page_budget")
+        if not isinstance(item["id"], str) or not ID.fullmatch(item["id"]):
+            raise ValueError("manifest entry has malformed id")
+        if item["id"] in seen:
+            raise ValueError(f"duplicate manifest entry: {item['id']}")
+        seen.add(item["id"])
+        if item["kind"] not in {"profile", "supplemental"}:
+            raise ValueError(f"unsupported manifest kind: {item['kind']}")
+        if type(item["page_budget"]) is not int or item["page_budget"] != 1:
+            raise ValueError("each manifest page_budget must be integer 1")
+    return entries
+
+
+def compile_manifest(path: Path, mode: str, output: Path) -> None:
+    if mode != "draft":
+        raise ValueError("manifest builds currently support draft mode only")
+    entries = load_manifest(path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    from pypdf import PdfReader, PdfWriter
+    with tempfile.TemporaryDirectory(prefix="binder-manifest-") as tmp_name:
+        pages = []
+        for index, item in enumerate(entries):
+            page = Path(tmp_name) / f"{index:02d}-{item['id']}.pdf"
+            if item["kind"] == "profile":
+                compile_entry(*load_entry(item["id"], mode), page)
+            else:
+                compile_supplemental(item["id"], page)
+            validate_pdf(page, item["page_budget"])
+            pages.append(page)
+        writer = PdfWriter()
+        for page in pages:
+            writer.append(PdfReader(page))
+        writer.add_metadata({"/Title": "Aquiloop care binder — draft", "/Producer": "Aquiloop deterministic binder builder"})
+        with output.open("wb") as stream:
+            writer.write(stream)
+    validate_pdf(output, sum(item["page_budget"] for item in entries))
+    print(f"built {output} ({len(entries)} pages, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
+
+
 def main() -> int:
-    parser=argparse.ArgumentParser(); parser.add_argument("--entry",required=True); parser.add_argument("--mode",choices=("draft","final"),required=True); parser.add_argument("--output",type=Path,required=True); args=parser.parse_args()
-    try: compile_entry(*load_entry(args.entry,args.mode),args.output)
+    parser=argparse.ArgumentParser(); group=parser.add_mutually_exclusive_group(required=True); group.add_argument("--entry"); group.add_argument("--manifest",type=Path); parser.add_argument("--kind",choices=("profile","supplemental"),default="profile"); parser.add_argument("--mode",choices=("draft","final"),required=True); parser.add_argument("--output",type=Path,required=True); args=parser.parse_args()
+    try:
+        if args.manifest:
+            compile_manifest(args.manifest, args.mode, args.output)
+        elif args.kind == "supplemental":
+            compile_supplemental(args.entry, args.output)
+        else:
+            compile_entry(*load_entry(args.entry,args.mode),args.output)
     except (OSError,ValueError,RuntimeError,json.JSONDecodeError) as exc: parser.exit(1,f"error: {exc}\n")
     return 0
 if __name__ == "__main__": raise SystemExit(main())

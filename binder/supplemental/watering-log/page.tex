@@ -1,0 +1,26 @@
+\documentclass[letterpaper]{article}
+\usepackage[paperwidth=8.5in,paperheight=11in,left=1in,right=.55in,top=.55in,bottom=.55in]{geometry}
+\usepackage{fontspec,array,tabularx}
+\usepackage[table]{xcolor}
+\setsansfont{TeX Gyre Heros}\pagestyle{empty}
+\setlength{\parindent}{0pt}\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1}
+\definecolor{ink}{HTML}{202824}\definecolor{rule}{HTML}{52605A}\definecolor{tint}{gray}{0.91}
+\color{ink}\pdfvariable suppressoptionalinfo 767
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcommand{\terrestrial}[2]{\textbf{#1}\newline{\fontsize{6.6}{7.5}\selectfont #2\newline Typical interval:\ \_\_\_ days}}
+\newcommand{\logcell}{{\fontsize{6.2}{7}\selectfont Amount/method:\ \_\_\_\_\newline Observation:\ \_\_\_\_}}
+\newcommand{\raincell}{{\fontsize{6.2}{7}\selectfont Amount/method:\ \_\_\_\newline Rain/amount:\ \_\_\_\_\newline Observation:\ \_\_\_}}
+\newcommand{\tankcell}{{\fontsize{5.8}{6.5}\selectfont Event/amount/result:\ \_\_\_\newline Observation:\ \_\_\_\_}}
+% Three prompt lines plus this padding produce a row just over .48 inch high.
+\newcommand{\logrow}{\_\_ / \_\_\newline\_\_:\_\_ & \raincell & \raincell & \logcell & \logcell & \tankcell\\[.20in]\hline}
+\begin{document}
+{\fontsize{21}{23}\selectfont\bfseries Watering \& aquarium care log}\par\vspace{1pt}
+{\fontsize{7.5}{8.5}\selectfont Planning estimate only---check moisture or plant condition, rain, and season first. A plant cell may remain blank when it was not watered.}\par\vspace{1pt}
+{\fontsize{6.8}{7.8}\selectfont\textbf{Legend:} Aquarium maintenance is not watering. Hornwort events may record a water change, top-off, test, or trimming, with amount/result and observation.}\par\vspace{2pt}
+{\sffamily\fontsize{7.2}{8.3}\selectfont
+\begin{tabularx}{\linewidth}{|p{.55in}|L|L|L|L|L|}\hline
+\rowcolor{tint}\textbf{Date / time} & \terrestrial{Sedum}{Outdoor grow bag} & \terrestrial{Kalanchoe}{Outdoor grow bag} & \terrestrial{Pothos}{Indoors} & \terrestrial{Bird of paradise}{Indoors initially} & \textbf{Hornwort}\newline{\fontsize{6.6}{7.5}\selectfont Aquarium\newline Watering interval: N/A}\\\hline
+\logrow\logrow\logrow\logrow\logrow\logrow\logrow
+\logrow\logrow\logrow\logrow\logrow\logrow\logrow
+\end{tabularx}}
+\end{document}

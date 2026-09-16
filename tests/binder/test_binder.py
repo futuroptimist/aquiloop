@@ -91,6 +91,48 @@ class CatalogTests(unittest.TestCase):
                 build_binder.load_entry(base.name, "final")
 
 
+class ManifestAndSupplementalTests(unittest.TestCase):
+    def test_manifest_is_the_exact_ordered_six_page_authority(self):
+        entries = build_binder.load_manifest(ROOT / "binder" / "manifest.yaml")
+        self.assertEqual(
+            [(item["id"], item["kind"], item["page_budget"]) for item in entries],
+            [
+                ("sedum-loves-fire", "profile", 1),
+                ("kalanchoe-desert", "profile", 1),
+                ("pothos", "profile", 1),
+                ("bird-of-paradise", "profile", 1),
+                ("aquarium-hornwort", "profile", 1),
+                ("watering-log", "supplemental", 1),
+            ],
+        )
+
+    def test_watering_log_source_preserves_layout_contract(self):
+        source = (ROOT / "binder/supplemental/watering-log/page.tex").read_text(encoding="utf-8")
+        self.assertEqual(source.count("\\logrow"), 15)  # definition plus 14 rows
+        for text in (
+            "Planning estimate only---check moisture or plant condition, rain, and season first.",
+            "Rain/amount:", "Watering interval: N/A",
+            "Aquarium maintenance is not watering", "Typical interval:",
+        ):
+            self.assertIn(text, source)
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_manifest_build_is_six_pages_and_ordered(self):
+        from pypdf import PdfReader
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            output = base / "binder.pdf"
+            build_binder.compile_manifest(ROOT / "binder/manifest.yaml", "draft", output)
+            reader = PdfReader(output)
+            self.assertEqual(len(reader.pages), 6)
+            expected = ["Sedum", "Kalanchoe", "Pothos", "Bird of paradise", "Aquarium hornwort", "Watering & aquarium care log"]
+            for page, heading in zip(reader.pages, expected):
+                self.assertIn(heading, page.extract_text())
+                self.assertAlmostEqual(float(page.cropbox.width), 612, delta=.1)
+                self.assertAlmostEqual(float(page.cropbox.height), 792, delta=.1)
+                self.assertEqual(page.get("/Rotate", 0), 0)
+
+
 class PhotoPreparationTests(unittest.TestCase):
     def test_prepares_derivative_without_changing_original_or_gps(self):
         with tempfile.TemporaryDirectory() as name:
