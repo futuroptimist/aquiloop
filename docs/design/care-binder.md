@@ -460,8 +460,9 @@ python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
 ```
 
 Combined assembly is intentionally draft-only until profiles have qualified
-photographs and final content. CI and the broader regression matrix remain
-future work.
+photographs and final content. CI remains future work; the Step 07a regression
+matrix now covers the local page, content, asset, rights, layout, and assembly
+contracts described below.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -574,8 +575,9 @@ Only that later physical check can justify calling the binder print-worthy.
   assembly are implemented; final page qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, broader regression coverage, CI workflow, and
-  generated PDF artifacts remain pending.
+- Actual specimen assets, CI workflow, generated PDF artifacts, Step 07b
+  qualification, and physical print/handwriting checks remain pending. Step 07a
+  automated regression coverage does not satisfy those later acceptance gates.
 
 ### Local verification outputs (Step 06a)
 

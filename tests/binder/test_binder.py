@@ -176,12 +176,18 @@ class AssemblyTests(unittest.TestCase):
                 return self.text
 
         build_binder._validate_page(Page(), "valid")
+        build_binder._validate_page(
+            Page(text=("x " * build_binder.MIN_EXTRACTED_PAGE_CHARACTERS)),
+            "threshold with normalized whitespace",
+        )
         for page, message in (
             (Page(crop=(20, 20, 632, 812)), "geometry"),
             (Page(media=(0, 0, 600, 792)), "geometry"),
             (Page(text=" \n\t"), "blank"),
             (Page(text="page 1"), "near-blank"),
             (Page(text="Watering & aquarium log"), "near-blank"),
+            (Page(text="DRAFT PLACEHOLDER\nhero-placeholder-001"), "near-blank"),
+            (Page(text="x" * (build_binder.MIN_EXTRACTED_PAGE_CHARACTERS - 1)), "near-blank"),
             (Page(rotation=90), "rotation"),
         ):
             with self.subTest(message=message), self.assertRaisesRegex(RuntimeError, message):
@@ -232,6 +238,8 @@ class AssemblyTests(unittest.TestCase):
             # as "T ypical"; assert the words while tolerating that extractor
             # artifact rather than coupling the contract to one PDF parser.
             self.assertEqual(len(re.findall(r"T\s*ypical interval:", log_text)), 4)
+            self.assertEqual(len(re.findall(r"_+\s*days", log_text)), 4)
+            self.assertRegex(log_text, r"Hornwort[\s\S]*Watering interval:\s*N/A")
             counts = Counter(
                 label for label in ("Date:", "Time:", "Event:", "Amount/result:",
                                     "Rain/amount:", "Amount/method:", "Observation:")
@@ -249,6 +257,7 @@ class AssemblyTests(unittest.TestCase):
             sizes = []
             date_positions = []
             aquarium_observation_positions = []
+            field_positions = []
 
             def inspect_text(text, _cm, tm, _font, font_size):
                 stripped = text.strip()
@@ -258,6 +267,9 @@ class AssemblyTests(unittest.TestCase):
                     date_positions.append(tm[5])
                 if "Observation:" in stripped and tm[4] > 430:
                     aquarium_observation_positions.append(tm[5])
+                for label in labels:
+                    if label in stripped:
+                        field_positions.append((label, tm[4], tm[5]))
 
             log_reader.pages[0].extract_text(visitor_text=inspect_text)
             self.assertTrue(sizes)
@@ -270,6 +282,27 @@ class AssemblyTests(unittest.TestCase):
             self.assertEqual(len(row_tops), 14)
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
             self.assertEqual(len(aquarium_observation_positions), 14)
+
+            # Establish the six rendered columns from their label x positions,
+            # then verify every one of the 14 row/column regions independently.
+            x_positions = sorted({round(x, 1) for _, x, _ in field_positions})
+            self.assertEqual(len(x_positions), 6)
+            expected_fields = (
+                {"Date:", "Time:"},
+                {"Amount/method:", "Observation:", "Rain/amount:"},
+                {"Amount/method:", "Observation:", "Rain/amount:"},
+                {"Amount/method:", "Observation:"},
+                {"Amount/method:", "Observation:"},
+                {"Event:", "Amount/result:", "Observation:"},
+            )
+            for row_y in row_tops:
+                for column, column_x in enumerate(x_positions):
+                    found = {
+                        label for label, x, y in field_positions
+                        if round(x, 1) == column_x and abs(y - row_y) < 30
+                    }
+                    self.assertEqual(found, expected_fields[column],
+                                     f"missing fields near row {row_y}, column {column}")
 
             manifest = ROOT / "binder" / "manifest.yaml"
             build_binder.compile_manifest(manifest, "draft", first)
@@ -299,6 +332,19 @@ class AssemblyTests(unittest.TestCase):
             "bird-of-paradise": ("Bird of paradise", "LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
             "aquarium-hornwort": ("Aquarium hornwort", "LIGHT", "WATER PARAMETERS / TEMPERATURE", "PLACEMENT / FLOATING", "NUTRIENT CONTEXT", "GROWTH / TRIMMING", "PROPAGATION", "COMPATIBILITY / TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
         }
+        propagation_evidence = {
+            "sedum-loves-fire": (("stem", "whole leaf", "callus", "rot"), ("SED-POWO", "SED-PAT", "SED-MSU", "SED-IA")),
+            "kalanchoe-desert": (("stem section", "lower leaves", "well-drained", "rot"), ("KAL-RHS", "KAL-IA", "KAL-PROP")),
+            "pothos": (("vine stem cutting", "root it in water", "After establishment", "root rot"), ("POT-NCSU", "POT-PSU")),
+            "bird-of-paradise": (("divide", "shoot", "original depth", "soggy"), ("BOP-REG", "BOP-NIC", "BOP-UF")),
+            "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-USDA", "HOR-FWS", "HOR-WA", "HOR-TROP")),
+        }
+
+        def assert_profile_evidence(slug, text):
+            guidance, source_keys = propagation_evidence[slug]
+            for marker in (*headings[slug], *guidance, *source_keys, "EVIDENCE", "REVISION"):
+                self.assertIn(marker, text)
+
         with tempfile.TemporaryDirectory() as name:
             for slug, required in headings.items():
                 with self.subTest(entry=slug):
@@ -310,14 +356,36 @@ class AssemblyTests(unittest.TestCase):
                     page = reader.pages[0]
                     build_binder._validate_page(page, slug)
                     text = page.extract_text()
-                    for marker in (*required, "EVIDENCE", "REVISION"):
-                        self.assertIn(marker, text)
+                    assert_profile_evidence(slug, text)
                     if any(records[asset_id]["kind"] == "placeholder"
                            for asset_id in selected.values()):
                         self.assertIn("DRAFT PLACEHOLDER", text)
                     if slug == "aquarium-hornwort":
                         self.assertNotIn("SOIL / SUBSTRATE", text)
                         self.assertNotIn("Water thoroughly", text)
+
+            # A heading and citation alone must not masquerade as a rendered
+            # propagation contract. Work only on a temporary entry copy.
+            source = ROOT / "binder" / "entries" / "pothos"
+            with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as temp_entry:
+                mutant = Path(temp_entry)
+                shutil.copytree(source / "assets", mutant / "assets")
+                shutil.copy(source / "assets.json", mutant / "assets.json")
+                page = (source / "page.tex").read_text(encoding="utf-8")
+                page = re.sub(
+                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU\]\}\})",
+                    r"\1Citation retained only. \2",
+                    page,
+                    count=1,
+                )
+                (mutant / "page.tex").write_text(page, encoding="utf-8")
+                output = Path(name) / "pothos-missing-propagation.pdf"
+                build_binder.compile_entry(*build_binder.load_entry(mutant.name, "draft"), output)
+                text = PdfReader(output).pages[0].extract_text()
+                self.assertIn("PROPAGATION", text)
+                self.assertIn("POT-NCSU", text)
+                with self.assertRaises(AssertionError):
+                    assert_profile_evidence("pothos", text)
 
 
 class PhotoPreparationTests(unittest.TestCase):
@@ -401,6 +469,9 @@ class ComprehensiveRegressionTests(unittest.TestCase):
                 text = reader.pages[0].extract_text()
                 self.assertIn("PROPAGATION", text); self.assertIn("SED-MSU", text)
                 self.assertEqual(set(loaded[2]), {"hero"} | {f"detail{i}" for i in range(1, count + 1)})
+                # One image XObject per selected photograph proves the optional
+                # detail frames were actually rendered (and no empty frames were).
+                self.assertEqual(len(reader.pages[0].images), 1 + count)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_selected_detail_placeholders_are_visibly_labeled(self):
@@ -425,9 +496,15 @@ class ComprehensiveRegressionTests(unittest.TestCase):
         self.assertNotIn("keepaspectratio=false", template)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
-    def test_overflow_is_rejected(self):
-        context, base = self.fixture(page_suffix="\\par " + ("OVERFLOW " * 5000))
-        with context, self.assertRaisesRegex(RuntimeError, "rendered .* pages|overfull"):
+    def test_overfull_box_is_rejected_independently(self):
+        context, base = self.fixture(page_suffix=r"\par\hbox{" + ("W" * 1000) + "}")
+        with context, self.assertRaisesRegex(RuntimeError, "overfull"):
+            build_binder.compile_entry(*build_binder.load_entry(base.name, "final"), base / "bad.pdf")
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_unexpected_page_count_is_rejected_independently(self):
+        context, base = self.fixture(page_suffix=r"\newpage SECOND PAGE")
+        with context, self.assertRaisesRegex(RuntimeError, r"rendered 2 pages, expected 1"):
             build_binder.compile_entry(*build_binder.load_entry(base.name, "final"), base / "bad.pdf")
 
     def test_valid_unselected_unknown_rights_does_not_change_output_selection(self):
@@ -476,6 +553,16 @@ class ComprehensiveRegressionTests(unittest.TestCase):
             Image.effect_noise((990,990),100).save(base/"assets/hero.jpg",quality=100)
             with self.assertRaisesRegex(ValueError,"1 MiB"): build_binder.load_entry(base.name,"draft")
 
+    def test_missing_asset_file_is_rejected_independently_of_containment(self):
+        context, base = self.fixture()
+        with context:
+            data = json.loads((base / "assets.json").read_text())
+            data["assets"][0]["path"] = "assets/does-not-exist.jpg"
+            (base / "assets.json").write_text(json.dumps(data))
+            self.assertFalse(base.joinpath("assets/does-not-exist.jpg").exists())
+            with self.assertRaisesRegex(ValueError, "asset path must resolve within entry"):
+                build_binder.load_entry(base.name, "draft")
+
     def test_unsupported_raster_format_and_wrong_aspect_are_rejected(self):
         for image_format, size, message in (("GIF", (990, 990), "unsupported raster format"),
                                             ("JPEG", (1000, 990), "aspect ratio")):
@@ -515,6 +602,35 @@ class ComprehensiveRegressionTests(unittest.TestCase):
         context, base = self.fixture()
         with context:
             build_binder.load_entry(base.name, "final")
+
+    def test_rights_review_guard_is_independent_of_resolved_rights(self):
+        for value in ("missing", False, "true", 1, None, True):
+            with self.subTest(rights_reviewed=value):
+                context, base = self.fixture()
+                with context:
+                    data = json.loads((base / "assets.json").read_text())
+                    source = data["assets"][0]["source"]
+                    if value == "missing":
+                        source.pop("rights_reviewed")
+                    else:
+                        source["rights_reviewed"] = value
+                    (base / "assets.json").write_text(json.dumps(data))
+                    if value is True:
+                        build_binder.load_entry(base.name, "final")
+                    else:
+                        with self.assertRaisesRegex(ValueError, "not qualified"):
+                            build_binder.load_entry(base.name, "final")
+
+    def test_reviewed_resolved_placeholder_is_still_rejected(self):
+        context, base = self.fixture()
+        with context:
+            data = json.loads((base / "assets.json").read_text())
+            record = data["assets"][0]
+            record.update(kind="placeholder", path="assets/placeholder.txt")
+            (base / "assets/placeholder.txt").write_text("synthetic")
+            (base / "assets.json").write_text(json.dumps(data))
+            with self.assertRaisesRegex(ValueError, "not qualified"):
+                build_binder.load_entry(base.name, "final")
 
     def test_tex_special_asset_paths(self):
         for filename, rejected in (("ordinary.jpg", False), ("photo#1.jpg", True), ("photo%crop.jpg", True)):

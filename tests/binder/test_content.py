@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import unittest
 from pathlib import Path
@@ -48,6 +49,26 @@ class ContentWorksheetTests(unittest.TestCase):
                     f"{slug}/propagation[{index}] must not have empty {field}",
                 )
 
+    def assertAquaticGuidance(self, content: dict) -> None:
+        self.assertIn("Watering interval is N/A", content["environmental_variability"])
+        water_claims = content["cards"]["water_parameters_temperature"]
+        self.assertTrue(
+            any("Watering interval is N/A" in claim["claim"] for claim in water_claims),
+            "aquarium-hornwort water card must preserve the N/A watering contract",
+        )
+        self.assertNotIn("soil_substrate", content["cards"])
+        self.assertNotIn("water", content["cards"])
+        guidance = [content["environmental_variability"]]
+        for claims in content["cards"].values():
+            for claim in claims:
+                guidance.extend(
+                    value for key, value in claim.items()
+                    if key != "sources" and isinstance(value, str)
+                )
+        aquatic_text = " ".join(guidance).casefold()
+        for prohibited in ("water thoroughly", "potting soil"):
+            self.assertNotIn(prohibited, aquatic_text)
+
     def test_source_and_content_contracts(self):
         for slug, expected_cards in ENTRIES.items():
             with self.subTest(entry=slug):
@@ -76,24 +97,7 @@ class ContentWorksheetTests(unittest.TestCase):
                 self.assertTrue(content["unresolved_fields"])
                 self.assertTrue(content["environmental_variability"])
                 if slug == "aquarium-hornwort":
-                    self.assertIn("Watering interval is N/A", content["environmental_variability"])
-                    water_claims = content["cards"]["water_parameters_temperature"]
-                    self.assertTrue(
-                        any("Watering interval is N/A" in claim["claim"] for claim in water_claims),
-                        "aquarium-hornwort water card must preserve the N/A watering contract",
-                    )
-                    self.assertNotIn("soil_substrate", content["cards"])
-                    self.assertNotIn("water", content["cards"])
-                    guidance = [content["environmental_variability"]]
-                    for claims in content["cards"].values():
-                        for claim in claims:
-                            guidance.extend(
-                                value for key, value in claim.items()
-                                if key != "sources" and isinstance(value, str)
-                            )
-                    aquatic_text = " ".join(guidance).casefold()
-                    self.assertNotIn("water thoroughly", aquatic_text)
-                    self.assertNotIn("potting soil", aquatic_text)
+                    self.assertAquaticGuidance(content)
 
                 cited = set(content["identity"]["sources"])
                 for claims in content["cards"].values():
@@ -120,6 +124,19 @@ class ContentWorksheetTests(unittest.TestCase):
         content["cards"]["propagation"][0]["pitfall"] = ""
         with self.assertRaisesRegex(AssertionError, "must not have empty pitfall"):
             self.assertPropagationContract("pothos", content)
+
+    def test_hornwort_rejects_terrestrial_advice_in_every_guidance_field(self):
+        original = self.load("aquarium-hornwort", "content.yaml")
+        fields = (*sorted(PROPAGATION_FIELDS), "environmental_variability")
+        for field in fields:
+            with self.subTest(field=field):
+                content = copy.deepcopy(original)
+                if field == "environmental_variability":
+                    content[field] += " Use potting soil."
+                else:
+                    content["cards"]["propagation"][0][field] += " Water thoroughly."
+                with self.assertRaises(AssertionError):
+                    self.assertAquaticGuidance(content)
 
     def test_source_support_metadata_covers_every_citation(self):
         for slug in ENTRIES:
