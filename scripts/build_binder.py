@@ -13,6 +13,7 @@ PLACEMENT = re.compile(r"^% binder-placement (hero|detail1|detail2) ([a-z0-9]+(?
 UNRESOLVED_RIGHTS = {"unknown", "pending", "unresolved", "permission requested", "tbd", "not reviewed", "permission denied"}
 UNSAFE_TEX_PATH_CHARS = frozenset("#%{}\\\r\n")
 EXPECTED_BINDER_PAGES = 6
+MIN_EXTRACTED_PAGE_CHARACTERS = 20
 EXPECTED_MANIFEST = (
     ("sedum-loves-fire", "profile"),
     ("kalanchoe-desert", "profile"),
@@ -213,8 +214,12 @@ def _validate_page(page: object, label: str) -> None:
         raise RuntimeError(f"{label} page geometry is not US Letter")
     if (page.get("/Rotate") or 0) != 0:
         raise RuntimeError(f"{label} page rotation is not 0")
-    if not (page.extract_text() or "").strip():
-        raise RuntimeError(f"{label} page is blank or has no extractable text")
+    extracted = re.sub(r"\s+", "", page.extract_text() or "")
+    if len(extracted) < MIN_EXTRACTED_PAGE_CHARACTERS:
+        raise RuntimeError(
+            f"{label} page is blank or near-blank "
+            f"({len(extracted)} extractable non-whitespace characters)"
+        )
 
 
 def compile_manifest(path: Path, mode: str, output: Path) -> None:

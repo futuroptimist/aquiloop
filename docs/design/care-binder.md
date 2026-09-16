@@ -460,8 +460,10 @@ python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
 ```
 
 Combined assembly is intentionally draft-only until profiles have qualified
-photographs and final content. CI and the broader regression matrix remain
-future work.
+photographs and final content. The local Step 07a regression matrix covers
+manifest invariants, individual and combined pagination, extracted content,
+page geometry, assets and rights, the supplemental log, and deterministic
+output. CI integration remains a separate future gate.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -506,6 +508,13 @@ The validator must fail on:
   by policy;
 - blank/near-blank pages, content outside the safe/content boxes, clipped text,
   overfull boxes, or unintended overflow pages.
+
+For machine validation, “near-blank” means fewer than 20 extractable
+non-whitespace characters. The log requests 8-point TeX labels; LuaLaTeX may
+encode those labels as approximately 7.97 PDF points, so extraction tests use
+an explicit 7.9-point floor without lowering the physical 8-point design
+requirement. Log row baselines must remain at least 0.48 inches (34.56 points)
+apart.
 
 Image and content validation must additionally check:
 
@@ -564,8 +573,9 @@ Only that later physical check can justify calling the binder print-worthy.
   assembly are implemented; final page qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, broader regression coverage, CI workflow, and
-  generated PDF artifacts remain pending.
+- Actual specimen assets, CI workflow (Step 07b), rendered-page qualification,
+  physical print qualification, and generated release PDF artifacts remain
+  pending.
 
 ### Local verification outputs (Step 06a)
 

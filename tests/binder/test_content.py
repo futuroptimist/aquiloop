@@ -82,6 +82,12 @@ class ContentWorksheetTests(unittest.TestCase):
                         any("Watering interval is N/A" in claim["claim"] for claim in water_claims),
                         "aquarium-hornwort water card must preserve the N/A watering contract",
                     )
+                    serialized = json.dumps(content["cards"]).casefold()
+                    for terrestrial_instruction in (
+                        "water when the soil", "potting mix", "potting medium",
+                        "soil moisture", "soil / substrate",
+                    ):
+                        self.assertNotIn(terrestrial_instruction, serialized)
 
                 cited = set(content["identity"]["sources"])
                 for claims in content["cards"].values():

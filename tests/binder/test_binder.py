@@ -131,6 +131,20 @@ class AssemblyTests(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         build_binder.load_manifest(path)
 
+    def test_combined_build_cannot_recompute_count_after_entry_removal(self):
+        original = json.loads((ROOT / "binder" / "manifest.yaml").read_text())
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            path = root / "binder" / "manifest.yaml"
+            path.parent.mkdir()
+            original["entries"].pop()
+            path.write_text(json.dumps(original), encoding="utf-8")
+            output = root / "binder.pdf"
+            with mock.patch.object(build_binder, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "canonical six-entry"):
+                    build_binder.compile_manifest(path, "draft", output)
+            self.assertFalse(output.exists())
+
     def test_page_validation_rejects_shifted_crop_blank_and_rotation(self):
         class Box:
             def __init__(self, coordinates):
@@ -141,7 +155,7 @@ class AssemblyTests(unittest.TestCase):
             mediabox = Box((0, 0, 612, 792))
             cropbox = Box((0, 0, 612, 792))
 
-            def __init__(self, text="content", rotation=0, crop=None):
+            def __init__(self, text="enough extractable page content", rotation=0, crop=None):
                 self.text = text
                 self.rotation = rotation
                 if crop:
@@ -156,7 +170,8 @@ class AssemblyTests(unittest.TestCase):
         build_binder._validate_page(Page(), "valid")
         for page, message in (
             (Page(crop=(20, 20, 632, 812)), "geometry"),
-            (Page(text=" \n\t"), "blank"),
+            (Page(text=" \n\t"), "blank or near-blank"),
+            (Page(text="tiny"), "blank or near-blank"),
             (Page(rotation=90), "rotation"),
         ):
             with self.subTest(message=message), self.assertRaisesRegex(RuntimeError, message):
@@ -184,11 +199,16 @@ class AssemblyTests(unittest.TestCase):
             log_text = log_reader.pages[0].extract_text()
             for text in (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
-                "Hornwort", "Planning estimate only", "Rain/amount",
+                "Hornwort", "outdoor", "grow bag", "indoors", "aquarium",
+                "Planning estimate only", "Rain/amount", "Amount/method:",
+                "Observation:", "Date:", "Time:",
                 "Watering interval:", "N/A", "Aquarium maintenance", "not watering",
                 "Event:", "Amount/result:",
             ):
                 self.assertIn(text, log_text)
+            # Some Poppler/font combinations extract a synthetic space from
+            # the header's initial glyph; normalize whitespace for this label.
+            self.assertIn("Typicalinterval:", "".join(log_text.split()))
             labels = {"Date:", "Time:", "Amount/method:", "Observation:",
                       "Rain/amount:", "Event:", "Amount/result:"}
             sizes = []
@@ -228,6 +248,56 @@ class AssemblyTests(unittest.TestCase):
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
                 build_binder._validate_page(page, title)
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_all_profiles_build_independently_with_required_visible_contract(self):
+        from pypdf import PdfReader
+
+        expected = {
+            "sedum-loves-fire": "Sedum",
+            "kalanchoe-desert": "Kalanchoe",
+            "pothos": "Pothos",
+            "bird-of-paradise": "Bird of paradise",
+            "aquarium-hornwort": "Aquarium hornwort",
+        }
+        terrestrial_cards = (
+            "LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER",
+            "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION",
+            "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA",
+        )
+        aquatic_cards = (
+            "LIGHT", "WATER PARAMETERS / TEMPERATURE", "PLACEMENT / FLOATING",
+            "NUTRIENT CONTEXT", "GROWTH / TRIMMING", "PROPAGATION",
+            "COMPATIBILITY / TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA",
+        )
+        with tempfile.TemporaryDirectory() as name:
+            for slug, identity in expected.items():
+                with self.subTest(entry=slug):
+                    output = Path(name) / f"{slug}.pdf"
+                    build_binder.compile_entry(
+                        *build_binder.load_entry(slug, "draft"), output
+                    )
+                    reader = PdfReader(output)
+                    self.assertEqual(len(reader.pages), 1)
+                    page = reader.pages[0]
+                    text = page.extract_text()
+                    self.assertIn(identity, text)
+                    self.assertIn("EVIDENCE", text)
+                    self.assertIn("REVISION", text)
+                    self.assertIn("DRAFT PLACEHOLDER", text)
+                    for heading in aquatic_cards if slug == "aquarium-hornwort" else terrestrial_cards:
+                        self.assertIn(heading, text)
+                    build_binder._validate_page(page, slug)
+
+    def test_hornwort_page_uses_aquatic_not_terrestrial_instructions(self):
+        page = (ROOT / "binder/entries/aquarium-hornwort/page.tex").read_text()
+        for aquatic_heading in (
+            "WATER PARAMETERS / TEMPERATURE", "PLACEMENT / FLOATING",
+            "NUTRIENT CONTEXT", "COMPATIBILITY / TROUBLESHOOTING",
+        ):
+            self.assertIn(aquatic_heading, page)
+        self.assertNotIn("SOIL / SUBSTRATE", page)
+        self.assertNotRegex(page, r"(?i)water when|watering trigger|potting (?:mix|medium)")
 
 
 class PhotoPreparationTests(unittest.TestCase):
@@ -372,6 +442,8 @@ class ComprehensiveRegressionTests(unittest.TestCase):
             bad=json.loads(json.dumps(original)); bad["assets"][0]["alt"]=""; cases.append((bad,"nonempty"))
             bad=json.loads(json.dumps(original)); bad["assets"][0]["subjects"]="plant"; cases.append((bad,"subjects"))
             bad=json.loads(json.dumps(original)); bad["assets"][0]["id"]="bad id"; cases.append((bad,"malformed"))
+            bad=json.loads(json.dumps(original)); del bad["assets"][0]["caption"]; cases.append((bad,"missing required metadata"))
+            bad=json.loads(json.dumps(original)); del bad["assets"][0]["source"]["rights"]; cases.append((bad,"missing source metadata"))
             bad=json.loads(json.dumps(original)); bad["assets"][0]["path"]="../page.tex"; cases.append((bad,"within entry"))
             for candidate,message in cases:
                 (base / "assets.json").write_text(json.dumps(candidate),encoding="utf-8")
@@ -381,6 +453,22 @@ class ComprehensiveRegressionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"below"): build_binder.load_entry(base.name,"draft")
             Image.effect_noise((990,990),100).save(base/"assets/hero.jpg",quality=100)
             with self.assertRaisesRegex(ValueError,"1 MiB"): build_binder.load_entry(base.name,"draft")
+
+    def test_unsupported_format_and_detail_aspect_ratio_fail(self):
+        context, base = self.fixture(1)
+        with context:
+            data = json.loads((base / "assets.json").read_text(encoding="utf-8"))
+            Image.new("RGB", (990, 990)).save(base / "assets" / "hero.bmp")
+            data["assets"][0]["path"] = "assets/hero.bmp"
+            (base / "assets.json").write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "unsupported raster format"):
+                build_binder.load_entry(base.name, "final")
+
+            data["assets"][0]["path"] = "assets/hero.jpg"
+            Image.new("RGB", (700, 700)).save(base / "assets" / "detail1.jpg")
+            (base / "assets.json").write_text(json.dumps(data), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "aspect ratio"):
+                build_binder.load_entry(base.name, "final")
 
     def test_duplicate_and_malformed_placements_are_independent(self):
         for lines,message in [(["% binder-placement hero hero; ok","% binder-placement hero hero; twice"],"duplicate"),(["% binder-placement hero hero"],"malformed"),(["% binder-placement hero missing; ok"],"unknown asset")]:
