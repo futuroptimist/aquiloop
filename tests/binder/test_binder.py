@@ -19,6 +19,109 @@ import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
 
 
+def _log_row_cells(row_anchors, column_anchors, field_positions):
+    """Assign every extracted label to one non-overlapping rendered cell."""
+    rows = sorted(row_anchors, reverse=True)
+    boundaries = [(upper + lower) / 2 for upper, lower in zip(rows, rows[1:])]
+    cells = [[Counter() for _ in column_anchors] for _ in rows]
+    for label, x, y in field_positions:
+        column = min(range(len(column_anchors)), key=lambda index: abs(x - column_anchors[index]))
+        row = next((index for index, boundary in enumerate(boundaries) if y > boundary), len(rows) - 1)
+        cells[row][column][label] += 1
+    return cells
+
+
+def _assert_log_row_cells(row_anchors, column_anchors, field_positions, expected_fields):
+    cells = _log_row_cells(row_anchors, column_anchors, field_positions)
+    for row, row_cells in enumerate(cells):
+        for column, found in enumerate(row_cells):
+            expected = Counter(expected_fields[column])
+            if found != expected:
+                raise AssertionError(
+                    f"row {row + 1}, column {column + 1}: expected {expected}, found {found}"
+                )
+
+
+def _painted_pdf_geometry(page):
+    """Return painted image and stroked-path bounding boxes from a PDF page."""
+    resources = page["/Resources"]
+    xobjects = resources.get("/XObject", {})
+    ctm = (1, 0, 0, 1, 0, 0)
+    stack = []
+    path = []
+    images = []
+    strokes = []
+
+    def transform(point):
+        x, y = point
+        a, b, c, d, e, f = ctm
+        return (a * x + c * y + e, b * x + d * y + f)
+
+    def bounds(points):
+        xs, ys = zip(*points)
+        return (min(xs), min(ys), max(xs), max(ys))
+
+    for operands, operator in page.get_contents().operations:
+        if operator == b"q":
+            stack.append(ctm)
+        elif operator == b"Q":
+            ctm = stack.pop()
+        elif operator == b"cm":
+            values = [float(value) for value in operands]
+            a, b, c, d, e, f = values
+            ca, cb, cc, cd, ce, cf = ctm
+            ctm = (
+                ca * a + cc * b, cb * a + cd * b,
+                ca * c + cc * d, cb * c + cd * d,
+                ca * e + cc * f + ce, cb * e + cd * f + cf,
+            )
+        elif operator in (b"m", b"l"):
+            values = [float(value) for value in operands]
+            path.append(transform(values[:2]))
+        elif operator == b"re":
+            values = [float(value) for value in operands]
+            x, y, width, height = values
+            path.extend(transform(point) for point in (
+                (x, y), (x + width, y), (x + width, y + height), (x, y + height)
+            ))
+        elif operator in (b"c", b"v", b"y"):
+            values = [float(value) for value in operands]
+            path.extend(transform(values[index:index + 2]) for index in range(0, len(values), 2))
+        elif operator in (b"S", b"s", b"B", b"B*", b"b", b"b*"):
+            if path:
+                strokes.append(bounds(path))
+            path = []
+        elif operator in (b"n", b"f", b"f*"):
+            path = []
+        elif operator == b"Do":
+            name = operands[0]
+            xobject = xobjects.get(name)
+            if xobject is not None and xobject.get_object().get("/Subtype") == "/Image":
+                images.append(bounds([transform(point) for point in ((0, 0), (1, 0), (1, 1), (0, 1))]))
+    return images, strokes
+
+
+def _assert_optional_detail_rendering(page, detail_count):
+    images, strokes = _painted_pdf_geometry(page)
+    image_sizes = [(box[2] - box[0], box[3] - box[1]) for box in images]
+    if len(image_sizes) != 1 + detail_count:
+        raise AssertionError(f"expected {1 + detail_count} painted images, found {len(image_sizes)}")
+    if sum(width > 230 and height > 230 for width, height in image_sizes) != 1:
+        raise AssertionError("expected exactly one painted hero image")
+    painted_details = sum(
+        145 < width < 150 and 95 < height < 100 for width, height in image_sizes
+    )
+    detail_frames = sum(
+        146 < box[2] - box[0] < 150 and 96 < box[3] - box[1] < 100
+        for box in strokes
+    )
+    if painted_details != detail_count or detail_frames != detail_count:
+        raise AssertionError(
+            f"expected {detail_count} painted details/frames, "
+            f"found {painted_details}/{detail_frames}"
+        )
+
+
 class CatalogTests(unittest.TestCase):
     def test_draft_loads_and_has_no_empty_detail_placements(self):
         _, records, selected = build_binder.load_entry("sedum-loves-fire", "draft")
@@ -295,14 +398,7 @@ class AssemblyTests(unittest.TestCase):
                 {"Amount/method:", "Observation:"},
                 {"Event:", "Amount/result:", "Observation:"},
             )
-            for row_y in row_tops:
-                for column, column_x in enumerate(x_positions):
-                    found = {
-                        label for label, x, y in field_positions
-                        if round(x, 1) == column_x and abs(y - row_y) < 30
-                    }
-                    self.assertEqual(found, expected_fields[column],
-                                     f"missing fields near row {row_y}, column {column}")
+            _assert_log_row_cells(row_tops, x_positions, field_positions, expected_fields)
 
             manifest = ROOT / "binder" / "manifest.yaml"
             build_binder.compile_manifest(manifest, "draft", first)
@@ -320,6 +416,27 @@ class AssemblyTests(unittest.TestCase):
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
                 build_binder._validate_page(page, title)
+
+    def test_log_row_regions_reject_adjacent_field_borrowing(self):
+        rows = [100.0, 60.9, 21.8]
+        columns = [10.0, 20.0]
+        expected = ({"Date:"}, {"Observation:"})
+        positions = [
+            (label, x, y)
+            for y in rows
+            for label, x in (("Date:", columns[0]), ("Observation:", columns[1]))
+        ]
+        _assert_log_row_cells(rows, columns, positions, expected)
+
+        # Preserve the global count while moving row 2's aquarium observation
+        # into row 1. Non-overlapping ownership must expose both bad cells.
+        mutated = list(positions)
+        second = mutated.index(("Observation:", columns[1], rows[1]))
+        mutated[second] = ("Observation:", columns[1], rows[0])
+        self.assertEqual(Counter(label for label, _, _ in mutated),
+                         Counter(label for label, _, _ in positions))
+        with self.assertRaisesRegex(AssertionError, r"row [12], column 2"):
+            _assert_log_row_cells(rows, columns, mutated, expected)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_every_profile_builds_independently_with_complete_visible_content(self):
@@ -484,9 +601,19 @@ class ComprehensiveRegressionTests(unittest.TestCase):
                 text = reader.pages[0].extract_text()
                 self.assertIn("PROPAGATION", text); self.assertIn("SED-MSU", text)
                 self.assertEqual(set(loaded[2]), {"hero"} | {f"detail{i}" for i in range(1, count + 1)})
-                # One image XObject per selected photograph proves the optional
-                # detail frames were actually rendered (and no empty frames were).
-                self.assertEqual(len(reader.pages[0].images), 1 + count)
+                _assert_optional_detail_rendering(reader.pages[0], count)
+
+        # Resource counts and placement declarations cannot detect an empty
+        # vector frame. Inspect painted path geometry and reject one directly.
+        context, base = self.fixture(
+            0, page_suffix=r"\tikz[overlay]{\draw (0,0) rectangle (2.05in,1.35in);}"
+        )
+        with context:
+            output = base / "empty-frame.pdf"
+            build_binder.compile_entry(*build_binder.load_entry(base.name, "final"), output)
+            page = PdfReader(output).pages[0]
+            with self.assertRaisesRegex(AssertionError, "painted details/frames"):
+                _assert_optional_detail_rendering(page, 0)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_selected_detail_placeholders_are_visibly_labeled(self):
