@@ -82,6 +82,14 @@ class ContentWorksheetTests(unittest.TestCase):
                         any("Watering interval is N/A" in claim["claim"] for claim in water_claims),
                         "aquarium-hornwort water card must preserve the N/A watering contract",
                     )
+                    rendered = (ROOT / "binder" / "entries" / slug / "page.tex").read_text()
+                    for heading in (
+                        "WATER PARAMETERS / TEMPERATURE", "PLACEMENT / FLOATING",
+                        "NUTRIENT CONTEXT", "GROWTH / TRIMMING",
+                        "COMPATIBILITY / TROUBLESHOOTING",
+                    ):
+                        self.assertIn(heading, rendered)
+                    self.assertNotRegex(rendered, r"(?i)SOIL / SUBSTRATE|\\CareRow\{WATER\}")
 
                 cited = set(content["identity"]["sources"])
                 for claims in content["cards"].values():

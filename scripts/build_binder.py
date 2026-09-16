@@ -213,8 +213,12 @@ def _validate_page(page: object, label: str) -> None:
         raise RuntimeError(f"{label} page geometry is not US Letter")
     if (page.get("/Rotate") or 0) != 0:
         raise RuntimeError(f"{label} page rotation is not 0")
-    if not (page.extract_text() or "").strip():
-        raise RuntimeError(f"{label} page is blank or has no extractable text")
+    extracted = (page.extract_text() or "").strip()
+    # A stray page number or other fragment is not meaningful binder content.
+    # Keep this deliberately conservative: every legitimate page has a title,
+    # labels, and substantially more than this small extraction floor.
+    if len(extracted) < 20:
+        raise RuntimeError(f"{label} page is blank or near-blank")
 
 
 def compile_manifest(path: Path, mode: str, output: Path) -> None:

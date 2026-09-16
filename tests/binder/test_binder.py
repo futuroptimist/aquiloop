@@ -91,6 +91,27 @@ class CatalogTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "aspect ratio"):
                 build_binder.load_entry(base.name, "final")
 
+    def test_catalog_rejects_missing_files_metadata_schema_and_format(self):
+        real = ROOT / "binder" / "entries" / "sedum-loves-fire"
+        original = json.loads((real / "assets.json").read_text())
+        cases = []
+        bad = json.loads(json.dumps(original)); bad["schema_version"] = 2
+        cases.append((bad, "supported schema_version"))
+        bad = json.loads(json.dumps(original)); del bad["assets"][0]["caption"]
+        cases.append((bad, "missing required metadata"))
+        bad = json.loads(json.dumps(original)); bad["assets"][0]["source"].pop("provenance")
+        cases.append((bad, "missing source metadata"))
+        bad = json.loads(json.dumps(original)); bad["assets"][0]["path"] = "assets/missing.txt"
+        cases.append((bad, "resolve within entry"))
+        for candidate, message in cases:
+            with self.subTest(message=message), tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as name:
+                base = Path(name); (base / "assets").mkdir()
+                (base / "assets/draft-placeholder.txt").write_text("fixture")
+                (base / "assets.json").write_text(json.dumps(candidate))
+                (base / "page.tex").write_text("% binder-placement hero sedum-placeholder-001; fixture\n")
+                with self.assertRaisesRegex(ValueError, message):
+                    build_binder.load_entry(base.name, "draft")
+
 
 class AssemblyTests(unittest.TestCase):
     def test_manifest_is_the_ordered_single_page_assembly_authority(self):
@@ -131,7 +152,7 @@ class AssemblyTests(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         build_binder.load_manifest(path)
 
-    def test_page_validation_rejects_shifted_crop_blank_and_rotation(self):
+    def test_page_validation_rejects_shifted_crop_near_blank_and_rotation(self):
         class Box:
             def __init__(self, coordinates):
                 self.lower_left = coordinates[:2]
@@ -141,7 +162,7 @@ class AssemblyTests(unittest.TestCase):
             mediabox = Box((0, 0, 612, 792))
             cropbox = Box((0, 0, 612, 792))
 
-            def __init__(self, text="content", rotation=0, crop=None):
+            def __init__(self, text="meaningful binder page content", rotation=0, crop=None):
                 self.text = text
                 self.rotation = rotation
                 if crop:
@@ -156,7 +177,8 @@ class AssemblyTests(unittest.TestCase):
         build_binder._validate_page(Page(), "valid")
         for page, message in (
             (Page(crop=(20, 20, 632, 812)), "geometry"),
-            (Page(text=" \n\t"), "blank"),
+            (Page(text=" \n\t"), "near-blank"),
+            (Page(text="page 1"), "near-blank"),
             (Page(rotation=90), "rotation"),
         ):
             with self.subTest(message=message), self.assertRaisesRegex(RuntimeError, message):
@@ -168,6 +190,38 @@ class AssemblyTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "only in draft mode"):
                 build_binder.compile_supplemental("watering-log", "final", output)
             self.assertFalse(output.exists())
+
+    def test_combined_expected_count_is_not_derived_from_manifest_length(self):
+        self.assertEqual(build_binder.EXPECTED_BINDER_PAGES, 6)
+        self.assertEqual(len(build_binder.EXPECTED_MANIFEST), 6)
+        shortened = list(build_binder.EXPECTED_MANIFEST[:-1])
+        self.assertNotEqual(len(shortened), build_binder.EXPECTED_BINDER_PAGES)
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_all_profiles_build_independently_with_content_and_geometry(self):
+        from pypdf import PdfReader
+
+        required_cards = {
+            "sedum-loves-fire": ("LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+            "kalanchoe-desert": ("LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+            "pothos": ("LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+            "bird-of-paradise": ("LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+            "aquarium-hornwort": ("LIGHT", "WATER PARAMETERS / TEMPERATURE", "PLACEMENT / FLOATING", "NUTRIENT CONTEXT", "GROWTH / TRIMMING", "PROPAGATION", "COMPATIBILITY / TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+        }
+        with tempfile.TemporaryDirectory() as name:
+            for slug, cards in required_cards.items():
+                with self.subTest(entry=slug):
+                    output = Path(name) / f"{slug}.pdf"
+                    build_binder.compile_entry(*build_binder.load_entry(slug, "draft"), output)
+                    reader = PdfReader(output)
+                    self.assertEqual(len(reader.pages), 1)
+                    page = reader.pages[0]
+                    build_binder._validate_page(page, slug)
+                    text = page.extract_text()
+                    self.assertIn("EVIDENCE", text)
+                    self.assertIn("DRAFT PLACEHOLDER", text)
+                    for card in cards:
+                        self.assertIn(card, text)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_watering_log_and_manifest_build_with_required_text_and_order(self):
@@ -207,10 +261,18 @@ class AssemblyTests(unittest.TestCase):
             log_reader.pages[0].extract_text(visitor_text=inspect_text)
             self.assertTrue(sizes)
             self.assertGreaterEqual(min(sizes), 7.9)
+            # LuaLaTeX exposes requested 8 pt labels as about 7.97011 PDF
+            # points. 7.9 is an extraction tolerance, not a smaller print size.
             row_tops = sorted(set(round(position, 1) for position in date_positions), reverse=True)
             self.assertEqual(len(row_tops), 14)
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
             self.assertEqual(len(aquarium_observation_positions), 14)
+            for label, expected_count in (
+                ("Date:", 14), ("Time:", 14), ("Event:", 14),
+                ("Amount/result:", 14), ("Observation:", 70),
+                ("Amount/method:", 56), ("Rain/amount:", 28),
+            ):
+                self.assertEqual(log_text.count(label), expected_count, label)
 
             manifest = ROOT / "binder" / "manifest.yaml"
             build_binder.compile_manifest(manifest, "draft", first)
@@ -381,6 +443,19 @@ class ComprehensiveRegressionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"below"): build_binder.load_entry(base.name,"draft")
             Image.effect_noise((990,990),100).save(base/"assets/hero.jpg",quality=100)
             with self.assertRaisesRegex(ValueError,"1 MiB"): build_binder.load_entry(base.name,"draft")
+
+    def test_selected_raster_rejects_unsupported_format(self):
+        context, base = self.fixture()
+        with context:
+            data = json.loads((base / "assets.json").read_text())
+            image = base / data["assets"][0]["path"]
+            unsupported = image.with_suffix(".bmp")
+            Image.open(image).save(unsupported, format="BMP")
+            image.unlink()
+            data["assets"][0]["path"] = "assets/hero.bmp"
+            (base / "assets.json").write_text(json.dumps(data))
+            with self.assertRaisesRegex(ValueError, "unsupported raster format"):
+                build_binder.load_entry(base.name, "draft")
 
     def test_duplicate_and_malformed_placements_are_independent(self):
         for lines,message in [(["% binder-placement hero hero; ok","% binder-placement hero hero; twice"],"duplicate"),(["% binder-placement hero hero"],"malformed"),(["% binder-placement hero missing; ok"],"unknown asset")]:
