@@ -193,6 +193,7 @@ class AssemblyTests(unittest.TestCase):
                       "Rain/amount:", "Event:", "Amount/result:"}
             sizes = []
             date_positions = []
+            aquarium_observation_positions = []
 
             def inspect_text(text, _cm, tm, _font, font_size):
                 stripped = text.strip()
@@ -200,6 +201,8 @@ class AssemblyTests(unittest.TestCase):
                     sizes.append(font_size)
                 if "Date:" in stripped:
                     date_positions.append(tm[5])
+                if "Observation:" in stripped and tm[4] > 430:
+                    aquarium_observation_positions.append(tm[5])
 
             log_reader.pages[0].extract_text(visitor_text=inspect_text)
             self.assertTrue(sizes)
@@ -207,6 +210,7 @@ class AssemblyTests(unittest.TestCase):
             row_tops = sorted(set(round(position, 1) for position in date_positions), reverse=True)
             self.assertEqual(len(row_tops), 14)
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
+            self.assertEqual(len(aquarium_observation_positions), 14)
 
             manifest = ROOT / "binder" / "manifest.yaml"
             build_binder.compile_manifest(manifest, "draft", first)
