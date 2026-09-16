@@ -340,10 +340,25 @@ class AssemblyTests(unittest.TestCase):
             "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-USDA", "HOR-FWS", "HOR-WA", "HOR-TROP")),
         }
 
+        def assert_extracted_phrase(phrase, text):
+            # PDF extraction preserves discretionary line-break hyphens and
+            # whitespace. Normalize those artifacts without weakening the
+            # profile-specific prose evidence being checked.
+            normalized = re.sub(r"-\s+", "", text)
+            normalized = re.sub(r"\s+", " ", normalized)
+            self.assertIn(phrase, normalized)
+
         def assert_profile_evidence(slug, text):
             guidance, source_keys = propagation_evidence[slug]
             for marker in (*headings[slug], *guidance, *source_keys, "EVIDENCE", "REVISION"):
-                self.assertIn(marker, text)
+                assert_extracted_phrase(marker, text)
+
+        # Pin the two observed extractor wraps and ensure normalization does
+        # not allow genuinely absent guidance to satisfy the assertion.
+        assert_extracted_phrase("After establishment", "After estab-\nlishment")
+        assert_extracted_phrase("below the surface", "below the sur-\nface")
+        with self.assertRaises(AssertionError):
+            assert_extracted_phrase("After establishment", "PROPAGATION [POT-NCSU]")
 
         with tempfile.TemporaryDirectory() as name:
             for slug, required in headings.items():
@@ -497,7 +512,7 @@ class ComprehensiveRegressionTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_overfull_box_is_rejected_independently(self):
-        context, base = self.fixture(page_suffix=r"\par\hbox{" + ("W" * 1000) + "}")
+        context, base = self.fixture(page_suffix=r"\par\noindent\hbox to 1pt{WWWWW}\par")
         with context, self.assertRaisesRegex(RuntimeError, "overfull"):
             build_binder.compile_entry(*build_binder.load_entry(base.name, "final"), base / "bad.pdf")
 
