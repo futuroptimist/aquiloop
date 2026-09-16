@@ -12,6 +12,25 @@ from PIL import Image
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+PROFILE_EXPECTATIONS = {
+    "sedum-loves-fire": ("Sedum", "SED-POWO"),
+    "kalanchoe-desert": ("Kalanchoe", "KAL-RHS"),
+    "pothos": ("Pothos", "POT-NCSU"),
+    "bird-of-paradise": ("Bird of paradise", "BOP-REG"),
+    "aquarium-hornwort": ("Aquarium hornwort", "HOR-USDA"),
+}
+PROFILE_CARDS = {
+    "LIGHT", "SOIL", "WATER", "TEMPERATURE", "FEEDING", "PROPAGATION",
+    "TROUBLESHOOTING", "NATURAL HISTORY",
+}
+AQUATIC_CARDS = {
+    "LIGHT", "WATER PARAMETERS", "PLACEMENT", "NUTRIENT CONTEXT", "GROWTH",
+    "PROPAGATION", "COMPATIBILITY", "NATURAL HISTORY",
+}
+# LuaLaTeX's 8 pt request is exposed by pypdf as 7.97011 PDF points. Keep the
+# extraction tolerance explicit without lowering the physical 8 pt contract.
+LOG_LABEL_MIN_EXTRACTED_POINTS = 7.9
+LOG_ROW_MIN_POINTS = 0.48 * 72
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
@@ -131,6 +150,20 @@ class AssemblyTests(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         build_binder.load_manifest(path)
 
+    def test_expected_page_count_is_canonical_not_derived_from_manifest_length(self):
+        self.assertEqual(build_binder.EXPECTED_BINDER_PAGES, 6)
+        self.assertEqual(len(build_binder.EXPECTED_MANIFEST), 6)
+        original = json.loads((ROOT / "binder" / "manifest.yaml").read_text())
+        original["entries"].pop()
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            path = root / "binder" / "manifest.yaml"
+            path.parent.mkdir()
+            path.write_text(json.dumps(original))
+            with mock.patch.object(build_binder, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "canonical six-entry"):
+                    build_binder.compile_manifest(path, "draft", root / "short.pdf")
+
     def test_page_validation_rejects_shifted_crop_blank_and_rotation(self):
         class Box:
             def __init__(self, coordinates):
@@ -141,7 +174,7 @@ class AssemblyTests(unittest.TestCase):
             mediabox = Box((0, 0, 612, 792))
             cropbox = Box((0, 0, 612, 792))
 
-            def __init__(self, text="content", rotation=0, crop=None):
+            def __init__(self, text="enough meaningful page content", rotation=0, crop=None):
                 self.text = text
                 self.rotation = rotation
                 if crop:
@@ -157,6 +190,7 @@ class AssemblyTests(unittest.TestCase):
         for page, message in (
             (Page(crop=(20, 20, 632, 812)), "geometry"),
             (Page(text=" \n\t"), "blank"),
+            (Page(text="title only"), "near-blank"),
             (Page(rotation=90), "rotation"),
         ):
             with self.subTest(message=message), self.assertRaisesRegex(RuntimeError, message):
@@ -206,11 +240,21 @@ class AssemblyTests(unittest.TestCase):
 
             log_reader.pages[0].extract_text(visitor_text=inspect_text)
             self.assertTrue(sizes)
-            self.assertGreaterEqual(min(sizes), 7.9)
+            self.assertGreaterEqual(min(sizes), LOG_LABEL_MIN_EXTRACTED_POINTS)
             row_tops = sorted(set(round(position, 1) for position in date_positions), reverse=True)
             self.assertEqual(len(row_tops), 14)
-            self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
+            self.assertGreaterEqual(
+                min(a - b for a, b in zip(row_tops, row_tops[1:])),
+                LOG_ROW_MIN_POINTS,
+            )
             self.assertEqual(len(aquarium_observation_positions), 14)
+            for label, expected_count in {
+                "Date:": 14, "Time:": 14, "Amount/method:": 56,
+                "Rain/amount:": 28, "Event:": 14, "Amount/result:": 14,
+                "Observation:": 70,
+            }.items():
+                self.assertEqual(log_text.count(label), expected_count, label)
+            build_binder._validate_page(log_reader.pages[0], "watering-log")
 
             manifest = ROOT / "binder" / "manifest.yaml"
             build_binder.compile_manifest(manifest, "draft", first)
@@ -228,6 +272,45 @@ class AssemblyTests(unittest.TestCase):
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
                 build_binder._validate_page(page, title)
+
+
+class ProfileRenderingTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_every_profile_independently_enforces_content_and_geometry(self):
+        from pypdf import PdfReader
+
+        with tempfile.TemporaryDirectory() as name:
+            for slug, (identity, evidence_key) in PROFILE_EXPECTATIONS.items():
+                with self.subTest(entry=slug):
+                    output = Path(name) / f"{slug}.pdf"
+                    build_binder.compile_entry(
+                        *build_binder.load_entry(slug, "draft"), output
+                    )
+                    reader = PdfReader(output)
+                    self.assertEqual(len(reader.pages), 1)
+                    page = reader.pages[0]
+                    build_binder._validate_page(page, slug)
+                    text = page.extract_text()
+                    self.assertIn(identity, text)
+                    self.assertIn("EVIDENCE", text)
+                    self.assertIn(evidence_key, text)
+                    expected_cards = (
+                        AQUATIC_CARDS if slug == "aquarium-hornwort" else PROFILE_CARDS
+                    )
+                    for card in expected_cards:
+                        self.assertIn(card, text, f"{slug} omitted {card}")
+                    self.assertIn("PROPAGATION", text)
+                    self.assertIn("DRAFT PLACEHOLDER", text)
+
+    def test_hornwort_uses_aquatic_headings_not_terrestrial_instructions(self):
+        page = (ROOT / "binder/entries/aquarium-hornwort/page.tex").read_text()
+        for heading in (
+            "WATER PARAMETERS / TEMPERATURE", "PLACEMENT / FLOATING",
+            "NUTRIENT CONTEXT", "GROWTH / TRIMMING", "COMPATIBILITY / TROUBLESHOOTING",
+        ):
+            self.assertIn(f"{{{heading}}}", page)
+        for forbidden in ("SOIL / SUBSTRATE", "water thoroughly", "medium dries"):
+            self.assertNotIn(forbidden, page)
 
 
 class PhotoPreparationTests(unittest.TestCase):
@@ -377,6 +460,12 @@ class ComprehensiveRegressionTests(unittest.TestCase):
                 (base / "assets.json").write_text(json.dumps(candidate),encoding="utf-8")
                 with self.assertRaisesRegex(ValueError,message): build_binder.load_entry(base.name,"draft")
             (base / "assets.json").write_text(json.dumps(original),encoding="utf-8")
+            (base / "assets/hero.jpg").unlink()
+            with self.assertRaisesRegex(ValueError, "within entry"):
+                build_binder.load_entry(base.name, "draft")
+            Image.new("RGB", (990, 990)).save(base / "assets/hero.jpg", format="GIF")
+            with self.assertRaisesRegex(ValueError, "unsupported raster format"):
+                build_binder.load_entry(base.name, "draft")
             Image.new("RGB",(20,20)).save(base/"assets/hero.jpg")
             with self.assertRaisesRegex(ValueError,"below"): build_binder.load_entry(base.name,"draft")
             Image.effect_noise((990,990),100).save(base/"assets/hero.jpg",quality=100)
