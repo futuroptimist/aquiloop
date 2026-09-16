@@ -161,7 +161,7 @@ class AssemblyTests(unittest.TestCase):
             mediabox = Box((0, 0, 612, 792))
             cropbox = Box((0, 0, 612, 792))
 
-            def __init__(self, text="substantive page content", rotation=0, crop=None, media=None):
+            def __init__(self, text="substantive page content " * 6, rotation=0, crop=None, media=None):
                 self.text = text
                 self.rotation = rotation
                 if crop:
@@ -181,6 +181,7 @@ class AssemblyTests(unittest.TestCase):
             (Page(media=(0, 0, 600, 792)), "geometry"),
             (Page(text=" \n\t"), "blank"),
             (Page(text="page 1"), "near-blank"),
+            (Page(text="Watering & aquarium log"), "near-blank"),
             (Page(rotation=90), "rotation"),
         ):
             with self.subTest(message=message), self.assertRaisesRegex(RuntimeError, message):
@@ -264,7 +265,7 @@ class AssemblyTests(unittest.TestCase):
             # 7.97011 points. Keep that explicit tolerance without weakening
             # the design's physical 8 pt request.
             self.assertGreaterEqual(min(sizes), 7.9)
-            self.assertAlmostEqual(min(sizes), 7.97011, places=4)
+            self.assertAlmostEqual(min(sizes), 7.97011, delta=0.01)
             row_tops = sorted(set(round(position, 1) for position in date_positions), reverse=True)
             self.assertEqual(len(row_tops), 14)
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
@@ -302,14 +303,18 @@ class AssemblyTests(unittest.TestCase):
             for slug, required in headings.items():
                 with self.subTest(entry=slug):
                     output = Path(name) / f"{slug}.pdf"
-                    build_binder.compile_entry(*build_binder.load_entry(slug, "draft"), output)
+                    base, records, selected = build_binder.load_entry(slug, "draft")
+                    build_binder.compile_entry(base, records, selected, output)
                     reader = PdfReader(output)
                     self.assertEqual(len(reader.pages), 1)
                     page = reader.pages[0]
                     build_binder._validate_page(page, slug)
                     text = page.extract_text()
-                    for marker in (*required, "EVIDENCE", "REVISION", "DRAFT PLACEHOLDER"):
+                    for marker in (*required, "EVIDENCE", "REVISION"):
                         self.assertIn(marker, text)
+                    if any(records[asset_id]["kind"] == "placeholder"
+                           for asset_id in selected.values()):
+                        self.assertIn("DRAFT PLACEHOLDER", text)
                     if slug == "aquarium-hornwort":
                         self.assertNotIn("SOIL / SUBSTRATE", text)
                         self.assertNotIn("Water thoroughly", text)

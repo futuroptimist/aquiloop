@@ -504,12 +504,15 @@ The validator must fail on:
 - unresolved asset/font references, missing required content keys or source
   metadata, placeholder imagery in a release build, or build warnings promoted
   by policy;
-- blank/near-blank pages, content outside the safe/content boxes, clipped text,
-  overfull boxes, or unintended overflow pages.
+- blank/near-blank pages (fewer than 100 non-whitespace extracted characters,
+  so a surviving title or placeholder alone does not pass), content outside the
+  safe/content boxes, clipped text, overfull boxes, or unintended overflow
+  pages.
 
 The watering-log regression requests 8-point TeX labels and accepts the
 approximately 7.97011-point size exposed by LuaLaTeX PDF text extraction (with
-a 7.9-point lower comparison tolerance for conversion noise). This extraction
+a ±0.01-point comparison tolerance and a 7.9-point floor for conversion
+noise). This extraction
 tolerance does not lower the physical 8-point design contract. Automated page
 geometry and text checks complement, but do not replace, the later physical
 print and handwriting qualification.

@@ -84,9 +84,14 @@ class ContentWorksheetTests(unittest.TestCase):
                     )
                     self.assertNotIn("soil_substrate", content["cards"])
                     self.assertNotIn("water", content["cards"])
-                    aquatic_text = " ".join(
-                        claim["claim"] for claims in content["cards"].values() for claim in claims
-                    ).casefold()
+                    guidance = [content["environmental_variability"]]
+                    for claims in content["cards"].values():
+                        for claim in claims:
+                            guidance.extend(
+                                value for key, value in claim.items()
+                                if key != "sources" and isinstance(value, str)
+                            )
+                    aquatic_text = " ".join(guidance).casefold()
                     self.assertNotIn("water thoroughly", aquatic_text)
                     self.assertNotIn("potting soil", aquatic_text)
 

@@ -13,6 +13,9 @@ PLACEMENT = re.compile(r"^% binder-placement (hero|detail1|detail2) ([a-z0-9]+(?
 UNRESOLVED_RIGHTS = {"unknown", "pending", "unresolved", "permission requested", "tbd", "not reviewed", "permission denied"}
 UNSAFE_TEX_PATH_CHARS = frozenset("#%{}\\\r\n")
 EXPECTED_BINDER_PAGES = 6
+# A title or placeholder can easily contribute a few dozen extracted characters;
+# require enough text to demonstrate that the page's substantive body survived.
+MIN_EXTRACTED_PAGE_CHARACTERS = 100
 EXPECTED_MANIFEST = (
     ("sedum-loves-fire", "profile"),
     ("kalanchoe-desert", "profile"),
@@ -214,7 +217,7 @@ def _validate_page(page: object, label: str) -> None:
     if (page.get("/Rotate") or 0) != 0:
         raise RuntimeError(f"{label} page rotation is not 0")
     extracted = "".join((page.extract_text() or "").split())
-    if len(extracted) < 20:
+    if len(extracted) < MIN_EXTRACTED_PAGE_CHARACTERS:
         raise RuntimeError(f"{label} page is blank or near-blank")
 
 
