@@ -32,6 +32,35 @@
         "feeding_maintenance",
         "troubleshooting"
       ]
+    },
+    {
+      "key": "POT-WISC",
+      "authority": "University of Wisconsin–Madison Extension",
+      "title": "Pothos, Epipremmum aureum",
+      "url": "https://hort.extension.wisc.edu/articles/pothos-epipremmum-aureum/",
+      "accessed": "2026-09-17",
+      "supports": [
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
+        "natural_history_trivia"
+      ],
+      "applicability": "Species guide supporting aerated medium, surface-dry watering cue, feeding only during active growth, pruning, node-based vegetative growth, drafts, and ingestion/skin cautions. It does not provide a substrate ratio."
+    },
+    {
+      "key": "POT-NCSU-PROP",
+      "authority": "North Carolina State University Extension",
+      "title": "Extension Gardener Handbook: 13. Propagation",
+      "url": "https://content.ces.ncsu.edu/extension-gardener-handbook/13-propagation",
+      "accessed": "2026-09-17",
+      "supports": [
+        "propagation"
+      ],
+      "applicability": "General propagation chapter expressly listing devil’s ivy for single-node/leaf-bud cuttings; supports a node with axillary bud, bud-up placement in medium, and exposed leaf. Water rooting and foliage-above-water wording is paired with the species source."
     }
   ]
 }

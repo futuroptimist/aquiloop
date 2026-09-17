@@ -119,6 +119,35 @@ class ContentWorksheetTests(unittest.TestCase):
                     f"{sorted(unexplained)}",
                 )
 
+    def test_corrected_kalanchoe_hardiness_and_pothos_care_meanings(self):
+        kalanchoe = self.load("kalanchoe-desert", "content.yaml")
+        temperature = kalanchoe["cards"]["temperature_season"][0]["claim"]
+        self.assertIn("absolute-minimum winter band", temperature)
+        self.assertIn("not a summer growing range", temperature)
+        self.assertIn("sunny and sheltered", temperature)
+
+        pothos = self.load("pothos", "content.yaml")
+        propagation = pothos["cards"]["propagation"][0]
+        combined = " ".join(propagation[field] for field in
+                            ("claim", *sorted(PROPAGATION_FIELDS))).casefold()
+        for phrase in ("node", "bud", "not a detached leaf alone",
+                       "foliage above water"):
+            self.assertIn(phrase, combined)
+        water = pothos["cards"]["water"][0]["claim"].casefold()
+        for phrase in ("surface is dry", "thoroughly", "excess drain"):
+            self.assertIn(phrase, water)
+        feeding = pothos["cards"]["feeding_maintenance"][0]["claim"].casefold()
+        self.assertIn("when growth slows", feeding)
+        self.assertNotIn("winter dormancy", feeding)
+
+    def test_each_profile_prints_an_interpretable_source_legend(self):
+        for slug in ENTRIES:
+            with self.subTest(entry=slug):
+                page = (ROOT / "binder" / "entries" / slug / "page.tex").read_text()
+                self.assertIn(r"\textbf{EVIDENCE / SOURCES}", page)
+                printable = page.replace(r"}\allowbreak\texttt{", "")
+                self.assertIn(f"binder/entries/{slug}/sources.yaml", printable)
+
     def test_propagation_contract_rejects_an_empty_required_field(self):
         content = self.load("pothos", "content.yaml")
         content["cards"]["propagation"][0]["pitfall"] = ""

@@ -44,6 +44,39 @@
         "propagation"
       ],
       "applicability": "General succulent propagation article; it expressly includes Kalanchoe among genera suited to its stem-cutting method. RHS, rather than this general article, establishes stem cuttings for the candidate cultivar."
+    },
+    {
+      "key": "KAL-HARD",
+      "authority": "Royal Horticultural Society",
+      "title": "RHS hardiness rating",
+      "url": "https://www.rhs.org.uk/advice/rhs-hardiness-rating",
+      "accessed": "2026-09-17",
+      "supports": [
+        "temperature_season"
+      ],
+      "applicability": "Defines H1b as an absolute-minimum winter-temperature hardiness band and recommends sunny, sheltered summer outdoor placement; the band is not a summer growing-temperature recommendation."
+    },
+    {
+      "key": "KAL-NCSU",
+      "authority": "North Carolina State University Extension",
+      "title": "Kalanchoe",
+      "url": "https://plants.ces.ncsu.edu/plants/kalanchoe/",
+      "accessed": "2026-09-17",
+      "supports": [
+        "troubleshooting"
+      ],
+      "applicability": "Genus-level safety guidance: toxic to humans and pets if ingested; keep away from children and pets and use gloves to reduce contact-dermatitis risk."
+    },
+    {
+      "key": "KAL-MSU",
+      "authority": "Montana State University Extension",
+      "title": "Growing Succulents",
+      "url": "https://extension-store.montana.edu/montguides/growing-succulents",
+      "accessed": "2026-09-17",
+      "supports": [
+        "temperature_season"
+      ],
+      "applicability": "General succulent guidance supporting gradual acclimation when moving a Kalanchoe example into stronger outdoor light; RHS supplies the candidate cultivar’s H1b and sunny, sheltered placement."
     }
   ]
 }
