@@ -24,10 +24,63 @@ class BinderWorkflowTests(unittest.TestCase):
         self.assertIn("branches: [main]", self.workflow)
         self.assertRegex(self.workflow, r"(?m)^  workflow_dispatch: \{\}$")
         self.assertRegex(self.workflow, r"(?m)^permissions:\n  contents: read$")
-        actions = re.findall(r"(?m)^\s*uses: (\S+)", self.workflow)
-        self.assertEqual(len(actions), 3)
+        self._assert_immutable_actions(self.workflow)
+
+    def _assert_immutable_actions(self, workflow: str):
+        actions = re.findall(r"(?m)^\s*(?:-\s*)?uses:\s+(\S+)", workflow)
+        action_names = {action.rsplit("@", 1)[0] for action in actions}
+        for required_action in (
+            "actions/checkout",
+            "actions/setup-python",
+            "actions/upload-artifact",
+        ):
+            self.assertIn(required_action, action_names)
         for action in actions:
             self.assertRegex(action, r"^[^@]+@[0-9a-f]{40}$")
+
+    def test_immutable_action_checker_variants(self):
+        pinned = "example/action@0123456789abcdef0123456789abcdef01234567"
+        extra_steps = f"\n      - uses: {pinned}\n      - name: Extra action\n        uses: {pinned}\n"
+        self._assert_immutable_actions(self.workflow + extra_steps)
+
+        invalid_references = (
+            "example/action@v4",
+            "example/action@0123456",
+            "example/action@not-a-commit",
+        )
+        step_forms = (
+            "\n      - uses: {}\n",
+            "\n      - name: Extra action\n        uses: {}\n",
+        )
+        for reference in invalid_references:
+            for step_form in step_forms:
+                with self.subTest(reference=reference, step_form=step_form):
+                    with self.assertRaises(AssertionError):
+                        self._assert_immutable_actions(
+                            self.workflow + step_form.format(reference)
+                        )
+
+        for required_action in (
+            "actions/checkout",
+            "actions/setup-python",
+            "actions/upload-artifact",
+        ):
+            with self.subTest(missing=required_action):
+                without_required = re.sub(
+                    rf"(?m)^\s*uses: {re.escape(required_action)}@\S+.*$",
+                    "",
+                    self.workflow,
+                )
+                with self.assertRaises(AssertionError):
+                    self._assert_immutable_actions(without_required)
+
+        checkout_uses_first = re.sub(
+            r"(?m)^\s*- name: Check out repository\n\s*uses: (actions/checkout@\S+).*$",
+            r"      - uses: \1",
+            self.workflow,
+        )
+        self.assertNotEqual(checkout_uses_first, self.workflow)
+        self._assert_immutable_actions(checkout_uses_first)
 
     def test_pinned_tools_draft_build_and_single_artifact(self):
         for expected in (
