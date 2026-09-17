@@ -1,0 +1,3 @@
+# Binder-only Python toolchain; keep synchronized with docs/design/care-binder.md.
+Pillow==12.3.0
+pypdf==6.18.1
