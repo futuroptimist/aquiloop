@@ -434,8 +434,10 @@ Pagella and Heros fonts; compilation performs no downloads. The tested
 environment was Python 3.12.13, TeX Live 2023 / LuaHBTeX 1.17.0, Pillow 12.3.0,
 pypdf 6.18.1, and Poppler 24.02.0. The binder-only Python pins live in
 `requirements-binder.txt`; the distribution-provided TeX, font, and Poppler
-package revisions are pinned on the versioned `ubuntu-24.04` runner, and their
-actual tool versions are printed and checked for availability on every run.
+packages come from the current Ubuntu repositories on the versioned
+`ubuntu-24.04` runner. Their installed package revisions and actual tool versions
+are printed on every run, avoiding brittle requests for revisions that Ubuntu's
+moving repositories may no longer publish while retaining an auditable build log.
 Required commands/packages are `lualatex`,
 `pdfinfo`, `pdftoppm`, Pillow, and pypdf. Build the proof with:
 

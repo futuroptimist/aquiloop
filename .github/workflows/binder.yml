@@ -48,12 +48,12 @@ jobs:
           set -euo pipefail
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y \
-            fonts-texgyre=20180621-6 \
-            poppler-utils=24.02.0-1ubuntu9.9 \
-            texlive-fonts-recommended=2023.20240207-1 \
-            texlive-latex-base=2023.20240207-1 \
-            texlive-luatex=2023.20240207-1 \
-            texlive-pictures=2023.20240207-1
+            fonts-texgyre \
+            poppler-utils \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-luatex \
+            texlive-pictures
           command -v lualatex
           command -v pdfinfo
           command -v pdftoppm
@@ -75,6 +75,9 @@ jobs:
           lualatex --version | head -n 1
           pdfinfo -v 2>&1 | head -n 1
           pdftoppm -v 2>&1 | head -n 1
+          dpkg-query -W -f='${Package}=${Version}\n' \
+            fonts-texgyre poppler-utils texlive-fonts-recommended \
+            texlive-latex-base texlive-luatex texlive-pictures
 
       - name: Compile-check binder Python
         run: python -m compileall -q scripts/build_binder.py scripts/prepare_binder_photo.py tests/binder

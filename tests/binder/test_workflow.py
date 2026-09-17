@@ -34,6 +34,7 @@ class BinderWorkflowTests(unittest.TestCase):
             "lualatex --version",
             "pdfinfo -v",
             "pdftoppm -v",
+            "dpkg-query -W",
             "python -m unittest discover -s tests/binder -v",
             "--manifest binder/manifest.yaml --mode draft",
             "pdfinfo -box build/binder/aquiloop-binder-draft.pdf",
@@ -43,6 +44,10 @@ class BinderWorkflowTests(unittest.TestCase):
             self.assertIn(expected, self.workflow)
         self.assertEqual(self.workflow.count("actions/upload-artifact@"), 1)
         self.assertEqual(self.workflow.count("path: build/binder/aquiloop-binder-draft.pdf"), 1)
+        self.assertNotRegex(
+            self.workflow,
+            r"(?m)^\s+(?:fonts-texgyre|poppler-utils|texlive-[a-z-]+)=\S+",
+        )
 
 
 if __name__ == "__main__":
