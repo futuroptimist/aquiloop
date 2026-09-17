@@ -16,7 +16,7 @@
       "POT-NCSU"
     ]
   },
-  "environmental_variability": "Indoor light, temperature, container, and dry-down vary. Use plant and medium observations rather than a calendar.",
+  "environmental_variability": "Example guidance for Epipremnum aureum; confirm the specimen and cultivar later. Let light, active growth, and medium dry-down—not the calendar—govern adjustments.",
   "unresolved_fields": [
     "species and cultivar",
     "window exposure and distance",
@@ -35,53 +35,59 @@
     ],
     "soil_substrate": [
       {
-        "claim": "Use a loose, well-drained houseplant medium in a container with drainage; do not infer the current medium from appearance.",
+        "claim": "Use a well-aerated, well-drained houseplant medium in a container with open drainage holes. These sources do not prescribe an ingredient recipe, so choose a labeled airy houseplant mix rather than inventing one.",
         "sources": [
+          "POT-WISC",
           "POT-NCSU"
         ]
       }
     ],
     "water": [
       {
-        "claim": "Penn State recommends watering when the soil is dry and warns that excess water can cause root rot while too little can cause temporary drooping. Check root-zone moisture rather than watering by calendar.",
+        "claim": "When the soil surface is dry, water the root ball thoroughly and let excess drain; empty any saucer. Recheck moisture rather than using a calendar, because persistently wet medium promotes root rot.",
         "sources": [
-          "POT-PSU"
+          "POT-WISC",
+          "POT-NCSU"
         ]
       }
     ],
     "temperature_season": [
       {
-        "claim": "NCSU describes winter dormancy for pothos and excludes that period from its feeding schedule. Observe growth and medium dry-down rather than inferring a temperature limit or seasonal watering interval.",
+        "claim": "Keep away from drafts. Growth can slow under lower-light or cooler conditions; respond to active growth and slower dry-down rather than declaring calendar winter an unconditional dormancy.",
         "sources": [
-          "POT-NCSU"
+          "POT-WISC"
         ]
       }
     ],
     "feeding_maintenance": [
       {
-        "claim": "NCSU advises periodic fertilizer outside winter dormancy, wiping dusty leaves, and pruning stems to maintain a bushy habit. Adjust only after observing this specimen’s growth and medium.",
+        "claim": "Feed periodically while actively growing; reduce or pause feeding when growth slows. Wipe dusty leaves and prune long stems to encourage a fuller habit.",
         "sources": [
+          "POT-WISC",
           "POT-NCSU"
         ]
       }
     ],
     "propagation": [
       {
-        "claim": "Take a stem cutting from a vine and root it in water. Avoid keeping the resulting plant in over-wet potting medium, which can cause root rot.",
-        "method": "stem cutting",
-        "starting_material": "a vine stem cutting",
-        "establishment_condition": "place the cutting in water until it roots",
-        "pitfall": "over-wet potting medium after establishment can cause root rot",
+        "claim": "Take a stem section with a node, leaf, and axillary bud—not a detached leaf alone. Put the node in moist medium, bud upward and covered, while the leaf stays exposed; or submerge the node in water while keeping foliage above water.",
+        "method": "single-node stem cutting in medium or water",
+        "starting_material": "a stem section containing a node, leaf, and axillary bud; not a detached leaf alone",
+        "establishment_condition": "place the rooting node in moist medium with the bud upward and leaf exposed, or under water with foliage above water",
+        "pitfall": "a detached leaf without a node and bud cannot make the instructed single-node cutting; submerged foliage can decay",
         "sources": [
-          "POT-NCSU"
+          "POT-NCSU-PROP",
+          "POT-WISC"
         ]
       }
     ],
     "troubleshooting": [
       {
-        "claim": "Penn State links excess water with root rot, too little water with temporary drooping, and direct sun with yellowing. Inspect moisture and exposure before diagnosing; other causes remain possible.",
+        "claim": "Root rot suggests excess water; droop can reflect too little water; direct sun can scorch or yellow leaves. Chewing is toxic to pets and people, and sap may irritate skin; keep out of reach.",
         "sources": [
-          "POT-PSU"
+          "POT-PSU",
+          "POT-WISC",
+          "POT-NCSU"
         ]
       }
     ],

@@ -16,7 +16,7 @@
       "KAL-RHS"
     ]
   },
-  "environmental_variability": "General Kalanchoe and succulent guidance; outdoor exposure, rain, potting medium, and temperature require specimen-specific adjustment.",
+  "environmental_variability": "Example guidance for Kalanchoe humilis ‘Desert Surprise’; confirm a specimen match later. Adjust outdoor exposure, rain, medium, and watering to observed conditions.",
   "unresolved_fields": [
     "label and specimen match",
     "grow-bag drainage and medium",
@@ -36,7 +36,7 @@
     ],
     "soil_substrate": [
       {
-        "claim": "For the candidate cultivar, RHS recommends a loam-based potting compost with added grit; Iowa State says good drainage is essential and containers must not stand in water. The existing medium is unknown.",
+        "claim": "For the candidate cultivar, use a peat-free, loam-based potting compost with added grit; Iowa State says good drainage is essential and containers must not stand in water. The sources do not specify proportions, and the existing medium is unknown.",
         "sources": [
           "KAL-RHS",
           "KAL-IA"
@@ -54,9 +54,11 @@
     ],
     "temperature_season": [
       {
-        "claim": "RHS rates the candidate cultivar H1B: grown under glass all year and outdoors in summer at 10–15°C. Treat that UK rating as cultivar guidance, not a measured threshold for the unverified specimen.",
+        "claim": "RHS H1b is a hardiness category: 10–15°C is an absolute-minimum winter band, not a summer growing range. Keep the candidate as a houseplant or under glass; summer outdoor placement may be sunny and sheltered. Acclimate gradually to stronger sun and return it indoors before cold weather.",
         "sources": [
-          "KAL-RHS"
+          "KAL-RHS",
+          "KAL-HARD",
+          "KAL-MSU"
         ]
       }
     ],
@@ -83,9 +85,10 @@
     ],
     "troubleshooting": [
       {
-        "claim": "RHS lists mealybugs, aphids, downy mildews, and leaf spot as possible problems for the candidate cultivar. For this unverified specimen, inspect before diagnosing; other symptom causes remain unknown.",
+        "claim": "Inspect for mealybugs, aphids, downy mildew, and leaf spot. Kalanchoe is toxic if eaten by people or pets; keep it out of reach and wear gloves if its sap irritates skin.",
         "sources": [
-          "KAL-RHS"
+          "KAL-RHS",
+          "KAL-NCSU"
         ]
       }
     ],

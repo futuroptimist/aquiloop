@@ -495,7 +495,7 @@ class AssemblyTests(unittest.TestCase):
         propagation_evidence = {
             "sedum-loves-fire": (("stem", "whole leaf", "callus", "rot"), ("SED-POWO", "SED-PAT", "SED-MSU", "SED-IA")),
             "kalanchoe-desert": (("stem section", "lower leaves", "well-drained", "rot"), ("KAL-RHS", "KAL-IA", "KAL-PROP")),
-            "pothos": (("vine stem cutting", "root it in water", "After establishment", "root rot"), ("POT-NCSU", "POT-PSU")),
+            "pothos": (("stem piece", "node", "bud", "foliage above water"), ("POT-NCSU", "POT-PSU", "POT-WISC", "POT-NCSU-PROP")),
             "bird-of-paradise": (("divide", "shoot", "original depth", "soggy"), ("BOP-REG", "BOP-NIC", "BOP-UF")),
             "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-USDA", "HOR-FWS", "HOR-WA", "HOR-TROP")),
         }
@@ -504,6 +504,12 @@ class AssemblyTests(unittest.TestCase):
             # PDF extraction preserves discretionary line-break hyphens and
             # whitespace. Normalize those artifacts without weakening the
             # profile-specific prose evidence being checked.
+            if re.fullmatch(r"[A-Z]{3}(?:-[A-Z0-9]+)+", phrase):
+                # TeX may wrap only at a key's existing hyphens. Preserve the
+                # key itself while accepting whitespace introduced there.
+                pattern = re.escape(phrase).replace(r"\-", r"\-\s*")
+                self.assertRegex(text, pattern)
+                return
             normalized = re.sub(r"-\s+", "", text)
             normalized = re.sub(r"\s+", " ", normalized)
             self.assertIn(phrase, normalized)
@@ -548,7 +554,7 @@ class AssemblyTests(unittest.TestCase):
                 shutil.copy(source / "assets.json", mutant / "assets.json")
                 page = (source / "page.tex").read_text(encoding="utf-8")
                 page = re.sub(
-                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU\]\}\})",
+                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU-PROP; POT-WISC\]\}\})",
                     r"\1Citation retained only. \2",
                     page,
                     count=1,
@@ -558,7 +564,7 @@ class AssemblyTests(unittest.TestCase):
                 build_binder.compile_entry(*build_binder.load_entry(mutant.name, "draft"), output)
                 text = PdfReader(output).pages[0].extract_text()
                 self.assertIn("PROPAGATION", text)
-                self.assertIn("POT-NCSU", text)
+                self.assertIn("POT-NCSU-PROP", text)
                 with self.assertRaises(AssertionError):
                     assert_profile_evidence("pothos", text)
 
