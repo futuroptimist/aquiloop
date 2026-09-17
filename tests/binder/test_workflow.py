@@ -25,7 +25,13 @@ class BinderWorkflowTests(unittest.TestCase):
         self.assertRegex(self.workflow, r"(?m)^  workflow_dispatch: \{\}$")
         self.assertRegex(self.workflow, r"(?m)^permissions:\n  contents: read$")
         actions = re.findall(r"(?m)^\s*uses: (\S+)", self.workflow)
-        self.assertEqual(len(actions), 3)
+        action_names = {action.split("@", 1)[0] for action in actions}
+        for required_action in (
+            "actions/checkout",
+            "actions/setup-python",
+            "actions/upload-artifact",
+        ):
+            self.assertIn(required_action, action_names)
         for action in actions:
             self.assertRegex(action, r"^[^@]+@[0-9a-f]{40}$")
 
