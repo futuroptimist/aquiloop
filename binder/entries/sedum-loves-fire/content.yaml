@@ -18,6 +18,7 @@
     ]
   },
   "environmental_variability": "General succulent guidance only. Exposure, container, weather, medium, and observed dry-down must govern local adjustments.",
+  "revision": "v0.3 — 2026-09-17 care and source correction pass",
   "unresolved_fields": [
     "specimen identity and cultivar match",
     "actual exposure and acclimation history",
@@ -36,7 +37,7 @@
     ],
     "soil_substrate": [
       {
-        "claim": "Use a freely draining succulent medium in a container with drainage; the current soil-plus-additives recipe remains unknown.",
+        "claim": "Starting medium: a commercial cactus/succulent mix, or the Montana State example of equal parts potting soil, coarse sand, and perlite by volume, in a draining container. This broad succulent recipe is not a cultivar requirement or a description of the existing grow bag.",
         "sources": [
           "SED-MSU"
         ]

@@ -32,6 +32,53 @@
         "feeding_maintenance",
         "troubleshooting"
       ]
+    },
+    {
+      "key": "POT-WISC",
+      "authority": "University of Wisconsin–Madison Division of Extension",
+      "title": "Pothos, Epipremnum aureum",
+      "url": "https://hort.extension.wisc.edu/articles/pothos-epipremmum-aureum/",
+      "accessed": "2026-09-17",
+      "supports": [
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance"
+      ],
+      "applicability": "Species-level indoor-care article supporting a well-aerated medium, surface-dry watering cue, warm/draft-protected conditions, feeding only during active growth, and pruning. It does not prescribe an ingredient ratio."
+    },
+    {
+      "key": "POT-PROP",
+      "authority": "North Carolina State University Extension",
+      "title": "Extension Gardener Handbook: 13. Propagation",
+      "url": "https://content.ces.ncsu.edu/extension-gardener-handbook/13-propagation",
+      "accessed": "2026-09-17",
+      "supports": [
+        "propagation"
+      ],
+      "applicability": "General propagation reference expressly naming devil’s ivy for leaf-bud/single-node cuttings; establishes that the cutting includes a node, leaf and attached axillary bud and that a leaf cutting lacks that bud. The species profile separately supports water rooting."
+    },
+    {
+      "key": "POT-ASPCA",
+      "authority": "American Society for the Prevention of Cruelty to Animals",
+      "title": "Devils Ivy",
+      "url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/devils-ivy",
+      "accessed": "2026-09-17",
+      "supports": [
+        "troubleshooting"
+      ],
+      "applicability": "Pet-safety listing for Epipremnum aureum: toxic to cats and dogs and can cause oral irritation if eaten. It does not support cultivation claims."
+    },
+    {
+      "key": "POT-OUT",
+      "authority": "Iowa State University Extension and Outreach",
+      "title": "Moving Indoor Plants Outside for the Summer",
+      "url": "https://yardandgarden.extension.iastate.edu/how-to/moving-indoor-plants-outside-summer",
+      "accessed": "2026-09-17",
+      "supports": [
+        "water"
+      ],
+      "applicability": "General houseplant guidance supporting thorough watering when soil is dry and adjustment to conditions; used with the pothos-specific Wisconsin source."
     }
   ]
 }

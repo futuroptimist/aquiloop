@@ -69,6 +69,15 @@ class ContentWorksheetTests(unittest.TestCase):
         for prohibited in ("water thoroughly", "potting soil"):
             self.assertNotIn(prohibited, aquatic_text)
 
+    def assertPothosPropagationMeaning(self, content: dict) -> None:
+        propagation = content["cards"]["propagation"][0]
+        text = " ".join(
+            propagation[field] for field in ("claim", *sorted(PROPAGATION_FIELDS))
+        ).casefold()
+        for required in ("node", "bud", "foliage above water", "detached leaf"):
+            self.assertIn(required, text)
+        self.assertRegex(text, r"(submerge|below water).{0,45}node|node.{0,45}(submerge|below water)")
+
     def test_source_and_content_contracts(self):
         for slug, expected_cards in ENTRIES.items():
             with self.subTest(entry=slug):
@@ -98,6 +107,8 @@ class ContentWorksheetTests(unittest.TestCase):
                 self.assertTrue(content["environmental_variability"])
                 if slug == "aquarium-hornwort":
                     self.assertAquaticGuidance(content)
+                if slug == "pothos":
+                    self.assertPothosPropagationMeaning(content)
 
                 cited = set(content["identity"]["sources"])
                 for claims in content["cards"].values():
@@ -124,6 +135,40 @@ class ContentWorksheetTests(unittest.TestCase):
         content["cards"]["propagation"][0]["pitfall"] = ""
         with self.assertRaisesRegex(AssertionError, "must not have empty pitfall"):
             self.assertPropagationContract("pothos", content)
+
+    def test_pothos_propagation_rejects_a_heading_and_citation_without_instructions(self):
+        content = self.load("pothos", "content.yaml")
+        propagation = content["cards"]["propagation"][0]
+        for field in ("claim", *PROPAGATION_FIELDS):
+            propagation[field] = "Propagation [POT-NCSU]"
+        with self.assertRaises(AssertionError):
+            self.assertPothosPropagationMeaning(content)
+
+    def test_corrected_care_meanings_are_preserved(self):
+        kalanchoe = self.load("kalanchoe-desert", "content.yaml")
+        temperature = kalanchoe["cards"]["temperature_season"][0]["claim"].casefold()
+        self.assertIn("absolute minimum", temperature)
+        self.assertIn("not a summer growing range", temperature)
+        self.assertIn("sunny, sheltered", temperature)
+
+        pothos = self.load("pothos", "content.yaml")
+        water = pothos["cards"]["water"][0]["claim"].casefold()
+        feeding = pothos["cards"]["feeding_maintenance"][0]["claim"].casefold()
+        season = pothos["cards"]["temperature_season"][0]["claim"].casefold()
+        self.assertIn("water thoroughly", water)
+        self.assertIn("excess drain", water)
+        self.assertIn("growth slows", feeding)
+        self.assertNotIn("winter dormancy", season)
+
+    def test_printed_pages_explain_source_keys_and_full_record_lookup(self):
+        for slug in ENTRIES:
+            with self.subTest(entry=slug):
+                page = (
+                    ROOT / "binder" / "entries" / slug / "page.tex"
+                ).read_text(encoding="utf-8")
+                self.assertIn(r"\textbf{SOURCES}", page)
+                self.assertIn(f"binder/entries/{slug}/sources.yaml", page)
+                self.assertIn("Working example", page)
 
     def test_hornwort_rejects_terrestrial_advice_in_every_guidance_field(self):
         original = self.load("aquarium-hornwort", "content.yaml")

@@ -17,6 +17,7 @@
     ]
   },
   "environmental_variability": "General Kalanchoe and succulent guidance; outdoor exposure, rain, potting medium, and temperature require specimen-specific adjustment.",
+  "revision": "v0.2 — 2026-09-17 care and source correction pass",
   "unresolved_fields": [
     "label and specimen match",
     "grow-bag drainage and medium",
@@ -27,16 +28,16 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "RHS recommends full light indoors for the candidate cultivar, while Iowa State recommends a bright indoor location for Kalanchoe generally. The specimen’s present exposure remains unknown.",
+        "claim": "For the example cultivar, RHS recommends full light indoors and says an H1b plant may spend summer outdoors in a sunny, sheltered place. Move it between indoor and stronger outdoor light gradually to reduce sunburn risk.",
         "sources": [
           "KAL-RHS",
-          "KAL-IA"
+          "KAL-ACCL"
         ]
       }
     ],
     "soil_substrate": [
       {
-        "claim": "For the candidate cultivar, RHS recommends a loam-based potting compost with added grit; Iowa State says good drainage is essential and containers must not stand in water. The existing medium is unknown.",
+        "claim": "Starting medium for the example cultivar: loam-based potting compost with added grit, in a draining container. Good drainage is essential; empty standing water. No defensible source gives a universal ingredient ratio for this cultivar.",
         "sources": [
           "KAL-RHS",
           "KAL-IA"
@@ -54,9 +55,10 @@
     ],
     "temperature_season": [
       {
-        "claim": "RHS rates the candidate cultivar H1B: grown under glass all year and outdoors in summer at 10–15°C. Treat that UK rating as cultivar guidance, not a measured threshold for the unverified specimen.",
+        "claim": "RHS rates the example cultivar H1b. The 10–15°C (50–59°F) band is an absolute minimum-temperature hardiness guide, not a summer growing range: keep it as a houseplant or under glass generally; summer outdoors only in a sunny, sheltered position, and bring it in before cold exposure.",
         "sources": [
-          "KAL-RHS"
+          "KAL-RHS",
+          "KAL-HARD"
         ]
       }
     ],
@@ -83,9 +85,10 @@
     ],
     "troubleshooting": [
       {
-        "claim": "RHS lists mealybugs, aphids, downy mildews, and leaf spot as possible problems for the candidate cultivar. For this unverified specimen, inspect before diagnosing; other symptom causes remain unknown.",
+        "claim": "Inspect for mealybugs, aphids, downy mildews, and leaf spot before treating. Keep away from chewing pets: ASPCA lists Kalanchoe as toxic to cats and dogs; contact a veterinarian if eaten.",
         "sources": [
-          "KAL-RHS"
+          "KAL-RHS",
+          "KAL-ASPCA"
         ]
       }
     ],

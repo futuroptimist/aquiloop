@@ -17,6 +17,7 @@
     ]
   },
   "environmental_variability": "Indoor light, temperature, container, and dry-down vary. Use plant and medium observations rather than a calendar.",
+  "revision": "v0.2 — 2026-09-17 care and source correction pass",
   "unresolved_fields": [
     "species and cultivar",
     "window exposure and distance",
@@ -35,53 +36,57 @@
     ],
     "soil_substrate": [
       {
-        "claim": "Use a loose, well-drained houseplant medium in a container with drainage; do not infer the current medium from appearance.",
+        "claim": "Use a loose, well-drained houseplant potting medium in a container with drainage. Wisconsin Extension reports pothos tolerates many soil types; no retained source establishes a universal ingredient ratio, so this is a qualitative starting specification.",
         "sources": [
-          "POT-NCSU"
+          "POT-NCSU",
+          "POT-WISC"
         ]
       }
     ],
     "water": [
       {
-        "claim": "Penn State recommends watering when the soil is dry and warns that excess water can cause root rot while too little can cause temporary drooping. Check root-zone moisture rather than watering by calendar.",
+        "claim": "When the potting medium has dried, water thoroughly and let excess drain; do not leave the pot standing in water. Check root-zone moisture rather than watering by calendar.",
         "sources": [
-          "POT-PSU"
+          "POT-WISC",
+          "POT-OUT"
         ]
       }
     ],
     "temperature_season": [
       {
-        "claim": "NCSU describes winter dormancy for pothos and excludes that period from its feeding schedule. Observe growth and medium dry-down rather than inferring a temperature limit or seasonal watering interval.",
+        "claim": "Pothos grows best in warm indoor conditions. Protect it from cold drafts; use observed growth and medium dry-down rather than assuming calendar winter creates dormancy.",
         "sources": [
-          "POT-NCSU"
+          "POT-WISC"
         ]
       }
     ],
     "feeding_maintenance": [
       {
-        "claim": "NCSU advises periodic fertilizer outside winter dormancy, wiping dusty leaves, and pruning stems to maintain a bushy habit. Adjust only after observing this specimen’s growth and medium.",
+        "claim": "Feed lightly while the plant is actively growing; reduce or stop feeding when growth slows. Wipe dusty leaves and prune vines just above a leaf to encourage branching.",
         "sources": [
-          "POT-NCSU"
+          "POT-WISC"
         ]
       }
     ],
     "propagation": [
       {
-        "claim": "Take a stem cutting from a vine and root it in water. Avoid keeping the resulting plant in over-wet potting medium, which can cause root rot.",
+        "claim": "Take a stem cutting containing a node and its bud; a detached leaf alone is not sufficient. For water rooting, submerge the rooting node while keeping foliage above water, then pot after roots form.",
         "method": "stem cutting",
-        "starting_material": "a vine stem cutting",
-        "establishment_condition": "place the cutting in water until it roots",
-        "pitfall": "over-wet potting medium after establishment can cause root rot",
+        "starting_material": "a vine stem cutting containing a node and its bud, not a detached leaf alone",
+        "establishment_condition": "submerge the rooting node in water while keeping foliage above water; pot after roots form",
+        "pitfall": "a detached leaf without a node and bud cannot make a complete new shoot",
         "sources": [
-          "POT-NCSU"
+          "POT-NCSU",
+          "POT-PROP"
         ]
       }
     ],
     "troubleshooting": [
       {
-        "claim": "Penn State links excess water with root rot, too little water with temporary drooping, and direct sun with yellowing. Inspect moisture and exposure before diagnosing; other causes remain possible.",
+        "claim": "Check moisture and exposure before diagnosing droop, root rot, or yellowing. Keep away from chewing pets: ASPCA lists pothos as toxic to cats and dogs and notes oral irritation if eaten.",
         "sources": [
-          "POT-PSU"
+          "POT-PSU",
+          "POT-ASPCA"
         ]
       }
     ],

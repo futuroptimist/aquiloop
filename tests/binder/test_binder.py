@@ -495,7 +495,7 @@ class AssemblyTests(unittest.TestCase):
         propagation_evidence = {
             "sedum-loves-fire": (("stem", "whole leaf", "callus", "rot"), ("SED-POWO", "SED-PAT", "SED-MSU", "SED-IA")),
             "kalanchoe-desert": (("stem section", "lower leaves", "well-drained", "rot"), ("KAL-RHS", "KAL-IA", "KAL-PROP")),
-            "pothos": (("vine stem cutting", "root it in water", "After establishment", "root rot"), ("POT-NCSU", "POT-PSU")),
+            "pothos": (("node", "bud", "foliage above water", "detached leaf"), ("POT-NCSU", "POT-PROP")),
             "bird-of-paradise": (("divide", "shoot", "original depth", "soggy"), ("BOP-REG", "BOP-NIC", "BOP-UF")),
             "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-USDA", "HOR-FWS", "HOR-WA", "HOR-TROP")),
         }
@@ -506,11 +506,16 @@ class AssemblyTests(unittest.TestCase):
             # profile-specific prose evidence being checked.
             normalized = re.sub(r"-\s+", "", text)
             normalized = re.sub(r"\s+", " ", normalized)
+            if re.fullmatch(r"[A-Z]+-[A-Z]+", phrase):
+                # PDF extractors may omit a source key's literal hyphen when
+                # TeX uses it as a discretionary line-break point.
+                phrase = phrase.replace("-", "")
+                normalized = normalized.replace("-", "")
             self.assertIn(phrase, normalized)
 
         def assert_profile_evidence(slug, text):
             guidance, source_keys = propagation_evidence[slug]
-            for marker in (*headings[slug], *guidance, *source_keys, "EVIDENCE", "REVISION"):
+            for marker in (*headings[slug], *guidance, *source_keys, "SOURCES", "REVISION"):
                 assert_extracted_phrase(marker, text)
 
         # Pin the two observed extractor wraps and ensure normalization does
@@ -548,7 +553,7 @@ class AssemblyTests(unittest.TestCase):
                 shutil.copy(source / "assets.json", mutant / "assets.json")
                 page = (source / "page.tex").read_text(encoding="utf-8")
                 page = re.sub(
-                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU\]\}\})",
+                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU; POT-PROP\]\}\})",
                     r"\1Citation retained only. \2",
                     page,
                     count=1,
