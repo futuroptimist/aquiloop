@@ -11,13 +11,13 @@
       "another Ceratophyllum species",
       "an aquarium trade form not identifiable from the common name alone"
     ],
-    "decision": "Retain hornwort as the user-facing name and mark C. demersum provisional until package/source and forked-leaf/node photographs are reviewed.",
+    "decision": "Use aquarium hornwort and provisional C. demersum as an aquatic working example; later package and photographs qualify the specimen/trade form.",
     "sources": [
       "HOR-USDA",
       "HOR-FWS"
     ]
   },
-  "environmental_variability": "Aquarium guidance is a starting point. Tank temperature, chemistry, light, livestock, flow, fertilizer, and observed response must be recorded before local thresholds are set. Watering interval is N/A.",
+  "environmental_variability": "Aquatic example guidance only. Watering interval is N/A; adjust placement and maintenance from measured tank conditions and observed growth.",
   "unresolved_fields": [
     "species and trade form",
     "tank volume and livestock",

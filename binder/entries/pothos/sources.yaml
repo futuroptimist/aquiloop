@@ -32,6 +32,45 @@
         "feeding_maintenance",
         "troubleshooting"
       ]
+    },
+    {
+      "key": "POT-WISC",
+      "authority": "University of Wisconsin–Madison Extension",
+      "title": "Pothos, Epipremnum aureum",
+      "url": "https://hort.extension.wisc.edu/articles/pothos-epipremmum-aureum/",
+      "accessed": "2026-09-17",
+      "supports": [
+        "identity",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "natural_history_trivia"
+      ],
+      "applicability": "Species-level houseplant guide supporting aerated medium, surface-dry watering cue, growth-dependent winter feeding pause, safety/handling caution, and rooting vine cuttings in water or vermiculite."
+    },
+    {
+      "key": "POT-NCSU-PROP",
+      "authority": "North Carolina State University Extension",
+      "title": "Extension Gardener Handbook: 13. Propagation",
+      "url": "https://content.ces.ncsu.edu/extension-gardener-handbook/13-propagation",
+      "accessed": "2026-09-17",
+      "supports": [
+        "propagation"
+      ],
+      "applicability": "General leaf-bud/single-node method expressly lists devil’s ivy: the cutting includes stem, node, leaf, petiole, and axillary bud; the bud is covered and leaf exposed."
+    },
+    {
+      "key": "POT-ASPCA",
+      "authority": "American Society for the Prevention of Cruelty to Animals",
+      "title": "Toxic and Non-toxic Plants: Golden Pothos",
+      "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/golden-pothos",
+      "accessed": "2026-09-17",
+      "supports": [
+        "feeding_maintenance"
+      ],
+      "applicability": "Species-level chewing-pet caution for E. aureum; Wisconsin Extension separately supports skin-irritating sap."
     }
   ]
 }

@@ -44,6 +44,39 @@
         "propagation"
       ],
       "applicability": "General succulent propagation article; it expressly includes Kalanchoe among genera suited to its stem-cutting method. RHS, rather than this general article, establishes stem cuttings for the candidate cultivar."
+    },
+    {
+      "key": "KAL-HARD",
+      "authority": "Royal Horticultural Society",
+      "title": "RHS hardiness ratings",
+      "url": "https://www.rhs.org.uk/advice/rhs-hardiness-rating",
+      "accessed": "2026-09-17",
+      "supports": [
+        "temperature_season"
+      ],
+      "applicability": "Defines H1b as a 10–15°C minimum-temperature category for subtropical heated-glasshouse plants, with only sunny, sheltered summer outdoor placement; it is not an optimum growing-temperature recommendation."
+    },
+    {
+      "key": "KAL-OUT",
+      "authority": "Iowa State University Extension and Outreach",
+      "title": "Moving Indoor Plants Outside for the Summer",
+      "url": "https://yardandgarden.extension.iastate.edu/how-to/moving-indoor-plants-outside-summer",
+      "accessed": "2026-09-17",
+      "supports": [
+        "light_exposure"
+      ],
+      "applicability": "General transition guidance, including a 10–14 day light acclimation and a warning that abrupt outdoor sun can permanently injure succulent tissue."
+    },
+    {
+      "key": "KAL-ASPCA",
+      "authority": "American Society for the Prevention of Cruelty to Animals",
+      "title": "Toxic and Non-toxic Plants: Kalanchoe",
+      "url": "https://www.aspca.org/pet-care/animal-poison-control/toxic-and-non-toxic-plants/kalanchoe",
+      "accessed": "2026-09-17",
+      "supports": [
+        "feeding_maintenance"
+      ],
+      "applicability": "Genus-level chewing-pet caution: Kalanchoe spp. are listed as toxic to cats and dogs."
     }
   ]
 }

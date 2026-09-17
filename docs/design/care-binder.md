@@ -1,8 +1,9 @@
 # Home, garden, and aquarium care binder design brief
 
 Status: approved design direction; the six-page draft binder, single-entry
-template, watering log, and local photo workflow are implemented. Final care
-copy, photograph qualification, and release automation remain future work.
+template, watering log, and local photo workflow are implemented. The Step 08a1
+example-species care and source-clarity correction is complete; photograph
+qualification and final release remain future work.
 
 ## Purpose and sequence
 
@@ -27,6 +28,39 @@ provisional identities, general source-backed guidance, unresolved fields, and
 the visible placeholder; they do not wait for photographs. Photograph-qualified
 final copy depends on reviewed specimen images, rights, and the inputs listed
 under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
+
+The five profile pages are therefore useful **example-species guides**, not
+claims about the user's plants. A compact working-identity note near each title
+states that boundary; cards give sourced care for the named species or, for
+bird of paradise, explicitly named candidate species. Later specimen/photo
+qualification may select or reject that working identity and add local measured
+conditions without making the general guide depend on photographs.
+
+### Step 08a1 care-content correction (2026-09-17)
+
+- Corrected RHS H1b on the Kalanchoe page as a minimum-temperature hardiness
+  category rather than an optimum growing range, and paired warm-season outdoor
+  placement with a sourced gradual light-acclimation method.
+- Made pothos propagation require a stem node and axillary bud, with the rooting
+  node/bud in water or medium and foliage above it; a detached leaf alone is not
+  represented as sufficient. Watering now states a surface-dry trigger,
+  thorough application and drainage, while feeding follows active growth rather
+  than unconditional calendar-winter dormancy.
+- Added actionable, scoped substrate ingredients or medium qualities to every
+  terrestrial profile. Where retained authorities provide no applicable ratio,
+  the page says so rather than inventing one.
+- Replaced repeated research-process prose with compact working-identity notes,
+  kept bird-of-paradise candidate recommendations species-labeled, retained the
+  aquatic N/A watering contract, and added concise sourced pet/handling cautions
+  for Kalanchoe and pothos.
+- Every printed footer now expands each source key to a compact publisher/title
+  legend and points to that entry's `sources.yaml` for the full reference.
+
+This pass does **not** resolve the separate Step 08a2 watering-log handwriting
+space finding, the Step 08a3 shared typography/footer safe-margin finding, or
+Step 08b physical-print and handwriting qualification. Those remain pending;
+screen proofs from this correction must not be described as physical or
+final-mode acceptance.
 
 ## Visual references
 

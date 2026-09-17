@@ -11,13 +11,13 @@
       "Strelitzia reginae",
       "Strelitzia nicolai"
     ],
-    "decision": "Do not select S. reginae or S. nicolai from the common name alone. The candidates differ strongly in mature habit and flowers; retain a genus-level card until evidence supports one.",
+    "decision": "Use Strelitzia sp. as the working identity. Keep S. reginae and S. nicolai recommendations explicitly separate until later evidence selects a species.",
     "sources": [
       "BOP-REG",
       "BOP-NIC"
     ]
   },
-  "environmental_variability": "Genus-level container guidance only. Species, indoor exposure, temperature, container, and any outdoor transition plan remain unknown.",
+  "environmental_variability": "Two candidate-species examples, not specimen-specific instructions; apply only the named species guidance after identification.",
   "unresolved_fields": [
     "species",
     "full habit, stem/base, leaf and flower evidence",
@@ -28,7 +28,7 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "Both candidate species need bright conditions: NCSU recommends a sunny indoor site for S. reginae and bright indirect light for S. nicolai. Select exposure only after species and current conditions are reviewed.",
+        "claim": "S. reginae: a sunny indoor position. S. nicolai: bright, indirect light. Do not combine these into one exposure target.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -37,7 +37,7 @@
     ],
     "soil_substrate": [
       {
-        "claim": "NCSU describes well-drained loamy media for both candidate species. Confirm the existing pot and medium before making a species-specific recommendation.",
+        "claim": "S. reginae: fertile, loamy, well-drained soil. S. nicolai: moist but well-drained loam-and-sand medium. These are qualitative starting examples; sources give no mix ratio.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -46,7 +46,7 @@
     ],
     "water": [
       {
-        "claim": "NCSU says to water S. reginae freely in spring and summer and keep it drier in winter; for S. nicolai it says to water when the top soil layer feels dry. These are candidate-specific starting cues, not a fixed interval for this unresolved specimen.",
+        "claim": "S. reginae: water freely in spring/summer and keep drier in winter. S. nicolai: water when the top layer feels dry. In either case, drain excess and use no fixed interval.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -55,7 +55,7 @@
     ],
     "temperature_season": [
       {
-        "claim": "NCSU describes moderate indoor temperatures for S. reginae and says S. nicolai does not tolerate temperatures below 50°F or cold drafts. Record conditions and confirm species before adopting a limit.",
+        "claim": "S. reginae: NCSU gives 55–65°F nights and outdoor placement above 70°F. S. nicolai: 65–85°F and protection below 50°F/cold drafts. Apply only after species confirmation.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -64,7 +64,7 @@
     ],
     "feeding_maintenance": [
       {
-        "claim": "NCSU recommends regular spring/summer fertilizer for S. reginae and monthly balanced liquid fertilizer in spring/summer for S. nicolai. Defer a schedule until species and active growth are confirmed.",
+        "claim": "S. reginae: feed regularly in spring/summer. S. nicolai: balanced liquid feed monthly in spring/summer. Pause a candidate schedule when active growth slows.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"

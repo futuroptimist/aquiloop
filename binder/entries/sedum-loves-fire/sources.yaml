@@ -48,6 +48,17 @@
       "supports": [
         "propagation"
       ]
+    },
+    {
+      "key": "SED-IA-OUT",
+      "authority": "Iowa State University Extension and Outreach",
+      "title": "Moving Indoor Plants Outside for the Summer",
+      "url": "https://yardandgarden.extension.iastate.edu/how-to/moving-indoor-plants-outside-summer",
+      "accessed": "2026-09-17",
+      "supports": [
+        "light_exposure"
+      ],
+      "applicability": "General houseplant transition guidance; specifically warns that abrupt outdoor sun can permanently injure succulents and gives a 10–14 day light-acclimation method."
     }
   ]
 }

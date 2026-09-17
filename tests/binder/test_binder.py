@@ -495,7 +495,7 @@ class AssemblyTests(unittest.TestCase):
         propagation_evidence = {
             "sedum-loves-fire": (("stem", "whole leaf", "callus", "rot"), ("SED-POWO", "SED-PAT", "SED-MSU", "SED-IA")),
             "kalanchoe-desert": (("stem section", "lower leaves", "well-drained", "rot"), ("KAL-RHS", "KAL-IA", "KAL-PROP")),
-            "pothos": (("vine stem cutting", "root it in water", "After establishment", "root rot"), ("POT-NCSU", "POT-PSU")),
+            "pothos": (("stem with node", "leaf, and bud", "keep foliage above", "not a leaf alone"), ("POT-NCSU", "POT-NCSU-PROP", "POT-WISC", "POT-PSU", "POT-ASPCA")),
             "bird-of-paradise": (("divide", "shoot", "original depth", "soggy"), ("BOP-REG", "BOP-NIC", "BOP-UF")),
             "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-USDA", "HOR-FWS", "HOR-WA", "HOR-TROP")),
         }
@@ -515,10 +515,10 @@ class AssemblyTests(unittest.TestCase):
 
         # Pin the two observed extractor wraps and ensure normalization does
         # not allow genuinely absent guidance to satisfy the assertion.
-        assert_extracted_phrase("After establishment", "After estab-\nlishment")
+        assert_extracted_phrase("keep foliage above", "keep foli-\nage above")
         assert_extracted_phrase("below the surface", "below the sur-\nface")
         with self.assertRaises(AssertionError):
-            assert_extracted_phrase("After establishment", "PROPAGATION [POT-NCSU]")
+            assert_extracted_phrase("stem with node", "PROPAGATION [POT-NCSU]")
 
         with tempfile.TemporaryDirectory() as name:
             for slug, required in headings.items():
@@ -548,7 +548,7 @@ class AssemblyTests(unittest.TestCase):
                 shutil.copy(source / "assets.json", mutant / "assets.json")
                 page = (source / "page.tex").read_text(encoding="utf-8")
                 page = re.sub(
-                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU\]\}\})",
+                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU-PROP; POT-WISC\]\}\})",
                     r"\1Citation retained only. \2",
                     page,
                     count=1,

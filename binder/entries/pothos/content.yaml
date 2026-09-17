@@ -11,12 +11,12 @@
       "another Epipremnum species or cultivar",
       "a superficially similar vining aroid"
     ],
-    "decision": "Use Pothos as the page title and mark Epipremnum aureum provisional until label, node, petiole, and leaf photographs are reviewed.",
+    "decision": "Use Pothos and provisional Epipremnum aureum as a practical working example; later photographs and label review qualify the specimen and cultivar.",
     "sources": [
       "POT-NCSU"
     ]
   },
-  "environmental_variability": "Indoor light, temperature, container, and dry-down vary. Use plant and medium observations rather than a calendar.",
+  "environmental_variability": "Example E. aureum guidance; respond to actual light, growth, container drainage, and dry-down rather than calendar season.",
   "unresolved_fields": [
     "species and cultivar",
     "window exposure and distance",
@@ -35,45 +35,49 @@
     ],
     "soil_substrate": [
       {
-        "claim": "Use a loose, well-drained houseplant medium in a container with drainage; do not infer the current medium from appearance.",
+        "claim": "Use a loose, well-aerated, well-drained houseplant medium in a container with a drainage hole. Retained sources support qualities, not a defensible recipe ratio.",
         "sources": [
-          "POT-NCSU"
+          "POT-NCSU",
+          "POT-WISC"
         ]
       }
     ],
     "water": [
       {
-        "claim": "Penn State recommends watering when the soil is dry and warns that excess water can cause root rot while too little can cause temporary drooping. Check root-zone moisture rather than watering by calendar.",
+        "claim": "When the soil surface is dry, water the whole root ball thoroughly and let excess drain; do not leave the medium saturated or water by calendar.",
         "sources": [
+          "POT-WISC",
           "POT-PSU"
         ]
       }
     ],
     "temperature_season": [
       {
-        "claim": "NCSU describes winter dormancy for pothos and excludes that period from its feeding schedule. Observe growth and medium dry-down rather than inferring a temperature limit or seasonal watering interval.",
+        "claim": "Keep away from drafts. Seasonal labels do not prove dormancy: use current growth and medium dry-down to adjust care.",
         "sources": [
-          "POT-NCSU"
+          "POT-WISC"
         ]
       }
     ],
     "feeding_maintenance": [
       {
-        "claim": "NCSU advises periodic fertilizer outside winter dormancy, wiping dusty leaves, and pruning stems to maintain a bushy habit. Adjust only after observing this specimen’s growth and medium.",
+        "claim": "Feed periodically while actively growing; reduce or pause feeding when growth slows. Prune long vines as needed. Keep away from chewing pets; sap can irritate skin.",
         "sources": [
-          "POT-NCSU"
+          "POT-WISC",
+          "POT-ASPCA"
         ]
       }
     ],
     "propagation": [
       {
-        "claim": "Take a stem cutting from a vine and root it in water. Avoid keeping the resulting plant in over-wet potting medium, which can cause root rot.",
-        "method": "stem cutting",
-        "starting_material": "a vine stem cutting",
-        "establishment_condition": "place the cutting in water until it roots",
-        "pitfall": "over-wet potting medium after establishment can cause root rot",
+        "claim": "Use a stem section with a node, leaf, and axillary bud—not a detached leaf alone. Put the node/bud in water or rooting medium while keeping foliage above it; pot after roots form.",
+        "method": "single-node stem cutting",
+        "starting_material": "a stem section containing a node, leaf, and axillary bud; a detached leaf alone is insufficient",
+        "establishment_condition": "submerge or cover the rooting node/bud while keeping foliage above water or medium, then pot after roots form",
+        "pitfall": "submerged foliage can decay, and a leaf without its stem node and bud cannot follow this method",
         "sources": [
-          "POT-NCSU"
+          "POT-NCSU-PROP",
+          "POT-WISC"
         ]
       }
     ],

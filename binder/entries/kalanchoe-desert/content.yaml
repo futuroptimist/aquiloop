@@ -11,12 +11,12 @@
       "Kalanchoe humilis at species level",
       "another patterned Kalanchoe cultivar"
     ],
-    "decision": "Retain the reported label without treating the cultivar denomination as confirmed; use the formally styled name only to describe the candidate documented by RHS until label and specimen review is complete.",
+    "decision": "Use the reported common/cultivar label and K. humilis ‘Desert Surprise’ as the working example; do not infer a specimen match before label and photograph review.",
     "sources": [
       "KAL-RHS"
     ]
   },
-  "environmental_variability": "General Kalanchoe and succulent guidance; outdoor exposure, rain, potting medium, and temperature require specimen-specific adjustment.",
+  "environmental_variability": "Candidate-cultivar and general Kalanchoe guidance; adjust for observed outdoor light, rain, drainage, and growth.",
   "unresolved_fields": [
     "label and specimen match",
     "grow-bag drainage and medium",
@@ -27,16 +27,16 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "RHS recommends full light indoors for the candidate cultivar, while Iowa State recommends a bright indoor location for Kalanchoe generally. The specimen’s present exposure remains unknown.",
+        "claim": "Give the candidate full indoor light. For summer outdoors, start in full shade and increase light over 10–14 days; choose a sunny, sheltered final site only if the plant responds well.",
         "sources": [
           "KAL-RHS",
-          "KAL-IA"
+          "KAL-OUT"
         ]
       }
     ],
     "soil_substrate": [
       {
-        "claim": "For the candidate cultivar, RHS recommends a loam-based potting compost with added grit; Iowa State says good drainage is essential and containers must not stand in water. The existing medium is unknown.",
+        "claim": "Starting example for the candidate: peat-free, loam-based potting compost with added grit, in a draining container that never stands in water. RHS gives no proportion, so none is implied.",
         "sources": [
           "KAL-RHS",
           "KAL-IA"
@@ -45,7 +45,7 @@
     ],
     "water": [
       {
-        "claim": "For Kalanchoe generally, Iowa State says to let soil dry between waterings but not to wilting. RHS says to water the candidate cultivar moderately and more sparingly in winter; use those as scoped starting cues, not a fixed interval.",
+        "claim": "Let the medium dry between thorough waterings without waiting for wilt; drain fully. Water more sparingly only when winter light and growth are reduced.",
         "sources": [
           "KAL-RHS",
           "KAL-IA"
@@ -54,17 +54,19 @@
     ],
     "temperature_season": [
       {
-        "claim": "RHS rates the candidate cultivar H1B: grown under glass all year and outdoors in summer at 10–15°C. Treat that UK rating as cultivar guidance, not a measured threshold for the unverified specimen.",
+        "claim": "RHS H1b is a minimum-temperature hardiness category (10–15°C), not a preferred growing range: keep under glass/indoors year-round except warm summer placement in a sunny, sheltered site; protect from cold.",
         "sources": [
-          "KAL-RHS"
+          "KAL-RHS",
+          "KAL-HARD"
         ]
       }
     ],
     "feeding_maintenance": [
       {
-        "claim": "RHS advises liquid fertilizer two or three times in the growing season for the candidate cultivar and says no pruning is required. Do not infer a broader feeding or corrective-pruning schedule for this specimen.",
+        "claim": "For the candidate, RHS advises liquid feed two or three times during the growing season and no routine pruning. Keep away from chewing pets; Kalanchoe spp. are toxic to cats and dogs.",
         "sources": [
-          "KAL-RHS"
+          "KAL-RHS",
+          "KAL-ASPCA"
         ]
       }
     ],

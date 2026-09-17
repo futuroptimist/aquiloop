@@ -125,6 +125,34 @@ class ContentWorksheetTests(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, "must not have empty pitfall"):
             self.assertPropagationContract("pothos", content)
 
+    def test_corrected_kalanchoe_hardiness_and_pothos_routine_care(self):
+        kalanchoe = self.load("kalanchoe-desert", "content.yaml")
+        temperature = kalanchoe["cards"]["temperature_season"][0]["claim"]
+        self.assertIn("minimum-temperature hardiness category", temperature)
+        self.assertIn("not a preferred growing range", temperature)
+        self.assertIn("sunny, sheltered", temperature)
+
+        pothos = self.load("pothos", "content.yaml")
+        propagation = pothos["cards"]["propagation"][0]
+        combined = " ".join(propagation[field] for field in (
+            "claim", "starting_material", "establishment_condition", "pitfall"
+        )).casefold()
+        for meaning in ("node", "bud", "detached leaf", "foliage above"):
+            self.assertIn(meaning, combined)
+        water = pothos["cards"]["water"][0]["claim"].casefold()
+        for meaning in ("soil surface is dry", "thoroughly", "drain"):
+            self.assertIn(meaning, water)
+        feeding = pothos["cards"]["feeding_maintenance"][0]["claim"].casefold()
+        self.assertIn("when growth slows", feeding)
+        self.assertNotIn("winter dormancy", feeding)
+
+    def test_terrestrial_substrate_guidance_is_practical_without_invented_ratios(self):
+        for slug in ENTRIES.keys() - {"aquarium-hornwort"}:
+            with self.subTest(entry=slug):
+                text = self.load(slug, "content.yaml")["cards"]["soil_substrate"][0]["claim"].casefold()
+                self.assertTrue(any(word in text for word in ("drain", "grit", "sand", "perlite")))
+                self.assertTrue(any(word in text for word in ("ratio", "blend", "medium", "soil", "compost")))
+
     def test_hornwort_rejects_terrestrial_advice_in_every_guidance_field(self):
         original = self.load("aquarium-hornwort", "content.yaml")
         fields = (*sorted(PROPAGATION_FIELDS), "environmental_variability")
