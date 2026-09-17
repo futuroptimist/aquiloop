@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import os
 import re
+import subprocess
+import tempfile
+import textwrap
 import unittest
 from pathlib import Path
 
@@ -59,6 +63,53 @@ class BinderWorkflowTests(unittest.TestCase):
             "texlive-pictures",
         ):
             self.assertRegex(self.workflow, rf"(?m)^\s+{package}=\S+")
+
+    def _run_regression_gate(self, output: str, exit_code: int = 0):
+        marker = "      - name: Run complete binder regression suite\n        run: |\n"
+        script = self.workflow.split(marker, 1)[1].split("\n      - name:", 1)[0]
+        script = textwrap.dedent(script)
+        with tempfile.TemporaryDirectory() as directory:
+            fake_bin = Path(directory) / "bin"
+            fake_bin.mkdir()
+            fake_python = fake_bin / "python"
+            fake_python.write_text(
+                "#!/bin/sh\nprintf '%s' \"$FAKE_UNITTEST_OUTPUT\"\n"
+                'exit "$FAKE_UNITTEST_EXIT"\n',
+                encoding="utf-8",
+            )
+            fake_python.chmod(0o755)
+            environment = os.environ.copy()
+            environment.update(
+                {
+                    "FAKE_UNITTEST_OUTPUT": output,
+                    "FAKE_UNITTEST_EXIT": str(exit_code),
+                    "PATH": f"{fake_bin}{os.pathsep}{environment['PATH']}",
+                }
+            )
+            return subprocess.run(
+                ["bash", "-c", script],
+                cwd=directory,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+    def test_regression_gate_accepts_any_positive_passing_test_count(self):
+        result = self._run_regression_gate("Ran 42 tests in 0.123s\n\nOK\n")
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_regression_gate_rejects_unsuccessful_or_empty_suites(self):
+        cases = {
+            "failure": ("Ran 42 tests in 0.123s\n\nFAILED (failures=1)\n", 1),
+            "error": ("Ran 42 tests in 0.123s\n\nFAILED (errors=1)\n", 1),
+            "skip": ("Ran 42 tests in 0.123s\n\nOK (skipped=1)\n", 0),
+            "empty": ("Ran 0 tests in 0.000s\n\nOK\n", 0),
+        }
+        for name, (output, exit_code) in cases.items():
+            with self.subTest(name=name):
+                result = self._run_regression_gate(output, exit_code)
+                self.assertNotEqual(result.returncode, 0)
 
 
 if __name__ == "__main__":

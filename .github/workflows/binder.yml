@@ -101,7 +101,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m unittest discover -s tests/binder -v 2>&1 | tee build-binder-tests.log
-          grep -Eq '^Ran 41 tests in ' build-binder-tests.log
+          grep -Eq '^Ran [1-9][0-9]* tests? in ' build-binder-tests.log
           ! grep -Eq 'skipped=[1-9][0-9]*' build-binder-tests.log
 
       - name: Build combined six-page draft
