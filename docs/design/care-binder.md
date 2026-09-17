@@ -613,28 +613,3 @@ detail), prefers 300 ppi (990 × 990 or 615 × 405), and rejects files above the
 JPEG quality and reports when it is unmet; failure to meet that soft goal alone
 is not an error. Every final selection requires `source.rights_reviewed: true`;
 unselected, structurally valid draft records may retain honest unknown rights.
-
-### Step 08a1 care-content correction (2026-09-17)
-
-The five profiles are now **example-species guides** that remain useful before
-specimen photographs arrive. A working identity near each title scopes the
-advice; it is not a claim that the user's specimen or cultivar matches. Later
-specimen/photo qualification will compare labels and diagnostic views, record
-local growing conditions, and then decide which example guidance applies.
-Bird-of-paradise recommendations remain explicitly separated between
-*Strelitzia reginae* and *S. nicolai*.
-
-This correction pass fixed the RHS H1b interpretation (an absolute-minimum
-winter hardiness band, not a summer growing-temperature range), completed the
-pothos node-and-bud propagation method, tied watering and feeding to observable
-conditions, added practical drained-medium guidance without invented ratios,
-and retained concise sourced Kalanchoe and pothos safety cautions. Each printed
-footer now expands source keys into publisher/title cues and points to that
-entry's `sources.yaml` for full title, URL, access date, scope, and applicability.
-
-Step 08a1 does **not** qualify photographs, exact identities, local care values,
-final mode, or physical printing. The care-log handwriting-space finding remains
-assigned to Step 08a2. Shared typography and the previously measured footer-safe-
-margin finding remain assigned to Step 08a3; this pass does not claim either is
-fixed. Revised six-page proof review remains Step 08a4, followed by actual-size
-printing, punching, and handwriting acceptance in Step 08b.

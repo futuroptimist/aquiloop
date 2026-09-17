@@ -17,7 +17,7 @@
       "BOP-NIC"
     ]
   },
-  "environmental_variability": "Example guidance for Strelitzia; species remains unresolved. Apply only the recommendation explicitly labeled for S. reginae or S. nicolai.",
+  "environmental_variability": "Genus-level container guidance only. Species, indoor exposure, temperature, container, and any outdoor transition plan remain unknown.",
   "unresolved_fields": [
     "species",
     "full habit, stem/base, leaf and flower evidence",
@@ -28,7 +28,7 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "Candidate guidance: give S. reginae a sunny indoor site; give S. nicolai bright indirect light. Acclimate any increase gradually and apply only the guidance for the identified species.",
+        "claim": "Both candidate species need bright conditions: NCSU recommends a sunny indoor site for S. reginae and bright indirect light for S. nicolai. Select exposure only after species and current conditions are reviewed.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -37,7 +37,7 @@
     ],
     "soil_substrate": [
       {
-        "claim": "For either candidate, use a well-drained loamy container medium and open drainage holes. No retained source supplies a universal ingredient ratio, so do not assume the existing mix.",
+        "claim": "NCSU describes well-drained loamy media for both candidate species. Confirm the existing pot and medium before making a species-specific recommendation.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -64,7 +64,7 @@
     ],
     "feeding_maintenance": [
       {
-        "claim": "Candidate guidance: feed S. reginae regularly in spring and summer; feed S. nicolai monthly with balanced liquid fertilizer in spring and summer. Apply only the schedule for the identified species and active growth.",
+        "claim": "NCSU recommends regular spring/summer fertilizer for S. reginae and monthly balanced liquid fertilizer in spring/summer for S. nicolai. Defer a schedule until species and active growth are confirmed.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"

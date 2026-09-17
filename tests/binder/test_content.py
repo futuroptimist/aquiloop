@@ -141,13 +141,31 @@ class ContentWorksheetTests(unittest.TestCase):
         self.assertNotIn("winter dormancy", feeding)
 
     def test_each_profile_prints_an_interpretable_source_legend(self):
-        for slug in ENTRIES:
+        expected_cues = {
+            "kalanchoe-desert": (
+                "KAL-RHS—RHS, Desert Surprise",
+                "KAL-HARD—RHS, Hardiness rating",
+                "KAL-IA—ISU, Kalanchoe care",
+                "KAL-PROP—ISU, Propagate succulents",
+                "KAL-MSU—Montana State, Growing succulents",
+                "KAL-NCSU—NC State, Kalanchoe",
+            ),
+            "pothos": (
+                "POT-NCSU—NC State, ",
+                "POT-PSU—Penn State, Pothos",
+                "POT-WISC—UW–Madison, Pothos",
+                "POT-NCSU-PROP—NC State, Propagation",
+            ),
+        }
+        for slug, cues in expected_cues.items():
             with self.subTest(entry=slug):
                 page = (ROOT / "binder" / "entries" / slug / "page.tex").read_text(
                     encoding="utf-8")
                 self.assertIn(r"\textbf{EVIDENCE / SOURCES}", page)
                 printable = page.replace(r"}\allowbreak\texttt{", "")
                 self.assertIn(f"binder/entries/{slug}/sources.yaml", printable)
+                for cue in cues:
+                    self.assertIn(cue, page)
 
     def test_propagation_contract_rejects_an_empty_required_field(self):
         content = self.load("pothos", "content.yaml")

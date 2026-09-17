@@ -17,7 +17,7 @@
       "SED-PAT"
     ]
   },
-  "environmental_variability": "Example guidance for Sedum adolphi and general succulents; confirm cultivar/specimen later. Adjust to exposure, container drainage, weather, and observed dry-down.",
+  "environmental_variability": "General succulent guidance only. Exposure, container, weather, medium, and observed dry-down must govern local adjustments.",
   "unresolved_fields": [
     "specimen identity and cultivar match",
     "actual exposure and acclimation history",
@@ -36,7 +36,7 @@
     ],
     "soil_substrate": [
       {
-        "claim": "Use a commercial freely draining succulent medium in a container with open drainage. No retained source supports a universal ingredient ratio, so do not assume the composition of an existing grow bag.",
+        "claim": "Use a freely draining succulent medium in a container with drainage; the current soil-plus-additives recipe remains unknown.",
         "sources": [
           "SED-MSU"
         ]

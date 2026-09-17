@@ -504,11 +504,15 @@ class AssemblyTests(unittest.TestCase):
             # PDF extraction preserves discretionary line-break hyphens and
             # whitespace. Normalize those artifacts without weakening the
             # profile-specific prose evidence being checked.
+            if re.fullmatch(r"[A-Z]{3}(?:-[A-Z0-9]+)+", phrase):
+                # TeX may wrap only at a key's existing hyphens. Preserve the
+                # key itself while accepting whitespace introduced there.
+                pattern = re.escape(phrase).replace(r"\-", r"\-\s*")
+                self.assertRegex(text, pattern)
+                return
             normalized = re.sub(r"-\s+", "", text)
             normalized = re.sub(r"\s+", " ", normalized)
-            expected = phrase.replace("-", "") if phrase.isupper() else phrase
-            haystack = normalized.replace("-", "") if phrase.isupper() else normalized
-            self.assertIn(expected, haystack)
+            self.assertIn(phrase, normalized)
 
         def assert_profile_evidence(slug, text):
             guidance, source_keys = propagation_evidence[slug]
