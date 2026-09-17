@@ -46,14 +46,25 @@ jobs:
       - name: Install LuaLaTeX and Poppler
         run: |
           set -euo pipefail
+          # Freeze APT metadata as well as package revisions so these pins remain
+          # installable after the moving Noble repositories publish updates.
+          sudo tee /etc/apt/sources.list.d/ubuntu.sources >/dev/null <<'EOF'
+          Types: deb
+          URIs: https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/
+          Suites: noble noble-updates noble-security
+          Components: main universe
+          Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+          EOF
           sudo apt-get update
+          apt-cache policy texlive-binaries
           sudo apt-get install --no-install-recommends -y \
-            fonts-texgyre \
-            poppler-utils \
-            texlive-fonts-recommended \
-            texlive-latex-base \
-            texlive-luatex \
-            texlive-pictures
+            fonts-texgyre=20180621-6 \
+            poppler-utils=24.02.0-1ubuntu9.9 \
+            texlive-binaries=2023.20230311.66589-9build3 \
+            texlive-fonts-recommended=2023.20240207-1 \
+            texlive-latex-base=2023.20240207-1 \
+            texlive-luatex=2023.20240207-1 \
+            texlive-pictures=2023.20240207-1
           command -v lualatex
           command -v pdfinfo
           command -v pdftoppm
@@ -64,7 +75,7 @@ jobs:
       - name: Report and verify toolchain
         run: |
           set -euo pipefail
-          python --version
+          test "$(python --version 2>&1)" = "Python 3.12.13"
           python - <<'PY'
           import PIL, pypdf
           assert PIL.__version__ == "12.3.0", PIL.__version__
@@ -72,11 +83,15 @@ jobs:
           print(f"Pillow {PIL.__version__}")
           print(f"pypdf {pypdf.__version__}")
           PY
-          lualatex --version | head -n 1
-          pdfinfo -v 2>&1 | head -n 1
-          pdftoppm -v 2>&1 | head -n 1
+          lualatex_version="$(lualatex --version | head -n 1)"
+          pdfinfo_version="$(pdfinfo -v 2>&1 | head -n 1)"
+          pdftoppm_version="$(pdftoppm -v 2>&1 | head -n 1)"
+          printf '%s\n' "$lualatex_version" "$pdfinfo_version" "$pdftoppm_version"
+          grep -Fq 'LuaHBTeX, Version 1.17.0' <<<"$lualatex_version"
+          grep -Fq 'pdfinfo version 24.02.0' <<<"$pdfinfo_version"
+          grep -Fq 'pdftoppm version 24.02.0' <<<"$pdftoppm_version"
           dpkg-query -W -f='${Package}=${Version}\n' \
-            fonts-texgyre poppler-utils texlive-fonts-recommended \
+            fonts-texgyre poppler-utils texlive-binaries texlive-fonts-recommended \
             texlive-latex-base texlive-luatex texlive-pictures
 
       - name: Compile-check binder Python
@@ -93,7 +108,8 @@ jobs:
         run: |
           python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
             --output build/binder/aquiloop-binder-draft.pdf
-          sha256sum build/binder/aquiloop-binder-draft.pdf
+          printf 'validated PDF SHA-256: '
+          sha256sum build/binder/aquiloop-binder-draft.pdf | cut -d' ' -f1
 
       - name: Validate PDF boxes, pages, and rotation
         run: |

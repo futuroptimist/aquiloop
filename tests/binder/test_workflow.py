@@ -29,9 +29,14 @@ class BinderWorkflowTests(unittest.TestCase):
         for expected in (
             "runs-on: ubuntu-24.04",
             "python-version: '3.12.13'",
+            "https://snapshot.ubuntu.com/ubuntu/20260828T000000Z/",
+            "texlive-binaries=2023.20230311.66589-9build3",
             'PIL.__version__ == "12.3.0"',
             'pypdf.__version__ == "6.18.1"',
-            "lualatex --version",
+            'test "$(python --version 2>&1)" = "Python 3.12.13"',
+            "LuaHBTeX, Version 1.17.0",
+            "pdfinfo version 24.02.0",
+            "pdftoppm version 24.02.0",
             "pdfinfo -v",
             "pdftoppm -v",
             "dpkg-query -W",
@@ -44,10 +49,16 @@ class BinderWorkflowTests(unittest.TestCase):
             self.assertIn(expected, self.workflow)
         self.assertEqual(self.workflow.count("actions/upload-artifact@"), 1)
         self.assertEqual(self.workflow.count("path: build/binder/aquiloop-binder-draft.pdf"), 1)
-        self.assertNotRegex(
-            self.workflow,
-            r"(?m)^\s+(?:fonts-texgyre|poppler-utils|texlive-[a-z-]+)=\S+",
-        )
+        for package in (
+            "fonts-texgyre",
+            "poppler-utils",
+            "texlive-binaries",
+            "texlive-fonts-recommended",
+            "texlive-latex-base",
+            "texlive-luatex",
+            "texlive-pictures",
+        ):
+            self.assertRegex(self.workflow, rf"(?m)^\s+{package}=\S+")
 
 
 if __name__ == "__main__":

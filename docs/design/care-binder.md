@@ -433,11 +433,12 @@ runtime. The Step 06a proof uses LuaLaTeX and distribution-provided TeX Gyre
 Pagella and Heros fonts; compilation performs no downloads. The tested
 environment was Python 3.12.13, TeX Live 2023 / LuaHBTeX 1.17.0, Pillow 12.3.0,
 pypdf 6.18.1, and Poppler 24.02.0. The binder-only Python pins live in
-`requirements-binder.txt`; the distribution-provided TeX, font, and Poppler
-packages come from the current Ubuntu repositories on the versioned
-`ubuntu-24.04` runner. Their installed package revisions and actual tool versions
-are printed on every run, avoiding brittle requests for revisions that Ubuntu's
-moving repositories may no longer publish while retaining an auditable build log.
+`requirements-binder.txt`. Distribution packages are installed at exact
+revisions from the Ubuntu Noble snapshot dated `20260828T000000Z`; this freezes
+both repository metadata and the package revisions instead of relying on moving
+Ubuntu repositories. The workflow also logs the resolved revisions, including
+`texlive-binaries` (the LuaHBTeX provider), and asserts the Python, LuaHBTeX, and
+Poppler tool versions rather than checking only that their commands exist.
 Required commands/packages are `lualatex`,
 `pdfinfo`, `pdftoppm`, Pillow, and pypdf. Build the proof with:
 
@@ -508,6 +509,9 @@ SHAs; Python is pinned to 3.12.13 and the binder packages to Pillow 12.3.0 and
 pypdf 6.18.1. The versioned Ubuntu runner supplies LuaLaTeX and Poppler and logs
 their resolved versions. The workflow needs no secrets or external build inputs,
 and has no release, package, write, publishing, or deployment permission.
+The upload action reports an artifact ID and archive digest; that archive digest
+describes the ZIP and is distinct from the PDF SHA-256 printed immediately after
+the validated draft build.
 
 The validator must fail on:
 
