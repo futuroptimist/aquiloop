@@ -1,0 +1,119 @@
+name: Build care binder draft
+
+on:
+  pull_request:
+    paths: &binder-paths
+      - 'binder/**'
+      - 'scripts/build_binder.py'
+      - 'tests/binder/**'
+      - 'docs/design/care-binder.md'
+      - 'requirements-binder.txt'
+      - '.github/workflows/binder.yml'
+  push:
+    branches: [main]
+    paths: *binder-paths
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  build-draft:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository without persisted credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.12.13
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.12.13'
+          cache: pip
+          cache-dependency-path: requirements-binder.txt
+
+      - name: Install local PDF toolchain
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            fonts-texgyre poppler-utils texlive-fonts-recommended texlive-latex-base \
+            texlive-latex-recommended texlive-luatex texlive-pictures
+          command -v lualatex
+          command -v pdfinfo
+          command -v pdftoppm
+
+      - name: Install pinned Python dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-binder.txt
+
+      - name: Report and enforce tool versions
+        run: |
+          set -euo pipefail
+          python --version | tee /tmp/python-version
+          lualatex --version | tee /tmp/lualatex-version
+          pdfinfo -v 2>&1 | tee /tmp/pdfinfo-version
+          pdftoppm -v 2>&1 | tee /tmp/pdftoppm-version
+          python - <<'PY'
+          import PIL
+          import pypdf
+          print(f"Pillow {PIL.__version__}")
+          print(f"pypdf {pypdf.__version__}")
+          assert PIL.__version__ == "12.3.0"
+          assert pypdf.__version__ == "6.18.1"
+          PY
+          grep -F 'Python 3.12.13' /tmp/python-version
+          grep -F 'LuaHBTeX, Version 1.17.0' /tmp/lualatex-version
+          grep -F 'pdfinfo version 24.02.0' /tmp/pdfinfo-version
+          grep -F 'pdftoppm version 24.02.0' /tmp/pdftoppm-version
+
+      - name: Compile Python sources
+        run: python -m compileall -q scripts/build_binder.py tests/binder
+
+      - name: Run binder regression suite
+        run: python -m unittest discover -s tests/binder -v
+
+      - name: Build twice and verify deterministic output
+        run: |
+          set -euo pipefail
+          mkdir -p build/binder
+          python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft --output build/binder/aquiloop-binder-draft.pdf
+          sha256sum build/binder/aquiloop-binder-draft.pdf | tee build/binder/first.sha256
+          python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft --output /tmp/aquiloop-binder-draft-second.pdf
+          sha256sum /tmp/aquiloop-binder-draft-second.pdf | tee build/binder/second.sha256
+          cmp build/binder/aquiloop-binder-draft.pdf /tmp/aquiloop-binder-draft-second.pdf
+
+      - name: Validate PDF geometry and render at 150 DPI
+        run: |
+          set -euo pipefail
+          pdfinfo -box build/binder/aquiloop-binder-draft.pdf | tee build/binder/pdfinfo.txt
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          info = Path("build/binder/pdfinfo.txt").read_text(encoding="utf-8")
+          assert re.search(r"^Pages:\s+6$", info, re.MULTILINE), "expected exactly six pages"
+          assert re.search(r"^Page rot:\s+0$", info, re.MULTILINE), "expected rotation 0"
+          for box in ("MediaBox", "CropBox"):
+              match = re.search(rf"^{box}:\s+(.+)$", info, re.MULTILINE)
+              assert match and match.group(1).split() == ["0.00", "0.00", "612.00", "792.00"], f"unexpected {box}"
+          PY
+          mkdir -p /tmp/binder-render/color /tmp/binder-render/grayscale
+          pdftoppm -r 150 -png build/binder/aquiloop-binder-draft.pdf /tmp/binder-render/color/page
+          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-draft.pdf /tmp/binder-render/grayscale/page
+          test "$(find /tmp/binder-render/color -type f | wc -l)" -eq 6
+          test "$(find /tmp/binder-render/grayscale -type f | wc -l)" -eq 6
+
+      - name: Check repository cleanliness policy
+        run: |
+          git diff --check
+          test -z "$(git ls-files build)"
+
+      - name: Upload combined draft PDF
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-care-binder-draft
+          path: build/binder/aquiloop-binder-draft.pdf
+          if-no-files-found: error
+          retention-days: 14

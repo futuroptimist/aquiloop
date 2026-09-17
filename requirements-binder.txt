@@ -1,0 +1,3 @@
+# Python dependencies for the reproducible care-binder build and regression suite.
+Pillow==12.3.0
+pypdf==6.18.1

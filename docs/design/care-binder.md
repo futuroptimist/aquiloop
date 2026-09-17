@@ -460,9 +460,8 @@ python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
 ```
 
 Combined assembly is intentionally draft-only until profiles have qualified
-photographs and final content. CI remains future work; the Step 07a regression
-matrix now covers the local page, content, asset, rights, layout, and assembly
-contracts described below.
+photographs and final content. The Step 07a regression matrix covers the local
+page, content, asset, rights, layout, and assembly contracts described below.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -491,10 +490,23 @@ entry offset by another missing or blank entry.
 
 ### Automation and regression checks
 
-A later GitHub Actions workflow must run for relevant pull requests, changes on
-`main`, and `workflow_dispatch`. It builds once from pinned dependencies and
-uploads one clearly named, downloadable **combined PDF** artifact. It needs no
-credentials, release, publishing service, or deployment.
+`.github/workflows/binder.yml` runs for relevant binder-path pull requests and
+pushes to `main`, and can be started with `workflow_dispatch`. It has read-only
+repository contents permission, uses the versioned `ubuntu-24.04` runner, and
+pins checkout, Python setup, and artifact upload actions to full commit SHAs.
+The toolchain is Python 3.12.13, Pillow 12.3.0, pypdf 6.18.1, LuaHBTeX 1.17.0,
+and Poppler 24.02.0; the workflow prints and enforces those versions. Python
+packages are recorded in `requirements-binder.txt`, while the distribution TeX
+and Poppler packages are installed without recommended extras from the
+versioned runner's Ubuntu repositories.
+
+CI validates only the six-page **draft** combined PDF, including deterministic
+double-build hashes, PDF boxes, and 150-DPI color and grayscale renders. It
+uploads exactly one artifact, `aquiloop-care-binder-draft`, containing only
+`build/binder/aquiloop-binder-draft.pdf`, retained for 14 days. Rendered PNGs
+and diagnostic files remain in the runner workspace. This automation uses no
+credentials and performs no deployment, publishing, release, or final-mode
+qualification.
 
 The validator must fail on:
 
@@ -575,9 +587,9 @@ Only that later physical check can justify calling the binder print-worthy.
   assembly are implemented; final page qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, CI workflow, generated PDF artifacts, Step 07b
-  qualification, and physical print/handwriting checks remain pending. Step 07a
-  automated regression coverage does not satisfy those later acceptance gates.
+- Actual specimen assets, final rights review, screen inspection, and physical
+  print/handwriting checks remain pending. CI's provisional draft artifact does
+  not satisfy those later gates or qualify a final-mode release.
 
 ### Local verification outputs (Step 06a)
 
