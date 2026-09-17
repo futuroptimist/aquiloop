@@ -460,9 +460,8 @@ python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
 ```
 
 Combined assembly is intentionally draft-only until profiles have qualified
-photographs and final content. CI remains future work; the Step 07a regression
-matrix now covers the local page, content, asset, rights, layout, and assembly
-contracts described below.
+photographs and final content. The Step 07a regression matrix covers the local
+page, content, asset, rights, layout, and assembly contracts described below.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -491,10 +490,26 @@ entry offset by another missing or blank entry.
 
 ### Automation and regression checks
 
-A later GitHub Actions workflow must run for relevant pull requests, changes on
-`main`, and `workflow_dispatch`. It builds once from pinned dependencies and
-uploads one clearly named, downloadable **combined PDF** artifact. It needs no
-credentials, release, publishing service, or deployment.
+`.github/workflows/binder.yml` runs for pull requests that change binder inputs,
+pushes to `main` that change those paths, and manual `workflow_dispatch` runs.
+It has read-only repository contents permission and no credentials, release,
+package, publishing, or deployment capability. All actions use immutable commit
+pins, and the versioned `ubuntu-24.04` runner installs exact Ubuntu package
+versions for TeX Live 2023 / LuaHBTeX 1.17.0, Poppler 24.02.0, and the TeX Gyre
+fonts, records their package/tool versions, and fails if commands are
+unavailable. Python 3.12.13, Pillow 12.3.0, and
+pypdf 6.18.1 are exact pins; `requirements-binder.txt` is the binder-only Python
+dependency record. The build does not fetch fonts, photographs, or other binder
+inputs.
+
+CI runs the complete test suite, compiles the Python sources, builds the ordered
+draft twice to verify deterministic bytes, checks all six MediaBox/CropBox and
+rotation values with `pdfinfo -box`, and renders all pages in color and grayscale
+at 150 DPI. It uploads exactly one 14-day artifact named
+`aquiloop-binder-draft`, containing only
+`build/binder/aquiloop-binder-draft.pdf`; diagnostic renders remain in the
+runner workspace. This is a provisional six-page **draft** validation, never a
+final release or deployment.
 
 The validator must fail on:
 
@@ -575,9 +590,11 @@ Only that later physical check can justify calling the binder print-worthy.
   assembly are implemented; final page qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, CI workflow, generated PDF artifacts, Step 07b
-  qualification, and physical print/handwriting checks remain pending. Step 07a
-  automated regression coverage does not satisfy those later acceptance gates.
+- Actual specimen photographs and growing conditions, final identity/content
+  and rights review, final-mode qualification, rendered-page human inspection,
+  and physical print/punch/handwriting checks remain pending. Draft CI and its
+  downloadable artifact do not satisfy those later gates and are not a release
+  or deployment.
 
 ### Local verification outputs (Step 06a)
 
