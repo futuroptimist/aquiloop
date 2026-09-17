@@ -4,7 +4,9 @@ import json
 import tempfile
 import unittest
 import os
+import re
 import shutil
+from collections import Counter
 from unittest import mock
 from pathlib import Path
 from PIL import Image
@@ -15,6 +17,146 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
+
+
+def _log_row_cells(row_anchors, column_anchors, field_positions):
+    """Assign every extracted label to one non-overlapping rendered cell."""
+    rows = sorted(row_anchors, reverse=True)
+    # Date baselines are row starts, not row centers.  A row owns everything
+    # below its Date baseline down to (but not including) the next baseline.
+    boundaries = rows[1:]
+    cells = [[Counter() for _ in column_anchors] for _ in rows]
+    for label, x, y in field_positions:
+        column = min(range(len(column_anchors)), key=lambda index: abs(x - column_anchors[index]))
+        row = next((index for index, boundary in enumerate(boundaries) if y > boundary + 1), len(rows) - 1)
+        cells[row][column][label] += 1
+    return cells
+
+
+def _assert_log_row_cells(row_anchors, column_anchors, field_positions, expected_fields):
+    cells = _log_row_cells(row_anchors, column_anchors, field_positions)
+    for row, row_cells in enumerate(cells):
+        for column, found in enumerate(row_cells):
+            expected = Counter(expected_fields[column])
+            if found != expected:
+                raise AssertionError(
+                    f"row {row + 1}, column {column + 1}: expected {expected}, found {found}"
+                )
+
+
+def _painted_pdf_geometry(page):
+    """Return painted image and stroked-path bounding boxes from a PDF page."""
+    resources = page["/Resources"]
+    xobjects = resources.get("/XObject", {})
+    ctm = (1, 0, 0, 1, 0, 0)
+    stack = []
+    path = []
+    images = []
+    strokes = []
+
+    def transform(point):
+        x, y = point
+        a, b, c, d, e, f = ctm
+        return (a * x + c * y + e, b * x + d * y + f)
+
+    def bounds(points):
+        xs, ys = zip(*points)
+        return (min(xs), min(ys), max(xs), max(ys))
+
+    for operands, operator in page.get_contents().operations:
+        if operator == b"q":
+            stack.append(ctm)
+        elif operator == b"Q":
+            ctm = stack.pop()
+        elif operator == b"cm":
+            values = [float(value) for value in operands]
+            a, b, c, d, e, f = values
+            ca, cb, cc, cd, ce, cf = ctm
+            ctm = (
+                ca * a + cc * b, cb * a + cd * b,
+                ca * c + cc * d, cb * c + cd * d,
+                ca * e + cc * f + ce, cb * e + cd * f + cf,
+            )
+        elif operator in (b"m", b"l"):
+            values = [float(value) for value in operands]
+            path.append(transform(values[:2]))
+        elif operator == b"re":
+            values = [float(value) for value in operands]
+            x, y, width, height = values
+            path.extend(transform(point) for point in (
+                (x, y), (x + width, y), (x + width, y + height), (x, y + height)
+            ))
+        elif operator in (b"c", b"v", b"y"):
+            values = [float(value) for value in operands]
+            path.extend(transform(values[index:index + 2]) for index in range(0, len(values), 2))
+        elif operator in (b"S", b"s", b"B", b"B*", b"b", b"b*"):
+            if path:
+                strokes.append(bounds(path))
+            path = []
+        elif operator in (b"n", b"f", b"f*"):
+            path = []
+        elif operator == b"Do":
+            name = operands[0]
+            xobject = xobjects.get(name)
+            if xobject is not None and xobject.get_object().get("/Subtype") == "/Image":
+                images.append(bounds([transform(point) for point in ((0, 0), (1, 0), (1, 1), (0, 1))]))
+    return images, strokes
+
+
+def _assert_optional_detail_rendering(page, detail_count):
+    images, strokes = _painted_pdf_geometry(page)
+    image_sizes = [(box[2] - box[0], box[3] - box[1]) for box in images]
+    if len(image_sizes) != 1 + detail_count:
+        raise AssertionError(f"expected {1 + detail_count} painted images, found {len(image_sizes)}")
+    if sum(width > 230 and height > 230 for width, height in image_sizes) != 1:
+        raise AssertionError("expected exactly one painted hero image")
+    painted_details = sum(
+        145 < width < 150 and 95 < height < 100 for width, height in image_sizes
+    )
+    detail_images = [
+        box for box in images
+        if 145 < box[2] - box[0] < 150 and 95 < box[3] - box[1] < 100
+    ]
+    # TikZ emits the template frame as four separately stroked edges.  Fold
+    # those edges into a rectangle while retaining support for a single `re`
+    # stroke, as used by the unwanted-empty-frame regression below.
+    frames = [
+        box for box in strokes
+        if 146 < box[2] - box[0] < 150 and 96 < box[3] - box[1] < 100
+    ]
+    horizontal = [box for box in strokes if 146 < box[2] - box[0] < 150 and box[3] - box[1] < .2]
+    vertical = [box for box in strokes if box[2] - box[0] < .2 and 96 < box[3] - box[1] < 100]
+    for bottom in horizontal:
+        for top in horizontal:
+            candidate = (bottom[0], bottom[1], bottom[2], top[1])
+            if not 96 < candidate[3] - candidate[1] < 100:
+                continue
+            if any(
+                abs(left[0] - candidate[0]) < .5
+                and abs(left[1] - candidate[1]) < .5
+                and abs(left[3] - candidate[3]) < .5
+                for left in vertical
+            ) and any(
+                abs(right[0] - candidate[2]) < .5
+                and abs(right[1] - candidate[1]) < .5
+                and abs(right[3] - candidate[3]) < .5
+                for right in vertical
+            ):
+                frames.append(candidate)
+    frames = list({tuple(round(value, 1) for value in frame) for frame in frames})
+    if (
+        painted_details != detail_count
+        or len(detail_images) != detail_count
+        or len(frames) != detail_count
+        or any(
+            not any(all(abs(a - b) < 1 for a, b in zip(frame, image)) for frame in frames)
+            for image in detail_images
+        )
+    ):
+        raise AssertionError(
+            f"expected {detail_count} painted details/frames, "
+            f"found {painted_details}/{len(frames)}"
+        )
 
 
 class CatalogTests(unittest.TestCase):
@@ -91,6 +233,24 @@ class CatalogTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "aspect ratio"):
                 build_binder.load_entry(base.name, "final")
 
+    def test_synthetic_owned_reviewed_photograph_passes_final_validation(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as name:
+            base = Path(name)
+            (base / "assets").mkdir()
+            Image.new("RGB", (990, 990), "#597267").save(base / "assets" / "hero.jpg")
+            record = {
+                "id": "owned-hero", "path": "assets/hero.jpg", "kind": "photograph",
+                "subjects": ["synthetic plant"], "alt": "Synthetic owned plant photograph.",
+                "caption": "Synthetic owned fixture.",
+                "source": {"photographer": "test suite", "provenance": "generated fixture",
+                           "rights": "owned test fixture", "rights_reviewed": True},
+            }
+            (base / "assets.json").write_text(json.dumps({"schema_version": 1, "assets": [record]}))
+            (base / "page.tex").write_text("% binder-placement hero owned-hero; test\n")
+            _, records, selected = build_binder.load_entry(base.name, "final")
+            self.assertEqual(selected, {"hero": "owned-hero"})
+            self.assertTrue(records["owned-hero"]["source"]["rights_reviewed"])
+
 
 class AssemblyTests(unittest.TestCase):
     def test_manifest_is_the_ordered_single_page_assembly_authority(self):
@@ -141,11 +301,13 @@ class AssemblyTests(unittest.TestCase):
             mediabox = Box((0, 0, 612, 792))
             cropbox = Box((0, 0, 612, 792))
 
-            def __init__(self, text="content", rotation=0, crop=None):
+            def __init__(self, text="substantive page content " * 6, rotation=0, crop=None, media=None):
                 self.text = text
                 self.rotation = rotation
                 if crop:
                     self.cropbox = Box(crop)
+                if media:
+                    self.mediabox = Box(media)
 
             def get(self, key):
                 return self.rotation if key == "/Rotate" else None
@@ -154,13 +316,34 @@ class AssemblyTests(unittest.TestCase):
                 return self.text
 
         build_binder._validate_page(Page(), "valid")
+        build_binder._validate_page(
+            Page(text=("x " * build_binder.MIN_EXTRACTED_PAGE_CHARACTERS)),
+            "threshold with normalized whitespace",
+        )
         for page, message in (
             (Page(crop=(20, 20, 632, 812)), "geometry"),
+            (Page(media=(0, 0, 600, 792)), "geometry"),
             (Page(text=" \n\t"), "blank"),
+            (Page(text="page 1"), "near-blank"),
+            (Page(text="Watering & aquarium log"), "near-blank"),
+            (Page(text="DRAFT PLACEHOLDER\nhero-placeholder-001"), "near-blank"),
+            (Page(text="x" * (build_binder.MIN_EXTRACTED_PAGE_CHARACTERS - 1)), "near-blank"),
             (Page(rotation=90), "rotation"),
         ):
             with self.subTest(message=message), self.assertRaisesRegex(RuntimeError, message):
                 build_binder._validate_page(page, "invalid")
+
+    def test_removed_entry_cannot_reduce_combined_expected_page_count(self):
+        original = json.loads((ROOT / "binder" / "manifest.yaml").read_text())
+        original["entries"].pop()
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            manifest = root / "binder" / "manifest.yaml"
+            manifest.parent.mkdir()
+            manifest.write_text(json.dumps(original))
+            with mock.patch.object(build_binder, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "canonical six-entry"):
+                    build_binder.compile_manifest(manifest, "draft", root / "short.pdf")
 
     def test_supplemental_rejects_final_mode(self):
         with tempfile.TemporaryDirectory() as name:
@@ -186,14 +369,35 @@ class AssemblyTests(unittest.TestCase):
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
                 "Hornwort", "Planning estimate only", "Rain/amount",
                 "Watering interval:", "N/A", "Aquarium maintenance", "not watering",
-                "Event:", "Amount/result:",
+                "Event:", "Amount/result:", "Observation:", "Date:", "Time:",
+                "Amount/method:", "outdoor", "grow bag",
+                "indoors", "aquarium",
             ):
                 self.assertIn(text, log_text)
+            # TeX Gyre Heros kerning can make Poppler/pypdf expose this header
+            # as "T ypical"; assert the words while tolerating that extractor
+            # artifact rather than coupling the contract to one PDF parser.
+            self.assertEqual(len(re.findall(r"T\s*ypical interval:", log_text)), 4)
+            self.assertEqual(len(re.findall(r"_+\s*days", log_text)), 4)
+            self.assertRegex(log_text, r"Hornwort[\s\S]*Watering interval:\s*N/A")
+            counts = Counter(
+                label for label in ("Date:", "Time:", "Event:", "Amount/result:",
+                                    "Rain/amount:", "Amount/method:", "Observation:")
+                for _ in range(log_text.count(label))
+            )
+            self.assertEqual(counts["Date:"], 14)
+            self.assertEqual(counts["Time:"], 14)
+            self.assertEqual(counts["Event:"], 14)
+            self.assertEqual(counts["Amount/result:"], 14)
+            self.assertEqual(counts["Rain/amount:"], 28)
+            self.assertEqual(counts["Amount/method:"], 56)
+            self.assertEqual(counts["Observation:"], 70)
             labels = {"Date:", "Time:", "Amount/method:", "Observation:",
                       "Rain/amount:", "Event:", "Amount/result:"}
             sizes = []
             date_positions = []
             aquarium_observation_positions = []
+            field_positions = []
 
             def inspect_text(text, _cm, tm, _font, font_size):
                 stripped = text.strip()
@@ -203,14 +407,35 @@ class AssemblyTests(unittest.TestCase):
                     date_positions.append(tm[5])
                 if "Observation:" in stripped and tm[4] > 430:
                     aquarium_observation_positions.append(tm[5])
+                for label in labels:
+                    if label in stripped:
+                        field_positions.append((label, tm[4], tm[5]))
 
             log_reader.pages[0].extract_text(visitor_text=inspect_text)
             self.assertTrue(sizes)
+            # LuaLaTeX's PDF conversion exposes requested 8 pt labels as about
+            # 7.97011 points. Keep that explicit tolerance without weakening
+            # the design's physical 8 pt request.
             self.assertGreaterEqual(min(sizes), 7.9)
+            self.assertAlmostEqual(min(sizes), 7.97011, delta=0.01)
             row_tops = sorted(set(round(position, 1) for position in date_positions), reverse=True)
             self.assertEqual(len(row_tops), 14)
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
             self.assertEqual(len(aquarium_observation_positions), 14)
+
+            # Establish the six rendered columns from their label x positions,
+            # then verify every one of the 14 row/column regions independently.
+            x_positions = sorted({round(x, 1) for _, x, _ in field_positions})
+            self.assertEqual(len(x_positions), 6)
+            expected_fields = (
+                {"Date:", "Time:"},
+                {"Amount/method:", "Observation:", "Rain/amount:"},
+                {"Amount/method:", "Observation:", "Rain/amount:"},
+                {"Amount/method:", "Observation:"},
+                {"Amount/method:", "Observation:"},
+                {"Event:", "Amount/result:", "Observation:"},
+            )
+            _assert_log_row_cells(row_tops, x_positions, field_positions, expected_fields)
 
             manifest = ROOT / "binder" / "manifest.yaml"
             build_binder.compile_manifest(manifest, "draft", first)
@@ -228,6 +453,114 @@ class AssemblyTests(unittest.TestCase):
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
                 build_binder._validate_page(page, title)
+
+    def test_log_row_regions_reject_adjacent_field_borrowing(self):
+        rows = [606.8, 567.7, 528.6, 489.5]
+        columns = [10.0, 20.0]
+        expected = ({"Date:"}, {"Observation:"})
+        positions = []
+        for y in rows:
+            positions.extend((
+                ("Date:", columns[0], y),
+                ("Observation:", columns[1], y - 20.9),
+            ))
+        _assert_log_row_cells(rows, columns, positions, expected)
+
+        # Preserve global counts while moving an aquarium Observation into an
+        # adjacent row. Exercise both outer rows so neither can borrow a label.
+        for source, destination in ((0, 1), (3, 2)):
+            mutated = list(positions)
+            occurrence = ("Observation:", columns[1], rows[source] - 20.9)
+            index = mutated.index(occurrence)
+            mutated[index] = ("Observation:", columns[1], rows[destination] - 20.9)
+            self.assertEqual(Counter(label for label, _, _ in mutated),
+                             Counter(label for label, _, _ in positions))
+            cells = _log_row_cells(rows, columns, mutated)
+            self.assertEqual(cells[source][1]["Observation:"], 0)
+            self.assertEqual(cells[destination][1]["Observation:"], 2)
+            with self.assertRaisesRegex(AssertionError, r"row [1-4], column 2"):
+                _assert_log_row_cells(rows, columns, mutated, expected)
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_every_profile_builds_independently_with_complete_visible_content(self):
+        from pypdf import PdfReader
+
+        headings = {
+            "sedum-loves-fire": ("Sedum", "LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+            "kalanchoe-desert": ("Kalanchoe", "LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+            "pothos": ("Pothos", "LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+            "bird-of-paradise": ("Bird of paradise", "LIGHT / EXPOSURE", "SOIL / SUBSTRATE", "WATER", "TEMPERATURE / SEASON", "FEEDING / MAINTENANCE", "PROPAGATION", "TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+            "aquarium-hornwort": ("Aquarium hornwort", "LIGHT", "WATER PARAMETERS / TEMPERATURE", "PLACEMENT / FLOATING", "NUTRIENT CONTEXT", "GROWTH / TRIMMING", "PROPAGATION", "COMPATIBILITY / TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
+        }
+        propagation_evidence = {
+            "sedum-loves-fire": (("stem", "whole leaf", "callus", "rot"), ("SED-POWO", "SED-PAT", "SED-MSU", "SED-IA")),
+            "kalanchoe-desert": (("stem section", "lower leaves", "well-drained", "rot"), ("KAL-RHS", "KAL-IA", "KAL-PROP")),
+            "pothos": (("vine stem cutting", "root it in water", "After establishment", "root rot"), ("POT-NCSU", "POT-PSU")),
+            "bird-of-paradise": (("divide", "shoot", "original depth", "soggy"), ("BOP-REG", "BOP-NIC", "BOP-UF")),
+            "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-USDA", "HOR-FWS", "HOR-WA", "HOR-TROP")),
+        }
+
+        def assert_extracted_phrase(phrase, text):
+            # PDF extraction preserves discretionary line-break hyphens and
+            # whitespace. Normalize those artifacts without weakening the
+            # profile-specific prose evidence being checked.
+            normalized = re.sub(r"-\s+", "", text)
+            normalized = re.sub(r"\s+", " ", normalized)
+            self.assertIn(phrase, normalized)
+
+        def assert_profile_evidence(slug, text):
+            guidance, source_keys = propagation_evidence[slug]
+            for marker in (*headings[slug], *guidance, *source_keys, "EVIDENCE", "REVISION"):
+                assert_extracted_phrase(marker, text)
+
+        # Pin the two observed extractor wraps and ensure normalization does
+        # not allow genuinely absent guidance to satisfy the assertion.
+        assert_extracted_phrase("After establishment", "After estab-\nlishment")
+        assert_extracted_phrase("below the surface", "below the sur-\nface")
+        with self.assertRaises(AssertionError):
+            assert_extracted_phrase("After establishment", "PROPAGATION [POT-NCSU]")
+
+        with tempfile.TemporaryDirectory() as name:
+            for slug, required in headings.items():
+                with self.subTest(entry=slug):
+                    output = Path(name) / f"{slug}.pdf"
+                    base, records, selected = build_binder.load_entry(slug, "draft")
+                    build_binder.compile_entry(base, records, selected, output)
+                    reader = PdfReader(output)
+                    self.assertEqual(len(reader.pages), 1)
+                    page = reader.pages[0]
+                    build_binder._validate_page(page, slug)
+                    text = page.extract_text()
+                    assert_profile_evidence(slug, text)
+                    if any(records[asset_id]["kind"] == "placeholder"
+                           for asset_id in selected.values()):
+                        self.assertIn("DRAFT PLACEHOLDER", text)
+                    if slug == "aquarium-hornwort":
+                        self.assertNotIn("SOIL / SUBSTRATE", text)
+                        self.assertNotIn("Water thoroughly", text)
+
+            # A heading and citation alone must not masquerade as a rendered
+            # propagation contract. Work only on a temporary entry copy.
+            source = ROOT / "binder" / "entries" / "pothos"
+            with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as temp_entry:
+                mutant = Path(temp_entry)
+                shutil.copytree(source / "assets", mutant / "assets")
+                shutil.copy(source / "assets.json", mutant / "assets.json")
+                page = (source / "page.tex").read_text(encoding="utf-8")
+                page = re.sub(
+                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU\]\}\})",
+                    r"\1Citation retained only. \2",
+                    page,
+                    count=1,
+                )
+                (mutant / "page.tex").write_text(page, encoding="utf-8")
+                output = Path(name) / "pothos-missing-propagation.pdf"
+                build_binder.compile_entry(*build_binder.load_entry(mutant.name, "draft"), output)
+                text = PdfReader(output).pages[0].extract_text()
+                self.assertIn("PROPAGATION", text)
+                self.assertIn("POT-NCSU", text)
+                with self.assertRaises(AssertionError):
+                    assert_profile_evidence("pothos", text)
 
 
 class PhotoPreparationTests(unittest.TestCase):
@@ -311,6 +644,19 @@ class ComprehensiveRegressionTests(unittest.TestCase):
                 text = reader.pages[0].extract_text()
                 self.assertIn("PROPAGATION", text); self.assertIn("SED-MSU", text)
                 self.assertEqual(set(loaded[2]), {"hero"} | {f"detail{i}" for i in range(1, count + 1)})
+                _assert_optional_detail_rendering(reader.pages[0], count)
+
+        # Resource counts and placement declarations cannot detect an empty
+        # vector frame. Inspect painted path geometry and reject one directly.
+        context, base = self.fixture(
+            0, page_suffix=r"\tikz[overlay]{\draw (0,0) rectangle (2.05in,1.35in);}"
+        )
+        with context:
+            output = base / "empty-frame.pdf"
+            build_binder.compile_entry(*build_binder.load_entry(base.name, "final"), output)
+            page = PdfReader(output).pages[0]
+            with self.assertRaisesRegex(AssertionError, "painted details/frames"):
+                _assert_optional_detail_rendering(page, 0)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_selected_detail_placeholders_are_visibly_labeled(self):
@@ -335,9 +681,15 @@ class ComprehensiveRegressionTests(unittest.TestCase):
         self.assertNotIn("keepaspectratio=false", template)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
-    def test_overflow_is_rejected(self):
-        context, base = self.fixture(page_suffix="\\par " + ("OVERFLOW " * 5000))
-        with context, self.assertRaisesRegex(RuntimeError, "rendered .* pages|overfull"):
+    def test_overfull_box_is_rejected_independently(self):
+        context, base = self.fixture(page_suffix=r"\par\noindent\hbox to 1pt{WWWWW}\par")
+        with context, self.assertRaisesRegex(RuntimeError, "overfull"):
+            build_binder.compile_entry(*build_binder.load_entry(base.name, "final"), base / "bad.pdf")
+
+    @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
+    def test_unexpected_page_count_is_rejected_independently(self):
+        context, base = self.fixture(page_suffix=r"\newpage SECOND PAGE")
+        with context, self.assertRaisesRegex(RuntimeError, r"rendered 2 pages, expected 1"):
             build_binder.compile_entry(*build_binder.load_entry(base.name, "final"), base / "bad.pdf")
 
     def test_valid_unselected_unknown_rights_does_not_change_output_selection(self):
@@ -369,8 +721,12 @@ class ComprehensiveRegressionTests(unittest.TestCase):
             cases=[]
             cases.append(([], "contain an object"))
             cases.append(({"schema_version":1,"assets":{}}, "array"))
+            cases.append(({"schema_version":2,"assets":[]}, "schema_version"))
             bad=json.loads(json.dumps(original)); bad["assets"][0]["alt"]=""; cases.append((bad,"nonempty"))
             bad=json.loads(json.dumps(original)); bad["assets"][0]["subjects"]="plant"; cases.append((bad,"subjects"))
+            bad=json.loads(json.dumps(original)); del bad["assets"][0]["caption"]; cases.append((bad,"missing required metadata"))
+            bad=json.loads(json.dumps(original)); del bad["assets"][0]["source"]["rights"]; cases.append((bad,"missing source metadata"))
+            bad=json.loads(json.dumps(original)); bad["assets"][0]["source"]["photographer"]=""; cases.append((bad,"nonempty"))
             bad=json.loads(json.dumps(original)); bad["assets"][0]["id"]="bad id"; cases.append((bad,"malformed"))
             bad=json.loads(json.dumps(original)); bad["assets"][0]["path"]="../page.tex"; cases.append((bad,"within entry"))
             for candidate,message in cases:
@@ -381,6 +737,28 @@ class ComprehensiveRegressionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"below"): build_binder.load_entry(base.name,"draft")
             Image.effect_noise((990,990),100).save(base/"assets/hero.jpg",quality=100)
             with self.assertRaisesRegex(ValueError,"1 MiB"): build_binder.load_entry(base.name,"draft")
+
+    def test_missing_asset_file_is_rejected_independently_of_containment(self):
+        context, base = self.fixture()
+        with context:
+            data = json.loads((base / "assets.json").read_text())
+            data["assets"][0]["path"] = "assets/does-not-exist.jpg"
+            (base / "assets.json").write_text(json.dumps(data))
+            self.assertFalse(base.joinpath("assets/does-not-exist.jpg").exists())
+            with self.assertRaisesRegex(ValueError, "asset path must resolve within entry"):
+                build_binder.load_entry(base.name, "draft")
+
+    def test_unsupported_raster_format_and_wrong_aspect_are_rejected(self):
+        for image_format, size, message in (("GIF", (990, 990), "unsupported raster format"),
+                                            ("JPEG", (1000, 990), "aspect ratio")):
+            with self.subTest(image_format=image_format, size=size):
+                context, base = self.fixture()
+                with context:
+                    data = json.loads((base / "assets.json").read_text())
+                    path = base / data["assets"][0]["path"]
+                    Image.new("RGB", size).save(path, format=image_format)
+                    with self.assertRaisesRegex(ValueError, message):
+                        build_binder.load_entry(base.name, "final")
 
     def test_duplicate_and_malformed_placements_are_independent(self):
         for lines,message in [(["% binder-placement hero hero; ok","% binder-placement hero hero; twice"],"duplicate"),(["% binder-placement hero hero"],"malformed"),(["% binder-placement hero missing; ok"],"unknown asset")]:
@@ -409,6 +787,35 @@ class ComprehensiveRegressionTests(unittest.TestCase):
         context, base = self.fixture()
         with context:
             build_binder.load_entry(base.name, "final")
+
+    def test_rights_review_guard_is_independent_of_resolved_rights(self):
+        for value in ("missing", False, "true", 1, None, True):
+            with self.subTest(rights_reviewed=value):
+                context, base = self.fixture()
+                with context:
+                    data = json.loads((base / "assets.json").read_text())
+                    source = data["assets"][0]["source"]
+                    if value == "missing":
+                        source.pop("rights_reviewed")
+                    else:
+                        source["rights_reviewed"] = value
+                    (base / "assets.json").write_text(json.dumps(data))
+                    if value is True:
+                        build_binder.load_entry(base.name, "final")
+                    else:
+                        with self.assertRaisesRegex(ValueError, "not qualified"):
+                            build_binder.load_entry(base.name, "final")
+
+    def test_reviewed_resolved_placeholder_is_still_rejected(self):
+        context, base = self.fixture()
+        with context:
+            data = json.loads((base / "assets.json").read_text())
+            record = data["assets"][0]
+            record.update(kind="placeholder", path="assets/placeholder.txt")
+            (base / "assets/placeholder.txt").write_text("synthetic")
+            (base / "assets.json").write_text(json.dumps(data))
+            with self.assertRaisesRegex(ValueError, "not qualified"):
+                build_binder.load_entry(base.name, "final")
 
     def test_tex_special_asset_paths(self):
         for filename, rejected in (("ordinary.jpg", False), ("photo#1.jpg", True), ("photo%crop.jpg", True)):

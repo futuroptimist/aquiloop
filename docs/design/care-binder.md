@@ -460,8 +460,9 @@ python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
 ```
 
 Combined assembly is intentionally draft-only until profiles have qualified
-photographs and final content. CI and the broader regression matrix remain
-future work.
+photographs and final content. CI remains future work; the Step 07a regression
+matrix now covers the local page, content, asset, rights, layout, and assembly
+contracts described below.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -504,8 +505,18 @@ The validator must fail on:
 - unresolved asset/font references, missing required content keys or source
   metadata, placeholder imagery in a release build, or build warnings promoted
   by policy;
-- blank/near-blank pages, content outside the safe/content boxes, clipped text,
-  overfull boxes, or unintended overflow pages.
+- blank/near-blank pages (fewer than 100 non-whitespace extracted characters,
+  so a surviving title or placeholder alone does not pass), content outside the
+  safe/content boxes, clipped text, overfull boxes, or unintended overflow
+  pages.
+
+The watering-log regression requests 8-point TeX labels and accepts the
+approximately 7.97011-point size exposed by LuaLaTeX PDF text extraction (with
+a ±0.01-point comparison tolerance and a 7.9-point floor for conversion
+noise). This extraction
+tolerance does not lower the physical 8-point design contract. Automated page
+geometry and text checks complement, but do not replace, the later physical
+print and handwriting qualification.
 
 Image and content validation must additionally check:
 
@@ -564,8 +575,9 @@ Only that later physical check can justify calling the binder print-worthy.
   assembly are implemented; final page qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, broader regression coverage, CI workflow, and
-  generated PDF artifacts remain pending.
+- Actual specimen assets, CI workflow, generated PDF artifacts, Step 07b
+  qualification, and physical print/handwriting checks remain pending. Step 07a
+  automated regression coverage does not satisfy those later acceptance gates.
 
 ### Local verification outputs (Step 06a)
 
