@@ -21,6 +21,46 @@
       ]
     },
     {
+      "key": "POT-UW",
+      "authority": "University of Wisconsin–Madison Extension",
+      "title": "Pothos, Epipremnum aureum",
+      "url": "https://hort.extension.wisc.edu/articles/pothos-epipremmum-aureum/",
+      "accessed": "2026-09-17",
+      "supports": [
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
+        "natural_history_trivia",
+        "temperature_season"
+      ],
+      "applicability": "Species-level houseplant guidance. Feeding is conditional on active growth, not calendar winter alone."
+    },
+    {
+      "key": "POT-PROP",
+      "authority": "North Carolina State University Extension",
+      "title": "Extension Gardener Handbook: Plant Propagation",
+      "url": "https://content.ces.ncsu.edu/extension-gardener-handbook/13-propagation",
+      "accessed": "2026-09-17",
+      "supports": [
+        "propagation"
+      ],
+      "applicability": "General leaf-bud and single-node cutting method: the stem piece carries a node and axillary bud, with the bud in the rooting medium and leaf exposed."
+    },
+    {
+      "key": "POT-ASPCA",
+      "authority": "American Society for the Prevention of Cruelty to Animals",
+      "title": "Toxic and Non-toxic Plants: Golden Pothos",
+      "url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/golden-pothos",
+      "accessed": "2026-09-17",
+      "supports": [
+        "feeding_maintenance"
+      ],
+      "applicability": "Pet safety source for E. aureum; toxic to cats and dogs if chewed."
+    },
+    {
       "key": "POT-PSU",
       "authority": "Penn State Extension",
       "title": "Pothos as a Houseplant",

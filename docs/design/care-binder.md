@@ -28,6 +28,31 @@ the visible placeholder; they do not wait for photographs. Photograph-qualified
 final copy depends on reviewed specimen images, rights, and the inputs listed
 under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
 
+The five profiles are therefore usable **example-species guides** before photo
+collection: each gives sourced actions for its stated working species (or,
+for bird of paradise, separately labeled candidate species). A compact header
+note preserves identity uncertainty without displacing care instructions.
+These examples never assert that a working identity matches the user's plant.
+Later specimen/photo qualification may narrow an identity and adapt care to
+observed conditions; it is not a prerequisite for the example guidance.
+
+### Step 08a1 care and source correction pass
+
+The 2026-09-17 correction pass fixed the Kalanchoe H1b wording so the RHS
+10–15°C minimum-temperature band is not presented as a preferred summer
+growing range. It also completed pothos node-and-bud propagation instructions,
+made watering and growth-responsive feeding actionable, added concise sourced
+pet/handling cautions, and supplied practical qualitative substrate guidance
+where no defensible ratio was available. Each page now expands citation keys
+into a compact publisher/title legend and points to its entry's `sources.yaml`
+for the complete reference and applicability record.
+
+This pass does not qualify identities, cultivars, photos, local conditions, or
+final mode. Care-log handwriting space remains Step 08a2; shared typography and
+the previously measured footer safe-margin issue remain Step 08a3; revised
+proof verification remains Step 08a4; and actual-size printing, punching, and
+handwriting acceptance remain Step 08b.
+
 ## Visual references
 
 These references were inspected on 2026-09-14 for visual language only. They

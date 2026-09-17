@@ -495,7 +495,7 @@ class AssemblyTests(unittest.TestCase):
         propagation_evidence = {
             "sedum-loves-fire": (("stem", "whole leaf", "callus", "rot"), ("SED-POWO", "SED-PAT", "SED-MSU", "SED-IA")),
             "kalanchoe-desert": (("stem section", "lower leaves", "well-drained", "rot"), ("KAL-RHS", "KAL-IA", "KAL-PROP")),
-            "pothos": (("vine stem cutting", "root it in water", "After establishment", "root rot"), ("POT-NCSU", "POT-PSU")),
+            "pothos": (("vine stem cutting", "node and bud", "rooting node", "foliage above water"), ("POT-NCSU", "POT-PSU", "POT-UW", "POT-PROP")),
             "bird-of-paradise": (("divide", "shoot", "original depth", "soggy"), ("BOP-REG", "BOP-NIC", "BOP-UF")),
             "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-USDA", "HOR-FWS", "HOR-WA", "HOR-TROP")),
         }
@@ -548,7 +548,7 @@ class AssemblyTests(unittest.TestCase):
                 shutil.copy(source / "assets.json", mutant / "assets.json")
                 page = (source / "page.tex").read_text(encoding="utf-8")
                 page = re.sub(
-                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[POT-NCSU\]\}\})",
+                    r"(\{PROPAGATION\}\{).*?(\\textbf\{\[[^]]+\]\}\})",
                     r"\1Citation retained only. \2",
                     page,
                     count=1,

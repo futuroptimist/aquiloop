@@ -16,7 +16,7 @@
       "POT-NCSU"
     ]
   },
-  "environmental_variability": "Indoor light, temperature, container, and dry-down vary. Use plant and medium observations rather than a calendar.",
+  "environmental_variability": "Example guidance for Epipremnum aureum. Adjust for actual light, container, medium dry-down, temperature, and active growth; cultivar qualification remains later work.",
   "unresolved_fields": [
     "species and cultivar",
     "window exposure and distance",
@@ -27,53 +27,60 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "Penn State recommends moderate to bright light and avoiding direct sun; it notes that prolonged low light can reduce variegation or foliage brightness. Treat this as a starting point while the cultivar and exposure remain unknown.",
+        "claim": "Provide moderate to bright indirect light and avoid direct sun. Prolonged low light can reduce variegation or foliage brightness.",
         "sources": [
-          "POT-PSU"
+          "POT-PSU",
+          "POT-UW"
         ]
       }
     ],
     "soil_substrate": [
       {
-        "claim": "Use a loose, well-drained houseplant medium in a container with drainage; do not infer the current medium from appearance.",
+        "claim": "Use a loose, well-aerated, well-drained houseplant medium in a container with an open drainage hole. No defensible source here specifies a ratio, so this is qualitative guidance rather than a recipe.",
         "sources": [
-          "POT-NCSU"
+          "POT-NCSU",
+          "POT-UW"
         ]
       }
     ],
     "water": [
       {
-        "claim": "Penn State recommends watering when the soil is dry and warns that excess water can cause root rot while too little can cause temporary drooping. Check root-zone moisture rather than watering by calendar.",
+        "claim": "When the soil surface is dry, water the root ball thoroughly and let excess drain; empty any saucer. Recheck moisture instead of using a calendar. Persistently wet medium risks root rot.",
         "sources": [
-          "POT-PSU"
+          "POT-NCSU",
+          "POT-PSU",
+          "POT-UW"
         ]
       }
     ],
     "temperature_season": [
       {
-        "claim": "NCSU describes winter dormancy for pothos and excludes that period from its feeding schedule. Observe growth and medium dry-down rather than inferring a temperature limit or seasonal watering interval.",
+        "claim": "Keep away from drafts and large temperature swings. Growth response, not calendar winter alone, governs seasonal adjustment; water and feed less when growth and dry-down slow.",
         "sources": [
-          "POT-NCSU"
+          "POT-UW"
         ]
       }
     ],
     "feeding_maintenance": [
       {
-        "claim": "NCSU advises periodic fertilizer outside winter dormancy, wiping dusty leaves, and pruning stems to maintain a bushy habit. Adjust only after observing this specimen’s growth and medium.",
+        "claim": "Fertilize periodically during active growth; reduce or pause when growth slows. Prune long vines to promote new growth and wipe dusty leaves. Keep away from chewing pets; ingestion is toxic and sap can irritate skin.",
         "sources": [
-          "POT-NCSU"
+          "POT-NCSU",
+          "POT-UW",
+          "POT-ASPCA"
         ]
       }
     ],
     "propagation": [
       {
-        "claim": "Take a stem cutting from a vine and root it in water. Avoid keeping the resulting plant in over-wet potting medium, which can cause root rot.",
-        "method": "stem cutting",
-        "starting_material": "a vine stem cutting",
-        "establishment_condition": "place the cutting in water until it roots",
-        "pitfall": "over-wet potting medium after establishment can cause root rot",
+        "claim": "Cut a vine stem section containing a node and axillary bud; a detached leaf alone is insufficient. In water, submerge the rooting node while keeping foliage above water. Pot after roots form; avoid a waterlogged medium.",
+        "method": "single-node or multi-node stem cutting",
+        "starting_material": "a vine stem section containing at least one node and axillary bud, not a detached leaf alone",
+        "establishment_condition": "submerge the rooting node in water while keeping foliage above water, then pot after roots form",
+        "pitfall": "a leaf without a stem node and bud cannot produce the intended new shoot; waterlogged potting medium can rot roots",
         "sources": [
-          "POT-NCSU"
+          "POT-UW",
+          "POT-PROP"
         ]
       }
     ],
@@ -89,7 +96,8 @@
       {
         "claim": "Epipremnum aureum is a climbing/trailing evergreen aroid native to the Society Islands and can climb by aerial roots.",
         "sources": [
-          "POT-NCSU"
+          "POT-NCSU",
+          "POT-UW"
         ]
       }
     ]

@@ -22,6 +22,29 @@
       "applicability": "Cultivar profile for K. humilis ‘Desert Surprise’; supports its description and cultivar-specific cultivation, H1B hardiness, feeding, stem-cutting/plantlet propagation, and listed pests and diseases. Applicability to the specimen depends on later label and specimen confirmation."
     },
     {
+      "key": "KAL-HARD",
+      "authority": "Royal Horticultural Society",
+      "title": "RHS hardiness rating",
+      "url": "https://www.rhs.org.uk/advice/rhs-hardiness-rating",
+      "accessed": "2026-09-17",
+      "supports": [
+        "temperature_season",
+        "light_exposure"
+      ],
+      "applicability": "Defines H1b as a UK minimum-temperature hardiness band, not a preferred growing-temperature range, and permits summer outdoor placement only in sunny, sheltered locations."
+    },
+    {
+      "key": "KAL-ASPCA",
+      "authority": "American Society for the Prevention of Cruelty to Animals",
+      "title": "Toxic and Non-toxic Plants: Kalanchoe",
+      "url": "https://www.aspca.org/pet-care/aspca-poison-control/toxic-and-non-toxic-plants/kalanchoe",
+      "accessed": "2026-09-17",
+      "supports": [
+        "feeding_maintenance"
+      ],
+      "applicability": "Genus-level pet safety source; Kalanchoe is toxic to cats and dogs if eaten."
+    },
+    {
       "key": "KAL-IA",
       "authority": "Iowa State University Extension and Outreach",
       "title": "How do I care for Kalanchoe?",

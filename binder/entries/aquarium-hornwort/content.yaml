@@ -17,7 +17,7 @@
       "HOR-FWS"
     ]
   },
-  "environmental_variability": "Aquarium guidance is a starting point. Tank temperature, chemistry, light, livestock, flow, fertilizer, and observed response must be recorded before local thresholds are set. Watering interval is N/A.",
+  "environmental_variability": "Example guidance scoped to Ceratophyllum demersum; adjust it to observed local conditions. It does not identify or photograph-qualify the user’s specimen. Watering interval is N/A.",
   "unresolved_fields": [
     "species and trade form",
     "tank volume and livestock",

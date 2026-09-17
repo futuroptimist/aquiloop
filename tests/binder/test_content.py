@@ -161,6 +161,34 @@ class ContentWorksheetTests(unittest.TestCase):
                                 f"{slug}/{card} lacks support metadata for {key}",
                             )
 
+    def test_corrected_kalanchoe_hardiness_meaning(self):
+        content = self.load("kalanchoe-desert", "content.yaml")
+        guidance = content["cards"]["temperature_season"][0]["claim"]
+        self.assertIn("minimum-temperature band", guidance)
+        self.assertIn("not a preferred growing range", guidance)
+        self.assertIn("sunny, sheltered", guidance)
+
+    def test_pothos_cutting_and_routine_care_are_actionable(self):
+        content = self.load("pothos", "content.yaml")
+        propagation = content["cards"]["propagation"][0]
+        combined = " ".join(propagation[field] for field in PROPAGATION_FIELDS)
+        for meaning in ("node", "bud", "leaf alone", "foliage above water"):
+            self.assertIn(meaning, combined)
+        water = content["cards"]["water"][0]["claim"]
+        for meaning in ("surface is dry", "thoroughly", "excess drain", "calendar"):
+            self.assertIn(meaning, water)
+        feeding = content["cards"]["feeding_maintenance"][0]["claim"]
+        self.assertIn("active growth", feeding)
+        self.assertIn("growth slows", feeding)
+
+    def test_printed_pages_explain_source_keys_and_lookup_path(self):
+        for slug in ENTRIES:
+            with self.subTest(entry=slug):
+                page = (ROOT / "binder" / "entries" / slug / "page.tex").read_text()
+                self.assertIn(r"\textbf{EVIDENCE / SOURCES}", page)
+                self.assertIn("binder/entries/", page.replace(r"\allowbreak ", ""))
+                self.assertIn("sources.yaml", page)
+
 
 if __name__ == "__main__":
     unittest.main()
