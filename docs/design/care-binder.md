@@ -460,9 +460,32 @@ python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
 ```
 
 Combined assembly is intentionally draft-only until profiles have qualified
-photographs and final content. CI remains future work; the Step 07a regression
-matrix now covers the local page, content, asset, rights, layout, and assembly
-contracts described below.
+photographs and final content. `.github/workflows/binder.yml` runs the Step 07a
+regression matrix and builds this exact draft command for relevant pull requests,
+relevant pushes to `main`, and manual dispatches. Its path filters cover binder
+inputs, builder/photo scripts, binder tests and design documentation, the
+binder-only dependency pin, and the workflow itself.
+
+CI uses the versioned `ubuntu-24.04` runner, Python 3.12.13, Pillow 12.3.0,
+pypdf 6.18.1, TeX Live 2023 / LuaHBTeX 1.17.0, and Poppler 24.02.0. Python
+wheels are version-and-hash pinned in `requirements-binder.txt`; the workflow
+prints and checks every tool version before building. Ubuntu's signed package
+repositories provide TeX Live and Poppler because the hosted runner does not
+offer those tools as immutable actions; exact executable versions are enforced
+to prevent silent toolchain drift.
+
+After two byte-identical builds, PDF box checks, and 150-DPI color and grayscale
+render checks, CI uploads exactly one 14-day artifact named
+`aquiloop-binder-draft`, containing only
+`build/binder/aquiloop-binder-draft.pdf`. The workflow has read-only repository
+permission and performs no deployment, release, publishing, or external asset
+fetch. Rendered diagnostics stay in the runner workspace and generated outputs
+are never committed.
+
+This automation qualifies only the provisional six-page **draft** with visible
+profile placeholders. Specimen photographs and growing conditions, final image
+rights and identity/care review, final-mode qualification, rendered-page human
+inspection, and physical print/punch/handwriting inspection remain later gates.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -491,10 +514,10 @@ entry offset by another missing or blank entry.
 
 ### Automation and regression checks
 
-A later GitHub Actions workflow must run for relevant pull requests, changes on
-`main`, and `workflow_dispatch`. It builds once from pinned dependencies and
-uploads one clearly named, downloadable **combined PDF** artifact. It needs no
-credentials, release, publishing service, or deployment.
+The dedicated GitHub Actions workflow runs for relevant pull requests, changes
+on `main`, and `workflow_dispatch`. It uploads one clearly named, downloadable
+**combined draft PDF** artifact. It uses no credentials, release, publishing
+service, or deployment.
 
 The validator must fail on:
 
@@ -575,9 +598,9 @@ Only that later physical check can justify calling the binder print-worthy.
   assembly are implemented; final page qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, CI workflow, generated PDF artifacts, Step 07b
-  qualification, and physical print/handwriting checks remain pending. Step 07a
-  automated regression coverage does not satisfy those later acceptance gates.
+- Actual specimen assets, final-mode qualification, human rendered-page review,
+  and physical print/handwriting checks remain pending. Step 07a/07b automated
+  regression coverage does not satisfy those later acceptance gates.
 
 ### Local verification outputs (Step 06a)
 

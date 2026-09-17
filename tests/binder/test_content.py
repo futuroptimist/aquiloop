@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -160,6 +161,33 @@ class ContentWorksheetTests(unittest.TestCase):
                                 supported.get(key, set()),
                                 f"{slug}/{card} lacks support metadata for {key}",
                             )
+
+
+class BinderWorkflowTests(unittest.TestCase):
+    def test_workflow_is_read_only_pinned_and_builds_one_draft_artifact(self):
+        workflow = (ROOT / ".github/workflows/binder.yml").read_text(encoding="utf-8")
+        self.assertIn("pull_request:", workflow)
+        self.assertIn("push:", workflow)
+        self.assertIn("branches: [main]", workflow)
+        self.assertIn("workflow_dispatch: {}", workflow)
+        self.assertRegex(workflow, r"permissions:\n  contents: read\n")
+        self.assertNotRegex(workflow, r"(?m)^\s+(?:id-token|packages|deployments|releases|secrets):")
+        actions = re.findall(r"(?m)^\s+uses:\s+([^\s#]+)", workflow)
+        self.assertEqual(len(actions), 3)
+        self.assertTrue(all(re.fullmatch(r"[^@]+@[0-9a-f]{40}", action) for action in actions))
+        self.assertIn("python-version: '3.12.13'", workflow)
+        self.assertIn('PIL.__version__ == "12.3.0"', workflow)
+        self.assertIn('pypdf.__version__ == "6.18.1"', workflow)
+        self.assertIn("lualatex --version", workflow)
+        self.assertIn("pdfinfo -v", workflow)
+        build_command = (
+            "python scripts/build_binder.py --manifest binder/manifest.yaml "
+            "--mode draft --output build/binder/aquiloop-binder-draft.pdf"
+        )
+        self.assertEqual(workflow.count(build_command), 2)
+        self.assertEqual(workflow.count("uses: actions/upload-artifact@"), 1)
+        self.assertIn("path: ${{ env.PDF }}", workflow)
+        self.assertIn("ARTIFACT_NAME: aquiloop-binder-draft", workflow)
 
 
 if __name__ == "__main__":
