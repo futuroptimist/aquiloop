@@ -143,7 +143,8 @@ class ContentWorksheetTests(unittest.TestCase):
     def test_each_profile_prints_an_interpretable_source_legend(self):
         for slug in ENTRIES:
             with self.subTest(entry=slug):
-                page = (ROOT / "binder" / "entries" / slug / "page.tex").read_text()
+                page = (ROOT / "binder" / "entries" / slug / "page.tex").read_text(
+                    encoding="utf-8")
                 self.assertIn(r"\textbf{EVIDENCE / SOURCES}", page)
                 printable = page.replace(r"}\allowbreak\texttt{", "")
                 self.assertIn(f"binder/entries/{slug}/sources.yaml", printable)
