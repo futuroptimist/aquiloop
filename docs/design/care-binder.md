@@ -432,7 +432,14 @@ robust image placement, and deterministic PDF builds without introducing a web
 runtime. The Step 06a proof uses LuaLaTeX and distribution-provided TeX Gyre
 Pagella and Heros fonts; compilation performs no downloads. The tested
 environment was Python 3.12.13, TeX Live 2023 / LuaHBTeX 1.17.0, Pillow 12.3.0,
-pypdf 6.18.1, and Poppler 24.02.0. Required commands/packages are `lualatex`,
+pypdf 6.18.1, and Poppler 24.02.0. The binder-only Python pins live in
+`requirements-binder.txt`. Distribution packages are installed at exact
+revisions from the Ubuntu Noble snapshot dated `20260828T000000Z`; this freezes
+both repository metadata and the package revisions instead of relying on moving
+Ubuntu repositories. The workflow also logs the resolved revisions, including
+`texlive-binaries` (the LuaHBTeX provider), and asserts the Python, LuaHBTeX, and
+Poppler tool versions rather than checking only that their commands exist.
+Required commands/packages are `lualatex`,
 `pdfinfo`, `pdftoppm`, Pillow, and pypdf. Build the proof with:
 
 ```sh
@@ -460,9 +467,12 @@ python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
 ```
 
 Combined assembly is intentionally draft-only until profiles have qualified
-photographs and final content. CI remains future work; the Step 07a regression
-matrix now covers the local page, content, asset, rights, layout, and assembly
-contracts described below.
+photographs and final content. `.github/workflows/binder.yml` runs the Step 07a
+regression matrix and builds that exact draft command for relevant pull requests,
+relevant pushes to `main`, and manual dispatches. It uses read-only repository
+permissions and uploads exactly one `aquiloop-binder-draft` artifact containing
+the combined PDF, retained for 14 days. It does not upload diagnostic renders,
+publish a release, deploy, or qualify a final-mode binder.
 
 All inputs must be editable text plus local, licensed assets. Bundle permitted
 fonts locally with license files (or rely on a pinned distribution), never fetch
@@ -491,10 +501,17 @@ entry offset by another missing or blank entry.
 
 ### Automation and regression checks
 
-A later GitHub Actions workflow must run for relevant pull requests, changes on
-`main`, and `workflow_dispatch`. It builds once from pinned dependencies and
-uploads one clearly named, downloadable **combined PDF** artifact. It needs no
-credentials, release, publishing service, or deployment.
+The dedicated binder workflow runs for path-filtered pull requests and changes
+on `main`, plus `workflow_dispatch`. Its filters cover binder inputs, builder and
+photo-preparation scripts, binder tests, this design document, binder dependency
+pins, and the workflow itself. Third-party actions are pinned to immutable commit
+SHAs; Python is pinned to 3.12.13 and the binder packages to Pillow 12.3.0 and
+pypdf 6.18.1. The versioned Ubuntu runner supplies LuaLaTeX and Poppler and logs
+their resolved versions. The workflow needs no secrets or external build inputs,
+and has no release, package, write, publishing, or deployment permission.
+The upload action reports an artifact ID and archive digest; that archive digest
+describes the ZIP and is distinct from the PDF SHA-256 printed immediately after
+the validated draft build.
 
 The validator must fail on:
 
@@ -575,9 +592,11 @@ Only that later physical check can justify calling the binder print-worthy.
   assembly are implemented; final page qualification remains pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
-- Actual specimen assets, CI workflow, generated PDF artifacts, Step 07b
-  qualification, and physical print/handwriting checks remain pending. Step 07a
-  automated regression coverage does not satisfy those later acceptance gates.
+- Actual specimen photographs, final rights review, final-mode qualification,
+  rendered-page human review, and physical print/handwriting checks remain
+  pending. CI validates only the provisional six-page draft; its downloadable
+  artifact is not a release or deployment, and Step 07a/07b automation does not
+  satisfy those later human gates.
 
 ### Local verification outputs (Step 06a)
 
