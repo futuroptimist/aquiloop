@@ -537,6 +537,24 @@ The validator must fail on:
   safe/content boxes, clipped text, overfull boxes, or unintended overflow
   pages.
 
+The profile implementation reserves slightly more than the approved minimum at
+the vulnerable edges: geometry uses a 0.552-inch top margin and a 0.62-inch
+bottom margin while retaining the 1-inch punch margin and 0.55-inch right
+margin. Thus the TeX content area is inset beyond the required top-origin safe
+rectangle of `(72.0, 39.6, 572.4, 752.4)` PDF points rather than relying on a
+smaller font or a bottom-boundary exception. Cards and evidence footers are
+ragged right so narrow measures do not acquire stretched interword spacing;
+their requested 9.5-point body and 8-point footer sizes remain unchanged.
+
+The rendered regression builds the complete manifest, runs Poppler
+`pdftotext -bbox-layout`, and checks every extracted word box on all six pages.
+It also checks essential painted profile content on pages 1–5: images, stroked
+paths, and non-background filled paths must stay within the safe rectangle. A
+0.01-point allowance applies only to extracted text at the right edge; painted
+content and the other text edges receive no tolerance. Negative profile fixtures
+separately prove that out-of-bounds text and an out-of-bounds vector rule are
+rejected.
+
 The watering-log regression requests 8-point TeX labels and accepts the
 approximately 7.97011-point size exposed by LuaLaTeX PDF text extraction (with
 a ±0.01-point comparison tolerance and a 7.9-point floor for conversion
@@ -605,8 +623,9 @@ Only that later physical check can justify calling the binder print-worthy.
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
 - Specimen photographs and growing-condition records, care-log handwriting
-  space, typography and safe-margin refinement, revised six-page proof review,
-  and physical print/handwriting qualification remain pending gates.
+  space, revised six-page proof review, and physical print/handwriting
+  qualification remain pending gates. Typography and automated safe-margin
+  refinement are implemented, but do not satisfy either human gate.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
