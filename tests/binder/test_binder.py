@@ -45,7 +45,7 @@ def _assert_log_row_cells(row_anchors, column_anchors, field_positions, expected
 
 
 def _painted_pdf_geometry(page):
-    """Return painted image and stroked-path bounding boxes from a PDF page."""
+    """Return painted image and stroked-path boxes from a PDF page."""
     resources = page["/Resources"]
     xobjects = resources.get("/XObject", {})
     ctm = (1, 0, 0, 1, 0, 0)
@@ -93,7 +93,9 @@ def _painted_pdf_geometry(page):
             if path:
                 strokes.append(bounds(path))
             path = []
-        elif operator in (b"n", b"f", b"f*"):
+        elif operator in (b"f", b"f*"):
+            path = []
+        elif operator == b"n":
             path = []
         elif operator == b"Do":
             name = operands[0]
@@ -101,6 +103,19 @@ def _painted_pdf_geometry(page):
             if xobject is not None and xobject.get_object().get("/Subtype") == "/Image":
                 images.append(bounds([transform(point) for point in ((0, 0), (1, 0), (1, 1), (0, 1))]))
     return images, strokes
+
+
+def _assert_watering_log_text_contract(text):
+    """Check extraction-stable watering-log headings and row-key meanings."""
+    compact = re.sub(r"\s+", "", text)
+    expected_key = (
+        "D=date;T=time;A/M=amountormethod;Obs=observation;"
+        "Rain=rain/amount;Evt=aquariumevent;A/R=amountorresult."
+    )
+    if expected_key not in compact:
+        raise AssertionError("watering-log row key does not preserve every abbreviation mapping")
+    if "Date/time" not in compact:
+        raise AssertionError("watering-log leftmost header must be Date / time")
 
 
 def _assert_optional_detail_rendering(page, detail_count):
@@ -365,12 +380,21 @@ class AssemblyTests(unittest.TestCase):
             log_reader = PdfReader(log)
             self.assertEqual(len(log_reader.pages), 1)
             log_text = log_reader.pages[0].extract_text()
+            _assert_watering_log_text_contract(log_text)
+            for original, replacement in (
+                ("D = date; T = time", "D = time; T = date"),
+                ("Date / time", "Session"),
+            ):
+                mutated = log_text.replace(original, replacement)
+                self.assertNotEqual(mutated, log_text)
+                with self.assertRaises(AssertionError):
+                    _assert_watering_log_text_contract(mutated)
             for text in (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
-                "Hornwort", "Planning estimate only", "Rain/amount",
+                "Hornwort", "Planning estimate only", "rain/amount",
                 "Watering interval:", "N/A", "Aquarium maintenance", "not watering",
-                "Event:", "Amount/result:", "Observation:", "Date:", "Time:",
-                "Amount/method:", "outdoor", "grow bag",
+                "aquarium event", "amount or result", "observation", "date", "time",
+                "amount or method", "outdoor", "grow bag",
                 "indoors", "aquarium",
             ):
                 self.assertIn(text, log_text)
@@ -380,38 +404,39 @@ class AssemblyTests(unittest.TestCase):
             self.assertEqual(len(re.findall(r"T\s*ypical interval:", log_text)), 4)
             self.assertEqual(len(re.findall(r"_+\s*days", log_text)), 4)
             self.assertRegex(log_text, r"Hornwort[\s\S]*Watering interval:\s*N/A")
-            counts = Counter(
-                label for label in ("Date:", "Time:", "Event:", "Amount/result:",
-                                    "Rain/amount:", "Amount/method:", "Observation:")
-                for _ in range(log_text.count(label))
-            )
-            self.assertEqual(counts["Date:"], 14)
-            self.assertEqual(counts["Time:"], 14)
-            self.assertEqual(counts["Event:"], 14)
-            self.assertEqual(counts["Amount/result:"], 14)
-            self.assertEqual(counts["Rain/amount:"], 28)
-            self.assertEqual(counts["Amount/method:"], 56)
-            self.assertEqual(counts["Observation:"], 70)
-            labels = {"Date:", "Time:", "Amount/method:", "Observation:",
-                      "Rain/amount:", "Event:", "Amount/result:"}
+            labels = {"D", "T", "A/M", "Obs", "Rain", "Evt", "A/R"}
             sizes = []
             date_positions = []
             aquarium_observation_positions = []
             field_positions = []
+            header_positions = {}
 
             def inspect_text(text, _cm, tm, _font, font_size):
                 stripped = text.strip()
-                if any(label in stripped for label in labels):
+                if stripped in labels:
                     sizes.append(font_size)
-                if "Date:" in stripped:
+                    field_positions.append((stripped, tm[4], tm[5]))
+                if stripped == "D":
                     date_positions.append(tm[5])
-                if "Observation:" in stripped and tm[4] > 430:
+                if stripped == "Obs" and tm[4] > 430:
                     aquarium_observation_positions.append(tm[5])
-                for label in labels:
-                    if label in stripped:
-                        field_positions.append((label, tm[4], tm[5]))
+                if stripped in {
+                    "Date / time", "Sedum", "Kalanchoe", "Pothos",
+                    "Bird of paradise", "Hornwort",
+                }:
+                    header_positions[stripped] = tm[4]
 
             log_reader.pages[0].extract_text(visitor_text=inspect_text)
+            counts = Counter(label for label, _, _ in field_positions)
+            self.assertEqual(counts, Counter({
+                "D": 14, "T": 14, "Evt": 14, "A/R": 14,
+                "Rain": 28, "A/M": 56, "Obs": 70,
+            }))
+            self.assertEqual(
+                sorted(header_positions, key=header_positions.get),
+                ["Date / time", "Sedum", "Kalanchoe", "Pothos", "Bird of paradise", "Hornwort"],
+            )
+            self.assertEqual(min(header_positions, key=header_positions.get), "Date / time")
             self.assertTrue(sizes)
             # LuaLaTeX's PDF conversion exposes requested 8 pt labels as about
             # 7.97011 points. Keep that explicit tolerance without weakening
@@ -423,17 +448,29 @@ class AssemblyTests(unittest.TestCase):
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
             self.assertEqual(len(aquarium_observation_positions), 14)
 
+            # On the pinned, supported LuaHBTeX 1.17.0 engine, all 210
+            # handwriting rules are emitted as stroked paths. Exact quantity
+            # is intentional: missing rules must fail rather than be hidden by
+            # speculative handling for unsupported PDF backends.
+            _, strokes = _painted_pdf_geometry(log_reader.pages[0])
+            writing_rules = [
+                box for box in strokes
+                if box[3] - box[1] < .2 and 32.4 <= box[2] - box[0] < 100
+            ]
+            self.assertEqual(len(writing_rules), 14 * 15)
+            self.assertGreaterEqual(min(box[2] - box[0] for box in writing_rules), 32.4)
+
             # Establish the six rendered columns from their label x positions,
             # then verify every one of the 14 row/column regions independently.
             x_positions = sorted({round(x, 1) for _, x, _ in field_positions})
             self.assertEqual(len(x_positions), 6)
             expected_fields = (
-                {"Date:", "Time:"},
-                {"Amount/method:", "Observation:", "Rain/amount:"},
-                {"Amount/method:", "Observation:", "Rain/amount:"},
-                {"Amount/method:", "Observation:"},
-                {"Amount/method:", "Observation:"},
-                {"Event:", "Amount/result:", "Observation:"},
+                {"D", "T"},
+                {"A/M", "Obs", "Rain"},
+                {"A/M", "Obs", "Rain"},
+                {"A/M", "Obs"},
+                {"A/M", "Obs"},
+                {"Evt", "A/R", "Obs"},
             )
             _assert_log_row_cells(row_tops, x_positions, field_positions, expected_fields)
 
