@@ -403,23 +403,29 @@ Before final identity/care review, collect:
 ## Watering-log page contract
 
 Use landscape-like information density within the same US Letter **portrait**
-page and safe margins. The table has a narrow left **date/time** column followed
+page and safe margins. The table has a widened left **date/time** column followed
 by five plant columns in manifest order. Each plant header contains its short
 display name, location marker, and a blank field `Typical interval: ___ days`.
 The adjacent printed note reads: “Planning estimate only—check moisture or plant
 condition, rain, and season first.” No interval is populated during design.
 Use thin dark rules and a pale header tint that remains distinct in grayscale.
 
-Each dated row is one watering event. Every plant cell provides ruled space for
-**amount or method** and a **brief observation**; leave a plant's cell blank when
-it was not watered. Use at least 0.48-inch row height and approximately 14–16
-rows after headers so normal handwriting fits. Sedum and Kalanchoe cells include
-a small `Rain/amount: ____` line for handwritten outdoor observations.
+Each dated row is one watering event. To preserve useful writing-rule lengths,
+an 8-point-or-larger legend expands the compact repeated labels: `A/M` means
+amount or method, `Obs` observation, and `Rain` rain/amount. The wider first
+column retains the unambiguous full labels `Date` and `Time`.
+Every plant cell provides ruled space for **amount or method** and a **brief
+observation**; leave a plant's cell blank when it was not watered. Use exactly
+14 rows with an actual rendered row height of at least 0.48 inch. Every rule
+must retain at least 0.45 inch of writable horizontal space after its label.
+Sedum and Kalanchoe cells include a `Rain: ____` line for handwritten outdoor
+observations.
 
-Hornwort's header reads `Watering interval: N/A`. Its cells instead accept a
-compact aquarium event such as water change/top-off/test/trimming plus amount or
-result and observation. The legend must state that aquarium maintenance is not
-watering. Do not collapse unrelated tank events into a fictional interval.
+Hornwort's header reads `Watering interval: N/A`. Its cells instead use `Evt`
+for a compact aquarium event such as water change/top-off/test/trimming, `A/R`
+for amount/result, and `Obs` for observation. The legend expands these labels
+and must state that aquarium maintenance is not watering. Do not collapse
+unrelated tank events into a fictional interval.
 
 ## Future implementation and verification contract
 

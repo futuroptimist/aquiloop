@@ -1,20 +1,20 @@
 \newcommand{\LogHeader}[3]{\cellcolor{headergray}\centering\sffamily\fontsize{8}{9}\selectfont\shortstack{\bfseries #1\\[-1pt]\mdseries #2\\[-1pt]#3}\arraybackslash}
-\newcommand{\TerrestrialCell}[1]{\parbox[t][.42in][t]{\linewidth}{\vspace{1pt}\sffamily\fontsize{8}{8.5}\selectfont Amount/method: \hrulefill\\[1pt]Observation: \hrulefill#1}}
-\newcommand{\OutdoorCell}{\TerrestrialCell{\\[3pt]Rain/amount: \hrulefill}}
-\newcommand{\AquariumCell}{\parbox[t][.42in][t]{\linewidth}{\vspace{1pt}\sffamily\fontsize{8}{8.5}\selectfont Event: \hrulefill\\Amount/result: \hrulefill\\Observation: \hrulefill}}
+\newcommand{\TerrestrialCell}[1]{\parbox[t][.42in][t]{\linewidth}{\vspace{1pt}\sffamily\fontsize{8}{8.5}\selectfont A/M: \hrulefill\\[1pt]Obs: \hrulefill#1}}
+\newcommand{\OutdoorCell}{\TerrestrialCell{\\[3pt]Rain: \hrulefill}}
+\newcommand{\AquariumCell}{\parbox[t][.42in][t]{\linewidth}{\vspace{1pt}\sffamily\fontsize{8}{8.5}\selectfont Evt: \hrulefill\\A/R: \hrulefill\\Obs: \hrulefill}}
 \newcommand{\DateCell}{\parbox[t][.42in][t]{\linewidth}{\vspace{1pt}\sffamily\fontsize{8}{8.5}\selectfont Date: \hrulefill\\[1pt]Time: \hrulefill}}
 \newcommand{\LogRow}{\DateCell&\OutdoorCell&\OutdoorCell&\TerrestrialCell{}&\TerrestrialCell{}&\AquariumCell\\\hline}
 
 {\color{rust}\sffamily\bfseries\fontsize{9}{11}\selectfont DRAFT • HANDWRITTEN CARE RECORD}\par\vspace{3pt}
 {\fontsize{26}{29}\selectfont Watering \& aquarium log}\par\vspace{4pt}
 {\sffamily\fontsize{8.5}{10}\selectfont Planning estimate only—check moisture or plant condition, rain, and season first.}\par\vspace{3pt}
-{\sffamily\fontsize{8}{9.5}\selectfont\textbf{Legend:} Leave a plant cell blank when it was not watered. Aquarium maintenance (water change, top-off, test, or trimming) is not watering.}\par\vspace{5pt}
+{\sffamily\fontsize{8}{9.5}\selectfont\textbf{Row notation:} A/M amount or method · Obs observation · Rain rain/amount · Aquarium: Evt event · A/R amount/result. Blank = not watered. Aquarium maintenance (water change, top-off, test, or trimming) is not watering.}\par\vspace{5pt}
 
 \begingroup
 \setlength{\tabcolsep}{2pt}
 \setlength{\arrayrulewidth}{.5pt}
 \definecolor{headergray}{gray}{.89}
-\begin{tabular}{|p{.53in}|p{1.205in}|p{1.205in}|p{1.205in}|p{1.205in}|p{1.205in}|}
+\begin{tabular}{|p{.78in}|p{1.155in}|p{1.155in}|p{1.155in}|p{1.155in}|p{1.155in}|}
 \hline
 \rowcolor{headergray}
 \centering\sffamily\bfseries\fontsize{8}{9}\selectfont Date / time\arraybackslash &

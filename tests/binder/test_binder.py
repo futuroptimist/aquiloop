@@ -367,10 +367,10 @@ class AssemblyTests(unittest.TestCase):
             log_text = log_reader.pages[0].extract_text()
             for text in (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
-                "Hornwort", "Planning estimate only", "Rain/amount",
+                "Hornwort", "Planning estimate only", "Rain rain/amount",
                 "Watering interval:", "N/A", "Aquarium maintenance", "not watering",
-                "Event:", "Amount/result:", "Observation:", "Date:", "Time:",
-                "Amount/method:", "outdoor", "grow bag",
+                "Evt event", "A/R amount/result", "Obs observation", "Date:", "Time:",
+                "A/M amount or method", "outdoor", "grow bag",
                 "indoors", "aquarium",
             ):
                 self.assertIn(text, log_text)
@@ -381,19 +381,18 @@ class AssemblyTests(unittest.TestCase):
             self.assertEqual(len(re.findall(r"_+\s*days", log_text)), 4)
             self.assertRegex(log_text, r"Hornwort[\s\S]*Watering interval:\s*N/A")
             counts = Counter(
-                label for label in ("Date:", "Time:", "Event:", "Amount/result:",
-                                    "Rain/amount:", "Amount/method:", "Observation:")
+                label for label in ("Date:", "Time:", "Evt:", "A/R:",
+                                    "Rain:", "A/M:", "Obs:")
                 for _ in range(log_text.count(label))
             )
             self.assertEqual(counts["Date:"], 14)
             self.assertEqual(counts["Time:"], 14)
-            self.assertEqual(counts["Event:"], 14)
-            self.assertEqual(counts["Amount/result:"], 14)
-            self.assertEqual(counts["Rain/amount:"], 28)
-            self.assertEqual(counts["Amount/method:"], 56)
-            self.assertEqual(counts["Observation:"], 70)
-            labels = {"Date:", "Time:", "Amount/method:", "Observation:",
-                      "Rain/amount:", "Event:", "Amount/result:"}
+            self.assertEqual(counts["Evt:"], 14)
+            self.assertEqual(counts["A/R:"], 14)
+            self.assertEqual(counts["Rain:"], 28)
+            self.assertEqual(counts["A/M:"], 56)
+            self.assertEqual(counts["Obs:"], 70)
+            labels = {"Date:", "Time:", "A/M:", "Obs:", "Rain:", "Evt:", "A/R:"}
             sizes = []
             date_positions = []
             aquarium_observation_positions = []
@@ -405,7 +404,7 @@ class AssemblyTests(unittest.TestCase):
                     sizes.append(font_size)
                 if "Date:" in stripped:
                     date_positions.append(tm[5])
-                if "Observation:" in stripped and tm[4] > 430:
+                if "Obs:" in stripped and tm[4] > 430:
                     aquarium_observation_positions.append(tm[5])
                 for label in labels:
                     if label in stripped:
@@ -423,17 +422,30 @@ class AssemblyTests(unittest.TestCase):
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
             self.assertEqual(len(aquarium_observation_positions), 14)
 
+            # The 210 short horizontal strokes are the writing rules (15 per
+            # row); table borders are much wider.  Measure the rendered result,
+            # not just the declared column widths or TeX source.
+            _, strokes = _painted_pdf_geometry(log_reader.pages[0])
+            writing_rules = [
+                box for box in strokes
+                if box[2] - box[0] < 100 and box[3] - box[1] < .2
+            ]
+            self.assertEqual(len(writing_rules), 14 * 15)
+            self.assertGreaterEqual(
+                min(box[2] - box[0] for box in writing_rules), .45 * 72
+            )
+
             # Establish the six rendered columns from their label x positions,
             # then verify every one of the 14 row/column regions independently.
             x_positions = sorted({round(x, 1) for _, x, _ in field_positions})
             self.assertEqual(len(x_positions), 6)
             expected_fields = (
                 {"Date:", "Time:"},
-                {"Amount/method:", "Observation:", "Rain/amount:"},
-                {"Amount/method:", "Observation:", "Rain/amount:"},
-                {"Amount/method:", "Observation:"},
-                {"Amount/method:", "Observation:"},
-                {"Event:", "Amount/result:", "Observation:"},
+                {"A/M:", "Obs:", "Rain:"},
+                {"A/M:", "Obs:", "Rain:"},
+                {"A/M:", "Obs:"},
+                {"A/M:", "Obs:"},
+                {"Evt:", "A/R:", "Obs:"},
             )
             _assert_log_row_cells(row_tops, x_positions, field_positions, expected_fields)
 
