@@ -43,8 +43,12 @@ def _run_pdftotext(pdf, bbox_output):
             "install Poppler and ensure pdftotext is on PATH"
         ) from error
     except subprocess.TimeoutExpired as error:
+        details = (error.stderr or error.stdout or "no diagnostic output")
+        if isinstance(details, bytes):
+            details = details.decode(errors="replace")
         raise AssertionError(
-            f"pdftotext timed out after {PDFTOTEXT_TIMEOUT_SECONDS}s for {pdf}"
+            f"pdftotext timed out after {PDFTOTEXT_TIMEOUT_SECONDS}s for {pdf}: "
+            f"{details.strip()}"
         ) from error
     except subprocess.CalledProcessError as error:
         details = (error.stderr or error.stdout or "no diagnostic output").strip()
@@ -53,23 +57,24 @@ def _run_pdftotext(pdf, bbox_output):
         ) from error
 
 
-def _assert_pdf_ink_inside_safe_rectangle(pdf, bbox_output):
-    """Check rendered text, image, and stroked-path boxes against the safe area."""
-    from pypdf import PdfReader
-
+def _assert_pdf_text_inside_safe_rectangle(pdf, bbox_output):
+    """Check Poppler-extracted word boxes against the safe rectangle."""
     _run_pdftotext(pdf, bbox_output)
-    namespace = "{http://www.w3.org/1999/xhtml}"
-    pages = list(ElementTree.parse(bbox_output).getroot().iter(namespace + "page"))
-    pdf_pages = PdfReader(pdf).pages
-    if len(pages) != len(pdf_pages):
-        raise AssertionError(
-            f"pdftotext returned {len(pages)} pages for a {len(pdf_pages)}-page PDF"
-        )
+
+    def local_name(element):
+        return element.tag.rsplit("}", 1)[-1]
+
+    pages = [
+        element for element in ElementTree.parse(bbox_output).getroot().iter()
+        if local_name(element) == "page"
+    ]
+    if not pages:
+        raise AssertionError("pdftotext returned no pages")
     measured = []
-    for page_number, (bbox_page, pdf_page) in enumerate(zip(pages, pdf_pages), 1):
-        words = list(bbox_page.iter(namespace + "word"))
+    for page_number, bbox_page in enumerate(pages, 1):
+        words = [element for element in bbox_page.iter() if local_name(element) == "word"]
         if not words:
-            raise AssertionError(f"page {page_number} has no rendered text")
+            raise AssertionError(f"pdftotext returned no words for page {page_number}")
         bounds = (
             min(float(word.attrib["xMin"]) for word in words),
             min(float(word.attrib["yMin"]) for word in words),
@@ -91,24 +96,28 @@ def _assert_pdf_ink_inside_safe_rectangle(pdf, bbox_output):
                 f"{SAFE_TEXT_RECTANGLE} (right-edge tolerance "
                 f"{RIGHT_EXTRACTION_TOLERANCE} pt)"
             )
-        page_height = float(pdf_page.mediabox.height)
-        images, strokes = _painted_pdf_geometry(pdf_page)
-        for kind, boxes in (("image", images), ("stroked path", strokes)):
-            for box in boxes:
-                left, bottom, right, top = box
-                top_origin_box = (left, page_height - top, right, page_height - bottom)
-                left, top, right, bottom = top_origin_box
-                if (
-                    left < safe_left
-                    or top < safe_top
-                    or right > safe_right
-                    or bottom > safe_bottom
-                ):
-                    raise AssertionError(
-                        f"page {page_number} {kind} bounds {top_origin_box} exceed "
-                        f"safe rectangle {SAFE_TEXT_RECTANGLE}"
-                    )
     return measured
+
+
+def _assert_essential_painted_content_inside_safe_rectangle(pages):
+    """Check profile images, strokes, and non-background fills without tolerance."""
+    safe_left, safe_bottom, safe_right, safe_top = SAFE_TEXT_RECTANGLE
+    for page_number, page in enumerate(pages, 1):
+        page_box = tuple(float(value) for value in page.mediabox)
+        images, strokes, fills = _painted_pdf_geometry(page)
+        for kind, boxes in (("image", images), ("stroked path", strokes), ("filled path", fills)):
+            for box in boxes:
+                if kind == "filled path" and all(
+                    abs(value - page_value) < .01
+                    for value, page_value in zip(box, page_box)
+                ):
+                    continue
+                left, bottom, right, top = box
+                if left < safe_left or bottom < safe_bottom or right > safe_right or top > safe_top:
+                    raise AssertionError(
+                        f"page {page_number} {kind} bounds {box} exceed safe rectangle "
+                        f"{SAFE_TEXT_RECTANGLE}"
+                    )
 
 
 def _log_row_cells(row_anchors, column_anchors, field_positions):
@@ -137,7 +146,7 @@ def _assert_log_row_cells(row_anchors, column_anchors, field_positions, expected
 
 
 def _painted_pdf_geometry(page):
-    """Return painted image and stroked-path boxes from a PDF page."""
+    """Return painted image, stroked-path, and filled-path boxes."""
     resources = page["/Resources"]
     xobjects = resources.get("/XObject", {})
     ctm = (1, 0, 0, 1, 0, 0)
@@ -145,6 +154,7 @@ def _painted_pdf_geometry(page):
     path = []
     images = []
     strokes = []
+    fills = []
 
     def transform(point):
         x, y = point
@@ -184,8 +194,12 @@ def _painted_pdf_geometry(page):
         elif operator in (b"S", b"s", b"B", b"B*", b"b", b"b*"):
             if path:
                 strokes.append(bounds(path))
+                if operator in (b"B", b"B*", b"b", b"b*"):
+                    fills.append(bounds(path))
             path = []
         elif operator in (b"f", b"f*"):
+            if path:
+                fills.append(bounds(path))
             path = []
         elif operator == b"n":
             path = []
@@ -194,7 +208,7 @@ def _painted_pdf_geometry(page):
             xobject = xobjects.get(name)
             if xobject is not None and xobject.get_object().get("/Subtype") == "/Image":
                 images.append(bounds([transform(point) for point in ((0, 0), (1, 0), (1, 1), (0, 1))]))
-    return images, strokes
+    return images, strokes, fills
 
 
 def _assert_watering_log_text_contract(text):
@@ -211,7 +225,7 @@ def _assert_watering_log_text_contract(text):
 
 
 def _assert_optional_detail_rendering(page, detail_count):
-    images, strokes = _painted_pdf_geometry(page)
+    images, strokes, _ = _painted_pdf_geometry(page)
     image_sizes = [(box[2] - box[0], box[3] - box[1]) for box in images]
     if len(image_sizes) != 1 + detail_count:
         raise AssertionError(f"expected {1 + detail_count} painted images, found {len(image_sizes)}")
@@ -285,29 +299,21 @@ class PdfTextDiagnosticsTests(unittest.TestCase):
             _run_pdftotext("input.pdf", "output.html")
         self.assertEqual(run.call_args.kwargs["timeout"], PDFTOTEXT_TIMEOUT_SECONDS)
 
-    def test_safe_area_check_rejects_non_text_ink(self):
-        from pypdf import PdfWriter
-        from pypdf.generic import DecodedStreamObject, NameObject
-
+    def test_text_check_accepts_unnamespaced_poppler_xml(self):
         with tempfile.TemporaryDirectory() as name:
             base = Path(name)
-            pdf = base / "ink.pdf"
+            pdf = base / "input.pdf"
             bbox = base / "ink.html"
-            writer = PdfWriter()
-            page = writer.add_blank_page(width=612, height=792)
-            stream = DecodedStreamObject()
-            stream.set_data(b"10 400 m 20 400 l S\n")
-            page[NameObject("/Contents")] = writer._add_object(stream)
-            with pdf.open("wb") as output:
-                writer.write(output)
             bbox.write_text(
-                '<html xmlns="http://www.w3.org/1999/xhtml"><body><doc><page>'
+                "<html><body><doc><page>"
                 '<word xMin="100" yMin="100" xMax="120" yMax="110">safe</word>'
                 "</page></doc></body></html>"
             )
             with mock.patch(__name__ + "._run_pdftotext"):
-                with self.assertRaisesRegex(AssertionError, "stroked path bounds.*exceed"):
-                    _assert_pdf_ink_inside_safe_rectangle(pdf, bbox)
+                self.assertEqual(
+                    _assert_pdf_text_inside_safe_rectangle(pdf, bbox),
+                    [(100.0, 100.0, 120.0, 110.0)],
+                )
 
 
 class CatalogTests(unittest.TestCase):
@@ -588,7 +594,7 @@ class AssemblyTests(unittest.TestCase):
             # handwriting rules are emitted as stroked paths. Exact quantity
             # is intentional: missing rules must fail rather than be hidden by
             # speculative handling for unsupported PDF backends.
-            _, strokes = _painted_pdf_geometry(log_reader.pages[0])
+            _, strokes, _ = _painted_pdf_geometry(log_reader.pages[0])
             writing_rules = [
                 box for box in strokes
                 if box[3] - box[1] < .2 and 32.4 <= box[2] - box[0] < 100
@@ -627,46 +633,66 @@ class AssemblyTests(unittest.TestCase):
                     self.assertIn("PROPAGATION", text)
                 build_binder._validate_page(page, title)
 
-            bounds = _assert_pdf_ink_inside_safe_rectangle(first, base / "binder.bbox.html")
+
+    @unittest.skipUnless(
+        shutil.which("lualatex") and shutil.which("pdftotext"),
+        "lualatex and pdftotext required",
+    )
+    def test_rendered_pdf_text_and_essential_painted_content_stay_inside_safe_rectangle(self):
+        from pypdf import PdfReader, PdfWriter, Transformation
+
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            rendered = base / "binder.pdf"
+            build_binder.compile_manifest(
+                ROOT / "binder" / "manifest.yaml", "draft", rendered
+            )
+            reader = PdfReader(rendered)
+            bounds = _assert_pdf_text_inside_safe_rectangle(
+                rendered, base / "binder.bbox.html"
+            )
             self.assertEqual(len(bounds), 6)
+            _assert_essential_painted_content_inside_safe_rectangle(reader.pages[:5])
 
-            # Move a real rendered profile down without changing its page box.
-            # The resulting footer is a deliberate bottom-safe-margin violation,
-            # proving this regression measures positioned text rather than only
-            # page dimensions or extracted content.
-            from pypdf import PdfWriter, Transformation
-
-            violation = base / "bottom-safe-margin-violation.pdf"
+            # Keep the existing text-only negative case: translating a rendered
+            # profile down must move its footer through the bottom boundary.
+            translated = base / "bottom-safe-margin-violation.pdf"
             writer = PdfWriter()
             writer.add_page(reader.pages[0])
             writer.pages[0].add_transformation(Transformation().translate(ty=-10))
-            with violation.open("wb") as stream:
+            with translated.open("wb") as stream:
                 writer.write(stream)
-            with self.assertRaisesRegex(AssertionError, "exceed safe rectangle"):
-                _assert_pdf_ink_inside_safe_rectangle(
-                    violation, base / "bottom-safe-margin-violation.bbox.html"
+            with self.assertRaisesRegex(AssertionError, "text bounds.*exceed"):
+                _assert_pdf_text_inside_safe_rectangle(
+                    translated, base / "translated.bbox.html"
                 )
 
-            # Add a path in the punch margin without moving any text. This
-            # proves non-text ink is covered independently of word extraction.
-            from pypdf.generic import ArrayObject, DecodedStreamObject, NameObject
-
-            ink_violation = base / "ink-safe-margin-violation.pdf"
-            writer = PdfWriter()
-            writer.add_page(reader.pages[0])
-            stream = DecodedStreamObject()
-            stream.set_data(b"10 400 m 20 400 l S\n")
-            contents = writer.pages[0].get("/Contents")
-            if not isinstance(contents, ArrayObject):
-                contents = ArrayObject([contents])
-            contents.append(writer._add_object(stream))
-            writer.pages[0][NameObject("/Contents")] = contents
-            with ink_violation.open("wb") as output:
-                writer.write(output)
+            # Compile the existing profile with a vector-only violation 20 pt
+            # above the paper edge. Its text remains valid while its rule fails.
+            profile, records, selected = build_binder.load_entry(
+                "sedum-loves-fire", "draft"
+            )
+            fixture = base / "profile-fixture"
+            fixture.mkdir()
+            page_source = (profile / "page.tex").read_text(encoding="utf-8")
+            page_source += (
+                "\n\\begin{tikzpicture}[remember picture,overlay]\n"
+                "  \\draw[line width=.6pt] ([yshift=20pt]current page.south) "
+                "++(-5pt,0) -- ++(10pt,0);\n"
+                "\\end{tikzpicture}\n"
+            )
+            (fixture / "page.tex").write_text(page_source, encoding="utf-8")
+            vector_violation = base / "vector-safe-margin-violation.pdf"
+            build_binder.compile_entry(fixture, records, selected, vector_violation)
+            self.assertEqual(
+                len(_assert_pdf_text_inside_safe_rectangle(
+                    vector_violation, base / "vector.bbox.html"
+                )),
+                1,
+            )
+            vector_page = PdfReader(vector_violation).pages[0]
             with self.assertRaisesRegex(AssertionError, "stroked path bounds.*exceed"):
-                _assert_pdf_ink_inside_safe_rectangle(
-                    ink_violation, base / "ink-safe-margin-violation.bbox.html"
-                )
+                _assert_essential_painted_content_inside_safe_rectangle([vector_page])
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
         rows = [606.8, 567.7, 528.6, 489.5]

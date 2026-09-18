@@ -546,17 +546,14 @@ smaller font or a bottom-boundary exception. Cards and evidence footers are
 ragged right so narrow measures do not acquire stretched interword spacing;
 their requested 9.5-point body and 8-point footer sizes remain unchanged.
 
-The rendered regression builds the complete manifest (which first builds every
-profile and the supplemental log independently), runs Poppler
+The rendered regression builds the complete manifest, runs Poppler
 `pdftotext -bbox-layout`, and checks every extracted word box on all six pages.
-It also inspects PDF image and stroked-path bounds so a photograph, frame, card
-rule, or table rule cannot cross the safe boundary while its text remains
-inside. No bottom tolerance is allowed. A 0.01-point exception exists only for
-Poppler-extracted text at the right edge because Poppler reports glyph boxes up
-to roughly 0.0065 point beyond the nominal TeX boundary; painted-object bounds
-and the other text boundaries receive no exception. Negative fixtures translate
-a rendered profile downward and independently add a rule in the punch margin;
-both must be rejected.
+It also checks essential painted profile content on pages 1–5: images, stroked
+paths, and non-background filled paths must stay within the safe rectangle. A
+0.01-point allowance applies only to extracted text at the right edge; painted
+content and the other text edges receive no tolerance. Negative profile fixtures
+separately prove that out-of-bounds text and an out-of-bounds vector rule are
+rejected.
 
 The watering-log regression requests 8-point TeX labels and accepts the
 approximately 7.97011-point size exposed by LuaLaTeX PDF text extraction (with
