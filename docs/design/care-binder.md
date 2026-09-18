@@ -403,23 +403,26 @@ Before final identity/care review, collect:
 ## Watering-log page contract
 
 Use landscape-like information density within the same US Letter **portrait**
-page and safe margins. The table has a narrow left **date/time** column followed
+page and safe margins. The table has a practical **date/time** column followed
 by five plant columns in manifest order. Each plant header contains its short
 display name, location marker, and a blank field `Typical interval: ___ days`.
 The adjacent printed note reads: “Planning estimate only—check moisture or plant
 condition, rain, and season first.” No interval is populated during design.
 Use thin dark rules and a pale header tint that remains distinct in grayscale.
 
-Each dated row is one watering event. Every plant cell provides ruled space for
-**amount or method** and a **brief observation**; leave a plant's cell blank when
-it was not watered. Use at least 0.48-inch row height and approximately 14–16
-rows after headers so normal handwriting fits. Sedum and Kalanchoe cells include
-a small `Rain/amount: ____` line for handwritten outdoor observations.
+Each of the 14 dated rows is one watering event. Compact row labels preserve
+handwriting room: `Amt/meth.` means amount or method, `Obs.` means observation,
+and `Rain/amt` means rain/amount; the notation line expands every abbreviation.
+Every ruled field retains at least 0.45 inch of writable line after its label,
+including date and time. Leave a plant's cell blank when it was not watered.
+Use at least 0.48-inch row height so normal handwriting fits. Sedum and
+Kalanchoe cells include the `Rain/amt: ____` line for outdoor observations.
 
 Hornwort's header reads `Watering interval: N/A`. Its cells instead accept a
-compact aquarium event such as water change/top-off/test/trimming plus amount or
-result and observation. The legend must state that aquarium maintenance is not
-watering. Do not collapse unrelated tank events into a fictional interval.
+compact aquarium event such as water change/top-off/test/trimming plus
+`Amt/result` (amount or result) and `Obs.` (observation). The notation line must
+state that aquarium maintenance is not watering. Do not collapse unrelated tank
+events into a fictional interval.
 
 ## Future implementation and verification contract
 

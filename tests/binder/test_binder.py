@@ -367,10 +367,12 @@ class AssemblyTests(unittest.TestCase):
             log_text = log_reader.pages[0].extract_text()
             for text in (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
-                "Hornwort", "Planning estimate only", "Rain/amount",
+                "Hornwort", "Planning estimate only", "Rain/amt",
                 "Watering interval:", "N/A", "Aquarium maintenance", "not watering",
-                "Event:", "Amount/result:", "Observation:", "Date:", "Time:",
-                "Amount/method:", "outdoor", "grow bag",
+                "Event:", "Amt/result:", "Obs.:", "Date:", "Time:",
+                "Amt/meth.:", "outdoor", "grow bag",
+                "Amt = amount", "meth. = method", "Obs. = observation",
+                "Rain/amt = rain/amount", "Amt/result = amount/result",
                 "indoors", "aquarium",
             ):
                 self.assertIn(text, log_text)
@@ -381,19 +383,19 @@ class AssemblyTests(unittest.TestCase):
             self.assertEqual(len(re.findall(r"_+\s*days", log_text)), 4)
             self.assertRegex(log_text, r"Hornwort[\s\S]*Watering interval:\s*N/A")
             counts = Counter(
-                label for label in ("Date:", "Time:", "Event:", "Amount/result:",
-                                    "Rain/amount:", "Amount/method:", "Observation:")
+                label for label in ("Date:", "Time:", "Event:", "Amt/result:",
+                                    "Rain/amt:", "Amt/meth.:", "Obs.:")
                 for _ in range(log_text.count(label))
             )
             self.assertEqual(counts["Date:"], 14)
             self.assertEqual(counts["Time:"], 14)
             self.assertEqual(counts["Event:"], 14)
-            self.assertEqual(counts["Amount/result:"], 14)
-            self.assertEqual(counts["Rain/amount:"], 28)
-            self.assertEqual(counts["Amount/method:"], 56)
-            self.assertEqual(counts["Observation:"], 70)
-            labels = {"Date:", "Time:", "Amount/method:", "Observation:",
-                      "Rain/amount:", "Event:", "Amount/result:"}
+            self.assertEqual(counts["Amt/result:"], 14)
+            self.assertEqual(counts["Rain/amt:"], 28)
+            self.assertEqual(counts["Amt/meth.:"], 56)
+            self.assertEqual(counts["Obs.:"], 70)
+            labels = {"Date:", "Time:", "Amt/meth.:", "Obs.:",
+                      "Rain/amt:", "Event:", "Amt/result:"}
             sizes = []
             date_positions = []
             aquarium_observation_positions = []
@@ -405,7 +407,7 @@ class AssemblyTests(unittest.TestCase):
                     sizes.append(font_size)
                 if "Date:" in stripped:
                     date_positions.append(tm[5])
-                if "Observation:" in stripped and tm[4] > 430:
+                if "Obs.:" in stripped and tm[4] > 430:
                     aquarium_observation_positions.append(tm[5])
                 for label in labels:
                     if label in stripped:
@@ -423,17 +425,29 @@ class AssemblyTests(unittest.TestCase):
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
             self.assertEqual(len(aquarium_observation_positions), 14)
 
+            # Every one of the 210 body fields ends in a rendered writing rule.
+            # Exclude the much longer table rules, then enforce 0.45 inch on the
+            # actual PDF geometry rather than inferring space from source widths.
+            _, strokes = _painted_pdf_geometry(log_reader.pages[0])
+            writing_rules = [
+                x_max - x_min
+                for x_min, y_min, x_max, y_max in strokes
+                if y_max - y_min < .2 and 20 < x_max - x_min < 100
+            ]
+            self.assertEqual(len(writing_rules), 14 * (2 + 3 + 3 + 2 + 2 + 3))
+            self.assertGreaterEqual(min(writing_rules), .45 * 72)
+
             # Establish the six rendered columns from their label x positions,
             # then verify every one of the 14 row/column regions independently.
             x_positions = sorted({round(x, 1) for _, x, _ in field_positions})
             self.assertEqual(len(x_positions), 6)
             expected_fields = (
                 {"Date:", "Time:"},
-                {"Amount/method:", "Observation:", "Rain/amount:"},
-                {"Amount/method:", "Observation:", "Rain/amount:"},
-                {"Amount/method:", "Observation:"},
-                {"Amount/method:", "Observation:"},
-                {"Event:", "Amount/result:", "Observation:"},
+                {"Amt/meth.:", "Obs.:", "Rain/amt:"},
+                {"Amt/meth.:", "Obs.:", "Rain/amt:"},
+                {"Amt/meth.:", "Obs.:"},
+                {"Amt/meth.:", "Obs.:"},
+                {"Event:", "Amt/result:", "Obs.:"},
             )
             _assert_log_row_cells(row_tops, x_positions, field_positions, expected_fields)
 
