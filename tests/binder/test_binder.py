@@ -6,6 +6,8 @@ import unittest
 import os
 import re
 import shutil
+import subprocess
+from xml.etree import ElementTree
 from collections import Counter
 from unittest import mock
 from pathlib import Path
@@ -17,6 +19,49 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
+
+
+SAFE_TEXT_RECTANGLE = (72.0, 39.6, 572.4, 752.4)
+RIGHT_EXTRACTION_TOLERANCE = 0.01
+
+
+def _assert_pdf_text_inside_safe_rectangle(pdf, bbox_output):
+    """Check Poppler's rendered word boxes against the physical safe area."""
+    subprocess.run(
+        ["pdftotext", "-bbox-layout", str(pdf), str(bbox_output)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    namespace = "{http://www.w3.org/1999/xhtml}"
+    pages = list(ElementTree.parse(bbox_output).getroot().iter(namespace + "page"))
+    measured = []
+    for page_number, page in enumerate(pages, 1):
+        words = list(page.iter(namespace + "word"))
+        if not words:
+            raise AssertionError(f"page {page_number} has no rendered text")
+        bounds = (
+            min(float(word.attrib["xMin"]) for word in words),
+            min(float(word.attrib["yMin"]) for word in words),
+            max(float(word.attrib["xMax"]) for word in words),
+            max(float(word.attrib["yMax"]) for word in words),
+        )
+        measured.append(bounds)
+        left, top, right, bottom = bounds
+        safe_left, safe_top, safe_right, safe_bottom = SAFE_TEXT_RECTANGLE
+        outside = (
+            left < safe_left
+            or top < safe_top
+            or right > safe_right + RIGHT_EXTRACTION_TOLERANCE
+            or bottom > safe_bottom
+        )
+        if outside:
+            raise AssertionError(
+                f"page {page_number} text bounds {bounds} exceed safe rectangle "
+                f"{SAFE_TEXT_RECTANGLE} (right-edge tolerance "
+                f"{RIGHT_EXTRACTION_TOLERANCE} pt)"
+            )
+    return measured
 
 
 def _log_row_cells(row_anchors, column_anchors, field_positions):
@@ -491,6 +536,26 @@ class AssemblyTests(unittest.TestCase):
                     self.assertIn("PROPAGATION", text)
                 build_binder._validate_page(page, title)
 
+            bounds = _assert_pdf_text_inside_safe_rectangle(first, base / "binder.bbox.html")
+            self.assertEqual(len(bounds), 6)
+
+            # Move a real rendered profile down without changing its page box.
+            # The resulting footer is a deliberate bottom-safe-margin violation,
+            # proving this regression measures positioned text rather than only
+            # page dimensions or extracted content.
+            from pypdf import PdfWriter, Transformation
+
+            violation = base / "bottom-safe-margin-violation.pdf"
+            writer = PdfWriter()
+            writer.add_page(reader.pages[0])
+            writer.pages[0].add_transformation(Transformation().translate(ty=-10))
+            with violation.open("wb") as stream:
+                writer.write(stream)
+            with self.assertRaisesRegex(AssertionError, "exceed safe rectangle"):
+                _assert_pdf_text_inside_safe_rectangle(
+                    violation, base / "bottom-safe-margin-violation.bbox.html"
+                )
+
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
         rows = [606.8, 567.7, 528.6, 489.5]
         columns = [10.0, 20.0]
@@ -575,6 +640,19 @@ class AssemblyTests(unittest.TestCase):
                     build_binder._validate_page(page, slug)
                     text = page.extract_text()
                     assert_profile_evidence(slug, text)
+                    rendered_sizes = []
+                    evidence_sizes = []
+
+                    def inspect_profile_type(fragment, _cm, _tm, _font, font_size):
+                        if fragment.strip():
+                            rendered_sizes.append(font_size)
+                        if "EVIDENCE / SOURCES" in fragment:
+                            evidence_sizes.append(font_size)
+
+                    page.extract_text(visitor_text=inspect_profile_type)
+                    self.assertTrue(evidence_sizes)
+                    self.assertGreaterEqual(min(rendered_sizes), 7.9)
+                    self.assertAlmostEqual(evidence_sizes[0], 7.97011, delta=0.01)
                     if any(records[asset_id]["kind"] == "placeholder"
                            for asset_id in selected.values()):
                         self.assertIn("DRAFT PLACEHOLDER", text)
