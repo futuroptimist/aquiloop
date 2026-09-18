@@ -11,7 +11,8 @@
       "supports": [
         "identity"
       ],
-      "access_note": "Automated access returned HTTP 403 on 2026-09-17; retained as the botanical authority for interactive review."
+      "access_note": "Automated access returned HTTP 403 on 2026-09-17; retained as the botanical authority for interactive review.",
+      "applicability": "Accepted-name authority only; it does not establish the reported label, cultivar, or specimen identification."
     },
     {
       "key": "SED-PAT",

@@ -68,11 +68,11 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves, let the cut end callus, then place it in well-drained medium; placing it before callusing risks rot.",
+        "claim": "Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves; placing the cutting in medium before the cut end has dried and callused raises rot risk.",
         "method": "stem cutting",
         "starting_material": "a healthy stem cutting with its lower leaves removed",
-        "establishment_condition": "let the cut end callus, then place it in well-drained medium",
-        "pitfall": "a cutting is more likely to rot if placed before the cut end calluses",
+        "establishment_condition": "let the cut end dry and callus, then place it in well-drained medium",
+        "pitfall": "placing the cutting in medium before the cut end has dried and callused raises rot risk",
         "sources": [
           "SED-IA"
         ]

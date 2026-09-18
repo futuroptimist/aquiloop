@@ -185,9 +185,18 @@ class ContentWorksheetTests(unittest.TestCase):
 
     def test_revised_profiles_keep_reviewer_and_unresolved_footer_fields(self):
         expected_flags = {
-            "sedum-loves-fire": ("identity/cultivar match", "dry-down/rain"),
-            "bird-of-paradise": ("species", "pot/medium"),
-            "aquarium-hornwort": ("species/trade form", "chemistry", "light"),
+            "sedum-loves-fire": (
+                "identity/cultivar match", "photographs", "exposure", "medium",
+                "dry-down/rain", "temperatures",
+            ),
+            "bird-of-paradise": (
+                "species", "photographs", "exposure", "pot/medium", "climate",
+                "outdoor transition",
+            ),
+            "aquarium-hornwort": (
+                "species/trade form", "photographs", "tank", "livestock",
+                "chemistry", "light", "flow", "placement", "fertilizer/CO2",
+            ),
         }
         for slug, flags in expected_flags.items():
             with self.subTest(entry=slug):
@@ -196,13 +205,21 @@ class ContentWorksheetTests(unittest.TestCase):
                 self.assertIn("Reviewer: pending.", page)
                 self.assertIn("Flags:", page)
                 self.assertIn("unresolved", page)
+                self.assertIn(r"\textbf{EVIDENCE / SOURCES}", page)
+                self.assertIn(r"\texttt{sources.yaml}", page)
                 for flag in flags:
                     self.assertIn(flag, page)
 
     def test_sedum_propagation_warns_against_early_placement(self):
         propagation = self.load("sedum-loves-fire", "content.yaml")["cards"][
             "propagation"][0]
-        self.assertIn("placing it before callusing", propagation["claim"])
+        expected_warning = (
+            "placing the cutting in medium before the cut end has dried and "
+            "callused raises rot risk"
+        )
+        self.assertIn(expected_warning, propagation["claim"])
+        self.assertIn(expected_warning, propagation["pitfall"])
+        self.assertIn("dry and callus", propagation["establishment_condition"])
         self.assertNotIn("rooting before callusing", propagation["claim"])
 
     def test_propagation_contract_rejects_an_empty_required_field(self):
