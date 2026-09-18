@@ -6,6 +6,8 @@ import unittest
 import os
 import re
 import shutil
+import subprocess
+import xml.etree.ElementTree as ET
 from collections import Counter
 from unittest import mock
 from pathlib import Path
@@ -17,6 +19,51 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
+
+
+SAFE_TEXT_RECT = (72.0, 39.6, 572.4, 752.4)
+# Poppler occasionally reports a glyph a few thousandths of a point beyond the
+# right boundary.  No vertical tolerance is permitted: the bottom defect this
+# check guards against was real layout overflow, not extraction noise.
+RIGHT_EXTRACTION_TOLERANCE = 0.01
+
+
+def _rendered_text_bounds(pdf):
+    """Extract per-page top-origin word bounds with the pinned Poppler tool."""
+    with tempfile.TemporaryDirectory() as name:
+        bbox = Path(name) / "bbox.html"
+        subprocess.run(
+            ["pdftotext", "-bbox-layout", str(pdf), str(bbox)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        root = ET.parse(bbox).getroot()
+    pages = []
+    for page in root.iter("{http://www.w3.org/1999/xhtml}page"):
+        words = list(page.iter("{http://www.w3.org/1999/xhtml}word"))
+        if not words:
+            raise AssertionError("rendered page contains no extractable words")
+        pages.append((
+            min(float(word.attrib["xMin"]) for word in words),
+            min(float(word.attrib["yMin"]) for word in words),
+            max(float(word.attrib["xMax"]) for word in words),
+            max(float(word.attrib["yMax"]) for word in words),
+        ))
+    return pages
+
+
+def _assert_rendered_text_inside_safe_area(pdf):
+    left, top, right, bottom = SAFE_TEXT_RECT
+    bounds = _rendered_text_bounds(pdf)
+    for page_number, (x_min, y_min, x_max, y_max) in enumerate(bounds, 1):
+        if not (x_min >= left and y_min >= top and
+                x_max <= right + RIGHT_EXTRACTION_TOLERANCE and y_max <= bottom):
+            raise AssertionError(
+                f"page {page_number} text bounds {(x_min, y_min, x_max, y_max)} "
+                f"outside safe rectangle {SAFE_TEXT_RECT}"
+            )
+    return bounds
 
 
 def _log_row_cells(row_anchors, column_anchors, field_positions):
@@ -669,6 +716,33 @@ class ComprehensiveRegressionTests(unittest.TestCase):
         page = "\n".join(placements) + "\n" + "\n".join(x for x in page.splitlines() if not x.startswith("% binder-placement")) + page_suffix
         (base / "page.tex").write_text(page, encoding="utf-8")
         return context, base
+
+    @unittest.skipUnless(shutil.which("lualatex") and shutil.which("pdftotext"),
+                         "LuaLaTeX and Poppler unavailable")
+    def test_rendered_text_stays_inside_safe_area_and_rejects_bottom_violation(self):
+        with tempfile.TemporaryDirectory() as name:
+            output = Path(name) / "binder.pdf"
+            build_binder.compile_manifest(
+                ROOT / "binder" / "manifest.yaml", "draft", output
+            )
+            bounds = _assert_rendered_text_inside_safe_area(output)
+            self.assertEqual(len(bounds), 6)
+
+        # Place extractable text deliberately in the protected bottom margin.
+        # Overlaying it avoids pagination/overfull guards, so this specifically
+        # proves the rendered safe-area check catches the violation.
+        context, base = self.fixture(page_suffix=(
+            r"\begin{tikzpicture}[remember picture,overlay]"
+            r"\node[anchor=south] at ([yshift=12pt]current page.south)"
+            r"{BOTTOM SAFE MARGIN VIOLATION};\end{tikzpicture}"
+        ))
+        with context:
+            output = base / "bottom-violation.pdf"
+            build_binder.compile_entry(
+                *build_binder.load_entry(base.name, "final"), output
+            )
+            with self.assertRaisesRegex(AssertionError, "outside safe rectangle"):
+                _assert_rendered_text_inside_safe_area(output)
 
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_actual_pdf_zero_one_two_details_and_determinism(self):
