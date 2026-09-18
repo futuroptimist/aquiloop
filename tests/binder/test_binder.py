@@ -23,21 +23,51 @@ import prepare_binder_photo  # noqa: E402
 
 SAFE_TEXT_RECTANGLE = (72.0, 39.6, 572.4, 752.4)
 RIGHT_EXTRACTION_TOLERANCE = 0.01
+PDFTOTEXT_TIMEOUT_SECONDS = 30
 
 
-def _assert_pdf_text_inside_safe_rectangle(pdf, bbox_output):
-    """Check Poppler's rendered word boxes against the physical safe area."""
-    subprocess.run(
-        ["pdftotext", "-bbox-layout", str(pdf), str(bbox_output)],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
+def _run_pdftotext(pdf, bbox_output):
+    """Run Poppler with failures reported as actionable test assertions."""
+    command = ["pdftotext", "-bbox-layout", str(pdf), str(bbox_output)]
+    try:
+        subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=PDFTOTEXT_TIMEOUT_SECONDS,
+        )
+    except FileNotFoundError as error:
+        raise AssertionError(
+            "pdftotext is required for the rendered-PDF safe-area check; "
+            "install Poppler and ensure pdftotext is on PATH"
+        ) from error
+    except subprocess.TimeoutExpired as error:
+        raise AssertionError(
+            f"pdftotext timed out after {PDFTOTEXT_TIMEOUT_SECONDS}s for {pdf}"
+        ) from error
+    except subprocess.CalledProcessError as error:
+        details = (error.stderr or error.stdout or "no diagnostic output").strip()
+        raise AssertionError(
+            f"pdftotext failed for {pdf} with exit code {error.returncode}: {details}"
+        ) from error
+
+
+def _assert_pdf_ink_inside_safe_rectangle(pdf, bbox_output):
+    """Check rendered text, image, and stroked-path boxes against the safe area."""
+    from pypdf import PdfReader
+
+    _run_pdftotext(pdf, bbox_output)
     namespace = "{http://www.w3.org/1999/xhtml}"
     pages = list(ElementTree.parse(bbox_output).getroot().iter(namespace + "page"))
+    pdf_pages = PdfReader(pdf).pages
+    if len(pages) != len(pdf_pages):
+        raise AssertionError(
+            f"pdftotext returned {len(pages)} pages for a {len(pdf_pages)}-page PDF"
+        )
     measured = []
-    for page_number, page in enumerate(pages, 1):
-        words = list(page.iter(namespace + "word"))
+    for page_number, (bbox_page, pdf_page) in enumerate(zip(pages, pdf_pages), 1):
+        words = list(bbox_page.iter(namespace + "word"))
         if not words:
             raise AssertionError(f"page {page_number} has no rendered text")
         bounds = (
@@ -61,6 +91,23 @@ def _assert_pdf_text_inside_safe_rectangle(pdf, bbox_output):
                 f"{SAFE_TEXT_RECTANGLE} (right-edge tolerance "
                 f"{RIGHT_EXTRACTION_TOLERANCE} pt)"
             )
+        page_height = float(pdf_page.mediabox.height)
+        images, strokes = _painted_pdf_geometry(pdf_page)
+        for kind, boxes in (("image", images), ("stroked path", strokes)):
+            for box in boxes:
+                left, bottom, right, top = box
+                top_origin_box = (left, page_height - top, right, page_height - bottom)
+                left, top, right, bottom = top_origin_box
+                if (
+                    left < safe_left
+                    or top < safe_top
+                    or right > safe_right
+                    or bottom > safe_bottom
+                ):
+                    raise AssertionError(
+                        f"page {page_number} {kind} bounds {top_origin_box} exceed "
+                        f"safe rectangle {SAFE_TEXT_RECTANGLE}"
+                    )
     return measured
 
 
@@ -217,6 +264,50 @@ def _assert_optional_detail_rendering(page, detail_count):
             f"expected {detail_count} painted details/frames, "
             f"found {painted_details}/{len(frames)}"
         )
+
+
+class PdfTextDiagnosticsTests(unittest.TestCase):
+    def test_missing_pdftotext_has_install_guidance(self):
+        with mock.patch.object(subprocess, "run", side_effect=FileNotFoundError):
+            with self.assertRaisesRegex(AssertionError, "install Poppler"):
+                _run_pdftotext("input.pdf", "output.html")
+
+    def test_pdftotext_failure_surfaces_stderr(self):
+        failure = subprocess.CalledProcessError(
+            1, ["pdftotext"], stderr="broken PDF diagnostic"
+        )
+        with mock.patch.object(subprocess, "run", side_effect=failure):
+            with self.assertRaisesRegex(AssertionError, "broken PDF diagnostic"):
+                _run_pdftotext("input.pdf", "output.html")
+
+    def test_pdftotext_has_a_timeout(self):
+        with mock.patch.object(subprocess, "run") as run:
+            _run_pdftotext("input.pdf", "output.html")
+        self.assertEqual(run.call_args.kwargs["timeout"], PDFTOTEXT_TIMEOUT_SECONDS)
+
+    def test_safe_area_check_rejects_non_text_ink(self):
+        from pypdf import PdfWriter
+        from pypdf.generic import DecodedStreamObject, NameObject
+
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            pdf = base / "ink.pdf"
+            bbox = base / "ink.html"
+            writer = PdfWriter()
+            page = writer.add_blank_page(width=612, height=792)
+            stream = DecodedStreamObject()
+            stream.set_data(b"10 400 m 20 400 l S\n")
+            page[NameObject("/Contents")] = writer._add_object(stream)
+            with pdf.open("wb") as output:
+                writer.write(output)
+            bbox.write_text(
+                '<html xmlns="http://www.w3.org/1999/xhtml"><body><doc><page>'
+                '<word xMin="100" yMin="100" xMax="120" yMax="110">safe</word>'
+                "</page></doc></body></html>"
+            )
+            with mock.patch(__name__ + "._run_pdftotext"):
+                with self.assertRaisesRegex(AssertionError, "stroked path bounds.*exceed"):
+                    _assert_pdf_ink_inside_safe_rectangle(pdf, bbox)
 
 
 class CatalogTests(unittest.TestCase):
@@ -536,7 +627,7 @@ class AssemblyTests(unittest.TestCase):
                     self.assertIn("PROPAGATION", text)
                 build_binder._validate_page(page, title)
 
-            bounds = _assert_pdf_text_inside_safe_rectangle(first, base / "binder.bbox.html")
+            bounds = _assert_pdf_ink_inside_safe_rectangle(first, base / "binder.bbox.html")
             self.assertEqual(len(bounds), 6)
 
             # Move a real rendered profile down without changing its page box.
@@ -552,8 +643,29 @@ class AssemblyTests(unittest.TestCase):
             with violation.open("wb") as stream:
                 writer.write(stream)
             with self.assertRaisesRegex(AssertionError, "exceed safe rectangle"):
-                _assert_pdf_text_inside_safe_rectangle(
+                _assert_pdf_ink_inside_safe_rectangle(
                     violation, base / "bottom-safe-margin-violation.bbox.html"
+                )
+
+            # Add a path in the punch margin without moving any text. This
+            # proves non-text ink is covered independently of word extraction.
+            from pypdf.generic import ArrayObject, DecodedStreamObject, NameObject
+
+            ink_violation = base / "ink-safe-margin-violation.pdf"
+            writer = PdfWriter()
+            writer.add_page(reader.pages[0])
+            stream = DecodedStreamObject()
+            stream.set_data(b"10 400 m 20 400 l S\n")
+            contents = writer.pages[0].get("/Contents")
+            if not isinstance(contents, ArrayObject):
+                contents = ArrayObject([contents])
+            contents.append(writer._add_object(stream))
+            writer.pages[0][NameObject("/Contents")] = contents
+            with ink_violation.open("wb") as output:
+                writer.write(output)
+            with self.assertRaisesRegex(AssertionError, "stroked path bounds.*exceed"):
+                _assert_pdf_ink_inside_safe_rectangle(
+                    ink_violation, base / "ink-safe-margin-violation.bbox.html"
                 )
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
