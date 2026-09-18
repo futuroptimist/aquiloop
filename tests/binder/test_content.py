@@ -183,6 +183,28 @@ class ContentWorksheetTests(unittest.TestCase):
                 for cue in cues:
                     self.assertIn(cue, page)
 
+    def test_revised_profiles_keep_reviewer_and_unresolved_footer_fields(self):
+        expected_flags = {
+            "sedum-loves-fire": ("identity/cultivar match", "dry-down/rain"),
+            "bird-of-paradise": ("species", "pot/medium"),
+            "aquarium-hornwort": ("species/trade form", "chemistry", "light"),
+        }
+        for slug, flags in expected_flags.items():
+            with self.subTest(entry=slug):
+                page = (ROOT / "binder" / "entries" / slug / "page.tex").read_text(
+                    encoding="utf-8")
+                self.assertIn("Reviewer: pending.", page)
+                self.assertIn("Flags:", page)
+                self.assertIn("unresolved", page)
+                for flag in flags:
+                    self.assertIn(flag, page)
+
+    def test_sedum_propagation_warns_against_early_placement(self):
+        propagation = self.load("sedum-loves-fire", "content.yaml")["cards"][
+            "propagation"][0]
+        self.assertIn("placing it before callusing", propagation["claim"])
+        self.assertNotIn("rooting before callusing", propagation["claim"])
+
     def test_propagation_contract_rejects_an_empty_required_field(self):
         content = self.load("pothos", "content.yaml")
         content["cards"]["propagation"][0]["pitfall"] = ""

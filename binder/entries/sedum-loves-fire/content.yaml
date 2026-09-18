@@ -68,7 +68,7 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves, let the cut end callus, then place it in well-drained medium; rooting before callusing risks rot.",
+        "claim": "Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves, let the cut end callus, then place it in well-drained medium; placing it before callusing risks rot.",
         "method": "stem cutting",
         "starting_material": "a healthy stem cutting with its lower leaves removed",
         "establishment_condition": "let the cut end callus, then place it in well-drained medium",
