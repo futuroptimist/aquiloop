@@ -11,7 +11,7 @@
       "Sedum adolphi at species level",
       "unresolved look-alike or trade-name plant"
     ],
-    "decision": "Retain the user-facing label, but use accepted spelling adolphi only in the provisional working name. USPP37238P2 now identifies LOVE’S FIRE as a patented cultivar, so PPAF is stale in the United States. Do not associate the specimen with that cultivar until compared with its label and traits.",
+    "decision": "Keep the reported label distinct from the accepted species spelling Sedum adolphi and the patented cultivar name ‘LOVE’S FIRE’. Treat that cultivar as a candidate only; the label and specimen have not been matched to it.",
     "sources": [
       "SED-POWO",
       "SED-PAT"
@@ -44,7 +44,7 @@
     ],
     "water": [
       {
-        "claim": "Starting cue: water thoroughly only after the medium has dried; recheck after rain and do not substitute a fixed interval for observation.",
+        "claim": "Water thoroughly after the medium dries, then let excess drain. In an outdoor grow bag, recheck after rain and use observed dry-down rather than a fixed interval.",
         "sources": [
           "SED-MSU"
         ]
@@ -52,7 +52,7 @@
     ],
     "temperature_season": [
       {
-        "claim": "Protect this provisional tender succulent from frost and reduce watering as light and active growth decline. Exact outdoor thresholds remain unknown.",
+        "claim": "Protect this provisionally identified succulent from frost. As colder, darker conditions slow growth, keep the medium drier and use plant response rather than an unsourced temperature threshold.",
         "sources": [
           "SED-MSU"
         ]
@@ -60,7 +60,7 @@
     ],
     "feeding_maintenance": [
       {
-        "claim": "Feed sparingly during active growth and withhold fertilizer when growth slows; remove damaged tissue only with clean tools.",
+        "claim": "Feed lightly only while the plant is actively growing; reduce or stop feeding when growth slows. Check outdoor plants more often because sun and weather can change water use.",
         "sources": [
           "SED-MSU"
         ]
@@ -68,11 +68,11 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: take a healthy stem or leaf cutting. Let the wound callus, then establish in a well-drained medium; excess moisture before rooting is the key rot pitfall.",
-        "method": "stem or leaf cutting",
-        "starting_material": "a healthy stem or whole leaf cutting",
-        "establishment_condition": "let the wound callus, then place it in well-drained medium",
-        "pitfall": "excess moisture before rooting can cause rot",
+        "claim": "Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves, let the cut end callus, then place it in well-drained medium; rooting before callusing risks rot.",
+        "method": "stem cutting",
+        "starting_material": "a healthy stem cutting with its lower leaves removed",
+        "establishment_condition": "let the cut end callus, then place it in well-drained medium",
+        "pitfall": "a cutting is more likely to rot if placed before the cut end calluses",
         "sources": [
           "SED-IA"
         ]
@@ -80,7 +80,7 @@
     ],
     "troubleshooting": [
       {
-        "claim": "Soft or translucent tissue → excess moisture or cold is plausible → check drainage, medium moisture, and recent temperatures before acting. Stretched growth → insufficient light is plausible → verify exposure and acclimate gradually.",
+        "claim": "Spindly growth → light may be inadequate → verify exposure before gradually increasing sun. Persistent wetness or poor drainage → root-rot risk → check the grow bag, medium, and recent rain.",
         "sources": [
           "SED-MSU"
         ]

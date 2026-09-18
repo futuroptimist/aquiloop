@@ -11,13 +11,13 @@
       "Strelitzia reginae",
       "Strelitzia nicolai"
     ],
-    "decision": "Do not select S. reginae or S. nicolai from the common name alone. The candidates differ strongly in mature habit and flowers; retain a genus-level card until evidence supports one.",
+    "decision": "Use Strelitzia at genus level. S. reginae and S. nicolai remain separate candidates until label, habit, stem/base, leaf, or flower evidence supports one.",
     "sources": [
       "BOP-REG",
       "BOP-NIC"
     ]
   },
-  "environmental_variability": "Genus-level container guidance only. Species, indoor exposure, temperature, container, and any outdoor transition plan remain unknown.",
+  "environmental_variability": "Genus-level working identity only. Candidate-specific care is labeled below; species, exposure, temperature, container, and medium remain unknown.",
   "unresolved_fields": [
     "species",
     "full habit, stem/base, leaf and flower evidence",
@@ -28,7 +28,7 @@
   "cards": {
     "light_exposure": [
       {
-        "claim": "Both candidate species need bright conditions: NCSU recommends a sunny indoor site for S. reginae and bright indirect light for S. nicolai. Select exposure only after species and current conditions are reviewed.",
+        "claim": "Candidate guidance: a sunny indoor site for S. reginae; bright indirect light for S. nicolai. These alternatives do not establish the best exposure for the unresolved specimen.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -37,7 +37,7 @@
     ],
     "soil_substrate": [
       {
-        "claim": "NCSU describes well-drained loamy media for both candidate species. Confirm the existing pot and medium before making a species-specific recommendation.",
+        "claim": "Both candidate profiles call for well-drained loamy soil. Check the current container and medium before changing either; no mix ratio is supplied here.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -55,7 +55,7 @@
     ],
     "temperature_season": [
       {
-        "claim": "NCSU describes moderate indoor temperatures for S. reginae and says S. nicolai does not tolerate temperatures below 50°F or cold drafts. Record conditions and confirm species before adopting a limit.",
+        "claim": "Candidate guidance: moderate indoor temperatures for S. reginae; S. nicolai is described as intolerant below 50°F and of cold drafts. Apply neither as a confirmed-species prescription.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -64,7 +64,7 @@
     ],
     "feeding_maintenance": [
       {
-        "claim": "NCSU recommends regular spring/summer fertilizer for S. reginae and monthly balanced liquid fertilizer in spring/summer for S. nicolai. Defer a schedule until species and active growth are confirmed.",
+        "claim": "Both candidates are fed during spring/summer active growth, but their source schedules differ. Confirm species and growth before choosing a schedule.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -85,7 +85,7 @@
     ],
     "troubleshooting": [
       {
-        "claim": "NCSU lists overwatering or poor drainage as root-rot risks for S. reginae and lists wind damage, root rot, and several pests for S. nicolai. Inspect conditions and species before diagnosing this specimen.",
+        "claim": "Root rot risk → overwatering or poor drainage is plausible for S. reginae → check moisture and drainage. For S. nicolai, also inspect for wind damage and listed pests; confirm species before diagnosis.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"

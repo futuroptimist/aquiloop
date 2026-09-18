@@ -11,13 +11,13 @@
       "another Ceratophyllum species",
       "an aquarium trade form not identifiable from the common name alone"
     ],
-    "decision": "Retain hornwort as the user-facing name and mark C. demersum provisional until package/source and forked-leaf/node photographs are reviewed.",
+    "decision": "Use hornwort as the reported name and C. demersum as a provisional working example. Package/source and diagnostic leaf/node photographs are still needed to confirm the specimen.",
     "sources": [
-      "HOR-USDA",
-      "HOR-FWS"
+      "HOR-FWS",
+      "HOR-WA"
     ]
   },
-  "environmental_variability": "Aquarium guidance is a starting point. Tank temperature, chemistry, light, livestock, flow, fertilizer, and observed response must be recorded before local thresholds are set. Watering interval is N/A.",
+  "environmental_variability": "Strictly aquatic starting guidance. Record tank water, light, flow, livestock, placement, and specimen response before setting local targets. Watering interval is N/A.",
   "unresolved_fields": [
     "species and trade form",
     "tank volume and livestock",
@@ -45,9 +45,10 @@
     ],
     "placement_anchoring_floating": [
       {
-        "claim": "C. demersum is rootless and can float freely or anchor to the bottom with modified leaves. Until the specimen is confirmed, floating it rather than treating it as a rooted plant is the conservative editorial choice.",
+        "claim": "C. demersum is rootless and may float freely or anchor at the bottom with modified leaves. Tropica also permits bottom placement for its selection; bottom placement is therefore an option, not proof of identity.",
         "sources": [
-          "HOR-WA"
+          "HOR-WA",
+          "HOR-TROP"
         ]
       }
     ],
@@ -61,7 +62,7 @@
     ],
     "growth_trimming": [
       {
-        "claim": "C. demersum can form dense colonies and has easily broken stems. As a conservative maintenance step, observe its spread and remove excess or detached growth deliberately rather than assigning an unsupported growth-rate target.",
+        "claim": "Wild C. demersum can form dense colonies and its stems break easily. Observe spread and deliberately remove excess or detached growth; no aquarium growth-rate target is inferred.",
         "sources": [
           "HOR-WA"
         ]
@@ -81,7 +82,7 @@
     ],
     "aquarium_compatibility_troubleshooting": [
       {
-        "claim": "Because C. demersum stems break easily, inspect and remove loose fragments as a conservative housekeeping step. No retained source establishes a cause for aquarium shedding, algae, or decline, so record changes in light, water, handling, and livestock and leave the cause unknown.",
+        "claim": "Loose fragments → easily broken stems or handling is plausible → inspect and remove fragments. For algae, shedding, or decline, record light, water, flow, handling, and livestock changes; the sources do not establish a diagnosis.",
         "sources": [
           "HOR-WA"
         ]

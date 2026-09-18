@@ -493,11 +493,11 @@ class AssemblyTests(unittest.TestCase):
             "aquarium-hornwort": ("Aquarium hornwort", "LIGHT", "WATER PARAMETERS / TEMPERATURE", "PLACEMENT / FLOATING", "NUTRIENT CONTEXT", "GROWTH / TRIMMING", "PROPAGATION", "COMPATIBILITY / TROUBLESHOOTING", "NATURAL HISTORY / TRIVIA"),
         }
         propagation_evidence = {
-            "sedum-loves-fire": (("stem", "whole leaf", "callus", "rot"), ("SED-POWO", "SED-PAT", "SED-MSU", "SED-IA")),
+            "sedum-loves-fire": (("stem cutting", "lower leaves", "callus", "rot"), ("SED-POWO", "SED-PAT", "SED-MSU", "SED-IA")),
             "kalanchoe-desert": (("stem section", "lower leaves", "well-drained", "rot"), ("KAL-RHS", "KAL-IA", "KAL-PROP")),
             "pothos": (("stem piece", "node", "bud", "foliage above water"), ("POT-NCSU", "POT-PSU", "POT-WISC", "POT-NCSU-PROP")),
             "bird-of-paradise": (("divide", "shoot", "original depth", "soggy"), ("BOP-REG", "BOP-NIC", "BOP-UF")),
-            "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-USDA", "HOR-FWS", "HOR-WA", "HOR-TROP")),
+            "aquarium-hornwort": (("method", "plant fragment", "below the surface", "broken stems"), ("HOR-FWS", "HOR-WA", "HOR-TROP")),
         }
 
         def assert_extracted_phrase(phrase, text):

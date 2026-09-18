@@ -156,6 +156,22 @@ class ContentWorksheetTests(unittest.TestCase):
                 "POT-WISC—UW–Madison, Pothos",
                 "POT-NCSU-PROP—NC State, Propagation",
             ),
+            "sedum-loves-fire": (
+                "SED-POWO—Kew, ",
+                "SED-PAT—USPTO, LOVE’S FIRE patent",
+                "SED-MSU—Montana State, Growing succulents",
+                "SED-IA—ISU, Propagate succulents",
+            ),
+            "bird-of-paradise": (
+                "BOP-REG—NC State, ",
+                "BOP-NIC—NC State, ",
+                "BOP-UF—UF/IFAS, Bird-of-Paradise",
+            ),
+            "aquarium-hornwort": (
+                "HOR-FWS—U.S. FWS, Coon’s-tail",
+                "HOR-WA—Washington Ecology, Hornwort",
+                "HOR-TROP—Tropica, ",
+            ),
         }
         for slug, cues in expected_cues.items():
             with self.subTest(entry=slug):
@@ -195,6 +211,12 @@ class ContentWorksheetTests(unittest.TestCase):
                     source["key"]: set(source["supports"])
                     for source in source_doc["sources"]
                 }
+                for key in content["identity"]["sources"]:
+                    self.assertIn(key, supported, f"{slug}/identity cites unknown source {key}")
+                    self.assertIn(
+                        "identity", supported.get(key, set()),
+                        f"{slug}/identity lacks support metadata for {key}",
+                    )
                 for card, claims in content["cards"].items():
                     for claim in claims:
                         for key in claim["sources"]:
