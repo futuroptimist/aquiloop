@@ -6,6 +6,8 @@ import unittest
 import os
 import re
 import shutil
+import subprocess
+import xml.etree.ElementTree as ET
 from collections import Counter
 from unittest import mock
 from pathlib import Path
@@ -17,6 +19,52 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
+
+
+SAFE_TEXT_RECT = (72.0, 39.6, 572.4, 752.4)
+RIGHT_EXTRACTION_TOLERANCE = 0.01
+# Poppler includes a 0.125-point font-ascent overshoot above the watering-log
+# title's positioned box. This is extraction metadata rather than painted ink.
+TOP_EXTRACTION_TOLERANCE = 0.15
+
+
+def _pdf_text_bounds(pdf):
+    """Extract per-page word bounds in top-origin PDF coordinates with Poppler."""
+    with tempfile.TemporaryDirectory() as name:
+        bbox = Path(name) / "text-bounds.html"
+        subprocess.run(
+            ["pdftotext", "-bbox-layout", str(pdf), str(bbox)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        root = ET.parse(bbox).getroot()
+    result = []
+    for page in (element for element in root.iter() if element.tag.endswith("page")):
+        words = [element for element in page.iter() if element.tag.endswith("word")]
+        if not words:
+            raise AssertionError("rendered page has no extractable text")
+        result.append(tuple(
+            operation(float(word.attrib[attribute]) for word in words)
+            for operation, attribute in (
+                (min, "xMin"), (min, "yMin"), (max, "xMax"), (max, "yMax")
+            )
+        ))
+    return result
+
+
+def _assert_safe_text_bounds(bounds):
+    """Require extracted text inside the documented physical safe rectangle."""
+    left, top, right, bottom = SAFE_TEXT_RECT
+    for number, (x_min, y_min, x_max, y_max) in enumerate(bounds, 1):
+        if x_min < left or y_min < top - TOP_EXTRACTION_TOLERANCE:
+            raise AssertionError(f"page {number} text begins outside safe area: {bounds[number - 1]}")
+        if x_max > right + RIGHT_EXTRACTION_TOLERANCE:
+            raise AssertionError(f"page {number} text exceeds right safe edge: {bounds[number - 1]}")
+        # Deliberately no bottom tolerance: the former footer defect was real
+        # layout overflow, not an extraction artifact.
+        if y_max > bottom:
+            raise AssertionError(f"page {number} text exceeds bottom safe edge: {bounds[number - 1]}")
 
 
 def _log_row_cells(row_anchors, column_anchors, field_positions):
@@ -480,6 +528,13 @@ class AssemblyTests(unittest.TestCase):
             self.assertEqual(first.read_bytes(), second.read_bytes())
             reader = PdfReader(first)
             self.assertEqual(len(reader.pages), 6)
+            bounds = _pdf_text_bounds(first)
+            self.assertEqual(len(bounds), 6)
+            _assert_safe_text_bounds(bounds)
+            for page_number, page_bounds in enumerate(bounds[:5], 1):
+                with self.subTest(page=page_number):
+                    self.assertGreaterEqual(page_bounds[0], 72.0)
+                    self.assertLessEqual(page_bounds[3], 752.4)
             expected = (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
                 "Aquarium hornwort", "Watering & aquarium log",
@@ -489,7 +544,41 @@ class AssemblyTests(unittest.TestCase):
                 self.assertIn(title, text)
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
+                    requested_sizes = []
+
+                    def collect_size(fragment, _cm, _tm, _font, size):
+                        if fragment.strip():
+                            requested_sizes.append(size)
+
+                    page.extract_text(visitor_text=collect_size)
+                    self.assertGreaterEqual(min(requested_sizes), 7.9)
                 build_binder._validate_page(page, title)
+
+    @unittest.skipUnless(
+        shutil.which("lualatex") and shutil.which("pdftotext"),
+        "LuaLaTeX and Poppler unavailable",
+    )
+    def test_safe_text_bounds_reject_a_rendered_bottom_margin_violation(self):
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            (base / "violation.tex").write_text(
+                r"""\documentclass[letterpaper]{article}
+\usepackage[letterpaper,left=1in,right=.55in,top=.55in,bottom=.55in]{geometry}
+\pagestyle{empty}\begin{document}\vspace*{\fill}DELIBERATE BOTTOM VIOLATION\end{document}
+""",
+                encoding="utf-8",
+            )
+            subprocess.run(
+                ["lualatex", "--interaction=nonstopmode", "--halt-on-error", "violation.tex"],
+                cwd=base,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            bounds = _pdf_text_bounds(base / "violation.pdf")
+            self.assertGreater(bounds[0][3], SAFE_TEXT_RECT[3])
+            with self.assertRaisesRegex(AssertionError, "bottom safe edge"):
+                _assert_safe_text_bounds(bounds)
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
         rows = [606.8, 567.7, 528.6, 489.5]

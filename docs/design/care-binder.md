@@ -143,7 +143,9 @@ historical record.
 - Page box: US Letter portrait, exactly 8.5 × 11 inches (612 × 792 PDF points).
 - Safe area: 1.0-inch left margin for three-hole punching; 0.55 inch at top,
   right, and bottom. No essential ink enters those margins. The resulting usable
-  rectangle is 6.95 × 9.9 inches.
+  rectangle is 6.95 × 9.9 inches. Profile pages implement a 0.60-inch effective
+  bottom reserve—0.05 inch beyond the minimum—so their evidence footers remain
+  inside the 752.4-point bottom-safe boundary without reducing type.
 - Hero photograph: an initial 3.30 × 3.30-inch square frame at upper right,
   cropped without misleading scale. The rendered crop requires at least
   792 × 792 pixels (240 ppi) and preferably 990 × 990 pixels (300 ppi), plus
@@ -154,7 +156,10 @@ historical record.
   bounded item. Keep headings with their content and prohibit stranded labels.
 - Type: 24–30 pt common name; 14–17 pt binomial/status line; 11–12 pt category
   headings; 9.5–10.5 pt body with at least 1.25× line spacing; 8 pt minimum for
-  sources/revision metadata. Never shrink type to cure overflow.
+  sources/revision metadata. Never shrink type to cure overflow. Care-card copy
+  and evidence footers are ragged right so narrow measures do not acquire
+  stretched interword spaces; source keys and their human-readable legends stay
+  together in the footer.
 - Output: near-black body text on white or near-white, minimum 4.5:1 contrast
   for ordinary text, no information conveyed by hue alone, solid/dashed or
   labeled distinctions that survive grayscale, and 0.5 pt minimum rules.
@@ -545,6 +550,17 @@ tolerance does not lower the physical 8-point design contract. Automated page
 geometry and text checks complement, but do not replace, the later physical
 print and handwriting qualification.
 
+The rendered regression also runs Poppler's `pdftotext -bbox-layout` over the
+ordered six-page PDF and checks every extracted word against the top-origin safe
+rectangle `(72.0, 39.6, 572.4, 752.4)` points. The right edge alone receives a
+0.01-point rounding allowance because Poppler reports several glyph boxes up to
+0.00649 point beyond an exactly positioned 572.4-point edge. There is no bottom
+allowance. A 0.15-point top-only accommodation covers Poppler's font-ascent box
+for the unchanged watering-log title (0.12418 point above its positioned box);
+it is extraction metadata, not permission for positioned or painted content to
+cross the top safe edge. A rendered negative fixture deliberately uses the old
+bottom reserve and proves that an extracted bottom beyond 752.4 points fails.
+
 Image and content validation must additionally check:
 
 - supported JSON schema versions and duplicate asset IDs;
@@ -594,6 +610,9 @@ After screen review passes, print on US Letter at actual size (not “fit”), p
 a sacrificial copy, write in several log rows with the intended pen, and inspect
 duplex/ink behavior if applicable. Record printer settings and corrections.
 Only that later physical check can justify calling the binder print-worthy.
+Step 08a3 therefore completes automated typography and safe-margin enforcement,
+but Step 08a4's revised six-page screen proof and Step 08b's actual-size print,
+punch, and handwriting checks remain required gates.
 
 ## Deferred decisions
 
@@ -605,8 +624,9 @@ Only that later physical check can justify calling the binder print-worthy.
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
 - Specimen photographs and growing-condition records, care-log handwriting
-  space, typography and safe-margin refinement, revised six-page proof review,
-  and physical print/handwriting qualification remain pending gates.
+  space, revised six-page proof review, and physical print/handwriting
+  qualification remain pending gates. Typography and automated safe-margin
+  refinement are implemented; they do not substitute for those human gates.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
