@@ -11,19 +11,19 @@
       "Strelitzia reginae",
       "Strelitzia nicolai"
     ],
-    "decision": "Do not select S. reginae or S. nicolai from the common name alone. The candidates differ strongly in mature habit and flowers; retain a genus-level card until evidence supports one.",
+    "decision": "Working identity: Strelitzia at genus level from the reported common name. Do not select S. reginae or S. nicolai without label or specimen evidence; candidate guidance below stays species-specific.",
     "sources": [
       "BOP-REG",
       "BOP-NIC"
     ]
   },
-  "environmental_variability": "Genus-level container guidance only. Species, indoor exposure, temperature, container, and any outdoor transition plan remain unknown.",
+  "environmental_variability": "Genus-level container guidance only. Species, indoor exposure, temperature, container, and medium remain unknown.",
   "unresolved_fields": [
     "species",
     "full habit, stem/base, leaf and flower evidence",
     "window exposure and supplemental light",
     "container and medium",
-    "temperature/humidity and outdoor-transition plan"
+    "temperature and humidity"
   ],
   "cards": {
     "light_exposure": [

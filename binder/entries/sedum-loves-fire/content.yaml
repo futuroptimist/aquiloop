@@ -11,7 +11,7 @@
       "Sedum adolphi at species level",
       "unresolved look-alike or trade-name plant"
     ],
-    "decision": "Retain the user-facing label, but use accepted spelling adolphi only in the provisional working name. USPP37238P2 now identifies LOVE’S FIRE as a patented cultivar, so PPAF is stale in the United States. Do not associate the specimen with that cultivar until compared with its label and traits.",
+    "decision": "Working identity: accepted species name Sedum adolphi with reported label ‘Love’s Fire.’ The patent documents a cultivar named LOVE’S FIRE, but neither the reported label nor the patent confirms that this specimen is that cultivar.",
     "sources": [
       "SED-POWO",
       "SED-PAT"
@@ -60,7 +60,7 @@
     ],
     "feeding_maintenance": [
       {
-        "claim": "Feed sparingly during active growth and withhold fertilizer when growth slows; remove damaged tissue only with clean tools.",
+        "claim": "Feed sparingly during active growth and withhold fertilizer when growth slows; remove diseased leaves if observed.",
         "sources": [
           "SED-MSU"
         ]
@@ -80,7 +80,7 @@
     ],
     "troubleshooting": [
       {
-        "claim": "Soft or translucent tissue → excess moisture or cold is plausible → check drainage, medium moisture, and recent temperatures before acting. Stretched growth → insufficient light is plausible → verify exposure and acclimate gradually.",
+        "claim": "Spindly growth, pale or shriveled leaves, leaf drop, or color change signals a problem but not a diagnosis; check light, drainage, moisture, and recent weather before acting.",
         "sources": [
           "SED-MSU"
         ]

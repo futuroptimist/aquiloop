@@ -585,6 +585,21 @@ a sacrificial copy, write in several log rows with the intended pen, and inspect
 duplex/ink behavior if applicable. Record printer settings and corrections.
 Only that later physical check can justify calling the binder print-worthy.
 
+## Step 08a profile-care correction status
+
+PR #59 completed the practical-care and interpretable-source correction for the
+Kalanchoe and pothos profiles. This follow-up completes the same correction for
+Sedum “Love’s Fire,” bird of paradise, and aquarium hornwort: each now uses a
+compact working-identity note, claim-level source keys, and a printed legend that
+maps those keys to recognizable publisher/title cues and the entry’s full
+`sources.yaml` record. These are still high-level examples, not specimen
+identifications or local prescriptions.
+
+The specimen-photo/care-condition gate, care-log handwriting-space revision,
+typography and safe-margin refinement, revised six-page proof review, and
+physical print/handwriting gate all remain pending. No profile is final or
+photograph-qualified.
+
 ## Deferred decisions
 
 - The approved direction is A typography + B profile layout + H care log. The

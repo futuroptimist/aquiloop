@@ -7,29 +7,31 @@
       "authority": "Royal Botanic Gardens, Kew — Plants of the World Online",
       "title": "Sedum adolphi Raym.-Hamet",
       "url": "https://powo.science.kew.org/results?q=Sedum%20adolphi",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "identity"
       ],
-      "access_note": "Automated URL check returned HTTP 403 on 2026-09-15; retained as the botanical authority for interactive review."
+      "access_note": "Automated URL check returned HTTP 403 on 2026-09-15; retained as the botanical authority for interactive review.",
+      "applicability": "Botanical authority for the accepted species spelling only; its search record does not verify the reported cultivar label or specimen."
     },
     {
       "key": "SED-PAT",
       "authority": "United States Patent and Trademark Office, via Google Patents",
       "title": "Sedum plant named “LOVE’S FIRE” (USPP37238P2)",
       "url": "https://patents.google.com/patent/USPP37238P2/en",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "identity",
         "natural_history_trivia"
-      ]
+      ],
+      "applicability": "Cultivar-specific patent record supporting the LOVE’S FIRE name and selection history; it does not establish that the user’s specimen is this cultivar."
     },
     {
       "key": "SED-MSU",
       "authority": "Montana State University Extension",
       "title": "Growing Succulents",
       "url": "https://extension-store.montana.edu/montguides/growing-succulents",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "light_exposure",
         "soil_substrate",
@@ -37,17 +39,19 @@
         "temperature_season",
         "feeding_maintenance",
         "troubleshooting"
-      ]
+      ],
+      "applicability": "General succulent guidance used as high-level care for the provisional Sedum; it does not supply specimen-specific thresholds or a soil ratio."
     },
     {
       "key": "SED-IA",
       "authority": "Iowa State University Extension and Outreach",
       "title": "How to Propagate Succulents",
       "url": "https://yardandgarden.extension.iastate.edu/how-to/how-propagate-succulents",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "propagation"
-      ]
+      ],
+      "applicability": "General propagation guidance that explicitly includes Sedum for stem and whole-leaf cuttings; it does not verify this specimen’s identity."
     }
   ]
 }

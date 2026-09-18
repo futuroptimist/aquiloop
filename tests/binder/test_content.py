@@ -140,6 +140,30 @@ class ContentWorksheetTests(unittest.TestCase):
         self.assertIn("when growth slows", feeding)
         self.assertNotIn("winter dormancy", feeding)
 
+    def test_remaining_profiles_preserve_practical_care_meanings(self):
+        sedum = self.load("sedum-loves-fire", "content.yaml")
+        sedum_text = " ".join(
+            claim["claim"] for claims in sedum["cards"].values() for claim in claims
+        ).casefold()
+        for phrase in ("acclimate gradually", "freely draining", "after rain",
+                       "frost", "active growth", "callus"):
+            self.assertIn(phrase, sedum_text)
+
+        bird = self.load("bird-of-paradise", "content.yaml")
+        self.assertEqual(bird["identity"]["working_name"], "Strelitzia sp.")
+        propagation = bird["cards"]["propagation"][0]
+        self.assertIn("S. reginae", propagation["claim"])
+        self.assertEqual(propagation["sources"], ["BOP-UF"])
+
+        hornwort = self.load("aquarium-hornwort", "content.yaml")
+        placement = hornwort["cards"]["placement_anchoring_floating"][0]["claim"]
+        for phrase in ("float freely", "at the bottom", "rootless"):
+            self.assertIn(phrase, placement)
+        self.assertIn(
+            "Watering interval is N/A",
+            hornwort["cards"]["water_parameters_temperature"][0]["claim"],
+        )
+
     def test_each_profile_prints_an_interpretable_source_legend(self):
         expected_cues = {
             "kalanchoe-desert": (
@@ -155,6 +179,23 @@ class ContentWorksheetTests(unittest.TestCase):
                 "POT-PSU—Penn State, Pothos",
                 "POT-WISC—UW–Madison, Pothos",
                 "POT-NCSU-PROP—NC State, Propagation",
+            ),
+            "sedum-loves-fire": (
+                "SED-POWO—Kew POWO, Sedum adolphi",
+                "SED-PAT—USPTO, LOVE’S FIRE patent",
+                "SED-MSU—Montana State, Growing succulents",
+                "SED-IA—ISU, Propagate succulents",
+            ),
+            "bird-of-paradise": (
+                "BOP-REG—NC State, S. reginae",
+                "BOP-NIC—NC State, S. nicolai",
+                "BOP-UF—UF/IFAS, Bird-of-Paradise",
+            ),
+            "aquarium-hornwort": (
+                "HOR-USDA—USDA, C. demersum",
+                "HOR-FWS—U.S. FWS, Coon’s-tail",
+                "HOR-WA—Washington Ecology, Coontail",
+                "HOR-TROP—Tropica, Foxtail",
             ),
         }
         for slug, cues in expected_cues.items():

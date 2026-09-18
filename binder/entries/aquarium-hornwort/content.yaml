@@ -11,7 +11,7 @@
       "another Ceratophyllum species",
       "an aquarium trade form not identifiable from the common name alone"
     ],
-    "decision": "Retain hornwort as the user-facing name and mark C. demersum provisional until package/source and forked-leaf/node photographs are reviewed.",
+    "decision": "Working identity: provisional C. demersum from the reported hornwort name. Confirm package/source and forked-leaf/node evidence before treating the species or trade form as identified.",
     "sources": [
       "HOR-USDA",
       "HOR-FWS"
@@ -45,7 +45,7 @@
     ],
     "placement_anchoring_floating": [
       {
-        "claim": "C. demersum is rootless and can float freely or anchor to the bottom with modified leaves. Until the specimen is confirmed, floating it rather than treating it as a rooted plant is the conservative editorial choice.",
+        "claim": "Candidate C. demersum is rootless and may float freely or anchor at the bottom with modified leaves. Keep it aquatic; bottom placement does not make it a rooted terrestrial plant.",
         "sources": [
           "HOR-WA"
         ]
