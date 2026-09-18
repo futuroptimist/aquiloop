@@ -587,6 +587,17 @@ Only that later physical check can justify calling the binder print-worthy.
 
 ## Deferred decisions
 
+### Practical-care correction status
+
+- PR #59 completed the source-backed practical-care and interpretable-source
+  corrections for the Kalanchoe and pothos profiles.
+- The Step 08a1b follow-up completes the equivalent corrections for Sedum
+  “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
+  examples rather than identifications of the user's specimens.
+- Specimen photographs and growing-condition records, care-log handwriting
+  space, typography and safe-margin refinement, revised six-page proof review,
+  and physical print/handwriting qualification remain pending gates.
+
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
   assembly are implemented; final page qualification remains pending.

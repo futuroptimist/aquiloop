@@ -156,6 +156,22 @@ class ContentWorksheetTests(unittest.TestCase):
                 "POT-WISC—UW–Madison, Pothos",
                 "POT-NCSU-PROP—NC State, Propagation",
             ),
+            "sedum-loves-fire": (
+                "SED-POWO—Kew, ",
+                "SED-PAT—USPTO, LOVE’S FIRE patent",
+                "SED-MSU—Montana State, Growing succulents",
+                "SED-IA—ISU, Propagate succulents",
+            ),
+            "bird-of-paradise": (
+                "BOP-REG—NC State, ",
+                "BOP-NIC—NC State, ",
+                "BOP-UF—UF/IFAS, Bird-of-Paradise",
+            ),
+            "aquarium-hornwort": (
+                "HOR-FWS—U.S. FWS, Coon’s-tail",
+                "HOR-WA—Washington Ecology, Hornwort",
+                "HOR-TROP—Tropica, ",
+            ),
         }
         for slug, cues in expected_cues.items():
             with self.subTest(entry=slug):
@@ -166,6 +182,45 @@ class ContentWorksheetTests(unittest.TestCase):
                 self.assertIn(f"binder/entries/{slug}/sources.yaml", printable)
                 for cue in cues:
                     self.assertIn(cue, page)
+
+    def test_revised_profiles_keep_reviewer_and_unresolved_footer_fields(self):
+        expected_flags = {
+            "sedum-loves-fire": (
+                "identity/cultivar match", "photographs", "exposure", "medium",
+                "dry-down/rain", "temperatures",
+            ),
+            "bird-of-paradise": (
+                "species", "photographs", "exposure", "pot/medium", "climate",
+                "outdoor transition",
+            ),
+            "aquarium-hornwort": (
+                "species/trade form", "photographs", "tank", "livestock",
+                "chemistry", "light", "flow", "placement", "fertilizer/CO2",
+            ),
+        }
+        for slug, flags in expected_flags.items():
+            with self.subTest(entry=slug):
+                page = (ROOT / "binder" / "entries" / slug / "page.tex").read_text(
+                    encoding="utf-8")
+                self.assertIn("Reviewer: pending.", page)
+                self.assertIn("Flags:", page)
+                self.assertIn("unresolved", page)
+                self.assertIn(r"\textbf{EVIDENCE / SOURCES}", page)
+                self.assertIn(r"\texttt{sources.yaml}", page)
+                for flag in flags:
+                    self.assertIn(flag, page)
+
+    def test_sedum_propagation_warns_against_early_placement(self):
+        propagation = self.load("sedum-loves-fire", "content.yaml")["cards"][
+            "propagation"][0]
+        expected_warning = (
+            "placing the cutting in medium before the cut end has dried and "
+            "callused raises rot risk"
+        )
+        self.assertIn(expected_warning, propagation["claim"])
+        self.assertIn(expected_warning, propagation["pitfall"])
+        self.assertIn("dry and callus", propagation["establishment_condition"])
+        self.assertNotIn("rooting before callusing", propagation["claim"])
 
     def test_propagation_contract_rejects_an_empty_required_field(self):
         content = self.load("pothos", "content.yaml")
@@ -195,6 +250,12 @@ class ContentWorksheetTests(unittest.TestCase):
                     source["key"]: set(source["supports"])
                     for source in source_doc["sources"]
                 }
+                for key in content["identity"]["sources"]:
+                    self.assertIn(key, supported, f"{slug}/identity cites unknown source {key}")
+                    self.assertIn(
+                        "identity", supported.get(key, set()),
+                        f"{slug}/identity lacks support metadata for {key}",
+                    )
                 for card, claims in content["cards"].items():
                     for claim in claims:
                         for key in claim["sources"]:
