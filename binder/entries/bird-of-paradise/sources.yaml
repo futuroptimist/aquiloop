@@ -7,25 +7,7 @@
       "authority": "North Carolina State University Extension",
       "title": "Strelitzia reginae",
       "url": "https://plants.ces.ncsu.edu/plants/strelitzia-reginae/",
-      "accessed": "2026-09-15",
-      "supports": [
-        "identity",
-        "light_exposure",
-        "soil_substrate",
-        "water",
-        "temperature_season",
-        "feeding_maintenance",
-        "propagation",
-        "troubleshooting",
-        "natural_history_trivia"
-      ]
-    },
-    {
-      "key": "BOP-NIC",
-      "authority": "North Carolina State University Extension",
-      "title": "Strelitzia nicolai",
-      "url": "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "identity",
         "light_exposure",
@@ -37,14 +19,33 @@
         "troubleshooting",
         "natural_history_trivia"
       ],
-      "applicability": "Species profile for the S. nicolai candidate. Care facts are candidate-specific and are used alongside the S. reginae profile to show where recommendations agree or differ; they do not resolve the specimen’s species."
+      "applicability": "Candidate species profile supporting the S. reginae identity, clumping habit, and its own indoor light, medium, water, temperature, feeding, division, and trouble cues. These do not confirm or prescribe care for an unresolved Strelitzia specimen."
+    },
+    {
+      "key": "BOP-NIC",
+      "authority": "North Carolina State University Extension",
+      "title": "Strelitzia nicolai",
+      "url": "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/",
+      "accessed": "2026-09-17",
+      "supports": [
+        "identity",
+        "light_exposure",
+        "soil_substrate",
+        "water",
+        "temperature_season",
+        "feeding_maintenance",
+        "propagation",
+        "troubleshooting",
+        "natural_history_trivia"
+      ],
+      "applicability": "Candidate species profile supporting the S. nicolai identity, woody/tree-like habit, and its own light, medium, water, temperature, feeding, propagation, and trouble cues. It is used for explicit comparison, not to resolve the specimen."
     },
     {
       "key": "BOP-UF",
       "authority": "University of Florida IFAS Extension",
       "title": "Bird-of-Paradise",
       "url": "https://edis.ifas.ufl.edu/publication/MG106",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "light_exposure",
         "soil_substrate",
@@ -54,7 +55,7 @@
         "propagation",
         "troubleshooting"
       ],
-      "applicability": "Species account for S. reginae. Its division example uses old clumps with four to five shoots, single-stem divisions, original planting depth, and moist establishment; it also warns that dry or soggy establishment conditions can kill foliage. Do not transfer these details to the unresolved S. nicolai candidate."
+      "applicability": "Species account for S. reginae. Its division example supports old clumps with four to five shoots, single-stem divisions, original planting depth, and moist establishment, with dry/soggy warnings. Do not transfer the method to unresolved S. nicolai."
     }
   ]
 }

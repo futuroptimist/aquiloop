@@ -142,6 +142,12 @@ class ContentWorksheetTests(unittest.TestCase):
 
     def test_each_profile_prints_an_interpretable_source_legend(self):
         expected_cues = {
+            "sedum-loves-fire": (
+                "SED-POWO—Kew, ",
+                "SED-PAT—USPTO record, LOVE’S FIRE",
+                "SED-MSU—Montana State, Growing succulents",
+                "SED-IA—Iowa State, Propagate succulents",
+            ),
             "kalanchoe-desert": (
                 "KAL-RHS—RHS, Desert Surprise",
                 "KAL-HARD—RHS, Hardiness rating",
@@ -156,6 +162,17 @@ class ContentWorksheetTests(unittest.TestCase):
                 "POT-WISC—UW–Madison, Pothos",
                 "POT-NCSU-PROP—NC State, Propagation",
             ),
+            "bird-of-paradise": (
+                "BOP-REG—NC State, ",
+                "BOP-NIC—NC State, ",
+                "BOP-UF—UF/IFAS, Bird-of-Paradise",
+            ),
+            "aquarium-hornwort": (
+                "HOR-USDA—USDA, Coon’s tail",
+                "HOR-FWS—U.S. FWS, Coon’s-tail",
+                "HOR-WA—Washington Ecology, Coontail",
+                "HOR-TROP—Tropica, ",
+            ),
         }
         for slug, cues in expected_cues.items():
             with self.subTest(entry=slug):
@@ -166,6 +183,28 @@ class ContentWorksheetTests(unittest.TestCase):
                 self.assertIn(f"binder/entries/{slug}/sources.yaml", printable)
                 for cue in cues:
                     self.assertIn(cue, page)
+
+    def test_remaining_profiles_preserve_practical_care_boundaries(self):
+        sedum = self.load("sedum-loves-fire", "content.yaml")
+        sedum_text = " ".join(
+            claim["claim"] for claims in sedum["cards"].values()
+            for claim in claims
+        ).casefold()
+        for cue in ("acclimate", "after rain", "frost", "active", "callus"):
+            self.assertIn(cue, sedum_text)
+        self.assertNotIn("soil ratio", sedum_text)
+
+        bird = self.load("bird-of-paradise", "content.yaml")
+        self.assertEqual(bird["identity"]["working_name"], "Strelitzia sp.")
+        propagation = bird["cards"]["propagation"][0]
+        self.assertIn("conditional s. reginae", propagation["claim"].casefold())
+        self.assertIn("candidate S. reginae", propagation["method"])
+
+        hornwort = self.load("aquarium-hornwort", "content.yaml")
+        placement = hornwort["cards"]["placement_anchoring_floating"][0]["claim"]
+        self.assertIn("float freely", placement)
+        self.assertIn("bottom", placement)
+        self.assertAquaticGuidance(hornwort)
 
     def test_propagation_contract_rejects_an_empty_required_field(self):
         content = self.load("pothos", "content.yaml")

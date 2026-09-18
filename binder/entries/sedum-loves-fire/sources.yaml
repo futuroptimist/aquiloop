@@ -7,29 +7,31 @@
       "authority": "Royal Botanic Gardens, Kew — Plants of the World Online",
       "title": "Sedum adolphi Raym.-Hamet",
       "url": "https://powo.science.kew.org/results?q=Sedum%20adolphi",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "identity"
       ],
-      "access_note": "Automated URL check returned HTTP 403 on 2026-09-15; retained as the botanical authority for interactive review."
+      "access_note": "The search result was retained as the botanical authority for the accepted spelling; automated inspection remains blocked by HTTP 403, so the specimen and cultivar are not treated as verified.",
+      "applicability": "Taxonomic name record only; it supports the accepted species spelling, not the reported label or the specimen’s identity."
     },
     {
       "key": "SED-PAT",
       "authority": "United States Patent and Trademark Office, via Google Patents",
       "title": "Sedum plant named “LOVE’S FIRE” (USPP37238P2)",
       "url": "https://patents.google.com/patent/USPP37238P2/en",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "identity",
         "natural_history_trivia"
-      ]
+      ],
+      "applicability": "The issued U.S. plant-patent record supports the cultivar denomination and mutation history. It describes the patented cultivar, not the user’s unreviewed specimen."
     },
     {
       "key": "SED-MSU",
       "authority": "Montana State University Extension",
       "title": "Growing Succulents",
       "url": "https://extension-store.montana.edu/montguides/growing-succulents",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "light_exposure",
         "soil_substrate",
@@ -37,17 +39,19 @@
         "temperature_season",
         "feeding_maintenance",
         "troubleshooting"
-      ]
+      ],
+      "applicability": "General succulent guidance supporting gradual outdoor sun acclimation, drainage, dry-before-thorough-watering practice, frost caution, lighter winter watering, active-growth feeding, and symptom checks. It does not establish this specimen’s hardiness or a local numeric threshold."
     },
     {
       "key": "SED-IA",
       "authority": "Iowa State University Extension and Outreach",
       "title": "How to Propagate Succulents",
       "url": "https://yardandgarden.extension.iastate.edu/how-to/how-propagate-succulents",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-17",
       "supports": [
         "propagation"
-      ]
+      ],
+      "applicability": "General succulent propagation guide that expressly lists Sedum for stem cuttings; supports clean cutting, callusing, freely draining medium, and the pre-rooting rot caution."
     }
   ]
 }

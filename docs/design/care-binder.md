@@ -1,8 +1,17 @@
 # Home, garden, and aquarium care binder design brief
 
 Status: approved design direction; the six-page draft binder, single-entry
-template, watering log, and local photo workflow are implemented. Final care
-copy, photograph qualification, and release automation remain future work.
+template, watering log, local photo workflow, and source-backed high-level care
+pass are implemented. Photograph qualification and final release remain future
+work.
+
+PR #59 completed the practical-care and interpretable-source pass for the
+Kalanchoe and pothos profiles. The subsequent Step 08a1b change completed the
+same pass for Sedum “Love’s Fire,” bird of paradise, and aquarium hornwort.
+These are still working profiles rather than specimen identifications: actual
+photos and growing conditions remain pending. Care-log handwriting space,
+typography and safe-margin refinement, revised six-page proof review, and
+physical print/handwriting qualification also remain pending gates.
 
 ## Purpose and sequence
 
@@ -588,8 +597,10 @@ Only that later physical check can justify calling the binder print-worthy.
 ## Deferred decisions
 
 - The approved direction is A typography + B profile layout + H care log. The
-  profile foundation, H care log, ordered manifest, and deterministic draft
-  assembly are implemented; final page qualification remains pending.
+  profile foundation, H care log, ordered manifest, deterministic draft
+  assembly, and five-profile high-level care/source pass are implemented;
+  care-log space, typography/safe-margin refinement, and final page
+  qualification remain pending.
 - Final specimen identity, local care values, photographs, and growing/aquarium
   conditions are pending evidence collection and review.
 - Actual specimen photographs, final rights review, final-mode qualification,

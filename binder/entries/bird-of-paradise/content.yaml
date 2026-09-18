@@ -11,24 +11,23 @@
       "Strelitzia reginae",
       "Strelitzia nicolai"
     ],
-    "decision": "Do not select S. reginae or S. nicolai from the common name alone. The candidates differ strongly in mature habit and flowers; retain a genus-level card until evidence supports one.",
+    "decision": "Keep the working identity at Strelitzia genus level. The common label alone cannot choose between S. reginae and S. nicolai; candidate differences below are comparison cues, not a confirmed-species prescription.",
     "sources": [
       "BOP-REG",
       "BOP-NIC"
     ]
   },
-  "environmental_variability": "Genus-level container guidance only. Species, indoor exposure, temperature, container, and any outdoor transition plan remain unknown.",
+  "environmental_variability": "Genus-level working record only. The two candidate profiles offer separate starting cues; species, indoor exposure, temperature, container, and medium must be observed before selecting between them.",
   "unresolved_fields": [
     "species",
     "full habit, stem/base, leaf and flower evidence",
     "window exposure and supplemental light",
-    "container and medium",
-    "temperature/humidity and outdoor-transition plan"
+    "container and medium"
   ],
   "cards": {
     "light_exposure": [
       {
-        "claim": "Both candidate species need bright conditions: NCSU recommends a sunny indoor site for S. reginae and bright indirect light for S. nicolai. Select exposure only after species and current conditions are reviewed.",
+        "claim": "Candidate comparison: NCSU recommends a sunny, well-lit indoor site for S. reginae, while S. nicolai prefers bright indirect light. Keep these alternatives separate until the species and present exposure are known.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -37,7 +36,7 @@
     ],
     "soil_substrate": [
       {
-        "claim": "NCSU describes well-drained loamy media for both candidate species. Confirm the existing pot and medium before making a species-specific recommendation.",
+        "claim": "Both candidate profiles call for a well-drained loamy medium. Check the current container, drainage, and medium before changing them; neither candidate profile confirms this specimen.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -64,7 +63,7 @@
     ],
     "feeding_maintenance": [
       {
-        "claim": "NCSU recommends regular spring/summer fertilizer for S. reginae and monthly balanced liquid fertilizer in spring/summer for S. nicolai. Defer a schedule until species and active growth are confirmed.",
+        "claim": "Both candidate profiles place feeding in spring and summer, but their schedules differ. Feed only after choosing applicable species guidance and confirming active growth; remove torn leaves if needed.",
         "sources": [
           "BOP-REG",
           "BOP-NIC"
@@ -73,7 +72,7 @@
     ],
     "propagation": [
       {
-        "claim": "Candidate example for S. reginae: divide an old clump with four to five shoots into single-stem divisions in late spring or early summer. Replant at the original depth and keep moist until rooted; dry or soggy establishment conditions can kill foliage.",
+        "claim": "Conditional S. reginae example: divide an old clump with four to five shoots into single-stem divisions in late spring or early summer. Replant at the original depth and keep moist until rooted; dry or soggy conditions can kill leaves.",
         "method": "division (candidate S. reginae example)",
         "starting_material": "an old S. reginae clump with four to five shoots, separated into single-stem divisions",
         "establishment_condition": "replant at the original depth and keep the soil moist until roots establish",

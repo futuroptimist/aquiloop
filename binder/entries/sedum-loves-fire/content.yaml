@@ -11,7 +11,7 @@
       "Sedum adolphi at species level",
       "unresolved look-alike or trade-name plant"
     ],
-    "decision": "Retain the user-facing label, but use accepted spelling adolphi only in the provisional working name. USPP37238P2 now identifies LOVE’S FIRE as a patented cultivar, so PPAF is stale in the United States. Do not associate the specimen with that cultivar until compared with its label and traits.",
+    "decision": "Retain the reported label verbatim, but use the accepted spelling adolphi in the provisional working name. USPP37238P2 names a patented cultivar, Sedum adolphi ‘LOVE’S FIRE’; the patent record does not establish that the user’s specimen is that cultivar.",
     "sources": [
       "SED-POWO",
       "SED-PAT"
@@ -52,7 +52,7 @@
     ],
     "temperature_season": [
       {
-        "claim": "Protect this provisional tender succulent from frost and reduce watering as light and active growth decline. Exact outdoor thresholds remain unknown.",
+        "claim": "Unless hardiness is established for the specimen, protect the grow bag from frost. As colder, darker conditions slow growth, keep the medium drier and avoid the cold-and-wet combination; no local temperature threshold is established.",
         "sources": [
           "SED-MSU"
         ]
@@ -60,7 +60,7 @@
     ],
     "feeding_maintenance": [
       {
-        "claim": "Feed sparingly during active growth and withhold fertilizer when growth slows; remove damaged tissue only with clean tools.",
+        "claim": "If the plant is actively growing in spring or summer, a light, low-nitrogen feeding can help; succulents need less fertilizer than many houseplants. Do not carry that feeding into slowed winter growth.",
         "sources": [
           "SED-MSU"
         ]
@@ -68,9 +68,9 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: take a healthy stem or leaf cutting. Let the wound callus, then establish in a well-drained medium; excess moisture before rooting is the key rot pitfall.",
-        "method": "stem or leaf cutting",
-        "starting_material": "a healthy stem or whole leaf cutting",
+        "claim": "Take a healthy stem cutting with clean, sharp pruners. Let the cut end dry and callus, then place it in well-drained medium; keeping it wet before roots form raises the risk of rot.",
+        "method": "stem cutting",
+        "starting_material": "a healthy stem section cut with clean, sharp pruners",
         "establishment_condition": "let the wound callus, then place it in well-drained medium",
         "pitfall": "excess moisture before rooting can cause rot",
         "sources": [
@@ -80,7 +80,7 @@
     ],
     "troubleshooting": [
       {
-        "claim": "Soft or translucent tissue → excess moisture or cold is plausible → check drainage, medium moisture, and recent temperatures before acting. Stretched growth → insufficient light is plausible → verify exposure and acclimate gradually.",
+        "claim": "Spindly growth or pale, shrivelled, dropping leaves are check-not-diagnosis cues. Review actual light and dry-down first; overwatering or poor drainage can stress roots and promote rot.",
         "sources": [
           "SED-MSU"
         ]
