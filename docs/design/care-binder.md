@@ -403,7 +403,7 @@ Before final identity/care review, collect:
 ## Watering-log page contract
 
 Use landscape-like information density within the same US Letter **portrait**
-page and safe margins. The table has a wider, practical left **date/time** column
+page and safe margins. The table has a **0.72-inch date/time** column
 followed by five plant columns in manifest order. Each plant header contains its short
 display name, location marker, and a blank field `Typical interval: ___ days`.
 The adjacent printed note reads: “Planning estimate only—check moisture or plant
@@ -420,6 +420,11 @@ leave a plant's cell blank when it was not watered. Use exactly 14 rows with an
 actual rendered row height of at least 0.48 inch. Sedum and Kalanchoe cells
 include the `Rain` line for handwritten outdoor observations. Every writable
 rule retains at least 0.45 inch after its label.
+
+The repeated body labels have a physical **8-point** design contract. On the
+supported pinned LuaLaTeX build, the rendered rows measure approximately
+39.106 PDF points (0.54314 inch) high and the narrowest writable rule measures
+43.87 PDF points (0.60931 inch), both above their minimum contracts.
 
 Hornwort's header reads `Watering interval: N/A`. Its cells instead accept a
 compact aquarium event such as water change/top-off/test/trimming plus amount or

@@ -45,7 +45,7 @@ def _assert_log_row_cells(row_anchors, column_anchors, field_positions, expected
 
 
 def _painted_pdf_geometry(page):
-    """Return painted image, stroked-path, and filled-path boxes from a PDF page."""
+    """Return painted image and stroked-path boxes from a PDF page."""
     resources = page["/Resources"]
     xobjects = resources.get("/XObject", {})
     ctm = (1, 0, 0, 1, 0, 0)
@@ -53,7 +53,6 @@ def _painted_pdf_geometry(page):
     path = []
     images = []
     strokes = []
-    fills = []
 
     def transform(point):
         x, y = point
@@ -93,12 +92,8 @@ def _painted_pdf_geometry(page):
         elif operator in (b"S", b"s", b"B", b"B*", b"b", b"b*"):
             if path:
                 strokes.append(bounds(path))
-                if operator in (b"B", b"B*", b"b", b"b*"):
-                    fills.append(bounds(path))
             path = []
         elif operator in (b"f", b"f*"):
-            if path:
-                fills.append(bounds(path))
             path = []
         elif operator == b"n":
             path = []
@@ -107,11 +102,24 @@ def _painted_pdf_geometry(page):
             xobject = xobjects.get(name)
             if xobject is not None and xobject.get_object().get("/Subtype") == "/Image":
                 images.append(bounds([transform(point) for point in ((0, 0), (1, 0), (1, 1), (0, 1))]))
-    return images, strokes, fills
+    return images, strokes
+
+
+def _assert_watering_log_text_contract(text):
+    """Check extraction-stable watering-log headings and row-key meanings."""
+    compact = re.sub(r"\s+", "", text)
+    expected_key = (
+        "D=date;T=time;A/M=amountormethod;Obs=observation;"
+        "Rain=rain/amount;Evt=aquariumevent;A/R=amountorresult."
+    )
+    if expected_key not in compact:
+        raise AssertionError("watering-log row key does not preserve every abbreviation mapping")
+    if "Date/time" not in compact:
+        raise AssertionError("watering-log leftmost header must be Date / time")
 
 
 def _assert_optional_detail_rendering(page, detail_count):
-    images, strokes, _ = _painted_pdf_geometry(page)
+    images, strokes = _painted_pdf_geometry(page)
     image_sizes = [(box[2] - box[0], box[3] - box[1]) for box in images]
     if len(image_sizes) != 1 + detail_count:
         raise AssertionError(f"expected {1 + detail_count} painted images, found {len(image_sizes)}")
@@ -372,6 +380,15 @@ class AssemblyTests(unittest.TestCase):
             log_reader = PdfReader(log)
             self.assertEqual(len(log_reader.pages), 1)
             log_text = log_reader.pages[0].extract_text()
+            _assert_watering_log_text_contract(log_text)
+            for original, replacement in (
+                ("D = date; T = time", "D = time; T = date"),
+                ("Date / time", "Session"),
+            ):
+                mutated = log_text.replace(original, replacement)
+                self.assertNotEqual(mutated, log_text)
+                with self.assertRaises(AssertionError):
+                    _assert_watering_log_text_contract(mutated)
             for text in (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
                 "Hornwort", "Planning estimate only", "rain/amount",
@@ -403,7 +420,10 @@ class AssemblyTests(unittest.TestCase):
                     date_positions.append(tm[5])
                 if stripped == "Obs" and tm[4] > 430:
                     aquarium_observation_positions.append(tm[5])
-                if stripped in {"Sedum", "Kalanchoe", "Pothos", "Bird of paradise", "Hornwort"}:
+                if stripped in {
+                    "Date / time", "Sedum", "Kalanchoe", "Pothos",
+                    "Bird of paradise", "Hornwort",
+                }:
                     header_positions[stripped] = tm[4]
 
             log_reader.pages[0].extract_text(visitor_text=inspect_text)
@@ -414,8 +434,9 @@ class AssemblyTests(unittest.TestCase):
             }))
             self.assertEqual(
                 sorted(header_positions, key=header_positions.get),
-                ["Sedum", "Kalanchoe", "Pothos", "Bird of paradise", "Hornwort"],
+                ["Date / time", "Sedum", "Kalanchoe", "Pothos", "Bird of paradise", "Hornwort"],
             )
+            self.assertEqual(min(header_positions, key=header_positions.get), "Date / time")
             self.assertTrue(sizes)
             # LuaLaTeX's PDF conversion exposes requested 8 pt labels as about
             # 7.97011 points. Keep that explicit tolerance without weakening
@@ -427,11 +448,13 @@ class AssemblyTests(unittest.TestCase):
             self.assertGreaterEqual(min(a - b for a, b in zip(row_tops, row_tops[1:])), 34.56)
             self.assertEqual(len(aquarium_observation_positions), 14)
 
-            # Each compact label must still be followed by a genuinely useful
-            # handwritten rule. At 72 PDF points/inch, 0.45 inch is 32.4 pt.
-            _, strokes, fills = _painted_pdf_geometry(log_reader.pages[0])
+            # On the pinned, supported LuaHBTeX 1.17.0 engine, all 210
+            # handwriting rules are emitted as stroked paths. Exact quantity
+            # is intentional: missing rules must fail rather than be hidden by
+            # speculative handling for unsupported PDF backends.
+            _, strokes = _painted_pdf_geometry(log_reader.pages[0])
             writing_rules = [
-                box for box in set(strokes + fills)
+                box for box in strokes
                 if box[3] - box[1] < .2 and 32.4 <= box[2] - box[0] < 100
             ]
             self.assertEqual(len(writing_rules), 14 * 15)
