@@ -45,7 +45,7 @@ def _assert_log_row_cells(row_anchors, column_anchors, field_positions, expected
 
 
 def _painted_pdf_geometry(page):
-    """Return painted image and stroked-path bounding boxes from a PDF page."""
+    """Return painted image, stroked-path, and filled-path boxes from a PDF page."""
     resources = page["/Resources"]
     xobjects = resources.get("/XObject", {})
     ctm = (1, 0, 0, 1, 0, 0)
@@ -53,6 +53,7 @@ def _painted_pdf_geometry(page):
     path = []
     images = []
     strokes = []
+    fills = []
 
     def transform(point):
         x, y = point
@@ -92,19 +93,25 @@ def _painted_pdf_geometry(page):
         elif operator in (b"S", b"s", b"B", b"B*", b"b", b"b*"):
             if path:
                 strokes.append(bounds(path))
+                if operator in (b"B", b"B*", b"b", b"b*"):
+                    fills.append(bounds(path))
             path = []
-        elif operator in (b"n", b"f", b"f*"):
+        elif operator in (b"f", b"f*"):
+            if path:
+                fills.append(bounds(path))
+            path = []
+        elif operator == b"n":
             path = []
         elif operator == b"Do":
             name = operands[0]
             xobject = xobjects.get(name)
             if xobject is not None and xobject.get_object().get("/Subtype") == "/Image":
                 images.append(bounds([transform(point) for point in ((0, 0), (1, 0), (1, 1), (0, 1))]))
-    return images, strokes
+    return images, strokes, fills
 
 
 def _assert_optional_detail_rendering(page, detail_count):
-    images, strokes = _painted_pdf_geometry(page)
+    images, strokes, _ = _painted_pdf_geometry(page)
     image_sizes = [(box[2] - box[0], box[3] - box[1]) for box in images]
     if len(image_sizes) != 1 + detail_count:
         raise AssertionError(f"expected {1 + detail_count} painted images, found {len(image_sizes)}")
@@ -422,9 +429,9 @@ class AssemblyTests(unittest.TestCase):
 
             # Each compact label must still be followed by a genuinely useful
             # handwritten rule. At 72 PDF points/inch, 0.45 inch is 32.4 pt.
-            _, strokes = _painted_pdf_geometry(log_reader.pages[0])
+            _, strokes, fills = _painted_pdf_geometry(log_reader.pages[0])
             writing_rules = [
-                box for box in strokes
+                box for box in set(strokes + fills)
                 if box[3] - box[1] < .2 and 32.4 <= box[2] - box[0] < 100
             ]
             self.assertEqual(len(writing_rules), 14 * 15)
