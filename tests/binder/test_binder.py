@@ -352,6 +352,18 @@ class AssemblyTests(unittest.TestCase):
                 build_binder.compile_supplemental("watering-log", "final", output)
             self.assertFalse(output.exists())
 
+    def test_watering_log_source_preserves_handwriting_contract(self):
+        source = (ROOT / "binder" / "supplemental" / "watering-log" / "page.tex").read_text()
+        self.assertIn(r"\setlength{\LogMinRule}{.45in}", source)
+        self.assertIn(r"|p{.78in}|p{1.155in}|", source)
+        self.assertEqual(source.count(r"\LogRow"), 15)  # Definition plus 14 uses.
+        for expansion in (
+            "D = date", "T = time", "A/M = amount or method",
+            "O = observation", "R/A = rain/amount", "E = aquarium event",
+            "A/R = amount/result",
+        ):
+            self.assertIn(expansion, source)
+
     @unittest.skipUnless(shutil.which("lualatex"), "lualatex unavailable")
     def test_watering_log_and_manifest_build_with_required_text_and_order(self):
         from pypdf import PdfReader
@@ -367,33 +379,37 @@ class AssemblyTests(unittest.TestCase):
             log_text = log_reader.pages[0].extract_text()
             for text in (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
-                "Hornwort", "Planning estimate only", "Rain/amount",
+                "Hornwort", "Planning estimate only", "rain/amount",
                 "Watering interval:", "N/A", "Aquarium maintenance", "not watering",
-                "Event:", "Amount/result:", "Observation:", "Date:", "Time:",
-                "Amount/method:", "outdoor", "grow bag",
+                "aquarium event", "amount/result", "observation", "date", "time",
+                "amount or method", "outdoor", "grow bag",
                 "indoors", "aquarium",
             ):
                 self.assertIn(text, log_text)
+            header_positions = [log_text.index(name) for name in (
+                "Date / time", "Sedum", "Kalanchoe", "Pothos",
+                "Bird of paradise", "Hornwort",
+            )]
+            self.assertEqual(header_positions, sorted(header_positions))
             # TeX Gyre Heros kerning can make Poppler/pypdf expose this header
             # as "T ypical"; assert the words while tolerating that extractor
             # artifact rather than coupling the contract to one PDF parser.
             self.assertEqual(len(re.findall(r"T\s*ypical interval:", log_text)), 4)
             self.assertEqual(len(re.findall(r"_+\s*days", log_text)), 4)
             self.assertRegex(log_text, r"Hornwort[\s\S]*Watering interval:\s*N/A")
-            counts = Counter(
-                label for label in ("Date:", "Time:", "Event:", "Amount/result:",
-                                    "Rain/amount:", "Amount/method:", "Observation:")
-                for _ in range(log_text.count(label))
-            )
-            self.assertEqual(counts["Date:"], 14)
-            self.assertEqual(counts["Time:"], 14)
-            self.assertEqual(counts["Event:"], 14)
-            self.assertEqual(counts["Amount/result:"], 14)
-            self.assertEqual(counts["Rain/amount:"], 28)
-            self.assertEqual(counts["Amount/method:"], 56)
-            self.assertEqual(counts["Observation:"], 70)
-            labels = {"Date:", "Time:", "Amount/method:", "Observation:",
-                      "Rain/amount:", "Event:", "Amount/result:"}
+            counts = Counter({
+                label: len(re.findall(re.escape(label[0]) + r"\s*" + re.escape(label[1:]), log_text))
+                if label == "T:" else log_text.count(label)
+                for label in ("D:", "T:", "E:", "A/R:", "R/A:", "A/M:", "O:")
+            })
+            self.assertEqual(counts["D:"], 14)
+            self.assertEqual(counts["T:"], 14)
+            self.assertEqual(counts["E:"], 14)
+            self.assertEqual(counts["A/R:"], 14)
+            self.assertEqual(counts["R/A:"], 28)
+            self.assertEqual(counts["A/M:"], 56)
+            self.assertEqual(counts["O:"], 70)
+            labels = {"D:", "T:", "A/M:", "O:", "R/A:", "E:", "A/R:"}
             sizes = []
             date_positions = []
             aquarium_observation_positions = []
@@ -401,14 +417,15 @@ class AssemblyTests(unittest.TestCase):
 
             def inspect_text(text, _cm, tm, _font, font_size):
                 stripped = text.strip()
-                if any(label in stripped for label in labels):
+                compact = stripped.replace(" ", "")
+                if any(label in compact for label in labels):
                     sizes.append(font_size)
-                if "Date:" in stripped:
+                if "D:" in compact:
                     date_positions.append(tm[5])
-                if "Observation:" in stripped and tm[4] > 430:
+                if "O:" in compact and tm[4] > 430:
                     aquarium_observation_positions.append(tm[5])
                 for label in labels:
-                    if label in stripped:
+                    if label in compact:
                         field_positions.append((label, tm[4], tm[5]))
 
             log_reader.pages[0].extract_text(visitor_text=inspect_text)
@@ -428,12 +445,12 @@ class AssemblyTests(unittest.TestCase):
             x_positions = sorted({round(x, 1) for _, x, _ in field_positions})
             self.assertEqual(len(x_positions), 6)
             expected_fields = (
-                {"Date:", "Time:"},
-                {"Amount/method:", "Observation:", "Rain/amount:"},
-                {"Amount/method:", "Observation:", "Rain/amount:"},
-                {"Amount/method:", "Observation:"},
-                {"Amount/method:", "Observation:"},
-                {"Event:", "Amount/result:", "Observation:"},
+                {"D:", "T:"},
+                {"A/M:", "O:", "R/A:"},
+                {"A/M:", "O:", "R/A:"},
+                {"A/M:", "O:"},
+                {"A/M:", "O:"},
+                {"E:", "A/R:", "O:"},
             )
             _assert_log_row_cells(row_tops, x_positions, field_positions, expected_fields)
 
