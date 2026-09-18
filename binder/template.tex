@@ -1,5 +1,5 @@
 \documentclass[letterpaper]{article}
-\usepackage[paperwidth=8.5in,paperheight=11in,left=1in,right=.55in,top=.55in,bottom=.55in]{geometry}
+\usepackage[paperwidth=8.5in,paperheight=11in,left=1in,right=.55in,top=.552in,bottom=.60in]{geometry}
 \usepackage[table]{xcolor}
 \usepackage{fontspec,graphicx,tikz,array}
 \setmainfont{TeX Gyre Pagella}\setsansfont{TeX Gyre Heros}\pagestyle{empty}
@@ -7,8 +7,9 @@
 \definecolor{ink}{HTML}{202824}\definecolor{sage}{HTML}{557064}\definecolor{rust}{HTML}{994F35}\definecolor{paper}{HTML}{FCFBF7}
 \pagecolor{paper}\color{ink}
 \pdfvariable suppressoptionalinfo 767
-\newcommand{\CareCard}[2]{\begin{minipage}[t]{3.365in}\color{sage}\rule{\linewidth}{.6pt}\par\vspace{2pt}{\sffamily\bfseries\fontsize{11}{13}\selectfont #1}\par\vspace{2pt}{\color{ink}\sffamily\fontsize{9.5}{12}\selectfont #2}\end{minipage}}
+\newcommand{\CareCard}[2]{\begin{minipage}[t]{3.365in}\raggedright\color{sage}\rule{\linewidth}{.6pt}\par\vspace{2pt}{\sffamily\bfseries\fontsize{11}{13}\selectfont #1}\par\vspace{2pt}{\color{ink}\sffamily\fontsize{9.5}{12}\selectfont #2}\end{minipage}}
 \newcommand{\CareRow}[4]{\CareCard{#1}{#2}\hfill\CareCard{#3}{#4}\par\vspace{5pt}}
+\newcommand{\EvidenceFooter}[1]{{\raggedright\sffamily\fontsize{8}{10}\selectfont #1\par}}
 % Prepared inputs have the exact frame ratio, so keepaspectratio cannot distort them.
 \newcommand{\HeroImage}[1]{\fbox{\includegraphics[width=3.288in,height=3.288in,keepaspectratio]{#1}}}
 \newcommand{\DetailImage}[1]{\fbox{\includegraphics[width=2.038in,height=1.338in,keepaspectratio]{#1}}}

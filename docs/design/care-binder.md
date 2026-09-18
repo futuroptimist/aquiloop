@@ -144,6 +144,12 @@ historical record.
 - Safe area: 1.0-inch left margin for three-hole punching; 0.55 inch at top,
   right, and bottom. No essential ink enters those margins. The resulting usable
   rectangle is 6.95 × 9.9 inches.
+- The shared template implements a 0.552-inch top inset and a 0.60-inch bottom
+  inset. These small effective reserves keep extracted glyph ink inside the
+  documented 72.0, 39.6, 572.4, 752.4-point safe rectangle without shrinking
+  type; the left and right layout insets remain 1.0 and 0.55 inch. Care-card
+  prose and evidence footers are ragged right so narrow measures do not acquire
+  stretched inter-word spacing, while the 8-point evidence type is unchanged.
 - Hero photograph: an initial 3.30 × 3.30-inch square frame at upper right,
   cropped without misleading scale. The rendered crop requires at least
   792 × 792 pixels (240 ppi) and preferably 990 × 990 pixels (300 ppi), plus
@@ -545,6 +551,17 @@ tolerance does not lower the physical 8-point design contract. Automated page
 geometry and text checks complement, but do not replace, the later physical
 print and handwriting qualification.
 
+The rendered safe-area regression builds the ordered five profiles plus the
+supplemental log, runs Poppler `pdftotext -bbox-layout`, and checks every
+extracted word in top-origin coordinates against the safe rectangle. Vertical
+bounds have no tolerance, in particular no bottom-margin exception. A 0.01-point
+right-edge allowance covers Poppler glyph-coordinate rounding (observed at
+roughly 0.0065 point) without changing the physical right margin. A synthetic
+overlay in the bottom margin proves that the regression fails on a real
+violation. This automated text-ink check supplements the existing page-box,
+rotation, pagination, content, image, and painted-rule contracts; it does not
+claim to detect every possible non-text mark or replace rendered visual review.
+
 Image and content validation must additionally check:
 
 - supported JSON schema versions and duplicate asset IDs;
@@ -605,8 +622,9 @@ Only that later physical check can justify calling the binder print-worthy.
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
 - Specimen photographs and growing-condition records, care-log handwriting
-  space, typography and safe-margin refinement, revised six-page proof review,
-  and physical print/handwriting qualification remain pending gates.
+  space, revised six-page proof review, and physical print/handwriting
+  qualification remain pending gates. Typography and automated safe-margin
+  refinement are complete, but still require that revised proof review.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
