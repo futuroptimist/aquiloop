@@ -143,7 +143,10 @@ historical record.
 - Page box: US Letter portrait, exactly 8.5 × 11 inches (612 × 792 PDF points).
 - Safe area: 1.0-inch left margin for three-hole punching; 0.55 inch at top,
   right, and bottom. No essential ink enters those margins. The resulting usable
-  rectangle is 6.95 × 9.9 inches.
+  rectangle is 6.95 × 9.9 inches. The shared profile template implements a
+  0.56-inch top reserve and 0.60-inch bottom reserve: these small effective
+  reserves account for glyph ink beyond TeX's baseline-oriented text block
+  while retaining the documented safe rectangle.
 - Hero photograph: an initial 3.30 × 3.30-inch square frame at upper right,
   cropped without misleading scale. The rendered crop requires at least
   792 × 792 pixels (240 ppi) and preferably 990 × 990 pixels (300 ppi), plus
@@ -545,6 +548,14 @@ tolerance does not lower the physical 8-point design contract. Automated page
 geometry and text checks complement, but do not replace, the later physical
 print and handwriting qualification.
 
+The rendered safe-area regression builds the ordered six-page PDF, asks
+Poppler's `pdftotext -bbox-layout` for top-origin word boxes, and checks every
+word against `(72.0, 39.6)–(572.4, 752.4)` points. No bottom exception is
+allowed. A 0.25-point right-edge tolerance covers only Poppler/font-coordinate
+rounding and does not alter the physical right margin. A separately rendered
+negative fixture deliberately places text below the bottom boundary and must
+be rejected. Page-box and rotation checks remain independent in pypdf.
+
 Image and content validation must additionally check:
 
 - supported JSON schema versions and duplicate asset IDs;
@@ -605,8 +616,9 @@ Only that later physical check can justify calling the binder print-worthy.
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
 - Specimen photographs and growing-condition records, care-log handwriting
-  space, typography and safe-margin refinement, revised six-page proof review,
-  and physical print/handwriting qualification remain pending gates.
+  space, revised six-page proof review, and physical print/handwriting
+  qualification remain pending gates. Typography and automated safe-margin
+  refinement are implemented, but do not satisfy those human gates.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
