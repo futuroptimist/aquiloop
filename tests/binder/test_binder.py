@@ -6,6 +6,8 @@ import unittest
 import os
 import re
 import shutil
+import subprocess
+import xml.etree.ElementTree as ET
 from collections import Counter
 from unittest import mock
 from pathlib import Path
@@ -17,6 +19,48 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_binder  # noqa: E402
 import prepare_binder_photo  # noqa: E402
+
+
+SAFE_TEXT_RECT = (72.0, 39.6, 572.4, 752.4)
+RIGHT_EXTRACTION_TOLERANCE = 0.25
+
+
+def _pdf_text_bounds(pdf):
+    """Return Poppler top-origin word bounds, grouped by rendered page."""
+    with tempfile.TemporaryDirectory() as name:
+        bbox = Path(name) / "bbox.html"
+        subprocess.run(
+            ["pdftotext", "-bbox-layout", str(pdf), str(bbox)],
+            check=True, capture_output=True, text=True,
+        )
+        root = ET.parse(bbox).getroot()
+    pages = []
+    for page in (element for element in root.iter() if element.tag.endswith("}page")):
+        pages.append([
+            tuple(float(word.attrib[key]) for key in ("xMin", "yMin", "xMax", "yMax"))
+            for word in page.iter() if word.tag.endswith("}word")
+        ])
+    return pages
+
+
+def _assert_pdf_text_in_safe_rect(pdf):
+    """Require all extracted text ink to remain in the physical safe area."""
+    left, top, right, bottom = SAFE_TEXT_RECT
+    pages = _pdf_text_bounds(pdf)
+    if not pages or any(not words for words in pages):
+        raise AssertionError("safe-area check requires extracted text on every page")
+    for page_number, words in enumerate(pages, 1):
+        for bounds in words:
+            x_min, y_min, x_max, y_max = bounds
+            if x_min < left or y_min < top or x_max > right + RIGHT_EXTRACTION_TOLERANCE or y_max > bottom:
+                raise AssertionError(
+                    f"page {page_number} text outside safe rectangle: {bounds}"
+                )
+    return [
+        (min(word[0] for word in words), min(word[1] for word in words),
+         max(word[2] for word in words), max(word[3] for word in words))
+        for words in pages
+    ]
 
 
 def _log_row_cells(row_anchors, column_anchors, field_positions):
@@ -490,6 +534,35 @@ class AssemblyTests(unittest.TestCase):
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
                 build_binder._validate_page(page, title)
+
+    @unittest.skipUnless(
+        shutil.which("lualatex") and shutil.which("pdftotext"),
+        "lualatex and pdftotext unavailable",
+    )
+    def test_rendered_text_stays_inside_safe_rectangle(self):
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            binder = base / "binder.pdf"
+            build_binder.compile_manifest(
+                ROOT / "binder" / "manifest.yaml", "draft", binder
+            )
+            bounds = _assert_pdf_text_in_safe_rect(binder)
+            self.assertEqual(len(bounds), 6)
+
+            # Prove this inspects rendered coordinates rather than source or
+            # extracted content alone: deliberately place ink in the bottom
+            # unsafe margin of an otherwise valid Letter page.
+            fixture = base / "unsafe.tex"
+            fixture.write_text(r"""\documentclass[letterpaper]{article}
+\usepackage[paperwidth=8.5in,paperheight=11in,left=1in,right=.55in,top=.55in,bottom=.10in]{geometry}
+\pagestyle{empty}\begin{document}\vspace*{\fill}Deliberate bottom violation.\end{document}
+""", encoding="utf-8")
+            subprocess.run(
+                ["lualatex", "-halt-on-error", "-interaction=batchmode", fixture.name],
+                cwd=base, check=True, capture_output=True, text=True,
+            )
+            with self.assertRaisesRegex(AssertionError, "outside safe rectangle"):
+                _assert_pdf_text_in_safe_rect(base / "unsafe.pdf")
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
         rows = [606.8, 567.7, 528.6, 489.5]
