@@ -133,7 +133,7 @@ The approved profile combines **A's typography** with **B's layout**: a large
 serif common-name heading, italic botanical name, and restrained botanical
 accents; title and identity at upper left; a prominent framed hero photograph
 at upper right; and a two-column care-card grid below. The approved **H care
-log** uses thin dark rules, a pale header tint, date/time plus five plant
+log** uses thin dark rules, an unfilled header, date/time plus five plant
 columns, and comfortable handwriting space. These choices supersede the
 full-width photograph in the exploratory prompts while preserving their useful
 historical record.
@@ -155,9 +155,12 @@ historical record.
 - Type: 24–30 pt common name; 14–17 pt binomial/status line; 11–12 pt category
   headings; 9.5–10.5 pt body with at least 1.25× line spacing; 8 pt minimum for
   sources/revision metadata. Never shrink type to cure overflow.
-- Output: near-black body text on white or near-white, minimum 4.5:1 contrast
-  for ordinary text, no information conveyed by hue alone, solid/dashed or
-  labeled distinctions that survive grayscale, and 0.5 pt minimum rules.
+- Output: near-black body text on white, minimum 4.5:1 contrast for ordinary
+  text, no information conveyed by hue alone, solid/dashed or labeled
+  distinctions that survive grayscale, and 0.5 pt minimum rules. Paper areas
+  render as actual white by default: intentional ink is limited to content,
+  rules, and future specimen images. Full-page, card, and table-cell background
+  fills are not part of the production design.
 
 ### Profile content schema
 
@@ -548,6 +551,10 @@ their requested 9.5-point body and 8-point footer sizes remain unchanged.
 
 The rendered regression builds the complete manifest, runs Poppler
 `pdftotext -bbox-layout`, and checks every extracted word box on all six pages.
+It also rasterizes the combined draft with Poppler and checks multiple known
+blank regions on every page for pure white, plus an unoccupied part of the
+watering-log header. These regions avoid text and future photo placements so
+antialiasing and qualified specimen images cannot cause false failures.
 It also checks essential painted profile content on pages 1–5: images, stroked
 paths, and non-background filled paths must stay within the safe rectangle. A
 0.01-point allowance applies only to extracted text at the right edge; painted

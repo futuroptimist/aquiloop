@@ -24,6 +24,7 @@ import prepare_binder_photo  # noqa: E402
 SAFE_TEXT_RECTANGLE = (72.0, 39.6, 572.4, 752.4)
 RIGHT_EXTRACTION_TOLERANCE = 0.01
 PDFTOTEXT_TIMEOUT_SECONDS = 30
+PDF_RENDER_DPI = 150
 
 
 def _run_pdftotext(pdf, bbox_output):
@@ -55,6 +56,61 @@ def _run_pdftotext(pdf, bbox_output):
         raise AssertionError(
             f"pdftotext failed for {pdf} with exit code {error.returncode}: {details}"
         ) from error
+
+
+def _render_pdf_pages(pdf, output_root):
+    """Rasterize every PDF page through the same Poppler path used by CI."""
+    command = [
+        "pdftoppm", "-r", str(PDF_RENDER_DPI), "-png", str(pdf), str(output_root)
+    ]
+    try:
+        subprocess.run(
+            command, check=True, capture_output=True, text=True,
+            timeout=PDFTOTEXT_TIMEOUT_SECONDS,
+        )
+    except FileNotFoundError as error:
+        raise AssertionError(
+            "pdftoppm is required for the rendered-PDF paper-color check; "
+            "install Poppler and ensure pdftoppm is on PATH"
+        ) from error
+    except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
+        details = (error.stderr or error.stdout or "no diagnostic output")
+        if isinstance(details, bytes):
+            details = details.decode(errors="replace")
+        raise AssertionError(f"pdftoppm failed for {pdf}: {details.strip()}") from error
+    return sorted(output_root.parent.glob(f"{output_root.name}-*.png"))
+
+
+def _assert_white_paper_regions(rendered_pages):
+    """Check stable blank paper regions without sampling text or photo slots."""
+    scale = PDF_RENDER_DPI / 72
+    # Coordinates are in top-origin PDF points. These three areas remain clear
+    # of the content rectangle on every page, including after future photos.
+    blank_regions = ((8, 8, 64, 30), (8, 100, 64, 690), (8, 762, 64, 784))
+    for page_number, path in enumerate(rendered_pages, 1):
+        with Image.open(path) as source:
+            image = source.convert("RGB")
+            for region in blank_regions:
+                box = tuple(round(value * scale) for value in region)
+                colors = set(image.crop(box).get_flattened_data())
+                if colors != {(255, 255, 255)}:
+                    raise AssertionError(
+                        f"page {page_number} blank paper region {region} is not white: "
+                        f"{sorted(colors)[:5]}"
+                    )
+
+    # The header band contains intentional text and rules, so inspect its white
+    # pixel share rather than individual pixels. A cell fill would cover nearly
+    # the whole band, while glyph antialiasing occupies only a small fraction.
+    with Image.open(rendered_pages[-1]) as source:
+        image = source.convert("RGB")
+        header = image.crop(tuple(round(value * scale) for value in (73, 139, 571, 181)))
+        pixels = list(header.get_flattened_data())
+        white_share = pixels.count((255, 255, 255)) / len(pixels)
+        if white_share < .8:
+            raise AssertionError(
+                f"watering-log header background is not white ({white_share:.1%} white)"
+            )
 
 
 def _assert_pdf_text_inside_safe_rectangle(pdf, bbox_output):
@@ -298,6 +354,11 @@ class PdfTextDiagnosticsTests(unittest.TestCase):
         with mock.patch.object(subprocess, "run") as run:
             _run_pdftotext("input.pdf", "output.html")
         self.assertEqual(run.call_args.kwargs["timeout"], PDFTOTEXT_TIMEOUT_SECONDS)
+
+    def test_missing_pdftoppm_has_install_guidance(self):
+        with mock.patch.object(subprocess, "run", side_effect=FileNotFoundError):
+            with self.assertRaisesRegex(AssertionError, "install Poppler"):
+                _render_pdf_pages(Path("input.pdf"), Path("page"))
 
     def test_text_check_accepts_unnamespaced_poppler_xml(self):
         with tempfile.TemporaryDirectory() as name:
@@ -635,10 +696,10 @@ class AssemblyTests(unittest.TestCase):
 
 
     @unittest.skipUnless(
-        shutil.which("lualatex") and shutil.which("pdftotext"),
-        "lualatex and pdftotext required",
+        shutil.which("lualatex") and shutil.which("pdftotext") and shutil.which("pdftoppm"),
+        "lualatex and Poppler required",
     )
-    def test_rendered_pdf_text_and_essential_painted_content_stay_inside_safe_rectangle(self):
+    def test_rendered_pdf_paper_and_content_contracts(self):
         from pypdf import PdfReader, PdfWriter, Transformation
 
         with tempfile.TemporaryDirectory() as name:
@@ -653,6 +714,9 @@ class AssemblyTests(unittest.TestCase):
             )
             self.assertEqual(len(bounds), 6)
             _assert_essential_painted_content_inside_safe_rectangle(reader.pages[:5])
+            rendered_pages = _render_pdf_pages(rendered, base / "page")
+            self.assertEqual(len(rendered_pages), 6)
+            _assert_white_paper_regions(rendered_pages)
 
             # Keep the existing text-only negative case: translating a rendered
             # profile down must move its footer through the bottom boundary.

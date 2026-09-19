@@ -1,4 +1,4 @@
-\newcommand{\LogHeader}[3]{\cellcolor{headergray}\centering\sffamily\fontsize{8}{9}\selectfont\shortstack{\bfseries #1\\[-1pt]\mdseries #2\\[-1pt]#3}\arraybackslash}
+\newcommand{\LogHeader}[3]{\centering\sffamily\fontsize{8}{9}\selectfont\shortstack{\bfseries #1\\[-1pt]\mdseries #2\\[-1pt]#3}\arraybackslash}
 \newcommand{\TerrestrialCell}[1]{\parbox[t][.42in][t]{\linewidth}{\vspace{1pt}\sffamily\fontsize{8}{8.5}\selectfont A/M \hrulefill\\[1pt]Obs \hrulefill#1}}
 \newcommand{\OutdoorCell}{\TerrestrialCell{\\[3pt]Rain \hrulefill}}
 \newcommand{\AquariumCell}{\parbox[t][.42in][t]{\linewidth}{\vspace{1pt}\sffamily\fontsize{8}{8.5}\selectfont Evt \hrulefill\\A/R \hrulefill\\Obs \hrulefill}}
@@ -13,10 +13,8 @@
 \begingroup
 \setlength{\tabcolsep}{2pt}
 \setlength{\arrayrulewidth}{.5pt}
-\definecolor{headergray}{gray}{.89}
 \begin{tabular}{|p{.72in}|p{1.167in}|p{1.167in}|p{1.167in}|p{1.167in}|p{1.167in}|}
 \hline
-\rowcolor{headergray}
 \centering\sffamily\bfseries\fontsize{8}{9}\selectfont Date / time\arraybackslash &
 \LogHeader{Sedum}{outdoor\\grow bag}{Typical interval:\\\_\_\_ days} &
 \LogHeader{Kalanchoe}{outdoor\\grow bag}{Typical interval:\\\_\_\_ days} &
