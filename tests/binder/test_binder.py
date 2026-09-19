@@ -24,6 +24,7 @@ import prepare_binder_photo  # noqa: E402
 SAFE_TEXT_RECTANGLE = (72.0, 39.6, 572.4, 752.4)
 RIGHT_EXTRACTION_TOLERANCE = 0.01
 PDFTOTEXT_TIMEOUT_SECONDS = 30
+PDF_RENDER_DPI = 150
 
 
 def _run_pdftotext(pdf, bbox_output):
@@ -55,6 +56,41 @@ def _run_pdftotext(pdf, bbox_output):
         raise AssertionError(
             f"pdftotext failed for {pdf} with exit code {error.returncode}: {details}"
         ) from error
+
+
+def _assert_rendered_paper_regions_are_white(pdf, output_directory):
+    """Render the binder and inspect ink-free regions away from content edges."""
+    output_directory.mkdir()
+    prefix = output_directory / "page"
+    command = [
+        "pdftoppm", "-r", str(PDF_RENDER_DPI), "-png", str(pdf), str(prefix)
+    ]
+    try:
+        subprocess.run(command, check=True, capture_output=True, text=True)
+    except (FileNotFoundError, subprocess.CalledProcessError) as error:
+        details = getattr(error, "stderr", None) or "pdftoppm is unavailable"
+        raise AssertionError(f"Poppler PDF rendering failed: {details.strip()}") from error
+
+    renders = sorted(output_directory.glob("page-*.png"))
+    if len(renders) != 6:
+        raise AssertionError(f"expected 6 rendered pages, found {len(renders)}")
+    for page_number, rendered in enumerate(renders, 1):
+        with Image.open(rendered) as image:
+            rgb = image.convert("RGB")
+            # This inset outer-margin patch contains no intentional ink on any
+            # page and detects a page-wide background without touching content.
+            regions = [(8, 8, 100, 100)]
+            if page_number == 6:
+                # Blank interior of the first log header cell. This catches a
+                # table fill while staying clear of its rules and label text.
+                regions.append((200, 280, 220, 320))
+            for region in regions:
+                extrema = rgb.crop(region).getextrema()
+                if extrema != ((255, 255), (255, 255), (255, 255)):
+                    raise AssertionError(
+                        f"page {page_number} paper region {region} is not pure white: "
+                        f"channel extrema {extrema}"
+                    )
 
 
 def _assert_pdf_text_inside_safe_rectangle(pdf, bbox_output):
@@ -693,6 +729,19 @@ class AssemblyTests(unittest.TestCase):
             vector_page = PdfReader(vector_violation).pages[0]
             with self.assertRaisesRegex(AssertionError, "stroked path bounds.*exceed"):
                 _assert_essential_painted_content_inside_safe_rectangle([vector_page])
+
+    @unittest.skipUnless(
+        shutil.which("lualatex") and shutil.which("pdftoppm"),
+        "lualatex and pdftoppm required",
+    )
+    def test_combined_render_uses_white_paper_on_every_page(self):
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            rendered = base / "binder.pdf"
+            build_binder.compile_manifest(
+                ROOT / "binder" / "manifest.yaml", "draft", rendered
+            )
+            _assert_rendered_paper_regions_are_white(rendered, base / "renders")
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
         rows = [606.8, 567.7, 528.6, 489.5]
