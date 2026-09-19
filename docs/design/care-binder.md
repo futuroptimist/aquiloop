@@ -555,6 +555,14 @@ content and the other text edges receive no tolerance. Negative profile fixtures
 separately prove that out-of-bounds text and an out-of-bounds vector rule are
 rejected.
 
+Paper areas render pure white by default for printer efficiency. Intentional ink
+is limited to content, rules, borders, and future specimen images; full-page,
+card, and table-header background tints are not part of the design. The rendered
+regression builds the combined six-page draft with the normal production path,
+uses Poppler at 150 DPI, and checks ink-free corner regions on every page for
+solid white. Those samples are outside the safe content rectangle, so text
+antialiasing and future photographs cannot cause false failures.
+
 The watering-log regression requests 8-point TeX labels and accepts the
 approximately 7.97011-point size exposed by LuaLaTeX PDF text extraction (with
 a ±0.01-point comparison tolerance and a 7.9-point floor for conversion

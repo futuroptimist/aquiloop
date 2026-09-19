@@ -24,6 +24,42 @@ import prepare_binder_photo  # noqa: E402
 SAFE_TEXT_RECTANGLE = (72.0, 39.6, 572.4, 752.4)
 RIGHT_EXTRACTION_TOLERANCE = 0.01
 PDFTOTEXT_TIMEOUT_SECONDS = 30
+WHITE_RGB = (255, 255, 255)
+
+
+def _assert_rendered_paper_regions_are_white(pdf, render_directory):
+    """Render the binder and check ink-free corner regions on every page."""
+    render_directory.mkdir()
+    command = [
+        "pdftoppm", "-r", "150", "-png", str(pdf),
+        str(render_directory / "page"),
+    ]
+    try:
+        subprocess.run(command, check=True, capture_output=True, text=True, timeout=30)
+    except (FileNotFoundError, subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
+        raise AssertionError(f"pdftoppm could not render {pdf}: {error}") from error
+
+    renders = sorted(render_directory.glob("page-*.png"))
+    if len(renders) != 6:
+        raise AssertionError(f"expected 6 rendered pages, found {len(renders)}")
+    for page_number, rendered in enumerate(renders, 1):
+        with Image.open(rendered).convert("RGB") as image:
+            width, height = image.size
+            # These small corner samples lie well outside the documented safe
+            # rectangle, so text antialiasing and future specimen photos cannot
+            # affect them. A page-wide tint necessarily affects all four.
+            regions = (
+                (0, 0, 24, 24),
+                (width - 24, 0, width, 24),
+                (0, height - 24, 24, height),
+                (width - 24, height - 24, width, height),
+            )
+            for region in regions:
+                colors = image.crop(region).getcolors(maxcolors=2)
+                if colors != [(24 * 24, WHITE_RGB)]:
+                    raise AssertionError(
+                        f"page {page_number} paper region {region} is not solid white: {colors}"
+                    )
 
 
 def _run_pdftotext(pdf, bbox_output):
@@ -693,6 +729,19 @@ class AssemblyTests(unittest.TestCase):
             vector_page = PdfReader(vector_violation).pages[0]
             with self.assertRaisesRegex(AssertionError, "stroked path bounds.*exceed"):
                 _assert_essential_painted_content_inside_safe_rectangle([vector_page])
+
+    @unittest.skipUnless(
+        shutil.which("lualatex") and shutil.which("pdftoppm"),
+        "lualatex and pdftoppm required",
+    )
+    def test_rendered_pdf_uses_white_paper_on_every_page(self):
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            rendered = base / "binder.pdf"
+            build_binder.compile_manifest(
+                ROOT / "binder" / "manifest.yaml", "draft", rendered
+            )
+            _assert_rendered_paper_regions_are_white(rendered, base / "rendered")
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
         rows = [606.8, 567.7, 528.6, 489.5]
