@@ -24,6 +24,26 @@ import prepare_binder_photo  # noqa: E402
 SAFE_TEXT_RECTANGLE = (72.0, 39.6, 572.4, 752.4)
 RIGHT_EXTRACTION_TOLERANCE = 0.01
 PDFTOTEXT_TIMEOUT_SECONDS = 30
+PDFTOPPM_TIMEOUT_SECONDS = 60
+# Pixel coordinates at 72 dpi. The common patches are wholly inside non-content
+# margins on every page. The card patch sits inside the first care card on each
+# profile, and the header patches cover the date cell and all five plant cells
+# on the watering log. None overlaps a profile image slot or printed content.
+WHITE_BACKGROUND_PATCHES = (
+    (5, 5, 50, 30),
+    (580, 5, 607, 30),
+    (5, 760, 50, 787),
+    (580, 760, 607, 787),
+)
+PROFILE_CARD_PATCH = (305, 300, 312, 307)
+WATERING_LOG_HEADER_PATCHES = (
+    (74, 130, 78, 165),
+    (130, 128, 134, 132),
+    (218, 128, 222, 132),
+    (307, 128, 311, 132),
+    (396, 128, 400, 132),
+    (485, 128, 489, 132),
+)
 
 
 def _run_pdftotext(pdf, bbox_output):
@@ -55,6 +75,50 @@ def _run_pdftotext(pdf, bbox_output):
         raise AssertionError(
             f"pdftotext failed for {pdf} with exit code {error.returncode}: {details}"
         ) from error
+
+
+def _assert_rendered_backgrounds_are_white(pdf, render_directory):
+    """Render the combined draft and verify stable blank regions are white."""
+    prefix = render_directory / "page"
+    render_directory.mkdir(parents=True, exist_ok=True)
+    command = ["pdftoppm", "-r", "72", "-png", str(pdf), str(prefix)]
+    try:
+        subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=PDFTOPPM_TIMEOUT_SECONDS,
+        )
+    except FileNotFoundError as error:
+        raise AssertionError(
+            "pdftoppm is required for the white-background check; "
+            "install Poppler and ensure pdftoppm is on PATH"
+        ) from error
+    except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
+        details = (error.stderr or error.stdout or "no diagnostic output")
+        if isinstance(details, bytes):
+            details = details.decode(errors="replace")
+        raise AssertionError(f"pdftoppm failed for {pdf}: {details.strip()}") from error
+
+    renders = sorted(render_directory.glob("page-*.png"))
+    if len(renders) != 6:
+        raise AssertionError(f"expected 6 rendered pages, found {len(renders)}")
+    for page_number, path in enumerate(renders, 1):
+        with Image.open(path) as source:
+            page = source.convert("RGB")
+            patches = list(WHITE_BACKGROUND_PATCHES)
+            if page_number <= 5:
+                patches.append(PROFILE_CARD_PATCH)
+            else:
+                patches.extend(WATERING_LOG_HEADER_PATCHES)
+            for box in patches:
+                patch = page.crop(box)
+                colors = patch.getcolors(maxcolors=256)
+                if colors != [(patch.width * patch.height, (255, 255, 255))]:
+                    raise AssertionError(
+                        f"page {page_number} background patch {box} is not solid white: {colors}"
+                    )
 
 
 def _assert_pdf_text_inside_safe_rectangle(pdf, bbox_output):
@@ -693,6 +757,19 @@ class AssemblyTests(unittest.TestCase):
             vector_page = PdfReader(vector_violation).pages[0]
             with self.assertRaisesRegex(AssertionError, "stroked path bounds.*exceed"):
                 _assert_essential_painted_content_inside_safe_rectangle([vector_page])
+
+    @unittest.skipUnless(
+        shutil.which("lualatex") and shutil.which("pdftoppm"),
+        "lualatex and pdftoppm required",
+    )
+    def test_combined_render_has_white_backgrounds_on_every_page(self):
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            rendered = base / "binder.pdf"
+            build_binder.compile_manifest(
+                ROOT / "binder" / "manifest.yaml", "draft", rendered
+            )
+            _assert_rendered_backgrounds_are_white(rendered, base / "rendered")
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
         rows = [606.8, 567.7, 528.6, 489.5]
