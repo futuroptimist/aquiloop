@@ -25,16 +25,25 @@ SAFE_TEXT_RECTANGLE = (72.0, 39.6, 572.4, 752.4)
 RIGHT_EXTRACTION_TOLERANCE = 0.01
 PDFTOTEXT_TIMEOUT_SECONDS = 30
 PDFTOPPM_TIMEOUT_SECONDS = 60
-# Pixel coordinates at 72 dpi. These patches are wholly inside non-content
-# margins on every page; the final patch is inside blank space at the left of
-# the watering-log header. None overlaps a profile image slot.
+# Pixel coordinates at 72 dpi. The common patches are wholly inside non-content
+# margins on every page. The card patch sits inside the first care card on each
+# profile, and the header patches cover the date cell and all five plant cells
+# on the watering log. None overlaps a profile image slot or printed content.
 WHITE_BACKGROUND_PATCHES = (
     (5, 5, 50, 30),
     (580, 5, 607, 30),
     (5, 760, 50, 787),
     (580, 760, 607, 787),
 )
-WATERING_LOG_HEADER_PATCH = (74, 130, 78, 165)
+PROFILE_CARD_PATCH = (305, 300, 312, 307)
+WATERING_LOG_HEADER_PATCHES = (
+    (74, 130, 78, 165),
+    (130, 128, 134, 132),
+    (218, 128, 222, 132),
+    (307, 128, 311, 132),
+    (396, 128, 400, 132),
+    (485, 128, 489, 132),
+)
 
 
 def _run_pdftotext(pdf, bbox_output):
@@ -71,7 +80,7 @@ def _run_pdftotext(pdf, bbox_output):
 def _assert_rendered_backgrounds_are_white(pdf, render_directory):
     """Render the combined draft and verify stable blank regions are white."""
     prefix = render_directory / "page"
-    render_directory.mkdir(parents=True)
+    render_directory.mkdir(parents=True, exist_ok=True)
     command = ["pdftoppm", "-r", "72", "-png", str(pdf), str(prefix)]
     try:
         subprocess.run(
@@ -99,8 +108,10 @@ def _assert_rendered_backgrounds_are_white(pdf, render_directory):
         with Image.open(path) as source:
             page = source.convert("RGB")
             patches = list(WHITE_BACKGROUND_PATCHES)
-            if page_number == 6:
-                patches.append(WATERING_LOG_HEADER_PATCH)
+            if page_number <= 5:
+                patches.append(PROFILE_CARD_PATCH)
+            else:
+                patches.extend(WATERING_LOG_HEADER_PATCHES)
             for box in patches:
                 patch = page.crop(box)
                 colors = patch.getcolors(maxcolors=256)
