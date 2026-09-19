@@ -24,6 +24,17 @@ import prepare_binder_photo  # noqa: E402
 SAFE_TEXT_RECTANGLE = (72.0, 39.6, 572.4, 752.4)
 RIGHT_EXTRACTION_TOLERANCE = 0.01
 PDFTOTEXT_TIMEOUT_SECONDS = 30
+PDFTOPPM_TIMEOUT_SECONDS = 60
+# Pixel coordinates at 72 dpi. These patches are wholly inside non-content
+# margins on every page; the final patch is inside blank space at the left of
+# the watering-log header. None overlaps a profile image slot.
+WHITE_BACKGROUND_PATCHES = (
+    (5, 5, 50, 30),
+    (580, 5, 607, 30),
+    (5, 760, 50, 787),
+    (580, 760, 607, 787),
+)
+WATERING_LOG_HEADER_PATCH = (74, 130, 78, 165)
 
 
 def _run_pdftotext(pdf, bbox_output):
@@ -55,6 +66,48 @@ def _run_pdftotext(pdf, bbox_output):
         raise AssertionError(
             f"pdftotext failed for {pdf} with exit code {error.returncode}: {details}"
         ) from error
+
+
+def _assert_rendered_backgrounds_are_white(pdf, render_directory):
+    """Render the combined draft and verify stable blank regions are white."""
+    prefix = render_directory / "page"
+    render_directory.mkdir(parents=True)
+    command = ["pdftoppm", "-r", "72", "-png", str(pdf), str(prefix)]
+    try:
+        subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=PDFTOPPM_TIMEOUT_SECONDS,
+        )
+    except FileNotFoundError as error:
+        raise AssertionError(
+            "pdftoppm is required for the white-background check; "
+            "install Poppler and ensure pdftoppm is on PATH"
+        ) from error
+    except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
+        details = (error.stderr or error.stdout or "no diagnostic output")
+        if isinstance(details, bytes):
+            details = details.decode(errors="replace")
+        raise AssertionError(f"pdftoppm failed for {pdf}: {details.strip()}") from error
+
+    renders = sorted(render_directory.glob("page-*.png"))
+    if len(renders) != 6:
+        raise AssertionError(f"expected 6 rendered pages, found {len(renders)}")
+    for page_number, path in enumerate(renders, 1):
+        with Image.open(path) as source:
+            page = source.convert("RGB")
+            patches = list(WHITE_BACKGROUND_PATCHES)
+            if page_number == 6:
+                patches.append(WATERING_LOG_HEADER_PATCH)
+            for box in patches:
+                patch = page.crop(box)
+                colors = patch.getcolors(maxcolors=256)
+                if colors != [(patch.width * patch.height, (255, 255, 255))]:
+                    raise AssertionError(
+                        f"page {page_number} background patch {box} is not solid white: {colors}"
+                    )
 
 
 def _assert_pdf_text_inside_safe_rectangle(pdf, bbox_output):
@@ -693,6 +746,19 @@ class AssemblyTests(unittest.TestCase):
             vector_page = PdfReader(vector_violation).pages[0]
             with self.assertRaisesRegex(AssertionError, "stroked path bounds.*exceed"):
                 _assert_essential_painted_content_inside_safe_rectangle([vector_page])
+
+    @unittest.skipUnless(
+        shutil.which("lualatex") and shutil.which("pdftoppm"),
+        "lualatex and pdftoppm required",
+    )
+    def test_combined_render_has_white_backgrounds_on_every_page(self):
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            rendered = base / "binder.pdf"
+            build_binder.compile_manifest(
+                ROOT / "binder" / "manifest.yaml", "draft", rendered
+            )
+            _assert_rendered_backgrounds_are_white(rendered, base / "rendered")
 
     def test_log_row_regions_reject_adjacent_field_borrowing(self):
         rows = [606.8, 567.7, 528.6, 489.5]

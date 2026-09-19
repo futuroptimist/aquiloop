@@ -133,7 +133,7 @@ The approved profile combines **A's typography** with **B's layout**: a large
 serif common-name heading, italic botanical name, and restrained botanical
 accents; title and identity at upper left; a prominent framed hero photograph
 at upper right; and a two-column care-card grid below. The approved **H care
-log** uses thin dark rules, a pale header tint, date/time plus five plant
+log** uses thin dark rules, a white header, date/time plus five plant
 columns, and comfortable handwriting space. These choices supersede the
 full-width photograph in the exploratory prompts while preserving their useful
 historical record.
@@ -155,9 +155,13 @@ historical record.
 - Type: 24–30 pt common name; 14–17 pt binomial/status line; 11–12 pt category
   headings; 9.5–10.5 pt body with at least 1.25× line spacing; 8 pt minimum for
   sources/revision metadata. Never shrink type to cure overflow.
-- Output: near-black body text on white or near-white, minimum 4.5:1 contrast
+- Output: near-black body text on white, minimum 4.5:1 contrast
   for ordinary text, no information conveyed by hue alone, solid/dashed or
   labeled distinctions that survive grayscale, and 0.5 pt minimum rules.
+- Print efficiency: paper areas render as actual white by default. Intentional
+  ink is limited to content, rules, placeholders, and future specimen images;
+  do not use full-page, card, table-header, or other decorative background
+  fills.
 
 ### Profile content schema
 
@@ -408,7 +412,8 @@ followed by five plant columns in manifest order. Each plant header contains its
 display name, location marker, and a blank field `Typical interval: ___ days`.
 The adjacent printed note reads: “Planning estimate only—check moisture or plant
 condition, rain, and season first.” No interval is populated during design.
-Use thin dark rules and a pale header tint that remains distinct in grayscale.
+Use thin dark rules and typography to distinguish the white table header in
+both color and grayscale; do not use a header background fill.
 
 Each dated row is one watering event. A row key expands the compact notation:
 `D` = date, `T` = time, `A/M` = amount or method, `Obs` = observation, `Rain` =
@@ -554,6 +559,13 @@ paths, and non-background filled paths must stay within the safe rectangle. A
 content and the other text edges receive no tolerance. Negative profile fixtures
 separately prove that out-of-bounds text and an out-of-bounds vector rule are
 rejected.
+
+The same regression renders the combined six-page draft through Poppler and
+checks multiple known blank patches on every page, including the watering-log
+header, for exact white pixels. The patches sit away from text, rules, and image
+slots so font antialiasing and future specimen photographs cannot create false
+failures; this guards against reintroducing full-page or decorative card/header
+fills.
 
 The watering-log regression requests 8-point TeX labels and accepts the
 approximately 7.97011-point size exposed by LuaLaTeX PDF text extraction (with
