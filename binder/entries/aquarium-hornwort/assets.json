@@ -8,12 +8,30 @@
       "subjects": [
         "whole plant pending"
       ],
-      "alt": "Visible draft placeholder; an actual specimen photograph has not been supplied.",
-      "caption": "Draft placeholder — actual specimen photograph pending.",
+      "alt": "Visible synthetic development placeholder; this unselected asset is retained for template testing.",
+      "caption": "Reusable development placeholder — not selected.",
       "source": {
         "provenance": "synthetic text placeholder created for draft page development",
         "photographer": "not applicable",
         "rights": "unknown"
+      }
+    },
+    {
+      "id": "aquarium-hornwort-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "submerged feathery stems",
+        "aquarium",
+        "plant basket"
+      ],
+      "alt": "Feathery green aquatic stems submerged in an aquarium above a small slotted plant basket and driftwood.",
+      "caption": "Owner-supplied overview of the aquatic plant in its aquarium setting.",
+      "source": {
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "photographer": "Daniel",
+        "rights": "permission granted for inclusion in this repository and its generated care binder",
+        "rights_reviewed": true
       }
     }
   ]

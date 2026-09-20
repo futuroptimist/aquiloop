@@ -8,12 +8,29 @@
       "subjects": [
         "whole plant pending"
       ],
-      "alt": "Visible draft placeholder; an actual specimen photograph has not been supplied.",
-      "caption": "Draft placeholder — actual specimen photograph pending.",
+      "alt": "Visible synthetic development placeholder; this unselected asset is retained for template testing.",
+      "caption": "Reusable development placeholder — not selected.",
       "source": {
         "provenance": "synthetic text placeholder created for draft page development",
         "photographer": "not applicable",
         "rights": "unknown"
+      }
+    },
+    {
+      "id": "kalanchoe-desert-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "two patterned succulent rosettes",
+        "outdoor grow bag"
+      ],
+      "alt": "Two compact green succulent rosettes with dark purple markings growing in an outdoor fabric grow bag.",
+      "caption": "Owner-supplied overview of the patterned succulent rosettes in their grow bag.",
+      "source": {
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "photographer": "Daniel",
+        "rights": "permission granted for inclusion in this repository and its generated care binder",
+        "rights_reviewed": true
       }
     }
   ]

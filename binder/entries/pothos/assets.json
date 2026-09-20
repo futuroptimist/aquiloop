@@ -8,12 +8,30 @@
       "subjects": [
         "whole plant pending"
       ],
-      "alt": "Visible draft placeholder; an actual specimen photograph has not been supplied.",
-      "caption": "Draft placeholder — actual specimen photograph pending.",
+      "alt": "Visible synthetic development placeholder; this unselected asset is retained for template testing.",
+      "caption": "Reusable development placeholder — not selected.",
       "source": {
         "provenance": "synthetic text placeholder created for draft page development",
         "photographer": "not applicable",
         "rights": "unknown"
+      }
+    },
+    {
+      "id": "pothos-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "trailing houseplant",
+        "variegated foliage",
+        "home shelving"
+      ],
+      "alt": "A trailing houseplant with green and yellow-variegated leaves cascading from white home shelving.",
+      "caption": "Owner-supplied overview of the trailing plant in its home setting.",
+      "source": {
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "photographer": "Daniel",
+        "rights": "permission granted for inclusion in this repository and its generated care binder",
+        "rights_reviewed": true
       }
     }
   ]
