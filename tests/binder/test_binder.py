@@ -11,7 +11,7 @@ from xml.etree import ElementTree
 from collections import Counter
 from unittest import mock
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageChops, ImageStat
 
 import sys
 
@@ -381,52 +381,86 @@ class PdfTextDiagnosticsTests(unittest.TestCase):
 
 
 class CatalogTests(unittest.TestCase):
-    def test_draft_loads_and_has_no_empty_detail_placements(self):
-        _, records, selected = build_binder.load_entry("sedum-loves-fire", "draft")
-        self.assertEqual(selected, {"hero": "sedum-placeholder-001"})
-        self.assertGreater(len(records), 0)
+    @staticmethod
+    def placeholder_catalog():
+        return {
+            "schema_version": 1,
+            "assets": [{
+                "id": "fixture-placeholder-001",
+                "path": "assets/draft-placeholder.txt",
+                "kind": "placeholder",
+                "subjects": ["synthetic fixture"],
+                "alt": "Visible synthetic placeholder fixture.",
+                "caption": "Synthetic placeholder fixture.",
+                "source": {
+                    "photographer": "not applicable",
+                    "provenance": "self-contained test fixture",
+                    "rights": "unknown",
+                },
+            }],
+        }
+
+    def write_placeholder_entry(self, root, selected_id="fixture-placeholder-001", data=None):
+        base = root / "binder" / "entries" / "fixture-entry"
+        (base / "assets").mkdir(parents=True)
+        (base / "assets" / "draft-placeholder.txt").write_text("synthetic")
+        (base / "assets.json").write_text(json.dumps(data or self.placeholder_catalog()))
+        (base / "page.tex").write_text(
+            f"% binder-placement hero {selected_id}; self-contained test fixture\n"
+        )
+        return base
+
+    def test_production_entries_select_photos_without_details_or_placeholders(self):
+        for slug in (
+            "sedum-loves-fire", "kalanchoe-desert", "pothos",
+            "bird-of-paradise", "aquarium-hornwort",
+        ):
+            with self.subTest(entry=slug):
+                _, records, selected = build_binder.load_entry(slug, "draft")
+                expected = f"{slug}-overview-001"
+                self.assertEqual(selected, {"hero": expected})
+                self.assertEqual(records[expected]["path"], "assets/overview.jpg")
+                self.assertEqual(records[expected]["kind"], "photograph")
+                self.assertNotIn("placeholder", selected.values())
 
     def test_final_rejects_selected_placeholder_and_unresolved_rights(self):
-        with self.assertRaisesRegex(ValueError, "not qualified for final mode"):
-            build_binder.load_entry("sedum-loves-fire", "final")
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            base = self.write_placeholder_entry(root)
+            with mock.patch.object(build_binder, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "not qualified for final mode"):
+                    build_binder.load_entry(base.name, "final")
 
     def test_duplicate_ids_and_unknown_selection_are_rejected(self):
-        real = ROOT / "binder" / "entries" / "sedum-loves-fire"
-        data = json.loads((real / "assets.json").read_text())
         cases = (
-            (lambda d: d["assets"].append(d["assets"][0].copy()), "sedum-placeholder-001", "duplicate"),
+            (lambda d: d["assets"].append(d["assets"][0].copy()), "fixture-placeholder-001", "duplicate"),
             (lambda d: None, "missing-id", "unknown asset"),
         )
         for mutation, selected_id, message in cases:
-            with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as name:
-                base = Path(name)
-                (base / "assets").mkdir()
-                (base / "assets" / "draft-placeholder.txt").write_text("synthetic")
-                candidate = json.loads(json.dumps(data)); mutation(candidate)
-                (base / "assets.json").write_text(json.dumps(candidate))
-                (base / "page.tex").write_text(f"% binder-placement hero {selected_id}; test\n")
-                with self.assertRaisesRegex(ValueError, message):
-                    build_binder.load_entry(base.name, "draft")
+            with self.subTest(message=message), tempfile.TemporaryDirectory() as name:
+                root = Path(name)
+                data = self.placeholder_catalog()
+                mutation(data)
+                base = self.write_placeholder_entry(root, selected_id, data)
+                with mock.patch.object(build_binder, "ROOT", root):
+                    with self.assertRaisesRegex(ValueError, message):
+                        build_binder.load_entry(base.name, "draft")
 
     def test_source_type_and_asset_kind_are_validated(self):
-        real = ROOT / "binder" / "entries" / "sedum-loves-fire"
-        data = json.loads((real / "assets.json").read_text())
         for invalid_source, message in ((True, "source metadata must be an object"), (False, "unsupported kind")):
-            with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as name:
-                base = Path(name); (base / "assets").mkdir()
-                (base / "assets" / "draft-placeholder.txt").write_text("synthetic")
-                candidate = json.loads(json.dumps(data))
+            with self.subTest(message=message), tempfile.TemporaryDirectory() as name:
+                root = Path(name)
+                data = self.placeholder_catalog()
                 if invalid_source:
-                    candidate["assets"][0]["source"] = "invalid"
+                    data["assets"][0]["source"] = "invalid"
                 else:
-                    candidate["assets"][0]["kind"] = "image"
-                (base / "assets.json").write_text(json.dumps(candidate))
-                (base / "page.tex").write_text("% binder-placement hero sedum-placeholder-001; test\n")
-                with self.assertRaisesRegex(ValueError, message):
-                    build_binder.load_entry(base.name, "draft")
+                    data["assets"][0]["kind"] = "image"
+                base = self.write_placeholder_entry(root, data=data)
+                with mock.patch.object(build_binder, "ROOT", root):
+                    with self.assertRaisesRegex(ValueError, message):
+                        build_binder.load_entry(base.name, "draft")
 
     def test_selected_details_are_explicit_and_unselected_records_stay_unselected(self):
-        real = ROOT / "binder" / "entries" / "sedum-loves-fire"
         with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as name:
             base = Path(name); (base / "assets").mkdir()
             assets = []
@@ -441,23 +475,26 @@ class CatalogTests(unittest.TestCase):
             self.assertNotIn("unused", selected.values())
 
     def test_final_requires_positive_rights_review_and_matching_aspect(self):
-        real = ROOT / "binder" / "entries" / "sedum-loves-fire"
-        data = json.loads((real / "assets.json").read_text())
+        data = self.placeholder_catalog()
         record = data["assets"][0]
         record.update({"path": "assets/photo.jpg", "kind": "photograph"})
         record["source"].update(rights="owned test fixture", rights_reviewed=True)
-        with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as name:
-            base = Path(name); (base / "assets").mkdir()
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            base = root / "binder" / "entries" / "fixture-entry"
+            (base / "assets").mkdir(parents=True)
             Image.new("RGB", (1200, 800)).save(base / "assets" / "photo.jpg")
             (base / "assets.json").write_text(json.dumps(data))
-            (base / "page.tex").write_text("% binder-placement hero sedum-placeholder-001; test\n")
-            with self.assertRaisesRegex(ValueError, "aspect ratio"):
-                build_binder.load_entry(base.name, "final")
+            (base / "page.tex").write_text("% binder-placement hero fixture-placeholder-001; test\n")
+            with mock.patch.object(build_binder, "ROOT", root):
+                with self.assertRaisesRegex(ValueError, "aspect ratio"):
+                    build_binder.load_entry(base.name, "final")
 
     def test_synthetic_owned_reviewed_photograph_passes_final_validation(self):
-        with tempfile.TemporaryDirectory(dir=ROOT / "binder" / "entries") as name:
-            base = Path(name)
-            (base / "assets").mkdir()
+        with tempfile.TemporaryDirectory() as name:
+            root = Path(name)
+            base = root / "binder" / "entries" / "fixture-entry"
+            (base / "assets").mkdir(parents=True)
             Image.new("RGB", (990, 990), "#597267").save(base / "assets" / "hero.jpg")
             record = {
                 "id": "owned-hero", "path": "assets/hero.jpg", "kind": "photograph",
@@ -468,7 +505,8 @@ class CatalogTests(unittest.TestCase):
             }
             (base / "assets.json").write_text(json.dumps({"schema_version": 1, "assets": [record]}))
             (base / "page.tex").write_text("% binder-placement hero owned-hero; test\n")
-            _, records, selected = build_binder.load_entry(base.name, "final")
+            with mock.patch.object(build_binder, "ROOT", root):
+                _, records, selected = build_binder.load_entry(base.name, "final")
             self.assertEqual(selected, {"hero": "owned-hero"})
             self.assertTrue(records["owned-hero"]["source"]["rights_reviewed"])
 
@@ -690,12 +728,34 @@ class AssemblyTests(unittest.TestCase):
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
                 "Aquarium hornwort", "Watering & aquarium log",
             )
-            for page, title in zip(reader.pages, expected):
+            slugs = (
+                "sedum-loves-fire", "kalanchoe-desert", "pothos",
+                "bird-of-paradise", "aquarium-hornwort",
+            )
+            for index, (page, title) in enumerate(zip(reader.pages, expected)):
                 text = page.extract_text()
                 self.assertIn(title, text)
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
+                    self.assertNotIn("DRAFT PLACEHOLDER", text)
+                    painted_images, _, _ = _painted_pdf_geometry(page)
+                    self.assertEqual(len(painted_images), 1)
+                    self.assertEqual(len(page.images), 1)
+                    source = Image.open(
+                        ROOT / "binder" / "entries" / slugs[index] / "assets" / "overview.jpg"
+                    ).convert("RGB")
+                    embedded = page.images[0].image.convert("RGB")
+                    self.assertEqual(embedded.size, source.size)
+                    # LuaTeX re-encodes JPEG data. Compare decoded pixels with a
+                    # tight lossy-codec tolerance so this proves the selected
+                    # source was painted rather than merely finding any image.
+                    rms = ImageStat.Stat(ImageChops.difference(embedded, source)).rms
+                    self.assertTrue(all(channel < 3 for channel in rms), rms)
                 build_binder._validate_page(page, title)
+            self.assertNotIn(
+                "DRAFT PLACEHOLDER",
+                "".join(page.extract_text() for page in reader.pages),
+            )
 
 
     @unittest.skipUnless(
@@ -738,6 +798,7 @@ class AssemblyTests(unittest.TestCase):
             )
             fixture = base / "profile-fixture"
             fixture.mkdir()
+            shutil.copytree(profile / "assets", fixture / "assets")
             page_source = (profile / "page.tex").read_text(encoding="utf-8")
             page_source += (
                 "\n\\begin{tikzpicture}[remember picture,overlay]\n"
@@ -1013,6 +1074,8 @@ class ComprehensiveRegressionTests(unittest.TestCase):
     def test_template_declares_exact_outer_frame_geometry(self):
         template = (ROOT / "binder/template.tex").read_text(encoding="utf-8")
         self.assertIn("rectangle (3.30in,3.30in)", template)
+        self.assertIn(r"width=\dimexpr3.30in-2\fboxrule\relax", template)
+        self.assertIn(r"height=\dimexpr3.30in-2\fboxrule\relax", template)
         self.assertIn("rectangle (2.05in,1.35in)", template)
         self.assertNotIn("keepaspectratio=false", template)
 

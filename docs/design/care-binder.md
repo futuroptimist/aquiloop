@@ -1,8 +1,9 @@
 # Home, garden, and aquarium care binder design brief
 
 Status: approved design direction; the six-page draft binder, single-entry
-template, watering log, and local photo workflow are implemented. Final care
-copy, photograph qualification, and release automation remain future work.
+template, watering log, local photo workflow, and five selected owner-supplied
+hero photographs are implemented. Final care, publication qualification, and
+release automation remain future work.
 
 ## Purpose and sequence
 
@@ -22,11 +23,15 @@ the final committed photographs must show the user's actual specimens.
 
 The facts currently supplied are intentionally sparse. “Soil plus additives”
 does not establish a recipe, and Pacifica, California is prior location context,
-not a measured growing-site condition. Draft content and pages may use clearly
+not a measured growing-site condition. Draft content and pages use clearly
 provisional identities, general source-backed guidance, unresolved fields, and
-the visible placeholder; they do not wait for photographs. Photograph-qualified
-final copy depends on reviewed specimen images, rights, and the inputs listed
-under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
+the five selected owner-supplied overview photographs. Daniel approved their
+complete square compositions—including solar lights and aquarium/home
+surroundings—their backgrounds, lighting, and visible plant conditions for the
+first photo-enabled draft. This selection records that photographs were
+supplied; it does not complete identity, care, reviewer, or final-publication qualification.
+That later qualification depends on reviewed specimen evidence and the inputs
+listed under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
 
 ## Visual references
 
@@ -158,8 +163,9 @@ historical record.
 - Output: near-black body text on white, minimum 4.5:1 contrast
   for ordinary text, no information conveyed by hue alone, solid/dashed or
   labeled distinctions that survive grayscale, and 0.5 pt minimum rules.
-- Print efficiency: paper areas render as actual white by default. Intentional
-  ink is limited to content, rules, placeholders, and future specimen images;
+- Print efficiency: paper areas render as actual white by default. Intentional ink
+  is limited to content, rules, selected specimen images, and any draft
+  placeholders;
   do not use full-page, card, table-header, or other decorative background
   fills.
 
@@ -202,9 +208,10 @@ crowd out the photograph or care grid.
 
 ### Species image catalogs and page placements
 
-The planned source layout gives each species a reusable image catalog. This tree
-is illustrative; none of these photographs, catalogs, or page sources is claimed
-to exist yet:
+The source layout gives each species a reusable image catalog. Each current
+profile selects its owner-supplied `assets/overview.jpg` as the hero while retaining its unselected
+placeholder as a reusable development asset. This tree illustrates the
+layout and possible future details:
 
 ```text
 binder/
@@ -333,6 +340,14 @@ Retain `original.jpg` outside Git; choose the crop deliberately; create the
 derivative; add its metadata to `assets.json`; select its stable ID in the
 adjacent `page.tex` placement comment; then rebuild. Existing derivatives need
 an explicit `--overwrite`. This is intentionally not a media-management service.
+
+For the current v1 overview photographs, replacement is optional rather than a
+publication prerequisite. A future replacement should be prepared as a new
+derivative without changing the original camera file, must satisfy the same
+aspect/resolution/size validation, and should receive a stable catalog record.
+Update the page placement ID only after reviewing the complete replacement crop,
+metadata, and permission. Optional diagnostic detail photographs remain future
+work and leave no empty frames when unselected.
 
 ### Aquatic adaptation
 

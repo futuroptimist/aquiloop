@@ -15,6 +15,24 @@
         "photographer": "not applicable",
         "rights": "unknown"
       }
+    },
+    {
+      "id": "kalanchoe-desert-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "whole plant",
+        "leaf pattern",
+        "outdoor grow-bag setting"
+      ],
+      "alt": "Two compact succulent plants with broad green leaves patterned in purple growing in an outdoor fabric grow bag.",
+      "caption": "Owner-supplied overview of the Kalanchoe ‘Desert Surprise’ specimen in its outdoor grow bag.",
+      "source": {
+        "photographer": "Daniel",
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "rights": "Permission granted for inclusion in this repository and generated binder.",
+        "rights_reviewed": true
+      }
     }
   ]
 }

@@ -15,6 +15,24 @@
         "photographer": "not applicable",
         "rights": "unknown"
       }
+    },
+    {
+      "id": "bird-of-paradise-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "whole plant",
+        "growth habit",
+        "indoor setting"
+      ],
+      "alt": "A potted bird of paradise with upright stems and green leaves positioned between indoor furnishings.",
+      "caption": "Owner-supplied overview of the bird-of-paradise specimen in its indoor setting.",
+      "source": {
+        "photographer": "Daniel",
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "rights": "Permission granted for inclusion in this repository and generated binder.",
+        "rights_reviewed": true
+      }
     }
   ]
 }
