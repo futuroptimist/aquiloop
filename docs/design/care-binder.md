@@ -1,8 +1,9 @@
 # Home, garden, and aquarium care binder design brief
 
 Status: approved design direction; the six-page draft binder, single-entry
-template, watering log, and local photo workflow are implemented. Final care
-copy, photograph qualification, and release automation remain future work.
+template, watering log, local photo workflow, and five owner-supplied overview
+photographs are implemented. Final identity/care review, independent photograph
+qualification, and release automation remain future work.
 
 ## Purpose and sequence
 
@@ -17,15 +18,16 @@ The first release is one directly printable, six-page PDF in this exact order:
 6. Handwritten watering log.
 
 Each profile occupies exactly one page. The concept studies below are retained
-as historical exploration, not evidence: generated plants are provisional, and
-the final committed photographs must show the user's actual specimens.
+as historical exploration, not evidence: generated plants are provisional. The
+selected overview photographs show the user's actual specimens.
 
 The facts currently supplied are intentionally sparse. “Soil plus additives”
 does not establish a recipe, and Pacifica, California is prior location context,
 not a measured growing-site condition. Draft content and pages may use clearly
-provisional identities, general source-backed guidance, unresolved fields, and
-the visible placeholder; they do not wait for photographs. Photograph-qualified
-final copy depends on reviewed specimen images, rights, and the inputs listed
+provisional identities, general source-backed guidance, and unresolved fields.
+Owner photographs may be selected in draft mode without implying identity/care
+review or final publication qualification. Photograph-qualified final copy
+depends on reviewed specimen images, rights, and the inputs listed
 under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
 
 ## Visual references
@@ -202,9 +204,24 @@ crowd out the photograph or care grid.
 
 ### Species image catalogs and page placements
 
-The planned source layout gives each species a reusable image catalog. This tree
-is illustrative; none of these photographs, catalogs, or page sources is claimed
-to exist yet:
+The five draft profiles select Daniel's owner-supplied `assets/overview.jpg`
+photographs as their heroes. Their complete square compositions—including solar
+lights and aquarium or home surroundings—are accepted for v1 and render without
+an additional crop in the 3.30-inch square frame. The retained placeholder
+records and files remain unselected development assets. No detail slots are
+selected; optional diagnostic label, node, leaf, stem/base, or package views are
+future work and do not gate this edition.
+
+A future replacement follows the same preparation and catalog validation
+workflow: retain the camera original outside Git, create a compliant square
+derivative, update the existing stable overview record (or deliberately select
+a new stable ID), preserve explicit permission metadata, and qualify the
+rendered page again in color and grayscale. Replacement images need only meet
+the reusable aspect, minimum-resolution, and file-size contracts; they are not
+required to reproduce the current files' exact dimensions or hashes.
+
+The source layout gives each species a reusable image catalog. This tree is an
+illustrative subset of the implemented structure:
 
 ```text
 binder/
@@ -634,21 +651,22 @@ Only that later physical check can justify calling the binder print-worthy.
 - The Step 08a1b follow-up completes the equivalent corrections for Sedum
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
-- Specimen photographs and growing-condition records, care-log handwriting
-  space, revised six-page proof review, and physical print/handwriting
-  qualification remain pending gates. Typography and automated safe-margin
-  refinement are implemented, but do not satisfy either human gate.
+- Owner overview photographs are selected. Diagnostic details,
+  growing-condition records, photo-enabled six-page proof review, and physical
+  print/handwriting qualification remain pending gates. Typography, log space,
+  and automated safe-margin refinement are implemented, but do not satisfy the
+  remaining human gates.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
   assembly are implemented; final page qualification remains pending.
-- Final specimen identity, local care values, photographs, and growing/aquarium
-  conditions are pending evidence collection and review.
-- Actual specimen photographs, final rights review, final-mode qualification,
-  rendered-page human review, and physical print/handwriting checks remain
-  pending. CI validates only the provisional six-page draft; its downloadable
-  artifact is not a release or deployment, and Step 07a/07b automation does not
-  satisfy those later human gates.
+- Final specimen identity, local care values, diagnostic photographs, and
+  growing/aquarium conditions are pending evidence collection and review.
+- The selected overview photographs have recorded permission. Independent
+  photo-enabled proof review, final-mode qualification, and physical
+  print/handwriting checks remain pending. CI validates only the provisional
+  six-page draft; its downloadable artifact is not a release or deployment,
+  and Step 07a/07b automation does not satisfy those later human gates.
 
 ### Local verification outputs (Step 06a)
 

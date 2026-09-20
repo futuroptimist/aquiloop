@@ -11,8 +11,10 @@
 \newcommand{\CareRow}[4]{\CareCard{#1}{#2}\hfill\CareCard{#3}{#4}\par\vspace{5pt}}
 \newcommand{\EvidenceFooter}[1]{{\raggedright\color{sage}\rule{\linewidth}{.6pt}\par\vspace{4pt}{\color{ink}\sffamily\fontsize{8}{10}\selectfont #1\par}}}
 % Prepared inputs have the exact frame ratio, so keepaspectratio cannot distort them.
-\newcommand{\HeroImage}[1]{\fbox{\includegraphics[width=3.288in,height=3.288in,keepaspectratio]{#1}}}
-\newcommand{\DetailImage}[1]{\fbox{\includegraphics[width=2.038in,height=1.338in,keepaspectratio]{#1}}}
+% Account for both .6 pt frame rules so the outer boxes remain exactly 3.30 in
+% and 2.05 x 1.35 in and do not cross the approved safe area.
+\newcommand{\HeroImage}[1]{\fbox{\includegraphics[width=3.28333in,height=3.28333in,keepaspectratio]{#1}}}
+\newcommand{\DetailImage}[1]{\fbox{\includegraphics[width=2.03333in,height=1.33333in,keepaspectratio]{#1}}}
 \newcommand{\HeroPlaceholder}[1]{\begin{tikzpicture}\path[use as bounding box] (0,0) rectangle (3.30in,3.30in);\draw[rust,line width=.6pt] (.3pt,.3pt) rectangle (3.296in,3.296in);\node[align=center,text width=2.7in,font=\sffamily\bfseries] at (1.65in,1.65in) {DRAFT PLACEHOLDER\\#1};\end{tikzpicture}}
 \newcommand{\DetailPlaceholder}[1]{\begin{tikzpicture}\path[use as bounding box] (0,0) rectangle (2.05in,1.35in);\draw[rust,line width=.6pt] (.3pt,.3pt) rectangle (2.046in,1.346in);\node[align=center,text width=1.75in,font=\sffamily\bfseries\fontsize{8}{10}\selectfont] at (1.025in,.675in) {DRAFT PLACEHOLDER\\#1};\end{tikzpicture}}
 \begin{document}\input{resolved-assets.tex}\input{page.tex}\end{document}
