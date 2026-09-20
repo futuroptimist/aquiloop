@@ -8,12 +8,30 @@
       "subjects": [
         "whole plant pending"
       ],
-      "alt": "Visible draft placeholder; an actual specimen photograph has not been supplied.",
-      "caption": "Draft placeholder — actual specimen photograph pending.",
+      "alt": "Reusable visible draft placeholder; not selected when a specimen photograph is available.",
+      "caption": "Reusable draft placeholder — unselected for the photo-enabled binder.",
       "source": {
         "provenance": "synthetic text placeholder created for draft page development",
         "photographer": "not applicable",
         "rights": "unknown"
+      }
+    },
+    {
+      "id": "aquarium-hornwort-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "whole plant",
+        "submerged stems",
+        "aquarium setting"
+      ],
+      "alt": "Photograph of submerged green hornwort-like stems in a furnished aquarium with gravel, rocks, wood, and aquarium equipment visible.",
+      "caption": "Owner specimen in its aquarium setting; the full approved v1 composition is shown.",
+      "source": {
+        "photographer": "Daniel",
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "rights": "Permission granted by photographer for inclusion in this repository and generated care binder.",
+        "rights_reviewed": true
       }
     }
   ]
