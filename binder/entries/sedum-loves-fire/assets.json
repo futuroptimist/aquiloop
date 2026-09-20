@@ -13,6 +13,23 @@
         "photographer": "not applicable",
         "rights": "unknown"
       }
+    },
+    {
+      "id": "sedum-loves-fire-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "three small succulent rosettes in an outdoor grow bag",
+        "solar light and surrounding mulch"
+      ],
+      "alt": "Three small red-tipped green succulent rosettes growing in dark soil beside a solar light.",
+      "caption": "Owner-supplied overview of the Sedum “Love’s Fire” specimen in its outdoor grow bag.",
+      "source": {
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "photographer": "Daniel",
+        "rights": "Permission granted by the photographer for inclusion in this repository and generated care binder; no broader reuse license granted.",
+        "rights_reviewed": true
+      }
     }
   ]
 }

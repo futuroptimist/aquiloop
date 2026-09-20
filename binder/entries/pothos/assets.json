@@ -15,6 +15,23 @@
         "photographer": "not applicable",
         "rights": "unknown"
       }
+    },
+    {
+      "id": "pothos-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "trailing potted pothos on an indoor shelf",
+        "home shelving and room surroundings"
+      ],
+      "alt": "A leafy green and yellow trailing pothos in a pot on a white indoor shelf.",
+      "caption": "Owner-supplied overview of the indoor pothos specimen and its shelf setting.",
+      "source": {
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "photographer": "Daniel",
+        "rights": "Permission granted by the photographer for inclusion in this repository and generated care binder; no broader reuse license granted.",
+        "rights_reviewed": true
+      }
     }
   ]
 }

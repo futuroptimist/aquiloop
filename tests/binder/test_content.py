@@ -186,15 +186,15 @@ class ContentWorksheetTests(unittest.TestCase):
     def test_revised_profiles_keep_reviewer_and_unresolved_footer_fields(self):
         expected_flags = {
             "sedum-loves-fire": (
-                "identity/cultivar match", "photographs", "exposure", "medium",
+                "identity/cultivar match", "diagnostic photographs", "exposure", "medium",
                 "dry-down/rain", "temperatures",
             ),
             "bird-of-paradise": (
-                "species", "photographs", "exposure", "pot/medium", "climate",
+                "species", "diagnostic photographs", "exposure", "pot/medium", "climate",
                 "outdoor transition",
             ),
             "aquarium-hornwort": (
-                "species/trade form", "photographs", "tank", "livestock",
+                "species/trade form", "diagnostic photographs", "tank", "livestock",
                 "chemistry", "light", "flow", "placement", "fertilizer/CO2",
             ),
         }
