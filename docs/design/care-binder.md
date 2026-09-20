@@ -1,8 +1,9 @@
 # Home, garden, and aquarium care binder design brief
 
 Status: approved design direction; the six-page draft binder, single-entry
-template, watering log, and local photo workflow are implemented. Final care
-copy, photograph qualification, and release automation remain future work.
+template, watering log, local photo workflow, and five owner-supplied overview
+photographs are implemented. Final identity/care review, proof qualification,
+and release automation remain future work.
 
 ## Purpose and sequence
 
@@ -23,10 +24,14 @@ the final committed photographs must show the user's actual specimens.
 The facts currently supplied are intentionally sparse. “Soil plus additives”
 does not establish a recipe, and Pacifica, California is prior location context,
 not a measured growing-site condition. Draft content and pages may use clearly
-provisional identities, general source-backed guidance, unresolved fields, and
-the visible placeholder; they do not wait for photographs. Photograph-qualified
-final copy depends on reviewed specimen images, rights, and the inputs listed
-under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
+provisional identities, general source-backed guidance, and unresolved fields.
+The five profiles now select Daniel's owner-supplied square overview photographs;
+their complete v1 compositions, including solar lights and aquarium/home
+surroundings, are intentionally accepted without further cropping or retouching.
+This records photo supply and permission, not identity/care review or final proof
+qualification. Optional diagnostic details and the other inputs listed under
+[Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification)
+remain future work.
 
 ## Visual references
 
@@ -319,6 +324,15 @@ silently spill onto another page.
    useful detail.
 5. Upload the derivative into the species' `assets/` directory, add or update
    its catalog record, and select its ID from a page only when desired.
+
+The current v1 pages select `assets/overview.jpg` from each species catalog and
+render the complete 1:1 derivative in the 3.30-inch hero frame. To replace one,
+retain the existing stable asset ID, prepare a derivative that satisfies the
+same aspect/resolution/size contract, update its honest descriptive and rights
+metadata as needed, and rerun the complete binder proof. Do not overwrite the
+source camera file or infer identity, diagnosis, or growing conditions from the
+replacement. Unselected placeholders remain reusable development fixtures;
+optional diagnostic photographs remain unselected and reserve no empty frames.
 
 The implemented helper preserves originals and reports the derivative's measured
 dimensions, bytes, and effective print resolution. For example:
@@ -634,21 +648,20 @@ Only that later physical check can justify calling the binder print-worthy.
 - The Step 08a1b follow-up completes the equivalent corrections for Sedum
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
-- Specimen photographs and growing-condition records, care-log handwriting
-  space, revised six-page proof review, and physical print/handwriting
-  qualification remain pending gates. Typography and automated safe-margin
-  refinement are implemented, but do not satisfy either human gate.
+- Owner-supplied overview photographs are selected. Diagnostic photographs and
+  growing-condition records remain pending evidence; photo integration does not
+  resolve identity or local-care uncertainty.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
   assembly are implemented; final page qualification remains pending.
-- Final specimen identity, local care values, photographs, and growing/aquarium
-  conditions are pending evidence collection and review.
-- Actual specimen photographs, final rights review, final-mode qualification,
-  rendered-page human review, and physical print/handwriting checks remain
+- Final specimen identity, local care values, diagnostic photographs, and
+  growing/aquarium conditions are pending evidence collection and review.
+- The selected overview photographs have documented repository/binder permission;
+  final-mode qualification and independent photo-enabled proof review remain
   pending. CI validates only the provisional six-page draft; its downloadable
-  artifact is not a release or deployment, and Step 07a/07b automation does not
-  satisfy those later human gates.
+  artifact is not a release or deployment, and automation does not satisfy those
+  later human gates.
 
 ### Local verification outputs (Step 06a)
 

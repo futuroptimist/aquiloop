@@ -15,6 +15,23 @@
         "photographer": "not applicable",
         "rights": "unknown"
       }
+    },
+    {
+      "id": "aquarium-hornwort-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "hornwort-like aquatic stems in an aquarium",
+        "aquarium hardscape, planter basket, and fish"
+      ],
+      "alt": "Green feathery aquatic stems growing around a planter basket among aquarium rocks, wood, and fish.",
+      "caption": "Owner-supplied overview of the aquarium hornwort specimen in its tank setting.",
+      "source": {
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "photographer": "Daniel",
+        "rights": "Permission granted by the photographer for inclusion in this repository and generated care binder; no broader reuse license granted.",
+        "rights_reviewed": true
+      }
     }
   ]
 }

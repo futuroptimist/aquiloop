@@ -15,6 +15,23 @@
         "photographer": "not applicable",
         "rights": "unknown"
       }
+    },
+    {
+      "id": "kalanchoe-desert-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "patterned Kalanchoe rosettes in an outdoor grow bag",
+        "mulch and solar light"
+      ],
+      "alt": "Two compact Kalanchoe rosettes with green, cream, and burgundy patterned leaves in an outdoor grow bag.",
+      "caption": "Owner-supplied overview of the reported Kalanchoe “Desert Surprise” specimen.",
+      "source": {
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "photographer": "Daniel",
+        "rights": "Permission granted by the photographer for inclusion in this repository and generated care binder; no broader reuse license granted.",
+        "rights_reviewed": true
+      }
     }
   ]
 }

@@ -15,6 +15,23 @@
         "photographer": "not applicable",
         "rights": "unknown"
       }
+    },
+    {
+      "id": "bird-of-paradise-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "potted bird of paradise plant indoors",
+        "living-room surroundings and grow light"
+      ],
+      "alt": "A potted bird of paradise with upright stems and broad leaves in a living-room corner beneath a grow light.",
+      "caption": "Owner-supplied overview of the indoor bird of paradise specimen.",
+      "source": {
+        "provenance": "owner-supplied photograph of the user's specimen, uploaded for the care binder",
+        "photographer": "Daniel",
+        "rights": "Permission granted by the photographer for inclusion in this repository and generated care binder; no broader reuse license granted.",
+        "rights_reviewed": true
+      }
     }
   ]
 }
