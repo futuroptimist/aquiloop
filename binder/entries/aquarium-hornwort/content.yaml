@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "publication_qualified": false,
   "entry": "aquarium-hornwort",
   "display_name": "Aquarium hornwort",
   "reported_label": "Aquarium hornwort",

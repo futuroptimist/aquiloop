@@ -405,6 +405,7 @@ class CatalogTests(unittest.TestCase):
         (base / "assets").mkdir(parents=True)
         (base / "assets" / "draft-placeholder.txt").write_text("synthetic")
         (base / "assets.json").write_text(json.dumps(data or self.placeholder_catalog()))
+        (base / "content.yaml").write_text(json.dumps({"publication_qualified": True}))
         (base / "page.tex").write_text(
             f"% binder-placement hero {selected_id}; self-contained test fixture\n"
         )
@@ -422,6 +423,15 @@ class CatalogTests(unittest.TestCase):
                 self.assertEqual(records[expected]["path"], "assets/overview.jpg")
                 self.assertEqual(records[expected]["kind"], "photograph")
                 self.assertNotIn("placeholder", selected.values())
+
+    def test_pending_production_profiles_are_rejected_in_final_mode(self):
+        for slug in (
+            "sedum-loves-fire", "kalanchoe-desert", "pothos",
+            "bird-of-paradise", "aquarium-hornwort",
+        ):
+            with self.subTest(entry=slug):
+                with self.assertRaisesRegex(ValueError, "not qualified for final mode"):
+                    build_binder.load_entry(slug, "final")
 
     def test_final_rejects_selected_placeholder_and_unresolved_rights(self):
         with tempfile.TemporaryDirectory() as name:
@@ -485,6 +495,7 @@ class CatalogTests(unittest.TestCase):
             (base / "assets").mkdir(parents=True)
             Image.new("RGB", (1200, 800)).save(base / "assets" / "photo.jpg")
             (base / "assets.json").write_text(json.dumps(data))
+            (base / "content.yaml").write_text(json.dumps({"publication_qualified": True}))
             (base / "page.tex").write_text("% binder-placement hero fixture-placeholder-001; test\n")
             with mock.patch.object(build_binder, "ROOT", root):
                 with self.assertRaisesRegex(ValueError, "aspect ratio"):
@@ -504,6 +515,7 @@ class CatalogTests(unittest.TestCase):
                            "rights": "owned test fixture", "rights_reviewed": True},
             }
             (base / "assets.json").write_text(json.dumps({"schema_version": 1, "assets": [record]}))
+            (base / "content.yaml").write_text(json.dumps({"publication_qualified": True}))
             (base / "page.tex").write_text("% binder-placement hero owned-hero; test\n")
             with mock.patch.object(build_binder, "ROOT", root):
                 _, records, selected = build_binder.load_entry(base.name, "final")
@@ -741,9 +753,10 @@ class AssemblyTests(unittest.TestCase):
                     painted_images, _, _ = _painted_pdf_geometry(page)
                     self.assertEqual(len(painted_images), 1)
                     self.assertEqual(len(page.images), 1)
-                    source = Image.open(
+                    with Image.open(
                         ROOT / "binder" / "entries" / slugs[index] / "assets" / "overview.jpg"
-                    ).convert("RGB")
+                    ) as opened:
+                        source = opened.convert("RGB")
                     embedded = page.images[0].image.convert("RGB")
                     self.assertEqual(embedded.size, source.size)
                     # LuaTeX re-encodes JPEG data. Compare decoded pixels with a
@@ -1018,6 +1031,9 @@ class ComprehensiveRegressionTests(unittest.TestCase):
             records.append({"id": asset_id, "path": f"assets/{asset_id}.jpg", "kind": "photograph", "subjects": ["visibly synthetic raster"], "alt": "Visibly synthetic raster.", "caption": "Synthetic test raster.", "source": {"photographer": "test suite", "provenance": "generated fixture", "rights": "owned test fixture", "rights_reviewed": True}})
         if extra: records.append(extra)
         (base / "assets.json").write_text(json.dumps({"schema_version": 1, "assets": records}), encoding="utf-8")
+        (base / "content.yaml").write_text(
+            json.dumps({"publication_qualified": True}), encoding="utf-8"
+        )
         placements = ["% binder-placement hero hero; synthetic fixture"] + [f"% binder-placement detail{i} detail{i}; synthetic fixture" for i in range(1, details + 1)]
         page = (ROOT / "binder/entries/sedum-loves-fire/page.tex").read_text(encoding="utf-8")
         page = "\n".join(placements) + "\n" + "\n".join(x for x in page.splitlines() if not x.startswith("% binder-placement")) + page_suffix

@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "publication_qualified": false,
   "entry": "pothos",
   "display_name": "Pothos",
   "reported_label": "Pothos",
