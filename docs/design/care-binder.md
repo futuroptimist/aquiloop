@@ -653,21 +653,26 @@ Only that later physical check can justify calling the binder print-worthy.
 - The Step 08a1b follow-up completes the equivalent corrections for Sedum
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
-- Specimen photographs and growing-condition records, care-log handwriting
-  space, revised six-page proof review, and physical print/handwriting
-  qualification remain pending gates. Typography and automated safe-margin
-  refinement are implemented, but do not satisfy either human gate.
+- Five owner-supplied overview photographs are supplied and selected for the
+  current draft. Optional diagnostic detail photographs remain future work.
+  Growing-condition records, care-log handwriting space, revised six-page proof
+  review, and physical print/handwriting qualification remain pending gates.
+  Typography and automated safe-margin refinement are implemented, but do not
+  satisfy either human gate.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
   assembly are implemented; final page qualification remains pending.
-- Final specimen identity, local care values, photographs, and growing/aquarium
-  conditions are pending evidence collection and review.
-- Actual specimen photographs, final rights review, final-mode qualification,
-  rendered-page human review, and physical print/handwriting checks remain
-  pending. CI validates only the provisional six-page draft; its downloadable
-  artifact is not a release or deployment, and Step 07a/07b automation does not
-  satisfy those later human gates.
+- Final specimen identity, local care values, optional diagnostic detail
+  photographs, and growing/aquarium conditions are pending evidence collection
+  and review.
+- The five owner-supplied specimen overviews are selected, and their rights for
+  repository inclusion are reviewed. Identity and environment confirmation,
+  reviewer approval, final-mode publication qualification, rendered-page human
+  review, and physical print/handwriting checks remain pending. CI validates
+  only the provisional six-page draft; its downloadable artifact is not a
+  release or deployment, and Step 07a/07b automation does not satisfy those
+  later human gates.
 
 ### Local verification outputs (Step 06a)
 
