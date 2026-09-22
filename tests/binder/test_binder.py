@@ -750,6 +750,7 @@ class AssemblyTests(unittest.TestCase):
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
                     self.assertNotIn("DRAFT PLACEHOLDER", text)
+                    _assert_optional_detail_rendering(page, 0)
                     painted_images, _, _ = _painted_pdf_geometry(page)
                     self.assertEqual(len(painted_images), 1)
                     self.assertEqual(len(page.images), 1)
