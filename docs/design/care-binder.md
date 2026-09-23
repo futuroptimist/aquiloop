@@ -477,14 +477,13 @@ python scripts/build_binder.py --entry sedum-loves-fire --mode draft \
   --output build/binder/sedum-loves-fire-draft.pdf
 ```
 
-The builder validates catalog schema, profile publication qualification, and
-selections before compiling, then uses
+The builder validates catalog schema and selections before compiling, then uses
 pypdf independently to enforce one page and a 612 × 792-point MediaBox. Draft
-mode visibly permits placeholders; final mode requires the profile's
-`content.yaml` to declare `publication_qualified: true` and rejects a selected
-placeholder or unresolved rights. Publication qualification is an explicit
-human-review result and must remain `false` while identity, care content, or
-reviewer approval is pending. The watering log deliberately uses a small
+mode visibly permits placeholders. The five production profiles in the manifest
+remain provisional and are rejected in final mode; future publication
+qualification is deferred. Synthetic profiles still exercise final-mode asset
+validation, which rejects a selected placeholder or unresolved rights. The
+watering log deliberately uses a small
 supplemental-page path rather than the profile loader, so it does not invent a hero asset or relax
 profile asset checks. Build that page independently with:
 
