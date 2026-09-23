@@ -35,6 +35,15 @@ def load_entry(entry: str, mode: str) -> tuple[Path, dict[str, dict], dict[str, 
     base = (entries / entry).resolve()
     if entries not in base.parents or not base.is_dir():
         raise ValueError(f"unknown entry: {entry}")
+    # Current production profiles remain provisional; future publication
+    # qualification is intentionally deferred rather than encoded in content.
+    provisional_profiles = {
+        (entries / entry_id).resolve()
+        for entry_id, kind in EXPECTED_MANIFEST
+        if kind == "profile"
+    }
+    if mode == "final" and base in provisional_profiles:
+        raise ValueError(f"production profile {base.name} remains provisional and cannot be built in final mode")
     catalog = json.loads((base / "assets.json").read_text(encoding="utf-8"))
     if not isinstance(catalog, dict):
         raise ValueError("assets.json must contain an object")
