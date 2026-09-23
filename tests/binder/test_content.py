@@ -186,15 +186,15 @@ class ContentWorksheetTests(unittest.TestCase):
     def test_revised_profiles_keep_reviewer_and_unresolved_footer_fields(self):
         expected_flags = {
             "sedum-loves-fire": (
-                "identity/cultivar match", "exposure", "medium",
+                "identity/cultivar match", "photographs", "exposure", "medium",
                 "dry-down/rain", "temperatures",
             ),
             "bird-of-paradise": (
-                "species", "exposure", "pot/medium", "climate",
+                "species", "photographs", "exposure", "pot/medium", "climate",
                 "outdoor transition",
             ),
             "aquarium-hornwort": (
-                "species/trade form", "tank", "livestock",
+                "species/trade form", "photographs", "tank", "livestock",
                 "chemistry", "light", "flow", "placement", "fertilizer/CO2",
             ),
         }
@@ -203,9 +203,6 @@ class ContentWorksheetTests(unittest.TestCase):
                 page = (ROOT / "binder" / "entries" / slug / "page.tex").read_text(
                     encoding="utf-8")
                 self.assertIn("Reviewer: pending.", page)
-                self.assertIn("Owner hero photograph supplied.", page)
-                self.assertIn("publication qualification pending", page)
-                self.assertNotIn("not photograph-qualified", page)
                 self.assertIn("Flags:", page)
                 self.assertIn("unresolved", page)
                 self.assertIn(r"\textbf{EVIDENCE / SOURCES}", page)
