@@ -1,8 +1,10 @@
 # Home, garden, and aquarium care binder design brief
 
 Status: approved design direction; the six-page draft binder, single-entry
-template, watering log, and local photo workflow are implemented. Final care
-copy, photograph qualification, and release automation remain future work.
+template, watering log, and local photo workflow are implemented. Five
+owner-supplied overview photographs are selected in the photograph-enabled
+draft; botanical review, publication qualification, final care copy, and release
+automation remain future work.
 
 ## Purpose and sequence
 
@@ -22,10 +24,12 @@ the final committed photographs must show the user's actual specimens.
 
 The facts currently supplied are intentionally sparse. “Soil plus additives”
 does not establish a recipe, and Pacifica, California is prior location context,
-not a measured growing-site condition. Draft content and pages may use clearly
-provisional identities, general source-backed guidance, unresolved fields, and
-the visible placeholder; they do not wait for photographs. Photograph-qualified
-final copy depends on reviewed specimen images, rights, and the inputs listed
+not a measured growing-site condition. Draft content and pages use clearly
+provisional identities, general source-backed guidance, unresolved fields, and the five selected owner-supplied
+overview photographs. Their presence does not confirm identity, diagnosis, or
+local care conditions. Photograph-enabled draft output remains distinct from
+botanical review and publication-qualified final copy, which depend on reviewed
+specimen evidence, rights, and the inputs listed
 under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
 
 ## Visual references
@@ -202,9 +206,10 @@ crowd out the photograph or care grid.
 
 ### Species image catalogs and page placements
 
-The planned source layout gives each species a reusable image catalog. This tree
-is illustrative; none of these photographs, catalogs, or page sources is claimed
-to exist yet:
+The implemented source layout gives each species a reusable image catalog. The
+five production profiles now select their owner-supplied `assets/overview.jpg`
+records as draft hero images; no detail placement is selected. This abbreviated
+tree illustrates the shared layout:
 
 ```text
 binder/
