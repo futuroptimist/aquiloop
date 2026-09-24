@@ -410,15 +410,20 @@ class CatalogTests(unittest.TestCase):
         )
         return base
 
-    def test_production_entries_select_placeholders_without_details(self):
-        for slug in (
-            "sedum-loves-fire", "kalanchoe-desert", "pothos",
-            "bird-of-paradise", "aquarium-hornwort",
-        ):
+    def test_production_entries_select_expected_photos_without_details(self):
+        expected = {
+            "sedum-loves-fire": "sedum-loves-fire-overview-001",
+            "kalanchoe-desert": "kalanchoe-desert-overview-001",
+            "pothos": "pothos-overview-001",
+            "bird-of-paradise": "bird-of-paradise-overview-001",
+            "aquarium-hornwort": "aquarium-hornwort-overview-001",
+        }
+        for slug, expected_id in expected.items():
             with self.subTest(entry=slug):
-                _, records, selected = build_binder.load_entry(slug, "draft")
-                self.assertEqual(set(selected), {"hero"})
-                self.assertEqual(records[selected["hero"]]["kind"], "placeholder")
+                base, records, selected = build_binder.load_entry(slug, "draft")
+                self.assertEqual(selected, {"hero": expected_id})
+                self.assertEqual(records[expected_id]["kind"], "photograph")
+                self.assertTrue((base / records[expected_id]["path"]).is_file())
 
     def test_pending_production_profiles_are_rejected_in_final_mode(self):
         for slug in (
@@ -735,12 +740,17 @@ class AssemblyTests(unittest.TestCase):
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
                 "Aquarium hornwort", "Watering & aquarium log",
             )
+            painted_heroes = 0
             for page, title in zip(reader.pages, expected):
                 text = page.extract_text()
                 self.assertIn(title, text)
+                self.assertNotIn("DRAFT PLACEHOLDER", text)
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
+                    _assert_optional_detail_rendering(page, 0)
+                    painted_heroes += 1
                 build_binder._validate_page(page, title)
+            self.assertEqual(painted_heroes, 5)
 
 
     @unittest.skipUnless(
@@ -783,6 +793,7 @@ class AssemblyTests(unittest.TestCase):
             )
             fixture = base / "profile-fixture"
             fixture.mkdir()
+            shutil.copytree(profile / "assets", fixture / "assets")
             page_source = (profile / "page.tex").read_text(encoding="utf-8")
             page_source += (
                 "\n\\begin{tikzpicture}[remember picture,overlay]\n"
