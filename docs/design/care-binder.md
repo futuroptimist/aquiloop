@@ -1,8 +1,9 @@
 # Home, garden, and aquarium care binder design brief
 
 Status: approved design direction; the six-page draft binder, single-entry
-template, watering log, and local photo workflow are implemented. Final care
-copy, photograph qualification, and release automation remain future work.
+template, watering log, and local photo workflow are implemented. Five
+owner-supplied overview photographs are selected in the draft binder. Botanical
+review, publication qualification, and release automation remain future work.
 
 ## Purpose and sequence
 
@@ -18,14 +19,16 @@ The first release is one directly printable, six-page PDF in this exact order:
 
 Each profile occupies exactly one page. The concept studies below are retained
 as historical exploration, not evidence: generated plants are provisional, and
-the final committed photographs must show the user's actual specimens.
+the selected draft photographs show the user's actual specimens.
 
 The facts currently supplied are intentionally sparse. “Soil plus additives”
 does not establish a recipe, and Pacifica, California is prior location context,
-not a measured growing-site condition. Draft content and pages may use clearly
+not a measured growing-site condition. Draft content and pages use clearly
 provisional identities, general source-backed guidance, unresolved fields, and
-the visible placeholder; they do not wait for photographs. Photograph-qualified
-final copy depends on reviewed specimen images, rights, and the inputs listed
+five selected owner-supplied overview photographs.
+These photographs provide specimen context but do not confirm identity, diagnosis,
+or growing conditions. Photograph-enabled draft output remains distinct from later
+botanical review and publication qualification, which depend on the inputs listed
 under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
 
 ## Visual references
@@ -634,20 +637,21 @@ Only that later physical check can justify calling the binder print-worthy.
 - The Step 08a1b follow-up completes the equivalent corrections for Sedum
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
-- Specimen photographs and growing-condition records, care-log handwriting
-  space, revised six-page proof review, and physical print/handwriting
-  qualification remain pending gates. Typography and automated safe-margin
-  refinement are implemented, but do not satisfy either human gate.
+- Five owner-supplied overview photographs are selected for the draft binder.
+  Optional diagnostic detail photographs and growing-condition records, revised
+  photo-enabled proof review, and physical print/handwriting qualification remain
+  pending gates. Typography and automated safe-margin refinement are implemented,
+  but do not satisfy either human gate.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
   assembly are implemented; final page qualification remains pending.
-- Final specimen identity, local care values, photographs, and growing/aquarium
-  conditions are pending evidence collection and review.
-- Actual specimen photographs, final rights review, final-mode qualification,
-  rendered-page human review, and physical print/handwriting checks remain
-  pending. CI validates only the provisional six-page draft; its downloadable
-  artifact is not a release or deployment, and Step 07a/07b automation does not
+- Final specimen identity, local care values, optional diagnostic photographs,
+  and growing/aquarium conditions are pending evidence collection and review.
+- The selected overview photographs do not complete botanical review, publication
+  qualification, final-mode qualification, rendered-page human review, or
+  physical print/handwriting checks; those gates remain pending. CI validates only
+  the provisional six-page draft; its downloadable artifact is not a release or deployment, and Step 07a/07b automation does not
   satisfy those later human gates.
 
 ### Local verification outputs (Step 06a)
