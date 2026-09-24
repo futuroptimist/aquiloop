@@ -410,15 +410,20 @@ class CatalogTests(unittest.TestCase):
         )
         return base
 
-    def test_production_entries_select_placeholders_without_details(self):
-        for slug in (
-            "sedum-loves-fire", "kalanchoe-desert", "pothos",
-            "bird-of-paradise", "aquarium-hornwort",
-        ):
+    def test_production_entries_select_expected_photos_without_details(self):
+        expected = {
+            "sedum-loves-fire": "sedum-loves-fire-overview-001",
+            "kalanchoe-desert": "kalanchoe-desert-overview-001",
+            "pothos": "pothos-overview-001",
+            "bird-of-paradise": "bird-of-paradise-overview-001",
+            "aquarium-hornwort": "aquarium-hornwort-overview-001",
+        }
+        for slug, asset_id in expected.items():
             with self.subTest(entry=slug):
-                _, records, selected = build_binder.load_entry(slug, "draft")
-                self.assertEqual(set(selected), {"hero"})
-                self.assertEqual(records[selected["hero"]]["kind"], "placeholder")
+                base, records, selected = build_binder.load_entry(slug, "draft")
+                self.assertEqual(selected, {"hero": asset_id})
+                self.assertEqual(records[asset_id]["kind"], "photograph")
+                self.assertTrue((base / records[asset_id]["path"]).is_file())
 
     def test_pending_production_profiles_are_rejected_in_final_mode(self):
         for slug in (
@@ -731,6 +736,7 @@ class AssemblyTests(unittest.TestCase):
             self.assertEqual(first.read_bytes(), second.read_bytes())
             reader = PdfReader(first)
             self.assertEqual(len(reader.pages), 6)
+            painted_heroes = 0
             expected = (
                 "Sedum", "Kalanchoe", "Pothos", "Bird of paradise",
                 "Aquarium hornwort", "Watering & aquarium log",
@@ -740,7 +746,11 @@ class AssemblyTests(unittest.TestCase):
                 self.assertIn(title, text)
                 if title != "Watering & aquarium log":
                     self.assertIn("PROPAGATION", text)
+                    self.assertNotIn("DRAFT PLACEHOLDER", text)
+                    _assert_optional_detail_rendering(page, 0)
+                    painted_heroes += 1
                 build_binder._validate_page(page, title)
+            self.assertEqual(painted_heroes, 5)
 
 
     @unittest.skipUnless(
@@ -783,6 +793,7 @@ class AssemblyTests(unittest.TestCase):
             )
             fixture = base / "profile-fixture"
             fixture.mkdir()
+            shutil.copytree(profile / "assets", fixture / "assets")
             page_source = (profile / "page.tex").read_text(encoding="utf-8")
             page_source += (
                 "\n\\begin{tikzpicture}[remember picture,overlay]\n"
@@ -913,9 +924,7 @@ class AssemblyTests(unittest.TestCase):
                     self.assertTrue(evidence_sizes)
                     self.assertGreaterEqual(min(rendered_sizes), 7.9)
                     self.assertAlmostEqual(evidence_sizes[0], 7.97011, delta=0.01)
-                    if any(records[asset_id]["kind"] == "placeholder"
-                           for asset_id in selected.values()):
-                        self.assertIn("DRAFT PLACEHOLDER", text)
+                    self.assertNotIn("DRAFT PLACEHOLDER", text)
                     if slug == "aquarium-hornwort":
                         self.assertNotIn("SOIL / SUBSTRATE", text)
                         self.assertNotIn("Water thoroughly", text)
