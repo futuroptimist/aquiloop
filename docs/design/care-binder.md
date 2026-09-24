@@ -1,8 +1,10 @@
 # Home, garden, and aquarium care binder design brief
 
 Status: approved design direction; the six-page draft binder, single-entry
-template, watering log, and local photo workflow are implemented. Final care
-copy, photograph qualification, and release automation remain future work.
+template, watering log, and local photo workflow are implemented. Five
+owner-supplied overview photographs are selected in the draft binder. Botanical
+and publication qualification, final care copy, and release automation remain
+future work.
 
 ## Purpose and sequence
 
@@ -18,14 +20,16 @@ The first release is one directly printable, six-page PDF in this exact order:
 
 Each profile occupies exactly one page. The concept studies below are retained
 as historical exploration, not evidence: generated plants are provisional, and
-the final committed photographs must show the user's actual specimens.
+the selected draft photographs show the user's actual specimens.
 
 The facts currently supplied are intentionally sparse. “Soil plus additives”
 does not establish a recipe, and Pacifica, California is prior location context,
-not a measured growing-site condition. Draft content and pages may use clearly
-provisional identities, general source-backed guidance, unresolved fields, and
-the visible placeholder; they do not wait for photographs. Photograph-qualified
-final copy depends on reviewed specimen images, rights, and the inputs listed
+not a measured growing-site condition. The photograph-enabled draft uses the
+five owner-supplied overview images while retaining clearly provisional
+identities, general source-backed guidance, and
+unresolved fields. Selection for this draft does not botanically qualify the
+images or qualify the binder for publication. Final copy depends on botanical
+and publication review plus the inputs listed
 under [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
 
 ## Visual references
@@ -202,9 +206,9 @@ crowd out the photograph or care grid.
 
 ### Species image catalogs and page placements
 
-The planned source layout gives each species a reusable image catalog. This tree
-is illustrative; none of these photographs, catalogs, or page sources is claimed
-to exist yet:
+Each species now has a reusable image catalog, and its owner-supplied overview
+photograph is selected as the draft page hero. The expanded tree below remains
+illustrative for optional future detail photographs:
 
 ```text
 binder/
