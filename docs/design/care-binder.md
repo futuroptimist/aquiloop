@@ -71,12 +71,15 @@ flow in which one short entry compensates for another's overflow.
 The companion pages continue A's typography and B's modular layout on US Letter
 portrait paper: actual white background with no decorative fills, the existing
 one-inch blank left punch clearance and safe margins, a serif common name,
-italic working botanical name, and sans-serif body. Every page carries a clear
-`OVERVIEW`, `NUMBERS & PACIFICA`, or `PROPAGATION` label plus a species/page-kind
-identifier and revision/source footer. Target 24–28 pt titles, 11–12 pt section
-headings, 9.5–10.5 pt body copy, and sources no smaller than 8 pt. Use thin
-rules, consistent spacing, textual labels rather than color alone, and contrast
-that remains legible in grayscale.
+italic working botanical name, and sans-serif body. Every new companion carries
+the applicable `NUMBERS & PACIFICA` or `PROPAGATION` label plus a
+species/page-kind identifier and revision/source footer. The five accepted
+overview layouts are exempt from this new label and footer contract: they retain
+their existing `DRAFT • PROVISIONAL IDENTITY` headers and are not changed to add
+an `OVERVIEW` label. Target 24–28 pt titles, 11–12 pt section headings, 9.5–10.5
+pt body copy, and sources no smaller than 8 pt. Use thin rules, consistent
+spacing, textual labels rather than color alone, and contrast that remains
+legible in grayscale.
 
 Companions spend their area on instruction rather than repeat the large hero
 photograph; no new photograph is required. A small, labeled vector schematic is
@@ -294,8 +297,10 @@ assumptions:
   `(id, kind)` pairs in `EXPECTED_MANIFEST`, accepts only `profile` and
   `supplemental`, requires every entry budget to equal one, resolves profiles
   only through `page.tex`, requires a hero for every loaded entry, and derives
-  the provisional set from current profile rows. Its CLI has only `--entry`,
-  `--supplemental`, and `--manifest`, while combined/final behavior remains
+  the provisional set from current profile rows. Its CLI requires exactly one
+  mutually exclusive source selector (`--entry`, `--supplemental`, or
+  `--manifest`) together with required `--mode` and `--output` flags; it has no
+  companion page-kind selector. Manifest assembly and supplemental pages remain
   draft-only.
 - `tests/binder/` asserts the six IDs/kinds/order and six-page deterministic
   output; its coverage/order mutation tests, title walk, safe-margin page
