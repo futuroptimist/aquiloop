@@ -40,9 +40,13 @@ publication review and the inputs listed under
 This section is the implementation contract for the next phase. It adds two
 independently authored one-page companions to each existing profile while
 preserving the accepted six-page artifact and its five overview pages without
-care-copy, photograph, or layout changes. Research and implementation may make
-the proposal concrete later, but this document does not claim that any new
-numeric recommendation or procedure has been researched, rendered, or
+changes to their care copy, photographs, cards, provisional-status notices, or
+one-page geometry. The later v2 implementation has one narrow exception: it may
+add the page-kind identification specified below within the existing
+header/footer, without otherwise rearranging or restyling an overview. The
+accepted six-page artifact itself remains unchanged. Research and implementation
+may make the proposal concrete later, but this document does not claim that any
+new numeric recommendation or procedure has been researched, rendered, or
 verified. Provisional identity, optional additional photographs, and missing
 home measurements must be represented honestly without blocking useful example
 pages.
@@ -62,24 +66,30 @@ must be checked independently of the submitted manifest:
 | 13–15 | Aquarium hornwort | `profile`, `numbers`, `propagation` |
 | 16 | Existing watering & aquarium log | `supplemental` |
 
-Each existing overview remains exactly one page, retains its selected hero
-photograph and high-level Propagation card, and continues to satisfy the
-existing eight-card profile validation. Each companion has its own one-page
-budget. Thus a species section is three intentional pages, never a multipage
-flow in which one short entry compensates for another's overflow.
+Each existing overview remains exactly one page, retains its care copy,
+selected hero photograph, card layout (including its high-level Propagation
+card), and provisional-status notices, and continues to satisfy the existing
+eight-card profile validation. Only the narrow page-kind identification change
+described below is permitted when v2 is implemented. Each companion has its own
+one-page budget. Thus a species section is three intentional pages, never a
+multipage flow in which one short entry compensates for another's overflow.
 
 The companion pages continue A's typography and B's modular layout on US Letter
 portrait paper: actual white background with no decorative fills, the existing
 one-inch blank left punch clearance and safe margins, a serif common name,
 italic working botanical name, and sans-serif body. Every new companion carries
 the applicable `NUMBERS & PACIFICA` or `PROPAGATION` label plus a
-species/page-kind identifier and revision/source footer. The five accepted
-overview layouts are exempt from this new label and footer contract: they retain
-their existing `DRAFT • PROVISIONAL IDENTITY` headers and are not changed to add
-an `OVERVIEW` label. Target 24–28 pt titles, 11–12 pt section headings, 9.5–10.5
-pt body copy, and sources no smaller than 8 pt. Use thin rules, consistent
-spacing, textual labels rather than color alone, and contrast that remains
-legible in grayscale.
+species/page-kind identifier and revision/source footer. Target 24–28 pt titles,
+11–12 pt section headings, 9.5–10.5 pt body copy, and sources no smaller than 8
+pt. Use thin rules, consistent spacing, textual labels rather than color alone,
+and contrast that remains legible in grayscale. Every v2 page is identified in
+its existing header/footer area: `profile` maps to `OVERVIEW`, `numbers` to
+`NUMBERS & PACIFICA`, and
+`propagation` to `PROPAGATION`. The supplemental log retains its existing title
+and is identified by `(watering-log, supplemental)`; it does not require a
+species identifier. For overviews, adding `OVERVIEW` to the existing
+header/footer is the sole permitted layout change; their current care content,
+photographs, cards, provisional notices, and one-page geometry remain fixed.
 
 Companions spend their area on instruction rather than repeat the large hero
 photograph; no new photograph is required. A small, labeled vector schematic is
@@ -240,17 +250,26 @@ Like the current `.yaml` files, companion worksheets remain JSON-compatible
 YAML with an explicit schema version and stable source keys. Every numeric claim
 records: metric and value/range (or an explicit `unknown`/`N/A` reason); units;
 species/cultivar and method applicability; growing conditions and geographic
-context; source keys and evidence status; and whether it is a published range,
-proposed starting point, or measured observation. Recipe components must be
+context; applicable source keys and evidence status; and whether it is a
+published range, proposed starting point, or measured observation. Measured
+observations instead record local date, method, and conditions. Recipe components must be
 machine-checkable and a complete terrestrial mix must sum to 100% by volume.
 One claim has one authoritative worksheet home: do not duplicate conflicting
 values between `numbers.yaml` and `propagation.yaml`; use a stable reference
 when both pages need it.
 
 Existing profile eight-card and source-use validation remains intact. Extend
-source-usage checks to both companion worksheets: every substantive claim cites
-a known source key, and every non-background source is used. Initial research
-should begin with the [USDA Plant Hardiness Zone Map](https://planthardiness.ars.usda.gov/),
+source-usage checks to both companion worksheets. Published guidance and
+proposed recipes must cite known source keys and record applicability notes;
+every cited key must resolve to a nonempty HTTPS bibliography record, and every
+non-background source must be used. An explicit `unknown`/`N/A` record may omit
+a bibliographic citation when it supplies a nonempty reason. A measured
+observation may likewise omit an external citation, but must carry local
+provenance including its date, method, and relevant growing or tank conditions;
+it must never acquire an invented source merely to satisfy validation. Companion
+validation should distinguish those record types and enforce the corresponding
+fields without weakening or replacing existing overview validation. Initial
+research should begin with the [USDA Plant Hardiness Zone Map](https://planthardiness.ars.usda.gov/),
 its [usage guidance](https://planthardiness.ars.usda.gov/pages/how-to-use-the-maps),
 [UC ANR's San Mateo/San Francisco climate material](https://ucanr.edu/site/mgsmsf/climate),
 and the existing `sources.yaml` inventories, then use relevant university
@@ -281,9 +300,10 @@ python scripts/build_binder.py --entry pothos --page-kind numbers --mode draft \
   --output build/binder/pothos-numbers-draft.pdf
 ```
 
-Omitting `--page-kind` continues to mean the profile for backward compatibility;
-`--supplemental watering-log` remains available. Hero selection is required
-only for `profile`; companions may select zero images. Any companion-selected
+The `--page-kind` flag is proposed functionality, not part of the current CLI.
+When implemented, omitting it continues to mean the profile for backward
+compatibility; `--supplemental watering-log` remains available. Hero selection
+is required only for `profile`; companions may select zero images. Any companion-selected
 image still receives the existing catalog, rights, local-path, raster format,
 size, resolution, and placement checks. The current provisional final-mode
 guard must apply to every page whose species entry is not qualified, not merely
@@ -300,8 +320,9 @@ assumptions:
   the provisional set from current profile rows. Its CLI requires exactly one
   mutually exclusive source selector (`--entry`, `--supplemental`, or
   `--manifest`) together with required `--mode` and `--output` flags; it has no
-  companion page-kind selector. Manifest assembly and supplemental pages remain
-  draft-only.
+  companion page-kind selector. Manifest and supplemental builds are currently
+  draft-only; an individual `--entry` build may request final mode, where the
+  existing provisional-entry guard rejects an unqualified profile.
 - `tests/binder/` asserts the six IDs/kinds/order and six-page deterministic
   output; its coverage/order mutation tests, title walk, safe-margin page
   slices, white-background patches, source/content contracts, independent
@@ -318,13 +339,17 @@ assumptions:
 
 Acceptance for implementation is all of the following:
 
-- five unchanged one-page overviews, ten one-page companions, and the existing
-  one-page log in the exact sixteen-page order;
+- five preserved one-page overviews (with only the permitted `OVERVIEW`
+  identification added in the existing header/footer), ten one-page companions,
+  and the existing one-page log in the exact sixteen-page order; the accepted
+  six-page artifact remains unchanged;
 - independent one-page budgets, with explicit failures for a missing,
   duplicated, reordered, or overflowing companion;
-- valid units and ranges, known source keys for cited claims, machine-checked
-  100% by-volume totals for applicable complete recipes, and honest
-  `unknown`/`N/A` handling that never forces a fabricated value;
+- valid units and ranges, known HTTPS source records and applicability notes for
+  published guidance and proposed recipes, local provenance for measured
+  observations, machine-checked 100% by-volume totals for applicable complete
+  recipes, and reasoned `unknown`/`N/A` handling that never forces a fabricated
+  value or citation;
 - every page type checked for safe/punch margins, clipping, near-blank or extra
   pages, actual white background, readable body/source type, and applicable
   selected-asset contracts;
