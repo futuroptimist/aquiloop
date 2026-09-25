@@ -2,9 +2,12 @@
 
 Status: approved design direction; the six-page draft binder, single-entry
 template, watering log, and local photo workflow are implemented. Five
-owner-supplied overview photographs are selected for the draft binder. Final
-care copy, botanical review, photograph qualification, and release automation
-remain future work.
+owner-supplied overview photographs are selected for the draft binder. The
+rendered and physical proofs of that initial six-page, white-background draft
+have been accepted. This acceptance does not establish botanical identity or
+qualify any entry for final mode. The sixteen-page expansion specified below is
+a proposed phase: none of its companion pages, numeric recommendations, or
+verification results are implemented yet.
 
 ## Purpose and sequence
 
@@ -31,6 +34,307 @@ photograph-enabled draft does not confirm identity, diagnosis, or local care
 conditions. Photograph-qualified final copy still depends on botanical and
 publication review and the inputs listed under
 [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
+
+## Proposed sixteen-page companion expansion
+
+This section is the implementation contract for the next phase. It adds two
+independently authored one-page companions to each existing profile while
+preserving the accepted six-page artifact and its five overview pages without
+care-copy, photograph, or layout changes. Research and implementation may make
+the proposal concrete later, but this document does not claim that any new
+numeric recommendation or procedure has been researched, rendered, or
+verified. Provisional identity, optional additional photographs, and missing
+home measurements must be represented honestly without blocking useful example
+pages.
+
+### Structure, order, and shared visual language
+
+Each plant becomes a three-page section in the reading order **Overview →
+Numbers & Pacifica → Propagation**. The production v2 order is canonical and
+must be checked independently of the submitted manifest:
+
+| Physical pages | Species section | Page kinds in order |
+| --- | --- | --- |
+| 01–03 | Sedum “Love’s Fire” | `profile`, `numbers`, `propagation` |
+| 04–06 | Kalanchoe “Desert Surprise” | `profile`, `numbers`, `propagation` |
+| 07–09 | Pothos | `profile`, `numbers`, `propagation` |
+| 10–12 | Bird of paradise | `profile`, `numbers`, `propagation` |
+| 13–15 | Aquarium hornwort | `profile`, `numbers`, `propagation` |
+| 16 | Existing watering & aquarium log | `supplemental` |
+
+Each existing overview remains exactly one page, retains its selected hero
+photograph and high-level Propagation card, and continues to satisfy the
+existing eight-card profile validation. Each companion has its own one-page
+budget. Thus a species section is three intentional pages, never a multipage
+flow in which one short entry compensates for another's overflow.
+
+The companion pages continue A's typography and B's modular layout on US Letter
+portrait paper: actual white background with no decorative fills, the existing
+one-inch blank left punch clearance and safe margins, a serif common name,
+italic working botanical name, and sans-serif body. Every page carries a clear
+`OVERVIEW`, `NUMBERS & PACIFICA`, or `PROPAGATION` label plus a species/page-kind
+identifier and revision/source footer. Target 24–28 pt titles, 11–12 pt section
+headings, 9.5–10.5 pt body copy, and sources no smaller than 8 pt. Use thin
+rules, consistent spacing, textual labels rather than color alone, and contrast
+that remains legible in grayscale.
+
+Companions spend their area on instruction rather than repeat the large hero
+photograph; no new photograph is required. A small, labeled vector schematic is
+appropriate when it materially explains a cut, node, division, orientation, or
+aquatic placement. Overflow is resolved by editing copy or simplifying
+secondary material—not by reducing the type sizes, discarding required
+instructions, or silently emitting another page.
+
+### Numbers & Pacifica page
+
+This page is a practical reference sheet, not a miniature spreadsheet. Roughly
+four-fifths of its usable content area should hold the numeric/context cards and
+recipe or aquatic setup panel. Its fixed reading order is:
+
+1. **Compact identity header.** Show the common name, italic working botanical
+   name, `NUMBERS & PACIFICA`, current setting (`outdoor grow bag`, `indoors`,
+   or `aquarium`), and at most one concise identity/applicability caveat.
+2. **Pacifica context strip.** Label the place “Pacifica, California — coastal
+   SF Bay Area”; show the map edition, zone-evidence status, and a short
+   seasonal note. The user's 10a/10b estimate is research input, not a confirmed
+   yard classification. Research must verify an authoritative map lookup and
+   distinguish locality-level evidence from a measured garden microclimate;
+   neither the worksheet nor printed page may request or publish a street
+   address. Indoor entries distinguish present indoor care from a possible
+   Pacifica outdoor trial. Hornwort instead states prominently that tank
+   conditions govern its recommendations.
+3. **Eight-card, two-column grid.** Every card leads with a supported value or
+   range and unit; when a number would mislead, use a useful qualitative answer
+   or explicit `unknown`/`N/A` with a reason rather than invented precision.
+4. **Full-width recipe/setup panel.** Apply the terrestrial or aquatic contract
+   below.
+5. **Seasonal and observation strip.** Give one short Pacifica adjustment and
+   pen fields `Measured exposure ___`, `Observed establishment ___`, and
+   `Date ___`; use equivalent tank-condition fields for hornwort. The existing
+   log remains the recurring record.
+6. **Evidence footer.** Print readable source keys, revision, and material
+   applicability limitations; keep full claim records beside the source.
+
+The eight cards have these fixed meanings:
+
+1. **Light:** outdoor direct-sun hours where applicable; indoor light category
+   and a sourced supplemental-light schedule when useful. Daylight length,
+   lamp runtime, and direct-sun hours are distinct measures and must not be
+   equated.
+2. **Temperature:** preferred growth conditions and separately labeled
+   cold-protection thresholds, Fahrenheit first with Celsius alongside. A USDA
+   zone is not an optimal growing temperature.
+3. **Water and moisture:** an observable trigger, inspection method, and only a
+   defensible conditional timing. A measured dry-down observation remains
+   separate from a recommendation.
+4. **Chemistry:** supported medium or water pH and other useful parameters. Do
+   not fill space with unsupported humidity or aquarium targets or values that
+   conflict with livestock needs.
+5. **Seed germination:** timeline, pretreatment, temperature, and conditions
+   when a practical sourced seed method exists. Otherwise distinguish “not the
+   method covered here” from “no reliable interval found.”
+6. **Vegetative establishment:** method-specific conditions and distinct
+   milestones for callusing, first roots/regrowth, and transplant readiness.
+7. **Lifetime and maturity:** separate life cycle/longevity from time to mature
+   or flower; never relabel a maturity range as lifespan. State briefly when no
+   defensible lifespan in years was found.
+8. **Size and growth:** supported mature dimensions with context, separating
+   container/indoor expectations from landscape size and retaining separate
+   bird-of-paradise species alternatives.
+
+For each terrestrial entry, the full-width panel should offer one usable
+established-plant starting recipe when evidence permits. Name ingredients and
+percentages **by volume**; a complete recipe must total exactly 100%. Include a
+simple batch conversion (preferably quantities for 10 litres), short ingredient
+purposes, and supported drainage or particle-size notes. Label the recipe as
+published species guidance, a general container recipe, or a proposed local
+starting mix. Keep it distinct from both the unknown “my current mix” and the
+rooting/seed-starting medium documented on the propagation page. Display it as
+an unfilled segmented outline or compact table, never large solid-color bars.
+
+Hornwort replaces soil with an **aquatic setup** panel. Research must support
+floating/attachment options, water parameters, light, and flow in a
+livestock-compatible context. The page must not fabricate terrestrial soil,
+root-establishment targets, or other rooted-plant assumptions.
+
+### Detailed propagation page
+
+Use a broad main column for the primary home method and a narrower supporting
+column. Aim for approximately 450–550 words of instructional copy plus labels
+and sources, subject to the one-page render contract. Prefer one complete
+primary method and at most one actionable concise alternate over multiple
+partial methods.
+
+The header names the preferred method, suitable season or environmental
+conditions, starting material, and one short parent-readiness check. It must
+say or clearly imply that this is general procedure, not a diagnosis of the
+photographed specimen. The broad column normally contains six to eight numbered
+steps in this sequence:
+
+1. prepare tools, container, and rooting medium or water;
+2. select suitable starting material;
+3. locate the cut or division precisely;
+4. perform method-specific preparation;
+5. place the material at the supported depth and orientation;
+6. maintain light, temperature, moisture, and hygiene;
+7. inspect observable success and failure milestones; and
+8. transfer and acclimate it to ordinary care when ready.
+
+Lengths, depths, temperatures, and timelines appear only when a source supports
+their stated method and conditions. When timing varies, the procedure explains
+what to observe rather than promising false precision.
+
+The supporting column contains a short materials list with practical
+quantities, one small labeled schematic when useful, a compact milestone table,
+at most one alternate method, and exactly three common failure cues paired with
+the next corrective check. Shared steps should be referenced rather than
+repeated. A bottom strip gives explicit “ready for normal care” criteria and
+small fields for `Start date`, `Method`, and `First successful growth`. The
+footer cites the procedure and every method-specific number.
+
+### Species research briefs
+
+These are research assignments, not permission to publish unsupported claims:
+
+- **Sedum “Love’s Fire”:** investigate stem cuttings as the primary method; a
+  leaf method is optional only if well supported. Keep seed timing separate
+  from rooting time, scope nursery observations to the reported conditions,
+  and check cultivar and patent evidence before making cultivar-specific
+  propagation claims. Any patent/cultivar note must be concise and sourced.
+- **Kalanchoe “Desert Surprise”:** investigate stem cuttings as primary. Include
+  plantlets only if evidence for the identity candidate shows that the behavior
+  applies; never transfer it from an unrelated *Kalanchoe* species.
+- **Pothos:** explain node-bearing cuttings and water-versus-medium alternatives,
+  with an especially clear node/cut/water-line diagram. Include the transition
+  from propagation conditions to an established pot.
+- **Bird of paradise:** investigate division as primary and seed as the one
+  alternate. Keep *Strelitzia reginae* and *S. nicolai* evidence separate while
+  identity is provisional. Cover division readiness, root/shoot allocation,
+  replanting depth, and aftercare; label seed germination and flowering
+  timelines separately.
+- **Aquarium hornwort:** investigate fragmentation and subsequent regrowth
+  using an aquatic procedure throughout. Cover handling, placement, trimming,
+  and responsible fragment disposal. Do not reuse terrestrial callusing or
+  rooting instructions.
+
+### Companion evidence and source files
+
+Extend each existing species directory without duplicating catalogs or assets:
+
+```text
+page.tex                # implemented overview
+content.yaml            # implemented overview worksheet
+numbers.tex             # proposed rendered reference page
+numbers.yaml            # proposed numeric/context worksheet
+propagation.tex         # proposed rendered procedure
+propagation.yaml        # proposed method worksheet
+sources.yaml            # shared factual source inventory
+assets.json             # shared image catalog
+assets/                 # shared image binaries
+```
+
+Like the current `.yaml` files, companion worksheets remain JSON-compatible
+YAML with an explicit schema version and stable source keys. Every numeric claim
+records: metric and value/range (or an explicit `unknown`/`N/A` reason); units;
+species/cultivar and method applicability; growing conditions and geographic
+context; source keys and evidence status; and whether it is a published range,
+proposed starting point, or measured observation. Recipe components must be
+machine-checkable and a complete terrestrial mix must sum to 100% by volume.
+One claim has one authoritative worksheet home: do not duplicate conflicting
+values between `numbers.yaml` and `propagation.yaml`; use a stable reference
+when both pages need it.
+
+Existing profile eight-card and source-use validation remains intact. Extend
+source-usage checks to both companion worksheets: every substantive claim cites
+a known source key, and every non-background source is used. Initial research
+should begin with the [USDA Plant Hardiness Zone Map](https://planthardiness.ars.usda.gov/),
+its [usage guidance](https://planthardiness.ars.usda.gov/pages/how-to-use-the-maps),
+[UC ANR's San Mateo/San Francisco climate material](https://ucanr.edu/site/mgsmsf/climate),
+and the existing `sources.yaml` inventories, then use relevant university
+extension, botanical-garden, RHS, breeder, and identifiable aquarium-grower
+sources. Practical source-backed instructions remain possible when specimen
+identity or household measurements are provisional.
+
+### Versioned manifest and builder proposal
+
+Manifest schema v2 should recognize exactly four page kinds: `profile`,
+`numbers`, `propagation`, and `supplemental`. A physical-page identity is the
+pair `(species ID, page kind)`; duplicate pairs are invalid. Known kinds resolve
+to fixed filenames (`page.tex`, `numbers.tex`, `propagation.tex`, and the known
+supplemental source), never arbitrary paths supplied by the manifest. Each
+initial companion declares `page_budget=1`, and the production manifest lists
+all sixteen physical pages explicitly in the canonical order above.
+
+Validation must compare the manifest against a separately encoded canonical
+coverage/order contract rather than deriving success from the manifest's own
+length or budget sum. This makes a missing, duplicate, or reordered companion a
+failure even if the submitted document still totals sixteen pages. Preserve
+schema-v1 six-page manifests as test fixtures and preserve the current
+single-profile command. Add an explicit independent companion selector, for
+example:
+
+```sh
+python scripts/build_binder.py --entry pothos --page-kind numbers --mode draft \
+  --output build/binder/pothos-numbers-draft.pdf
+```
+
+Omitting `--page-kind` continues to mean the profile for backward compatibility;
+`--supplemental watering-log` remains available. Hero selection is required
+only for `profile`; companions may select zero images. Any companion-selected
+image still receives the existing catalog, rights, local-path, raster format,
+size, resolution, and placement checks. The current provisional final-mode
+guard must apply to every page whose species entry is not qualified, not merely
+to profiles. Keep the complete-manifest command and exactly one downloadable
+combined-PDF artifact; do not add a deployment or release stage.
+
+Later implementation must deliberately remove these current six-page
+assumptions:
+
+- `scripts/build_binder.py` fixes `EXPECTED_BINDER_PAGES` at 6, encodes six
+  `(id, kind)` pairs in `EXPECTED_MANIFEST`, accepts only `profile` and
+  `supplemental`, requires every entry budget to equal one, resolves profiles
+  only through `page.tex`, requires a hero for every loaded entry, and derives
+  the provisional set from current profile rows. Its CLI has only `--entry`,
+  `--supplemental`, and `--manifest`, while combined/final behavior remains
+  draft-only.
+- `tests/binder/` asserts the six IDs/kinds/order and six-page deterministic
+  output; its coverage/order mutation tests, title walk, safe-margin page
+  slices, white-background patches, source/content contracts, independent
+  entry tests, overflow fixtures, and hero assumptions currently address five
+  profiles plus one log. These must gain independent companion fixtures and
+  missing/duplicate/reordered/overflow negatives without weakening v1 fixture
+  coverage.
+- `.github/workflows/binder.yml` names and builds a six-page draft, asserts six
+  PDF pages and six color/grayscale renders, and uploads the current draft
+  artifact. The v2 workflow must assert sixteen while retaining one artifact;
+  its existing path filters already cover the proposed files under `binder/**`.
+
+### Expansion validation and rollout
+
+Acceptance for implementation is all of the following:
+
+- five unchanged one-page overviews, ten one-page companions, and the existing
+  one-page log in the exact sixteen-page order;
+- independent one-page budgets, with explicit failures for a missing,
+  duplicated, reordered, or overflowing companion;
+- valid units and ranges, known source keys for cited claims, machine-checked
+  100% by-volume totals for applicable complete recipes, and honest
+  `unknown`/`N/A` handling that never forces a fabricated value;
+- every page type checked for safe/punch margins, clipping, near-blank or extra
+  pages, actual white background, readable body/source type, and applicable
+  selected-asset contracts;
+- byte-for-byte deterministic combined output from the supported pinned
+  toolchain;
+- color and grayscale visual inspection of all sixteen pages, followed after
+  merge by main-branch artifact verification; and
+- an actual-size physical review focused on the ten new pages, their readable
+  density, writable fields, punch clearance, and binder ordering.
+
+No companion page requires recapture of an accepted overview photograph, and
+the rollout has no deployment or release-publishing stage. The accepted initial
+six-page rendered/physical proof remains historical evidence for that artifact,
+not proof that the proposed layouts, values, procedures, botanical identities,
+or final-mode gates have passed.
 
 ## Visual references
 
@@ -640,22 +944,22 @@ Only that later physical check can justify calling the binder print-worthy.
 - The Step 08a1b follow-up completes the equivalent corrections for Sedum
   “Love’s Fire,” bird of paradise, and aquarium hornwort. These remain working
   examples rather than identifications of the user's specimens.
-- Additional diagnostic photographs and growing-condition records, revised
-  photograph-enabled proof review, and physical print/handwriting qualification
-  remain pending gates. Typography and automated safe-margin refinement are
-  implemented, but do not satisfy those human gates.
+- The initial photograph-enabled, white-background six-page draft has passed
+  its rendered and physical print/handwriting review. Additional diagnostic
+  photographs and measured growing conditions remain optional inputs to later
+  botanical and content review, not reasons to revoke that accepted proof.
 
 - The approved direction is A typography + B profile layout + H care log. The
   profile foundation, H care log, ordered manifest, and deterministic draft
-  assembly are implemented; final page qualification remains pending.
+  assembly are implemented and proofed; final-mode qualification remains
+  pending.
 - Final specimen identity, local care values, diagnostic photographs, and
   growing/aquarium conditions are pending evidence collection and review.
-- Owner-supplied overview photographs are selected only for the draft. Botanical
-  and publication qualification, final-mode qualification, rendered-page human
-  review, and physical print/handwriting checks remain pending. CI validates
-  only the provisional six-page draft; its downloadable
-  artifact is not a release or deployment, and Step 07a/07b automation does not
-  satisfy those later human gates.
+- Owner-supplied overview photographs are selected only for the draft.
+  Botanical, publication, and final-mode qualification remain pending. CI
+  validates only the provisional six-page draft; its downloadable artifact is
+  not a release or deployment. The completed human proof gates apply to that
+  accepted draft and do not pre-approve the proposed companion pages.
 
 ### Local verification outputs (Step 06a)
 
