@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "context_id": "pacifica-ca-coastal-v1",
+  "label": "Pacifica, California — coastal San Francisco Bay Area",
+  "locality": {
+    "city": "Pacifica",
+    "county": "San Mateo County",
+    "state": "California",
+    "country": "United States",
+    "postal_code_scope": "94044"
+  },
+  "evidence_scope": {
+    "kind": "regional_and_zip_context",
+    "applies_to": "Outdoor context only; indoor room and aquarium conditions require their own measurements.",
+    "does_not_establish": [
+      "conditions at any particular address or yard",
+      "preferred growing temperatures for a plant",
+      "measured exposure, frost dates, soil or grow-bag mixture",
+      "indoor room conditions",
+      "aquarium conditions"
+    ]
+  },
+  "hardiness": {
+    "map_edition": 2023,
+    "climate_reference_period": "1991–2020",
+    "metric": "average annual extreme minimum winter temperature",
+    "zone_interval_f": 10,
+    "half_zone_interval_f": 5,
+    "lookup": {
+      "method": "Official map Quick ZIP Code Search using ZIP 94044",
+      "reproduction": "Open the official map, enter 94044 in Quick ZIP Code Search, and read the Plant Hardiness Zone result.",
+      "geographic_scope": "ZIP 94044 majority classification; not every point or yard within the ZIP code",
+      "result": {
+        "status": "published",
+        "zone": "10a",
+        "range_f": {"minimum": 30, "maximum": 35},
+        "range_c": {"minimum": -1.1, "maximum": 1.7},
+        "source_refs": ["CTX-USDA-PHZM-2023"]
+      },
+      "investigated_estimate": "The suggested ‘10a and 10b?’ was treated as an estimate. The official ZIP search returned only the majority classification 10a; it did not verify both half-zones for Pacifica.",
+      "site_specific_result": {
+        "status": "unknown",
+        "reason": "No exact growing-site location or measured winter minimum is available, and the ZIP majority result cannot classify every Pacifica yard. The USDA also notes that map cells and mapped zones cannot resolve every garden microclimate.",
+        "attempted_method": "Official 2023 USDA map Quick ZIP Code Search for 94044",
+        "source_refs": ["CTX-USDA-PHZM-USE"]
+      }
+    },
+    "interpretation": "Hardiness is a general perennial-survival guide based on historical average annual extreme minimum temperature. It is neither a plant's preferred growth-temperature range nor a measurement or forecast for a particular site.",
+    "source_refs": ["CTX-USDA-PHZM-2023", "CTX-USDA-PHZM-USE"]
+  },
+  "seasonal_notes": [
+    {
+      "id": "pacifica-seasonal-moisture",
+      "note": "San Mateo and San Francisco Counties generally have dry summers and mild winters; plants needing year-round water require deliberate consideration during dry periods.",
+      "scope": "regional guidance, not a watering schedule or a measured Pacifica garden condition",
+      "source_refs": ["CTX-UCANR-SMSF-CLIMATE"]
+    },
+    {
+      "id": "pacifica-coastal-variation",
+      "note": "Ocean and bay influence shape the regional climate, while nearby microclimates can receive different amounts of summer fog and overcast and can be warmer or cooler.",
+      "scope": "regional guidance; coastal exposure, fog frequency, wind, and temperature remain unknown for the actual site",
+      "source_refs": ["CTX-UCANR-SMSF-CLIMATE", "CTX-USDA-PHZM-USE"]
+    }
+  ],
+  "site_measurements": [
+    {"metric": "outdoor_direct_sun_hours", "status": "unknown", "reason": "No site measurement supplied."},
+    {"metric": "outdoor_wind_or_salt_exposure", "status": "unknown", "reason": "No site observation supplied."},
+    {"metric": "outdoor_fog_frequency", "status": "unknown", "reason": "No site observation supplied."},
+    {"metric": "site_frost_dates", "status": "unknown", "reason": "No site observation supplied."},
+    {"metric": "grow_bag_substrate", "status": "unknown", "reason": "No measured recipe supplied; ‘soil plus additives’ is not a quantified mixture."},
+    {"metric": "indoor_temperature_and_light", "status": "unknown", "reason": "No room measurements supplied; regional outdoor climate is not an indoor proxy."},
+    {"metric": "aquarium_temperature_light_and_chemistry", "status": "unknown", "reason": "No tank measurements supplied; regional outdoor climate is not an aquarium proxy."}
+  ],
+  "source_collection": "shared-climate-sources-v1",
+  "source_refs": [
+    "CTX-USDA-PHZM-2023",
+    "CTX-USDA-PHZM-USE",
+    "CTX-UCANR-SMSF-CLIMATE"
+  ]
+}
