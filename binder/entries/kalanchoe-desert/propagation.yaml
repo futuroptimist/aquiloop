@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert",
+  "worksheet": "propagation",
+  "identity_scope": "Working identity only; the reported label and photographed specimen have not been botanically confirmed.",
+  "context_refs": [
+    "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+  ],
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "Use a healthy 3–6 in (7.6–15.2 cm) stem cutting in spring or summer. RHS supports stem cuttings for the candidate cultivar; Iowa State supplies the general Kalanchoe-applicable preparation.",
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "spring or summer; healthy non-flowering material preferred",
+      "geographic_context": "sheltered home work area",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS",
+          "KAL-PROP"
+        ],
+        "applicability": "RHS establishes candidate method and season; Iowa State expressly includes Kalanchoe in its stem-cutting method."
+      }
+    },
+    {
+      "claim_id": "stem-cutting-length",
+      "metric": "cutting_length",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 6,
+        "unit": "inch"
+      },
+      "applicable_taxon": "Kalanchoe genus; candidate cultivar unconfirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "healthy stem; clean sharp pruners",
+      "geographic_context": "not site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-PROP"
+        ],
+        "applicability": "General succulent/Kalanchoe method; RHS does not give cultivar-specific length."
+      }
+    },
+    {
+      "claim_id": "callus-duration",
+      "metric": "cutting_callus_formation",
+      "quantity": {
+        "kind": "value",
+        "value": 3,
+        "unit": "day"
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "lower leaves removed; exposed clean cut surface",
+      "geographic_context": "sheltered dry location",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "KAL-PROP"
+        ],
+        "applicability": "Iowa State specifies air-drying for “several days.”",
+        "derivation": "Use 3 days only as a proposed first inspection point; insert later if the cut is not visibly dry and callused."
+      }
+    },
+    {
+      "claim_id": "propagation-medium",
+      "metric": "propagation_medium",
+      "description": "Use fresh cactus potting soil or perlite in a small container with a drainage hole; do not substitute the established-plant recipe automatically.",
+      "applicable_taxon": "Kalanchoe genus; candidate cultivar unconfirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "clean draining container",
+      "geographic_context": "not site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-PROP"
+        ],
+        "applicability": "General Kalanchoe-applicable succulent stem-cutting medium."
+      }
+    },
+    {
+      "claim_id": "sequential-procedure",
+      "metric": "propagation_steps",
+      "description": "1. Clean sharp pruners and prepare a small draining pot with cactus mix or perlite. 2. Select a firm healthy 3–6 in stem in spring or summer. 3. Cut cleanly and retain the top orientation. 4. Remove leaves from the lower half; air-dry until the cut is callused. 5. Insert the lower stem upright and firm gently. 6. Keep in bright indirect light with ventilation; keep medium barely moist, never saturated. 7. Check for new growth and resistance to a very gentle tug; stop and inspect if the base softens. 8. Transfer after roots hold the medium and growth resumes, then acclimate gradually to ordinary light and watering.",
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "clean tools, draining medium, protected bright conditions",
+      "geographic_context": "general home propagation; later placement may be Pacifica outdoors",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS",
+          "KAL-PROP",
+          "KAL-MSU"
+        ],
+        "applicability": "Sources support method, season, cutting preparation, callusing, drainage, and gradual light acclimation; exact home timing is absent.",
+        "derivation": "Sequential home procedure joins the cited requirements and uses observable readiness checks rather than inventing a rooting date."
+      }
+    },
+    {
+      "claim_id": "rooting-interval-reference",
+      "metric": "rooting_or_regrowth",
+      "description": "See kalanchoe-desert#vegetative-rooting-interval: no reliable home interval was found; look for root hold and new growth instead.",
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "home propagation conditions unmeasured",
+      "geographic_context": "not site-specific",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "KAL-PROP"
+        ],
+        "applicability": "The source says new roots develop but provides no interval.",
+        "derivation": "Cross-reference preserves the unknown authoritative record while supplying observation-based checks."
+      }
+    },
+    {
+      "claim_id": "transplant-readiness",
+      "metric": "transplant_readiness",
+      "description": "Ready when gentle resistance shows roots holding the medium and new growth is visible; then move to established mix without burying the crown.",
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "active growth after rooting",
+      "geographic_context": "not site-specific",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "KAL-PROP"
+        ],
+        "applicability": "Iowa State permits potting once new roots develop but gives no schedule.",
+        "derivation": "Adds conservative observable criteria and preserves the distinction between first roots and transplant readiness."
+      }
+    },
+    {
+      "claim_id": "failure-cues",
+      "metric": "propagation_failure_signs",
+      "description": "Exactly three checks: (1) black or mushy base → remove decay and verify callusing; (2) wet stagnant medium → verify the drainage hole and reduce moisture; (3) pale stretched growth → verify light and increase it gradually, avoiding abrupt strong sun.",
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "routine inspection",
+      "geographic_context": "not site-specific",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "KAL-PROP",
+          "KAL-MSU"
+        ],
+        "applicability": "General succulent sources support rot prevention, drainage, and gradual light changes.",
+        "derivation": "Pairs three visible warning cues with the next check; none diagnoses the photographed specimen."
+      }
+    },
+    {
+      "claim_id": "plantlet-alternate",
+      "metric": "alternate_propagation_method",
+      "description": "Removal of plantlets is an RHS-listed alternate for the candidate cultivar, but use it only if this plant actually produces detachable plantlets; no transfer of plantlet behavior from another Kalanchoe species is assumed.",
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; applies only if identity is confirmed",
+      "propagation_method": "plantlet removal",
+      "life_stage": "cutting",
+      "growing_conditions": "only a naturally produced plantlet with enough tissue to handle",
+      "geographic_context": "not site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS"
+        ],
+        "applicability": "Cultivar profile lists plantlet removal; it supplies no detailed home method or timeline."
+      }
+    }
+  ]
+}
