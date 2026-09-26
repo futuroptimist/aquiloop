@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "context_id": "pacifica-ca-coastal-context-v1",
+  "label": "Pacifica, California — coastal San Mateo County context",
+  "evidence_scope": {
+    "locality": "Pacifica, California",
+    "region": "coastal San Mateo County, San Francisco Bay Area",
+    "postal_scope": "ZIP Code 94044 majority classification",
+    "privacy": "No street address or private reference point is recorded.",
+    "limitations": "Regional and ZIP-level evidence only; it does not characterize every Pacifica yard, an indoor room, or an aquarium."
+  },
+  "hardiness": {
+    "map_edition": 2023,
+    "climatic_reference_period": "1991–2020",
+    "metric": "average annual extreme minimum winter temperature",
+    "zone_interval_fahrenheit": 10,
+    "half_zone_interval_fahrenheit": 5,
+    "lookup": {
+      "method": "Queried the ZIP_CODE field for 94044 in layer 296 of the PHZM_2023_Zip_Code_Table FeatureServer used by the USDA interactive map; inspected ZIP_CODE, Class, and MAJORITY fields.",
+      "geographic_scope": "majority classification across ZIP Code 94044, not a locality boundary or point location",
+      "result": "10a",
+      "temperature_band_fahrenheit": {
+        "minimum": 30,
+        "maximum": 35,
+        "interval_semantics": "USDA display band for the ZIP-majority half-zone"
+      },
+      "temperature_band_celsius": {
+        "minimum": -1.1,
+        "maximum": 1.7,
+        "interval_semantics": "USDA-published conversion, retained at source precision"
+      },
+      "sources": [
+        "CLIMATE-USDA-PHZM-ZIP-94044"
+      ]
+    },
+    "yard_zone": {
+      "status": "unknown",
+      "reason": "No non-private point lookup or exact garden location was supplied, and the ZIP-majority result cannot resolve local mapped variation or a garden microclimate.",
+      "attempted_method": "Authoritative USDA 2023 ZIP lookup for 94044; no street address was requested or used.",
+      "investigated_estimate": "The proposed 10a/10b estimate was checked. The authoritative ZIP-majority lookup supports 10a only; it neither verifies 10b nor rules out finer-scale variation within Pacifica.",
+      "sources": [
+        "CLIMATE-USDA-PHZM-USAGE",
+        "CLIMATE-USDA-PHZM-ZIP-94044"
+      ]
+    },
+    "interpretation": "A hardiness zone is a historical cold-extreme classification and general guide for perennial survival. It is not a preferred growth-temperature range, a forecast, a frost date, or a measurement of this garden.",
+    "sources": [
+      "CLIMATE-USDA-PHZM-2023",
+      "CLIMATE-USDA-PHZM-USAGE"
+    ]
+  },
+  "regional_notes": [
+    {
+      "id": "pacifica-region-seasonality",
+      "note": "San Mateo and San Francisco Counties generally have dry summers and mild winters under bay and ocean influence; plants needing year-round water require deliberate summer-water planning.",
+      "scope": "regional outdoor context, not a watering interval for a specimen",
+      "sources": [
+        "CLIMATE-UCANR-SMSF"
+      ]
+    },
+    {
+      "id": "pacifica-region-fog-variation",
+      "note": "Nearby Bay Area microclimates range from cool coastal fog belts to warmer inland sun belts, with substantial local differences in summer fog, overcast, and temperature.",
+      "scope": "regional outdoor context; actual grow-bag exposure must be observed",
+      "sources": [
+        "CLIMATE-UCANR-SMSF",
+        "CLIMATE-USDA-PHZM-USAGE"
+      ]
+    },
+    {
+      "id": "pacifica-outdoor-exposure",
+      "note": "Wind, soil or medium moisture, light, humidity, shelter, and small frost pockets can alter plant performance beyond the mapped hardiness classification.",
+      "scope": "outdoor siting factors; not evidence about this garden",
+      "sources": [
+        "CLIMATE-USDA-PHZM-USAGE"
+      ]
+    }
+  ],
+  "setting_boundaries": {
+    "outdoor_grow_bag": "Apply regional seasonality and hardiness only as background, then use measured bag drainage, sun, wind, rain exposure, and plant response.",
+    "indoor": "Do not infer window light, room temperature, humidity, or lamp runtime from the Pacifica outdoor context.",
+    "aquarium": "Do not infer water temperature, chemistry, flow, livestock compatibility, or lamp runtime from terrestrial climate or hardiness data."
+  },
+  "unknown_site_measurements": [
+    {
+      "metric": "direct_sun_duration",
+      "status": "unknown",
+      "reason": "No seasonally dated measurement at the grow-bag location is available."
+    },
+    {
+      "metric": "garden_extreme_minimum_temperature",
+      "status": "unknown",
+      "reason": "No on-site temperature record is available; the USDA zone is not a measurement."
+    },
+    {
+      "metric": "frost_dates",
+      "status": "unknown",
+      "reason": "No site observations or suitably scoped authoritative dates were established."
+    },
+    {
+      "metric": "grow_bag_substrate_composition",
+      "status": "unknown",
+      "reason": "The current ingredients and proportions were not supplied."
+    },
+    {
+      "metric": "indoor_conditions",
+      "status": "unknown",
+      "reason": "Window exposure, room temperatures, humidity, and supplemental lighting were not measured."
+    },
+    {
+      "metric": "aquarium_conditions",
+      "status": "unknown",
+      "reason": "Tank temperature, chemistry, flow, lamp runtime, volume, and livestock were not supplied."
+    }
+  ],
+  "sources": [
+    "CLIMATE-USDA-PHZM-2023",
+    "CLIMATE-USDA-PHZM-USAGE",
+    "CLIMATE-USDA-PHZM-ZIP-94044",
+    "CLIMATE-UCANR-SMSF"
+  ]
+}

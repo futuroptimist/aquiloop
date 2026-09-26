@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "collection_id": "shared-climate-sources-v1",
+  "sources": [
+    {
+      "key": "CLIMATE-USDA-PHZM-2023",
+      "authority": "U.S. Department of Agriculture, Agricultural Research Service",
+      "title": "2023 USDA Plant Hardiness Zone Map",
+      "url": "https://planthardiness.ars.usda.gov/",
+      "accessed": "2026-09-26",
+      "supports": [
+        "map_edition",
+        "zone_definition",
+        "zone_interval"
+      ],
+      "applicability": "Defines the 2023 national map as a cold-hardiness planning tool based on average annual extreme minimum winter temperature, with 10 °F zones and 5 °F half zones; it does not describe preferred growing temperatures or a particular yard."
+    },
+    {
+      "key": "CLIMATE-USDA-PHZM-USAGE",
+      "authority": "U.S. Department of Agriculture, Agricultural Research Service",
+      "title": "How to Use the Maps",
+      "url": "https://planthardiness.ars.usda.gov/pages/how-to-use-the-maps",
+      "accessed": "2026-09-26",
+      "supports": [
+        "climatic_reference_period",
+        "zone_interpretation",
+        "lookup_method",
+        "microclimate_limitations"
+      ],
+      "applicability": "Documents the 1991–2020 weather-data period, ZIP and point lookup methods, half-zone meanings, map resolution and limits, and the need to consider local light, wind, soil moisture, humidity, exposure, and microclimates."
+    },
+    {
+      "key": "CLIMATE-USDA-PHZM-ZIP-94044",
+      "authority": "U.S. Department of Agriculture, Agricultural Research Service",
+      "title": "2023 Plant Hardiness Zone ZIP Code Table — ZIP 94044 query",
+      "url": "https://services1.arcgis.com/SyUSN23vOoYdfLC8/arcgis/rest/services/PHZM_2023_Zip_Code_Table/FeatureServer/296/query?where=ZIP_CODE%3D%2794044%27&outFields=ZIP_CODE%2CClass%2CMAJORITY&returnGeometry=false&f=html",
+      "accessed": "2026-09-26",
+      "supports": [
+        "zip_94044_majority_zone"
+      ],
+      "applicability": "The table that powers the USDA interactive map's ZIP lookup reports the majority classification for ZIP 94044 as 10a (30 to 35 °F / -1.1 to 1.7 °C). ZIP-majority evidence is not a point lookup and cannot establish the zone or measured minimum for every Pacifica garden."
+    },
+    {
+      "key": "CLIMATE-UCANR-SMSF",
+      "authority": "University of California Agriculture and Natural Resources, UC Master Gardeners of San Mateo and San Francisco Counties",
+      "title": "Climate",
+      "url": "https://ucanr.edu/site/mgsmsf/climate",
+      "accessed": "2026-09-26",
+      "supports": [
+        "regional_seasonality",
+        "coastal_influence",
+        "fog_and_microclimates"
+      ],
+      "applicability": "Regional guidance for San Mateo and San Francisco Counties supports dry summers, mild winters, bay/ocean influence, summer water constraints, and strong fog, overcast, and temperature variation among nearby microclimates. It is not a Pacifica-yard observation or an indoor/aquarium prescription."
+    }
+  ]
+}

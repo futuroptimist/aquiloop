@@ -277,6 +277,193 @@ extension, botanical-garden, RHS, breeder, and identifiable aquarium-grower
 sources. Practical source-backed instructions remain possible when specimen
 identity or household measurements are provisional.
 
+### Shared Pacifica context and numeric claim contract
+
+Step 13 adds static research groundwork at
+`binder/contexts/pacifica.yaml` and a separate shared climate bibliography at
+`binder/contexts/sources.yaml`. These files are JSON-compatible YAML and are
+**not consumed by the current renderer**. Existing profile worksheets continue
+to resolve source keys only through their own entry-level `sources.yaml`.
+Future companion validation will resolve a reference by its stable key: first
+against that entry's bibliography, then against the shared climate collection;
+a duplicate key across either namespace is invalid. Worksheets refer to an
+authoritative claim as `<entry-id>#<claim-id>` (for example,
+`pothos#site-direct-sun-observation`), never by a filesystem path. One claim is
+defined in exactly one of the entry's future companion worksheets; either page
+may list that reference without copying the claim.
+
+The shared context records the authoritative USDA 2023 ZIP lookup for 94044 as
+a **ZIP-majority 10a** classification (30–35 °F / -1.1–1.7 °C), based on
+1991–2020 weather data. This does not settle a particular Pacifica yard's zone,
+and the suggested “10a and 10b?” remains unresolved at that finer scope. USDA
+defines zones by average annual extreme minimum winter temperature: they are
+cold-hardiness planning labels, not preferred growing temperatures, forecasts,
+frost dates, or site measurements. UC ANR supports only the scoped regional
+summary—dry summers, mild winters, coastal influence, and meaningful fog,
+overcast, and temperature differences among nearby microclimates. Actual sun,
+wind, rain exposure, bag medium and temperatures remain observations to collect.
+The outdoor context must not supply missing indoor-room or aquarium values.
+
+#### Canonical claim shape and evidence states
+
+A future `numbers.yaml` or `propagation.yaml` owns claims in a top-level
+`claims` array. The small canonical record shape is:
+
+```json
+{
+  "claim_id": "stable-kebab-case-id",
+  "metric": "controlled_metric_name",
+  "quantity": {"kind": "value", "value": 0, "unit": "h/day"},
+  "applicable_taxon": "taxon or explicitly unresolved candidate",
+  "propagation_method": "method name or not_applicable",
+  "life_stage": "established | seed | cutting | division | fragment",
+  "growing_conditions": "conditions under which the claim applies",
+  "geographic_context": "scope or not_applicable",
+  "evidence_category": "published | proposed | observed | unknown | not_applicable",
+  "provenance": {}
+}
+```
+
+`claim_id` is unique within the stable entry ID, making the composite reference
+`<entry-id>#<claim-id>`. `metric`, `applicable_taxon`, `propagation_method`,
+`life_stage`, `growing_conditions`, `geographic_context`, and
+`evidence_category` are always present. Taxon applicability must distinguish
+*Strelitzia reginae* from *S. nicolai* whenever evidence is species-dependent;
+`Strelitzia sp.` cannot silently inherit either candidate's number.
+
+`quantity.kind` is one of `value`, `range`, `unknown`, or `not_applicable`.
+A value has one finite JSON number and `unit`; a range has finite `minimum` and
+`maximum`, `minimum <= maximum`, and one shared `unit`. NaN and infinities are
+invalid. Zero is a measured or published numeric value, never shorthand for
+unknown or not applicable. Unknown and not-applicable quantities omit numeric
+fields and units and require a nonempty `reason`; unknown means research or a
+measurement has not resolved the metric, while not applicable means the metric
+does not describe that taxon, method, life stage, or setting.
+
+Evidence categories impose these provenance rules:
+
+- `published` requires nonempty `source_refs` and `applicability`; the quantity
+  reproduces a cited value or ordered range at source precision.
+- `proposed` is a practical starting point derived from guidance, not a quoted
+  source value. It requires nonempty `source_refs`, `applicability`, and
+  `derivation`, and must be labeled “proposed starting point” on the page.
+- `observed` is an actual local measurement. It requires ISO `date`, a
+  repeatable `method`, and relevant `conditions`; it needs no external source
+  and must not be presented as regional or published guidance.
+- `unknown` and `not_applicable` require the quantity reason and may omit
+  citations. They are honest results, not permission to skip applicable
+  research.
+
+Representative structural examples deliberately avoid new plant advice:
+
+```json
+[
+  {
+    "claim_id": "example-published-range",
+    "metric": "example_temperature_band",
+    "quantity": {"kind": "range", "minimum": 30, "maximum": 35, "unit": "degF"},
+    "applicable_taxon": "not species-specific (context example)",
+    "propagation_method": "not_applicable",
+    "life_stage": "established",
+    "growing_conditions": "USDA ZIP-majority hardiness context only",
+    "geographic_context": "ZIP Code 94044 majority classification",
+    "evidence_category": "published",
+    "provenance": {"source_refs": ["CLIMATE-USDA-PHZM-ZIP-94044"], "applicability": "Cold-extreme map band; not a preferred growth range or yard measurement."}
+  },
+  {
+    "claim_id": "example-proposed-value",
+    "metric": "illustrative_starting_quantity",
+    "quantity": {"kind": "value", "value": 1, "unit": "count"},
+    "applicable_taxon": "contract example only",
+    "propagation_method": "example method",
+    "life_stage": "cutting",
+    "growing_conditions": "conditions must be supplied by later research",
+    "geographic_context": "not_applicable",
+    "evidence_category": "proposed",
+    "provenance": {"source_refs": ["future-entry-source-key"], "applicability": "Placeholder shape only; not publishable advice.", "derivation": "Later research must explain the conservative starting choice."}
+  },
+  {
+    "claim_id": "example-observed-zero",
+    "metric": "direct_sun_duration",
+    "quantity": {"kind": "value", "value": 0, "unit": "h/day"},
+    "applicable_taxon": "recorded specimen",
+    "propagation_method": "not_applicable",
+    "life_stage": "established",
+    "growing_conditions": "illustrative covered location",
+    "geographic_context": "private site; address omitted",
+    "evidence_category": "observed",
+    "provenance": {"date": "YYYY-MM-DD", "method": "timed unobstructed direct sun", "conditions": "season, weather, and placement recorded at observation"}
+  },
+  {
+    "claim_id": "example-unknown",
+    "metric": "site_frost_date",
+    "quantity": {"kind": "unknown", "reason": "No site observation or suitably scoped source has established it."},
+    "applicable_taxon": "outdoor specimen",
+    "propagation_method": "not_applicable",
+    "life_stage": "established",
+    "growing_conditions": "site unmeasured",
+    "geographic_context": "Pacifica yard, exact location omitted",
+    "evidence_category": "unknown",
+    "provenance": {}
+  },
+  {
+    "claim_id": "example-not-applicable",
+    "metric": "terrestrial_rooting_depth",
+    "quantity": {"kind": "not_applicable", "reason": "The aquatic fragment method has no terrestrial rooting step."},
+    "applicable_taxon": "candidate Ceratophyllum demersum",
+    "propagation_method": "fragment",
+    "life_stage": "fragment",
+    "growing_conditions": "aquarium",
+    "geographic_context": "not_applicable",
+    "evidence_category": "not_applicable",
+    "provenance": {}
+  }
+]
+```
+
+Source units and precision are authoritative. A display may add a sensible
+Fahrenheit/Celsius conversion, but it records the source unit, rounds the
+conversion no more finely than the source supports, and marks which value is
+converted. A broad whole-degree range must not become decimal precision merely
+because of arithmetic. Use separate metrics for `direct_sun_duration`,
+`daylight_duration`, and `aquarium_lamp_runtime`; none substitutes for another.
+Likewise use distinct milestone metrics for `seed_germination`,
+`cutting_callus_formation`, `rooting_or_regrowth`, and
+`transplant_readiness`, each scoped to method and conditions. `lifespan`,
+`maturity`, and `time_to_flowering` are separate concepts. Do not invent a
+universal lifespan for indefinitely renewable clonal plants.
+
+#### Recipe and aquatic records
+
+A terrestrial established-plant recipe uses `recipe_basis: "percent_by_volume"`,
+a `recipe_evidence` value of `directly_published`, `adapted`, or
+`proposed_starting_point`, and named `components`, each with finite
+`percent_by_volume`. Components must total exactly 100. For a 10-litre batch,
+each component's litres equal `percent_by_volume / 10` (for example, 20% is
+2 L); display precision must remain practical and the component total must be
+10 L. Record ingredient purposes and source/applicability provenance. Never
+call a proposed recipe the user's current mix. Established-plant substrate and
+propagation medium are different records and may cross-reference shared
+component evidence without merging their purposes.
+
+Hornwort uses an `aquatic_setup` record instead of a recipe. Its replacement
+fields are `placement` (including floating or supported attachment where
+sourced), `water_temperature`, `water_chemistry`, `light`, `lamp_runtime`,
+`flow`, `livestock_context`, and `fragment_regrowth`; each is a claim or claim
+reference with the same evidence-state rules. Terrestrial soil percentages,
+rooting depth, and terrestrial transplant instructions are `not_applicable`
+with reasons, not required dummy values.
+
+Steps 14a–14c will populate researched species claims. Steps 15–16 will
+implement resolution and validation and render the already accepted visual
+contract; Steps 17a–17c will author the ten pages. Until then, the canonical
+sixteen-page order remains one overview, one numbers page, and one propagation
+page per species, followed by the shared log. White backgrounds, readable type,
+one-inch punch clearance, safe margins, and independent one-page budgets remain
+unchanged. No part of this static contract changes the implemented six-page
+binder, current manifest, templates, source validation, CLI, or final-mode
+qualification.
+
 ### Versioned manifest and builder proposal
 
 Manifest schema v2 should recognize exactly four page kinds: `profile`,
