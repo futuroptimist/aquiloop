@@ -350,16 +350,24 @@ A future `numbers.yaml` or `propagation.yaml` owns claims in a top-level
 
 `quantity.kind` is one of `value`, `range`, `unknown`, or `not_applicable`.
 A value has one finite JSON number and `unit`; a range has finite `minimum` and
-`maximum`, `minimum <= maximum`, and one shared `unit`. NaN and infinities are
-invalid. Zero is a measured or published numeric value, never shorthand for
-unknown or not applicable. Unknown and not-applicable quantities omit numeric
-fields and units and require a nonempty `reason`; unknown means research or a
-measurement has not resolved the metric, while not applicable means the metric
-does not describe that taxon, method, life stage, or setting.
+`maximum`, `minimum <= maximum`, and one shared `unit`. These two kinds represent
+numeric data only. NaN and infinities are invalid. Zero is a measured or
+published numeric value, never shorthand for unknown or not applicable.
+`unknown` and `not_applicable` are reason-bearing state envelopes permitted for
+numeric, descriptive, and recipe metrics. They require a nonempty `reason` and
+omit numbers, ranges, units, descriptions, recipes, and citations; unknown
+means research or a measurement has not resolved the metric, while not
+applicable means the metric does not describe that taxon, method, life stage,
+or setting.
 
-The numeric `quantity` union is only for numeric metrics. A sourced descriptive
-claim uses `description` instead of `quantity`, while a component recipe uses
-the aggregate `recipe` payload described below; exactly one payload is present.
+For a known record, a numeric metric uses a `quantity` whose kind is `value` or
+`range`, a sourced descriptive claim uses `description` instead of `quantity`,
+and a component recipe uses the aggregate `recipe` payload described below.
+Every claim has exactly one payload: a numeric value/range `quantity`, a
+`description`, a `recipe`, or an unknown/not-applicable `quantity` state
+envelope. The payload and `evidence_category` must agree: the state-envelope
+kind exactly matches `unknown` or `not_applicable`; every other payload uses
+`published`, `proposed`, or `observed` as applicable.
 Descriptions are nonempty strings and use the same evidence category and
 provenance rules, without dummy numbers. For example, an aquatic placement may
 be `{ "description": "floating", "evidence_category": "published",
@@ -374,16 +382,18 @@ fields above. Later steps will implement and validate these shapes.
 Evidence categories impose these provenance rules:
 
 - `published` requires nonempty `source_refs` and `applicability`; the payload
-  reproduces a cited value, ordered range, or description at source precision.
+  reproduces a cited value, ordered range, description, or directly published
+  recipe at source precision.
 - `proposed` is a practical starting point derived from guidance, not a quoted
   source value or description. It requires nonempty `source_refs`, `applicability`, and
   `derivation`, and must be labeled “proposed starting point” on the page.
 - `observed` is an actual local measurement. It requires ISO `date`, a
   repeatable `method`, and relevant `conditions`; it needs no external source
   and must not be presented as regional or published guidance.
-- `unknown` and `not_applicable` require the quantity reason and may omit
-  citations. They are honest results, not permission to skip applicable
-  research.
+- `unknown` and `not_applicable` require a nonempty reason in their `quantity`
+  state envelope and omit citations. They require no fabricated number,
+  description, recipe, or unit. They are honest results, not permission to skip
+  applicable research.
 
 Representative structural examples deliberately avoid new plant advice:
 
@@ -444,6 +454,38 @@ Representative structural examples deliberately avoid new plant advice:
     "applicable_taxon": "candidate Ceratophyllum demersum",
     "propagation_method": "fragment",
     "life_stage": "fragment",
+    "growing_conditions": "aquarium",
+    "geographic_context": "not_applicable",
+    "evidence_category": "not_applicable",
+    "provenance": {}
+  }
+]
+```
+
+The same state envelope represents unresolved descriptive and aggregate
+metrics without inventing content:
+
+```json
+[
+  {
+    "claim_id": "example-unknown-livestock-context",
+    "metric": "livestock_context",
+    "quantity": {"kind": "unknown", "reason": "No aquarium livestock inventory has been recorded."},
+    "applicable_taxon": "candidate Ceratophyllum demersum",
+    "propagation_method": "fragment",
+    "life_stage": "established",
+    "growing_conditions": "aquarium",
+    "geographic_context": "not_applicable",
+    "evidence_category": "unknown",
+    "provenance": {}
+  },
+  {
+    "claim_id": "example-not-applicable-terrestrial-recipe",
+    "metric": "terrestrial_established_plant_recipe",
+    "quantity": {"kind": "not_applicable", "reason": "Hornwort is represented by an aquatic setup rather than a terrestrial substrate recipe."},
+    "applicable_taxon": "candidate Ceratophyllum demersum",
+    "propagation_method": "fragment",
+    "life_stage": "established",
     "growing_conditions": "aquarium",
     "geographic_context": "not_applicable",
     "evidence_category": "not_applicable",
