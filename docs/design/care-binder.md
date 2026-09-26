@@ -232,6 +232,119 @@ These are research assignments, not permission to publish unsupported claims:
 
 ### Companion evidence and source files
 
+#### Shared context and numeric-record contract
+
+Step 13 adds two static research inputs: `binder/contexts/pacifica.yaml` is the
+authoritative shared Pacifica context and `binder/contexts/sources.yaml` is its
+separate climate bibliography. They are JSON-compatible YAML and are not yet
+read by the renderer, manifest, overview validator, or build workflow. Later
+companion worksheets resolve a shared context by `context_id` and a climate
+source by `(source_collection_id, source key)`, never by embedding an arbitrary
+filesystem path. Species sources remain in the existing per-entry
+`sources.yaml`; Steps 14–17 will add companion claims and sources without
+changing current overview source validation. Renderer/schema enforcement is
+reserved for Steps 15–16.
+
+The Pacifica record establishes only regional and ZIP-level context. The USDA
+2023 map uses 1991–2020 weather data and defines zones from average annual
+extreme minimum winter temperature, in 10 °F zones split into 5 °F half zones.
+The map's ZIP workflow and its published lookup table return **10a (30 to 35
+°F / −1.1 to 1.7 °C) as the majority class for ZIP 94044**. This verifies a
+ZIP-majority result, not “10a and 10b,” an exact property classification, a
+frost record, or a preferred growing-temperature range. No public specimen
+reference point or owner-approved point was supplied, so the exact site zone
+remains explicitly unknown. USDA also warns that fine microclimates and wind,
+soil, moisture, light, and exposure duration affect survival. UC ANR describes
+San Mateo/San Francisco Counties as having dry summers, mild winters, ocean and
+bay influence, and local variation from cool coastal fog belts to warmer nearby
+conditions. These statements guide outdoor observation; they do not invent a
+Pacifica yard's exposure, an indoor room condition, or an aquarium condition.
+Full applicability and citations live in the shared context rather than being
+repeated on every companion.
+
+Each future numeric fact or evidence state is one **claim record** in exactly
+one authoritative companion worksheet. Its stable `claim_id` is unique within
+the stable `entry_id`; either page can refer to it as
+`{"entry_id": "pothos", "claim_id": "vegetative-rooting-time"}`. Moving a
+file therefore cannot break the reference. The small record shape is:
+
+```json
+{
+  "claim_id": "stable-kebab-case-id",
+  "metric": "machine-readable quantity or concept",
+  "evidence_category": "published | proposed | observed | unknown | not_applicable",
+  "value": 0,
+  "range": {"min": 0, "max": 0},
+  "unit": "one consistent unit",
+  "applicable_taxon": "named species, cultivar, candidate, or explicit scope",
+  "propagation_method": "method or not_applicable",
+  "life_stage": "seed | cutting | establishing | established | mature | not_applicable",
+  "growing_conditions": "conditions under which the claim applies",
+  "geographic_context": "named scope or not_applicable",
+  "provenance": {}
+}
+```
+
+Use exactly one of `value`, `range`, or an evidence state that deliberately has
+neither. Numbers must be finite JSON numbers; a range has finite, consistently
+unitized bounds with `min <= max`. Zero is a measured or published numeric
+value, never shorthand for unknown or not applicable. `metric`,
+`applicable_taxon`, conditions, and relevant method/life stage remain explicit
+even when a field is not applicable, so a seed interval cannot silently become
+a cutting interval. A taxon-dependent bird-of-paradise value names either
+*Strelitzia reginae* or *S. nicolai* (or has separate claims); it must not use
+an unqualified “bird of paradise” scope.
+
+Evidence categories impose these provenance rules:
+
+- **`published`:** `provenance` contains nonempty `source_refs` and an
+  `applicability` explanation. Example structure only:
+  `{"claim_id":"example-published-range","metric":"example_duration","evidence_category":"published","range":{"min":2,"max":4},"unit":"weeks","applicable_taxon":"example taxon","propagation_method":"example method","life_stage":"cutting","growing_conditions":"conditions stated by the source","geographic_context":"source context","provenance":{"source_refs":["EXAMPLE-SOURCE"],"applicability":"Why this source and scope apply."}}`.
+- **`proposed`:** a practical starting point derived from guidance, never a
+  published fact or claimed current practice. It has the same nonempty source
+  references and applicability explanation plus `derivation`, which explains
+  the conservative transformation from cited guidance. Example structure only:
+  `{"claim_id":"example-proposed-start","metric":"example_setting","evidence_category":"proposed","value":1,"unit":"example_unit","applicable_taxon":"example taxon","propagation_method":"not_applicable","life_stage":"established","growing_conditions":"stated starting conditions","geographic_context":"named planning context","provenance":{"source_refs":["EXAMPLE-SOURCE"],"applicability":"Why the guidance transfers.","derivation":"How the starting value was chosen."}}`.
+- **`observed`:** an actual local measurement has `observed_on` (ISO date),
+  `method`, and relevant `conditions` in provenance; it needs no external
+  citation. For example, a future zero reading is recorded as `value: 0`, not
+  as unknown. Illustrative shape:
+  `{"claim_id":"example-observed-zero","metric":"example_count","evidence_category":"observed","value":0,"unit":"count","applicable_taxon":"observed specimen","propagation_method":"example method","life_stage":"establishing","growing_conditions":"recorded local conditions","geographic_context":"private site; coordinates withheld","provenance":{"observed_on":"YYYY-MM-DD","method":"stated counting method","conditions":"conditions at observation"}}`.
+  Regional guidance is never mislabeled as an observation.
+- **`unknown`:** omit `value`, `range`, and citations and provide a nonempty
+  `reason`, such as
+  `{"claim_id":"direct-sun-hours","metric":"direct_sun_hours","evidence_category":"unknown","unit":"hours_per_day","applicable_taxon":"observed specimen","propagation_method":"not_applicable","life_stage":"established","growing_conditions":"outdoor grow bag","geographic_context":"Pacifica site","provenance":{"reason":"No dated site measurement is available."}}`.
+  This is a visible research state, not permission to skip available research.
+- **`not_applicable`:** omit `value`, `range`, and citations and provide a
+  nonempty `reason` tied to method or setting—for example,
+  `{"claim_id":"terrestrial-rooting-depth","metric":"rooting_depth","evidence_category":"not_applicable","unit":"not_applicable","applicable_taxon":"hornwort candidate","propagation_method":"fragmentation","life_stage":"not_applicable","growing_conditions":"free-floating aquarium placement","geographic_context":"not_applicable","provenance":{"reason":"The aquatic method does not use terrestrial roots or soil."}}`.
+  It is distinct from “not yet researched.”
+
+Store source values at their published precision. Fahrenheit/Celsius display
+conversion must round to precision justified by the source (whole degrees from
+whole-degree values; at most one decimal for a 5 °F zone boundary) and label a
+converted value rather than implying it was independently measured. Keep
+`direct_sun_hours`, astronomical `daylight_duration`, and
+`aquarium_lamp_runtime` as separate metrics. Likewise keep
+`seed_germination`, `cutting_callus`, `rooting_or_regrowth`, and
+`transplant_readiness` as separate milestones, and keep `lifespan`,
+`time_to_maturity`, and `time_to_flowering` separate. Do not invent a universal
+lifespan for indefinitely clonal plants.
+
+A terrestrial substrate claim adds `recipe_basis` (`directly_published`,
+`adapted`, or `proposed_starting_point`) and `use_stage` (`established_plant`
+or a named propagation stage). Its `components` name ingredients and integer or
+finite decimal `percent_by_volume` values totaling exactly 100. For a 10-litre
+batch, each component's litres equal `percent_by_volume / 10` (for example,
+30% becomes 3 L); sensible display rounding must preserve the complete total.
+An adaptation identifies what changed and why. Established-plant mix and
+propagation medium are separate claims, and no proposed recipe is called the
+owner's current grow-bag mix. Hornwort instead uses aquatic fields for
+`placement` (floating or supported attachment), `water_parameters`,
+`lamp_runtime`, `flow`, `livestock_constraints`, and fragment handling; soil
+percentages and terrestrial rooting instructions are `not_applicable` with a
+reason.
+
 Extend each existing species directory without duplicating catalogs or assets:
 
 ```text
