@@ -113,24 +113,6 @@
       }
     },
     {
-      "claim_id": "zip-majority-zone-context",
-      "metric": "hardiness_zone_context",
-      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone",
-      "description": "Use the shared Pacifica hardiness claim only as ZIP-majority cold-extreme context; it is not this yard’s zone or a growth temperature.",
-      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
-      "propagation_method": "not_applicable",
-      "life_stage": "established",
-      "growing_conditions": "Regional planning context",
-      "geographic_context": "ZIP Code 94044 majority classification",
-      "evidence_category": "published",
-      "provenance": {
-        "source_refs": [
-          "CLIMATE-USDA-PHZM-ZIP-94044"
-        ],
-        "applicability": "Shared contextual claim, not species hardiness or a site measurement."
-      }
-    },
-    {
       "claim_id": "water-trigger",
       "metric": "water_trigger",
       "description": "Water thoroughly only after the substrate is dry, let excess drain, and reassess after rain rather than following a calendar.",
@@ -252,29 +234,44 @@
       "provenance": {}
     },
     {
-      "claim_id": "patent-plant-age",
-      "metric": "age_at_patent_observation",
+      "claim_id": "terminal-cutting-root-initiation",
+      "metric": "rooting_or_regrowth",
       "quantity": {
         "kind": "value",
-        "value": 4,
-        "unit": "month"
+        "value": 10,
+        "unit": "day"
       },
       "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
       "propagation_method": "terminal stem cutting",
-      "life_stage": "established",
-      "growing_conditions": "Four months from cutting; one-gallon container; commercial greenhouse; approximately 2500 foot-candles; 1–29 degC night/day observations",
-      "geographic_context": "Vista, California nursery",
+      "life_stage": "cutting",
+      "growing_conditions": "Approximately 24 degC commercial nursery propagation conditions",
+      "geographic_context": "Vista, California nursery; not Pacifica-specific",
       "evidence_category": "published",
       "provenance": {
         "source_refs": [
           "SED-PAT"
         ],
-        "applicability": "Age of the plant described in the patent, not universal maturity or lifespan."
+        "applicability": "Patent reports time to initiate roots for the cultivar under stated commercial conditions; not transplant readiness."
       }
     },
     {
+      "claim_id": "time-to-maturity",
+      "metric": "maturity",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The patent describes a four-month-old observed plant but does not establish time to maturity."
+      },
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "established",
+      "growing_conditions": "No sufficiently scoped maturity conditions established",
+      "geographic_context": "Vista, California patent observation is not a maturity benchmark",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
       "claim_id": "patent-height",
-      "metric": "height_at_patent_observation",
+      "metric": "size_height",
       "quantity": {
         "kind": "range",
         "minimum": 10,
@@ -296,7 +293,7 @@
     },
     {
       "claim_id": "patent-spread",
-      "metric": "spread_at_patent_observation",
+      "metric": "size_spread",
       "quantity": {
         "kind": "range",
         "minimum": 22,
@@ -345,6 +342,11 @@
       "geographic_context": "Pacifica outdoor grow bag; exact site exposure and microclimate unmeasured",
       "evidence_category": "unknown",
       "provenance": {}
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
     }
   ]
 }

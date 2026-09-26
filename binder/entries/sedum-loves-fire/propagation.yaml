@@ -184,27 +184,6 @@
       }
     },
     {
-      "claim_id": "first-root-milestone",
-      "metric": "rooting_or_regrowth",
-      "quantity": {
-        "kind": "value",
-        "value": 10,
-        "unit": "day"
-      },
-      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
-      "propagation_method": "terminal stem cutting",
-      "life_stage": "cutting",
-      "growing_conditions": "Approximately 24 degC commercial nursery conditions",
-      "geographic_context": "Vista, California nursery",
-      "evidence_category": "published",
-      "provenance": {
-        "source_refs": [
-          "SED-PAT"
-        ],
-        "applicability": "Time to initiate roots, not full establishment or transplant readiness."
-      }
-    },
-    {
       "claim_id": "root-check",
       "metric": "procedure_step",
       "description": "Check gently for resistance rather than pulling the cutting out; resistance indicates roots have formed.",
@@ -329,6 +308,11 @@
         ],
         "applicability": "General leaf-cutting method explicitly applicable to Sedum; cultivar fidelity/response has not been established."
       }
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "sedum-loves-fire#terminal-cutting-root-initiation"
     }
   ]
 }

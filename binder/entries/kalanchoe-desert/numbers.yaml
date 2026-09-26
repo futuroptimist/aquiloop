@@ -122,22 +122,22 @@
       }
     },
     {
-      "claim_id": "zip-majority-zone-context",
-      "metric": "hardiness_zone_context",
-      "description": "The ZIP 94044 majority is USDA 10a (30–35 degF / -1.1–1.7 degC), colder than RHS H1b; it is regional evidence, not a yard reading. Keep the candidate protected from Pacifica winter exposure.",
+      "claim_id": "pacifica-winter-protection",
+      "metric": "cold_protection",
+      "description": "Keep the candidate protected from Pacifica winter exposure because its published H1b hardiness band does not support leaving it outside through the colder regional winter context.",
       "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Comparison of independently scoped cold bands",
-      "geographic_context": "ZIP Code 94044 majority classification",
+      "geographic_context": "Pacifica outdoor grow bag; exact site exposure and microclimate unmeasured",
       "evidence_category": "proposed",
       "provenance": {
         "source_refs": [
           "CLIMATE-USDA-PHZM-ZIP-94044",
           "KAL-HARD"
         ],
-        "applicability": "USDA supplies the ZIP-majority cold-extreme band; RHS supplies the candidate hardiness band.",
-        "derivation": "Proposed cold-protection conclusion: the regional historical extreme band lies below the candidate’s H1b band; do not use this comparison as a forecast or site measurement."
+        "applicability": "Candidate H1b hardiness is compared with the separately referenced shared ZIP-majority cold-extreme context.",
+        "derivation": "Proposed cold-protection conclusion from the separately scoped regional and candidate hardiness claims; not a forecast or site measurement."
       }
     },
     {
@@ -375,6 +375,14 @@
       "geographic_context": "Pacifica outdoor grow bag; exact site exposure and microclimate unmeasured",
       "evidence_category": "unknown",
       "provenance": {}
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+    },
+    {
+      "claim_ref": "kalanchoe-desert#root-initiation-time"
     }
   ]
 }
