@@ -7,7 +7,7 @@
       "authority": "Royal Horticultural Society",
       "title": "Kalanchoe humilis ‘Desert Surprise’",
       "url": "https://www.rhs.org.uk/plants/310184/kalanchoe-humilis-desert-surprise/details",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
         "identity",
         "light_exposure",
@@ -17,7 +17,12 @@
         "feeding_maintenance",
         "propagation",
         "troubleshooting",
-        "natural_history_trivia"
+        "natural_history_trivia",
+        "companion_position",
+        "companion_cold_protection",
+        "companion_size_maturity_and_flowering",
+        "companion_established_mix_derivation",
+        "companion_propagation_season_and_methods"
       ],
       "applicability": "Cultivar profile for K. humilis ‘Desert Surprise’; supports its description and cultivar-specific cultivation, H1B hardiness, feeding, stem-cutting/plantlet propagation, and listed pests and diseases. Applicability to the specimen depends on later label and specimen confirmation."
     },
@@ -26,11 +31,14 @@
       "authority": "Iowa State University Extension and Outreach",
       "title": "How do I care for Kalanchoe?",
       "url": "https://yardandgarden.extension.iastate.edu/faq/how-do-i-care-kalanchoe",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
         "light_exposure",
         "soil_substrate",
-        "water"
+        "water",
+        "companion_growth_temperature",
+        "companion_water_trigger",
+        "companion_propagation_aftercare"
       ],
       "applicability": "Short general Kalanchoe FAQ. It supports bright indoor light, stated indoor temperature ranges, drying between waterings, and drainage, plus reblooming conditions. It does not support feeding, acclimation, frost exposure, or symptom diagnosis."
     },
@@ -39,9 +47,13 @@
       "authority": "Iowa State University Extension and Outreach",
       "title": "How to Propagate Succulents",
       "url": "https://yardandgarden.extension.iastate.edu/how-to/how-propagate-succulents",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
-        "propagation"
+        "propagation",
+        "companion_cutting_length",
+        "companion_callusing",
+        "companion_rooting_medium",
+        "companion_root_development"
       ],
       "applicability": "General succulent propagation article; it expressly includes Kalanchoe among genera suited to its stem-cutting method. RHS, rather than this general article, establishes stem cuttings for the candidate cultivar."
     },
@@ -50,9 +62,10 @@
       "authority": "Royal Horticultural Society",
       "title": "RHS hardiness rating",
       "url": "https://www.rhs.org.uk/advice/rhs-hardiness-rating",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
-        "temperature_season"
+        "temperature_season",
+        "companion_cold_protection"
       ],
       "applicability": "Defines H1b as an absolute-minimum winter-temperature hardiness band and recommends sunny, sheltered summer outdoor placement; the band is not a summer growing-temperature recommendation."
     },
@@ -72,9 +85,11 @@
       "authority": "Montana State University Extension",
       "title": "Growing Succulents",
       "url": "https://extension-store.montana.edu/montguides/growing-succulents",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
-        "temperature_season"
+        "temperature_season",
+        "companion_light_acclimation",
+        "companion_root_check"
       ],
       "applicability": "General succulent guidance supporting gradual acclimation when moving a Kalanchoe example into stronger outdoor light; RHS supplies the candidate cultivar’s H1b and sunny, sheltered placement."
     }
