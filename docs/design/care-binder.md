@@ -6,8 +6,10 @@ owner-supplied overview photographs are selected for the draft binder. The
 rendered and physical proofs of that initial six-page, white-background draft
 have been accepted. This acceptance does not establish botanical identity or
 qualify any entry for final mode. The sixteen-page expansion specified below is
-a proposed phase: none of its companion pages, numeric recommendations, or
-verification results are implemented yet.
+a proposed phase. Research worksheets containing numeric recommendations and
+proposed recipes now exist for Sedum “Love’s Fire” and Kalanchoe “Desert
+Surprise,” but their companion pages have not been rendered or verified, and
+the wider sixteen-page expansion remains future work.
 
 ## Purpose and sequence
 
