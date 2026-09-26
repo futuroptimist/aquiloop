@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "outdoor-light-exposure",
+      "metric": "outdoor_light_exposure",
+      "description": "General succulents span about 2–3 hours daily for low-light plants to as much as 6 hours for high-light plants; acclimate from semi-shade and avoid abrupt exposure to intense 11 a.m.–3 p.m. sun.",
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Outdoor container; gradual acclimation required",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU"
+        ],
+        "applicability": "General succulent range and acclimation advice, not a cultivar-specific target or a measurement of this site."
+      }
+    },
+    {
+      "claim_id": "site-direct-sun-duration",
+      "metric": "direct_sun_duration",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No seasonally dated direct-sun measurement exists for the grow-bag, and no cultivar-specific source establishes an exact daily duration."
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Outdoor grow-bag exposure unmeasured",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "cultivar-observation-light-intensity",
+      "metric": "light_intensity",
+      "quantity": {
+        "kind": "value",
+        "value": 2500,
+        "unit": "fc"
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Commercial greenhouse trial in Vista, California; natural light and no artificial photoperiod treatment",
+      "geographic_context": "Vista, California commercial greenhouse; not Pacifica",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Patent observation condition for described plants; not a recommended target and not evidence about the user specimen."
+      }
+    },
+    {
+      "claim_id": "cultivar-temperature-tolerance",
+      "metric": "temperature_tolerance",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0,
+        "maximum": 32,
+        "unit": "degC"
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Patent-grown cultivar under stated commercial greenhouse observations",
+      "geographic_context": "Vista, California commercial greenhouse; not Pacifica",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Reported cultivar tolerance, approximately 0 °C to at least 32 °C; not a preferred range or guarantee for an unconfirmed specimen."
+      }
+    },
+    {
+      "claim_id": "cold-protection",
+      "metric": "cold_protection",
+      "description": "Treat an unconfirmed specimen as a soft succulent: protect it from freezing and from the damaging combination of cold and wet until identity and site exposure are resolved.",
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Outdoor container during cold or wet weather",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU",
+          "SED-PAT"
+        ],
+        "applicability": "MSU describes soft succulents as frost-intolerant, while the patent reports approximate tolerance only to 0 °C.",
+        "derivation": "Conservative proposed starting point: shelter before freezing rather than treating the patent’s approximate 0 °C observation as a safe operating minimum."
+      },
+      "display_label": "Proposed starting point"
+    },
+    {
+      "claim_id": "water-dry-down",
+      "metric": "water_moisture",
+      "description": "Let the medium dry before watering, then wet it thoroughly and allow free drainage; do not substitute frequent light sprinkling.",
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container with drainage; frequency varies with season and exposure",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU"
+        ],
+        "applicability": "General succulent container guidance; supplies a moisture-state rule, not a calendar interval."
+      }
+    },
+    {
+      "claim_id": "established-substrate-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "recipe": {
+        "recipe_basis": "percent_by_volume",
+        "recipe_evidence": "directly_published",
+        "batch_conversion": {
+          "total_litres": 10,
+          "unit": "L"
+        },
+        "components": [
+          {
+            "name": "potting soil",
+            "percent_by_volume": 50,
+            "litres_per_10_litre_batch": 5,
+            "purpose": "organic and moisture-buffering fraction"
+          },
+          {
+            "name": "coarse sand",
+            "percent_by_volume": 50,
+            "litres_per_10_litre_batch": 5,
+            "purpose": "porosity and drainage"
+          }
+        ]
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container with a drainage hole; evaluate drainage after mixing",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-UMN"
+        ],
+        "applicability": "Published one-part-to-one-part general indoor cactus/succulent mix, expressed equivalently as 50% + 50% by volume and 5 L + 5 L per 10 L. It is not cultivar-specific and does not describe the user’s current grow-bag mixture."
+      }
+    },
+    {
+      "claim_id": "cultivar-root-initiation",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "value",
+        "value": 10,
+        "unit": "day"
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Approximately 24 °C in the patent propagation setting",
+      "geographic_context": "Commercial nursery conditions; not Pacifica",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Patent reports about 10 days to initiate roots from terminal vegetative cuttings at approximately 24 °C; initiation is not transplant readiness."
+      }
+    },
+    {
+      "claim_id": "four-month-size-height",
+      "metric": "size_height",
+      "quantity": {
+        "kind": "range",
+        "minimum": 10,
+        "maximum": 12,
+        "unit": "cm"
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "established",
+      "growing_conditions": "Four months from a cutting in a 1-gallon container; commercial greenhouse observations",
+      "geographic_context": "Vista, California commercial greenhouse; not Pacifica",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Average height of patent-described four-month-old cultivar plants under the stated trial conditions; not universal mature size."
+      }
+    },
+    {
+      "claim_id": "four-month-size-spread",
+      "metric": "size_spread",
+      "quantity": {
+        "kind": "range",
+        "minimum": 22,
+        "maximum": 25,
+        "unit": "cm"
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "established",
+      "growing_conditions": "Four months from a cutting in a 1-gallon container; commercial greenhouse observations",
+      "geographic_context": "Vista, California commercial greenhouse; not Pacifica",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Average spread of patent-described four-month-old cultivar plants under the stated trial conditions; not universal mature size."
+      }
+    },
+    {
+      "claim_id": "cultivar-dry-heat-observation",
+      "metric": "water_stress_tolerance",
+      "quantity": {
+        "kind": "value",
+        "value": 2,
+        "unit": "week"
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Patent observation under high temperatures without supplemental water",
+      "geographic_context": "Commercial greenhouse observation; not a Pacifica watering interval",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Cultivar reportedly showed no serious damage after at least two weeks; this is a tolerance observation, not routine irrigation guidance."
+      }
+    },
+    {
+      "claim_id": "seed-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable source reviewed supplied a germination interval or practical seed protocol for the named cultivar; seed would not preserve a cultivar clone."
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "seed",
+      "growing_conditions": "Conditions not established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "maturity",
+      "metric": "maturity",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The patent describes age and size at four months but does not define maturity."
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Conditions not established",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "time-to-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Flowers were not observed in the patent trial, so no flowering interval is supported."
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Conditions not established",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "lifespan",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable source reviewed establishes a universal lifespan, and vegetative clones can be renewed."
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Conditions not established",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "transplant-readiness",
+      "metric": "transplant_readiness",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Sources distinguish root initiation from transplanting but do not give a cultivar-specific elapsed time or root threshold."
+      },
+      "applicable_taxon": "provisional Sedum adolphi ‘Love’s Fire’ candidate; specimen identity unconfirmed",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Conditions not established",
+      "geographic_context": "Pacifica, California regional context; actual grow-bag microclimate unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ],
+  "context_claim_refs": [
+    "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+  ]
+}
