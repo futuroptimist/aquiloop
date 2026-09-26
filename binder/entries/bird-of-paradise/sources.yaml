@@ -46,9 +46,14 @@
       "url": "https://edis.ifas.ufl.edu/publication/MG106",
       "accessed": "2026-09-17",
       "supports": [
-        "propagation"
+        "outdoor_light",
+        "cold_damage",
+        "size",
+        "flowering_maturity",
+        "division",
+        "seed_germination"
       ],
-      "applicability": "Species account for S. reginae. Its division example uses old clumps with four to five shoots, single-stem divisions, original planting depth, and moist establishment; it also warns that dry or soggy establishment conditions can kill foliage. Do not transfer these details to the unresolved S. nicolai candidate."
+      "applicability": "Species account for S. reginae in Florida landscapes. It supports a 3–5 ft clump, best flowering in full sun, freeze injury below 32 °F, old-clump division details, and sequential seed pretreatment, sowing, 1–2 month scarified germination (with a wider 1 month–1 year caveat), two-true-leaf potting, and 2–3 month later transplant guidance. Florida performance is not a Pacifica-site observation, and none of these figures transfers silently to S. nicolai."
     }
   ]
 }
