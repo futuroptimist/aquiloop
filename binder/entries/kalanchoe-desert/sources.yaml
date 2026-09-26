@@ -7,7 +7,7 @@
       "authority": "Royal Horticultural Society",
       "title": "Kalanchoe humilis ‘Desert Surprise’",
       "url": "https://www.rhs.org.uk/plants/310184/kalanchoe-humilis-desert-surprise/details",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
         "identity",
         "light_exposure",
@@ -17,33 +17,45 @@
         "feeding_maintenance",
         "propagation",
         "troubleshooting",
-        "natural_history_trivia"
+        "natural_history_trivia",
+        "size",
+        "maturity",
+        "flowering",
+        "established_substrate_components"
       ],
-      "applicability": "Cultivar profile for K. humilis ‘Desert Surprise’; supports its description and cultivar-specific cultivation, H1B hardiness, feeding, stem-cutting/plantlet propagation, and listed pests and diseases. Applicability to the specimen depends on later label and specimen confirmation."
+      "applicability": "Cultivar profile for K. humilis ‘Desert Surprise’; supports its description and cultivar-specific cultivation, H1B hardiness, feeding, stem-cutting/plantlet propagation, and listed pests and diseases. Applicability to the specimen depends on later label and specimen confirmation. The loam-based compost plus grit wording supplies ingredients but no ratio; any worksheet ratio is explicitly proposed rather than published."
     },
     {
       "key": "KAL-IA",
       "authority": "Iowa State University Extension and Outreach",
       "title": "How do I care for Kalanchoe?",
       "url": "https://yardandgarden.extension.iastate.edu/faq/how-do-i-care-kalanchoe",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
         "light_exposure",
         "soil_substrate",
-        "water"
+        "water",
+        "temperature_ranges",
+        "flower_bud_induction",
+        "night_duration"
       ],
-      "applicability": "Short general Kalanchoe FAQ. It supports bright indoor light, stated indoor temperature ranges, drying between waterings, and drainage, plus reblooming conditions. It does not support feeding, acclimation, frost exposure, or symptom diagnosis."
+      "applicability": "Short general Kalanchoe FAQ. It supports bright indoor light, stated indoor temperature ranges, drying between waterings, and drainage, plus reblooming conditions. It does not support feeding, acclimation, frost exposure, or symptom diagnosis. Its temperatures and six-week/14-hour-night rebloom protocol are genus-level indoor guidance, not cutting-specific optima."
     },
     {
       "key": "KAL-PROP",
       "authority": "Iowa State University Extension and Outreach",
       "title": "How to Propagate Succulents",
       "url": "https://yardandgarden.extension.iastate.edu/how-to/how-propagate-succulents",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
-        "propagation"
+        "propagation",
+        "cutting_preparation",
+        "callus",
+        "propagation_medium",
+        "leaf_cutting",
+        "rooting_or_regrowth"
       ],
-      "applicability": "General succulent propagation article; it expressly includes Kalanchoe among genera suited to its stem-cutting method. RHS, rather than this general article, establishes stem cuttings for the candidate cultivar."
+      "applicability": "General succulent propagation article; it expressly includes Kalanchoe among genera suited to its stem-cutting method. RHS, rather than this general article, establishes stem cuttings for the candidate cultivar. Qualitative timings are retained as written; it does not establish cultivar fidelity for leaf-derived plants."
     },
     {
       "key": "KAL-HARD",
@@ -72,11 +84,27 @@
       "authority": "Montana State University Extension",
       "title": "Growing Succulents",
       "url": "https://extension-store.montana.edu/montguides/growing-succulents",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
-        "temperature_season"
+        "temperature_season",
+        "rooting_check",
+        "propagation_failure_signs"
       ],
       "applicability": "General succulent guidance supporting gradual acclimation when moving a Kalanchoe example into stronger outdoor light; RHS supplies the candidate cultivar’s H1b and sunny, sheltered placement."
+    },
+    {
+      "key": "KAL-UMN",
+      "authority": "University of Minnesota Extension",
+      "title": "Cacti and succulents",
+      "url": "https://extension.umn.edu/houseplants/cacti-and-succulents",
+      "accessed": "2026-09-26",
+      "supports": [
+        "established_substrate_recipe",
+        "water",
+        "propagation_medium",
+        "cutting_aftercare"
+      ],
+      "applicability": "General indoor cacti-and-succulent guidance. It directly publishes a one-part potting-soil to one-part coarse-sand mix, drainage test, complete dry-down watering, and air-dried cutting in slightly moistened sterile sand; it does not identify or supply species-specific performance for this specimen."
     }
   ]
 }

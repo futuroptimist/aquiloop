@@ -19,39 +19,65 @@
       "authority": "United States Patent and Trademark Office, via Google Patents",
       "title": "Sedum plant named “LOVE’S FIRE” (USPP37238P2)",
       "url": "https://patents.google.com/patent/USPP37238P2/en",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
         "identity",
-        "natural_history_trivia"
+        "natural_history_trivia",
+        "cultivar_dimensions",
+        "root_initiation",
+        "temperature_tolerance",
+        "drought_observation"
       ],
-      "applicability": "Patent record for the named cultivar, including its denomination and 2022 origin as a mutation of ‘Strawberry’; it does not establish that the user’s specimen is this cultivar."
+      "applicability": "Patent record for the named cultivar, including its denomination and 2022 origin as a mutation of ‘Strawberry’; it does not establish that the user’s specimen is this cultivar. Its approximately 24 °C/10-day root-initiation result, four-month dimensions, greenhouse conditions, and tolerance observations are trial-scoped rather than universal care limits."
     },
     {
       "key": "SED-MSU",
       "authority": "Montana State University Extension",
       "title": "Growing Succulents",
       "url": "https://extension-store.montana.edu/montguides/growing-succulents",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
         "light_exposure",
         "soil_substrate",
         "water",
         "temperature_season",
         "feeding_maintenance",
-        "troubleshooting"
+        "troubleshooting",
+        "substrate_components",
+        "cold_protection",
+        "propagation_medium",
+        "rooting_check"
       ],
-      "applicability": "General succulent guidance supporting gradual outdoor light acclimation, drainage and dry-down watering, frost protection, active-growth feeding, and observation-based troubleshooting; it is not a species or cultivar identification source."
+      "applicability": "General succulent guidance supporting gradual outdoor light acclimation, drainage and dry-down watering, frost protection, active-growth feeding, and observation-based troubleshooting; it is not a species or cultivar identification source. Its alternative homemade-mix ingredient list has no published proportions and is therefore not used as the worksheet recipe ratio."
     },
     {
       "key": "SED-IA",
       "authority": "Iowa State University Extension and Outreach",
       "title": "How to Propagate Succulents",
       "url": "https://yardandgarden.extension.iastate.edu/how-to/how-propagate-succulents",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
-        "propagation"
+        "propagation",
+        "cutting_preparation",
+        "callus",
+        "propagation_medium",
+        "rooting_or_regrowth"
       ],
-      "applicability": "General propagation guidance that explicitly includes Sedum among suitable stem- and leaf-cutting subjects; it does not identify the specimen or cultivar."
+      "applicability": "General propagation guidance that explicitly includes Sedum among suitable stem- and leaf-cutting subjects; it does not identify the specimen or cultivar. Its “several days” and “several weeks” timings remain qualitative and are not converted into exact ranges."
+    },
+    {
+      "key": "SED-UMN",
+      "authority": "University of Minnesota Extension",
+      "title": "Cacti and succulents",
+      "url": "https://extension.umn.edu/houseplants/cacti-and-succulents",
+      "accessed": "2026-09-26",
+      "supports": [
+        "established_substrate_recipe",
+        "water",
+        "propagation_medium",
+        "cutting_aftercare"
+      ],
+      "applicability": "General indoor cacti-and-succulent guidance. It directly publishes a one-part potting-soil to one-part coarse-sand mix, drainage test, complete dry-down watering, and air-dried cutting in slightly moistened sterile sand; it does not identify or supply species-specific performance for this specimen."
     }
   ]
 }
