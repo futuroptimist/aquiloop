@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "collection_id": "shared-climate-sources-v1",
+  "sources": [
+    {
+      "key": "CTX-USDA-PHZM-2023",
+      "authority": "United States Department of Agriculture, Agricultural Research Service",
+      "title": "2023 USDA Plant Hardiness Zone Map",
+      "url": "https://planthardiness.ars.usda.gov/",
+      "accessed": "2026-09-26",
+      "supports": [
+        "map_edition",
+        "zone_definition",
+        "zip_94044_lookup"
+      ],
+      "applicability": "The official 2023 map and its Quick ZIP Code Search support the map provenance and ZIP 94044 majority result. A ZIP result is not a parcel-level or measured-yard classification."
+    },
+    {
+      "key": "CTX-USDA-PHZM-USE",
+      "authority": "United States Department of Agriculture, Agricultural Research Service",
+      "title": "How to Use the Maps",
+      "url": "https://planthardiness.ars.usda.gov/pages/how-to-use-the-maps",
+      "accessed": "2026-09-26",
+      "supports": [
+        "climate_reference_period",
+        "zone_interpretation",
+        "map_resolution_and_microclimates",
+        "hardiness_limitations"
+      ],
+      "applicability": "Official interpretation for the 2023 map: zones summarize average annual extreme minimum winter temperature over 1991–2020 and are general perennial-plant guides, not optimal growth temperatures or site measurements."
+    },
+    {
+      "key": "CTX-UCANR-SMSF-CLIMATE",
+      "authority": "University of California Agriculture and Natural Resources, UC Master Gardeners of San Mateo and San Francisco Counties",
+      "title": "Climate",
+      "url": "https://ucanr.edu/site/mgsmsf/climate",
+      "accessed": "2026-09-26",
+      "supports": [
+        "regional_dry_summers",
+        "regional_mild_winters",
+        "ocean_and_bay_influence",
+        "fog_and_microclimate_variation"
+      ],
+      "applicability": "Regional San Mateo and San Francisco Counties guidance, not a Pacifica parcel observation. It supports dry summers, mild winters, ocean/bay influence, and large local differences in summer fog, overcast, and temperature."
+    }
+  ]
+}
