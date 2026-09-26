@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "worksheet": "numbers",
+  "identity_scope": "Working identity only; the reported label and photographed specimen have not been botanically confirmed.",
+  "context_refs": [
+    "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+  ],
+  "claims": [
+    {
+      "claim_id": "site-direct-sun-duration",
+      "metric": "direct_sun_duration",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No timed direct-sun observation exists for the Pacifica placement, and the sources do not give cultivar-specific sun-hours."
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "outdoor grow bag; exposure unmeasured",
+      "geographic_context": "Pacifica yard, exact location omitted",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "cultivar-nursery-light",
+      "metric": "light_intensity",
+      "quantity": {
+        "kind": "value",
+        "value": 2500,
+        "unit": "foot-candle"
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "commercial greenhouse in Vista, California; natural light; no photoperiodic treatment",
+      "geographic_context": "Vista, California nursery trial; not Pacifica advice",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Patent observation for the named cultivar under its stated nursery conditions; not direct-sun duration and not proof of specimen identity."
+      }
+    },
+    {
+      "claim_id": "cultivar-observation-temperature",
+      "metric": "observed_temperature_range",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 29,
+        "unit": "degC"
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "commercial greenhouse observation; night and day range",
+      "geographic_context": "Vista, California nursery trial; not a preferred range",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Patent observation conditions for the named cultivar, not a recommended growth band or cold threshold."
+      }
+    },
+    {
+      "claim_id": "cultivar-temperature-tolerance",
+      "metric": "temperature_tolerance",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0,
+        "maximum": 32,
+        "unit": "degC"
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "patent-reported tolerance under evaluated cultivar conditions",
+      "geographic_context": "not Pacifica-site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Named-cultivar patent tolerance; does not guarantee an unconfirmed specimen or establish frost survival below 0 °C."
+      }
+    },
+    {
+      "claim_id": "water-trigger",
+      "metric": "water_trigger",
+      "description": "Water thoroughly only after the medium has dried; outdoor rain and drainage must be checked rather than following a fixed calendar.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "well-drained succulent medium in a draining container",
+      "geographic_context": "outdoor placement; rainfall varies",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU"
+        ],
+        "applicability": "General succulent container guidance, not cultivar-specific timing."
+      }
+    },
+    {
+      "claim_id": "medium-character",
+      "metric": "substrate_character",
+      "description": "Use a porous, sharply draining succulent medium in a container with drainage; the current grow-bag mix remains unknown.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "container culture",
+      "geographic_context": "not site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU"
+        ],
+        "applicability": "General succulent guidance; it does not prescribe exact components for this cultivar."
+      }
+    },
+    {
+      "claim_id": "established-mix-starting-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "recipe": {
+        "recipe_basis": "percent_by_volume",
+        "recipe_evidence": "proposed_starting_point",
+        "batch_volume_litres": 10,
+        "components": [
+          {
+            "name": "commercial cactus/succulent potting mix",
+            "percent_by_volume": 50,
+            "litres_per_10_litre_batch": 5,
+            "purpose": "water-retentive and nutrient-bearing base"
+          },
+          {
+            "name": "coarse perlite",
+            "percent_by_volume": 50,
+            "litres_per_10_litre_batch": 5,
+            "purpose": "increase pore space and drainage"
+          }
+        ]
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "draining container; trial only after checking current medium",
+      "geographic_context": "Pacifica outdoor starting point; adjust from observed dry-down",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU",
+          "SED-IA"
+        ],
+        "applicability": "General sources require fast drainage and identify cactus mix or perlite as suitable succulent media; neither publishes this exact ratio.",
+        "derivation": "Equal volumes are a simple, conservative test batch assembled from the cited materials. It is a proposed starting point, not the user’s current mix; revise only from observed drainage and plant response."
+      }
+    },
+    {
+      "claim_id": "seed-germination-interval",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable practical seed protocol specific to the candidate cultivar was found; the cultivar patent documents vegetative propagation."
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "seed propagation not selected",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "cultivar-root-initiation",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "value",
+        "value": 10,
+        "unit": "day"
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "approximately 24 °C in the patent’s commercial propagation conditions",
+      "geographic_context": "commercial nursery conditions; not a home guarantee",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Named-cultivar terminal cutting result at the stated temperature; rooting initiation is not transplant readiness."
+      }
+    },
+    {
+      "claim_id": "cultivar-height",
+      "metric": "mature_height",
+      "quantity": {
+        "kind": "range",
+        "minimum": 10,
+        "maximum": 12,
+        "unit": "cm"
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "typical patented cultivar plants in commercial greenhouse observations",
+      "geographic_context": "Vista, California nursery observation",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Patent average for typical named-cultivar plants under described conditions; not a universal container maximum."
+      }
+    },
+    {
+      "claim_id": "cultivar-spread",
+      "metric": "mature_spread",
+      "quantity": {
+        "kind": "range",
+        "minimum": 22,
+        "maximum": 25,
+        "unit": "cm"
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "typical patented cultivar plants in commercial greenhouse observations",
+      "geographic_context": "Vista, California nursery observation",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Patent average for typical named-cultivar plants under described conditions; not a universal container maximum."
+      }
+    },
+    {
+      "claim_id": "time-to-maturity",
+      "metric": "time_to_maturity",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible maturity interval was found for the candidate taxon under comparable home-container conditions."
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "outdoor container",
+      "geographic_context": "not site-specific",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "lifespan-years",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable year-based lifespan was found, and renewable clonal plants should not be assigned a universal lifespan."
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "container culture",
+      "geographic_context": "not site-specific",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "flowering-time",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The patent does not report a home-propagation time to flowering."
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "home propagation conditions unknown",
+      "geographic_context": "not site-specific",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ]
+}

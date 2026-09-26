@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "worksheet": "propagation",
+  "identity_scope": "Working identity only; the reported label and photographed specimen have not been botanically confirmed.",
+  "context_refs": [
+    "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+  ],
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "Use a healthy 3–6 in (7.6–15.2 cm) terminal stem cutting; the cultivar patent identifies terminal vegetative cuttings, while the length and preparation are general Sedum-applicable succulent guidance.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "spring or active growth is practical; parent must be healthy and not water-stressed",
+      "geographic_context": "indoor sheltered work area; not site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT",
+          "SED-IA"
+        ],
+        "applicability": "Patent supports the named cultivar method; Iowa State supports the general stem length and preparation and expressly includes Sedum."
+      }
+    },
+    {
+      "claim_id": "stem-cutting-length",
+      "metric": "cutting_length",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 6,
+        "unit": "inch"
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "healthy stem; clean sharp pruners",
+      "geographic_context": "not site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA"
+        ],
+        "applicability": "General succulent stem-cutting range; applies to Sedum generally, not a cultivar-specific measurement."
+      }
+    },
+    {
+      "claim_id": "callus-duration",
+      "metric": "cutting_callus_formation",
+      "quantity": {
+        "kind": "value",
+        "value": 3,
+        "unit": "day"
+      },
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "lower leaves removed; cut end exposed to air on a clean tray",
+      "geographic_context": "sheltered dry location",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SED-IA"
+        ],
+        "applicability": "Iowa State directs drying for “several days” before insertion.",
+        "derivation": "Use 3 days as a proposed starting checkpoint for “several,” then wait longer if the cut surface is not dry and sealed; appearance, not the clock, controls placement."
+      }
+    },
+    {
+      "claim_id": "propagation-medium",
+      "metric": "propagation_medium",
+      "description": "A clean draining container filled with cactus potting soil or perlite; this is separate from the established-plant recipe.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "container with drainage; fresh medium",
+      "geographic_context": "not site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA"
+        ],
+        "applicability": "General succulent method explicitly names cactus potting soil or perlite."
+      }
+    },
+    {
+      "claim_id": "sequential-procedure",
+      "metric": "propagation_steps",
+      "description": "1. Clean sharp pruners and a draining pot; add cactus mix or perlite. 2. Select a firm, healthy terminal shoot. 3. Cut a 3–6 in stem cleanly. 4. Remove leaves from the lower half and air-dry the end until callused. 5. Insert the callused lower stem upright and firm the medium lightly. 6. Keep in bright indirect light, protect from temperature extremes, and keep the medium barely moist rather than saturated. 7. Check for resistance to a very gentle tug and new growth; inspect instead for darkening, softness, or collapse. 8. Pot into established-plant mix after roots hold the medium and growth resumes; increase outdoor exposure gradually.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "clean tools, draining medium, sheltered bright conditions",
+      "geographic_context": "general home propagation; acclimate later to Pacifica placement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SED-IA",
+          "SED-MSU"
+        ],
+        "applicability": "Source-backed cut, callus, media, drainage, and gradual-light principles; exact household conditions remain unmeasured.",
+        "derivation": "Ordered home workflow combines the cited steps. “Barely moist,” visual/tug checks, and gradual acclimation are conservative operational cues, not promised timings."
+      }
+    },
+    {
+      "claim_id": "root-initiation-reference",
+      "metric": "rooting_or_regrowth",
+      "description": "See sedum-loves-fire#cultivar-root-initiation (about 10 days at approximately 24 °C in patent nursery conditions); do not read it as transplant readiness.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "reference only; patent conditions differ from home conditions",
+      "geographic_context": "commercial nursery reference",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Cross-reference to the authoritative numeric claim in numbers.yaml; applicability remains limited to the named cultivar and patent conditions."
+      }
+    },
+    {
+      "claim_id": "transplant-readiness",
+      "metric": "transplant_readiness",
+      "description": "Transfer only after roots hold the medium during a gentle check and visible new growth confirms establishment; no fixed interval is supported for the home setting.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "draining propagation medium; active growth visible",
+      "geographic_context": "not site-specific",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SED-IA"
+        ],
+        "applicability": "Iowa State says pot after new roots develop but gives no transplant interval.",
+        "derivation": "Turns the source’s root-development threshold into observable, conservative readiness checks without inventing a date."
+      }
+    },
+    {
+      "claim_id": "failure-cues",
+      "metric": "propagation_failure_signs",
+      "description": "Exactly three checks: (1) black or soft cut end → remove decay and reassess whether the end callused before insertion; (2) persistently wet medium → verify drainage and reduce water; (3) stretched pale new growth → verify light, then increase exposure gradually rather than moving abruptly into strong sun.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "routine inspection",
+      "geographic_context": "not site-specific",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SED-IA",
+          "SED-MSU"
+        ],
+        "applicability": "General sources connect premature insertion or wet conditions with rot risk and support gradual exposure changes.",
+        "derivation": "Pairs three visible cues with the next diagnostic action; these are checks, not diagnoses of the photographed plant."
+      }
+    },
+    {
+      "claim_id": "leaf-method",
+      "metric": "alternate_propagation_method",
+      "description": "Leaf cuttings are a concise alternate for Sedum generally: remove the entire leaf including its stem-attachment tissue, place it flat on slightly damp well-drained medium with the attachment end at the surface, and keep damp but not wet until roots and rosettes form.",
+      "applicable_taxon": "candidate Sedum ‘Love’s Fire’; cultivar claim applies only if identity is confirmed",
+      "propagation_method": "leaf cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "slightly damp well-drained medium",
+      "geographic_context": "not site-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA"
+        ],
+        "applicability": "General Sedum-applicable leaf method; not shown to preserve or apply to an unconfirmed patented specimen."
+      }
+    }
+  ]
+}
