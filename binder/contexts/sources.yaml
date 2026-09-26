@@ -33,7 +33,7 @@
       "key": "CLIMATE-USDA-PHZM-ZIP-94044",
       "authority": "U.S. Department of Agriculture, Agricultural Research Service",
       "title": "2023 Plant Hardiness Zone ZIP Code Table — ZIP 94044 query",
-      "url": "https://services1.arcgis.com/SyUSN23vOoYdfLC8/arcgis/rest/services/PHZM_2023_Zip_Code_Table/FeatureServer/296/query?where=ZIP_CODE%3D%2794044%27&outFields=ZIP_CODE%2CClass%2CMAJORITY&returnGeometry=false&f=html",
+      "url": "https://services1.arcgis.com/SyUSN23vOoYdfLC8/arcgis/rest/services/PHZM_2023_Zip_Code_Table/FeatureServer/296/query?where=ZIP_CODE%3D%2794044%27&outFields=ZIP_CODE%2CClass%2CMAJORITY&returnGeometry=false&f=json",
       "accessed": "2026-09-26",
       "supports": [
         "zip_94044_majority_zone"

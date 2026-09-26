@@ -438,7 +438,8 @@ universal lifespan for indefinitely renewable clonal plants.
 A terrestrial established-plant recipe uses `recipe_basis: "percent_by_volume"`,
 a `recipe_evidence` value of `directly_published`, `adapted`, or
 `proposed_starting_point`, and named `components`, each with finite
-`percent_by_volume`. Components must total exactly 100. For a 10-litre batch,
+`percent_by_volume`, expressed as an integer percent point from 0 through 100.
+Components must total exactly 100. For a 10-litre batch,
 each component's litres equal `percent_by_volume / 10` (for example, 20% is
 2 L); display precision must remain practical and the component total must be
 10 L. Record ingredient purposes and source/applicability provenance. Never
