@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "context_id": "pacifica-ca-shared-v1",
+  "display_name": "Pacifica, California — coastal San Francisco Bay Area",
+  "locality": {
+    "city": "Pacifica",
+    "state": "California",
+    "country": "United States",
+    "evidence_scope": "regional context plus USDA ZIP Code 94044 lookup; no street address or garden reference point",
+    "privacy_scope": "No exact home address is requested or recorded."
+  },
+  "hardiness": {
+    "map_edition": 2023,
+    "climatic_reference_period": "1991-2020",
+    "metric": "average annual extreme minimum winter temperature",
+    "zone_interval_f": 10,
+    "half_zone_interval_f": 5,
+    "lookup": {
+      "method": "Query the table powering the USDA interactive map with ZIP_CODE = 94044.",
+      "service": "PHZM_2023_Zip_Code_Table/FeatureServer/296",
+      "query_field": "ZIP_CODE",
+      "query_value": "94044",
+      "result": "10a",
+      "result_temperature_range_f": {
+        "min": 30,
+        "max": 35
+      },
+      "result_temperature_range_c_display": {
+        "min": -1.1,
+        "max": 1.7
+      },
+      "scope": "ZIP-level table classification",
+      "sources": [
+        "CLIMATE-USDA-PHZM-2023",
+        "CLIMATE-USDA-PHZM-USAGE",
+        "CLIMATE-USDA-PHZM-ZIP-94044"
+      ]
+    },
+    "yard_result": {
+      "status": "unknown",
+      "reason": "No exact garden point or measured microclimate was supplied. The ZIP lookup does not establish the classification or experienced minimum temperature of every Pacifica yard.",
+      "attempted_method": "Authoritative 2023 USDA ZIP lookup for 94044; no address-level or named-reference-point lookup was attempted because no suitable public point was specified."
+    },
+    "interpretation": "Hardiness is a long-period average of annual extreme winter minima used as general perennial-plant guidance. It is neither a preferred growing-temperature range nor a measured site condition, and it does not capture all exposure, moisture, wind, or fine-scale microclimate effects.",
+    "sources": [
+      "CLIMATE-USDA-PHZM-2023",
+      "CLIMATE-USDA-PHZM-USAGE"
+    ]
+  },
+  "regional_notes": [
+    {
+      "note_id": "pacifica-seasonality",
+      "statement": "San Mateo and San Francisco Counties generally have dry summers and mild winters, with ocean and bay influence.",
+      "scope": "regional guidance; not a watering schedule or a site observation",
+      "sources": ["CLIMATE-UCANR-SMSF"]
+    },
+    {
+      "note_id": "pacifica-fog-variation",
+      "statement": "Bay Area microclimates range from cool coastal fog belts to hot inland sun belts; nearby sites can differ in fog, overcast, and temperature.",
+      "scope": "regional variation; actual Pacifica garden exposure remains unmeasured",
+      "sources": ["CLIMATE-UCANR-SMSF"]
+    },
+    {
+      "note_id": "pacifica-map-limits",
+      "statement": "Wind, soil, moisture, humidity, exposure, and microclimates can affect plant survival independently of the mapped hardiness zone.",
+      "scope": "general outdoor interpretation",
+      "sources": ["CLIMATE-USDA-PHZM-USAGE"]
+    }
+  ],
+  "setting_boundaries": {
+    "outdoor_grow_bag": "Use regional and hardiness context only as a starting point; record the actual bag medium, exposure, moisture, and temperatures separately.",
+    "indoor": "Do not infer room light, temperature, humidity, drafts, or pot conditions from outdoor Pacifica context.",
+    "aquarium": "Do not infer water temperature, chemistry, lamp runtime, flow, or livestock constraints from outdoor Pacifica context."
+  },
+  "unknown_site_measurements": [
+    {"metric": "garden_direct_sun_hours", "status": "unknown", "reason": "not measured"},
+    {"metric": "garden_minimum_temperature", "status": "unknown", "reason": "not measured"},
+    {"metric": "garden_frost_dates", "status": "unknown", "reason": "not observed or supplied"},
+    {"metric": "grow_bag_substrate_recipe", "status": "unknown", "reason": "ingredients and proportions not supplied"},
+    {"metric": "indoor_light_and_climate", "status": "unknown", "reason": "room measurements not supplied"},
+    {"metric": "aquarium_conditions", "status": "unknown", "reason": "tank measurements and equipment schedule not supplied"}
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "collection_id": "shared-climate-sources-v1",
+  "sources": [
+    {
+      "key": "CLIMATE-USDA-PHZM-2023",
+      "authority": "United States Department of Agriculture, Agricultural Research Service",
+      "title": "2023 USDA Plant Hardiness Zone Map",
+      "url": "https://planthardiness.ars.usda.gov/",
+      "accessed": "2026-09-26",
+      "supports": [
+        "map_edition",
+        "zone_definition",
+        "zone_interval"
+      ],
+      "applicability": "National map authority. Defines zones from average annual extreme minimum winter temperature in 10 degree Fahrenheit zones and 5 degree Fahrenheit half zones; it does not describe preferred growing temperatures or a particular garden."
+    },
+    {
+      "key": "CLIMATE-USDA-PHZM-USAGE",
+      "authority": "United States Department of Agriculture, Agricultural Research Service",
+      "title": "How to Use the Maps",
+      "url": "https://planthardiness.ars.usda.gov/pages/how-to-use-the-maps",
+      "accessed": "2026-09-26",
+      "supports": [
+        "climatic_reference_period",
+        "lookup_method",
+        "microclimate_limitations",
+        "hardiness_interpretation"
+      ],
+      "applicability": "National usage guidance for the 2023 map. Establishes the 1991-2020 weather-data period, ZIP or point lookup methods, half-mile map scale, and limitations from microclimates and other growing factors."
+    },
+    {
+      "key": "CLIMATE-USDA-PHZM-ZIP-94044",
+      "authority": "United States Department of Agriculture, Agricultural Research Service",
+      "title": "2023 Plant Hardiness Zone ZIP Code Lookup Table",
+      "url": "https://services1.arcgis.com/SyUSN23vOoYdfLC8/arcgis/rest/services/PHZM_2023_Zip_Code_Table/FeatureServer/296",
+      "accessed": "2026-09-26",
+      "supports": [
+        "pacifica_zip_94044_zone_lookup"
+      ],
+      "applicability": "The table powering the USDA interactive map was queried with ZIP_CODE = 94044 and returned Class 10a (30 to 35 degrees Fahrenheit / -1.1 to 1.7 degrees Celsius). This is ZIP-level evidence, not a point lookup or measurement for every Pacifica yard."
+    },
+    {
+      "key": "CLIMATE-UCANR-SMSF",
+      "authority": "University of California Agriculture and Natural Resources, UC Master Gardeners of San Mateo and San Francisco Counties",
+      "title": "Climate",
+      "url": "https://ucanr.edu/site/mgsmsf/climate",
+      "accessed": "2026-09-26",
+      "supports": [
+        "regional_seasonality",
+        "coastal_influence",
+        "fog_and_microclimates",
+        "local_variation"
+      ],
+      "applicability": "Regional San Mateo and San Francisco Counties guidance, applicable to Pacifica only as regional context. It describes dry summers, mild winters, ocean and bay influence, and variation from coastal fog belts to inland sun belts; it is not a measurement of the user's site."
+    }
+  ]
+}
