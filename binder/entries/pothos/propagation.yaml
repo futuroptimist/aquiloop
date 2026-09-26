@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "Use a node-bearing stem cutting rooted in water; this is general species guidance, not a diagnosis of the photographed plant.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW",
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Species/genus procedure plus extension leaf-bud anatomy."
+      }
+    },
+    {
+      "claim_id": "prepare",
+      "metric": "procedure_step",
+      "description": "Wear gloves; clean sharp shears and a clear vessel, and have fresh water and a small draining pot ready.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "RHS requires gloves and water rooting; clean-tool and staging details are a hygienic home implementation.",
+        "derivation": "Proposed preparation makes the published method sequential without changing its biology."
+      }
+    },
+    {
+      "claim_id": "select-node",
+      "metric": "procedure_step",
+      "description": "Select a healthy stem section bearing a leaf joint (node), leaf, and axillary bud; a detached leaf alone is not this method.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "NCSU leaf-bud cutting requirements expressly include devil’s ivy."
+      }
+    },
+    {
+      "claim_id": "make-cut",
+      "metric": "procedure_step",
+      "description": "Cut the stem just below the selected leaf joint with clean shears.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Direct RHS cut location."
+      }
+    },
+    {
+      "claim_id": "waterline",
+      "metric": "procedure_step",
+      "description": "Stand the node in water while keeping foliage above the water line; place in bright indirect light.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW",
+          "POT-WISC"
+        ],
+        "applicability": "RHS supports bright water rooting; Wisconsin supports node rooting and avoiding submerged foliage."
+      }
+    },
+    {
+      "claim_id": "maintain",
+      "metric": "procedure_step",
+      "description": "Keep the node submerged and foliage dry; replace cloudy or depleted water and inspect the stem for decay.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Sources establish water rooting and rot risk but no water-change schedule.",
+        "derivation": "Observation-based hygiene avoids an unsupported fixed interval."
+      }
+    },
+    {
+      "claim_id": "root-initiation",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Reviewed sources instruct waiting for roots but give no conditions-linked interval."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "transplant-ready",
+      "metric": "transplant_readiness",
+      "description": "Pot into the established-plant mix after roots appear; no source-backed minimum root length was found.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "RHS says to pot after roots appear; it supplies no length or day count."
+      }
+    },
+    {
+      "claim_id": "pot-and-acclimate",
+      "metric": "procedure_step",
+      "description": "Pot with the rooted node just below the surface and leaf exposed; keep evenly monitored during the water-to-medium transition, then resume the established dry-down cue.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP",
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Node orientation and established dry-down are published; transition moisture wording is an adaptation.",
+        "derivation": "Combines published bud-up/exposed-leaf placement with a gradual transition and does not prescribe a calendar."
+      }
+    },
+    {
+      "claim_id": "medium-alternate",
+      "metric": "alternate_method",
+      "description": "Alternatively place the node bud-up in moist propagation medium with the leaf exposed.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node cutting in medium",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Direct extension leaf-bud method; medium recipe and timing are not specified."
+      }
+    },
+    {
+      "claim_id": "layering-alternate",
+      "metric": "alternate_method",
+      "description": "For layering, pin an attached trailing stem node into free-draining compost and separate only after that node roots.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "layering",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "RHS alternate method; no rooting interval supplied."
+      }
+    },
+    {
+      "claim_id": "failure-cue-rot",
+      "metric": "failure_sign",
+      "description": "Soft or dark stem: check whether foliage is submerged or water is foul; recut to sound tissue with clean tools.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Sources support keeping foliage above water and identify excess moisture rot risk.",
+        "derivation": "Proposed corrective check operationalizes hygiene; it is not a specimen diagnosis."
+      }
+    },
+    {
+      "claim_id": "failure-cue-wilt",
+      "metric": "failure_sign",
+      "description": "Persistent wilt without roots: check node submersion, heat, and light rather than adding fertilizer.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Sources require a submerged node and bright indirect placement but give no fertilizer remedy.",
+        "derivation": "Proposed next check prioritizes method conditions."
+      }
+    },
+    {
+      "claim_id": "failure-cue-scorch",
+      "metric": "failure_sign",
+      "description": "Bleached or crisp patches: move out of direct sun while retaining bright indirect light.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent; clean vessel; bright indirect indoor location",
+      "geographic_context": "indoors; household conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "RHS advises bright indirect light and avoiding full sun.",
+        "derivation": "Proposed corrective response applies that published exposure guidance."
+      }
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pothos#transplant-readiness"
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "identity-scope",
+      "metric": "identity_scope",
+      "description": "Do not choose a species-specific number until the specimen is identified; candidate claims below are labeled separately.",
+      "applicable_taxon": "unresolved Strelitzia specimen; S. reginae and S. nicolai remain separate candidates",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-REG",
+          "BOP-NIC"
+        ],
+        "applicability": "Two candidate profiles; neither identifies the specimen."
+      }
+    },
+    {
+      "claim_id": "reginae-indoor-light",
+      "metric": "indoor_light_category",
+      "description": "Well-lit sunny indoor position.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-REG"
+        ],
+        "applicability": "S. reginae only; qualitative indoor guidance, not direct-sun hours."
+      }
+    },
+    {
+      "claim_id": "nicolai-indoor-light",
+      "metric": "indoor_light_category",
+      "description": "Bright indirect indoor light.",
+      "applicable_taxon": "candidate S. nicolai",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "S. nicolai only; qualitative indoor guidance, not direct-sun hours."
+      }
+    },
+    {
+      "claim_id": "reginae-outdoor-light",
+      "metric": "outdoor_light",
+      "description": "Full sun gives the best flowering, while partial shade produces larger flowers on taller stems.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Established Florida landscape plant",
+      "geographic_context": "possible future Pacifica outdoor trial; site exposure unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Florida landscape guidance for S. reginae; not an hours conversion or Pacifica measurement."
+      }
+    },
+    {
+      "claim_id": "outdoor-direct-sun-hours",
+      "metric": "direct_sun_duration",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No seasonally dated measurement exists, and “full sun” is not converted to hours without source evidence."
+      },
+      "applicable_taxon": "unresolved Strelitzia specimen; S. reginae and S. nicolai remain separate candidates",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "possible future Pacifica outdoor trial; site exposure unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "reginae-night-temperature",
+      "metric": "temperature_growth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 55,
+        "maximum": 65,
+        "unit": "degF"
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-REG"
+        ],
+        "applicability": "NCSU moderate night-temperature range; not daytime optimum or cold threshold."
+      }
+    },
+    {
+      "claim_id": "nicolai-temperature",
+      "metric": "temperature_growth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 65,
+        "maximum": 85,
+        "unit": "degF"
+      },
+      "applicable_taxon": "candidate S. nicolai",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "NCSU preferred range for S. nicolai; candidate-specific."
+      }
+    },
+    {
+      "claim_id": "nicolai-cold-threshold",
+      "metric": "cold_protection",
+      "quantity": {
+        "kind": "value",
+        "value": 50,
+        "unit": "degF"
+      },
+      "applicable_taxon": "candidate S. nicolai",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "NCSU says it will not tolerate below 50 °F; duration and injury response are unspecified."
+      }
+    },
+    {
+      "claim_id": "reginae-freeze-injury",
+      "metric": "cold_injury",
+      "quantity": {
+        "kind": "value",
+        "value": 32,
+        "unit": "degF"
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "possible future Pacifica outdoor trial; site temperature unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF reports injury below freezing in Florida; exposure duration is unspecified and this is not an outdoor recommendation."
+      }
+    },
+    {
+      "claim_id": "outdoor-trial-decision",
+      "metric": "outdoor_trial",
+      "description": "Keep indoors unless species is resolved and a sheltered trial site is measured; the ZIP zone cannot replace an on-site minimum.",
+      "applicable_taxon": "unresolved Strelitzia specimen; S. reginae and S. nicolai remain separate candidates",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "Pacifica ZIP-majority zone 10a; exact site microclimate unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-REG",
+          "BOP-NIC"
+        ],
+        "applicability": "Candidate cold requirements differ and no garden measurement exists.",
+        "derivation": "Conservative proposed gate: resolve identity and measure exposure/temperature before an A/B trial."
+      }
+    },
+    {
+      "claim_id": "reginae-water",
+      "metric": "water_trigger",
+      "description": "Water freely during spring/summer growth; keep drier in winter while avoiding both dry and soggy establishment conditions.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-REG",
+          "BOP-UF"
+        ],
+        "applicability": "Seasonal candidate guidance; no fixed interval."
+      }
+    },
+    {
+      "claim_id": "nicolai-water",
+      "metric": "water_trigger",
+      "description": "Water when the top soil layer feels dry, then drain.",
+      "applicable_taxon": "candidate S. nicolai",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "Observable S. nicolai cue; no fixed interval."
+      }
+    },
+    {
+      "claim_id": "established-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "recipe": {
+        "recipe_basis": "percent_by_volume",
+        "recipe_evidence": "proposed_starting_point",
+        "batch_volume_litres": 10,
+        "components": [
+          {
+            "name": "loam-based peat-free potting mix",
+            "percent_by_volume": 50,
+            "litres_for_10_litre_batch": 5,
+            "purpose": "fertile moisture-retentive base"
+          },
+          {
+            "name": "coarse horticultural sand",
+            "percent_by_volume": 25,
+            "litres_for_10_litre_batch": 2.5,
+            "purpose": "mineral structure and drainage"
+          },
+          {
+            "name": "medium orchid bark",
+            "percent_by_volume": 25,
+            "litres_for_10_litre_batch": 2.5,
+            "purpose": "coarse air space"
+          }
+        ]
+      },
+      "applicable_taxon": "unresolved Strelitzia specimen; S. reginae and S. nicolai remain separate candidates",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-REG",
+          "BOP-NIC"
+        ],
+        "applicability": "Both candidate profiles require loamy, well-drained soil; NCSU names loam and sand for S. nicolai but publishes no complete ratio or bark ingredient.",
+        "derivation": "Proposed container starting point: half loam-based mix, one-quarter named coarse sand, and one-quarter coarse bark for drainage; trial before wider use and do not treat as the current unknown mix."
+      }
+    },
+    {
+      "claim_id": "current-medium",
+      "metric": "current_substrate_composition",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Current container, ingredients, proportions, and drainage were not supplied."
+      },
+      "applicable_taxon": "unresolved Strelitzia specimen; S. reginae and S. nicolai remain separate candidates",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "reginae-size",
+      "metric": "mature_size",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 5,
+        "unit": "foot"
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Florida landscape clump",
+      "geographic_context": "Florida landscape; not indoor-container expectation",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Published mature clump height; not S. nicolai or an indoor promise."
+      }
+    },
+    {
+      "claim_id": "nicolai-height",
+      "metric": "mature_height",
+      "quantity": {
+        "kind": "range",
+        "minimum": 20,
+        "maximum": 30,
+        "unit": "foot"
+      },
+      "applicable_taxon": "candidate S. nicolai",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Native-habitat or warm-climate landscape habit",
+      "geographic_context": "not indoor-container expectation",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "NCSU S. nicolai landscape/native-habitat height."
+      }
+    },
+    {
+      "claim_id": "nicolai-spread",
+      "metric": "mature_spread",
+      "quantity": {
+        "kind": "range",
+        "minimum": 6,
+        "maximum": 10,
+        "unit": "foot"
+      },
+      "applicable_taxon": "candidate S. nicolai",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Native-habitat or warm-climate landscape habit",
+      "geographic_context": "not indoor-container expectation",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "NCSU S. nicolai landscape/native-habitat spread."
+      }
+    },
+    {
+      "claim_id": "nicolai-first-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "range",
+        "minimum": 5,
+        "maximum": 6,
+        "unit": "year"
+      },
+      "applicable_taxon": "candidate S. nicolai",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "NCSU candidate first-flowering statement; conditions and propagation origin are not specified, so do not read as seed-to-flower certainty."
+      }
+    },
+    {
+      "claim_id": "reginae-first-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Reviewed sources describe flowering and seed propagation but do not give a defensible seed-to-first-flower interval."
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "lifespan",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Both candidates are perennial/clumping plants, but no defensible universal lifespan in years was found."
+      },
+      "applicable_taxon": "unresolved Strelitzia specimen; S. reginae and S. nicolai remain separate candidates",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+    },
+    {
+      "claim_ref": "bird-of-paradise#seed-germination-scarified"
+    }
+  ]
+}

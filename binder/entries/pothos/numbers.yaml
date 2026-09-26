@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "identity-scope",
+      "metric": "identity_scope",
+      "description": "Apply species guidance provisionally; the owner record does not confirm cultivar or variegation.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "Species profile supports E. aureum traits but does not identify the specimen or cultivar."
+      }
+    },
+    {
+      "claim_id": "indoor-light",
+      "metric": "indoor_light_category",
+      "description": "Bright, indirect light; avoid full direct sun and deep shade. No exact indoor hours are inferred.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Qualitative indoor category, not direct-sun hours or daylight duration."
+      }
+    },
+    {
+      "claim_id": "supplemental-light-runtime",
+      "metric": "supplemental_light_runtime",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable reviewed source supplied an E. aureum lamp schedule tied to intensity and distance."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "preferred-temperature",
+      "metric": "temperature_growth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 18,
+        "maximum": 30,
+        "unit": "degC"
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "RHS indoor best-results range; not a cold-damage threshold."
+      }
+    },
+    {
+      "claim_id": "cold-protection-threshold",
+      "metric": "cold_protection",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Reviewed sources advise avoiding cold drafts but do not establish a duration-specific injury threshold for this specimen."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "water-trigger",
+      "metric": "water_trigger",
+      "description": "Test with a finger; water only when compost is approaching dryness, then drain fully and do not leave the pot standing in water.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Observable indoor cue; no calendar interval is claimed."
+      }
+    },
+    {
+      "claim_id": "substrate-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "recipe": {
+        "recipe_basis": "percent_by_volume",
+        "recipe_evidence": "published_species_guidance",
+        "batch_volume_litres": 10,
+        "components": [
+          {
+            "name": "ericaceous peat-free compost",
+            "percent_by_volume": 60,
+            "litres_for_10_litre_batch": 6,
+            "purpose": "slightly acidic moisture-retentive base"
+          },
+          {
+            "name": "grit",
+            "percent_by_volume": 20,
+            "litres_for_10_litre_batch": 2,
+            "purpose": "drainage and air space"
+          },
+          {
+            "name": "medium orchid bark",
+            "percent_by_volume": 20,
+            "litres_for_10_litre_batch": 2,
+            "purpose": "coarse structure and air space"
+          }
+        ]
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Direct 3:1:1 RHS epipremnum recipe converted exactly by volume; starting recipe, not the owner’s unknown current mix."
+      }
+    },
+    {
+      "claim_id": "substrate-ph",
+      "metric": "substrate_ph",
+      "description": "Slightly acidic; no defensible numeric pH interval was supplied by the reviewed species guidance.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Qualitative chemistry only; do not invent a numeric range."
+      }
+    },
+    {
+      "claim_id": "current-medium",
+      "metric": "current_substrate_composition",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The current pot, ingredients, proportions, and drainage behavior were not supplied."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "seed-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No practical, reliable E. aureum household seed protocol and interval were found; the reviewed home guidance uses vegetative methods."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "vegetative-rooting-time",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Sources say to wait until roots appear but provide no supported interval under specified household conditions."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "transplant-readiness",
+      "metric": "transplant_readiness",
+      "description": "Pot after roots appear; the sources do not define a root length or day count.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "node-bearing stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-RHS-GROW"
+        ],
+        "applicability": "Observable milestone only; potting after roots appear is distinct from first root timing."
+      }
+    },
+    {
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "NCSU horizontal groundcover dimension; not an indoor-container promise."
+      },
+      "claim_id": "horizontal-groundcover-length",
+      "metric": "size_length",
+      "quantity": {
+        "kind": "range",
+        "minimum": 6,
+        "maximum": 8,
+        "unit": "foot"
+      }
+    },
+    {
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "NCSU maximum climbing/trailing vine length; support and adequate light matter, and this is not an indoor-container promise."
+      },
+      "claim_id": "climbing-vine-length",
+      "metric": "size_length",
+      "quantity": {
+        "kind": "value",
+        "value": 40,
+        "unit": "foot"
+      }
+    },
+    {
+      "claim_id": "maturity-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No supported household time to mature foliage or first flower was found; container plants generally retain juvenile form."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "lifespan",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible lifespan in years was found; a clonally renewed vine has no universal individual lifespan."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture; household conditions unmeasured",
+      "geographic_context": "indoors; Pacifica outdoor climate does not establish room conditions",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+    },
+    {
+      "claim_ref": "pothos#transplant-readiness"
+    }
+  ]
+}

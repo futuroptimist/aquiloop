@@ -18,7 +18,8 @@
         "propagation",
         "troubleshooting",
         "natural_history_trivia"
-      ]
+      ],
+      "applicability": "Species profile for E. aureum supporting provisional identity, bright-indirect light, dry-between-waterings care, water rooting, juvenile container form, 6–8 ft horizontal groundcover, and vines to 40 ft. It does not identify the owner’s specimen or cultivar, define an indoor size promise, or provide rooting time."
     },
     {
       "key": "POT-PSU",
@@ -61,6 +62,22 @@
         "propagation"
       ],
       "applicability": "General propagation chapter expressly listing devil’s ivy for single-node/leaf-bud cuttings; supports a node with axillary bud, bud-up placement in medium, and exposed leaf. Water rooting and foliage-above-water wording is paired with the species source."
+    },
+    {
+      "key": "POT-RHS-GROW",
+      "authority": "Royal Horticultural Society",
+      "title": "How to grow epipremnum",
+      "url": "https://www.rhs.org.uk/plants/epipremnum/growing-guide",
+      "accessed": "2026-09-26",
+      "supports": [
+        "indoor_light",
+        "temperature",
+        "water_trigger",
+        "established_substrate_recipe",
+        "stem_cutting",
+        "layering"
+      ],
+      "applicability": "Current genus-level indoor guide. It publishes an 18–30 °C care range; bright indirect-light and approaching-dry watering cues; a 3:1:1 ericaceous peat-free compost, grit, and medium orchid-bark recipe; and node-bearing water-cutting and layering procedures. It gives no rooting deadline."
     }
   ]
 }

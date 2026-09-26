@@ -1,0 +1,398 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "Divide an old S. reginae clump in late spring or early summer; use only if identity and parent readiness match.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF method, season, and parent criteria apply only to S. reginae."
+      }
+    },
+    {
+      "claim_id": "parent-readiness",
+      "metric": "starting_material",
+      "description": "Start with an old clump carrying four to five shoots.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Direct UF S. reginae parent description."
+      }
+    },
+    {
+      "claim_id": "prepare",
+      "metric": "procedure_step",
+      "description": "Prepare clean cutting tools, draining containers, and moist well-drained medium; water the parent beforehand so roots can be handled without drying.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF supports division and moist, non-soggy establishment but does not list a tool kit.",
+        "derivation": "Proposed staging makes the published division sequence workable and minimizes exposed-root time."
+      }
+    },
+    {
+      "claim_id": "separate",
+      "metric": "procedure_step",
+      "description": "Lift or expose the rhizomatous clump and separate it into single-stem divisions, preserving roots and a shoot on each piece.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF",
+          "BOP-REG"
+        ],
+        "applicability": "UF specifies single-stem S. reginae divisions; NCSU confirms rhizomatous habit."
+      }
+    },
+    {
+      "claim_id": "replant-depth",
+      "metric": "procedure_step",
+      "description": "Replant each division at the same depth at which it was growing; do not bury the crown deeper.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Direct UF original-depth instruction."
+      }
+    },
+    {
+      "claim_id": "aftercare",
+      "metric": "procedure_step",
+      "description": "Keep the medium moist but not soggy until roots establish; protect divisions from drying.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF warns both dry and soggy establishment can yellow and kill foliage."
+      }
+    },
+    {
+      "claim_id": "division-establishment-time",
+      "metric": "division_establishment",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "UF gives an until-rooted moisture cue but no conditions-linked establishment interval."
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "division-ready",
+      "metric": "transplant_readiness",
+      "description": "Resume ordinary care only when the division remains stable, is anchored, and produces new growth.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF defines moist-until-rooted aftercare but no readiness test.",
+        "derivation": "Proposed observable criteria keep establishment separate from the act of division."
+      }
+    },
+    {
+      "claim_id": "seed-alternate",
+      "metric": "alternate_method",
+      "description": "Seed is the documented alternate for S. reginae, but it is slower and does not resolve the owner specimen.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF S. reginae seed procedure only."
+      }
+    },
+    {
+      "claim_id": "seed-soak",
+      "metric": "seed_pretreatment",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "day"
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Direct UF pretreatment."
+      }
+    },
+    {
+      "claim_id": "seed-medium",
+      "metric": "propagation_medium",
+      "description": "Sow in vermiculite, a 1:1 peat/perlite mixture, or a ready-made seed mix.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Direct UF alternatives; separate from established-plant recipe."
+      }
+    },
+    {
+      "claim_id": "seed-depth",
+      "metric": "sowing_depth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0.5,
+        "maximum": 1,
+        "unit": "inch"
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Direct UF depth."
+      }
+    },
+    {
+      "claim_id": "seed-conditions",
+      "metric": "procedure_step",
+      "description": "Keep consistently damp, warm, humid, and in indirect light; cover with clear glass or plastic and check moisture periodically.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Direct UF germination conditions; no numeric temperature is published."
+      }
+    },
+    {
+      "claim_id": "seed-germination-scarified",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF usual interval after scarification; not a guarantee."
+      }
+    },
+    {
+      "claim_id": "seed-germination-wide",
+      "metric": "seed_germination_variability",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 12,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF full variability warning; retain beside the usual scarified range."
+      }
+    },
+    {
+      "claim_id": "seed-first-pot",
+      "metric": "transplant_readiness",
+      "description": "Move seedlings to individual pots when they have two true leaves; this is a developmental cue, not germination.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seedling",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Direct UF seedling milestone."
+      }
+    },
+    {
+      "claim_id": "seed-later-transplant",
+      "metric": "transplant_readiness",
+      "quantity": {
+        "kind": "range",
+        "minimum": 2,
+        "maximum": 3,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "seed",
+      "life_stage": "seedling",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF later transplant interval; distinct from germination and first potting."
+      }
+    },
+    {
+      "claim_id": "nicolai-division-scope",
+      "metric": "alternate_method",
+      "description": "NCSU lists division or seed for S. nicolai, but no reviewed source supplied the S. reginae shoot-count, depth, or timing details for that species.",
+      "applicable_taxon": "candidate S. nicolai",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "Method listing only; do not transfer S. reginae procedure details."
+      }
+    },
+    {
+      "claim_id": "failure-cue-wilt",
+      "metric": "failure_sign",
+      "description": "Yellowing or collapse during establishment: check for both root-zone dryness and saturation before changing care.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF warns both dry and soggy establishment can kill leaves.",
+        "derivation": "Proposed paired next check avoids diagnosing from one symptom."
+      }
+    },
+    {
+      "claim_id": "failure-cue-rot",
+      "metric": "failure_sign",
+      "description": "Soft crown or foul roots: check planting depth, drainage, and saturation; remove failed tissue with clean tools.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF requires original planting depth and warns against soggy conditions.",
+        "derivation": "Proposed corrective check operationalizes those risks."
+      }
+    },
+    {
+      "claim_id": "failure-cue-no-growth",
+      "metric": "failure_sign",
+      "description": "No new growth but firm tissue: verify stable moisture and anchoring; do not equate a quiet division with a fixed failure deadline.",
+      "applicable_taxon": "candidate S. reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old healthy clump; late spring or early summer",
+      "geographic_context": "general procedure; household and Pacifica outdoor conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "No establishment interval is published.",
+        "derivation": "Proposed observation rule avoids inventing a deadline."
+      }
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "bird-of-paradise#seed-germination-scarified"
+    }
+  ]
+}
