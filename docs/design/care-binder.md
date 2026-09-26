@@ -277,6 +277,154 @@ extension, botanical-garden, RHS, breeder, and identifiable aquarium-grower
 sources. Practical source-backed instructions remain possible when specimen
 identity or household measurements are provisional.
 
+#### Shared Pacifica context and numeric records
+
+Step 13 adds two research inputs, `binder/contexts/pacifica.yaml` and
+`binder/contexts/sources.yaml`. They are JSON-compatible YAML with stable
+`context_id`, `collection_id`, and source keys. They are deliberately separate
+from each species' bibliography: a future companion source reference resolves
+first in that entry's `sources.yaml`, or, when prefixed `CLIMATE-`, in the
+shared climate collection. Keys must be unique within the combined resolution
+scope. The current renderer does not load either shared file; companion loading
+and validation belong to Steps 15–16, so the implemented six-page inputs and
+qualification behavior remain unchanged.
+
+The shared context records the 2023 USDA map, its 1991–2020 climatic reference
+period, and its definition of a zone as the average annual extreme minimum
+winter temperature (10 °F zones, split into 5 °F half zones). A reproducible
+query of the table powering the official interactive map, using
+`ZIP_CODE = 94044`, returned `10a (30 to 35 °F / -1.1 to 1.7 °C)`. That is a
+ZIP-level classification, not proof that both 10a and 10b occur in Pacifica and
+not a point result for every yard. The exact garden zone remains explicitly
+unknown because no garden point or measured microclimate was supplied. USDA
+also cautions that hardiness is general perennial cold-survival guidance, not
+a preferred growth-temperature range or a substitute for site measurements.
+UC ANR supports only the regional summary: San Mateo and San Francisco
+Counties have generally dry summers and mild winters under ocean and bay
+influence, while fog, overcast, and temperature vary among coastal and inland
+microclimates. Outdoor grow-bag decisions may use that scoped context; indoor
+room and aquarium conditions must be measured independently.
+
+Each future companion worksheet owns claims in a top-level `claims` collection.
+A claim has exactly one authoritative home and this record shape (optional
+fields are conditional on `evidence_category`):
+
+```json
+{
+  "claim_id": "stable-entry-scoped-id",
+  "metric": "machine_readable_quantity",
+  "range": {"min": 30, "max": 35},
+  "units": "degF",
+  "applicable_taxon": "named species, cultivar, candidate, or not taxon-specific",
+  "propagation_method": "method name or not_applicable",
+  "life_stage": "seed, cutting, establishing, established, or not_applicable",
+  "growing_conditions": "conditions under which the claim applies",
+  "geographic_context": "source region, Pacifica context ID, indoors, or aquarium",
+  "evidence_category": "published | proposed | observed | unknown | not_applicable",
+  "source_refs": ["SOURCE-KEY"],
+  "applicability": "why the evidence applies and its limits",
+  "provenance": {"date": "YYYY-MM-DD", "method": "measurement method", "conditions": "conditions at observation"},
+  "reason": "required explanation for unknown or not_applicable"
+}
+```
+
+Use either scalar `value` or ordered `range`, never both. Numeric values and
+bounds are finite JSON numbers; `range.min <= range.max`; the units are the same
+for both bounds. Zero is a real measured or supported number, never shorthand
+for unknown or not applicable. `unknown` and `not_applicable` omit `value`,
+`range`, and `units` and require `reason`. Published and proposed claims require
+nonempty `source_refs` plus `applicability`; proposed means a clearly labeled
+practical starting point derived from the cited guidance, not a reported user
+practice. Observed claims instead require `provenance.date`, `method`, and
+relevant conditions; they may omit an external source because they report an
+actual local measurement. The remaining descriptive applicability fields are
+always nonempty, using the literal `not_applicable` only where the dimension
+truly does not apply.
+
+References use `{ "entry_id": "pothos", "claim_id": "..." }`, never a
+filesystem path. Both `numbers.yaml` and `propagation.yaml` may point to that
+pair, but only the owning worksheet contains the claim. Claim IDs are unique
+within an entry and remain stable when a page moves. A shared context reference
+uses `{ "context_id": "pacifica-ca-shared-v1" }`; source keys then resolve by
+the rule above.
+
+These compact examples demonstrate states, not new plant-care advice:
+
+```json
+[
+  {
+    "claim_id": "usda-94044-extreme-minimum",
+    "metric": "average_annual_extreme_minimum_temperature",
+    "range": {"min": 30, "max": 35}, "units": "degF",
+    "applicable_taxon": "not taxon-specific", "propagation_method": "not_applicable",
+    "life_stage": "established", "growing_conditions": "outdoor ZIP-level context",
+    "geographic_context": "US ZIP Code 94044", "evidence_category": "published",
+    "source_refs": ["CLIMATE-USDA-PHZM-ZIP-94044"],
+    "applicability": "ZIP lookup only; not a measured garden minimum"
+  },
+  {
+    "claim_id": "example-proposed-mix-arithmetic", "metric": "substrate_recipe",
+    "value": 10, "units": "litre_batch", "applicable_taxon": "schema example only",
+    "propagation_method": "not_applicable", "life_stage": "established",
+    "growing_conditions": "hypothetical container", "geographic_context": "none",
+    "evidence_category": "proposed", "source_refs": ["REQUIRED-REAL-SOURCE"],
+    "applicability": "Non-authoritative arithmetic example; research must replace it",
+    "components": [{"ingredient": "ingredient A", "percent_by_volume": 60, "litres": 6},
+                   {"ingredient": "ingredient B", "percent_by_volume": 40, "litres": 4}],
+    "recipe_basis": "proposed_starting_point"
+  },
+  {
+    "claim_id": "example-local-reading", "metric": "garden_direct_sun_hours",
+    "value": 0, "units": "hours_per_day", "applicable_taxon": "not taxon-specific",
+    "propagation_method": "not_applicable", "life_stage": "established",
+    "growing_conditions": "example observation only", "geographic_context": "local site",
+    "evidence_category": "observed", "source_refs": [],
+    "applicability": "Demonstrates that observed zero is not unknown",
+    "provenance": {"date": "YYYY-MM-DD", "method": "hourly observation", "conditions": "record sky and obstructions"}
+  },
+  {
+    "claim_id": "garden-exposure", "metric": "garden_direct_sun_hours",
+    "applicable_taxon": "not taxon-specific", "propagation_method": "not_applicable",
+    "life_stage": "established", "growing_conditions": "outdoor garden",
+    "geographic_context": "pacifica-ca-shared-v1", "evidence_category": "unknown",
+    "source_refs": [], "applicability": "site measurement needed", "reason": "not measured"
+  },
+  {
+    "claim_id": "hornwort-soil-recipe", "metric": "terrestrial_substrate_recipe",
+    "applicable_taxon": "Ceratophyllum identity candidate", "propagation_method": "fragmentation",
+    "life_stage": "establishing", "growing_conditions": "aquarium",
+    "geographic_context": "aquarium", "evidence_category": "not_applicable",
+    "source_refs": [], "applicability": "aquatic plant context",
+    "reason": "Use the aquatic setup fields; no terrestrial soil recipe applies"
+  }
+]
+```
+
+Production data must replace every schema-only placeholder before publication.
+Preserve the precision of the source: display its Fahrenheit value first, with
+a sensibly rounded Celsius conversion (for example whole °F to no more than one
+decimal °C), and do not store a conversion as independent evidence. Direct-sun
+hours, astronomical daylight duration, and aquarium-lamp runtime are different
+metrics. Likewise, seed germination, cutting callus formation, first roots or
+regrowth, and transplant readiness are different milestones; lifespan,
+maturity, and time to flowering are different concepts. Do not assert a
+universal lifespan for indefinitely renewed clonal plants. A bird-of-paradise
+claim names *Strelitzia reginae*, *S. nicolai*, or both only when the cited
+evidence supports that exact applicability; provisional identity never permits
+merging species-specific values.
+
+A terrestrial `substrate_recipe` records named `components`, each with
+`percent_by_volume`; a complete recipe totals exactly 100. For a 10-litre
+batch, each component's litres equal `percent_by_volume / 10` (for example,
+60% becomes 6 L). Record `recipe_basis` as `directly_published`, `adapted`, or
+`proposed_starting_point`, cite the derivation, and keep established-plant mix
+separate from propagation medium. Never label it as the user's current grow-bag
+mix without an observation. Hornwort uses aquatic replacements—placement
+(`floating` or supported attachment), water temperature and chemistry, lamp
+runtime and intensity/context, flow, livestock constraints, and fragment
+regrowth milestones—rather than soil components, terrestrial roots, or a
+10-litre substrate conversion.
+
 ### Versioned manifest and builder proposal
 
 Manifest schema v2 should recognize exactly four page kinds: `profile`,
