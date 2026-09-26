@@ -243,36 +243,6 @@
       "provenance": {}
     },
     {
-      "claim_id": "stem-root-initiation",
-      "metric": "rooting_or_regrowth",
-      "quantity": {
-        "kind": "unknown",
-        "reason": "The reviewed candidate-cultivar and Kalanchoe-applicable sources give no dependable stem-rooting interval."
-      },
-      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
-      "propagation_method": "stem cutting",
-      "life_stage": "cutting",
-      "growing_conditions": "No sufficiently scoped conditions established",
-      "geographic_context": "Pacifica outdoor grow bag; exact site exposure and microclimate unmeasured",
-      "evidence_category": "unknown",
-      "provenance": {}
-    },
-    {
-      "claim_id": "stem-transplant-timing",
-      "metric": "transplant_readiness",
-      "quantity": {
-        "kind": "unknown",
-        "reason": "No fixed transplant interval was found; use observable rooting and growth criteria."
-      },
-      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
-      "propagation_method": "stem cutting",
-      "life_stage": "cutting",
-      "growing_conditions": "No sufficiently scoped conditions established",
-      "geographic_context": "Pacifica outdoor grow bag; exact site exposure and microclimate unmeasured",
-      "evidence_category": "unknown",
-      "provenance": {}
-    },
-    {
       "claim_id": "time-to-maturity",
       "metric": "maturity",
       "quantity": {

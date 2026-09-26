@@ -115,7 +115,8 @@
     {
       "claim_id": "zip-majority-zone-context",
       "metric": "hardiness_zone_context",
-      "description": "Use pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone only as ZIP-majority cold-extreme context; it is not this yard’s zone or a growth temperature.",
+      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone",
+      "description": "Use the shared Pacifica hardiness claim only as ZIP-majority cold-extreme context; it is not this yard’s zone or a growth temperature.",
       "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
@@ -251,38 +252,17 @@
       "provenance": {}
     },
     {
-      "claim_id": "terminal-cutting-root-initiation",
-      "metric": "rooting_or_regrowth",
-      "quantity": {
-        "kind": "value",
-        "value": 10,
-        "unit": "day"
-      },
-      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
-      "propagation_method": "terminal stem cutting",
-      "life_stage": "cutting",
-      "growing_conditions": "Approximately 24 degC commercial nursery propagation conditions",
-      "geographic_context": "Vista, California nursery; not Pacifica-specific",
-      "evidence_category": "published",
-      "provenance": {
-        "source_refs": [
-          "SED-PAT"
-        ],
-        "applicability": "Patent reports time to initiate roots for the cultivar under stated commercial conditions; not transplant readiness."
-      }
-    },
-    {
       "claim_id": "patent-plant-age",
-      "metric": "maturity",
+      "metric": "age_at_patent_observation",
       "quantity": {
         "kind": "value",
         "value": 4,
-        "unit": "month from cutting"
+        "unit": "month"
       },
       "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
       "propagation_method": "terminal stem cutting",
       "life_stage": "established",
-      "growing_conditions": "One-gallon container; commercial greenhouse; approximately 2500 foot-candles; 1–29 degC night/day observations",
+      "growing_conditions": "Four months from cutting; one-gallon container; commercial greenhouse; approximately 2500 foot-candles; 1–29 degC night/day observations",
       "geographic_context": "Vista, California nursery",
       "evidence_category": "published",
       "provenance": {
@@ -294,7 +274,7 @@
     },
     {
       "claim_id": "patent-height",
-      "metric": "mature_height",
+      "metric": "height_at_patent_observation",
       "quantity": {
         "kind": "range",
         "minimum": 10,
@@ -316,7 +296,7 @@
     },
     {
       "claim_id": "patent-spread",
-      "metric": "mature_spread",
+      "metric": "spread_at_patent_observation",
       "quantity": {
         "kind": "range",
         "minimum": 22,
