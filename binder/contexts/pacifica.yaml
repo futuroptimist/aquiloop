@@ -16,6 +16,7 @@
     "zone_interval_fahrenheit": 10,
     "half_zone_interval_fahrenheit": 5,
     "lookup": {
+      "claim_id": "zip-94044-majority-hardiness-zone",
       "method": "Queried the ZIP_CODE field for 94044 in layer 296 of the PHZM_2023_Zip_Code_Table FeatureServer used by the USDA interactive map; inspected ZIP_CODE, Class, and MAJORITY fields.",
       "geographic_scope": "majority classification across ZIP Code 94044, not a locality boundary or point location",
       "result": "10a",

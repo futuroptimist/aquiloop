@@ -292,6 +292,23 @@ authoritative claim as `<entry-id>#<claim-id>` (for example,
 defined in exactly one of the entry's future companion worksheets; either page
 may list that reference without copying the claim.
 
+A shared climate claim instead uses the equally small, context-qualified form
+`<context-id>#<claim-id>`. For example, the two companion records may contain:
+
+```json
+{
+  "numbers_and_pacifica": {"claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"},
+  "propagation": {"claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"}
+}
+```
+
+Both references resolve uniquely to `hardiness.lookup` in the shared context,
+where that `claim_id` is defined. This is only the shared-climate counterpart
+to the entry convention, not a general-purpose reference framework. A
+`claim_ref` points to a claim record and is never a bibliography key;
+`provenance.source_refs` contains bibliography keys such as
+`CLIMATE-USDA-PHZM-ZIP-94044`.
+
 The shared context records the authoritative USDA 2023 ZIP lookup for 94044 as
 a **ZIP-majority 10a** classification (30–35 °F / -1.1–1.7 °C), based on
 1991–2020 weather data. This does not settle a particular Pacifica yard's zone,
@@ -340,12 +357,26 @@ fields and units and require a nonempty `reason`; unknown means research or a
 measurement has not resolved the metric, while not applicable means the metric
 does not describe that taxon, method, life stage, or setting.
 
+The numeric `quantity` union is only for numeric metrics. A sourced descriptive
+claim uses `description` instead of `quantity`, while a component recipe uses
+the aggregate `recipe` payload described below; exactly one payload is present.
+Descriptions are nonempty strings and use the same evidence category and
+provenance rules, without dummy numbers. For example, an aquatic placement may
+be `{ "description": "floating", "evidence_category": "published",
+"provenance": {"source_refs": ["future-entry-source-key"],
+"applicability": "Named taxon, life stage, and tank conditions from the cited source."} }`;
+a livestock-context observation may be `{ "description": "No livestock present",
+"evidence_category": "observed", "provenance": {"date": "YYYY-MM-DD",
+"method": "visual tank inventory", "conditions": "tank identity recorded"} }`.
+These fragments sit in otherwise complete claim records with the required scope
+fields above. Later steps will implement and validate these shapes.
+
 Evidence categories impose these provenance rules:
 
-- `published` requires nonempty `source_refs` and `applicability`; the quantity
-  reproduces a cited value or ordered range at source precision.
+- `published` requires nonempty `source_refs` and `applicability`; the payload
+  reproduces a cited value, ordered range, or description at source precision.
 - `proposed` is a practical starting point derived from guidance, not a quoted
-  source value. It requires nonempty `source_refs`, `applicability`, and
+  source value or description. It requires nonempty `source_refs`, `applicability`, and
   `derivation`, and must be labeled “proposed starting point” on the page.
 - `observed` is an actual local measurement. It requires ISO `date`, a
   repeatable `method`, and relevant `conditions`; it needs no external source
@@ -438,14 +469,45 @@ universal lifespan for indefinitely renewable clonal plants.
 A terrestrial established-plant recipe uses `recipe_basis: "percent_by_volume"`,
 a `recipe_evidence` value of `directly_published`, `adapted`, or
 `proposed_starting_point`, and named `components`, each with finite
-`percent_by_volume`, expressed as an integer percent point from 0 through 100.
-Components must total exactly 100. For a 10-litre batch,
+`percent_by_volume`, expressed as a JSON number from 0 through 100 inclusive.
+Decimal percentages are allowed. Validation must parse their JSON decimal
+lexemes as exact base-10 decimals (or equivalently scale all values to a common
+power of ten) and require their mathematical sum to equal exactly 100; it must
+not sum binary floating-point approximations. For a 10-litre batch,
 each component's litres equal `percent_by_volume / 10` (for example, 20% is
 2 L); display precision must remain practical and the component total must be
 10 L. Record ingredient purposes and source/applicability provenance. Never
 call a proposed recipe the user's current mix. Established-plant substrate and
 propagation medium are different records and may cross-reference shared
 component evidence without merging their purposes.
+
+A minimal aggregate shape is, for example:
+
+```json
+{
+  "recipe": {
+    "recipe_basis": "percent_by_volume",
+    "recipe_evidence": "proposed_starting_point",
+    "components": [
+      {"name": "component A", "percent_by_volume": 33.3, "purpose": "example only"},
+      {"name": "component B", "percent_by_volume": 33.3, "purpose": "example only"},
+      {"name": "component C", "percent_by_volume": 33.4, "purpose": "example only"}
+    ]
+  },
+  "evidence_category": "proposed",
+  "provenance": {
+    "source_refs": ["future-entry-source-key"],
+    "applicability": "Illustrative structure only; later research supplies taxon and conditions.",
+    "derivation": "Component percentages adapted from the cited guidance; not plant advice."
+  }
+}
+```
+
+This fragment also belongs in a complete, scoped claim record. Component names,
+percentages, and purposes form one aggregate claim and inherit that explicit
+provenance; a component needing distinct support may carry its own
+`provenance` or a claim reference. This contract does not fabricate numeric
+quantities for descriptive records.
 
 Hornwort uses an `aquatic_setup` record instead of a recipe. Its replacement
 fields are `placement` (including floating or supported attachment where
