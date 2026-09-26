@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "entry": "sedum-loves-fire",
+  "worksheet": "propagation",
+  "identity_scope": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+  "context_claim_refs": [
+    "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+  ],
+  "claims": [
+    {
+      "claim_id": "preferred-method",
+      "metric": "propagation_method",
+      "description": "Use a terminal stem cutting; the patent documents the named cultivar as stable through terminal vegetative cuttings, while Iowa State and MSU support stem cuttings for Sedum/succulents generally.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "healthy parent in active growth; general home procedure",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT",
+          "SED-IA",
+          "SED-MSU"
+        ],
+        "applicability": "Cultivar method plus genus/general procedure; applies to the specimen only if identity and parent health are suitable."
+      }
+    },
+    {
+      "claim_id": "cutting-length",
+      "metric": "cutting_length",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 6,
+        "unit": "in"
+      },
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "healthy stem; clean, sharp pruners",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA"
+        ],
+        "applicability": "General Sedum-applicable stem-cutting procedure, not a cultivar-specific measurement."
+      }
+    },
+    {
+      "claim_id": "prepare-material",
+      "metric": "propagation_step",
+      "description": "Prepare a small clean container with drainage, clean sharp pruners, and well-drained medium. Select a firm, healthy stem without rot or pest damage.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "sanitary home workspace",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA",
+          "SED-MSU"
+        ],
+        "applicability": "Synthesis of the cited general succulent preparation and hygiene guidance."
+      }
+    },
+    {
+      "claim_id": "make-and-strip-cutting",
+      "metric": "propagation_step",
+      "description": "Remove a 3–6 inch stem section with clean, sharp pruners, then remove leaves from the lower half without crushing the stem.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "healthy parent material",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA"
+        ],
+        "applicability": "Iowa State procedure explicitly lists Sedum among suitable genera."
+      }
+    },
+    {
+      "claim_id": "callus-preparation",
+      "metric": "cutting_callus_formation",
+      "description": "Leave the cut end on a clean tray or suspend it in an empty pot for several days, until the wound is dry and callused; do not insert a fresh wet wound.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "dry, clean location out of wet medium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA"
+        ],
+        "applicability": "General Sedum-applicable guidance; “several days” is retained without invented precision."
+      }
+    },
+    {
+      "claim_id": "rooting-medium",
+      "metric": "propagation_medium",
+      "description": "Insert the callused end upright into well-drained cactus potting soil or perlite; sterilized sand is an alternative general succulent rooting medium.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "container with drainage",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA",
+          "SED-MSU"
+        ],
+        "applicability": "General succulent/Sedum medium options; distinct from the established-plant recipe."
+      }
+    },
+    {
+      "claim_id": "moisture-and-light",
+      "metric": "propagation_aftercare",
+      "description": "Keep the medium only slightly moist and water sparingly until roots develop. Provide bright light but avoid an abrupt move into strong midday sun.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "warm, bright, freely draining propagation setup",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU"
+        ],
+        "applicability": "General succulent aftercare; no unsupported watering interval or exact light hours are imposed."
+      }
+    },
+    {
+      "claim_id": "root-check",
+      "metric": "rooting_or_regrowth",
+      "description": "Test gently for resistance rather than pulling the cutting out; resistance indicates roots have formed. Also look for stable new growth and absence of stem collapse.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "after callusing and placement in medium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU"
+        ],
+        "applicability": "Observable general succulent rooting check; no elapsed-time promise."
+      }
+    },
+    {
+      "claim_id": "patent-root-initiation-reference",
+      "metric": "rooting_or_regrowth",
+      "description": "See sedum-loves-fire#cultivar-root-initiation for the patent’s approximately 10-day root-initiation observation at approximately 24 degC.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "terminal stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "patent nursery conditions only",
+      "geographic_context": "Vista, California commercial nursery",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-PAT"
+        ],
+        "applicability": "Cross-reference preserves the number’s authoritative home in numbers.yaml; root initiation is not transplant readiness."
+      }
+    },
+    {
+      "claim_id": "transfer-criteria",
+      "metric": "transplant_readiness",
+      "description": "Transfer after the cutting resists a gentle tug and shows stable growth; pot into a draining container, then acclimate gradually to ordinary light and dry-down care.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "rooted cutting with observable resistance and stable growth",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-MSU"
+        ],
+        "applicability": "Observation-based readiness from MSU; no unsupported number of days."
+      }
+    },
+    {
+      "claim_id": "failure-cues",
+      "metric": "propagation_failure_signs",
+      "description": "Exactly three checks: soft or dark cut base → check whether it was callused and whether medium stays wet; shriveling without resistance → check root formation and moisture balance; pale stretched new growth → check light before increasing exposure gradually.",
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "home propagation setup",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SED-IA",
+          "SED-MSU"
+        ],
+        "applicability": "Failure checks synthesize cited rot-prevention, rooting-test, watering, and light guidance without diagnosing the specimen."
+      }
+    },
+    {
+      "claim_id": "transplant-readiness-days",
+      "metric": "transplant_readiness",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No source reviewed gives a cultivar-specific elapsed time from cutting to transplant readiness; use the observable root and growth criteria."
+      },
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "home propagation conditions vary",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "leaf-method-timeline",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Although general sources list Sedum as leaf-propagatable, no sufficiently specific timeline or superiority evidence was established for the candidate cultivar; this worksheet therefore covers stem cuttings."
+      },
+      "applicable_taxon": "candidate Sedum adolphi ‘LOVE’S FIRE’; specimen and cultivar match unverified",
+      "propagation_method": "leaf cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "method not selected",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ]
+}

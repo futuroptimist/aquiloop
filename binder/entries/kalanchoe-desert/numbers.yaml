@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "entry": "kalanchoe-desert",
+  "worksheet": "numbers",
+  "identity_scope": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+  "context_claim_refs": [
+    "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+  ],
+  "claims": [
+    {
+      "claim_id": "candidate-position",
+      "metric": "light_category",
+      "description": "Full sun or partial shade in a sheltered position; acclimation and measured local exposure remain necessary.",
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "RHS candidate-cultivar cultivation; outdoor placement only during suitably warm weather",
+      "geographic_context": "general container guidance; Pacifica outdoor placement requires site observation",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS",
+          "KAL-HARD"
+        ],
+        "applicability": "RHS qualitative position guidance for the candidate cultivar; it does not support an exact direct-sun duration for Pacifica."
+      }
+    },
+    {
+      "claim_id": "outdoor-direct-sun-duration",
+      "metric": "direct_sun_duration",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed candidate-cultivar source gives qualitative full sun or partial shade, not supported hours; the grow-bag exposure is unmeasured."
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "current outdoor grow bag",
+      "geographic_context": "Pacifica yard; exact location omitted",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "indoor-night-temperature",
+      "metric": "preferred_growth_temperature",
+      "quantity": {
+        "kind": "range",
+        "minimum": 45,
+        "maximum": 65,
+        "unit": "degF"
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "General indoor Kalanchoe care at night",
+      "geographic_context": "indoor; not inferred from Pacifica climate",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-IA"
+        ],
+        "applicability": "Genus-level indoor guidance, not a cultivar-specific outdoor range."
+      }
+    },
+    {
+      "claim_id": "indoor-day-temperature",
+      "metric": "preferred_growth_temperature",
+      "quantity": {
+        "kind": "range",
+        "minimum": 50,
+        "maximum": 70,
+        "unit": "degF"
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "General indoor Kalanchoe care during daytime",
+      "geographic_context": "indoor; not inferred from Pacifica climate",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-IA"
+        ],
+        "applicability": "Genus-level indoor guidance, not a cultivar-specific outdoor range."
+      }
+    },
+    {
+      "claim_id": "candidate-absolute-minimum-winter-band",
+      "metric": "cold_protection_threshold",
+      "quantity": {
+        "kind": "range",
+        "minimum": 10,
+        "maximum": 15,
+        "unit": "degC"
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "RHS H1b absolute-minimum winter band; generally houseplant or heated-glasshouse care",
+      "geographic_context": "UK hardiness classification; use only as conservative cold-protection context",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS",
+          "KAL-HARD"
+        ],
+        "applicability": "H1b is an absolute-minimum winter band, not an optimum growth range or a USDA-zone equivalence."
+      }
+    },
+    {
+      "claim_id": "candidate-size-height",
+      "metric": "size_height",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0.1,
+        "maximum": 0.5,
+        "unit": "m"
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "RHS eventual size band under its cultivation profile",
+      "geographic_context": "RHS cultivation context; specimen and local response unverified",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS"
+        ],
+        "applicability": "Candidate-cultivar eventual height band; only applicable if identity matches."
+      }
+    },
+    {
+      "claim_id": "candidate-size-spread",
+      "metric": "size_spread",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0.1,
+        "maximum": 0.5,
+        "unit": "m"
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "RHS eventual size band under its cultivation profile",
+      "geographic_context": "RHS cultivation context; specimen and local response unverified",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS"
+        ],
+        "applicability": "Candidate-cultivar eventual spread band; only applicable if identity matches."
+      }
+    },
+    {
+      "claim_id": "candidate-time-to-maturity",
+      "metric": "maturity",
+      "quantity": {
+        "kind": "range",
+        "minimum": 2,
+        "maximum": 5,
+        "unit": "year"
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "RHS time-to-maturity field for its candidate-cultivar profile",
+      "geographic_context": "RHS cultivation context; specimen and local response unverified",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS"
+        ],
+        "applicability": "Candidate-cultivar maturity range; it is not lifespan or time to flower."
+      }
+    },
+    {
+      "claim_id": "dry-down-watering-trigger",
+      "metric": "water_moisture_trigger",
+      "description": "Allow the medium to dry between waterings but not to wilting; never leave the container standing in retained water.",
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "General container-grown Kalanchoe with free drainage",
+      "geographic_context": "general container guidance; Pacifica outdoor placement requires site observation",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-IA"
+        ],
+        "applicability": "Genus-level observable trigger; no fixed outdoor interval is inferred."
+      }
+    },
+    {
+      "claim_id": "established-mix-starting-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "recipe": {
+        "recipe_basis": "percent_by_volume",
+        "recipe_evidence": "proposed_starting_point",
+        "batch_volume_litres": 10,
+        "components": [
+          {
+            "name": "peat-free loam-based potting compost",
+            "percent_by_volume": 66.7,
+            "litres_per_10_litre_batch": 6.67,
+            "purpose": "structured water- and nutrient-holding base"
+          },
+          {
+            "name": "horticultural grit",
+            "percent_by_volume": 33.3,
+            "litres_per_10_litre_batch": 3.33,
+            "purpose": "increase drainage and coarse mineral fraction"
+          }
+        ]
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container with an unobstructed drainage hole; assess drainage before use",
+      "geographic_context": "general container guidance; Pacifica outdoor placement requires site observation",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS",
+          "KAL-IA"
+        ],
+        "applicability": "RHS specifies peat-free loam-based compost with added grit and Iowa State requires good drainage, but neither publishes a ratio.",
+        "derivation": "Two parts compost to one part grit is an explicitly proposed starting ratio, decimalized as 66.7% + 33.3% = 100.0%; for 10 L, 6.67 + 3.33 = 10.00 L. It is not the user’s current mix."
+      }
+    },
+    {
+      "claim_id": "seed-germination-interval",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No practical seed method for the candidate cultivar was established; RHS recommends plantlets or stem cuttings."
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "unresolved",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "stem-root-initiation",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed sources support stem cuttings but do not publish a candidate-specific rooting interval."
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "well-drained propagation medium; timing unresolved",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "stem-transplant-readiness",
+      "metric": "transplant_readiness",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No candidate-specific elapsed time was found; readiness must be judged by established roots and stable new growth."
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "well-drained propagation medium; timing unresolved",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "lifespan-years",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible lifespan in years was found, and a clonally renewable succulent should not be assigned a universal lifespan."
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "container culture",
+      "geographic_context": "general container guidance; Pacifica outdoor placement requires site observation",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "candidate-flower-stalk-height",
+      "metric": "flowering_size",
+      "quantity": {
+        "kind": "value",
+        "value": 35,
+        "unit": "cm"
+      },
+      "applicable_taxon": "candidate Kalanchoe humilis ‘Desert Surprise’; specimen match unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "RHS description of flower stalk height when flowering occurs",
+      "geographic_context": "RHS cultivation context; specimen and local response unverified",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "KAL-RHS"
+        ],
+        "applicability": "Candidate-cultivar morphology, not a flowering timeline."
+      }
+    }
+  ]
+}
