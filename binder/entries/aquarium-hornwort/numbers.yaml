@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "identity-scope",
+      "metric": "identity_scope",
+      "description": "Use Ceratophyllum demersum only as a working species example. The common name hornwort does not identify the owner specimen, and guidance for a named commercial selection is not evidence about that specimen.",
+      "applicable_taxon": "provisional Ceratophyllum demersum; specimen species and aquarium trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium; specimen source and tank conditions unreported",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-FWS", "HOR-WA", "HOR-TROP"],
+        "applicability": "The government records describe wild C. demersum, while Tropica describes a particular Bolivian selection; none identifies the owner specimen."
+      }
+    },
+    {
+      "claim_id": "light-demand",
+      "metric": "aquarium_light_demand",
+      "description": "Low light is tolerated by wild C. demersum; Tropica also rates its particular selection as low-demand. Neither source gives a usable PAR value for this specimen or lamp.",
+      "applicable_taxon": "provisional Ceratophyllum demersum; Tropica rating limited to its documented selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Submerged or floating in a freshwater aquarium; lamp and depth unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-TROP"],
+        "applicability": "Qualitative tolerance only; it does not establish intensity at the plant or identify the owner specimen."
+      }
+    },
+    {
+      "claim_id": "lamp-runtime-start",
+      "metric": "aquarium_lamp_runtime",
+      "quantity": {"kind": "range", "minimum": 6, "maximum": 8, "unit": "hour_per_day"},
+      "applicable_taxon": "general newly planted freshwater aquarium; not species-specific",
+      "propagation_method": "not_applicable",
+      "life_stage": "establishing",
+      "growing_conditions": "Timer-controlled planted aquarium; actual lamp intensity, depth, and existing schedule unknown",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-ACO-LIGHT"],
+        "applicability": "Aquarium Co-Op recommends 6–8 hours as a general starting duration for a newly planted aquarium, not as a C. demersum requirement.",
+        "derivation": "Use the published general starting interval only after recording the current schedule; hold intensity and other conditions steady, then adjust gradually from plant and algae response rather than treating runtime as a guaranteed target."
+      }
+    },
+    {
+      "claim_id": "water-temperature-tolerance",
+      "metric": "water_temperature_tolerance",
+      "quantity": {"kind": "range", "minimum": 50, "maximum": 85, "unit": "degF"},
+      "applicable_taxon": "aquarium-trade hornwort presented by Aquarium Co-Op as Ceratophyllum demersum",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Aquarium or pond; broad stated tolerance, not an optimum or livestock prescription",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "The source also gives 10–30 °C. Preserve its rounded endpoints; confirm livestock requirements and actual temperature before using the range."
+      }
+    },
+    {
+      "claim_id": "tank-temperature",
+      "metric": "current_tank_temperature",
+      "quantity": {"kind": "unknown", "reason": "No measured tank temperature or livestock requirement was supplied; a published tolerance is not a current reading or preferred target."},
+      "applicable_taxon": "owner aquarium and unverified hornwort specimen",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Owner aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "water-ph",
+      "metric": "water_ph",
+      "quantity": {"kind": "unknown", "reason": "The substantively reviewed sources do not establish a numeric aquarium pH target for this unverified specimen, and no tank measurement was supplied."},
+      "applicable_taxon": "owner aquarium and unverified hornwort specimen",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium; chemistry unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "water-hardness",
+      "metric": "water_hardness",
+      "description": "Wild C. demersum tolerates hard, high-calcium water, but the source supplies no GH, KH, or calcium interval and the tank chemistry is unmeasured.",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Fresh water; no numeric aquarium target",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA"],
+        "applicability": "A qualitative species tolerance only; do not infer a preferred GH/KH or alter livestock water from it."
+      }
+    },
+    {
+      "claim_id": "nitrogen-cycle-readings",
+      "metric": "ammonia_nitrite_nitrate",
+      "quantity": {"kind": "unknown", "reason": "No ammonia, nitrite, nitrate, test method, livestock, or maintenance record was supplied; plant guidance must not substitute for livestock-safe water-quality management."},
+      "applicable_taxon": "owner aquarium",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium; nitrogen-cycle status unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "flow",
+      "metric": "water_flow",
+      "description": "Use gentle flow and keep needles away from the filter intake. Wild C. demersum also occurs in ponds, lakes, and slow-moving streams and rivers.",
+      "applicable_taxon": "aquarium-trade hornwort presented as Ceratophyllum demersum; habitat statement is wild species-level",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium; filter and circulation pattern unknown",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE", "HOR-WA"],
+        "applicability": "Qualitative aquarium and habitat guidance; it does not establish a flow rate for the owner tank."
+      }
+    },
+    {
+      "claim_id": "floating-placement",
+      "metric": "placement",
+      "description": "Prefer free-floating placement. C. demersum is rootless, and aquarium guidance states that floating gives access to light and carbon dioxide from the air.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium with surface gas exchange maintained",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-ACO-CARE"],
+        "applicability": "Species and aquarium guidance; floating remains an option, not proof of identity or permission to cover the water surface."
+      }
+    },
+    {
+      "claim_id": "supported-placement",
+      "metric": "supported_attachment",
+      "description": "Bottom or hardscape placement is possible, but do not describe it as rooting: wild plants may anchor with modified leaves, Tropica permits bottom placement for its selection, and aquarium guidance warns that a buried or attached end can rot.",
+      "applicable_taxon": "provisional Ceratophyllum demersum; Tropica detail limited to its selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium; optional loose support or bottom placement without a root-establishment claim",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-TROP", "HOR-ACO-CARE"],
+        "applicability": "The sources support possible placement, not a universal attachment method or rooted transplant procedure."
+      }
+    },
+    {
+      "claim_id": "nutrient-context",
+      "metric": "water_column_nutrients",
+      "description": "Hornwort takes nutrients from the water column and fast growth can deplete them; wild dense colonies are also associated with nutrient-rich water. Record livestock, tests, plant response, and the existing fertilizer regimen before adding fertilizer.",
+      "applicable_taxon": "provisional Ceratophyllum demersum; wild habitat and aquarium-horticulture contexts kept distinct",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium; stocking, feeding, tests, and fertilizer regimen unknown",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-ACO-CARE"],
+        "applicability": "The sources explain nutrient context but do not support a dose for this tank."
+      }
+    },
+    {
+      "claim_id": "carbon-dioxide",
+      "metric": "supplemental_carbon_dioxide",
+      "description": "Aquarium Co-Op states that injected carbon dioxide is not required for hornwort; the owner tank's CO2 setup remains unknown.",
+      "applicable_taxon": "aquarium-trade hornwort presented as Ceratophyllum demersum",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium; gas exchange and CO2 setup unreported",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "General aquarium-horticulture guidance, not a measured carbon concentration or livestock recommendation."
+      }
+    },
+    {
+      "claim_id": "aquarium-growth-rate",
+      "metric": "stem_growth_rate",
+      "quantity": {"kind": "range", "minimum": 1, "maximum": 4, "unit": "inch_per_week"},
+      "applicable_taxon": "aquarium-trade hornwort presented as Ceratophyllum demersum",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Aquarium with enough light and nutrients; source does not quantify either condition",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "Conditional aquarium growth report, also given as 3–10 cm/week; it is not a forecast for the unmeasured owner tank."
+      }
+    },
+    {
+      "claim_id": "wild-stem-length",
+      "metric": "wild_stem_length_maximum",
+      "quantity": {"kind": "range", "minimum": 3, "maximum": 4, "unit": "metre"},
+      "applicable_taxon": "wild Ceratophyllum demersum",
+      "propagation_method": "not_applicable",
+      "life_stage": "mature",
+      "growing_conditions": "Wild freshwater habitat; not a maintained aquarium expectation",
+      "geographic_context": "Washington species account; species is reported worldwide",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA"],
+        "applicability": "Wild stem maximum only; pruning, tank depth, light, and nutrients constrain aquarium form."
+      }
+    },
+    {
+      "claim_id": "tropica-selection-height",
+      "metric": "commercial_selection_height_after_two_months",
+      "quantity": {"kind": "range", "minimum": 5, "maximum": 30, "unit": "centimetre"},
+      "applicable_taxon": "Tropica Ceratophyllum demersum selection collected in Bolivia",
+      "propagation_method": "not_applicable",
+      "life_stage": "establishing",
+      "growing_conditions": "Tropica aquarium plant-details convention; conditions not quantified on the record",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-TROP"],
+        "applicability": "Tropica defines the field as average height after two months in a tank and marks the upper bound as 30+ cm; it is selection-specific and not a growth forecast for the owner specimen."
+      }
+    },
+    {
+      "claim_id": "life-cycle",
+      "metric": "life_cycle",
+      "description": "Washington Ecology describes C. demersum as an aquatic perennial.",
+      "applicable_taxon": "wild Ceratophyllum demersum",
+      "propagation_method": "not_applicable",
+      "life_stage": "mature",
+      "growing_conditions": "Wild freshwater habitat",
+      "geographic_context": "Washington species account; species is reported worldwide",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA"],
+        "applicability": "Life-cycle category only; perennial does not establish a lifespan in years for an aquarium stem or clone."
+      }
+    },
+    {
+      "claim_id": "lifespan-years",
+      "metric": "lifespan",
+      "quantity": {"kind": "unknown", "reason": "No defensible lifespan in years was found for an aquarium stem or clonally renewed C. demersum population; the published perennial life-cycle category is not a numeric lifespan."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "not_applicable",
+      "life_stage": "mature",
+      "growing_conditions": "Aquarium; continuity depends on conditions, trimming, fragmentation, and replacement growth",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "terrestrial-soil-recipe",
+      "metric": "terrestrial_soil_percentages",
+      "quantity": {"kind": "not_applicable", "reason": "C. demersum is a rootless submerged aquatic plant; the hornwort contract uses an aquatic setup rather than terrestrial soil percentages."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "rooting-depth",
+      "metric": "rooting_depth",
+      "quantity": {"kind": "not_applicable", "reason": "The candidate species lacks roots; optional bottom support is placement, not a rooting-depth prescription."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "rooted-transplant",
+      "metric": "rooted_plant_transplant",
+      "quantity": {"kind": "not_applicable", "reason": "A rootless hornwort fragment does not pass through a rooted transplant stage; readiness is judged by sustained aquatic shoot growth."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "tank-and-livestock-context",
+      "metric": "tank_volume_livestock_and_maintenance",
+      "quantity": {"kind": "unknown", "reason": "Tank volume, livestock, filtration, flow pattern, water-change practice, feeding, fertilizer, CO2, and current lamp schedule were not supplied; confirm them before changing aquarium conditions."},
+      "applicable_taxon": "owner aquarium and unverified hornwort specimen",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Owner aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone",
+      "use": "Background locality record only; terrestrial hardiness must not be applied to aquarium water temperature or livestock care."
+    },
+    {
+      "claim_ref": "aquarium-hornwort#fragment-regrowth",
+      "use": "Vegetative-establishment card; the authoritative regrowth claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "aquarium-hornwort#seed-germination",
+      "use": "Seed-germination card; the authoritative unknown practical method remains on the propagation worksheet."
+    }
+  ]
+}

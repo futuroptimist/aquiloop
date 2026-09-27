@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "Use aquatic fragmentation as the primary home method: trim a side shoot or stem tip and keep the fragment submerged, preferably floating. This is general guidance for candidate C. demersum, not a diagnosis or identity confirmation.",
+      "applicable_taxon": "provisional Ceratophyllum demersum; specimen species and aquarium trade selection unverified",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium; source plant and tank conditions must be checked first",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-ACO-CARE"],
+        "applicability": "Washington lists plant fragments as species propagation; Aquarium Co-Op describes side-shoot or stem-tip trimming for home aquaria."
+      }
+    },
+    {
+      "claim_id": "prepare-work-area",
+      "metric": "procedure_step",
+      "description": "1. Prepare clean scissors, a clean water-filled holding container, and a fine net. Record current temperature, light schedule, flow, livestock, and water-test results before changing the tank.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "parent and fragment",
+      "growing_conditions": "Use aquarium water in the holding container; owner tank conditions presently unknown",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE", "HOR-NYDEC-DISPOSAL"],
+        "applicability": "The care source identifies sensitivity to major water changes and loose needles; NYSDEC addresses containment of aquatic plant fragments.",
+        "derivation": "Clean cutting and capture tools keep the operation controlled, while recording rather than inventing tank conditions preserves a useful baseline."
+      }
+    },
+    {
+      "claim_id": "select-starting-material",
+      "metric": "procedure_step",
+      "description": "2. Select an intact, actively growing side shoot or stem tip. Do not infer health or species from the overview photograph; inspect the live material for intact whorls and avoid already collapsing sections.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "parent",
+      "growing_conditions": "Live aquarium inspection immediately before trimming",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "The source specifies a side shoot or top of a tall stem and distinguishes new leaves/shoots from shedding.",
+        "derivation": "The proposed readiness check operationalizes the cited propagule choice without diagnosing the photographed specimen."
+      }
+    },
+    {
+      "claim_id": "make-cut",
+      "metric": "procedure_step",
+      "description": "3. Support the stem in the holding container and make one gentle cut that frees the selected side shoot or top section. Avoid crushing or repeated handling, because C. demersum stems break easily.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Fragment remains wet and submerged during handling",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-ACO-CARE"],
+        "applicability": "Washington documents easily broken stems; Aquarium Co-Op supports trimming a side shoot or stem top.",
+        "derivation": "A supported single cut minimizes accidental fragments while carrying out the cited home propagation method."
+      }
+    },
+    {
+      "claim_id": "fragment-length",
+      "metric": "fragment_length",
+      "quantity": {"kind": "unknown", "reason": "The reviewed home-aquarium source specifies a side shoot or stem tip but gives no minimum fragment length, and wild fragmentation does not establish a household cutting size."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "place-fragment",
+      "metric": "procedure_step",
+      "description": "4. Return the fragment to the aquarium and let it float freely below or at the surface, clear of the filter intake. Floating is preferred; optional bottom or hardscape support must not be called rooting, and a buried or attached end can rot.",
+      "applicable_taxon": "provisional Ceratophyllum demersum; bottom-placement detail partly selection-specific",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium with surface gas exchange and gentle flow",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-TROP", "HOR-ACO-CARE"],
+        "applicability": "Sources support free floating and optional bottom/attachment placement while consistently describing the plant as rootless; Aquarium Co-Op warns of end rot."
+      }
+    },
+    {
+      "claim_id": "maintain-fragment",
+      "metric": "procedure_step",
+      "description": "5. Keep the fragment fully aquatic under the recorded tank schedule, gentle flow, and stable livestock-compatible water. Do not add fertilizer or change temperature, chemistry, lamp runtime, or CO2 solely for this worksheet; first compare measurements and plant response with the setup claims.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Owner freshwater aquarium; measurements and livestock unknown",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "The source supports broad temperature tolerance, gentle flow, low-to-high light, no required CO2 injection, nutrient use, and shedding after major changes.",
+        "derivation": "Holding known conditions stable makes new shoot growth observable and avoids converting broad tolerances into unsupported tank targets."
+      }
+    },
+    {
+      "claim_id": "fragment-regrowth",
+      "metric": "rooting_or_regrowth",
+      "description": "A fragment can form a new plant. Count new leaves or a new/elongating shoot produced after cutting as regrowth; a broken-off piece alone is fragmentation, not evidence of successful establishment.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Submerged or floating in a freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-ACO-CARE"],
+        "applicability": "Washington states that fragments propagate; Aquarium Co-Op describes fragments becoming plants and recovery through new leaves and shoots. No dependable interval is supplied."
+      }
+    },
+    {
+      "claim_id": "inspect-establishment",
+      "metric": "procedure_step",
+      "description": "6. Inspect without tugging: first note whether the cut fragment stays intact, then record genuinely new leaves or shoot extension. Continue observing when no interval is supported rather than declaring success or failure by a deadline.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium under recorded conditions",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "The source identifies new leaves and shoots as recovery observations but gives only the qualitative word quickly.",
+        "derivation": "Separate integrity, new growth, and sustained growth so accidental breakage cannot be mislabeled as establishment."
+      }
+    },
+    {
+      "claim_id": "ready-for-normal-care",
+      "metric": "establishment_readiness",
+      "description": "7. Treat the fragment as established after it remains intact and shows sustained new shoot growth on more than one inspection under stable recorded tank conditions. It stays in aquatic care; there is no terrestrial transfer or root milestone.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "establishing fragment",
+      "growing_conditions": "Freshwater aquarium under recorded conditions",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-ACO-CARE"],
+        "applicability": "Sources establish rootlessness, fragment propagation, and new leaf/shoot recovery but no quantitative readiness threshold.",
+        "derivation": "Repeated observable shoot growth is a conservative proposed establishment check that does not invent roots or a calendar interval."
+      }
+    },
+    {
+      "claim_id": "trim-and-contain",
+      "metric": "procedure_step",
+      "description": "8. Trim growth before it blocks other plants' light or limits surface gas exchange. Net all loose fragments and fallen needles, and keep fragments away from the filter intake.",
+      "applicable_taxon": "aquarium-trade hornwort presented as Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "established",
+      "growing_conditions": "Maintained freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "Aquarium maintenance guidance supports pruning for light/gas exchange and removing shed material; netting is the proposed containment tool named in the preparation step."
+      }
+    },
+    {
+      "claim_id": "responsible-disposal",
+      "metric": "procedure_step",
+      "description": "Seal unwanted trimmings, fragments, and needles in a plastic bag for household trash. Never release or flush them, and do not compost aquatic plant material where fragments could reach natural areas.",
+      "applicable_taxon": "all unwanted aquarium plant material, including the unverified hornwort specimen",
+      "propagation_method": "fragmentation",
+      "life_stage": "discarded material",
+      "growing_conditions": "Removal from aquarium; prevent environmental release",
+      "geographic_context": "general aquarium-owner prevention guidance",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": ["HOR-NYDEC-DISPOSAL"],
+        "applicability": "Government aquarium-owner guidance applies regardless of whether this specimen is regulated locally or correctly identified."
+      }
+    },
+    {
+      "claim_id": "regrowth-time",
+      "metric": "time_to_new_growth",
+      "quantity": {"kind": "unknown", "reason": "The aquarium source says fragments become plants quickly but gives no reproducible interval tied to stated light, temperature, chemistry, or fragment condition."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium; conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "seed-germination",
+      "metric": "seed_germination",
+      "quantity": {"kind": "unknown", "reason": "Washington Ecology documents seed propagation and fruit, so seed reproduction is biologically possible, but no practical home-aquarium germination method or defensible interval was established from the reviewed sources."},
+      "applicable_taxon": "wild Ceratophyllum demersum; owner specimen unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "No supported household aquarium protocol",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "callusing",
+      "metric": "terrestrial_callusing",
+      "quantity": {"kind": "not_applicable", "reason": "Fragment propagation remains submerged; the reviewed method does not include drying or terrestrial callus formation."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "root-initiation",
+      "metric": "root_initiation",
+      "quantity": {"kind": "not_applicable", "reason": "C. demersum lacks roots; observable shoot regrowth, not root initiation, is the relevant milestone."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "terrestrial-medium-depth-transfer",
+      "metric": "terrestrial_medium_depth_and_transplant",
+      "quantity": {"kind": "not_applicable", "reason": "A rootless submerged fragment needs no soil recipe, rooting depth, pot, or terrestrial transplant step; optional bottom support remains aquatic placement."},
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Freshwater aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "failure-cue-shedding",
+      "metric": "failure_sign",
+      "description": "Heavy needle shedding: first check recent water-parameter or chemical changes, flow strength, light at the fragment, and nutrient context; remove fallen material but do not diagnose the cause from appearance alone.",
+      "applicable_taxon": "aquarium-trade hornwort presented as Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "During aquatic establishment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "The source associates shedding with major parameter changes, strong current, insufficient light, nutrient shortage, and certain chemicals without making those causes visually distinguishable.",
+        "derivation": "The next check presents the sourced alternatives as measurements to investigate rather than an appearance-based diagnosis."
+      }
+    },
+    {
+      "claim_id": "failure-cue-decaying-end",
+      "metric": "failure_sign",
+      "description": "A soft or decaying held-down end: check whether it is buried or tightly attached; remove decayed material and return an intact section to free-floating placement.",
+      "applicable_taxon": "aquarium-trade hornwort presented as Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "Bottom-placed or hardscape-supported fragment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-ACO-CARE"],
+        "applicability": "The source warns that the attached end tends to rot because hornwort never forms proper roots and identifies floating as best growth placement.",
+        "derivation": "The corrective check removes the cited placement stress without asserting that every damaged end has the same cause."
+      }
+    },
+    {
+      "claim_id": "failure-cue-unintended-fragments",
+      "metric": "failure_sign",
+      "description": "Repeated breakage or fragments collecting at the filter: check handling and current at the placement, move intact material away from the intake, and net loose pieces before they spread.",
+      "applicable_taxon": "provisional Ceratophyllum demersum",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "During aquatic establishment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": ["HOR-WA", "HOR-ACO-CARE", "HOR-NYDEC-DISPOSAL"],
+        "applicability": "Sources document easily broken stems, gentle-flow/intake precautions, fragment propagation, and containment of unwanted aquatic plants.",
+        "derivation": "The response checks mechanical causes and contains viable fragments instead of treating breakage as new growth."
+      }
+    }
+  ],
+  "claim_refs": [
+    {"claim_ref": "aquarium-hornwort#light-demand", "use": "Maintenance condition; authoritative qualitative light claim is on the numbers worksheet."},
+    {"claim_ref": "aquarium-hornwort#lamp-runtime-start", "use": "Optional proposed timer starting point; not a species requirement or current tank observation."},
+    {"claim_ref": "aquarium-hornwort#water-temperature-tolerance", "use": "Broad published tolerance only; livestock and measured tank temperature govern local use."},
+    {"claim_ref": "aquarium-hornwort#flow", "use": "Gentle-flow maintenance and filter-intake check."},
+    {"claim_ref": "aquarium-hornwort#floating-placement", "use": "Preferred rootless fragment placement."},
+    {"claim_ref": "aquarium-hornwort#nutrient-context", "use": "Water-column nutrient check without an invented fertilizer dose."}
+  ]
+}
