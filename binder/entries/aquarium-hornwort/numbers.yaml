@@ -1,0 +1,463 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "worksheet": "numbers",
+  "aquatic_setup": {
+    "placement": {
+      "claim_ref": "aquarium-hornwort#placement"
+    },
+    "water_temperature": {
+      "claim_ref": "aquarium-hornwort#water-temperature-range"
+    },
+    "water_chemistry": {
+      "claim_ref": "aquarium-hornwort#water-chemistry-hardness"
+    },
+    "light": {
+      "claim_ref": "aquarium-hornwort#light-demand"
+    },
+    "lamp_runtime": {
+      "claim_ref": "aquarium-hornwort#aquarium-lamp-runtime"
+    },
+    "flow": {
+      "claim_ref": "aquarium-hornwort#flow"
+    },
+    "livestock_context": {
+      "claim_ref": "aquarium-hornwort#livestock-context"
+    },
+    "fragment_regrowth": {
+      "claim_ref": "aquarium-hornwort#fragment-regrowth"
+    }
+  },
+  "claims": [
+    {
+      "claim_id": "identity-scope",
+      "metric": "identity_scope",
+      "description": "Ceratophyllum demersum is a working species example only. “Hornwort” does not verify the photographed aquarium specimen or Tropica’s Bolivian commercial selection.",
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-FWS",
+          "HOR-WA",
+          "HOR-TROP"
+        ],
+        "applicability": "The government records establish the named wild species; the Tropica record is explicitly selection-specific. None identifies this specimen."
+      }
+    },
+    {
+      "claim_id": "light-demand",
+      "metric": "light",
+      "description": "Low light is tolerated by wild C. demersum; Tropica labels its Bolivian selection low-demand. This is qualitative and is not an intensity or photoperiod measurement.",
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA",
+          "HOR-TROP"
+        ],
+        "applicability": "Wild-species tolerance and selection-specific aquarium guidance agree qualitatively; neither establishes this tank’s light."
+      }
+    },
+    {
+      "claim_id": "aquarium-lamp-runtime",
+      "metric": "aquarium_lamp_runtime",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reviewed source establishes a species-applicable daily lamp runtime, and the aquarium lamp schedule is unmeasured."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "water-temperature-range",
+      "metric": "water_temperature",
+      "quantity": {
+        "kind": "range",
+        "minimum": 10,
+        "maximum": 30,
+        "unit": "degC"
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-ACOOP"
+        ],
+        "applicability": "Aquarium-horticulture care range for C. demersum in tanks and ponds; a broad tolerated range, not a preferred target or current-tank reading."
+      }
+    },
+    {
+      "claim_id": "water-chemistry-hardness",
+      "metric": "water_chemistry",
+      "description": "The wild species account reports tolerance of hard water with high calcium content; no reviewed source supplies a defensible GH or KH number for this specimen.",
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA"
+        ],
+        "applicability": "Qualitative wild-species tolerance only; not a measured aquarium value or preferred aquarium target."
+      }
+    },
+    {
+      "claim_id": "water-ph",
+      "metric": "water_pH",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reviewed source substantiates a suitably scoped numeric aquarium pH range, and this tank has not been measured."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "water-gh",
+      "metric": "water_GH",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Hard-water tolerance is qualitative in the reviewed institutional account; no defensible numeric GH range or tank measurement is available."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "water-kh",
+      "metric": "water_KH",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reviewed source establishes a numeric KH range for the provisional species example, and this tank has not been measured."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "nitrogen-cycle-readings",
+      "metric": "nitrogen_cycle_readings",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Ammonia, nitrite, and nitrate in the current aquarium have not been measured or supplied."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "tank-volume",
+      "metric": "tank_volume",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The aquarium volume has not been supplied or measured."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "co2-setup",
+      "metric": "carbon_dioxide_setup",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The current aquarium CO2 setup is unknown; qualitative guidance does not establish the user’s equipment."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "flow",
+      "metric": "flow",
+      "description": "Use gentle flow and keep loose needles and fragments away from the filter intake.",
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-ACOOP"
+        ],
+        "applicability": "Aquarium-horticulture guidance for C. demersum; current flow and filter layout remain unmeasured."
+      }
+    },
+    {
+      "claim_id": "placement",
+      "metric": "placement",
+      "description": "Float freely. Wild C. demersum may also be held at the bottom by modified leaves, especially in flowing water; avoid treating it as a rooted substrate plant.",
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA",
+          "HOR-ACOOP"
+        ],
+        "applicability": "Wild-species morphology supports floating or naturally supported placement; aquarium guidance favors floating and warns attached ends may rot."
+      }
+    },
+    {
+      "claim_id": "nutrient-context",
+      "metric": "nutrient_context",
+      "description": "C. demersum takes nutrients from the water column; fast growth can consume ammonia, nitrate, and phosphate, while nutrient-rich water can support dense wild colonies.",
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA",
+          "HOR-ACOOP"
+        ],
+        "applicability": "General wild and aquarium context, not evidence of this tank’s nutrient level or a fertilizer prescription."
+      }
+    },
+    {
+      "claim_id": "fertilizer-setup",
+      "metric": "fertilizer_setup",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No fertilizer product, dose, schedule, livestock load, or measured nutrient status is known for the current aquarium."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "growth-rate",
+      "metric": "growth_rate",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 10,
+        "unit": "cm/week"
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-ACOOP"
+        ],
+        "applicability": "Aquarium-horticulture rate stated for C. demersum with enough light and nutrients; condition-dependent, not a promise for this specimen."
+      }
+    },
+    {
+      "claim_id": "selection-stem-height",
+      "metric": "size_height",
+      "quantity": {
+        "kind": "value",
+        "value": 80,
+        "unit": "cm"
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-TROP"
+        ],
+        "applicability": "Maximum stem height described for Tropica’s Bolivian C. demersum selection; not transferred as this unverified specimen’s expected size."
+      }
+    },
+    {
+      "claim_id": "fragment-regrowth",
+      "metric": "fragment_regrowth",
+      "description": "A trimmed side shoot, top, or other stem segment can continue as a new plant when kept aquatic and floated; visible new leaves or shoots—not mere breakage—show regrowth.",
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA",
+          "HOR-ACOOP"
+        ],
+        "applicability": "Washington documents propagation by plant fragments; aquarium guidance describes floating trimmed segments and subsequent new shoots."
+      }
+    },
+    {
+      "claim_id": "fragment-establishment-time",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed sources give no defensible interval from cutting to established new growth; breakage alone is not establishment."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "seed-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The institutional species account confirms seed propagation, but no reviewed source provides a practical aquarium germination method or interval."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "maturity",
+      "metric": "maturity",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reviewed source establishes a condition-scoped time to maturity for an aquarium fragment."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "lifespan",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible aquarium lifespan was found; the institutional account calls the species perennial, while clonally renewed fragments do not yield a universal individual lifespan."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "livestock-context",
+      "metric": "livestock_context",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No aquarium livestock inventory has been supplied; compatibility and safety must be checked against the actual animals and filtration before placement."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "terrestrial-soil-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "This rootless submerged plant uses an aquatic setup, not a terrestrial soil recipe."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "fragmentation",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "terrestrial-rooting-depth",
+      "metric": "terrestrial_rooting_depth",
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "C. demersum lacks true roots, so terrestrial rooting depth does not describe this aquatic fragment method."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "rooted-plant-transplant",
+      "metric": "terrestrial_transplant",
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "The aquatic fragment remains submerged; there is no rooted terrestrial transplant step."
+      },
+      "applicable_taxon": "provisional working identity: Ceratophyllum demersum; common name and photograph do not verify species or trade selection",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "aquarium; actual tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    }
+  ]
+}

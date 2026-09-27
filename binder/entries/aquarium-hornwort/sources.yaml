@@ -7,7 +7,7 @@
       "authority": "U.S. Fish and Wildlife Service",
       "title": "Coon’s-tail (Ceratophyllum demersum)",
       "url": "https://www.fws.gov/species/coons-tail-ceratophyllum-demersum",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
         "identity",
         "natural_history_trivia"
@@ -19,7 +19,7 @@
       "authority": "Washington State Department of Ecology",
       "title": "Ceratophyllum demersum — coontail, hornwort",
       "url": "https://fortress.wa.gov/ecy/gisresources/lakes/AquaticPlantGuide/descriptions/cerdem.html",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
         "identity",
         "light",
@@ -38,12 +38,31 @@
       "authority": "Tropica Aquarium Plants",
       "title": "Ceratophyllum demersum “Foxtail” plant details",
       "url": "https://tropica.com/en/plants/plantdetails/Ceratophyllumdemersum(021)/4434",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
         "light",
         "placement_anchoring_floating"
       ],
       "applicability": "Grower page for a particular C. demersum selection collected in Bolivia. It supports that selection’s low light demand and describes its compact leaves, lateral shoots, hardier stems, and possible bottom placement; it does not provide pH or temperature values, nutrient/algae/shedding advice, or general maintenance evidence. Do not transfer selection-specific performance to the unverified specimen."
+    },
+    {
+      "key": "HOR-ACOOP",
+      "authority": "Aquarium Co-Op",
+      "title": "How to Care for Hornwort in Aquariums and Ponds",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/hornwort-care-guide",
+      "accessed": "2026-09-27",
+      "supports": [
+        "water_parameters_temperature",
+        "flow",
+        "placement_floating",
+        "nutrient_context",
+        "growth_rate",
+        "fragmentation_procedure",
+        "regrowth_success",
+        "failure_checks"
+      ],
+      "applicability": "Named C. demersum aquarium-horticulture article supports its 10–30 °C broad range, condition-dependent 3–10 cm/week growth, floating placement, gentle flow, trimming/fragmentation, visible recovery growth, and listed shedding contexts. It does not identify this specimen, establish a preferred target, give pH/hardness numbers or lamp runtime, or diagnose the current tank.",
+      "background_only": true
     }
   ]
 }
