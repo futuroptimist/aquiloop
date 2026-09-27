@@ -7,7 +7,7 @@
       "authority": "U.S. Fish and Wildlife Service",
       "title": "Coon’s-tail (Ceratophyllum demersum)",
       "url": "https://www.fws.gov/species/coons-tail-ceratophyllum-demersum",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
         "identity",
         "natural_history_trivia"
@@ -19,7 +19,7 @@
       "authority": "Washington State Department of Ecology",
       "title": "Ceratophyllum demersum — coontail, hornwort",
       "url": "https://fortress.wa.gov/ecy/gisresources/lakes/AquaticPlantGuide/descriptions/cerdem.html",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
         "identity",
         "light",
@@ -31,19 +31,49 @@
         "aquarium_compatibility_troubleshooting",
         "natural_history_trivia"
       ],
-      "applicability": "Species account for wild C. demersum: supports rootless habit, floating/anchoring, fragments, easily broken stems, dense growth in nutrient-rich water, hard-water and low-light tolerance, and cool-water aquarium use. It does not give aquarium maintenance, algae, shedding-cause, fertilizer, or numeric temperature/chemistry advice."
+      "applicability": "Wild C. demersum account supporting rootless perennial habit, 3–4 m stems, free-floating or modified-leaf anchoring, fragment and seed reproduction, breakable stems, nutrient-rich growth, hard-water and low-light tolerance, and slow-water/cool-aquarium context. It is not a household aquarium target or specimen identification."
     },
     {
       "key": "HOR-TROP",
       "authority": "Tropica Aquarium Plants",
       "title": "Ceratophyllum demersum “Foxtail” plant details",
       "url": "https://tropica.com/en/plants/plantdetails/Ceratophyllumdemersum(021)/4434",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
         "light",
-        "placement_anchoring_floating"
+        "placement_anchoring_floating",
+        "growth_size"
       ],
-      "applicability": "Grower page for a particular C. demersum selection collected in Bolivia. It supports that selection’s low light demand and describes its compact leaves, lateral shoots, hardier stems, and possible bottom placement; it does not provide pH or temperature values, nutrient/algae/shedding advice, or general maintenance evidence. Do not transfer selection-specific performance to the unverified specimen."
+      "applicability": "Grower page for a particular C. demersum selection collected in Bolivia. It supports that selection’s low light demand, 5–30+ cm two-month aquarium height, compact leaves, lateral shoots, hardier stems, and possible bottom placement. Selection-specific performance does not identify or automatically transfer to the unverified specimen."
+    },
+    {
+      "key": "HOR-COOP",
+      "authority": "Aquarium Co-Op",
+      "title": "How to Care for Hornwort in Aquariums and Ponds",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/hornwort-care",
+      "accessed": "2026-09-27",
+      "supports": [
+        "water_parameters_temperature",
+        "light",
+        "flow",
+        "placement_anchoring_floating",
+        "nutrient_context",
+        "growth_size",
+        "propagation",
+        "troubleshooting"
+      ],
+      "applicability": "Scoped aquarium-horticulture guidance for hornwort sold or exchanged as C. demersum: supports about 50–85°F tolerance, 1–4 in/week growth with enough light and nutrients, floating preference, gentle flow, no required CO2 injection, top/side-shoot fragmentation, pruning, and alternative shedding checks. It does not identify the specimen, define pH/GH/KH, or publish a lamp runtime or regrowth interval."
+    },
+    {
+      "key": "HOR-HENNEPIN",
+      "authority": "Hennepin County, Minnesota",
+      "title": "Pet store disposal guidelines for aquatic plants and animals",
+      "url": "https://www.hennepincounty.gov/-/media/Hennepin-Headless/Hennepin-Gov/services/environment/land-water-resources/aquatic-invasive-species-prevention/pet-store-disposal-guidelines.pdf",
+      "accessed": "2026-09-27",
+      "supports": [
+        "responsible_disposal"
+      ],
+      "applicability": "Government prevention guidance supporting sealed-bag household-trash disposal of unwanted aquatic plants and prohibiting release. It is general disposal guidance, not species identity, care, or evidence that this specimen is invasive in California."
     }
   ]
 }
