@@ -233,22 +233,24 @@
     {
       "claim_id": "reginae-seed-transplant-readiness",
       "metric": "transplant_readiness",
-      "quantity": {
-        "kind": "unknown",
-        "reason": "The reviewed S. reginae source does not provide a seedling size, leaf count, root threshold, or time for transplant readiness."
-      },
+      "description": "Move seedlings into individual pots when they have two true leaves; they should be ready for a larger pot or landscape transplant after two to three months.",
       "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
       "propagation_method": "seed",
       "life_stage": "seed",
-      "growing_conditions": "Germinated seedling; conditions insufficiently specified",
+      "growing_conditions": "Seedling raised under the UF warm, consistently damp, indirect-light procedure",
       "geographic_context": "not_applicable",
-      "evidence_category": "unknown",
-      "provenance": {}
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF gives both the two-true-leaf potting milestone and the subsequent two-to-three-month readiness interval for S. reginae seedlings."
+      }
     },
     {
       "claim_id": "nicolai-seed-method",
       "metric": "propagation_method",
-      "description": "Seed is a listed propagation strategy for S. nicolai, but the reviewed profile does not publish preparation, temperature, germination interval, or transplant readiness.",
+      "description": "Seed is a listed propagation strategy for S. nicolai.",
       "applicable_taxon": "candidate Strelitzia nicolai; specimen match unverified",
       "propagation_method": "seed",
       "life_stage": "seed",
@@ -291,6 +293,60 @@
       "geographic_context": "not_applicable",
       "evidence_category": "not_applicable",
       "provenance": {}
+    },
+    {
+      "claim_id": "failure-cue-division-yellowing",
+      "metric": "failure_sign",
+      "description": "Yellowing or dying leaves on a new division: check whether the soil is dry or soggy, then restore moist, freely draining conditions.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "During establishment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF links dry or soggy establishment conditions with leaves yellowing and eventually dying.",
+        "derivation": "The corrective check operationalizes the cited moisture alternatives without claiming which one applies."
+      }
+    },
+    {
+      "claim_id": "failure-cue-division-stalls",
+      "metric": "failure_sign",
+      "description": "A division that fails to establish: check that it remains at its original soil depth and that the soil stays moist while roots form for at least three months.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "During establishment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF directs replanting at the original depth and moist care until roots establish for at least three months.",
+        "derivation": "The corrective check combines the source's placement and establishment requirements without inventing a diagnosis or deadline."
+      }
+    },
+    {
+      "claim_id": "failure-cue-seed-not-sprouted",
+      "metric": "failure_sign",
+      "description": "No seedling after the usual scarified-seed interval: check that the covered medium remains damp and warm in indirect light, and allow for the documented germination range before discarding seed.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "During germination",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF calls for covered, consistently damp medium in a warm, indirect-light location and reports germination can take one month to one year.",
+        "derivation": "The corrective check uses the cited conditions and broad range so the usual one-to-two-month interval is not treated as a failure deadline."
+      }
     }
   ]
 }

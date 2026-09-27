@@ -221,6 +221,60 @@
       "geographic_context": "not_applicable",
       "evidence_category": "unknown",
       "provenance": {}
+    },
+    {
+      "claim_id": "failure-cue-brown-roots",
+      "metric": "failure_sign",
+      "description": "Brown or absent roots: check whether the cutting or medium has stayed overwatered, then correct the excess moisture before continuing.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "During water or vermiculite rooting",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Wisconsin identifies brown or nonexistent roots as root-rot symptoms most often caused by overwatering.",
+        "derivation": "The corrective check applies the cited symptom and cause to a cutting without diagnosing the photographed specimen."
+      }
+    },
+    {
+      "claim_id": "failure-cue-no-bud-growth",
+      "metric": "failure_sign",
+      "description": "No bud growth at the expected check: verify that conditions are warm and continue observing rather than discarding the cutting by the calendar alone.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "During early rooting",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Wisconsin reports that buds can begin growing in one to two weeks under warm temperatures.",
+        "derivation": "The corrective check uses warmth as the cited condition while treating the published interval as an observation point, not a failure deadline."
+      }
+    },
+    {
+      "claim_id": "failure-cue-blackened-leaf-edges",
+      "metric": "failure_sign",
+      "description": "Blackened leaf margins or tips, often with yellowing: check for excess or inadequate water and any fertilizer salt buildup before changing care.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "During rooting or after transfer",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Wisconsin links blackened margins or tips to moisture extremes or excess fertilizer and notes accompanying yellowing.",
+        "derivation": "The corrective check presents the cited alternatives for inspection rather than selecting an unsupported diagnosis."
+      }
     }
   ]
 }
