@@ -7,7 +7,7 @@
       "authority": "North Carolina State University Extension",
       "title": "Strelitzia reginae",
       "url": "https://plants.ces.ncsu.edu/plants/strelitzia-reginae/",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
         "identity",
         "light_exposure",
@@ -19,14 +19,14 @@
         "troubleshooting",
         "natural_history_trivia"
       ],
-      "applicability": "Species profile for the S. reginae candidate. Its care and habit facts are candidate-specific and do not resolve the specimen’s species."
+      "applicability": "Species profile for the S. reginae candidate. It supports sunny indoor light, numeric night temperature, landscape light categories and dimensions, well-drained loam/sand, seasonal water, and division. Its facts are candidate-specific and do not resolve the specimen’s species or provide a mix ratio."
     },
     {
       "key": "BOP-NIC",
       "authority": "North Carolina State University Extension",
       "title": "Strelitzia nicolai",
       "url": "https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
         "identity",
         "light_exposure",
@@ -37,18 +37,24 @@
         "troubleshooting",
         "natural_history_trivia"
       ],
-      "applicability": "Species profile for the S. nicolai candidate. Care facts are candidate-specific and are used alongside the S. reginae profile to show where recommendations agree or differ; they do not resolve the specimen’s species."
+      "applicability": "Species profile for the S. nicolai candidate. It supports bright indirect indoor light, landscape partial shade, numeric temperature/cold guidance, dry-surface watering, loam/sand substrate, landscape dimensions, flowering maturity, and listing division/seed. It gives no detailed propagation sequence and does not resolve the specimen’s species."
     },
     {
       "key": "BOP-UF",
       "authority": "University of Florida IFAS Extension",
       "title": "Bird-of-Paradise",
       "url": "https://edis.ifas.ufl.edu/publication/MG106",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
-        "propagation"
+        "propagation",
+        "numeric_size",
+        "temperature_cold",
+        "light_exposure",
+        "water",
+        "soil_substrate",
+        "flowering_maturity"
       ],
-      "applicability": "Species account for S. reginae. Its division example uses old clumps with four to five shoots, single-stem divisions, original planting depth, and moist establishment; it also warns that dry or soggy establishment conditions can kill foliage. Do not transfer these details to the unresolved S. nicolai candidate."
+      "applicability": "Species account and propagation procedure for S. reginae. It supports brief cold tolerance, landscape size and light, establishment water, division parent size/depth/timing, seed pretreatment/depth/media/germination, transplant milestones, and separate division/seed flowering timelines. Do not transfer these values to unresolved S. nicolai or treat Florida conditions as Pacifica measurements."
     }
   ]
 }

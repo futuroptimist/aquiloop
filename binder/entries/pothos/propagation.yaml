@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "Use a node-bearing stem cutting in water or moist medium; a detached leaf without a node and axillary bud is not the instructed cutting.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP",
+          "POT-WISC"
+        ],
+        "applicability": "The general extension chapter expressly lists devil’s ivy for a leaf-bud/single-node cutting; the species guide also supports water rooting."
+      }
+    },
+    {
+      "claim_id": "preferred-season",
+      "metric": "propagation_season",
+      "description": "Stem cuttings are more successful during the spring-to-summer growing season.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Actively growing indoor parent",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-PSU"
+        ],
+        "applicability": "Species houseplant guidance; season is a preference, not a guarantee or numeric rooting timeline."
+      }
+    },
+    {
+      "claim_id": "prepare",
+      "metric": "procedure_step",
+      "description": "Clean a sharp blade and prepare either a clean water vessel or a small drained container of moist, well-aerated propagation medium.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP",
+          "POT-WISC"
+        ],
+        "applicability": "General sanitary cutting preparation combined with the species’ water or aerated-medium options."
+      }
+    },
+    {
+      "claim_id": "select-node",
+      "metric": "procedure_step",
+      "description": "Choose healthy stem material containing a leaf, its node, and an axillary bud; preserve the node because it is the regenerative unit.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Devil’s ivy is expressly listed for single-node/leaf-bud cuttings."
+      }
+    },
+    {
+      "claim_id": "cut-placement",
+      "metric": "procedure_step",
+      "description": "Cut the stem section without injuring the bud. For medium rooting, place the node horizontally with the bud upward and lightly covered while the leaf remains exposed; for water rooting, submerge the node but keep foliage above water.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP",
+          "POT-WISC"
+        ],
+        "applicability": "Medium orientation comes from the extension propagation chapter; water option and node rooting come from the species guide."
+      }
+    },
+    {
+      "claim_id": "propagation-medium",
+      "metric": "propagation_medium",
+      "description": "Use clean water or a moist, well-aerated rooting medium. No component ratio is published in the reviewed sources; this is distinct from the proposed established-pot recipe.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP",
+          "POT-WISC"
+        ],
+        "applicability": "Source-backed alternatives without an invented propagation recipe."
+      }
+    },
+    {
+      "claim_id": "maintain",
+      "metric": "procedure_step",
+      "description": "Keep the medium moist rather than saturated, or keep only the node below clean water; provide filtered/bright indirect light and warmth without direct-sun scorch.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC",
+          "POT-NCSU"
+        ],
+        "applicability": "Species care and propagation conditions; no numeric rooting temperature is supplied."
+      }
+    },
+    {
+      "claim_id": "root-initiation-time",
+      "metric": "root_initiation",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "A photograph caption notes a two-week example, but no controlled or generalizable rooting interval was published; inspect roots instead."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "transplant-readiness",
+      "metric": "transplant_readiness",
+      "description": "Transfer a water-rooted or medium-rooted cutting only after it has a functioning cluster of new roots and the shoot remains firm; no reliable universal root length or day count was found.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-WISC"
+        ],
+        "applicability": "Sources establish easy node rooting but no transplant threshold.",
+        "derivation": "Uses observable new-root function rather than inventing a time or length; the conservative check is stable foliage plus multiple new roots."
+      }
+    },
+    {
+      "claim_id": "transfer",
+      "metric": "procedure_step",
+      "description": "Move the rooted cutting to a small drained pot of established-plant medium, settle medium around the roots without burying foliage, water through once, and maintain similar light while it acclimates.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-WISC"
+        ],
+        "applicability": "Species sources support drained aerated medium and ordinary watering after dry-down.",
+        "derivation": "Proposed transition minimizes simultaneous changes in light and root environment; observe dry-down in the new pot."
+      }
+    },
+    {
+      "claim_id": "rooting-temperature",
+      "metric": "rooting_temperature",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reviewed authoritative source supplied a numeric rooting-temperature range for E. aureum cuttings."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "failure-no-node",
+      "metric": "failure_sign",
+      "description": "Leaf remains intact but no new shoot appears: verify that the cutting includes a node and axillary bud; restart with a complete node if absent.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "The cited leaf-bud method requires the leaf, node, and axillary bud.",
+        "derivation": "Operational troubleshooting check follows directly from required cutting anatomy."
+      }
+    },
+    {
+      "claim_id": "failure-submerged-leaf",
+      "metric": "failure_sign",
+      "description": "Soft or decaying submerged leaf tissue: raise the foliage above the water line, remove decayed tissue, clean the vessel, and retain only sound node tissue.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "water stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Species method supports water rooting from nodes.",
+        "derivation": "Proposed hygiene correction maintains the node in water while preventing foliage immersion; not a specimen diagnosis."
+      }
+    },
+    {
+      "claim_id": "failure-rot",
+      "metric": "failure_sign",
+      "description": "Blackened or collapsing base in medium: check saturation and drainage, discard rotten tissue, and restart in moist—not waterlogged—well-aerated medium.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "medium stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-WISC"
+        ],
+        "applicability": "Species sources connect overwatering with root rot and require aerated drainage.",
+        "derivation": "Applies established rot-prevention guidance to the rooting check without promising recovery of rotten tissue."
+      }
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pothos#established-substrate-recipe"
+    }
+  ]
+}

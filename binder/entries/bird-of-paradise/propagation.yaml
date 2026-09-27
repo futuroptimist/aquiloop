@@ -1,0 +1,431 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "For confirmed S. reginae, divide an old clump in late spring or early summer; do not apply the detailed procedure to unresolved S. nicolai without species-specific support.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF procedure is explicitly S. reginae; NCSU only lists division generally for S. nicolai."
+      }
+    },
+    {
+      "claim_id": "parent-readiness",
+      "metric": "division_parent_readiness",
+      "quantity": {
+        "kind": "range",
+        "minimum": 4,
+        "maximum": 5,
+        "unit": "shoots per old clump"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae parent-clump criterion; not a specimen observation."
+      }
+    },
+    {
+      "claim_id": "prepare",
+      "metric": "procedure_step",
+      "description": "Prepare clean cutting tools, drained containers, and well-drained medium; water the parent before lifting and plan to preserve roots and one shoot per division.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF",
+          "BOP-REG"
+        ],
+        "applicability": "UF supplies lifting/division/replanting sequence and moisture needs; tool sanitation and advance setup are conservative home workflow details.",
+        "derivation": "Proposed preparation minimizes exposed-root time and preserves the cited single-stem division structure."
+      }
+    },
+    {
+      "claim_id": "separate",
+      "metric": "procedure_step",
+      "description": "Lift the old clump and separate it into single-stem divisions, retaining sound roots and rhizome tissue with each shoot; discard clearly rotten tissue rather than sharing it among pots.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF expressly directs separating four-to-five-shoot S. reginae clumps into single-stem divisions; hygiene language is conservative."
+      }
+    },
+    {
+      "claim_id": "replant-depth",
+      "metric": "procedure_step",
+      "description": "Replant every division at the same soil depth at which it previously grew; planting too deeply can delay flowering.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae planting and division depth guidance."
+      }
+    },
+    {
+      "claim_id": "division-establishment",
+      "metric": "division_establishment",
+      "quantity": {
+        "kind": "value",
+        "value": 3,
+        "unit": "month minimum"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Soil kept moist, neither dry nor soggy, until roots establish",
+      "geographic_context": "Florida guidance; indoor timing may differ",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae minimum root-establishment interval; not flowering readiness."
+      }
+    },
+    {
+      "claim_id": "division-aftercare",
+      "metric": "procedure_step",
+      "description": "Keep soil evenly moist until roots establish, but avoid both dry and soggy conditions; delay fertilizer until establishment, then resume ordinary care gradually.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF distinguishes establishment moisture and says to begin fertilizing after roots establish."
+      }
+    },
+    {
+      "claim_id": "division-to-flower",
+      "metric": "time_to_first_flowering",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "year"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Mature flowering result after division under UF landscape guidance",
+      "geographic_context": "Florida guidance; indoor timing may differ",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae division-to-flower interval; distinct from the three-month minimum establishment."
+      }
+    },
+    {
+      "claim_id": "division-transplant-ready",
+      "metric": "transplant_readiness",
+      "description": "Treat a division as established only after at least three months and observable stable rooting/new growth; elapsed time alone does not override wilt, rot, or instability.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF gives a three-month minimum but no stand-alone household readiness test.",
+        "derivation": "Combines the published minimum with observable stability so the interval is not mistaken for guaranteed establishment."
+      }
+    },
+    {
+      "claim_id": "seed-soak",
+      "metric": "seed_pretreatment",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "day"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae seed soak in lukewarm water, followed by scarification."
+      }
+    },
+    {
+      "claim_id": "seed-scarify",
+      "metric": "procedure_step",
+      "description": "After soaking, nick or file the hard seed coat without damaging the embryo; sow promptly after harvest when possible.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae pretreatment sequence."
+      }
+    },
+    {
+      "claim_id": "seed-depth",
+      "metric": "sowing_depth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0.5,
+        "maximum": 1,
+        "unit": "inch"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Vermiculite, 1:1 peat/perlite, or ready-made seed mix; consistently damp, warm, humid, indirect light",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae sowing depth and media alternatives."
+      }
+    },
+    {
+      "claim_id": "seed-medium",
+      "metric": "propagation_medium",
+      "description": "Use vermiculite, a 1:1 peat-and-perlite mix, or a ready-made seed mix; keep consistently damp under a clear cover in a warm place with indirect light.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Published S. reginae seed medium and environment; separate from established-plant recipe."
+      }
+    },
+    {
+      "claim_id": "scarified-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Fresh seed soaked 1–2 days, scarified, warm and consistently damp",
+      "geographic_context": "Florida guidance; household timing may differ",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Typical S. reginae interval for scarified seed; not transplant readiness."
+      }
+    },
+    {
+      "claim_id": "variable-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 12,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Depending on pretreatment; warm, humid, indirect-light conditions",
+      "geographic_context": "Florida guidance; household timing may differ",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Broader S. reginae variability range; retains source precision of one month to one year."
+      }
+    },
+    {
+      "claim_id": "seedling-first-pot",
+      "metric": "seedling_transplant_readiness",
+      "quantity": {
+        "kind": "value",
+        "value": 2,
+        "unit": "true leaves"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae criterion for potting seedlings individually; not landscape readiness."
+      }
+    },
+    {
+      "claim_id": "seedling-larger-pot",
+      "metric": "transplant_readiness",
+      "quantity": {
+        "kind": "range",
+        "minimum": 2,
+        "maximum": 3,
+        "unit": "month after individual potting"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "S. reginae readiness for larger pot or landscape under source conditions."
+      }
+    },
+    {
+      "claim_id": "nicolai-division-detail",
+      "metric": "division_procedure",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "NCSU lists division and seed for S. nicolai but supplies no candidate-specific shoot allocation, establishment interval, or detailed sequence."
+      },
+      "applicable_taxon": "candidate Strelitzia nicolai; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "nicolai-seed-timeline",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable S. nicolai-specific germination interval and conditions were found; do not transfer the S. reginae procedure silently."
+      },
+      "applicable_taxon": "candidate Strelitzia nicolai; specimen species unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "failure-wilt",
+      "metric": "failure_sign",
+      "description": "Leaves yellow or wilt after division: check both dry pockets and saturation, verify drainage, and keep the crown at its original depth.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF warns that dry or soggy establishment kills foliage and delays fertilizer until roots establish.",
+        "derivation": "Proposed corrective check operationalizes published establishment conditions; it is not a diagnosis of the owner specimen."
+      }
+    },
+    {
+      "claim_id": "failure-rot",
+      "metric": "failure_sign",
+      "description": "Soft, dark crown or rhizome tissue: isolate the division, stop excess water, inspect drainage, and discard rotten tissue rather than reusing contaminated medium.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF warns that dry or soggy establishment kills foliage and delays fertilizer until roots establish.",
+        "derivation": "Proposed corrective check operationalizes published establishment conditions; it is not a diagnosis of the owner specimen."
+      }
+    },
+    {
+      "claim_id": "failure-unstable",
+      "metric": "failure_sign",
+      "description": "Division rocks or makes no new growth: do not fertilize early; verify retained roots, stable placement, moisture, and wait for the published establishment minimum.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen species unresolved",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF warns that dry or soggy establishment kills foliage and delays fertilizer until roots establish.",
+        "derivation": "Proposed corrective check operationalizes published establishment conditions; it is not a diagnosis of the owner specimen."
+      }
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "bird-of-paradise#established-substrate-recipe"
+    }
+  ]
+}
