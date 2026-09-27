@@ -29,7 +29,11 @@
         "growth_trimming",
         "propagation",
         "aquarium_compatibility_troubleshooting",
-        "natural_history_trivia"
+        "natural_history_trivia",
+        "hard-water tolerance",
+        "wild stem length and perennial life cycle",
+        "seed reproduction",
+        "natural history"
       ],
       "applicability": "Species account for wild C. demersum: supports rootless habit, floating/anchoring, fragments, easily broken stems, dense growth in nutrient-rich water, hard-water and low-light tolerance, and cool-water aquarium use. It does not give aquarium maintenance, algae, shedding-cause, fertilizer, or numeric temperature/chemistry advice."
     },
@@ -41,9 +45,55 @@
       "accessed": "2026-09-17",
       "supports": [
         "light",
-        "placement_anchoring_floating"
+        "placement_anchoring_floating",
+        "selection-specific aquarium height",
+        "bottom placement"
       ],
-      "applicability": "Grower page for a particular C. demersum selection collected in Bolivia. It supports that selection’s low light demand and describes its compact leaves, lateral shoots, hardier stems, and possible bottom placement; it does not provide pH or temperature values, nutrient/algae/shedding advice, or general maintenance evidence. Do not transfer selection-specific performance to the unverified specimen."
+      "applicability": "Grower page for a particular C. demersum selection collected in Bolivia. It supports that selection’s low light demand, a 5–30+ cm average-height field after two months, an additional description of stems to 80 cm, and possible bottom placement. These selection-specific values and performance do not identify or predict the unverified specimen."
+    },
+    {
+      "key": "HOR-ACO-CARE",
+      "authority": "Aquarium Co-Op",
+      "title": "How to Care for Hornwort in Aquariums and Ponds",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/hornwort-care",
+      "accessed": "2026-09-27",
+      "background_only": true,
+      "supports": [
+        "aquarium temperature tolerance",
+        "conditional aquarium growth rate",
+        "floating placement and attachment limitation",
+        "gentle flow and filter-intake precaution",
+        "light and carbon-dioxide context",
+        "water-column nutrient and trimming context",
+        "fragment procedure and observable regrowth",
+        "shedding and placement failure checks"
+      ],
+      "applicability": "Identifiable aquarium retailer and educator guidance presenting hornwort as C. demersum. It supplies practical aquarium ranges and procedures but is not primary research, does not identify the owner specimen, and gives no pH, hardness, livestock-specific target, minimum fragment size, or dependable establishment interval."
+    },
+    {
+      "key": "HOR-ACO-LIGHT",
+      "authority": "Aquarium Co-Op",
+      "title": "How to Balance Aquarium Lights to Grow Healthy Plants (& Avoid Algae)",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/how-to-balance-aquarium-lighting",
+      "accessed": "2026-09-27",
+      "background_only": true,
+      "supports": [
+        "general newly planted aquarium lamp runtime"
+      ],
+      "applicability": "General planted-aquarium guidance recommends beginning at 6–8 hours daily and adjusting gradually from plant and algae response. It is a proposed timer starting point only—not a C. demersum requirement, a substitute for intensity, or evidence about the owner’s current lamp."
+    },
+    {
+      "key": "HOR-NYDEC-DISPOSAL",
+      "authority": "New York State Department of Environmental Conservation",
+      "title": "Guidelines for Aquarium and Pet Owners",
+      "url": "https://dec.ny.gov/nature/animals-fish-plants/invasive-species/aquatic/prevent-spread-of-aquatic-invasive-species/guidelines-for-aquarium-and-pet-owners",
+      "accessed": "2026-09-27",
+      "background_only": true,
+      "supports": [
+        "responsible aquatic plant disposal",
+        "fragment containment"
+      ],
+      "applicability": "General aquarium-owner prevention guidance: do not release or flush unwanted plants, seal them in a plastic bag for trash, and avoid composting aquatic material that could spread fragments. It applies as a precaution without claiming this specimen is locally regulated or correctly identified."
     }
   ]
 }
