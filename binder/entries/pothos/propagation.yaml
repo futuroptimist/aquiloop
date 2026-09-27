@@ -64,13 +64,14 @@
       "life_stage": "cutting",
       "growing_conditions": "Clean water; foliage above water",
       "geographic_context": "not_applicable",
-      "evidence_category": "published",
+      "evidence_category": "proposed",
       "provenance": {
         "source_refs": [
           "POT-WISC",
           "POT-NCSU-PROP"
         ],
-        "applicability": "Species source supports rooting vines in water; foliage-above-water follows the node-cutting structure."
+        "applicability": "Wisconsin supports rooting pothos vines in water; the cited sources do not explicitly state the foliage position or transfer sequence.",
+        "derivation": "The proposed procedure keeps the leaf out of the water while immersing the required node, then transfers the rooted cutting to the separately documented established-plant medium."
       }
     },
     {

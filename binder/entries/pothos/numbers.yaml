@@ -110,6 +110,21 @@
       "provenance": {}
     },
     {
+      "claim_id": "substrate-chemistry",
+      "metric": "substrate_ph",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed species sources do not provide a numeric substrate pH range for pothos."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container; current substrate chemistry unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
       "claim_id": "established-plant-substrate-recipe",
       "metric": "terrestrial_established_plant_recipe",
       "recipe": {
@@ -170,12 +185,7 @@
     },
     {
       "claim_id": "vine-length-ncsu",
-      "metric": "mature_vine_length",
-      "quantity": {
-        "kind": "value",
-        "value": 40,
-        "unit": "ft"
-      },
+      "metric": "mature_vine_length_maximum",
       "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
@@ -187,16 +197,12 @@
           "POT-NCSU"
         ],
         "applicability": "NCSU says vines can grow as long as 40 ft; owner conditions are unmeasured."
-      }
+      },
+      "description": "Maximum reported vine length: 40 ft."
     },
     {
       "claim_id": "vine-length-wisconsin",
-      "metric": "mature_vine_length",
-      "quantity": {
-        "kind": "value",
-        "value": 65,
-        "unit": "ft"
-      },
+      "metric": "mature_vine_length_maximum",
       "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
@@ -208,7 +214,8 @@
           "POT-WISC"
         ],
         "applicability": "Wisconsin states stems grow up to 65 ft; differing source contexts are retained rather than merged."
-      }
+      },
+      "description": "Maximum reported vine length: 65 ft."
     },
     {
       "claim_id": "indoor-flowering",
@@ -263,6 +270,22 @@
     {
       "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone",
       "use": "Background cold-hardiness context only; not an indoor condition or a recommendation to grow pothos outdoors."
+    },
+    {
+      "claim_ref": "pothos#seed-germination",
+      "use": "Seed-germination card state; the authoritative claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "pothos#cutting-callus-time",
+      "use": "Vegetative-establishment callus state; the authoritative claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "pothos#rooting-time",
+      "use": "Vegetative-establishment first-root interval; the authoritative claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "pothos#transplant-readiness",
+      "use": "Vegetative-establishment transplant threshold; the authoritative claim remains on the propagation worksheet."
     }
   ]
 }

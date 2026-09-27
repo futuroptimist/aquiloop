@@ -250,6 +250,21 @@
       }
     },
     {
+      "claim_id": "substrate-chemistry",
+      "metric": "substrate_ph",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed candidate-species sources do not provide a numeric substrate pH range applicable to both unresolved bird-of-paradise candidates."
+      },
+      "applicable_taxon": "unresolved Strelitzia sp.; S. reginae and S. nicolai are separate candidates",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container; species and current substrate chemistry unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
       "claim_id": "established-plant-substrate-recipe",
       "metric": "terrestrial_established_plant_recipe",
       "recipe": {
@@ -320,7 +335,7 @@
       "metric": "mature_width",
       "quantity": {
         "kind": "range",
-        "minimum": 3,
+        "minimum": 2,
         "maximum": 4,
         "unit": "ft"
       },
@@ -445,6 +460,30 @@
     {
       "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone",
       "use": "Cold-extreme ZIP-majority context only; not a yard minimum, preferred temperature, or proof that either candidate is safe outdoors."
+    },
+    {
+      "claim_ref": "bird-of-paradise#reginae-scarified-germination",
+      "use": "S. reginae seed-germination card interval; the authoritative claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "bird-of-paradise#reginae-broad-germination",
+      "use": "S. reginae broader seed-germination range; the authoritative claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "bird-of-paradise#nicolai-seed-germination",
+      "use": "S. nicolai seed-germination card state; the authoritative claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "bird-of-paradise#reginae-division-establishment",
+      "use": "S. reginae vegetative-establishment minimum; the authoritative claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "bird-of-paradise#nicolai-division-establishment",
+      "use": "S. nicolai vegetative-establishment card state; the authoritative claim remains on the propagation worksheet."
+    },
+    {
+      "claim_ref": "bird-of-paradise#reginae-seed-transplant-readiness",
+      "use": "S. reginae seedling transplant-readiness state; the authoritative claim remains on the propagation worksheet."
     }
   ]
 }

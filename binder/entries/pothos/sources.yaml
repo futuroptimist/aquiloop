@@ -32,7 +32,8 @@
         "water",
         "feeding_maintenance",
         "troubleshooting"
-      ]
+      ],
+      "applicability": "Houseplant guidance supporting bright indirect light, partial dry-down between waterings, maintenance, and troubleshooting; it does not establish numeric light duration, watering intervals, or substrate chemistry."
     },
     {
       "key": "POT-WISC",
