@@ -255,21 +255,6 @@
       }
     },
     {
-      "claim_id": "regrowth-timeline",
-      "metric": "rooting_or_regrowth",
-      "quantity": {
-        "kind": "unknown",
-        "reason": "The reviewed sources support fragment propagation but not a time to first new growth under stated aquarium conditions."
-      },
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
-      "propagation_method": "fragmentation",
-      "life_stage": "fragment",
-      "growing_conditions": "aquarium; current tank conditions unmeasured",
-      "geographic_context": "not_applicable",
-      "evidence_category": "unknown",
-      "provenance": {}
-    },
-    {
       "claim_id": "failure-cue-breakage",
       "metric": "failure_sign",
       "description": "Repeated loose pieces: check handling, intake/current exposure, and whether stems are being crushed; remove fragments before making another cut.",
@@ -356,51 +341,6 @@
       "geographic_context": "not_applicable",
       "evidence_category": "not_applicable",
       "provenance": {}
-    },
-    {
-      "claim_id": "fragment-terrestrial-rooting-depth",
-      "metric": "terrestrial_rooting_depth",
-      "quantity": {
-        "kind": "not_applicable",
-        "reason": "The fragment floats or is supported underwater and is not rooted in terrestrial medium."
-      },
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
-      "propagation_method": "fragmentation",
-      "life_stage": "fragment",
-      "growing_conditions": "aquarium; current tank conditions unmeasured",
-      "geographic_context": "not_applicable",
-      "evidence_category": "not_applicable",
-      "provenance": {}
-    },
-    {
-      "claim_id": "rooted-transplant-step",
-      "metric": "rooted_plant_transplant",
-      "quantity": {
-        "kind": "not_applicable",
-        "reason": "There is no rooted-plant transplant; acclimation means continued submerged growth under recorded tank conditions."
-      },
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
-      "propagation_method": "fragmentation",
-      "life_stage": "fragment",
-      "growing_conditions": "aquarium; current tank conditions unmeasured",
-      "geographic_context": "not_applicable",
-      "evidence_category": "not_applicable",
-      "provenance": {}
-    },
-    {
-      "claim_id": "seed-aquarium-method",
-      "metric": "seed_germination",
-      "quantity": {
-        "kind": "unknown",
-        "reason": "Sexual reproduction and one-seeded fruits are documented, but no reviewed source establishes a practical home-aquarium germination protocol or interval."
-      },
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
-      "propagation_method": "seed",
-      "life_stage": "seed",
-      "growing_conditions": "aquarium; current tank conditions unmeasured",
-      "geographic_context": "not_applicable",
-      "evidence_category": "unknown",
-      "provenance": {}
     }
   ],
   "claim_refs": [
@@ -415,6 +355,22 @@
     {
       "claim_ref": "aquarium-hornwort#fragment-regrowth-capability",
       "use": "Authoritative fragment-regrowth claim remains on numbers worksheet."
+    },
+    {
+      "claim_ref": "aquarium-hornwort#fragment-establishment-interval",
+      "use": "Authoritative unknown fragment-establishment interval remains on numbers worksheet."
+    },
+    {
+      "claim_ref": "aquarium-hornwort#terrestrial-rooting-depth",
+      "use": "Authoritative not-applicable terrestrial rooting depth remains on numbers worksheet."
+    },
+    {
+      "claim_ref": "aquarium-hornwort#rooted-plant-transplant",
+      "use": "Authoritative not-applicable rooted-plant transplant guidance remains on numbers worksheet."
+    },
+    {
+      "claim_ref": "aquarium-hornwort#seed-germination-interval",
+      "use": "Authoritative unknown aquarium seed-germination method and interval remain on numbers worksheet."
     }
   ]
 }

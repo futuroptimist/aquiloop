@@ -530,10 +530,10 @@
       "claim_ref": "aquarium-hornwort#floating-placement"
     },
     "water_temperature": {
-      "claim_ref": "aquarium-hornwort#commercial-temperature-range"
+      "claim_ref": "aquarium-hornwort#current-water-temperature"
     },
     "water_chemistry": {
-      "claim_ref": "aquarium-hornwort#commercial-ph-range"
+      "claim_ref": "aquarium-hornwort#current-water-chemistry"
     },
     "light": {
       "claim_ref": "aquarium-hornwort#wild-low-light-tolerance"
