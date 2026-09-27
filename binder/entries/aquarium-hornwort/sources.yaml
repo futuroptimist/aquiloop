@@ -7,9 +7,10 @@
       "authority": "U.S. Fish and Wildlife Service",
       "title": "Coon’s-tail (Ceratophyllum demersum)",
       "url": "https://www.fws.gov/species/coons-tail-ceratophyllum-demersum",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
         "identity",
+        "identity_scope",
         "natural_history_trivia"
       ],
       "applicability": "Federal species profile supports the scientific/common-name working example only; it does not identify the aquarium specimen or provide aquarium care."
@@ -19,31 +20,75 @@
       "authority": "Washington State Department of Ecology",
       "title": "Ceratophyllum demersum — coontail, hornwort",
       "url": "https://fortress.wa.gov/ecy/gisresources/lakes/AquaticPlantGuide/descriptions/cerdem.html",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
         "identity",
+        "identity_scope",
+        "light_demand",
+        "placement",
+        "flow",
+        "nutrient_context",
+        "stem_length",
+        "fragment_regrowth",
+        "propagation",
+        "life_cycle",
+        "breakage",
+        "natural_history_trivia",
         "light",
         "water_parameters_temperature",
         "placement_anchoring_floating",
-        "nutrient_context",
         "growth_trimming",
-        "propagation",
-        "aquarium_compatibility_troubleshooting",
-        "natural_history_trivia"
+        "aquarium_compatibility_troubleshooting"
       ],
-      "applicability": "Species account for wild C. demersum: supports rootless habit, floating/anchoring, fragments, easily broken stems, dense growth in nutrient-rich water, hard-water and low-light tolerance, and cool-water aquarium use. It does not give aquarium maintenance, algae, shedding-cause, fertilizer, or numeric temperature/chemistry advice."
+      "applicability": "Wild-species account supporting the rootless perennial habit, below-surface floating or modified-leaf anchoring, slow-water habitat, low-light and hard-water tolerance, nutrient-rich dense colonies, 3–4 m stems, easy breakage, seed and fragment propagation, and cool-water aquarium use. It supplies no numeric aquarium temperature, chemistry, lamp runtime, flow, fragment size, or regrowth interval."
     },
     {
       "key": "HOR-TROP",
       "authority": "Tropica Aquarium Plants",
       "title": "Ceratophyllum demersum “Foxtail” plant details",
       "url": "https://tropica.com/en/plants/plantdetails/Ceratophyllumdemersum(021)/4434",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-27",
       "supports": [
+        "light_demand",
+        "placement",
+        "height_after_two_months",
         "light",
         "placement_anchoring_floating"
       ],
-      "applicability": "Grower page for a particular C. demersum selection collected in Bolivia. It supports that selection’s low light demand and describes its compact leaves, lateral shoots, hardier stems, and possible bottom placement; it does not provide pH or temperature values, nutrient/algae/shedding advice, or general maintenance evidence. Do not transfer selection-specific performance to the unverified specimen."
+      "applicability": "Grower page for its Bolivian C. demersum “Foxtail” selection: supports low light demand, possible bottom placement, and a 5–30+ cm average height after two months. Selection-specific performance does not identify the specimen and supplies no lamp runtime, temperature, pH, flow, or propagation interval."
+    },
+    {
+      "key": "HOR-DEN",
+      "authority": "Dennerle Plants GmbH",
+      "title": "Ceratophyllum demersum plant details",
+      "url": "https://dennerleplants.com/en/plants/plantdetails/Ceratophyllumdemersum(764)/22989",
+      "accessed": "2026-09-27",
+      "supports": [
+        "light_demand",
+        "water_temperature",
+        "water_pH",
+        "water_hardness",
+        "dissolved_co2",
+        "growth_rate",
+        "height",
+        "pruning",
+        "fragment_regrowth",
+        "propagation"
+      ],
+      "applicability": "Commercial aquatic-plant grower profile for its C. demersum stock: reports strong light, 1–28 °C, pH 6–8, soft to very hard water, 10–20 mg/L CO2, very fast growth, height to 120 cm, frequent pruning, and propagation by head cuttings or side shoots. These stock-level values are published ranges, not preferred targets for the unverified specimen or permission to change livestock conditions; no lamp runtime, flow, fragment length, or establishment interval is supplied.",
+      "background_only": true
+    },
+    {
+      "key": "HOR-NYDEC",
+      "authority": "New York State Department of Environmental Conservation",
+      "title": "Guidelines for Aquarium and Pet Owners",
+      "url": "https://dec.ny.gov/nature/animals-fish-plants/invasive-species/aquatic/prevent-spread-of-aquatic-invasive-species/guidelines-for-aquarium-and-pet-owners",
+      "accessed": "2026-09-27",
+      "supports": [
+        "responsible_fragment_disposal"
+      ],
+      "applicability": "General aquarium biosecurity guidance, not C. demersum culture: directs unwanted plants and seeds to a sealed bag in household trash, warns against release, and advises against composting aquatic plant material because fragments or seeds may spread.",
+      "background_only": true
     }
   ]
 }
