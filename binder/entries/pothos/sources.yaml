@@ -7,7 +7,7 @@
       "authority": "North Carolina State University Extension",
       "title": "Epipremnum aureum",
       "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
         "identity",
         "light_exposure",
@@ -17,28 +17,35 @@
         "feeding_maintenance",
         "propagation",
         "troubleshooting",
-        "natural_history_trivia"
-      ]
+        "natural_history_trivia",
+        "numeric_size",
+        "flowering_maturity"
+      ],
+      "applicability": "Species account for the provisional E. aureum identity; supports qualitative indoor care, tropical habit dimensions, juvenile container habit, water rooting, and rarity of houseplant fruit. It does not identify the specimen, prescribe a substrate ratio, or provide a numeric indoor temperature or rooting interval."
     },
     {
       "key": "POT-PSU",
       "authority": "Penn State Extension",
       "title": "Pothos as a Houseplant",
       "url": "https://extension.psu.edu/pothos-as-a-houseplant",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
         "light_exposure",
         "water",
+        "temperature_numeric",
         "feeding_maintenance",
-        "troubleshooting"
-      ]
+        "propagation_season",
+        "troubleshooting",
+        "longevity_observation"
+      ],
+      "applicability": "Houseplant article supporting a 60–80°F average-room range, moderate-to-bright light, dry-soil watering cue, and spring/summer preference for stem cuttings. Its author’s plant older than ten years is an anecdotal observation, not a universal species lifespan."
     },
     {
       "key": "POT-WISC",
       "authority": "University of Wisconsin–Madison Extension",
       "title": "Pothos, Epipremmum aureum",
       "url": "https://hort.extension.wisc.edu/articles/pothos-epipremmum-aureum/",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
         "light_exposure",
         "soil_substrate",
@@ -49,14 +56,14 @@
         "troubleshooting",
         "natural_history_trivia"
       ],
-      "applicability": "Species guide supporting aerated medium, surface-dry watering cue, feeding only during active growth, pruning, node-based vegetative growth, drafts, and ingestion/skin cautions. It does not provide a substrate ratio."
+      "applicability": "Species guide supporting aerated medium, surface-dry watering cue, filtered-light care, landscape vine length, juvenile-versus-mature growth, lack of flowering in cultivation, and node-based vegetative growth. It does not provide a substrate ratio, numeric rooting interval, or transplant threshold."
     },
     {
       "key": "POT-NCSU-PROP",
       "authority": "North Carolina State University Extension",
       "title": "Extension Gardener Handbook: 13. Propagation",
       "url": "https://content.ces.ncsu.edu/extension-gardener-handbook/13-propagation",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
         "propagation"
       ],

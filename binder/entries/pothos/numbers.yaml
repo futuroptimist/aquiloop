@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "identity-scope",
+      "metric": "identity_scope",
+      "description": "Use E. aureum guidance provisionally; the common label and overview records do not establish cultivar or variegation.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "Species account supports the working identity, not identification of the owner specimen."
+      }
+    },
+    {
+      "claim_id": "indoor-light",
+      "metric": "indoor_light_category",
+      "description": "Bright indirect or filtered light is preferred; low light may reduce variegation, while direct sun can burn foliage.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-WISC"
+        ],
+        "applicability": "Indoor qualitative guidance; it supplies neither direct-sun hours nor a lamp schedule."
+      }
+    },
+    {
+      "claim_id": "supplemental-light-schedule",
+      "metric": "supplemental_light_duration",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable E. aureum source reviewed supplied a numeric household lamp schedule."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "room-temperature-range",
+      "metric": "temperature_preference",
+      "quantity": {
+        "kind": "range",
+        "minimum": 60,
+        "maximum": 80,
+        "unit": "degF"
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container in moderate-to-bright light; avoid direct sun",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-PSU"
+        ],
+        "applicability": "Average indoor range recommended by the species houseplant article; not a rooting range or cold-tolerance threshold."
+      }
+    },
+    {
+      "claim_id": "water-trigger",
+      "metric": "water_trigger",
+      "description": "Feel the surface and water thoroughly after the potting medium has dried at the surface or between waterings; let excess drain and do not use a calendar interval.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-WISC"
+        ],
+        "applicability": "Species-level indoor container cue; actual dry-down depends on the unmeasured room, pot, roots, and medium."
+      }
+    },
+    {
+      "claim_id": "watering-interval",
+      "metric": "watering_interval",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No fixed interval is defensible without observing this pot’s dry-down under its room conditions."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "substrate-description",
+      "metric": "substrate_properties",
+      "description": "Use a well-aerated, well-drained medium with organic matter in a container with unobstructed drainage.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-WISC"
+        ],
+        "applicability": "Species sources describe properties but do not publish a complete component ratio."
+      }
+    },
+    {
+      "claim_id": "established-substrate-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "recipe": {
+        "recipe_basis": "percent_by_volume",
+        "recipe_evidence": "proposed_starting_point",
+        "batch_volume_litres": 10,
+        "components": [
+          {
+            "name": "commercial peat- or coir-based houseplant potting mix",
+            "percent_by_volume": 50,
+            "litres_for_10_litre_batch": 5,
+            "purpose": "organic, water-holding base"
+          },
+          {
+            "name": "fine orchid bark",
+            "percent_by_volume": 25,
+            "litres_for_10_litre_batch": 2.5,
+            "purpose": "coarse structure and air space"
+          },
+          {
+            "name": "perlite",
+            "percent_by_volume": 25,
+            "litres_for_10_litre_batch": 2.5,
+            "purpose": "air space and faster drainage"
+          }
+        ]
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-WISC"
+        ],
+        "applicability": "Species guidance requires organic matter, aeration, and drainage but gives no formula; ingredient percentages are therefore not published guidance.",
+        "derivation": "A conservative proposed starting mix assigns half to a labeled houseplant base and divides the remaining half between coarse bark and perlite to operationalize the cited aeration/drainage properties. Trial in one drained pot and adjust from observed dry-down; this is not the current mix."
+      }
+    },
+    {
+      "claim_id": "current-substrate",
+      "metric": "current_substrate_composition",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The owner’s current potting ingredients, proportions, pH, drainage, and dry-down are unrecorded."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "substrate-ph",
+      "metric": "substrate_ph",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable species-specific numeric substrate-pH range was found in the reviewed sources."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "groundcover-height",
+      "metric": "size_height",
+      "quantity": {
+        "kind": "range",
+        "minimum": 6,
+        "maximum": 8,
+        "unit": "ft"
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Tropical outdoor groundcover habit, not a typical trimmed indoor pot",
+      "geographic_context": "Tropical landscape; not Pacifica-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "Species landscape dimension; not a predicted indoor specimen size."
+      }
+    },
+    {
+      "claim_id": "climbing-vine-length",
+      "metric": "size_length",
+      "quantity": {
+        "kind": "range",
+        "minimum": 13,
+        "maximum": 40,
+        "unit": "ft"
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Climbing or spreading species habit with support and suitable tropical conditions",
+      "geographic_context": "Landscape/species account; not Pacifica-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "Species range; indoor pruning, support, cultivar, and light constrain size."
+      }
+    },
+    {
+      "claim_id": "indoor-flowering",
+      "metric": "flowering_in_cultivation",
+      "description": "Houseplant pothos generally remains juvenile and does not flower in cultivation; flowering belongs to the mature phase and is rare.",
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Species natural-history distinction; it gives no age to maturity."
+      }
+    },
+    {
+      "claim_id": "time-to-maturity",
+      "metric": "maturity",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible household time to mature climbing foliage or reproductive maturity was found."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "lifespan",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible universal lifespan in years was found for a clonally renewable perennial vine."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "seed-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No practical, reliable E. aureum seed-germination procedure or interval was found; the reviewed houseplant sources cover vegetative propagation."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "site-direct-sun",
+      "metric": "direct_sun_duration",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Indoor light descriptions cannot establish direct-sun hours; window orientation, distance, obstruction, and seasonal exposure are unmeasured."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; cultivar and variegation unresolved",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container culture",
+      "geographic_context": "Indoor household; room conditions unmeasured",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+    }
+  ]
+}
