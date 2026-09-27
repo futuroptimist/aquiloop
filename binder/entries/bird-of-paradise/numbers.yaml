@@ -335,7 +335,7 @@
       "metric": "mature_width",
       "quantity": {
         "kind": "range",
-        "minimum": 2,
+        "minimum": 3,
         "maximum": 4,
         "unit": "ft"
       },
