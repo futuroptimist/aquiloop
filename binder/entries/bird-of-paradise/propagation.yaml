@@ -1,0 +1,352 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "reginae-division-start",
+      "metric": "division_starting_material",
+      "description": "Use an old S. reginae clump with four to five shoots; in late spring or early summer, separate it into single-stem divisions that each retain a healthy root system.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Established old clump in active season",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Species-specific division method; do not transfer to unresolved S. nicolai without support."
+      }
+    },
+    {
+      "claim_id": "reginae-division-replant",
+      "metric": "procedure_step",
+      "description": "Replant each division at its original soil depth and keep the soil moist, not dry or soggy, until roots establish.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Well-drained soil during establishment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Species-specific establishment sequence and moisture cautions."
+      }
+    },
+    {
+      "claim_id": "reginae-division-establishment",
+      "metric": "division_establishment_minimum",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Soil kept moist until roots establish",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF says keep soil moist until roots are established, at least three months; this is establishment, not first flowering."
+      },
+      "description": "Keep the soil moist until roots establish, for at least three months."
+    },
+    {
+      "claim_id": "reginae-division-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "year"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Established division under suitable culture",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Flowering interval after division; separate from root establishment."
+      }
+    },
+    {
+      "claim_id": "nicolai-division-method",
+      "metric": "propagation_method",
+      "description": "Division is a listed propagation strategy for S. nicolai.",
+      "applicable_taxon": "candidate Strelitzia nicolai; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Mature clump; procedure not established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "Species profile lists division only; S. reginae procedural details are intentionally not transferred."
+      }
+    },
+    {
+      "claim_id": "nicolai-division-establishment",
+      "metric": "division_establishment",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No S. nicolai-specific division establishment interval was found in the reviewed institutional source."
+      },
+      "applicable_taxon": "candidate Strelitzia nicolai; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "reginae-seed-preparation",
+      "metric": "procedure_step",
+      "description": "Use fresh seed when possible; soak it in lukewarm water for one or two days, then nick the hard seed coat with a knife or small file.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Fresh seed before sowing",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Species-specific pre-treatment sequence; take care not to damage the embryo."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-soak",
+      "metric": "seed_soak_duration",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "day"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Lukewarm water before scarification",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Published pre-treatment duration for S. reginae."
+      }
+    },
+    {
+      "claim_id": "reginae-sowing-depth",
+      "metric": "sowing_depth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0.5,
+        "maximum": 1,
+        "unit": "inch"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Vermiculite, 1:1 peat/perlite, or ready-made mix; warm indirect light",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Published sowing depth and media alternatives for S. reginae."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-medium",
+      "metric": "propagation_medium",
+      "description": "Sow in vermiculite, a one-to-one peat/perlite mixture, or a ready-made seed mix; keep consistently damp under a clear cover in a warm place with indirect light.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Covered seed container; warm indirect light",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Complete species seed environment; it is distinct from established-plant substrate."
+      }
+    },
+    {
+      "claim_id": "reginae-scarified-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Scarified fresh seed under UF warm, damp, indirect-light procedure",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Typical interval stated for scarified seed; source also warns the broader outcome can take much longer."
+      }
+    },
+    {
+      "claim_id": "reginae-broad-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 12,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Depending on seed pre-treatment; consistently damp, warm, indirect-light conditions",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF reports one month to one year depending on pre-treatment; preserved separately from the scarified-seed interval."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-transplant-readiness",
+      "metric": "transplant_readiness",
+      "description": "Move seedlings into individual pots when they have two true leaves; they should be ready for a larger pot or landscape transplant after two to three months.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Seedling raised under the UF warm, consistently damp, indirect-light procedure",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF gives both the two-true-leaf potting milestone and the subsequent two-to-three-month readiness interval for S. reginae seedlings."
+      }
+    },
+    {
+      "claim_id": "nicolai-seed-method",
+      "metric": "propagation_method",
+      "description": "Seed is a listed propagation strategy for S. nicolai.",
+      "applicable_taxon": "candidate Strelitzia nicolai; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Protocol not established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-NIC"
+        ],
+        "applicability": "Species profile supports seed as a method only; S. reginae protocol is not transferred."
+      }
+    },
+    {
+      "claim_id": "nicolai-seed-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No S. nicolai-specific germination interval under stated conditions was found in the reviewed institutional source."
+      },
+      "applicable_taxon": "candidate Strelitzia nicolai; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "cutting-method",
+      "metric": "propagation_method",
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "The reviewed candidate sources support seed and/or division, not stem or leaf cuttings; a detached leaf is not recorded as a propagation method for either candidate."
+      },
+      "applicable_taxon": "unresolved Strelitzia sp.; S. reginae and S. nicolai are separate candidates",
+      "propagation_method": "stem or leaf cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "No supported cutting protocol",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "failure-cue-division-yellowing",
+      "metric": "failure_sign",
+      "description": "Yellowing or dying leaves on a new division: check whether the soil is dry or soggy, then restore moist, freely draining conditions.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "During establishment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF links dry or soggy establishment conditions with leaves yellowing and eventually dying.",
+        "derivation": "The corrective check operationalizes the cited moisture alternatives without claiming which one applies."
+      }
+    },
+    {
+      "claim_id": "failure-cue-division-stalls",
+      "metric": "failure_sign",
+      "description": "A division that fails to establish: check that it remains at its original soil depth and that the soil stays moist while roots form for at least three months.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "During establishment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF directs replanting at the original depth and moist care until roots establish for at least three months.",
+        "derivation": "The corrective check combines the source's placement and establishment requirements without inventing a diagnosis or deadline."
+      }
+    },
+    {
+      "claim_id": "failure-cue-seed-not-sprouted",
+      "metric": "failure_sign",
+      "description": "No seedling after the usual scarified-seed interval: check that the covered medium remains damp and warm in indirect light, and allow for the documented germination range before discarding seed.",
+      "applicable_taxon": "candidate Strelitzia reginae; specimen match unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "During germination",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "UF calls for covered, consistently damp medium in a warm, indirect-light location and reports germination can take one month to one year.",
+        "derivation": "The corrective check uses the cited conditions and broad range so the usual one-to-two-month interval is not treated as a failure deadline."
+      }
+    }
+  ]
+}
