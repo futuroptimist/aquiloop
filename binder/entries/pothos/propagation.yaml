@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "Use a node-bearing stem cutting; a detached leaf without a node and axillary bud is not the instructed cutting.",
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent vine",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP",
+          "POT-WISC"
+        ],
+        "applicability": "The general handbook expressly lists devil’s ivy and the species guide confirms easy vegetative rooting."
+      }
+    },
+    {
+      "claim_id": "select-node",
+      "metric": "procedure_step",
+      "description": "Select a healthy stem section containing one node, its leaf, and an axillary bud.",
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent vine",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Devil’s ivy is expressly named for the single-node/leaf-bud method."
+      }
+    },
+    {
+      "claim_id": "medium-placement",
+      "metric": "procedure_step",
+      "description": "Place the node in moist propagation medium with the bud facing upward and covered, leaving the leaf exposed.",
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "single-node cutting in medium",
+      "life_stage": "cutting",
+      "growing_conditions": "Moist propagation medium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Published leaf-bud cutting placement expressly applicable to devil’s ivy."
+      }
+    },
+    {
+      "claim_id": "water-placement",
+      "metric": "procedure_step",
+      "description": "Alternatively submerge the node in water while keeping foliage above the water line.",
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Clean water vessel; foliage above water",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Species guide supports water rooting; node requirement is supplied by the propagation handbook."
+      }
+    },
+    {
+      "claim_id": "medium-rooting-time",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable species-specific interval was found for rooting a node cutting in medium under household conditions."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "single-node cutting in medium",
+      "life_stage": "cutting",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "cutting-callus",
+      "metric": "cutting_callus_formation",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No source required or timed a callusing step for pothos node cuttings."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "rooting-medium",
+      "metric": "propagation_medium",
+      "description": "Use moist propagation medium for the node, distinct from the established-plant recipe; the source does not prescribe component percentages.",
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "single-node cutting in medium",
+      "life_stage": "cutting",
+      "growing_conditions": "Container suitable for propagation",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Published method specifies moist medium but no recipe."
+      }
+    },
+    {
+      "claim_id": "transplant-readiness",
+      "metric": "transplant_readiness",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No cited source gives a root length, root count, or fixed day threshold for transplanting household pothos cuttings."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "seed-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No practical, reliable E. aureum seed-germination protocol was found; houseplants rarely if ever fruit and vegetative cuttings are the supported household method."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "seed-first-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No supported seed-to-flower interval was found; indoor flowering is exceptionally rare."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "division-method",
+      "metric": "propagation_method",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed sources support stem cuttings, not a sufficiently documented division sequence for this species."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pothos#water-root-photo-milestone"
+    }
+  ]
+}
