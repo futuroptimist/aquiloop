@@ -19,7 +19,7 @@
         "troubleshooting",
         "natural_history_trivia"
       ],
-      "applicability": "Species profile for the S. reginae candidate. Its care and habit facts are candidate-specific and do not resolve the specimen’s species."
+      "applicability": "Species profile for the S. reginae candidate. Supports sunny indoor siting, 55–65°F night temperatures, loamy drainage, seasonal watering, division, and 3–4 ft dimensions. Candidate-specific evidence does not resolve the specimen and is not transferable to S. nicolai."
     },
     {
       "key": "BOP-NIC",
@@ -37,7 +37,7 @@
         "troubleshooting",
         "natural_history_trivia"
       ],
-      "applicability": "Species profile for the S. nicolai candidate. Care facts are candidate-specific and are used alongside the S. reginae profile to show where recommendations agree or differ; they do not resolve the specimen’s species."
+      "applicability": "Species profile for the S. nicolai candidate. Supports bright indirect light, 65–85°F preference, a 50°F lower limit, dry-surface watering cue, loam-and-sand drainage, division/seed methods, 20–30 by 6–10 ft landscape size, and a 5–6-year flowering statement whose propagation origin is unspecified. It does not resolve the specimen."
     },
     {
       "key": "BOP-UF",
@@ -48,7 +48,7 @@
       "supports": [
         "propagation"
       ],
-      "applicability": "Species account for S. reginae. Its division example uses old clumps with four to five shoots, single-stem divisions, original planting depth, and moist establishment; it also warns that dry or soggy establishment conditions can kill foliage. Do not transfer these details to the unresolved S. nicolai candidate."
+      "applicability": "Species account for S. reginae. Supports Florida outdoor cold/light context; division from four-to-five-shoot clumps; at least three months to division establishment and 1–2 years to flowering; and the sequential seed pretreatment, 1–12-month germination, two-true-leaf pot-up, 2–3-month later transfer, and 3–5-year flowering milestones. Do not transfer these details to S. nicolai or treat Florida cold tolerance as a Pacifica site measurement."
     }
   ]
 }

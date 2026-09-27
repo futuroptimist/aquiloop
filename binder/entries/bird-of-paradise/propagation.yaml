@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "entry": "bird-of-paradise",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "reginae-division-start",
+      "metric": "starting_material",
+      "description": "Use an old clump with four to five shoots and separate it into single-stem divisions.",
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Old established clump",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Candidate-specific Florida division sequence; not applicable to unresolved S. nicolai."
+      }
+    },
+    {
+      "claim_id": "reginae-division-season",
+      "metric": "propagation_season",
+      "description": "Divide in late spring or early summer.",
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Active-season division",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Candidate-specific best-results season."
+      }
+    },
+    {
+      "claim_id": "reginae-division-planting",
+      "metric": "procedure_step",
+      "description": "Replant each division at the same soil depth at which it previously grew.",
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Freshly separated single-stem division",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Candidate-specific planting-depth instruction."
+      }
+    },
+    {
+      "claim_id": "reginae-division-moisture",
+      "metric": "procedure_step",
+      "description": "Keep soil moist—not dry or soggy—until roots establish; begin fertilizing only after establishment.",
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Fresh division in draining soil",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Candidate-specific establishment guidance and failure warning."
+      }
+    },
+    {
+      "claim_id": "reginae-division-establishment",
+      "metric": "division_establishment",
+      "quantity": {
+        "kind": "value",
+        "value": 3,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "Moist, draining soil after division",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "At least three months to root establishment; not time to flowering."
+      }
+    },
+    {
+      "claim_id": "reginae-division-first-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "year"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "division",
+      "life_stage": "established",
+      "growing_conditions": "Established division under suitable culture",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Candidate-specific mature flowering result after division; separate from root establishment."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-soak",
+      "metric": "procedure_step",
+      "description": "Use fresh seed; soak in lukewarm water for one or two days, then nick the hard seed coat.",
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Fresh seed before sowing",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Candidate-specific seed pretreatment."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-soak-duration",
+      "metric": "seed_presoak",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "day"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Lukewarm water before scarification",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Candidate-specific pretreatment duration."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-depth",
+      "metric": "sowing_depth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0.5,
+        "maximum": 1,
+        "unit": "inch"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Damp seed medium, warm indirect-light position",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Candidate-specific sowing depth."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-medium",
+      "metric": "propagation_medium",
+      "description": "Sow in vermiculite, a 1:1 peat-and-perlite mixture, or a ready-made seed mix; keep consistently damp under a clear cover in warm indirect light.",
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Covered warm seed container in indirect light",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Published alternatives; distinct from established-plant substrate."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-germination-scarified",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "scarified seed",
+      "life_stage": "seed",
+      "growing_conditions": "Fresh seed soaked then scarified; conditions otherwise unspecified",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Typical interval for scarified seed; not transplant readiness."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-germination-full-range",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 12,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Damp warm covered container; interval varies with pretreatment",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Full published range from one month to one year."
+      }
+    },
+    {
+      "claim_id": "reginae-seedling-pot-up",
+      "metric": "transplant_readiness",
+      "quantity": {
+        "kind": "value",
+        "value": 2,
+        "unit": "true leaves"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Germinated seedlings",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Observable threshold for individual pots, distinct from later landscape/large-pot readiness."
+      }
+    },
+    {
+      "claim_id": "reginae-larger-pot-readiness",
+      "metric": "transplant_readiness",
+      "quantity": {
+        "kind": "range",
+        "minimum": 2,
+        "maximum": 3,
+        "unit": "month"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "Seedlings already moved individually at two true leaves",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Published interval until larger pot or landscape transfer after the individual-pot stage."
+      }
+    },
+    {
+      "claim_id": "reginae-seed-first-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 5,
+        "unit": "year"
+      },
+      "applicable_taxon": "candidate Strelitzia reginae",
+      "propagation_method": "seed",
+      "life_stage": "established",
+      "growing_conditions": "Plant grown from seed",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "BOP-UF"
+        ],
+        "applicability": "Seed-to-bloom interval; separate from germination and transplant readiness."
+      }
+    },
+    {
+      "claim_id": "nicolai-seed-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed S. nicolai source names seed propagation but supplies no species-specific pretreatment, conditions, or germination interval."
+      },
+      "applicable_taxon": "candidate Strelitzia nicolai",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "nicolai-division-establishment",
+      "metric": "division_establishment",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed S. nicolai source names division but supplies no species-specific sequence or establishment timeline."
+      },
+      "applicable_taxon": "candidate Strelitzia nicolai",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "unresolved-specimen-method",
+      "metric": "propagation_method",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Do not choose the S. reginae sequence for this specimen until its species and suitability as a parent plant are confirmed."
+      },
+      "applicable_taxon": "unresolved Strelitzia sp.; candidate species are Strelitzia reginae and Strelitzia nicolai",
+      "propagation_method": "division",
+      "life_stage": "division",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "bird-of-paradise#reginae-seed-first-flowering"
+    }
+  ]
+}

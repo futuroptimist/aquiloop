@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "indoor-light-description",
+      "metric": "indoor_light",
+      "description": "Bright, indirect light is preferred; prolonged low light is tolerated but may reduce variegation, while direct sun can scorch foliage.",
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-PSU"
+        ],
+        "applicability": "Species guidance; descriptive indoor exposure is not converted to sun hours."
+      }
+    },
+    {
+      "claim_id": "landscape-direct-sun-band",
+      "metric": "direct_sun_duration",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0,
+        "maximum": 6,
+        "unit": "h/day"
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Outdoor landscape categories: deep shade through partial shade",
+      "geographic_context": "outdoor landscape; not Pacifica-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "NCSU category definitions span less than 2 hours through 2–6 hours; not an indoor-light prescription."
+      }
+    },
+    {
+      "claim_id": "watering-cue",
+      "metric": "watering_cue",
+      "description": "Let the well-drained medium dry at the surface or between waterings, then water thoroughly and drain excess.",
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor draining container",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU",
+          "POT-WISC",
+          "POT-PSU"
+        ],
+        "applicability": "Species container guidance; dry-down rate, not a calendar interval, governs watering."
+      }
+    },
+    {
+      "claim_id": "minimum-indoor-temperature",
+      "metric": "minimum_temperature",
+      "quantity": {
+        "kind": "value",
+        "value": 50,
+        "unit": "degF"
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor houseplant; avoid cold drafts",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Wisconsin Extension says minimum temperatures should remain above 50°F; this is a lower limit, not an optimum."
+      }
+    },
+    {
+      "claim_id": "groundcover-length",
+      "metric": "size_length",
+      "quantity": {
+        "kind": "range",
+        "minimum": 6,
+        "maximum": 8,
+        "unit": "ft"
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Outdoor horizontal groundcover habit",
+      "geographic_context": "outdoor landscape; not Pacifica-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "Species landscape dimension, not expected indoor container size."
+      }
+    },
+    {
+      "claim_id": "climbing-vine-length",
+      "metric": "size_length",
+      "quantity": {
+        "kind": "value",
+        "value": 40,
+        "unit": "ft"
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Outdoor/tropical climbing vine with support and adequate light",
+      "geographic_context": "outdoor landscape; not Pacifica-specific",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "Species maximum vine length in landscape context; not an indoor promise."
+      }
+    },
+    {
+      "claim_id": "juvenile-leaf-length",
+      "metric": "leaf_length",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 6,
+        "unit": "inch"
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Juvenile foliage typical of container plants",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "Species profile range; mature climbing foliage may differ."
+      }
+    },
+    {
+      "claim_id": "water-root-photo-milestone",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "value",
+        "value": 2,
+        "unit": "week"
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Node-bearing cuttings shown rooting in water; exact household conditions unstated",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "Caption documents roots after two weeks in the pictured cuttings; it is an observation example, not a guaranteed interval."
+      }
+    },
+    {
+      "claim_id": "indoor-mature-size",
+      "metric": "size_at_maturity",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reliable universal indoor mature dimension was found; support, pruning, light, container, and juvenile versus mature growth alter size."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "maturity",
+      "metric": "maturity",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible age-to-maturity was found for an indoor vegetatively propagated vine."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "time-to-flowering",
+      "metric": "time_to_flowering",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Houseplants rarely if ever flower, and no practical indoor time-to-flowering interval was found."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "lifespan",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible universal lifespan was found for a clonally renewable perennial vine."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "current-pot-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The specimen’s present potting-medium ingredients and proportions have not been recorded."
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "No sufficiently scoped conditions established",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "established-substrate-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "recipe": {
+        "recipe_basis": "percent_by_volume",
+        "recipe_evidence": "proposed_starting_point",
+        "batch_volume_litres": 10,
+        "components": [
+          {
+            "name": "commercial well-drained houseplant potting mix",
+            "percent_by_volume": 70,
+            "litres_per_10_litre_batch": 7,
+            "purpose": "organic, moisture-retentive base"
+          },
+          {
+            "name": "perlite",
+            "percent_by_volume": 30,
+            "litres_per_10_litre_batch": 3,
+            "purpose": "increase aeration and drainage"
+          }
+        ]
+      },
+      "applicable_taxon": "candidate Epipremnum aureum; specimen species and cultivar remain provisional",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Indoor container with unobstructed drainage; trial recipe, not the current mix",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC",
+          "POT-NCSU"
+        ],
+        "applicability": "Both species sources require an aerated or well-drained potting medium but publish no ingredient ratio.",
+        "derivation": "Proposed conservative starting blend: retain a majority commercial houseplant mix and add 30% perlite for aeration; evaluate dry-down and roots before reuse."
+      }
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+    }
+  ]
+}
