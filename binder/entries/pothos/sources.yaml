@@ -7,7 +7,7 @@
       "authority": "North Carolina State University Extension",
       "title": "Epipremnum aureum",
       "url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
         "identity",
         "light_exposure",
@@ -18,14 +18,15 @@
         "propagation",
         "troubleshooting",
         "natural_history_trivia"
-      ]
+      ],
+      "applicability": "Species profile supporting qualitative bright-indirect/low-light tolerance, well-drained dry-down care, groundcover and vine dimensions, rare flowering, and a captioned two-week water-rooting observation. Dimensions are not household forecasts; the photo caption is not a guaranteed rooting deadline."
     },
     {
       "key": "POT-PSU",
       "authority": "Penn State Extension",
       "title": "Pothos as a Houseplant",
       "url": "https://extension.psu.edu/pothos-as-a-houseplant",
-      "accessed": "2026-09-15",
+      "accessed": "2026-09-26",
       "supports": [
         "light_exposure",
         "water",
@@ -38,7 +39,7 @@
       "authority": "University of Wisconsin–Madison Extension",
       "title": "Pothos, Epipremmum aureum",
       "url": "https://hort.extension.wisc.edu/articles/pothos-epipremmum-aureum/",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
         "light_exposure",
         "soil_substrate",
@@ -49,18 +50,18 @@
         "troubleshooting",
         "natural_history_trivia"
       ],
-      "applicability": "Species guide supporting aerated medium, surface-dry watering cue, feeding only during active growth, pruning, node-based vegetative growth, drafts, and ingestion/skin cautions. It does not provide a substrate ratio."
+      "applicability": "Species guide supporting filtered light, 70–90°F care, aerated surface-dry medium, mature vine description, juvenile-phase lack of cultivation flowering, and water/vermiculite propagation with separate bud-growth and rooting intervals. It does not publish a substrate ratio."
     },
     {
       "key": "POT-NCSU-PROP",
       "authority": "North Carolina State University Extension",
       "title": "Extension Gardener Handbook: 13. Propagation",
       "url": "https://content.ces.ncsu.edu/extension-gardener-handbook/13-propagation",
-      "accessed": "2026-09-17",
+      "accessed": "2026-09-26",
       "supports": [
         "propagation"
       ],
-      "applicability": "General propagation chapter expressly listing devil’s ivy for single-node/leaf-bud cuttings; supports a node with axillary bud, bud-up placement in medium, and exposed leaf. Water rooting and foliage-above-water wording is paired with the species source."
+      "applicability": "General propagation chapter expressly listing devil’s ivy for single-node/leaf-bud cuttings; supports a node with axillary bud, bud-up placement in medium, and exposed leaf. It provides no pothos-specific rooting or transplant interval."
     }
   ]
 }

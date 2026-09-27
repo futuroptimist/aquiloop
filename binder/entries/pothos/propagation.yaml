@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "entry": "pothos",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "primary-method",
+      "metric": "propagation_method",
+      "description": "Propagate from a vine cutting that includes at least one node and axillary bud; a detached leaf alone is not the specified propagule.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Healthy parent vine; clean tools",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP",
+          "POT-WISC"
+        ],
+        "applicability": "The handbook expressly lists devil’s ivy for single-node/leaf-bud cuttings; Wisconsin supports cuttings generally."
+      }
+    },
+    {
+      "claim_id": "prepare-node-cutting",
+      "metric": "procedure_step",
+      "description": "Cut a healthy stem section with a leaf, node, and axillary bud; keep track of the bud-up orientation.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "single-node stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Fresh healthy vine section",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "General single-node/leaf-bud procedure expressly includes devil’s ivy."
+      }
+    },
+    {
+      "claim_id": "medium-placement",
+      "metric": "procedure_step",
+      "description": "Place the node in moist propagation medium with the bud upward and covered while the leaf remains exposed.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "single-node stem cutting in medium",
+      "life_stage": "cutting",
+      "growing_conditions": "Moist, aerated rooting medium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Handbook placement for single-node/leaf-bud cuttings."
+      }
+    },
+    {
+      "claim_id": "water-placement",
+      "metric": "procedure_step",
+      "description": "Alternatively place the node in water while keeping foliage above the water; move rooted cuttings to potting medium rather than treating water as the established-plant substrate.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Clean water; foliage above water",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC",
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Species source supports rooting vines in water; foliage-above-water follows the node-cutting structure."
+      }
+    },
+    {
+      "claim_id": "propagation-medium",
+      "metric": "propagation_medium",
+      "description": "Use vermiculite as the propagation medium; this temporary rooting medium is distinct from the established-plant recipe.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting in medium",
+      "life_stage": "cutting",
+      "growing_conditions": "Warm indoor rooting location",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Wisconsin explicitly states vines root in vermiculite; no component ratio is implied."
+      }
+    },
+    {
+      "claim_id": "bud-growth-time",
+      "metric": "bud_growth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "week"
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Warm temperatures; water or vermiculite method not separated by source",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Species guide says buds can start growing in 1–2 weeks under warm temperatures; not the same milestone as rooting."
+      }
+    },
+    {
+      "claim_id": "rooting-time",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 4,
+        "unit": "week"
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Warm temperatures; rooting in water or vermiculite",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Published rooting interval for vines in water or vermiculite; household results can vary."
+      }
+    },
+    {
+      "claim_id": "water-root-photo-time",
+      "metric": "rooting_observation",
+      "quantity": {
+        "kind": "value",
+        "value": 2,
+        "unit": "week"
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting in water",
+      "life_stage": "cutting",
+      "growing_conditions": "Conditions not reported in image caption",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-NCSU"
+        ],
+        "applicability": "NCSU image caption identifies cuttings rooting after two weeks; it is an observation, not a guaranteed readiness deadline."
+      }
+    },
+    {
+      "claim_id": "transplant-readiness",
+      "metric": "transplant_readiness",
+      "description": "Pot after several roots have formed and the cutting sustains growth; the sources do not publish a root-length threshold, so inspect the cutting rather than transplanting by calendar alone.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Rooted cutting destined for an aerated established-plant medium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC",
+          "POT-NCSU-PROP"
+        ],
+        "applicability": "Sources establish rooting and node procedure but no quantitative transplant threshold.",
+        "derivation": "Observable proposed readiness rule separates root initiation from transfer and avoids inventing a root length."
+      }
+    },
+    {
+      "claim_id": "combine-rooted-cuttings",
+      "metric": "procedure_step",
+      "description": "Plant several rooted cuttings together in one container when a fuller finished pot is desired.",
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Rooted cuttings after propagation",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "POT-WISC"
+        ],
+        "applicability": "Species guide explicitly recommends several rooted cuttings in one pot."
+      }
+    },
+    {
+      "claim_id": "seed-germination",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No practical, reproducible E. aureum seed-germination protocol was found in the reviewed extension sources; cultivated plants normally remain juvenile and do not flower."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "No supported household seed protocol",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "cutting-callus-time",
+      "metric": "cutting_callus_formation",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The reviewed sources do not prescribe a callusing step or interval for pothos node cuttings."
+      },
+      "applicable_taxon": "provisional Epipremnum aureum; specimen species and cultivar unverified",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Water or vermiculite rooting",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    }
+  ]
+}
