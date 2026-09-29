@@ -89,6 +89,21 @@
       ],
       "applicability": "General aquarium biosecurity guidance, not C. demersum culture: directs unwanted plants and seeds to a sealed bag in household trash, warns against release, and advises against composting aquatic plant material because fragments or seeds may spread.",
       "background_only": true
+    },
+    {
+      "key": "HOR-AQCOOP",
+      "authority": "Aquarium Co-Op",
+      "title": "How to Care for Hornwort (Ceratophyllum demersum) in Aquariums & Ponds",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/hornwort-care",
+      "accessed": "2026-09-27",
+      "supports": [
+        "aquarium_flow",
+        "filter_intake_exposure",
+        "needle_shedding",
+        "aquarium_compatibility_troubleshooting"
+      ],
+      "applicability": "General aquarium hornwort care supports gentle flow, keeping needles clear of filter intakes, and checking water changes, strong current, insufficient basal light, nutrients, and chemical dosing when needles shed. It does not identify the owner specimen or measure the current tank.",
+      "background_only": true
     }
   ]
 }

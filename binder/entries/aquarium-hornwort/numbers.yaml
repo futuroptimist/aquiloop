@@ -25,7 +25,7 @@
       "claim_id": "wild-low-light-tolerance",
       "metric": "light_demand",
       "description": "Wild C. demersum tolerates low light levels.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Wild ponds, lakes, and slow-moving waters; not a measured aquarium-light target",
@@ -42,7 +42,7 @@
       "claim_id": "foxtail-low-light-demand",
       "metric": "light_demand",
       "description": "Tropica rates its Bolivian “Foxtail” selection as low-light-demand.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Tropica Bolivian Ceratophyllum demersum “Foxtail” selection; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Tropica commercial “Foxtail” selection; tank method not specified",
@@ -59,7 +59,7 @@
       "claim_id": "commercial-stock-strong-light",
       "metric": "light_demand",
       "description": "Dennerle rates its C. demersum commercial stock for strong light.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Dennerle commercial aquarium stock",
@@ -96,7 +96,7 @@
         "maximum": 28,
         "unit": "degC"
       },
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Dennerle commercial aquarium stock; published tolerance/profile range, not a preferred target",
@@ -133,7 +133,7 @@
         "maximum": 8,
         "unit": "pH"
       },
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Dennerle commercial aquarium stock; published profile range, not a measured tank value",
@@ -150,7 +150,7 @@
       "claim_id": "commercial-hardness-range",
       "metric": "water_hardness",
       "description": "Dennerle describes its commercial stock as accepting soft to very hard water.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Dennerle commercial aquarium stock; qualitative hardness span",
@@ -182,7 +182,7 @@
       "claim_id": "wild-flow-habitat",
       "metric": "flow",
       "description": "Wild C. demersum occurs in ponds, lakes, and slow-moving streams and rivers; modified leaves may anchor it especially in flowing water.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Wild-species habitat; not an aquarium circulation prescription",
@@ -211,10 +211,27 @@
       "provenance": {}
     },
     {
+      "claim_id": "aquarium-gentle-flow-intake-clearance",
+      "metric": "flow",
+      "description": "Hornwort prefers gentle aquarium flow, with its needles kept clear of the filter intake.",
+      "applicable_taxon": "aquarium hornwort care guidance; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Aquarium; qualitative flow and filter-intake exposure guidance, not a measured current-tank setting",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-AQCOOP"
+        ],
+        "applicability": "General aquarium hornwort guidance supports gentle flow and avoiding filter-intake exposure; it does not identify the specimen or measure the current tank flow."
+      }
+    },
+    {
       "claim_id": "floating-placement",
       "metric": "placement",
       "description": "The rootless plant may float freely below the surface.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Wild-species morphology used as general aquarium placement context",
@@ -231,7 +248,7 @@
       "claim_id": "supported-bottom-placement",
       "metric": "placement",
       "description": "Bottom placement is possible without treating the rootless stem as a rooted plant.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Tropica Bolivian Ceratophyllum demersum “Foxtail” selection; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Tropica “Foxtail” selection; supported bottom placement in an aquarium",
@@ -248,7 +265,7 @@
       "claim_id": "wild-nutrient-context",
       "metric": "nutrient_context",
       "description": "Wild C. demersum can form dense colonies in nutrient-rich water.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Wild nutrient-rich water; not a fertilizer prescription",
@@ -285,7 +302,7 @@
         "maximum": 20,
         "unit": "mg/L"
       },
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Dennerle commercial aquarium stock profile",
@@ -307,7 +324,7 @@
         "maximum": 4,
         "unit": "m"
       },
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Wild C. demersum morphology",
@@ -323,7 +340,7 @@
     {
       "claim_id": "foxtail-two-month-height",
       "metric": "height_after_two_months",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Tropica Bolivian Ceratophyllum demersum “Foxtail” selection; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Tropica “Foxtail” selection after two months in a tank; upper bound printed as 30+",
@@ -341,7 +358,7 @@
       "claim_id": "commercial-growth-rate",
       "metric": "growth_rate",
       "description": "Dennerle classifies its commercial C. demersum as very fast-growing and says it requires constant pruning.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Dennerle commercial aquarium stock",
@@ -406,7 +423,7 @@
       "claim_id": "perennial-life-cycle",
       "metric": "life_cycle",
       "description": "C. demersum is an aquatic perennial.",
-      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
       "propagation_method": "not_applicable",
       "life_stage": "established",
       "growing_conditions": "Wild-species life-cycle classification",
@@ -542,7 +559,7 @@
       "claim_ref": "aquarium-hornwort#aquarium-lamp-runtime"
     },
     "flow": {
-      "claim_ref": "aquarium-hornwort#current-tank-flow"
+      "claim_ref": "aquarium-hornwort#aquarium-gentle-flow-intake-clearance"
     },
     "livestock_context": {
       "claim_ref": "aquarium-hornwort#livestock-context"

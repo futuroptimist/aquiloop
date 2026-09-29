@@ -135,10 +135,11 @@
       "evidence_category": "proposed",
       "provenance": {
         "source_refs": [
-          "HOR-WA"
+          "HOR-WA",
+          "HOR-AQCOOP"
         ],
-        "applicability": "WA supports below-surface free-floating placement; intake clearance is a conservative containment check.",
-        "derivation": "Uses the directly supported placement while reducing mechanical loss in an otherwise unmeasured flow setup."
+        "applicability": "WA supports below-surface free-floating placement; Aquarium Co-Op specifically advises keeping hornwort needles out of the filter intake.",
+        "derivation": "Uses the supported placement and applies the source’s filter-intake precaution in an otherwise unmeasured flow setup."
       }
     },
     {
@@ -293,9 +294,9 @@
       }
     },
     {
-      "claim_id": "failure-cue-crowding",
+      "claim_id": "failure-cue-heavy-needle-shedding",
       "metric": "failure_sign",
-      "description": "Dense or tangled growth: check whether regular pruning is overdue, trim deliberately, and contain all cut and accidental fragments.",
+      "description": "Heavy needle shedding: check for a recent water-parameter change, strong current or filter-intake exposure, insufficient light at stem bases, depleted nutrients, or liquid-carbon dosing; vacuum fallen needles and let intact growth recover before changing one variable.",
       "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
       "propagation_method": "fragmentation",
       "life_stage": "fragment",
@@ -304,12 +305,10 @@
       "evidence_category": "proposed",
       "provenance": {
         "source_refs": [
-          "HOR-DEN",
-          "HOR-WA",
-          "HOR-NYDEC"
+          "HOR-AQCOOP"
         ],
-        "applicability": "Dennerle reports very fast growth requiring pruning; WA reports dense colonies and fragments; NY DEC supplies disposal practice.",
-        "derivation": "Pairs sourced growth behavior with containment rather than asserting a disease diagnosis."
+        "applicability": "Aquarium Co-Op identifies major water changes and unfavorable conditions—including strong current, insufficient basal light, depleted nutrients, and some chemicals such as liquid carbon—as shedding contexts, and advises removing fallen needles.",
+        "derivation": "Turns the article’s shedding causes and cleanup instruction into concrete observation checks without assigning an unsupported diagnosis."
       }
     },
     {
