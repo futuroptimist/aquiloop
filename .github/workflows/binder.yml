@@ -44,8 +44,44 @@ jobs:
           cache-dependency-path: requirements-binder.txt
 
       - name: Install LuaLaTeX and Poppler
+        id: apt_install
         run: |
-          set -euo pipefail
+          set -Eeuo pipefail
+          install_log="$RUNNER_TEMP/binder-apt-install.log"
+          install_diagnostics="$RUNNER_TEMP/binder-apt-diagnostics.log"
+          packages=(
+            fonts-texgyre
+            poppler-utils
+            texlive-binaries
+            texlive-fonts-recommended
+            texlive-latex-base
+            texlive-luatex
+            texlive-pictures
+          )
+          record_install_failure() {
+            status="$1"
+            command="$2"
+            trap - ERR
+            set +e
+            printf '\nFAILED command (exit %s): %s\n' "$status" "$command" | tee -a "$install_log"
+            {
+              printf 'Configured APT sources:\n'
+              cat /etc/apt/sources.list 2>/dev/null
+              find /etc/apt/sources.list.d -maxdepth 1 -type f -print -exec cat {} \;
+              printf '\nPackage policy:\n'
+              apt-cache policy "${packages[@]}"
+              printf '\nInstalled versions:\n'
+              dpkg-query -W -f='${Package}=${Version}\n' "${packages[@]}"
+              printf '\nPackage dependencies:\n'
+              for package in "${packages[@]}"; do
+                printf '\n[%s]\n' "$package"
+                apt-cache depends "$package"
+              done
+            } >"$install_diagnostics" 2>&1
+            exit "$status"
+          }
+          trap 'record_install_failure "$?" "$BASH_COMMAND"' ERR
+          exec > >(tee -a "$install_log") 2>&1
           # Freeze APT metadata as well as package revisions so these pins remain
           # installable after the moving Noble repositories publish updates.
           sudo tee /etc/apt/sources.list.d/ubuntu.sources >/dev/null <<'EOF'
@@ -55,9 +91,9 @@ jobs:
           Components: main universe
           Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
           EOF
-          sudo apt-get update
+          sudo apt-get -o Acquire::Retries=3 update
           apt-cache policy texlive-binaries
-          sudo apt-get install --no-install-recommends -y \
+          sudo apt-get -o Acquire::Retries=3 install --no-install-recommends -y \
             fonts-texgyre=20180621-6 \
             poppler-utils=24.02.0-1ubuntu9.9 \
             texlive-binaries=2023.20230311.66589-9build3 \
@@ -68,6 +104,17 @@ jobs:
           command -v lualatex
           command -v pdfinfo
           command -v pdftoppm
+
+      - name: Upload APT installation diagnostics
+        if: ${{ failure() && steps.apt_install.outcome == 'failure' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-apt-diagnostics
+          path: |
+            ${{ runner.temp }}/binder-apt-install.log
+            ${{ runner.temp }}/binder-apt-diagnostics.log
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Install pinned Python dependencies
         run: python -m pip install --disable-pip-version-check --requirement requirements-binder.txt

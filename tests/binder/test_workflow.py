@@ -82,7 +82,7 @@ class BinderWorkflowTests(unittest.TestCase):
         self.assertNotEqual(checkout_uses_first, self.workflow)
         self._assert_immutable_actions(checkout_uses_first)
 
-    def test_pinned_tools_draft_build_and_single_artifact(self):
+    def test_pinned_tools_draft_build_and_artifacts(self):
         for expected in (
             "runs-on: ubuntu-24.04",
             "python-version: '3.12.13'",
@@ -102,9 +102,15 @@ class BinderWorkflowTests(unittest.TestCase):
             "pdfinfo -box build/binder/aquiloop-binder-draft.pdf",
             "name: aquiloop-binder-draft",
             "path: build/binder/aquiloop-binder-draft.pdf",
+            "apt-get -o Acquire::Retries=3 update",
+            "apt-get -o Acquire::Retries=3 install --no-install-recommends -y",
+            "name: aquiloop-binder-apt-diagnostics",
+            "if: ${{ failure() && steps.apt_install.outcome == 'failure' }}",
+            "binder-apt-install.log",
+            "binder-apt-diagnostics.log",
         ):
             self.assertIn(expected, self.workflow)
-        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 1)
+        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 2)
         self.assertEqual(self.workflow.count("path: build/binder/aquiloop-binder-draft.pdf"), 1)
         for package in (
             "fonts-texgyre",
