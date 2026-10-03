@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "entry": "aquarium-hornwort",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "identity-scope",
+      "metric": "identity_scope",
+      "description": "Ceratophyllum demersum is a working species example only; “hornwort” does not identify the aquarium specimen or a trade selection.",
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-FWS",
+          "HOR-WA"
+        ],
+        "applicability": "The government records connect the common names with the species, but neither identifies this specimen."
+      }
+    },
+    {
+      "claim_id": "wild-low-light-tolerance",
+      "metric": "light_demand",
+      "description": "Wild C. demersum tolerates low light levels.",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Wild ponds, lakes, and slow-moving waters; not a measured aquarium-light target",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA"
+        ],
+        "applicability": "Wild-species tolerance only; no intensity or lamp schedule is supplied."
+      }
+    },
+    {
+      "claim_id": "foxtail-low-light-demand",
+      "metric": "light_demand",
+      "description": "Tropica rates its Bolivian “Foxtail” selection as low-light-demand.",
+      "applicable_taxon": "Tropica Bolivian Ceratophyllum demersum “Foxtail” selection; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Tropica commercial “Foxtail” selection; tank method not specified",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-TROP"
+        ],
+        "applicability": "Selection-specific grower rating; it does not identify the specimen or quantify intensity/runtime."
+      }
+    },
+    {
+      "claim_id": "commercial-stock-strong-light",
+      "metric": "light_demand",
+      "description": "Dennerle rates its C. demersum commercial stock for strong light.",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Dennerle commercial aquarium stock",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-DEN"
+        ],
+        "applicability": "Commercial-stock rating that conflicts with other selection guidance; not a universal target."
+      }
+    },
+    {
+      "claim_id": "aquarium-lamp-runtime",
+      "metric": "aquarium_lamp_runtime",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Reviewed species and grower sources give qualitative light demand but no defensible daily lamp runtime for this unmeasured tank."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "commercial-temperature-range",
+      "metric": "water_temperature",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 28,
+        "unit": "degC"
+      },
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Dennerle commercial aquarium stock; published tolerance/profile range, not a preferred target",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-DEN"
+        ],
+        "applicability": "Commercial grower range; livestock needs and the unverified specimen may narrow it."
+      }
+    },
+    {
+      "claim_id": "current-water-temperature",
+      "metric": "water_temperature",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No current tank temperature or livestock-compatible target has been recorded."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "commercial-ph-range",
+      "metric": "water_pH",
+      "quantity": {
+        "kind": "range",
+        "minimum": 6,
+        "maximum": 8,
+        "unit": "pH"
+      },
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Dennerle commercial aquarium stock; published profile range, not a measured tank value",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-DEN"
+        ],
+        "applicability": "Commercial grower range; not proof of the specimen’s identity or a reason to alter stable livestock water."
+      }
+    },
+    {
+      "claim_id": "commercial-hardness-range",
+      "metric": "water_hardness",
+      "description": "Dennerle describes its commercial stock as accepting soft to very hard water.",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Dennerle commercial aquarium stock; qualitative hardness span",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-DEN"
+        ],
+        "applicability": "No numeric GH/KH endpoints are published on the page; retain the source wording."
+      }
+    },
+    {
+      "claim_id": "current-water-chemistry",
+      "metric": "water_chemistry",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No pH, GH, KH, ammonia, nitrite, nitrate, or other current tank measurement has been supplied."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "wild-flow-habitat",
+      "metric": "flow",
+      "description": "Wild C. demersum occurs in ponds, lakes, and slow-moving streams and rivers; modified leaves may anchor it especially in flowing water.",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Wild-species habitat; not an aquarium circulation prescription",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA"
+        ],
+        "applicability": "Habitat and anchoring context only; it does not quantify safe filter flow."
+      }
+    },
+    {
+      "claim_id": "current-tank-flow",
+      "metric": "flow",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Filter type, circulation, intake risk, and livestock needs are unrecorded; wild habitat wording cannot set aquarium flow."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "aquarium-gentle-flow-intake-clearance",
+      "metric": "flow",
+      "description": "Hornwort prefers gentle aquarium flow, with its needles kept clear of the filter intake.",
+      "applicable_taxon": "aquarium hornwort care guidance; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Aquarium; qualitative flow and filter-intake exposure guidance, not a measured current-tank setting",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-AQCOOP"
+        ],
+        "applicability": "General aquarium hornwort guidance supports gentle flow and avoiding filter-intake exposure; it does not identify the specimen or measure the current tank flow."
+      }
+    },
+    {
+      "claim_id": "floating-placement",
+      "metric": "placement",
+      "description": "The rootless plant may float freely below the surface.",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Wild-species morphology used as general aquarium placement context",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA"
+        ],
+        "applicability": "Species account supports free-floating placement; specimen identity remains provisional."
+      }
+    },
+    {
+      "claim_id": "supported-bottom-placement",
+      "metric": "placement",
+      "description": "Bottom placement is possible without treating the rootless stem as a rooted plant.",
+      "applicable_taxon": "Tropica Bolivian Ceratophyllum demersum “Foxtail” selection; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Tropica “Foxtail” selection; supported bottom placement in an aquarium",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-TROP"
+        ],
+        "applicability": "Selection-specific grower option; do not infer roots or burying depth."
+      }
+    },
+    {
+      "claim_id": "wild-nutrient-context",
+      "metric": "nutrient_context",
+      "description": "Wild C. demersum can form dense colonies in nutrient-rich water.",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Wild nutrient-rich water; not a fertilizer prescription",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA"
+        ],
+        "applicability": "Habitat association only; it does not establish a dose or a deficiency in this tank."
+      }
+    },
+    {
+      "claim_id": "current-nutrient-co2-regimen",
+      "metric": "nutrient_and_co2_setup",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Tank tests, fertilizer products/doses, feeding, stocking, and CO2 setup are unrecorded; no addition is inferred."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "dennerle-co2-range",
+      "metric": "dissolved_co2",
+      "quantity": {
+        "kind": "range",
+        "minimum": 10,
+        "maximum": 20,
+        "unit": "mg/L"
+      },
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Dennerle commercial aquarium stock profile",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-DEN"
+        ],
+        "applicability": "Grower profile value for its stock, not a requirement for this tank or permission to change CO2 around livestock."
+      }
+    },
+    {
+      "claim_id": "wild-stem-length",
+      "metric": "stem_length",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 4,
+        "unit": "m"
+      },
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Wild C. demersum morphology",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA"
+        ],
+        "applicability": "Wild maximum-size description; not an aquarium expectation."
+      }
+    },
+    {
+      "claim_id": "foxtail-two-month-height",
+      "metric": "height_after_two_months",
+      "applicable_taxon": "Tropica Bolivian Ceratophyllum demersum “Foxtail” selection; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Tropica “Foxtail” selection after two months in a tank; upper bound printed as 30+",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-TROP"
+        ],
+        "applicability": "Selection-specific catalog band; maximum is open-ended in the source and retained in conditions rather than falsely bounded."
+      },
+      "description": "Tropica reports an average height category of 5–30+ cm after two months in the tank for its “Foxtail” selection."
+    },
+    {
+      "claim_id": "commercial-growth-rate",
+      "metric": "growth_rate",
+      "description": "Dennerle classifies its commercial C. demersum as very fast-growing and says it requires constant pruning.",
+      "applicable_taxon": "Dennerle commercial Ceratophyllum demersum stock; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Dennerle commercial aquarium stock",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-DEN"
+        ],
+        "applicability": "Qualitative commercial-stock guidance; no length-per-time rate is supplied."
+      }
+    },
+    {
+      "claim_id": "fragment-regrowth-capability",
+      "metric": "fragment_regrowth",
+      "description": "Plant fragments are a propagation route for C. demersum; Dennerle identifies head cuttings and side shoots for its stock.",
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA",
+          "HOR-DEN"
+        ],
+        "applicability": "Supports vegetative regrowth routes, but not a fragment length or establishment interval."
+      }
+    },
+    {
+      "claim_id": "fragment-establishment-interval",
+      "metric": "rooting_or_regrowth",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reviewed source establishes a practical aquarium interval from breakage to new growth or established growth."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "fragmentation",
+      "life_stage": "fragment",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "seed-germination-interval",
+      "metric": "seed_germination",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "C. demersum produces one-seeded fruit and seed is listed as a propagation route, but no reviewed source gives a practical aquarium germination method or defensible interval."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "seed",
+      "life_stage": "seed",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "perennial-life-cycle",
+      "metric": "life_cycle",
+      "description": "C. demersum is an aquatic perennial.",
+      "applicable_taxon": "wild Ceratophyllum demersum; owner aquarium specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Wild-species life-cycle classification",
+      "geographic_context": "not_applicable",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "HOR-WA"
+        ],
+        "applicability": "Life-cycle category, not a lifespan in years for an aquarium clone."
+      }
+    },
+    {
+      "claim_id": "lifespan-years",
+      "metric": "lifespan",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reviewed source supports a lifespan in years for maintained or repeatedly fragmented aquarium growth."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "maturity-interval",
+      "metric": "maturity",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No reviewed source defines a time-to-maturity milestone under aquarium conditions."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "livestock-context",
+      "metric": "livestock_context",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No livestock inventory or compatibility requirements have been supplied."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "unknown",
+      "provenance": {}
+    },
+    {
+      "claim_id": "terrestrial-soil-recipe",
+      "metric": "terrestrial_established_plant_recipe",
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "This rootless aquatic plant uses an aquatic setup, not a terrestrial soil recipe."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "terrestrial-soil-percentages",
+      "metric": "terrestrial_soil_percentages",
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "No percent-by-volume terrestrial mixture applies to a submerged rootless plant."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "terrestrial-rooting-depth",
+      "metric": "terrestrial_rooting_depth",
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "C. demersum lacks roots; floating or supported bottom placement is not terrestrial rooting."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    },
+    {
+      "claim_id": "rooted-plant-transplant",
+      "metric": "rooted_plant_transplant",
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "Fragment propagation remains submerged and does not include a rooted terrestrial transplant."
+      },
+      "applicable_taxon": "provisional working example Ceratophyllum demersum; aquarium specimen and trade selection unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "aquarium; current tank conditions unmeasured",
+      "geographic_context": "not_applicable",
+      "evidence_category": "not_applicable",
+      "provenance": {}
+    }
+  ],
+  "aquatic_setup": {
+    "placement": {
+      "claim_ref": "aquarium-hornwort#floating-placement"
+    },
+    "water_temperature": {
+      "claim_ref": "aquarium-hornwort#current-water-temperature"
+    },
+    "water_chemistry": {
+      "claim_ref": "aquarium-hornwort#current-water-chemistry"
+    },
+    "light": {
+      "claim_ref": "aquarium-hornwort#wild-low-light-tolerance"
+    },
+    "lamp_runtime": {
+      "claim_ref": "aquarium-hornwort#aquarium-lamp-runtime"
+    },
+    "flow": {
+      "claim_ref": "aquarium-hornwort#aquarium-gentle-flow-intake-clearance"
+    },
+    "livestock_context": {
+      "claim_ref": "aquarium-hornwort#livestock-context"
+    },
+    "fragment_regrowth": {
+      "claim_ref": "aquarium-hornwort#fragment-regrowth-capability"
+    }
+  },
+  "claim_refs": []
+}
