@@ -88,14 +88,14 @@ class AnimalEvidenceTests(unittest.TestCase):
             shutil.copyfile(ROOT / "binder/entries/pothos/assets/overview.jpg", base / "assets/overview.jpg")
             catalog_path = base / "assets.json"
             catalog = json.loads(catalog_path.read_text())
-            record = catalog["assets"][0]
+            record = next(r for r in catalog["assets"] if r["id"] == "kuhli-overview-001")
             record.update(path="assets/overview.jpg", kind="photograph")
             record["source"].update(owner_supplied=True, rights_reviewed=True,
                                      rights="Owner permission for test fixture", photographer="Daniel")
             catalog_path.write_text(json.dumps(catalog))
             with mock.patch.object(builder, "ROOT", root), mock.patch.object(builder, "compile_entry") as compile_page:
                 builder.compile_animal("kuhli-loach", "animal-care", "draft", root / "unused.pdf")
-                self.assertEqual(compile_page.call_args.args[2], {"hero": "kuhli-photo-pending"})
+                self.assertEqual(compile_page.call_args.args[2], {"hero": "kuhli-overview-001"})
             record["source"]["owner_supplied"] = False
             catalog_path.write_text(json.dumps(catalog))
             with mock.patch.object(builder, "ROOT", root), self.assertRaisesRegex(ValueError, "owner-supplied"):
@@ -119,7 +119,7 @@ class AnimalRenderingTests(unittest.TestCase):
         sources = evidence.load_animal(ROOT, "kuhli-loach")["sources"]
         urls = {s["url"] for s in sources.values()}
         self.assertIn("watering-log / supplemental", self.reader.pages[-1].extract_text())
-        self.assertIn("DRAFT PLACEHOLDER", self.reader.pages[15].extract_text())
+        self.assertEqual(len(self.reader.pages[15].images), 1)
         for page, kind in zip(self.reader.pages[15:18], evidence.ANIMAL_PAGE_KINDS):
             builder._validate_page(page, kind)
             self.assertIn("kuhli-loach / " + kind, page.extract_text())
@@ -166,7 +166,7 @@ class AnimalRenderingTests(unittest.TestCase):
             shutil.copyfile(ROOT / "binder/entries/pothos/assets/overview.jpg", base / "assets/overview.jpg")
             catalog_path = base / "assets.json"
             catalog = json.loads(catalog_path.read_text())
-            record = catalog["assets"][0]
+            record = next(r for r in catalog["assets"] if r["id"] == "kuhli-overview-001")
             record.update(path="assets/overview.jpg", kind="photograph")
             record["source"].update(owner_supplied=True, rights_reviewed=True,
                                      rights="Owner permission for test fixture", photographer="Daniel")
@@ -178,3 +178,11 @@ class AnimalRenderingTests(unittest.TestCase):
             self.assertEqual(len(reader.pages), 1)
             self.assertEqual(len(reader.pages[0].images), 1)
             self.assertNotIn("DRAFT PLACEHOLDER", reader.pages[0].extract_text())
+            page = base / "animal-care.tex"
+            page.write_text(page.read_text().replace("hero kuhli-overview-001;", "hero kuhli-photo-pending;"))
+            with mock.patch.object(builder, "ROOT", root):
+                builder.compile_animal("kuhli-loach", "animal-care", "draft", pdf)
+            fallback = PdfReader(pdf)
+            self.assertEqual(len(fallback.pages), 1)
+            self.assertEqual(len(fallback.pages[0].images), 0)
+            self.assertIn("DRAFT PLACEHOLDER", fallback.pages[0].extract_text())

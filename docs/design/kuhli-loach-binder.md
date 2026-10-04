@@ -55,15 +55,15 @@ on page 19. This order reflects Daniel's explicit review correction:
 
 | Page | Kind | Purpose |
 | --- | --- | --- |
-| 16 | `animal-care` | Square owner-photo placeholder, identity, welfare, feeding and observations |
+| 16 | `animal-care` | Square owner photograph, identity, welfare, feeding and observations |
 | 17 | `tank-setup` | Scoped water evidence, habitat, plants, quarantine and measurements |
 | 18 | `reproduction` | Evidence limits, observation sequence, tankmates and shrimp risk |
 
 Each page independently has a one-page Letter budget. Reuse the companion
 typography, white paper, unfilled cards, one-inch punch clearance and existing
 safe rectangle. Body remains 9.5 pt and sources 8 pt. An explicit asset catalog
-reserves the first page's square hero with a visible text-only placeholder.
-No final specimen photograph is authorized or invented. Animal pages add clickable
+selects the first page's owner-prepared square hero and retains a visible text-only
+placeholder as a tested fallback. Animal pages add clickable
 source links through a build-local hyperref addition, leaving the shared template
 and existing rendered pages unchanged. Their right margin is inset to 0.56 inches
 so writing rules stay strictly inside the safe rectangle even after PDF coordinate
@@ -124,13 +124,23 @@ The exact hero slot is 3.30 x 3.30 inches, **1:1 square**. Export an sRGB JPEG
 preferably **990 x 990 pixels** (300 ppi). **900 x 900 is acceptable** (about
 273 ppi); minimum is 792 x 792 (240 ppi). Do not upscale a smaller crop. Aim for
 500 KiB or less; the renderer enforces a 1 MiB ceiling. The intended final path is
-`binder/entries/kuhli-loach/assets/overview.jpg`; it does not yet exist. The later
+`binder/entries/kuhli-loach/assets/overview.jpg`. The later
 cherry-shrimp counterpart uses `binder/entries/cherry-shrimp/assets/overview.jpg`.
 
-When Daniel supplies and authorizes the prepared file, add an `assets.json`
-photograph record (for example `kuhli-overview-001`) with meaningful subjects,
+Daniel committed and explicitly authorized the 990 x 990 JPEG on main on
+2026-10-04. The selected `kuhli-overview-001` catalog record has meaningful subjects,
 alt/caption, owner provenance, repository/binder permission, `owner_supplied: true`
-and `rights_reviewed: true`; select it in the first page's `% binder-placement
-hero` declaration. Retain the placeholder record. The builder uses the same slot
+and `rights_reviewed: true`; the first page's `% binder-placement hero` declaration
+selects it. The placeholder record is retained. The builder uses the same slot
 and validates crop/resolution/size/provenance before rendering; a bare JPEG drop
 does not silently select or publish it. Keep Pangio identity provisional.
+
+Both owner uploads were inspected as actual pixels: square, without screen UI.
+The Kuhli close-up is dim and softly focused; no sharpening, reframing or other
+visual rewrite was performed. Its original SHA-256 was
+`64842210c72cb1f2ec01d5c0e1054452b2db9749eab4f11ced46fd1affae3784`.
+Removing nonessential EXIF/XMP segments without recompression produced
+`2bd83b0d15d07837be0007811fcafc4a061a68237a2544d0cbbcc659a8b3ac16`;
+decoded RGB pixels were compared and are identical. The input has no embedded
+ICC profile, so sRGB is an export preference, not a verified property of this
+upload. No color conversion or profile assumption was applied to the file.

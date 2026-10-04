@@ -13,6 +13,21 @@
         "provenance": "Text-only draft placeholder, not a specimen image",
         "rights": "not applicable to a specimen photograph"
       }
+    },
+    {
+      "id": "kuhli-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": ["owner's Kuhli loach", "aquarium close-up"],
+      "alt": "A softly focused brown loach rests near aquarium substrate and shelter in dim water.",
+      "caption": "Owner-prepared aquarium photograph; Pangio species remains unverified.",
+      "source": {
+        "photographer": "Daniel Smith",
+        "provenance": "Owner-prepared JPEG committed to main and explicitly authorized for the binder on 2026-10-04. EXIF/XMP document metadata removed without recompression; decoded pixels unchanged. RGB input has no embedded ICC profile; no color conversion performed.",
+        "rights": "Owner grants permission for inclusion in this repository and generated binder.",
+        "owner_supplied": true,
+        "rights_reviewed": true
+      }
     }
   ]
 }
