@@ -21,7 +21,9 @@ class AnimalEvidenceTests(unittest.TestCase):
         self.assertEqual(len(data["claims"]), 26)
         entries = builder.load_manifest(ROOT / "binder/manifest-v3.yaml")
         self.assertEqual(len(entries), 19)
-        self.assertEqual(entries[:16], builder.load_manifest(ROOT / "binder/manifest-v2.yaml"))
+        baseline = builder.load_manifest(ROOT / "binder/manifest-v2.yaml")
+        self.assertEqual(entries[:15], baseline[:15])
+        self.assertEqual(entries[-1], baseline[-1])
         self.assertEqual(tuple((i["id"], i["kind"]) for i in entries), builder.EXPECTED_ANIMAL_MANIFEST)
 
     def test_animal_evidence_rejects_plant_stages_and_invalid_ranges(self):
@@ -77,6 +79,28 @@ class AnimalEvidenceTests(unittest.TestCase):
             with mock.patch.object(Path, "read_text", altered), self.assertRaises(ValueError):
                 builder.compile_animal("kuhli-loach", "animal-care", "draft", Path("unused.pdf"))
 
+    def test_hero_catalog_accepts_prepared_owner_photo_and_rejects_unreviewed_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            shutil.copytree(ROOT / "binder", root / "binder")
+            base = root / "binder/entries/kuhli-loach"
+            # Reuse an existing owner-photo fixture only inside the temporary test tree.
+            shutil.copyfile(ROOT / "binder/entries/pothos/assets/overview.jpg", base / "assets/overview.jpg")
+            catalog_path = base / "assets.json"
+            catalog = json.loads(catalog_path.read_text())
+            record = next(r for r in catalog["assets"] if r["id"] == "kuhli-overview-001")
+            record.update(path="assets/overview.jpg", kind="photograph")
+            record["source"].update(owner_supplied=True, rights_reviewed=True,
+                                     rights="Owner permission for test fixture", photographer="Daniel")
+            catalog_path.write_text(json.dumps(catalog))
+            with mock.patch.object(builder, "ROOT", root), mock.patch.object(builder, "compile_entry") as compile_page:
+                builder.compile_animal("kuhli-loach", "animal-care", "draft", root / "unused.pdf")
+                self.assertEqual(compile_page.call_args.args[2], {"hero": "kuhli-overview-001"})
+            record["source"]["owner_supplied"] = False
+            catalog_path.write_text(json.dumps(catalog))
+            with mock.patch.object(builder, "ROOT", root), self.assertRaisesRegex(ValueError, "owner-supplied"):
+                builder.compile_animal("kuhli-loach", "animal-care", "draft", root / "unused.pdf")
+
 
 @unittest.skipUnless(all(shutil.which(t) for t in ("lualatex", "pdftotext", "pdftoppm")), "LuaLaTeX and Poppler required")
 class AnimalRenderingTests(unittest.TestCase):
@@ -94,7 +118,9 @@ class AnimalRenderingTests(unittest.TestCase):
         self.assertEqual(len(self.reader.pages), 19)
         sources = evidence.load_animal(ROOT, "kuhli-loach")["sources"]
         urls = {s["url"] for s in sources.values()}
-        for page, kind in zip(self.reader.pages[16:], evidence.ANIMAL_PAGE_KINDS):
+        self.assertIn("watering-log / supplemental", self.reader.pages[-1].extract_text())
+        self.assertEqual(len(self.reader.pages[15].images), 1)
+        for page, kind in zip(self.reader.pages[15:18], evidence.ANIMAL_PAGE_KINDS):
             builder._validate_page(page, kind)
             self.assertIn("kuhli-loach / " + kind, page.extract_text())
             links = [a.get_object()["/A"]["/URI"] for a in page.get("/Annots", [])]
@@ -105,20 +131,21 @@ class AnimalRenderingTests(unittest.TestCase):
         from test_binder import (_assert_pdf_text_inside_safe_rectangle,
                                  _assert_essential_painted_content_inside_safe_rectangle)
         self.assertEqual(len(_assert_pdf_text_inside_safe_rectangle(self.pdf, self.base / "bounds.html")), 19)
-        _assert_essential_painted_content_inside_safe_rectangle(self.reader.pages[16:])
+        _assert_essential_painted_content_inside_safe_rectangle(self.reader.pages[15:18])
 
-    def test_first_sixteen_pages_are_pixel_identical_in_both_modes(self):
+    def test_inherited_pages_unchanged_with_watering_log_last(self):
         from PIL import Image, ImageChops
         original = self.base / "original.pdf"
         builder.compile_manifest(ROOT / "binder/manifest-v2.yaml", "draft", original)
         for gray in (False, True):
             for label, pdf in (("old", original), ("new", self.pdf)):
                 prefix = self.base / (label + str(gray))
-                subprocess.run(["pdftoppm", "-r", "72", "-f", "1", "-l", "16", "-png",
+                subprocess.run(["pdftoppm", "-r", "72", "-png",
                                 *(["-gray"] if gray else []), str(pdf), str(prefix)],
                                check=True, capture_output=True, timeout=120)
             for i in range(1, 17):
-                with Image.open(self.base / f"old{gray}-{i:02d}.png") as a, Image.open(self.base / f"new{gray}-{i:02d}.png") as b:
+                new_index = i if i < 16 else 19
+                with Image.open(self.base / f"old{gray}-{i:02d}.png") as a, Image.open(self.base / f"new{gray}-{new_index:02d}.png") as b:
                     self.assertIsNone(ImageChops.difference(a, b).getbbox(), (gray, i))
 
     def test_animal_overflow_fails_its_own_page_budget(self):
@@ -129,3 +156,33 @@ class AnimalRenderingTests(unittest.TestCase):
             page.write_text(page.read_text(encoding="utf-8") + r"\newpage Extra page must be rejected.", encoding="utf-8")
             with mock.patch.object(builder, "ROOT", root), self.assertRaisesRegex(RuntimeError, "rendered 2 pages"):
                 builder.compile_animal("kuhli-loach", "animal-care", "draft", root / "overflow.pdf")
+
+    def test_prepared_owner_photo_renders_in_reserved_hero_slot(self):
+        from pypdf import PdfReader
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            shutil.copytree(ROOT / "binder", root / "binder")
+            base = root / "binder/entries/kuhli-loach"
+            shutil.copyfile(ROOT / "binder/entries/pothos/assets/overview.jpg", base / "assets/overview.jpg")
+            catalog_path = base / "assets.json"
+            catalog = json.loads(catalog_path.read_text())
+            record = next(r for r in catalog["assets"] if r["id"] == "kuhli-overview-001")
+            record.update(path="assets/overview.jpg", kind="photograph")
+            record["source"].update(owner_supplied=True, rights_reviewed=True,
+                                     rights="Owner permission for test fixture", photographer="Daniel")
+            catalog_path.write_text(json.dumps(catalog))
+            pdf = root / "photo.pdf"
+            with mock.patch.object(builder, "ROOT", root):
+                builder.compile_animal("kuhli-loach", "animal-care", "draft", pdf)
+            reader = PdfReader(pdf)
+            self.assertEqual(len(reader.pages), 1)
+            self.assertEqual(len(reader.pages[0].images), 1)
+            self.assertNotIn("DRAFT PLACEHOLDER", reader.pages[0].extract_text())
+            page = base / "animal-care.tex"
+            page.write_text(page.read_text().replace("hero kuhli-overview-001;", "hero kuhli-photo-pending;"))
+            with mock.patch.object(builder, "ROOT", root):
+                builder.compile_animal("kuhli-loach", "animal-care", "draft", pdf)
+            fallback = PdfReader(pdf)
+            self.assertEqual(len(fallback.pages), 1)
+            self.assertEqual(len(fallback.pages[0].images), 0)
+            self.assertIn("DRAFT PLACEHOLDER", fallback.pages[0].extract_text())

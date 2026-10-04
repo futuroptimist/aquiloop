@@ -21,7 +21,9 @@ class ShrimpEvidenceTests(unittest.TestCase):
         self.assertEqual(len(data["claims"]), 30)
         entries = builder.load_manifest(ROOT / "binder/manifest-v4.yaml")
         self.assertEqual(len(entries), 22)
-        self.assertEqual(entries[:19], builder.load_manifest(ROOT / "binder/manifest-v3.yaml"))
+        baseline = builder.load_manifest(ROOT / "binder/manifest-v3.yaml")
+        self.assertEqual(entries[:18], baseline[:18])
+        self.assertEqual(entries[-1], baseline[-1])
         self.assertEqual(tuple((i["id"], i["kind"]) for i in entries), builder.EXPECTED_SHRIMP_MANIFEST)
         for kind in evidence.ANIMAL_PAGE_KINDS:
             with mock.patch.object(builder, "compile_entry") as compile_page:
@@ -73,26 +75,29 @@ class ShrimpRenderingTests(unittest.TestCase):
                                  _assert_essential_painted_content_inside_safe_rectangle)
         self.assertEqual(len(self.reader.pages), 22)
         self.assertEqual(len(_assert_pdf_text_inside_safe_rectangle(self.pdf, self.base / "bounds.html")), 22)
-        _assert_essential_painted_content_inside_safe_rectangle(self.reader.pages[19:])
+        _assert_essential_painted_content_inside_safe_rectangle(self.reader.pages[18:21])
+        self.assertIn("watering-log / supplemental", self.reader.pages[-1].extract_text())
+        self.assertEqual(len(self.reader.pages[18].images), 1)
         sources = evidence.load_animal(ROOT, "cherry-shrimp")["sources"]
         urls = {s["url"] for s in sources.values()}
-        for page, kind in zip(self.reader.pages[19:], evidence.ANIMAL_PAGE_KINDS):
+        for page, kind in zip(self.reader.pages[18:21], evidence.ANIMAL_PAGE_KINDS):
             builder._validate_page(page, kind)
             self.assertIn("cherry-shrimp / " + kind, page.extract_text())
             links = [a.get_object()["/A"]["/URI"] for a in page.get("/Annots", [])]
             self.assertTrue(links)
             self.assertTrue(set(links) <= urls)
 
-    def test_first_nineteen_pages_unchanged_in_both_modes(self):
+    def test_inherited_pages_unchanged_with_watering_log_last(self):
         from PIL import Image, ImageChops
         original = self.base / "original.pdf"
         builder.compile_manifest(ROOT / "binder/manifest-v3.yaml", "draft", original)
         for gray in (False, True):
             for label, pdf in (("old", original), ("new", self.pdf)):
                 prefix = self.base / (label + str(gray))
-                subprocess.run(["pdftoppm", "-r", "72", "-f", "1", "-l", "19", "-png",
+                subprocess.run(["pdftoppm", "-r", "72", "-png",
                                 *(["-gray"] if gray else []), str(pdf), str(prefix)],
                                check=True, capture_output=True, timeout=120)
             for i in range(1, 20):
-                with Image.open(self.base / f"old{gray}-{i:02d}.png") as a, Image.open(self.base / f"new{gray}-{i:02d}.png") as b:
+                new_index = i if i < 19 else 22
+                with Image.open(self.base / f"old{gray}-{i:02d}.png") as a, Image.open(self.base / f"new{gray}-{new_index:02d}.png") as b:
                     self.assertIsNone(ImageChops.difference(a, b).getbbox(), (gray, i))

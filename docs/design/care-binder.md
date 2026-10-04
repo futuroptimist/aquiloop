@@ -16,8 +16,9 @@ and remaining uncertainties. The default six-page build remains available.
 
 The opt-in animal extension is documented in
 [Kuhli loach care and binder extension](kuhli-loach-binder.md). Its versioned
-nineteen-page assembly appends three animal-appropriate pages after the unchanged
-sixteen-page expansion; neither existing assembly is replaced or renamed.
+nineteen-page assembly inserts three animal-appropriate pages after the fifteen
+plant pages and keeps the unchanged watering log last. The existing six- and
+sixteen-page assemblies remain available and unchanged; the binder is not renamed.
 
 The first release is one directly printable, six-page PDF in this exact order:
 

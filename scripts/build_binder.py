@@ -29,12 +29,12 @@ EXPECTED_EXPANDED_MANIFEST = tuple(
     for entry, _ in EXPECTED_MANIFEST[:-1]
     for kind in ("profile", "numbers", "propagation")
 ) + (("watering-log", "supplemental"),)
-EXPECTED_ANIMAL_MANIFEST = EXPECTED_EXPANDED_MANIFEST + tuple(
+EXPECTED_ANIMAL_MANIFEST = EXPECTED_EXPANDED_MANIFEST[:-1] + tuple(
     ("kuhli-loach", kind) for kind in ANIMAL_PAGE_KINDS
-)
-EXPECTED_SHRIMP_MANIFEST = EXPECTED_ANIMAL_MANIFEST + tuple(
+) + (EXPECTED_EXPANDED_MANIFEST[-1],)
+EXPECTED_SHRIMP_MANIFEST = EXPECTED_ANIMAL_MANIFEST[:-1] + tuple(
     ("cherry-shrimp", kind) for kind in ANIMAL_PAGE_KINDS
-)
+) + (EXPECTED_ANIMAL_MANIFEST[-1],)
 COMPANION_LABELS = {"numbers": "NUMBERS & PACIFICA", "propagation": "PROPAGATION",
                     "animal-care": "ANIMAL CARE", "tank-setup": "TANK SETUP",
                     "reproduction": "REPRODUCTION"}
@@ -44,7 +44,9 @@ def _nonempty(value: object) -> bool:
     return isinstance(value, str) and bool(value.strip())
 
 
-def load_entry(entry: str, mode: str) -> tuple[Path, dict[str, dict], dict[str, str]]:
+def load_entry(entry: str, mode: str, *, layout_name: str = "page.tex") -> tuple[Path, dict[str, dict], dict[str, str]]:
+    if layout_name not in {"page.tex", "animal-care.tex"}:
+        raise ValueError("unsupported asset-bearing layout")
     entries = (ROOT / "binder" / "entries").resolve()
     base = (entries / entry).resolve()
     if entries not in base.parents or not base.is_dir():
@@ -100,7 +102,7 @@ def load_entry(entry: str, mode: str) -> tuple[Path, dict[str, dict], dict[str, 
         records[asset_id] = record
 
     selected: dict[str, str] = {}
-    for line in (base / "page.tex").read_text(encoding="utf-8").splitlines():
+    for line in (base / layout_name).read_text(encoding="utf-8").splitlines():
         if line.startswith("% binder-placement"):
             match = PLACEMENT.fullmatch(line)
             if not match:
@@ -162,6 +164,15 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
             # can otherwise put a full-width writing rule fractionally outside it.
             content = content.replace("right=.55in", "right=.56in", 1)
             content = content.replace(r"\begin{document}", r"\usepackage[hidelinks]{hyperref}" + "\n" + r"\begin{document}")
+            if selected:
+                # Reuse the existing square hero geometry and prepared-asset path.
+                profile_template = (ROOT / "binder/template.tex").read_text(encoding="utf-8")
+                hero_macros = "\n".join(line for line in profile_template.splitlines()
+                                        if line.startswith((r"\newcommand{\HeroImage}", r"\newcommand{\HeroPlaceholder}")))
+                hero_macros = hero_macros.replace("[rust,", "[ink,")
+                setup = (r"\usepackage{graphicx}\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{.6pt}"
+                         + "\n" + hero_macros + "\n")
+                content = content.replace(r"\begin{document}", setup + r"\begin{document}\input{resolved-assets.tex}")
             (tmp / "template.tex").write_text(content, encoding="utf-8")
         page_name = f"{kind}.tex" if kind in COMPANION_LABELS else "page.tex"
         page_text = (base / page_name).read_text(encoding="utf-8")
@@ -293,13 +304,28 @@ def compile_animal(entry: str, kind: str, mode: str, output: Path) -> None:
     references = re.findall(r"^% claim-ref: (\S+)$", page, re.MULTILINE)
     if not references or not set(references) <= evidence["valid_refs"]:
         raise ValueError("animal layout must cite resolved claims")
-    if "% binder-placement" in page or r"\includegraphics" in page:
-        raise ValueError("animal photograph placement requires a future reviewed asset workflow")
+    if r"\includegraphics" in page:
+        raise ValueError("animal images must use the validated asset catalog")
+    records, selected = {}, {}
+    if kind == "animal-care" and "% binder-placement" not in page:
+        raise ValueError("animal care must declare its hero or visible placeholder")
+    if "% binder-placement" in page:
+        if kind != "animal-care":
+            raise ValueError("animal hero belongs on the first care page only")
+        base, records, selected = load_entry(entry, mode, layout_name="animal-care.tex")
+        if set(selected) != {"hero"}:
+            raise ValueError("animal care supports exactly one hero")
+        for record in records.values():
+            if record["kind"] == "photograph":
+                source = record["source"]
+                if (source.get("owner_supplied") is not True or source.get("rights_reviewed") is not True
+                        or source["rights"].strip().casefold() in UNRESOLVED_RIGHTS):
+                    raise ValueError("animal photographs require reviewed owner-supplied provenance")
     links = re.findall(r"\\href\{([^{}]+)\}", page)
     source_urls = {s["url"] for s in evidence["sources"].values()}
     if not links or not set(links) <= source_urls:
         raise ValueError("animal source links must resolve to bibliography URLs")
-    compile_entry(base, {}, {}, output, kind=kind, expanded=True)
+    compile_entry(base, records, selected, output, kind=kind, expanded=True)
 
 
 def _validate_page(page: object, label: str) -> None:

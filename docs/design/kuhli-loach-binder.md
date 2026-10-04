@@ -49,19 +49,21 @@ in the worksheets rather than duplicated as a second numerical authority.
 ## Controlled assembly and layout
 
 `binder/manifest.yaml` stays six pages and `binder/manifest-v2.yaml` stays sixteen.
-The opt-in `binder/manifest-v3.yaml` preserves those sixteen expanded pages in
-place, including the log, and appends this three-page animal section:
+The opt-in `binder/manifest-v3.yaml` preserves the fifteen plant pages in place,
+inserts this three-page animal section, and keeps the unchanged watering log last
+on page 19. This order reflects Daniel's explicit review correction:
 
 | Page | Kind | Purpose |
 | --- | --- | --- |
-| 17 | `animal-care` | Identity, social welfare, feeding, temperature and observations |
-| 18 | `tank-setup` | Scoped water evidence, habitat, plants, quarantine and measurements |
-| 19 | `reproduction` | Evidence limits, observation sequence, tankmates and shrimp risk |
+| 16 | `animal-care` | Square owner photograph, identity, welfare, feeding and observations |
+| 17 | `tank-setup` | Scoped water evidence, habitat, plants, quarantine and measurements |
+| 18 | `reproduction` | Evidence limits, observation sequence, tankmates and shrimp risk |
 
 Each page independently has a one-page Letter budget. Reuse the companion
 typography, white paper, unfilled cards, one-inch punch clearance and existing
-safe rectangle. Body remains 9.5 pt and sources 8 pt. No specimen photograph is
-available or invented; no new asset catalog is needed. Animal pages add clickable
+safe rectangle. Body remains 9.5 pt and sources 8 pt. An explicit asset catalog
+selects the first page's owner-prepared square hero and retains a visible text-only
+placeholder as a tested fallback. Animal pages add clickable
 source links through a build-local hyperref addition, leaving the shared template
 and existing rendered pages unchanged. Their right margin is inset to 0.56 inches
 so writing rules stay strictly inside the safe rectangle even after PDF coordinate
@@ -72,8 +74,10 @@ or `all`; they never need a plant propagation field, soil recipe, USDA zone or
 germination card. Reuse the existing numeric/provenance validator with an explicit
 animal mode. Published/proposed statements cite known HTTPS sources; proposals
 include derivations; unknown values state why. IDs are unique across all three
-worksheets. Layout claim references and source URLs must resolve. Animal images
-remain unsupported pending a reviewed rights/catalog workflow. Final mode remains
+worksheets. Layout claim references and source URLs must resolve. The animal-care
+hero reuses existing catalog, raster resolution and square-crop validation;
+photographs additionally require reviewed owner-supplied provenance. Direct image
+inclusion and animal detail placements are rejected. Final mode remains
 unavailable until identity and publication review; digital proof is draft only.
 
 ## Reproduction and verification
@@ -88,7 +92,8 @@ The pinned CI environment builds all three assemblies and uploads the new
 `aquiloop-binder-kuhli-proof` artifact: nineteen-page PDF plus 150-DPI color and
 grayscale PNGs. Existing artifacts remain available. Tests cover canonical order,
 entry-level overflow, geometry, safe text/paint bounds, bibliography links and
-pixel-identical first sixteen pages in both modes. Inspect all new pages at 100%
+pixel-identical fifteen plant pages plus the relocated watering log in both modes.
+Inspect all new pages at 100%
 and compare the inherited pages with the accepted proof before human review.
 Physical printing, punching and handwriting acceptance are still separate gates.
 
@@ -107,3 +112,35 @@ That tank is not automatically also a fish quarantine or Kuhli nursery. Guppy
 grass, Java moss, Anubias nana and subtle category accents remain separate work.
 The binder name and existing content remain unchanged. K161 physical proof is
 pending; a successful PDF build cannot complete it.
+
+## Owner photograph preparation
+
+Follow [binder photo policy](../../binder/AGENTS.md): Daniel-owned photographs
+only; no stock or AI-generated images, generative fill or composite substitutes.
+Ordinary owner-prepared crop/color correction is acceptable. Preserve the raw
+original outside the repository and remove screen UI/private metadata from export.
+
+The exact hero slot is 3.30 x 3.30 inches, **1:1 square**. Export an sRGB JPEG
+preferably **990 x 990 pixels** (300 ppi). **900 x 900 is acceptable** (about
+273 ppi); minimum is 792 x 792 (240 ppi). Do not upscale a smaller crop. Aim for
+500 KiB or less; the renderer enforces a 1 MiB ceiling. The intended final path is
+`binder/entries/kuhli-loach/assets/overview.jpg`. The later
+cherry-shrimp counterpart uses `binder/entries/cherry-shrimp/assets/overview.jpg`.
+
+Daniel committed and explicitly authorized the 990 x 990 JPEG on main on
+2026-10-04. The selected `kuhli-overview-001` catalog record has meaningful subjects,
+alt/caption, owner provenance, repository/binder permission, `owner_supplied: true`
+and `rights_reviewed: true`; the first page's `% binder-placement hero` declaration
+selects it. The placeholder record is retained. The builder uses the same slot
+and validates crop/resolution/size/provenance before rendering; a bare JPEG drop
+does not silently select or publish it. Keep Pangio identity provisional.
+
+Both owner uploads were inspected as actual pixels: square, without screen UI.
+The Kuhli close-up is dim and softly focused; no sharpening, reframing or other
+visual rewrite was performed. Its original SHA-256 was
+`64842210c72cb1f2ec01d5c0e1054452b2db9749eab4f11ced46fd1affae3784`.
+Removing nonessential EXIF/XMP segments without recompression produced
+`2bd83b0d15d07837be0007811fcafc4a061a68237a2544d0cbbcc659a8b3ac16`;
+decoded RGB pixels were compared and are identical. The input has no embedded
+ICC profile, so sRGB is an export preference, not a verified property of this
+upload. No color conversion or profile assumption was applied to the file.

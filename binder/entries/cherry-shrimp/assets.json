@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "cherry-photo-pending",
+      "path": "assets/draft-placeholder.txt",
+      "kind": "placeholder",
+      "subjects": ["owner photograph pending"],
+      "alt": "Visible draft placeholder reserving the square owner-photograph frame.",
+      "caption": "Reusable fallback; not a specimen photograph.",
+      "source": {
+        "photographer": "not applicable",
+        "provenance": "Owner-committed text-only placeholder fixture",
+        "rights": "not applicable to a specimen photograph"
+      }
+    },
+    {
+      "id": "cherry-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": ["owner's red shrimp", "planted aquarium"],
+      "alt": "A red shrimp fills the square frame diagonally among green aquarium plants and fine stems.",
+      "caption": "Owner-prepared cherry shrimp photograph; species and line not independently determined from this image.",
+      "source": {
+        "photographer": "Daniel Smith",
+        "provenance": "Owner-prepared JPEG committed to main and explicitly authorized for the binder on 2026-10-04. EXIF/XMP document metadata removed without recompression; decoded pixels unchanged. RGB input has no embedded ICC profile; no color conversion performed.",
+        "rights": "Owner grants permission for inclusion in this repository and generated binder.",
+        "owner_supplied": true,
+        "rights_reviewed": true
+      }
+    }
+  ]
+}

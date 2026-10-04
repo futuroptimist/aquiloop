@@ -77,38 +77,38 @@
       "page_budget": 1
     },
     {
+      "id": "kuhli-loach",
+      "kind": "animal-care",
+      "page_budget": 1
+    },
+    {
+      "id": "kuhli-loach",
+      "kind": "tank-setup",
+      "page_budget": 1
+    },
+    {
+      "id": "kuhli-loach",
+      "kind": "reproduction",
+      "page_budget": 1
+    },
+    {
+      "id": "cherry-shrimp",
+      "kind": "animal-care",
+      "page_budget": 1
+    },
+    {
+      "id": "cherry-shrimp",
+      "kind": "tank-setup",
+      "page_budget": 1
+    },
+    {
+      "id": "cherry-shrimp",
+      "kind": "reproduction",
+      "page_budget": 1
+    },
+    {
       "id": "watering-log",
       "kind": "supplemental",
-      "page_budget": 1
-    },
-    {
-      "id": "kuhli-loach",
-      "kind": "animal-care",
-      "page_budget": 1
-    },
-    {
-      "id": "kuhli-loach",
-      "kind": "tank-setup",
-      "page_budget": 1
-    },
-    {
-      "id": "kuhli-loach",
-      "kind": "reproduction",
-      "page_budget": 1
-    },
-    {
-      "id": "cherry-shrimp",
-      "kind": "animal-care",
-      "page_budget": 1
-    },
-    {
-      "id": "cherry-shrimp",
-      "kind": "tank-setup",
-      "page_budget": 1
-    },
-    {
-      "id": "cherry-shrimp",
-      "kind": "reproduction",
       "page_budget": 1
     }
   ]

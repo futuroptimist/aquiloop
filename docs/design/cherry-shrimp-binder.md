@@ -38,10 +38,11 @@ not controlled predation trials or a guaranteed home breeding protocol.
 
 ## Controlled assembly
 
-This branch depends on Kuhli PR #109 at `4dc205014ab4b14e5c5fed964fb515a3da8567a9`.
+This branch depends on Kuhli PR #109 at `7cc7f6450b818de90d94e72be8f537ec60fc4de6`.
 While that PR is unmerged, this PR targets its branch; do not merge out of order.
-The opt-in `manifest-v4.yaml` preserves the nineteen-page manifest verbatim and
-appends cherry shrimp care, tank setup and reproduction as pages 20-22. Existing
+The opt-in `manifest-v4.yaml` preserves the first eighteen pages and inserts
+cherry shrimp care, tank setup and reproduction as pages 19-21, moving the
+unchanged watering log to page 22 as Daniel requested. Existing
 manifests, all prior entries, shared templates and dependencies remain unchanged.
 Reuse the animal schema and renderer without a second species-specific engine.
 No photographs or assets are fabricated. Draft-only publication gates remain.
@@ -55,7 +56,25 @@ CI builds the 22-page draft and 150-DPI color/grayscale proofs. Focused tests co
 canonical append order, claim resolution, pages, links, safe text/paint bounds
 and pixel-identical inherited pages in both modes. Inspect all three new pages
 and compare inherited proofs with #109's accepted artifact before handoff.
-The accepted nineteen-page PDF SHA-256 is
-`251e9c85d4305513f93f96e2017bf0dd785133160ab8f2a3e9fa3ed7f441c8cc`.
+Final exact-head artifact hashes and comparison evidence are recorded in the PR.
 Six- and sixteen-page baseline proofs remain part of CI. K161 physical print,
 punch and handwriting acceptance is still pending. No live changes or merge.
+
+## Owner photograph
+
+Daniel committed and explicitly authorized `assets/overview.jpg` on main on
+2026-10-04. The selected `cherry-overview-001` catalog record documents that
+permission. The existing text-only placeholder remains an unselected fallback.
+Follow [binder photo policy](../../binder/AGENTS.md): only owner photographs;
+no stock or AI-generated substitutes, generative fill or composites.
+
+The actual photo was visually inspected: a red shrimp among plants, without
+camera-roll UI or personal text. It is a square 990 x 990 RGB JPEG, matching the
+3.30-inch hero slot at 300 ppi, with no additional crop or visual processing.
+The photo supports an owner specimen reference, not an independent taxonomic
+determination or current stocking measurement. Its original SHA-256 was
+`bb7b8ec0d01c4ed7f1b2ef1f8441ffeade98806b6b8fef9ffc5ebdc9aac14e95`.
+Removal of nonessential EXIF/XMP segments without recompression produced
+`66fd7e4938b777a6d3df2e1177ac6ed6479fe9f43fc7b1055d1ea4953f6dc20d`;
+decoded RGB pixels are identical. There is no embedded ICC profile, so verified
+sRGB is not claimed and no color conversion was performed.
