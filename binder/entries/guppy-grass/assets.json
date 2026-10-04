@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "guppy-grass-pending",
+      "path": "assets/draft-placeholder.txt",
+      "kind": "placeholder",
+      "subjects": [
+        "owner photograph pending"
+      ],
+      "alt": "Clearly labeled empty owner-photo frame.",
+      "caption": "Text-only draft placeholder; not a specimen photograph.",
+      "source": {
+        "photographer": "not applicable",
+        "provenance": "Text-only placeholder; no image generated or acquired.",
+        "rights": "not applicable"
+      }
+    }
+  ]
+}

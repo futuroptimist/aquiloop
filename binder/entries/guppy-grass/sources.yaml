@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "entry": "guppy-grass",
+  "sources": [
+    {
+      "key": "GG-AA",
+      "authority": "Aquatic Arts",
+      "title": "Guppy Grass AKA Najas Grass (Najas guadelupensis), Loose Portion",
+      "url": "https://aquaticarts.com/products/guppy-grass",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Primary seller account of its nursery stock; spelling normalized against extension identity records. Commercial ranges, not household readings or guaranteed livestock compatibility."
+    },
+    {
+      "key": "GG-TAM",
+      "authority": "Texas A&M AgriLife Extension / AquaPlant",
+      "title": "Southern Naiad",
+      "url": "https://aquaplant.tamu.edu/plant-identification/alphabetical-index/southern-naiad/",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Species morphology and pond habitat; approximate wild stem size is not an aquarium maximum."
+    },
+    {
+      "key": "GG-PROP",
+      "authority": "Texas A&M AgriLife Extension / AquaPlant",
+      "title": "How to Control Southern Naiad (Bushy Pondweed)",
+      "url": "https://aquaplant.tamu.edu/management-options/southern-naiad/",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Only fragment/root regrowth supports the adapted aquarium propagation plan. Pond herbicides, stocking and late-summer bulk transplants are not imported."
+    },
+    {
+      "key": "GG-MSU",
+      "authority": "Mississippi State University Extension",
+      "title": "Southern Naiad | Najas guadalupensis",
+      "url": "https://extension.msstate.edu/publications/southern-naiad-najas-guadalupensis",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Identity, tiny flowers and dense-growth/oxygen caveats in ponds; no aquarium treatment or growth timetable inferred."
+    },
+    {
+      "key": "GG-CAL",
+      "authority": "Calflora",
+      "title": "Najas guadalupensis",
+      "url": "https://www.calflora.org/app/taxon?crn=5743",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "California taxon record describes an annual herb; not a lifespan of a maintained aquarium clone."
+    },
+    {
+      "key": "DEC",
+      "authority": "New York State Department of Environmental Conservation",
+      "title": "Guidelines for Aquarium and Pet Owners",
+      "url": "https://dec.ny.gov/nature/animals-fish-plants/invasive-species/aquatic/prevent-spread-of-aquatic-invasive-species/guidelines-for-aquarium-and-pet-owners",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Aquarium containment/disposal and receipt inspection; not a plant culture protocol."
+    }
+  ]
+}

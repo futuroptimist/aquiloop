@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "entry": "anubias-nana",
+  "sources": [
+    {
+      "key": "AN-TROP",
+      "authority": "Tropica Aquarium Plants",
+      "title": "Anubias barteri var. nana",
+      "url": "https://tropica.com/en/plants/plantdetails/4545/4545",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Grower narrative: 5-10 cm height, 10-15 cm or longer rhizome, shade, slow growth, long-lived leaves, underwater flowering and exposed rhizome. Separate table says 5-15+ cm at two months; do not silently merge these measures."
+    },
+    {
+      "key": "AN-DEN",
+      "authority": "Dennerle Plants",
+      "title": "Anubias barteri var. nana",
+      "url": "https://dennerleplants.com/en/plants/plantdetails/Anubiasbarterivar.nana(781)/27804",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Grower profile: 22-28 C, pH 5-9, medium-low light, slow growth, 5-10 cm, very soft to very hard water, rhizome cuttings. Broad stock ranges do not set a mixed-tank target; CO2 table is not a dosing instruction."
+    },
+    {
+      "key": "GLUE",
+      "authority": "Seachem Laboratories",
+      "title": "Flourish Glue",
+      "url": "https://www.seachem.com/flourish-glue.php",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Manufacturer instructions for this cyanoacrylate gel only: small amount on moss/roots, 20-second hold, underwater use permitted, not for glass; skin/eye bonding warning. Not a universal cure time or proof of every glue formulation."
+    },
+    {
+      "key": "DEC",
+      "authority": "New York State Department of Environmental Conservation",
+      "title": "Guidelines for Aquarium and Pet Owners",
+      "url": "https://dec.ny.gov/nature/animals-fish-plants/invasive-species/aquatic/prevent-spread-of-aquatic-invasive-species/guidelines-for-aquarium-and-pet-owners",
+      "accessed": "2026-10-04",
+      "supports": [
+        "identity",
+        "care",
+        "propagation"
+      ],
+      "applicability": "Aquarium containment/disposal and receipt inspection; not a plant culture protocol."
+    }
+  ]
+}

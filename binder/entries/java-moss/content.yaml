@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "entry": "java-moss",
+  "display_name": "Java moss",
+  "reported_label": "Java moss",
+  "identity": {
+    "status": "provisional working taxon",
+    "working_name": "Taxiphyllum barbieri",
+    "confidence": "specimen unverified",
+    "alternatives": [
+      "trade-name or cultivar mismatch"
+    ],
+    "decision": "Requested planning entry; acquisition, exact moss identity and owner photograph are not established.",
+    "sources": [
+      "JM-TROP"
+    ]
+  },
+  "environmental_variability": "Watering interval is N/A. Tank readings and livestock needs govern; no household targets inferred.",
+  "unresolved_fields": [
+    "identity/source",
+    "owner photograph",
+    "temperature and chemistry",
+    "light/flow/additives",
+    "observed establishment"
+  ],
+  "cards": {
+    "light": [
+      {
+        "claim": "Tropica rates its Bogor Moss stock low-demand. This is a qualitative category, not zero light or exact lamp hours.",
+        "sources": [
+          "JM-TROP"
+        ]
+      }
+    ],
+    "water_parameters_temperature": [
+      {
+        "claim": "No numeric temperature interval established by retained grower evidence. Watering interval is N/A; record actual tank conditions.",
+        "sources": [
+          "JM-TROP"
+        ]
+      }
+    ],
+    "placement_anchoring_floating": [
+      {
+        "claim": "Attach a loose portion to wood or stone with cotton thread or line until it holds. Aquarium cyanoacrylate gel is an optional alternative; see propagation.",
+        "sources": [
+          "JM-TROP"
+        ]
+      }
+    ],
+    "nutrient_context": [
+      {
+        "claim": "Local nutrient and CO2 requirements are unknown. Record the existing regimen; a grower rating does not authorize dosing this livestock tank.",
+        "sources": [
+          "JM-TROP"
+        ]
+      }
+    ],
+    "growth_trimming": [
+      {
+        "claim": "Tropica rates growth medium and recommends scissors for excess growth. Co-Op describes lighter tips as new growth.",
+        "sources": [
+          "JM-TROP"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Separate a small healthy portion and secure it with room for growing tips. This is a proposed application of the grower attachment/pruning method, not a timed laboratory protocol.",
+        "sources": [
+          "JM-TROP",
+          "JM-COOP"
+        ],
+        "method": "moss portions attached to decor",
+        "starting_material": "healthy identified plant material",
+        "establishment_condition": "continued intact growth under recorded tank conditions",
+        "pitfall": "fragment loss or buried/smothered live tissue"
+      }
+    ],
+    "aquarium_compatibility_troubleshooting": [
+      {
+        "claim": "Inspect incoming plants and capture unwanted fragments. No plant cover guarantees survival of shrimp or fry; record changes and review livestock needs separately.",
+        "sources": [
+          "DEC"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "The working plant is a moss, not a rooted flowering plant. Co-Op describes attachment to decor rather than rooting into gravel.",
+        "sources": [
+          "JM-TROP",
+          "JM-COOP"
+        ]
+      }
+    ]
+  }
+}

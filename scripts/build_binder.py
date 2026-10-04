@@ -35,6 +35,16 @@ EXPECTED_ANIMAL_MANIFEST = EXPECTED_EXPANDED_MANIFEST[:-1] + tuple(
 EXPECTED_SHRIMP_MANIFEST = EXPECTED_ANIMAL_MANIFEST[:-1] + tuple(
     ("cherry-shrimp", kind) for kind in ANIMAL_PAGE_KINDS
 ) + (EXPECTED_ANIMAL_MANIFEST[-1],)
+AQUATIC_PLANT_ENTRIES = ("guppy-grass", "java-moss", "anubias-nana")
+EXPECTED_AQUATIC_MANIFEST = EXPECTED_SHRIMP_MANIFEST[:-1] + tuple(
+    (entry, kind) for entry in AQUATIC_PLANT_ENTRIES
+    for kind in ("profile", "numbers", "propagation")
+) + (EXPECTED_SHRIMP_MANIFEST[-1],)
+CATEGORY_BY_ENTRY = {
+    **{entry: "TERRESTRIAL PLANT" for entry, _ in EXPECTED_MANIFEST[:4]},
+    **{entry: "AQUATIC PLANT" for entry in ("aquarium-hornwort", *AQUATIC_PLANT_ENTRIES)},
+    "kuhli-loach": "AQUATIC ANIMAL", "cherry-shrimp": "AQUATIC ANIMAL",
+}
 COMPANION_LABELS = {"numbers": "NUMBERS & PACIFICA", "propagation": "PROPAGATION",
                     "animal-care": "ANIMAL CARE", "tank-setup": "TANK SETUP",
                     "reproduction": "REPRODUCTION"}
@@ -55,7 +65,7 @@ def load_entry(entry: str, mode: str, *, layout_name: str = "page.tex") -> tuple
     # qualification is intentionally deferred rather than encoded in content.
     provisional_profiles = {
         (entries / entry_id).resolve()
-        for entry_id, kind in EXPECTED_MANIFEST
+        for entry_id, kind in EXPECTED_AQUATIC_MANIFEST
         if kind == "profile"
     }
     if mode == "final" and base in provisional_profiles:
@@ -149,7 +159,7 @@ def load_entry(entry: str, mode: str, *, layout_name: str = "page.tex") -> tuple
 
 
 def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str], output: Path,
-                  *, kind: str = "profile", expanded: bool = False) -> None:
+                  *, kind: str = "profile", expanded: bool = False, category: str | None = None) -> None:
     if not shutil.which("lualatex"):
         raise RuntimeError("lualatex is required")
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -174,6 +184,24 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
                          + "\n" + hero_macros + "\n")
                 content = content.replace(r"\begin{document}", setup + r"\begin{document}\input{resolved-assets.tex}")
             (tmp / "template.tex").write_text(content, encoding="utf-8")
+        if base.name in AQUATIC_PLANT_ENTRIES:
+            # New aquatic source links use the existing catalog and evidence checks.
+            load_companions(ROOT, base.name)
+            content = (tmp / "template.tex").read_text(encoding="utf-8")
+            content = content.replace(r"\begin{document}", r"\usepackage[hidelinks]{hyperref}" + "\n" + r"\begin{document}")
+            content = content.replace("right=.55in", "right=.56in", 1)
+            (tmp / "template.tex").write_text(content, encoding="utf-8")
+        if category is not None:
+            if category != CATEGORY_BY_ENTRY.get(base.name):
+                raise ValueError("category must match the entry")
+            content = (tmp / "template.tex").read_text(encoding="utf-8")
+            color = "486B83" if category.startswith("AQUATIC") else "557064"
+            content = content.replace(r"\definecolor{sage}{HTML}{557064}", rf"\definecolor{{sage}}{{HTML}}{{{color}}}")
+            # Thin rules only; white backgrounds, dark body text and photo pixels stay intact.
+            content = re.sub(r"\\rule\{\\linewidth\}\{([.0-9]+pt)\}",
+                             lambda m: r"{\color{sage}\rule{\linewidth}{" + m[1] + "}}", content)
+            content = content.replace(r"\textbf{#2}\quad", r"\textbf{" + category + r" / #2}\quad")
+            (tmp / "template.tex").write_text(content, encoding="utf-8")
         page_name = f"{kind}.tex" if kind in COMPANION_LABELS else "page.tex"
         page_text = (base / page_name).read_text(encoding="utf-8")
         if expanded and kind == "profile":
@@ -181,6 +209,8 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
             page_text = page_text.replace(r"\textbf{REVISION}", r"\textbf{OVERVIEW / REVISION}", 1)
         if expanded and kind == "supplemental":
             page_text = page_text.replace("HANDWRITTEN CARE RECORD", "HANDWRITTEN CARE RECORD / watering-log / supplemental", 1)
+        if category is not None and kind == "profile":
+            page_text = page_text.replace(r"\textbf{OVERVIEW / REVISION}", r"\textbf{" + category + r" / OVERVIEW / REVISION}", 1)
         (tmp / "page.tex").write_text(page_text, encoding="utf-8")
         lines, commands = [], {"hero": "AssetHero", "detail1": "AssetDetailOne", "detail2": "AssetDetailTwo"}
         for role in commands:
@@ -247,7 +277,8 @@ def load_manifest(path: Path) -> list[dict]:
     supported = {(ROOT / "binder" / "manifest.yaml").resolve(): 1,
                  (ROOT / "binder" / "manifest-v2.yaml").resolve(): 2,
                  (ROOT / "binder" / "manifest-v3.yaml").resolve(): 3,
-                 (ROOT / "binder" / "manifest-v4.yaml").resolve(): 4}
+                 (ROOT / "binder" / "manifest-v4.yaml").resolve(): 4,
+                 (ROOT / "binder" / "manifest-v5.yaml").resolve(): 5}
     if manifest_path not in supported:
         raise ValueError("only the versioned binder assembly manifests are supported")
     version = supported[manifest_path]
@@ -268,17 +299,18 @@ def load_manifest(path: Path) -> list[dict]:
             raise ValueError("manifest page_budget must be integer 1")
     actual = tuple((item["id"], item["kind"]) for item in entries)
     expected = {1: EXPECTED_MANIFEST, 2: EXPECTED_EXPANDED_MANIFEST,
-                3: EXPECTED_ANIMAL_MANIFEST, 4: EXPECTED_SHRIMP_MANIFEST}[version]
+                3: EXPECTED_ANIMAL_MANIFEST, 4: EXPECTED_SHRIMP_MANIFEST,
+                5: EXPECTED_AQUATIC_MANIFEST}[version]
     if actual != expected:
-        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry", 4: "twenty-two-entry"}[version]
+        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry", 4: "twenty-two-entry", 5: "thirty-one-entry"}[version]
         raise ValueError(f"manifest entries must match the canonical {label} order and kinds")
     return entries
 
 
-def compile_companion(entry: str, kind: str, mode: str, output: Path) -> None:
+def compile_companion(entry: str, kind: str, mode: str, output: Path, *, category: str | None = None) -> None:
     if mode != "draft":
         raise ValueError("companion pages remain provisional and draft-only")
-    if (entry, kind) not in EXPECTED_EXPANDED_MANIFEST or kind not in {"numbers", "propagation"}:
+    if (entry, kind) not in EXPECTED_AQUATIC_MANIFEST or kind not in {"numbers", "propagation"}:
         raise ValueError("unknown companion page")
     evidence = load_companions(ROOT, entry)
     base = ROOT / "binder" / "entries" / entry
@@ -290,10 +322,11 @@ def compile_companion(entry: str, kind: str, mode: str, output: Path) -> None:
     # placement rather than silently bypassing catalog/rights validation.
     if "% binder-placement" in page or r"\includegraphics" in page:
         raise ValueError("companion photograph placement is not supported; use a native vector schematic")
-    compile_entry(base, {}, {}, output, kind=kind, expanded=True)
+    compile_entry(base, {}, {}, output, kind=kind, expanded=True,
+                  **({"category": category} if category is not None else {}))
 
 
-def compile_animal(entry: str, kind: str, mode: str, output: Path) -> None:
+def compile_animal(entry: str, kind: str, mode: str, output: Path, *, category: str | None = None) -> None:
     if mode != "draft":
         raise ValueError("animal pages remain provisional and draft-only")
     if kind not in ANIMAL_PAGE_KINDS or (entry, kind) not in EXPECTED_SHRIMP_MANIFEST:
@@ -325,7 +358,8 @@ def compile_animal(entry: str, kind: str, mode: str, output: Path) -> None:
     source_urls = {s["url"] for s in evidence["sources"].values()}
     if not links or not set(links) <= source_urls:
         raise ValueError("animal source links must resolve to bibliography URLs")
-    compile_entry(base, records, selected, output, kind=kind, expanded=True)
+    compile_entry(base, records, selected, output, kind=kind, expanded=True,
+                  **({"category": category} if category is not None else {}))
 
 
 def _validate_page(page: object, label: str) -> None:
@@ -351,21 +385,23 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
     from pypdf import PdfReader, PdfWriter
     entries = load_manifest(path)
     expanded = path.name != "manifest.yaml"
+    accented = path.name == "manifest-v5.yaml"
     expected_pages = len(entries)
     output.parent.mkdir(parents=True, exist_ok=True)
     writer = PdfWriter()
     with tempfile.TemporaryDirectory(prefix="binder-manifest-") as tmp_name:
         for index, item in enumerate(entries, 1):
+            style = {"category": CATEGORY_BY_ENTRY[item["id"]]} if accented and item["kind"] != "supplemental" else {}
             individual = Path(tmp_name) / f"{index:02d}-{item['id']}.pdf"
             if item["kind"] == "profile":
                 if expanded:
-                    compile_entry(*load_entry(item["id"], mode), individual, expanded=True)
+                    compile_entry(*load_entry(item["id"], mode), individual, expanded=True, **style)
                 else:
                     compile_entry(*load_entry(item["id"], mode), individual)
             elif item["kind"] in {"numbers", "propagation"}:
-                compile_companion(item["id"], item["kind"], mode, individual)
+                compile_companion(item["id"], item["kind"], mode, individual, **style)
             elif item["kind"] in ANIMAL_PAGE_KINDS:
-                compile_animal(item["id"], item["kind"], mode, individual)
+                compile_animal(item["id"], item["kind"], mode, individual, **style)
             else:
                 if expanded:
                     compile_entry(supplemental_path(item["id"]), {}, {}, individual,

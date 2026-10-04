@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "entry": "anubias-nana",
+  "display_name": "Anubias nana",
+  "reported_label": "Anubias nana",
+  "identity": {
+    "status": "provisional working taxon",
+    "working_name": "Anubias barteri var. nana",
+    "confidence": "specimen unverified",
+    "alternatives": [
+      "trade-name or cultivar mismatch"
+    ],
+    "decision": "Requested planning entry; no owner specimen or cultivar identification is established.",
+    "sources": [
+      "AN-TROP"
+    ]
+  },
+  "environmental_variability": "Watering interval is N/A. Tank readings and livestock needs govern; no household targets inferred.",
+  "unresolved_fields": [
+    "identity/source",
+    "owner photograph",
+    "temperature and chemistry",
+    "light/flow/additives",
+    "observed establishment"
+  ],
+  "cards": {
+    "light": [
+      {
+        "claim": "Tropica describes shade tolerance; Dennerle lists medium-low light. Neither provides this aquarium a lamp schedule.",
+        "sources": [
+          "AN-TROP"
+        ]
+      }
+    ],
+    "water_parameters_temperature": [
+      {
+        "claim": "Dennerle stock: 72-82 F (22-28 C; F rounded). Broad care range, not a heater setting. Watering interval is N/A.",
+        "sources": [
+          "AN-DEN"
+        ]
+      }
+    ],
+    "placement_anchoring_floating": [
+      {
+        "claim": "Fix to wood or stone. Keep the thick horizontal rhizome exposed, including when roots enter substrate; burial can cause rot.",
+        "sources": [
+          "AN-DEN"
+        ]
+      }
+    ],
+    "nutrient_context": [
+      {
+        "claim": "Local nutrient and CO2 requirements are unknown. Record the existing regimen; a grower rating does not authorize dosing this livestock tank.",
+        "sources": [
+          "AN-TROP"
+        ]
+      }
+    ],
+    "growth_trimming": [
+      {
+        "claim": "Slow growth. Long-lived leaves can accumulate algae; inspect light and debris before changing the whole tank.",
+        "sources": [
+          "AN-TROP"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Dennerle lists rhizome cuttings. Retain viable rhizome, roots and leaves on each planned division; no minimum leaf count or regrowth interval is established here.",
+        "sources": [
+          "AN-DEN"
+        ],
+        "method": "rhizome division and attachment",
+        "starting_material": "healthy identified plant material",
+        "establishment_condition": "continued intact growth under recorded tank conditions",
+        "pitfall": "fragment loss or buried/smothered live tissue"
+      }
+    ],
+    "aquarium_compatibility_troubleshooting": [
+      {
+        "claim": "Inspect incoming plants and capture unwanted fragments. No plant cover guarantees survival of shrimp or fry; record changes and review livestock needs separately.",
+        "sources": [
+          "DEC"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "Tropica reports underwater flowers and leaves persisting for years. Leaf longevity is not the lifespan of the whole plant or a flowering deadline.",
+        "sources": [
+          "AN-TROP"
+        ]
+      }
+    ]
+  }
+}

@@ -308,3 +308,26 @@ jobs:
             build/binder/shrimp-gray/
           if-no-files-found: error
           retention-days: 14
+
+      - name: Build thirty-one-page aquatic extension and proofs
+        run: |
+          set -euo pipefail
+          python scripts/build_binder.py --manifest binder/manifest-v5.yaml --mode draft \
+            --output build/binder/aquiloop-binder-aquatic-draft.pdf
+          mkdir -p build/binder/aquatic-color build/binder/aquatic-gray
+          pdftoppm -r 150 -png build/binder/aquiloop-binder-aquatic-draft.pdf build/binder/aquatic-color/page
+          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-aquatic-draft.pdf build/binder/aquatic-gray/page
+          test "$(find build/binder/aquatic-color -name '*.png' | wc -l)" -eq 31
+          test "$(find build/binder/aquatic-gray -name '*.png' | wc -l)" -eq 31
+          sha256sum build/binder/aquiloop-binder-aquatic-draft.pdf
+
+      - name: Upload aquatic extension and review proofs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-aquatic-proof
+          path: |
+            build/binder/aquiloop-binder-aquatic-draft.pdf
+            build/binder/aquatic-color/
+            build/binder/aquatic-gray/
+          if-no-files-found: error
+          retention-days: 14
