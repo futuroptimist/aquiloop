@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "entries": [
+    {"id": "sedum-loves-fire", "kind": "profile", "page_budget": 1},
+    {"id": "sedum-loves-fire", "kind": "numbers", "page_budget": 1},
+    {"id": "sedum-loves-fire", "kind": "propagation", "page_budget": 1},
+    {"id": "kalanchoe-desert", "kind": "profile", "page_budget": 1},
+    {"id": "kalanchoe-desert", "kind": "numbers", "page_budget": 1},
+    {"id": "kalanchoe-desert", "kind": "propagation", "page_budget": 1},
+    {"id": "pothos", "kind": "profile", "page_budget": 1},
+    {"id": "pothos", "kind": "numbers", "page_budget": 1},
+    {"id": "pothos", "kind": "propagation", "page_budget": 1},
+    {"id": "bird-of-paradise", "kind": "profile", "page_budget": 1},
+    {"id": "bird-of-paradise", "kind": "numbers", "page_budget": 1},
+    {"id": "bird-of-paradise", "kind": "propagation", "page_budget": 1},
+    {"id": "aquarium-hornwort", "kind": "profile", "page_budget": 1},
+    {"id": "aquarium-hornwort", "kind": "numbers", "page_budget": 1},
+    {"id": "aquarium-hornwort", "kind": "propagation", "page_budget": 1},
+    {"id": "watering-log", "kind": "supplemental", "page_budget": 1}
+  ]
+}

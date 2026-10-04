@@ -39,6 +39,27 @@ publication review and the inputs listed under
 
 ## Proposed sixteen-page companion expansion
 
+### Versioned implementation
+
+The accepted six-page assembly remains `binder/manifest.yaml` (schema 1).
+The opt-in expansion uses `binder/manifest-v2.yaml` (schema 2), whose sixteen
+entry/kind pairs are checked against the canonical order below independently
+of its contents. Each version has one assembly authority. The v2 implementation
+changes only the existing overview footer's revision label to identify it as
+`OVERVIEW`; source overview files and the v1 rendering remain unchanged.
+Companions stay draft-only while specimen and publication qualification are
+pending. Evidence validation uses exact decimal recipe arithmetic and accepts
+the existing `litres_for_10_litre_batch` and `litres_per_10_litre_batch` spellings
+as mutually exclusive aliases. Full claim records remain authoritative; authored
+TeX layouts cite stable claim references without replacing the research.
+
+Build commands (v2 requires the separately authored companion layouts):
+
+```sh
+python scripts/build_binder.py --manifest binder/manifest-v2.yaml --mode draft --output build/binder/aquiloop-binder-expanded-draft.pdf
+python scripts/build_binder.py --entry pothos --kind numbers --mode draft --output build/binder/pothos-numbers.pdf
+```
+
 This section is the implementation contract for the next phase. It adds two
 independently authored one-page companions to each existing profile while
 preserving the accepted six-page artifact and its five overview pages without
