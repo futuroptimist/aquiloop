@@ -14,7 +14,8 @@
       "evidence_category": "published",
       "provenance": {
         "source_refs": [
-          "AN-TROP"
+          "AN-TROP",
+          "AN-DEN"
         ],
         "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
       },

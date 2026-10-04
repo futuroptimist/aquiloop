@@ -96,7 +96,8 @@
       "evidence_category": "proposed",
       "provenance": {
         "source_refs": [
-          "JM-TROP"
+          "JM-TROP",
+          "GLUE"
         ],
         "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
         "derivation": "Apply the published placement method to a contained aquarium; floating guppy grass needs no attachment, and buried Anubias rhizomes are excluded."
