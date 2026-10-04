@@ -178,7 +178,8 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
                 sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
         log = (tmp / "template.log").read_text(encoding="utf-8", errors="replace")
         if "Overfull" in log:
-            raise RuntimeError("LuaLaTeX reported an overfull box")
+            details = "\n".join(line for line in log.splitlines() if "Overfull" in line)
+            raise RuntimeError(f"LuaLaTeX reported an overfull box in {base.name}/{page_name}: {details}")
         pdf = tmp / "template.pdf"
         from pypdf import PdfReader
         reader = PdfReader(pdf)

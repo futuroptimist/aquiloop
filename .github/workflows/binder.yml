@@ -5,6 +5,7 @@ on:
     paths:
       - 'binder/**'
       - 'scripts/build_binder.py'
+      - 'scripts/binder_evidence.py'
       - 'scripts/prepare_binder_photo.py'
       - 'tests/binder/**'
       - 'docs/design/care-binder.md'
@@ -15,6 +16,7 @@ on:
     paths:
       - 'binder/**'
       - 'scripts/build_binder.py'
+      - 'scripts/binder_evidence.py'
       - 'scripts/prepare_binder_photo.py'
       - 'tests/binder/**'
       - 'docs/design/care-binder.md'
@@ -193,6 +195,29 @@ jobs:
           git diff --check
           test -z "$(git ls-files build/)"
           test -z "$(git status --short --untracked-files=no)"
+
+      - name: Build expanded sixteen-page draft and proofs
+        run: |
+          set -euo pipefail
+          python scripts/build_binder.py --manifest binder/manifest-v2.yaml --mode draft \
+            --output build/binder/aquiloop-binder-expanded-draft.pdf
+          mkdir -p build/binder/expanded-color build/binder/expanded-gray
+          pdftoppm -r 150 -png build/binder/aquiloop-binder-expanded-draft.pdf build/binder/expanded-color/page
+          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-expanded-draft.pdf build/binder/expanded-gray/page
+          test "$(find build/binder/expanded-color -name '*.png' | wc -l)" -eq 16
+          test "$(find build/binder/expanded-gray -name '*.png' | wc -l)" -eq 16
+          sha256sum build/binder/aquiloop-binder-expanded-draft.pdf
+
+      - name: Upload expanded draft and review proofs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-expanded-proof
+          path: |
+            build/binder/aquiloop-binder-expanded-draft.pdf
+            build/binder/expanded-color/
+            build/binder/expanded-gray/
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Upload combined draft binder
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
