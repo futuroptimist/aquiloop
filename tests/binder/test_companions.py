@@ -86,6 +86,31 @@ class CompanionEvidenceTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 builder.compile_companion(entry, kind, mode, Path("unused.pdf"))
 
+    def test_shared_context_and_nested_aquatic_references(self):
+        context = "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+        self.assertIn(context, evidence.load_companions(ROOT, "pothos")["valid_refs"])
+        original_read = evidence.read
+        def mutated_read(path):
+            d = original_read(path)
+            if path.name == "numbers.yaml" and path.parent.name == "aquarium-hornwort":
+                d["aquatic_setup"]["placement"]["claim_ref"] = "aquarium-hornwort#missing"
+            return d
+        with mock.patch.object(evidence, "read", side_effect=mutated_read), self.assertRaisesRegex(ValueError, "unresolved claim"):
+            evidence.load_companions(ROOT, "aquarium-hornwort")
+
+    def test_layout_accepts_context_reference_but_rejects_unvalidated_images(self):
+        context = "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+        original = Path.read_text
+        page = "% claim-ref: " + context + "\n"
+        def read_page(path, *args, **kwargs):
+            return page if path.name == "numbers.tex" else original(path, *args, **kwargs)
+        with mock.patch.object(Path, "read_text", read_page), mock.patch.object(builder, "compile_entry") as compile_page:
+            builder.compile_companion("pothos", "numbers", "draft", Path("unused.pdf"))
+            compile_page.assert_called_once()
+            page += "% binder-placement hero ignored-asset; bypass must fail\n"
+            with self.assertRaisesRegex(ValueError, "photograph placement is not supported"):
+                builder.compile_companion("pothos", "numbers", "draft", Path("unused.pdf"))
+
 
 if __name__ == "__main__":
     unittest.main()
