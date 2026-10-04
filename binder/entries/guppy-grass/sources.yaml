@@ -9,9 +9,20 @@
       "url": "https://aquaticarts.com/products/guppy-grass",
       "accessed": "2026-10-04",
       "supports": [
+        "growth_trimming",
+        "guppy-grass#commercial-ph",
+        "guppy-grass#commercial-temperature",
+        "guppy-grass#growth",
+        "guppy-grass#light",
+        "guppy-grass#method",
+        "guppy-grass#observe-success",
+        "guppy-grass#placement",
         "identity",
-        "care",
-        "propagation"
+        "light",
+        "nutrient_context",
+        "placement_anchoring_floating",
+        "propagation",
+        "water_parameters_temperature"
       ],
       "applicability": "Primary seller account of its nursery stock; spelling normalized against extension identity records. Commercial ranges, not household readings or guaranteed livestock compatibility."
     },
@@ -22,9 +33,7 @@
       "url": "https://aquaplant.tamu.edu/plant-identification/alphabetical-index/southern-naiad/",
       "accessed": "2026-10-04",
       "supports": [
-        "identity",
-        "care",
-        "propagation"
+        "guppy-grass#size-scope"
       ],
       "applicability": "Species morphology and pond habitat; approximate wild stem size is not an aquarium maximum."
     },
@@ -35,8 +44,8 @@
       "url": "https://aquaplant.tamu.edu/management-options/southern-naiad/",
       "accessed": "2026-10-04",
       "supports": [
-        "identity",
-        "care",
+        "guppy-grass#method",
+        "guppy-grass#observe-success",
         "propagation"
       ],
       "applicability": "Only fragment/root regrowth supports the adapted aquarium propagation plan. Pond herbicides, stocking and late-summer bulk transplants are not imported."
@@ -48,9 +57,8 @@
       "url": "https://extension.msstate.edu/publications/southern-naiad-najas-guadalupensis",
       "accessed": "2026-10-04",
       "supports": [
-        "identity",
-        "care",
-        "propagation"
+        "guppy-grass#life-history",
+        "natural_history_trivia"
       ],
       "applicability": "Identity, tiny flowers and dense-growth/oxygen caveats in ponds; no aquarium treatment or growth timetable inferred."
     },
@@ -61,9 +69,8 @@
       "url": "https://www.calflora.org/app/taxon?crn=5743",
       "accessed": "2026-10-04",
       "supports": [
-        "identity",
-        "care",
-        "propagation"
+        "guppy-grass#life-history",
+        "natural_history_trivia"
       ],
       "applicability": "California taxon record describes an annual herb; not a lifespan of a maintained aquarium clone."
     },
@@ -74,9 +81,8 @@
       "url": "https://dec.ny.gov/nature/animals-fish-plants/invasive-species/aquatic/prevent-spread-of-aquatic-invasive-species/guidelines-for-aquarium-and-pet-owners",
       "accessed": "2026-10-04",
       "supports": [
-        "identity",
-        "care",
-        "propagation"
+        "aquarium_compatibility_troubleshooting",
+        "guppy-grass#contain-discard"
       ],
       "applicability": "Aquarium containment/disposal and receipt inspection; not a plant culture protocol."
     }

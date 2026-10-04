@@ -9,9 +9,22 @@
       "url": "https://tropica.com/en/plants/plantdetails/4391/4391",
       "accessed": "2026-10-04",
       "supports": [
+        "growth_trimming",
         "identity",
-        "care",
-        "propagation"
+        "java-moss#glue-contact",
+        "java-moss#growth",
+        "java-moss#life-history",
+        "java-moss#light",
+        "java-moss#method",
+        "java-moss#observe-success",
+        "java-moss#placement",
+        "java-moss#size-scope",
+        "light",
+        "natural_history_trivia",
+        "nutrient_context",
+        "placement_anchoring_floating",
+        "propagation",
+        "water_parameters_temperature"
       ],
       "applicability": "Grower stock: low light demand, medium growth, attachment by line/thread, pruning, 3-10 cm mat thickness and separate 3-10+ cm two-month height category. Does not identify an owner specimen."
     },
@@ -22,8 +35,12 @@
       "url": "https://www.aquariumcoop.com/blogs/aquarium/java-moss",
       "accessed": "2026-10-04",
       "supports": [
-        "identity",
-        "care",
+        "growth_trimming",
+        "java-moss#growth",
+        "java-moss#life-history",
+        "java-moss#method",
+        "java-moss#observe-success",
+        "natural_history_trivia",
         "propagation"
       ],
       "applicability": "Only attachment rather than substrate rooting, trimming and lighter new tips are used. Claims of growth without light, indestructibility and guaranteed juvenile safety are not adopted."
@@ -35,9 +52,12 @@
       "url": "https://www.seachem.com/flourish-glue.php",
       "accessed": "2026-10-04",
       "supports": [
-        "identity",
-        "care",
-        "propagation"
+        "java-moss#glue-contact",
+        "java-moss#glue-hold",
+        "java-moss#glue-product",
+        "java-moss#glue-safety",
+        "java-moss#placement",
+        "placement_anchoring_floating"
       ],
       "applicability": "Manufacturer instructions for this cyanoacrylate gel only: small amount on moss/roots, 20-second hold, underwater use permitted, not for glass; skin/eye bonding warning. Not a universal cure time or proof of every glue formulation."
     },
@@ -48,9 +68,8 @@
       "url": "https://dec.ny.gov/nature/animals-fish-plants/invasive-species/aquatic/prevent-spread-of-aquatic-invasive-species/guidelines-for-aquarium-and-pet-owners",
       "accessed": "2026-10-04",
       "supports": [
-        "identity",
-        "care",
-        "propagation"
+        "aquarium_compatibility_troubleshooting",
+        "java-moss#contain-discard"
       ],
       "applicability": "Aquarium containment/disposal and receipt inspection; not a plant culture protocol."
     }

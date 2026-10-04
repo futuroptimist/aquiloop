@@ -52,6 +52,28 @@ class AquaticEvidenceTests(unittest.TestCase):
             self.assertEqual(data['claims'][entry+'#establishment-time']['evidence_category'], 'unknown')
         self.assertNotIn('GLUE', evidence.load_companions(ROOT, 'guppy-grass')['sources'])
 
+    def test_source_support_is_scoped_to_cards_and_canonical_claims(self):
+        for entry in builder.AQUATIC_PLANT_ENTRIES:
+            data = evidence.load_companions(ROOT, entry)
+            sources = data['sources']
+            for ref, claim in data['claims'].items():
+                for key in claim['provenance'].get('source_refs', []):
+                    self.assertIn(ref, sources[key]['supports'], (ref, key))
+            for source in sources.values():
+                self.assertNotIn('care', source['supports'])
+                for ref in source['supports']:
+                    if '#' in ref:
+                        self.assertIn(ref, data['claims'])
+                        self.assertIn(source['key'], data['claims'][ref]['provenance']['source_refs'])
+            self.assertEqual(set(sources['DEC']['supports']), {
+                'aquarium_compatibility_troubleshooting', entry+'#contain-discard'})
+            if 'GLUE' in sources:
+                expected = {entry+'#'+key for key in
+                            ('glue-product','glue-hold','glue-contact','glue-safety')}
+                if entry == 'java-moss':
+                    expected.update({'placement_anchoring_floating', entry+'#placement'})
+                self.assertEqual(set(sources['GLUE']['supports']), expected)
+
     def test_v5_order_log_last_and_category_separation(self):
         old = builder.load_manifest(ROOT/'binder/manifest-v4.yaml')
         new = builder.load_manifest(ROOT/'binder/manifest-v5.yaml')
