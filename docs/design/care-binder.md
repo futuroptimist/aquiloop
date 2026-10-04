@@ -38,7 +38,7 @@ conditions. Photograph-qualified final copy still depends on botanical and
 publication review and the inputs listed under
 [Required specimen inputs](#required-specimen-inputs-for-final-photograph-qualification).
 
-## Proposed sixteen-page companion expansion
+## Sixteen-page companion expansion
 
 ### Versioned implementation
 
@@ -54,24 +54,24 @@ the existing `litres_for_10_litre_batch` and `litres_per_10_litre_batch` spellin
 as mutually exclusive aliases. Full claim records remain authoritative; authored
 TeX layouts cite stable claim references without replacing the research.
 
-Build commands (v2 requires the separately authored companion layouts):
+Build commands (the companion layouts are committed with v2):
 
 ```sh
 python scripts/build_binder.py --manifest binder/manifest-v2.yaml --mode draft --output build/binder/aquiloop-binder-expanded-draft.pdf
 python scripts/build_binder.py --entry pothos --kind numbers --mode draft --output build/binder/pothos-numbers.pdf
 ```
 
-This section is the implementation contract for the next phase. It adds two
+This section is the implementation contract for the expanded draft. It adds two
 independently authored one-page companions to each existing profile while
 preserving the accepted six-page artifact and its five overview pages without
 changes to their care copy, photographs, cards, provisional-status notices, or
-one-page geometry. The later v2 implementation has one narrow exception: it may
+one-page geometry. The v2 implementation has one narrow exception: it may
 add the page-kind identification specified below within the existing
 header/footer, without otherwise rearranging or restyling an overview. The
 accepted six-page artifact itself remains unchanged. Research and implementation
-may make the proposal concrete later, but this document does not claim that any
-new numeric recommendation or procedure has been researched, rendered, or
-verified. Provisional identity, optional additional photographs, and missing
+now have the digital proof evidence linked above; this does not establish final
+publication qualification or physical acceptance. Provisional identity,
+optional additional photographs, and missing
 home measurements must be represented honestly without blocking useful example
 pages.
 
