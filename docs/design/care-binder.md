@@ -5,11 +5,12 @@ template, watering log, and local photo workflow are implemented. Five
 owner-supplied overview photographs are selected for the draft binder. The
 rendered and physical proofs of that initial six-page, white-background draft
 have been accepted. This acceptance does not establish botanical identity or
-qualify any entry for final mode. The sixteen-page expansion specified below is
-a proposed phase. Research worksheets containing numeric recommendations and
-proposed recipes now exist for Sedum “Love’s Fire” and Kalanchoe “Desert
-Surprise,” but their companion pages have not been rendered or verified, and
-the wider sixteen-page expansion remains future work.
+qualify any entry for final mode. The opt-in sixteen-page expansion now has
+research worksheets and rendered companion pages for all five entries. Its
+digital color and grayscale proof is verified; review, merge, main-branch
+artifact verification, and physical print acceptance remain separate gates.
+See [the expanded proof record](care-binder-expanded-proof.md) for evidence
+and remaining uncertainties. The default six-page build remains available.
 
 ## Purpose and sequence
 
