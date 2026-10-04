@@ -21,13 +21,15 @@
 \newcommand{\Sources}[2]{\vfill\rule{\linewidth}{.6pt}\par\vspace{3pt}{\sffamily\fontsize{8}{10}\selectfont #1\par\vspace{2pt}\textbf{#2}\quad v1 / 2026-10-04. Identity and publication qualification pending.\par}}
 \newcommand{\PothosDiagram}{%
 \begin{tikzpicture}[x=1in,y=1in,font=\sffamily\fontsize{9.5}{11}\selectfont]
-\path[use as bounding box] (0,0) rectangle (6.7,.52);
-\draw[line width=.8pt] (.15,.16)--(1.55,.16);
-\draw[dashed] (0,.27)--(1.7,.27);
-\draw (.35,.09)--(.35,.23);
-\draw (.82,.16) circle (.035);
-\draw (.82,.16)--(1.05,.44)--(1.32,.44);
-\node[anchor=west] at (1.8,.4) {Leaf above water; node below water line.};
-\node[anchor=west] at (1.8,.13) {Cut retains node + bud. Schematic, not to scale.};
-\end{tikzpicture}\par\vspace{3pt}}
+\path[use as bounding box] (0,0) rectangle (2.25,.9);
+\draw[line width=.8pt] (.1,.32)--(1.25,.32);
+\draw[dashed] (0,.52)--(1.3,.52);
+\draw (.2,.25)--(.2,.39);
+\draw (.68,.32) circle (.035);
+\draw (.68,.32)--(.9,.76)--(1.15,.76);
+\node[anchor=west] at (1.35,.75) {leaf};
+\node[anchor=west] at (1.35,.52) {water};
+\node[anchor=west] at (1.35,.29) {node/bud};
+\node[anchor=west] at (0,.07) {cut};
+\end{tikzpicture}\par{\sffamily\fontsize{9.5}{12}\selectfont Water alternate; not to scale.}\par\vspace{3pt}}
 \begin{document}\input{page.tex}\end{document}
