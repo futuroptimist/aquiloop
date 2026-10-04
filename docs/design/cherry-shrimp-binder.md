@@ -38,8 +38,8 @@ not controlled predation trials or a guaranteed home breeding protocol.
 
 ## Controlled assembly
 
-This branch depends on Kuhli PR #109 at `7cc7f6450b818de90d94e72be8f537ec60fc4de6`.
-While that PR is unmerged, this PR targets its branch; do not merge out of order.
+Kuhli PR #109 merged to main as `a048847a68d67e31656bb2529e8e1dce1afea1e8`.
+This branch incorporates that main commit and now targets main directly.
 The opt-in `manifest-v4.yaml` preserves the first eighteen pages and inserts
 cherry shrimp care, tank setup and reproduction as pages 19-21, moving the
 unchanged watering log to page 22 as Daniel requested. Existing
