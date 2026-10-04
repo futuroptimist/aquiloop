@@ -30,6 +30,19 @@ def number(value):
     return type(value) in (int, Decimal) and Decimal(value).is_finite()
 
 
+def claim_references(value):
+    """Find references in page panels as well as the top-level shared list."""
+    if isinstance(value, dict):
+        if "claim_ref" in value:
+            require(text(value["claim_ref"]), "claim reference must be nonempty text")
+            yield value["claim_ref"]
+        for child in value.values():
+            yield from claim_references(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from claim_references(child)
+
+
 def validate_claim(c: dict, sources: dict) -> None:
     require(isinstance(c, dict), "claim must be an object")
     for field in ("claim_id", "metric", "applicable_taxon", "propagation_method",
@@ -112,9 +125,10 @@ def load_companions(root: Path, entry: str) -> dict:
         documents[kind] = d
     context = read(root / "binder/contexts/pacifica.yaml")
     context_ref = context["context_id"] + "#" + context["hardiness"]["lookup"]["claim_id"]
+    valid_refs = set(claims) | {context_ref}
     for d in documents.values():
-        for ref in d.get("claim_refs", []):
-            require(ref.get("claim_ref") in claims or ref.get("claim_ref") == context_ref, "unresolved claim reference")
+        for ref in claim_references(d):
+            require(ref in valid_refs, "unresolved claim reference")
     # Preserve overview checks: companion use supplements, never replaces, them.
     overview = read(base / "content.yaml")
     used = set(overview["identity"]["sources"])
@@ -125,4 +139,4 @@ def load_companions(root: Path, entry: str) -> dict:
         used.update(c["provenance"].get("source_refs", []))
     for source in read(base / "sources.yaml")["sources"]:
         require(source["key"] in used or source.get("background_only") is True, "unused non-background entry source")
-    return {"documents": documents, "claims": claims, "sources": sources}
+    return {"documents": documents, "claims": claims, "sources": sources, "valid_refs": valid_refs}

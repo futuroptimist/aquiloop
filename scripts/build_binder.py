@@ -152,6 +152,8 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         if expanded and kind == "profile":
             # Only the existing footer's revision label changes in v2.
             page_text = page_text.replace(r"\textbf{REVISION}", r"\textbf{OVERVIEW / REVISION}", 1)
+        if expanded and kind == "supplemental":
+            page_text = page_text.replace("HANDWRITTEN CARE RECORD", "HANDWRITTEN CARE RECORD / watering-log / supplemental", 1)
         (tmp / "page.tex").write_text(page_text, encoding="utf-8")
         lines, commands = [], {"hero": "AssetHero", "detail1": "AssetDetailOne", "detail2": "AssetDetailTwo"}
         for role in commands:
@@ -252,8 +254,12 @@ def compile_companion(entry: str, kind: str, mode: str, output: Path) -> None:
     base = ROOT / "binder" / "entries" / entry
     page = (base / f"{kind}.tex").read_text(encoding="utf-8")
     references = re.findall(r"^% claim-ref: (\S+)$", page, re.MULTILINE)
-    if not references or any(ref not in evidence["claims"] for ref in references):
-        raise ValueError("companion layout must cite resolved entry claims")
+    if not references or any(ref not in evidence["valid_refs"] for ref in references):
+        raise ValueError("companion layout must cite resolved entry or context claims")
+    # This release uses native vector schematics. Reject unsupported photograph
+    # placement rather than silently bypassing catalog/rights validation.
+    if "% binder-placement" in page or r"\includegraphics" in page:
+        raise ValueError("companion photograph placement is not supported; use a native vector schematic")
     compile_entry(base, {}, {}, output, kind=kind, expanded=True)
 
 
@@ -294,7 +300,11 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
             elif item["kind"] in {"numbers", "propagation"}:
                 compile_companion(item["id"], item["kind"], mode, individual)
             else:
-                compile_supplemental(item["id"], mode, individual)
+                if expanded:
+                    compile_entry(supplemental_path(item["id"]), {}, {}, individual,
+                                  kind="supplemental", expanded=True)
+                else:
+                    compile_supplemental(item["id"], mode, individual)
             reader = PdfReader(individual)
             if len(reader.pages) != item["page_budget"]:
                 raise RuntimeError(

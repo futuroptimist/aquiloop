@@ -88,6 +88,31 @@ class CompanionEvidenceTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 builder.compile_companion(entry, kind, mode, Path("unused.pdf"))
 
+    def test_shared_context_and_nested_aquatic_references(self):
+        context = "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+        self.assertIn(context, evidence.load_companions(ROOT, "pothos")["valid_refs"])
+        original_read = evidence.read
+        def mutated_read(path):
+            d = original_read(path)
+            if path.name == "numbers.yaml" and path.parent.name == "aquarium-hornwort":
+                d["aquatic_setup"]["placement"]["claim_ref"] = "aquarium-hornwort#missing"
+            return d
+        with mock.patch.object(evidence, "read", side_effect=mutated_read), self.assertRaisesRegex(ValueError, "unresolved claim"):
+            evidence.load_companions(ROOT, "aquarium-hornwort")
+
+    def test_layout_accepts_context_reference_but_rejects_unvalidated_images(self):
+        context = "pacifica-ca-coastal-context-v1#zip-94044-majority-hardiness-zone"
+        original = Path.read_text
+        page = "% claim-ref: " + context + "\n"
+        def read_page(path, *args, **kwargs):
+            return page if path.name == "numbers.tex" else original(path, *args, **kwargs)
+        with mock.patch.object(Path, "read_text", read_page), mock.patch.object(builder, "compile_entry") as compile_page:
+            builder.compile_companion("pothos", "numbers", "draft", Path("unused.pdf"))
+            compile_page.assert_called_once()
+            page += "% binder-placement hero ignored-asset; bypass must fail\n"
+            with self.assertRaisesRegex(ValueError, "photograph placement is not supported"):
+                builder.compile_companion("pothos", "numbers", "draft", Path("unused.pdf"))
+
     def test_ten_authored_layouts_resolve_claims_and_keep_page_structure(self):
         import re
         for entry, kind in builder.EXPECTED_EXPANDED_MANIFEST:
@@ -97,7 +122,7 @@ class CompanionEvidenceTests(unittest.TestCase):
             page = (ROOT / "binder/entries" / entry / f"{kind}.tex").read_text(encoding="utf-8")
             refs = re.findall(r"^% claim-ref: (\S+)$", page, re.MULTILINE)
             self.assertTrue(refs)
-            self.assertTrue(set(refs) <= data["claims"].keys())
+            self.assertTrue(set(refs) <= data["valid_refs"])
             self.assertIn(entry + " / " + kind, page)
             if kind == "numbers":
                 self.assertEqual(page.count(r"\CardRow{"), 4)
@@ -130,6 +155,7 @@ class ExpandedRenderingTests(unittest.TestCase):
             else:
                 from test_binder import _assert_watering_log_text_contract
                 _assert_watering_log_text_contract(content)
+                self.assertIn("watering-log / supplemental", content)
 
     def test_all_text_and_painted_content_inside_safe_area(self):
         from test_binder import (_assert_pdf_text_inside_safe_rectangle,
