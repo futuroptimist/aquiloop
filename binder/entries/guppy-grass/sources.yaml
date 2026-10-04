@@ -33,6 +33,7 @@
       "url": "https://aquaplant.tamu.edu/plant-identification/alphabetical-index/southern-naiad/",
       "accessed": "2026-10-04",
       "supports": [
+        "guppy-grass#select-identity",
         "guppy-grass#size-scope"
       ],
       "applicability": "Species morphology and pond habitat; approximate wild stem size is not an aquarium maximum."
@@ -58,6 +59,7 @@
       "accessed": "2026-10-04",
       "supports": [
         "guppy-grass#life-history",
+        "guppy-grass#thin-growth",
         "natural_history_trivia"
       ],
       "applicability": "Identity, tiny flowers and dense-growth/oxygen caveats in ponds; no aquarium treatment or growth timetable inferred."

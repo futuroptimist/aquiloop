@@ -129,6 +129,24 @@
         "derivation": "Use source growth and attachment characteristics as observation cues; no fixed interval or force test is inferred."
       },
       "description": "Record intact continued new growth; for attached plants, also observe natural hold without pulling. Do not equate a glue bond with biological establishment."
+    },
+    {
+      "claim_id": "tie-attachment",
+      "metric": "tie_attachment",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "division",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "AN-TROP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
+        "derivation": "Translate the grower fishing-line attachment into an observed home step; loop inspection is a proposed precaution, not a sourced timetable."
+      },
+      "description": "Tropica recommends attaching to stone or a root with fishing line until natural hold. Tie gently to decor, check loose loops and keep the rhizome exposed."
     }
   ]
 }

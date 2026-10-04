@@ -94,6 +94,29 @@ class AquaticEvidenceTests(unittest.TestCase):
             with mock.patch.object(builder,'ROOT',root), self.assertRaises(ValueError):
                 builder.load_manifest(path)
 
+    def test_each_printed_propagation_step_has_canonical_source_support(self):
+        for entry in builder.AQUATIC_PLANT_ENTRIES:
+            data = evidence.load_companions(ROOT, entry)
+            lines = (ROOT/'binder/entries'/entry/'propagation.tex').read_text().splitlines()
+            steps = 0
+            for index, line in enumerate(lines):
+                if not line.startswith(r'\Step{'):
+                    continue
+                steps += 1
+                self.assertTrue(lines[index-1].startswith('% step-claims: '))
+                refs = lines[index-1].split(': ', 1)[1].split()
+                supported = set()
+                for ref in refs:
+                    self.assertIn(ref, data['claims'])
+                    for key in data['claims'][ref]['provenance']['source_refs']:
+                        self.assertIn(ref, data['sources'][key]['supports'])
+                        supported.add(key)
+                cited = {key.strip() for group in re.findall(r'\[([^\]]+)\]', line)
+                         for key in group.split(',')}
+                self.assertTrue(cited)
+                self.assertLessEqual(cited, supported, (entry, steps, cited-supported))
+            self.assertEqual(steps, 7)
+
 
 @unittest.skipUnless(all(shutil.which(t) for t in ('lualatex','pdftotext','pdftoppm')), 'LuaLaTeX and Poppler required')
 class AquaticRenderingTests(unittest.TestCase):
