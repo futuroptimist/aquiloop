@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "kuhli-photo-pending",
+      "path": "assets/draft-placeholder.txt",
+      "kind": "placeholder",
+      "subjects": ["owner photograph pending"],
+      "alt": "Visible draft placeholder reserving the square owner-photograph frame.",
+      "caption": "Owner-prepared Kuhli photograph pending; exact Pangio species unverified.",
+      "source": {
+        "photographer": "not applicable",
+        "provenance": "Text-only draft placeholder, not a specimen image",
+        "rights": "not applicable to a specimen photograph"
+      }
+    }
+  ]
+}
