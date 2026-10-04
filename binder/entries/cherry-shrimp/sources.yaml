@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "entry": "cherry-shrimp",
+  "sources": [
+    {
+      "key": "CS-UF",
+      "authority": "UF/IFAS; Carrie Suen and Jennifer L. Gillett-Kaufman",
+      "title": "Cherry Shrimp Neocaridina davidi (Bouvier 1904)",
+      "url": "https://ask.ifas.ufl.edu/publication/IN1301",
+      "accessed": "2026-10-04",
+      "applicability": "University extension synthesis: identity, direct development, size, biofilm grazing and release risk. Its 16-19-day incubation is a literature report, not a home deadline; underlying full study not inspected."
+    },
+    {
+      "key": "CS-COOP",
+      "authority": "Aquarium Co-Op",
+      "title": "Care Guide for Cherry Shrimp - Tank Setup, Food, and Breeding",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/cherry-shrimp-care",
+      "accessed": "2026-10-04",
+      "applicability": "Firsthand practical husbandry; broad tolerances versus preferred temperature remain separate. Hardness minima are not closed ranges. About-month incubation differs from UF synthesis. No stocking, sex-ratio or compatibility guarantee adopted."
+    },
+    {
+      "key": "CS-FARM",
+      "authority": "The Shrimp Farm; Ryan Curtis",
+      "title": "Neocaridina Shrimp: Care, Water Parameters, Color, & More",
+      "url": "https://www.theshrimpfarm.com/posts/neocaridina-shrimp-care-breeding/",
+      "accessed": "2026-10-04",
+      "applicability": "Specialist husbandry: inert substrate, plants, intake protection, cautious feeding and narrower ideal chemistry. No fixed density, sacrificial trial stock or universal water-change schedule adopted."
+    },
+    {
+      "key": "CS-GH",
+      "authority": "The Shrimp Farm; Ryan Curtis",
+      "title": "Understanding General Hardness (GH)",
+      "url": "https://www.theshrimpfarm.com/posts/understanding-general-hardness/",
+      "accessed": "2026-10-04",
+      "applicability": "Used only for separate GH testing and calcium/magnesium interpretation, not its simplified physiological explanations or additive instructions."
+    },
+    {
+      "key": "CS-KH",
+      "authority": "The Shrimp Farm; Ryan Curtis",
+      "title": "Understanding Carbonate Hardness (KH)",
+      "url": "https://www.theshrimpfarm.com/posts/understanding-carbonate-hardness/",
+      "accessed": "2026-10-04",
+      "applicability": "Used only for carbonate/bicarbonate buffering and distinction from GH. Contradictory light/CO2 prose and universal KH minimum are not adopted."
+    },
+    {
+      "key": "CS-VET",
+      "authority": "MSD Veterinary Manual; Petty, Francis-Floyd and Yanong",
+      "title": "Management of Aquarium Fish",
+      "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/aquarium-fish/management-of-aquarium-fish",
+      "accessed": "2026-10-04",
+      "applicability": "Veterinary aquarium management updated June 2026: biofiltration, fishless cycling, abrupt pH/ammonia risk and copper toxicity to invertebrates. Applied as proposed shared-system gates, not shrimp-specific drug dosing."
+    },
+    {
+      "key": "CS-KUH",
+      "authority": "Aquarium Co-Op",
+      "title": "Care Guide for Kuhli Loaches",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/care-guide-for-kuhli-loaches",
+      "accessed": "2026-10-04",
+      "applicability": "Trade-group Pangio temperature and keeper compatibility experience; no controlled shrimp predation trial and no identification of the owner pair."
+    },
+    {
+      "key": "CS-SF",
+      "authority": "Seriously Fish",
+      "title": "Pangio semicincta",
+      "url": "https://www.seriouslyfish.com/species/pangio-semicincta/",
+      "accessed": "2026-10-04",
+      "applicability": "Species-specific micropredator diet informs a cautious compatibility inference, not a claim that the owner loaches are P. semicincta."
+    }
+  ]
+}

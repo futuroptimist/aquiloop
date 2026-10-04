@@ -32,6 +32,9 @@ EXPECTED_EXPANDED_MANIFEST = tuple(
 EXPECTED_ANIMAL_MANIFEST = EXPECTED_EXPANDED_MANIFEST[:-1] + tuple(
     ("kuhli-loach", kind) for kind in ANIMAL_PAGE_KINDS
 ) + (EXPECTED_EXPANDED_MANIFEST[-1],)
+EXPECTED_SHRIMP_MANIFEST = EXPECTED_ANIMAL_MANIFEST[:-1] + tuple(
+    ("cherry-shrimp", kind) for kind in ANIMAL_PAGE_KINDS
+) + (EXPECTED_ANIMAL_MANIFEST[-1],)
 COMPANION_LABELS = {"numbers": "NUMBERS & PACIFICA", "propagation": "PROPAGATION",
                     "animal-care": "ANIMAL CARE", "tank-setup": "TANK SETUP",
                     "reproduction": "REPRODUCTION"}
@@ -243,7 +246,8 @@ def load_manifest(path: Path) -> list[dict]:
     manifest_path = path.resolve()
     supported = {(ROOT / "binder" / "manifest.yaml").resolve(): 1,
                  (ROOT / "binder" / "manifest-v2.yaml").resolve(): 2,
-                 (ROOT / "binder" / "manifest-v3.yaml").resolve(): 3}
+                 (ROOT / "binder" / "manifest-v3.yaml").resolve(): 3,
+                 (ROOT / "binder" / "manifest-v4.yaml").resolve(): 4}
     if manifest_path not in supported:
         raise ValueError("only the versioned binder assembly manifests are supported")
     version = supported[manifest_path]
@@ -263,9 +267,10 @@ def load_manifest(path: Path) -> list[dict]:
         if type(item["page_budget"]) is not int or item["page_budget"] != 1:
             raise ValueError("manifest page_budget must be integer 1")
     actual = tuple((item["id"], item["kind"]) for item in entries)
-    expected = {1: EXPECTED_MANIFEST, 2: EXPECTED_EXPANDED_MANIFEST, 3: EXPECTED_ANIMAL_MANIFEST}[version]
+    expected = {1: EXPECTED_MANIFEST, 2: EXPECTED_EXPANDED_MANIFEST,
+                3: EXPECTED_ANIMAL_MANIFEST, 4: EXPECTED_SHRIMP_MANIFEST}[version]
     if actual != expected:
-        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry"}[version]
+        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry", 4: "twenty-two-entry"}[version]
         raise ValueError(f"manifest entries must match the canonical {label} order and kinds")
     return entries
 
@@ -291,7 +296,7 @@ def compile_companion(entry: str, kind: str, mode: str, output: Path) -> None:
 def compile_animal(entry: str, kind: str, mode: str, output: Path) -> None:
     if mode != "draft":
         raise ValueError("animal pages remain provisional and draft-only")
-    if kind not in ANIMAL_PAGE_KINDS or (entry, kind) not in EXPECTED_ANIMAL_MANIFEST:
+    if kind not in ANIMAL_PAGE_KINDS or (entry, kind) not in EXPECTED_SHRIMP_MANIFEST:
         raise ValueError("unknown animal page")
     evidence = load_animal(ROOT, entry)
     base = ROOT / "binder/entries" / entry

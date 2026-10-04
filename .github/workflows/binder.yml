@@ -161,9 +161,11 @@ jobs:
                   builder.compile_companion(entry, kind, 'draft', Path('build/binder/layouts') / f'{entry}-{kind}.pdf')
               except (ValueError, RuntimeError) as error:
                   errors.append(str(error))
-          for kind in builder.ANIMAL_PAGE_KINDS:
+          for entry, kind in builder.EXPECTED_SHRIMP_MANIFEST:
+              if kind not in builder.ANIMAL_PAGE_KINDS:
+                  continue
               try:
-                  builder.compile_animal('kuhli-loach', kind, 'draft', Path('build/binder/layouts') / f'kuhli-loach-{kind}.pdf')
+                  builder.compile_animal(entry, kind, 'draft', Path('build/binder/layouts') / f'{entry}-{kind}.pdf')
               except (ValueError, RuntimeError) as error:
                   errors.append(str(error))
           if errors:
@@ -281,5 +283,28 @@ jobs:
             build/binder/aquiloop-binder-kuhli-draft.pdf
             build/binder/kuhli-color/
             build/binder/kuhli-gray/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Build twenty-two-page shrimp extension and proofs
+        run: |
+          set -euo pipefail
+          python scripts/build_binder.py --manifest binder/manifest-v4.yaml --mode draft \
+            --output build/binder/aquiloop-binder-shrimp-draft.pdf
+          mkdir -p build/binder/shrimp-color build/binder/shrimp-gray
+          pdftoppm -r 150 -png build/binder/aquiloop-binder-shrimp-draft.pdf build/binder/shrimp-color/page
+          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-shrimp-draft.pdf build/binder/shrimp-gray/page
+          test "$(find build/binder/shrimp-color -name '*.png' | wc -l)" -eq 22
+          test "$(find build/binder/shrimp-gray -name '*.png' | wc -l)" -eq 22
+          sha256sum build/binder/aquiloop-binder-shrimp-draft.pdf
+
+      - name: Upload shrimp extension and review proofs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-shrimp-proof
+          path: |
+            build/binder/aquiloop-binder-shrimp-draft.pdf
+            build/binder/shrimp-color/
+            build/binder/shrimp-gray/
           if-no-files-found: error
           retention-days: 14
