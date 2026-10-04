@@ -9,7 +9,14 @@
 - Keep the watering guide/log last in every new or revised combined assembly.
 - Follow the existing hero convention: square 1:1, 3.30 inches, preferably
   990 x 990 pixels (300 ppi), at least 792 x 792 (240 ppi), no upscaling.
-  Prepared sRGB JPEGs belong at `entries/<entry>/assets/overview.jpg`.
+  Request prepared sRGB JPEGs at `entries/<entry>/assets/overview.jpg`; distinguish
+  that export request from a verified embedded color profile. For the explicitly
+  authorized Kuhli and cherry-shrimp photos supplied on 2026-10-04, untagged RGB
+  originals may remain in draft proofs with unchanged pixels and cataloged
+  unknown color space. This is a draft exception, not verified sRGB or print-color
+  acceptance. Do not assign or convert an unknown source profile and call it
+  verified. Obtain a known-profile owner export before claiming color-managed
+  print readiness; keep physical color acceptance pending.
   Strip private metadata and screen UI; target 500 KiB, maximum 1 MiB.
 - A photo does not establish exact taxonomic identity. Keep provisional identity
   labels until separately reviewed. Do not change existing photo rights metadata

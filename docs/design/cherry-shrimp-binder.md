@@ -78,3 +78,14 @@ Removal of nonessential EXIF/XMP segments without recompression produced
 `66fd7e4938b777a6d3df2e1177ac6ed6479fe9f43fc7b1055d1ea4953f6dc20d`;
 decoded RGB pixels are identical. There is no embedded ICC profile, so verified
 sRGB is not claimed and no color conversion was performed.
+
+
+The sRGB export specification was requested, not verified in the supplied JPEG.
+The binder policy explicitly permits this authorized untagged owner photo in
+draft proofs while preserving its pixels. No source profile is known, so merely
+assigning sRGB would not verify its original color interpretation. The photo is
+not certified for color-managed print output: obtain a known-profile owner export
+and complete physical color acceptance before making that claim. Existing screen
+color/grayscale proof review establishes layout/readability only. This resolves
+review #110 discussion_r4179545053 through an explicit draft policy clarification,
+without changing image bytes, rendering, or the user's photograph.
