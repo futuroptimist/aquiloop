@@ -27,6 +27,10 @@ not a claim that every freshwater species has been assessed.
 | Identified freshwater ghost/grass shrimp, *Palaemon paludosus* (older sources: *Palaemonetes paludosus*) | University account records females about 20–43 mm across reproductive stages and wild lifespan 6–13 months; these are not captive survival promises. [University account][grass-university] | Omnivore; freshwater larval stages, unlike direct-developing Neocaridina. [University account][grass-university] | Viable alternative if identity and healthy stock are confirmed. “Ghost shrimp” can also label brackish species or more aggressive whisker shrimp. [Ghost care][ghost] |
 | Crystal red/bee trade lines, sold under *Caridina cf. cantonensis* and related names | Males around 1 in, females up to 1.5 in; keeper estimate about 1.5 years. [Crystal care][crystal] | Freshwater miniature young; grazing plus supplementary food. [Crystal care][crystal] | Pattern/color alternative for someone deliberately choosing soft-water shrimp husbandry. Confirm the breeder's exact line and water; a separate shrimp setup may be preferable to modifying the loaches' established home. |
 
+UF/IFAS independently documents these color forms as selectively bred
+*N. davidi*, grazing on biofilm and hatching as miniature adults. A persistent
+colony is not an individual lifespan measurement. [University cherry profile][neo-university]
+
 Mixing *N. davidi* colors can produce less predictable, eventually brown/gray
 offspring; choose one line if preserving a color matters. Hornwort and other
 plants provide refuge and grazing surfaces. Neither an expensive grade nor a
@@ -138,7 +142,9 @@ raise either species' larvae. [Bamboo profile][bamboo]
    a table, and do not use live shrimp as a cycling test.
 5. Confirm feeding, cover, intake protection, observation, and a surplus/rehome plan
    before deciding a stocking count or buying animals. This research does not yet
-   establish a safe count for the actual tank.
+   establish a safe count for the actual tank. Rehome surplus shrimp responsibly;
+   do not release aquarium animals outdoors. UF/IFAS documents introduced cherry
+   shrimp populations and potential competition with native shrimp. [University cherry profile][neo-university]
 
 ## Later care-binder work
 
@@ -160,6 +166,7 @@ No retail “beginner-proof,” unlimited-stocking, or guaranteed-compatibility 
 is adopted. The unknowns above remain open for the later selection/setup discussion.
 
 [cherry]: https://www.aquariumcoop.com/blogs/aquarium/cherry-shrimp-care
+[neo-university]: https://ask.ifas.ufl.edu/publication/IN1301
 [amano]: https://www.aquariumcoop.com/blogs/aquarium/amano-shrimp
 [amano-farm]: https://www.theshrimpfarm.com/posts/amano-shrimp-care-sheet/
 [neo-farm]: https://www.theshrimpfarm.com/posts/neocaridina-shrimp-care-breeding/
