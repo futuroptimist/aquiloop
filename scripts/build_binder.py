@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
+from binder_evidence import load_companions
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {"id", "path", "kind", "subjects", "alt", "caption", "source"}
@@ -24,6 +25,11 @@ EXPECTED_MANIFEST = (
     ("aquarium-hornwort", "profile"),
     ("watering-log", "supplemental"),
 )
+EXPECTED_EXPANDED_MANIFEST = tuple(
+    (entry, kind)
+    for entry, _ in EXPECTED_MANIFEST[:-1]
+    for kind in ("profile", "numbers", "propagation")
+) + (("watering-log", "supplemental"),)
 
 
 def _nonempty(value: object) -> bool:
@@ -132,13 +138,23 @@ def load_entry(entry: str, mode: str) -> tuple[Path, dict[str, dict], dict[str, 
     return base, records, selected
 
 
-def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str], output: Path) -> None:
+def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str], output: Path,
+                  *, kind: str = "profile", expanded: bool = False) -> None:
     if not shutil.which("lualatex"):
         raise RuntimeError("lualatex is required")
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="binder-") as tmp_name:
         tmp = Path(tmp_name)
-        shutil.copy(ROOT / "binder" / "template.tex", tmp); shutil.copy(base / "page.tex", tmp)
+        template = "companion-template.tex" if kind in {"numbers", "propagation"} else "template.tex"
+        shutil.copyfile(ROOT / "binder" / template, tmp / "template.tex")
+        page_name = f"{kind}.tex" if kind in {"numbers", "propagation"} else "page.tex"
+        page_text = (base / page_name).read_text(encoding="utf-8")
+        if expanded and kind == "profile":
+            # Only the existing footer's revision label changes in v2.
+            page_text = page_text.replace(r"\textbf{REVISION}", r"\textbf{OVERVIEW / REVISION}", 1)
+        if expanded and kind == "supplemental":
+            page_text = page_text.replace("HANDWRITTEN CARE RECORD", "HANDWRITTEN CARE RECORD / watering-log / supplemental", 1)
+        (tmp / "page.tex").write_text(page_text, encoding="utf-8")
         lines, commands = [], {"hero": "AssetHero", "detail1": "AssetDetailOne", "detail2": "AssetDetailTwo"}
         for role in commands:
             command = commands[role]
@@ -159,7 +175,7 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         (tmp / "resolved-assets.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
         env = {**os.environ, "SOURCE_DATE_EPOCH": "0", "FORCE_SOURCE_DATE": "1"}
         for _ in range(2):
-            result = subprocess.run(["lualatex", "-halt-on-error", "-interaction=nonstopmode", "template.tex"], cwd=tmp, text=True, encoding="utf-8", capture_output=True, env=env)
+            result = subprocess.run(["lualatex", "-no-shell-escape", "-halt-on-error", "-interaction=nonstopmode", "template.tex"], cwd=tmp, text=True, encoding="utf-8", capture_output=True, env=env)
             if result.returncode:
                 sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
         log = (tmp / "template.log").read_text(encoding="utf-8", errors="replace")
@@ -170,6 +186,11 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         reader = PdfReader(pdf)
         if len(reader.pages) != 1: raise RuntimeError(f"entry rendered {len(reader.pages)} pages, expected 1")
         _validate_page(reader.pages[0], base.name)
+        if kind in {"numbers", "propagation"}:
+            extracted = reader.pages[0].extract_text()
+            label = "NUMBERS & PACIFICA" if kind == "numbers" else "PROPAGATION"
+            if label not in extracted or f"{base.name} / {kind}" not in extracted:
+                raise RuntimeError("companion page identity missing")
         shutil.copyfile(pdf, output)
         print(f"built {output} (1 page, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
 
@@ -190,11 +211,14 @@ def compile_supplemental(name: str, mode: str, output: Path) -> None:
 
 def load_manifest(path: Path) -> list[dict]:
     manifest_path = path.resolve()
-    if manifest_path != (ROOT / "binder" / "manifest.yaml").resolve():
-        raise ValueError("binder/manifest.yaml is the sole supported assembly manifest")
+    supported = {(ROOT / "binder" / "manifest.yaml").resolve(): 1,
+                 (ROOT / "binder" / "manifest-v2.yaml").resolve(): 2}
+    if manifest_path not in supported:
+        raise ValueError("only the versioned binder assembly manifests are supported")
+    version = supported[manifest_path]
     document = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if not isinstance(document, dict) or document.get("schema_version") != 1:
-        raise ValueError("manifest must use supported schema_version 1")
+    if not isinstance(document, dict) or document.get("schema_version") != version:
+        raise ValueError("manifest schema version must match its versioned path")
     entries = document.get("entries")
     if not isinstance(entries, list) or not entries:
         raise ValueError("manifest entries must be a nonempty array")
@@ -203,14 +227,34 @@ def load_manifest(path: Path) -> list[dict]:
             raise ValueError("each manifest entry must define only id, kind, and page_budget")
         if not _nonempty(item["id"]) or not ID.fullmatch(item["id"]):
             raise ValueError(f"malformed manifest entry ID: {item['id']!r}")
-        if item["kind"] not in {"profile", "supplemental"}:
+        if item["kind"] not in {"profile", "supplemental", "numbers", "propagation"}:
             raise ValueError(f"unsupported manifest kind: {item['kind']}")
         if type(item["page_budget"]) is not int or item["page_budget"] != 1:
             raise ValueError("manifest page_budget must be integer 1")
     actual = tuple((item["id"], item["kind"]) for item in entries)
-    if actual != EXPECTED_MANIFEST:
-        raise ValueError("manifest entries must match the canonical six-entry order and kinds")
+    expected = EXPECTED_MANIFEST if version == 1 else EXPECTED_EXPANDED_MANIFEST
+    if actual != expected:
+        label = "six-entry" if version == 1 else "sixteen-entry"
+        raise ValueError(f"manifest entries must match the canonical {label} order and kinds")
     return entries
+
+
+def compile_companion(entry: str, kind: str, mode: str, output: Path) -> None:
+    if mode != "draft":
+        raise ValueError("companion pages remain provisional and draft-only")
+    if (entry, kind) not in EXPECTED_EXPANDED_MANIFEST or kind not in {"numbers", "propagation"}:
+        raise ValueError("unknown companion page")
+    evidence = load_companions(ROOT, entry)
+    base = ROOT / "binder" / "entries" / entry
+    page = (base / f"{kind}.tex").read_text(encoding="utf-8")
+    references = re.findall(r"^% claim-ref: (\S+)$", page, re.MULTILINE)
+    if not references or any(ref not in evidence["valid_refs"] for ref in references):
+        raise ValueError("companion layout must cite resolved entry or context claims")
+    # This release uses native vector schematics. Reject unsupported photograph
+    # placement rather than silently bypassing catalog/rights validation.
+    if "% binder-placement" in page or r"\includegraphics" in page:
+        raise ValueError("companion photograph placement is not supported; use a native vector schematic")
+    compile_entry(base, {}, {}, output, kind=kind, expanded=True)
 
 
 def _validate_page(page: object, label: str) -> None:
@@ -235,15 +279,26 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
         raise ValueError("manifest assembly is currently available only in draft mode")
     from pypdf import PdfReader, PdfWriter
     entries = load_manifest(path)
+    expanded = path.name == "manifest-v2.yaml"
+    expected_pages = len(EXPECTED_EXPANDED_MANIFEST) if expanded else EXPECTED_BINDER_PAGES
     output.parent.mkdir(parents=True, exist_ok=True)
     writer = PdfWriter()
     with tempfile.TemporaryDirectory(prefix="binder-manifest-") as tmp_name:
         for index, item in enumerate(entries, 1):
             individual = Path(tmp_name) / f"{index:02d}-{item['id']}.pdf"
             if item["kind"] == "profile":
-                compile_entry(*load_entry(item["id"], mode), individual)
+                if expanded:
+                    compile_entry(*load_entry(item["id"], mode), individual, expanded=True)
+                else:
+                    compile_entry(*load_entry(item["id"], mode), individual)
+            elif item["kind"] in {"numbers", "propagation"}:
+                compile_companion(item["id"], item["kind"], mode, individual)
             else:
-                compile_supplemental(item["id"], mode, individual)
+                if expanded:
+                    compile_entry(supplemental_path(item["id"]), {}, {}, individual,
+                                  kind="supplemental", expanded=True)
+                else:
+                    compile_supplemental(item["id"], mode, individual)
             reader = PdfReader(individual)
             if len(reader.pages) != item["page_budget"]:
                 raise RuntimeError(
@@ -257,14 +312,14 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
         with output.open("wb") as stream:
             writer.write(stream)
     assembled = PdfReader(output)
-    if len(assembled.pages) != EXPECTED_BINDER_PAGES:
+    if len(assembled.pages) != expected_pages:
         raise RuntimeError(
             f"combined binder rendered {len(assembled.pages)} pages, "
-            f"expected {EXPECTED_BINDER_PAGES}"
+            f"expected {expected_pages}"
         )
     for index, page in enumerate(assembled.pages, 1):
         _validate_page(page, f"combined page {index}")
-    print(f"built {output} ({EXPECTED_BINDER_PAGES} pages, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
+    print(f"built {output} ({expected_pages} pages, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
 
 
 def main() -> int:
@@ -275,10 +330,14 @@ def main() -> int:
     source.add_argument("--manifest", type=Path)
     parser.add_argument("--mode", choices=("draft", "final"), required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--kind", choices=("profile", "numbers", "propagation"), default="profile")
     args = parser.parse_args()
     try:
         if args.entry:
-            compile_entry(*load_entry(args.entry, args.mode), args.output)
+            if args.kind == "profile":
+                compile_entry(*load_entry(args.entry, args.mode), args.output)
+            else:
+                compile_companion(args.entry, args.kind, args.mode, args.output)
         elif args.supplemental:
             compile_supplemental(args.supplemental, args.mode, args.output)
         else:
