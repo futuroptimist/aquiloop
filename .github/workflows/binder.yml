@@ -146,6 +146,34 @@ jobs:
       - name: Compile-check binder Python
         run: python -m compileall -q scripts/build_binder.py scripts/prepare_binder_photo.py tests/binder
 
+      - name: Render companion layout diagnostics
+        run: |
+          python - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          import build_binder as builder
+          errors = []
+          for entry, kind in builder.EXPECTED_EXPANDED_MANIFEST:
+              if kind not in {'numbers', 'propagation'}:
+                  continue
+              try:
+                  builder.compile_companion(entry, kind, 'draft', Path('build/binder/layouts') / f'{entry}-{kind}.pdf')
+              except (ValueError, RuntimeError) as error:
+                  errors.append(str(error))
+          if errors:
+              raise SystemExit('\n'.join(errors))
+          PY
+
+      - name: Upload individual layout diagnostics
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-companion-layout-diagnostics
+          path: build/binder/layouts/
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Run complete binder regression suite
         run: |
           set -euo pipefail
