@@ -28,6 +28,9 @@ class AnimalEvidenceTests(unittest.TestCase):
         data = evidence.load_animal(ROOT, "kuhli-loach")
         original = data["claims"]["kuhli-loach#trade-temperature"]
         for mutate in (lambda c: c.update(life_stage="cutting"),
+                       lambda c: c.update(propagation_method="stem cutting"),
+                       lambda c: c.update(usda_zone="10a"),
+                       lambda c: c.update(recipe={"recipe_basis": "percent_by_volume"}),
                        lambda c: c["provenance"].update(source_refs=["missing"]),
                        lambda c: c["quantity"].update(minimum=81),
                        lambda c: c.pop("care_method")):

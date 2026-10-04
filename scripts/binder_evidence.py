@@ -45,6 +45,11 @@ def claim_references(value):
 
 def validate_claim(c: dict, sources: dict, *, animal: bool = False) -> None:
     require(isinstance(c, dict), "claim must be an object")
+    if animal:
+        allowed = {"claim_id", "metric", "applicable_taxon", "care_method", "life_stage",
+                   "growing_conditions", "geographic_context", "evidence_category",
+                   "provenance", "quantity", "description"}
+        require(set(c) <= allowed, "unsupported animal claim field")
     for field in ("claim_id", "metric", "applicable_taxon", "care_method" if animal else "propagation_method",
                   "life_stage", "growing_conditions", "geographic_context", "evidence_category"):
         require(text(c.get(field)), f"claim requires {field}")
@@ -171,7 +176,6 @@ def load_animal(root: Path, entry: str) -> dict:
         require(isinstance(document.get("claims"), list) and document["claims"], "claims array required")
         for claim in document["claims"]:
             validate_claim(claim, sources, animal=True)
-            require("recipe" not in claim, "animal worksheet does not support substrate recipes")
             ref = entry + "#" + claim["claim_id"]
             require(ref not in claims, "duplicate animal claim ID")
             claims[ref] = claim
