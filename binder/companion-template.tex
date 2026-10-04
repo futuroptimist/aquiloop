@@ -1,0 +1,35 @@
+\documentclass[letterpaper]{article}
+\usepackage[paperwidth=8.5in,paperheight=11in,left=1in,right=.55in,top=.552in,bottom=.62in]{geometry}
+\usepackage{fontspec,tikz,array,xcolor}
+\setmainfont{TeX Gyre Pagella}\setsansfont{TeX Gyre Heros}\pagestyle{empty}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0pt}
+\definecolor{ink}{HTML}{202824}\definecolor{sage}{HTML}{557064}
+\color{ink}\raggedright\pdfvariable suppressoptionalinfo 767
+\newcommand{\CompanionHeader}[4]{%
+{\sffamily\bfseries\fontsize{9}{11}\selectfont DRAFT / #1}\par\vspace{5pt}
+{\fontsize{26}{29}\selectfont #2}\par\vspace{3pt}
+{\itshape\fontsize{12}{14}\selectfont #3}\par\vspace{4pt}
+{\sffamily\fontsize{9.5}{12}\selectfont #4}\par\vspace{7pt}}
+\newcommand{\Context}[1]{\rule{\linewidth}{.6pt}\par\vspace{3pt}{\sffamily\fontsize{9.5}{12}\selectfont #1}\par\vspace{5pt}}
+\newcommand{\Card}[2]{\begin{minipage}[t]{.482\linewidth}\raggedright
+\rule{\linewidth}{.4pt}\par\vspace{3pt}{\sffamily\bfseries\fontsize{11}{13}\selectfont #1}\par\vspace{3pt}
+{\sffamily\fontsize{9.5}{12}\selectfont #2\par}\end{minipage}}
+\newcommand{\CardRow}[4]{\Card{#1}{#2}\hfill\Card{#3}{#4}\par\vspace{7pt}}
+\newcommand{\Panel}[2]{\rule{\linewidth}{.5pt}\par\vspace{3pt}{\sffamily\bfseries\fontsize{11}{13}\selectfont #1}\par\vspace{3pt}{\sffamily\fontsize{9.5}{12}\selectfont #2\par}\vspace{6pt}}
+\newcommand{\Step}[3]{{\sffamily\bfseries\fontsize{11}{13}\selectfont #1. #2}\par\vspace{2pt}{\sffamily\fontsize{9.5}{12}\selectfont #3\par}\vspace{7pt}}
+\newcommand{\Note}[2]{{\sffamily\bfseries\fontsize{10}{12}\selectfont #1}\par\vspace{2pt}{\sffamily\fontsize{9.5}{12}\selectfont #2\par}\vspace{7pt}}
+\newcommand{\Sources}[2]{\vfill\rule{\linewidth}{.6pt}\par\vspace{3pt}{\sffamily\fontsize{8}{10}\selectfont #1\par\vspace{2pt}\textbf{#2}\quad v1 / 2026-10-04. Identity and publication qualification pending.\par}}
+\newcommand{\PothosDiagram}{%
+\begin{tikzpicture}[x=1in,y=1in,font=\sffamily\fontsize{9.5}{11}\selectfont]
+\path[use as bounding box] (0,0) rectangle (2.25,.9);
+\draw[line width=.8pt] (.1,.32)--(1.25,.32);
+\draw[dashed] (0,.52)--(1.3,.52);
+\draw (.2,.25)--(.2,.39);
+\draw (.68,.32) circle (.035);
+\draw (.68,.32)--(.9,.76)--(1.15,.76);
+\node[anchor=west] at (1.35,.75) {leaf};
+\node[anchor=west] at (1.35,.52) {water};
+\node[anchor=west] at (1.35,.29) {node/bud};
+\node[anchor=west] at (0,.07) {cut};
+\end{tikzpicture}\par{\sffamily\fontsize{9.5}{12}\selectfont Water alternate; not to scale.}\par\vspace{3pt}}
+\begin{document}\input{page.tex}\end{document}

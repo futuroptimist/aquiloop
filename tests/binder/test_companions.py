@@ -5,6 +5,8 @@ from decimal import Decimal
 from pathlib import Path
 import sys
 import tempfile
+import shutil
+import subprocess
 import unittest
 from unittest import mock
 
@@ -110,6 +112,93 @@ class CompanionEvidenceTests(unittest.TestCase):
             page += "% binder-placement hero ignored-asset; bypass must fail\n"
             with self.assertRaisesRegex(ValueError, "photograph placement is not supported"):
                 builder.compile_companion("pothos", "numbers", "draft", Path("unused.pdf"))
+
+    def test_ten_authored_layouts_resolve_claims_and_keep_page_structure(self):
+        import re
+        for entry, kind in builder.EXPECTED_EXPANDED_MANIFEST:
+            if kind not in {"numbers", "propagation"}:
+                continue
+            data = evidence.load_companions(ROOT, entry)
+            page = (ROOT / "binder/entries" / entry / f"{kind}.tex").read_text(encoding="utf-8")
+            refs = re.findall(r"^% claim-ref: (\S+)$", page, re.MULTILINE)
+            self.assertTrue(refs)
+            self.assertTrue(set(refs) <= data["valid_refs"])
+            self.assertIn(entry + " / " + kind, page)
+            if kind == "numbers":
+                self.assertEqual(page.count(r"\CardRow{"), 4)
+            else:
+                self.assertEqual(page.count(r"\Step{"), 8)
+                self.assertEqual(page.count(r"\Note{Check "), 3)
+
+
+@unittest.skipUnless(all(shutil.which(t) for t in ("lualatex", "pdftotext", "pdftoppm")), "LuaLaTeX and Poppler required")
+class ExpandedRenderingTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from pypdf import PdfReader
+        cls.directory = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(cls.directory.cleanup)
+        cls.base = Path(cls.directory.name)
+        cls.pdf = cls.base / "expanded.pdf"
+        builder.compile_manifest(ROOT / "binder/manifest-v2.yaml", "draft", cls.pdf)
+        cls.reader = PdfReader(cls.pdf)
+
+    def test_sixteen_pages_order_boxes_and_identity(self):
+        self.assertEqual(len(self.reader.pages), 16)
+        for page, (entry, kind) in zip(self.reader.pages, builder.EXPECTED_EXPANDED_MANIFEST):
+            builder._validate_page(page, entry)
+            content = page.extract_text()
+            if kind in {"numbers", "propagation"}:
+                self.assertIn(entry + " / " + kind, content)
+            elif kind == "profile":
+                self.assertIn("OVERVIEW / REVISION", content)
+            else:
+                from test_binder import _assert_watering_log_text_contract
+                _assert_watering_log_text_contract(content)
+                self.assertIn("watering-log / supplemental", content)
+
+    def test_all_text_and_painted_content_inside_safe_area(self):
+        from test_binder import (_assert_pdf_text_inside_safe_rectangle,
+                                 _assert_essential_painted_content_inside_safe_rectangle)
+        self.assertEqual(len(_assert_pdf_text_inside_safe_rectangle(self.pdf, self.base / "boxes.html")), 16)
+        _assert_essential_painted_content_inside_safe_rectangle(self.reader.pages)
+
+    def test_white_margins_in_color_and_grayscale(self):
+        from PIL import Image
+        from test_binder import WHITE_BACKGROUND_PATCHES
+        for gray in (False, True):
+            prefix = self.base / ("gray" if gray else "color")
+            subprocess.run(["pdftoppm", "-r", "72", "-png", *(["-gray"] if gray else []), str(self.pdf), str(prefix)], check=True, capture_output=True, timeout=120)
+            paths = list(self.base.glob(prefix.name + "-*.png"))
+            self.assertEqual(len(paths), 16)
+            for path in paths:
+                with Image.open(path) as image:
+                    for box in WHITE_BACKGROUND_PATCHES:
+                        self.assertEqual(image.convert("RGB").crop(box).getextrema(), ((255,255),)*3)
+
+    def test_overviews_and_log_preserve_accepted_content_and_photo_geometry(self):
+        import re
+        from pypdf import PdfReader
+        from test_binder import _painted_pdf_geometry
+        original = self.base / "six-page.pdf"
+        builder.compile_manifest(ROOT / "binder/manifest.yaml", "draft", original)
+        old = PdfReader(original)
+        for old_page, index in zip(old.pages, (0, 3, 6, 9, 12, 15)):
+            new_page = self.reader.pages[index]
+            new_text = new_page.extract_text().replace("OVERVIEW / REVISION", "REVISION")
+            new_text = new_text.replace(" / watering-log / supplemental", "")
+            normalize = lambda s: re.sub(r"\s+", " ", s).strip()
+            self.assertEqual(normalize(old_page.extract_text()), normalize(new_text))
+            self.assertEqual(_painted_pdf_geometry(old_page)[0], _painted_pdf_geometry(new_page)[0])
+
+    def test_overlong_companion_is_rejected_independently(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            shutil.copytree(ROOT / "binder", root / "binder")
+            page = root / "binder/entries/pothos/numbers.tex"
+            page.write_text(page.read_text(encoding="utf-8") + r"\newpage This extra companion page must be rejected.", encoding="utf-8")
+            with mock.patch.object(builder, "ROOT", root), self.assertRaisesRegex(RuntimeError, "rendered 2 pages, expected 1"):
+                builder.compile_companion("pothos", "numbers", "draft", root / "overlong.pdf")
 
 
 if __name__ == "__main__":
