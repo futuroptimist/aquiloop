@@ -19,4 +19,15 @@
 \newcommand{\Step}[3]{{\sffamily\bfseries\fontsize{11}{13}\selectfont #1. #2}\par\vspace{2pt}{\sffamily\fontsize{9.5}{12}\selectfont #3\par}\vspace{7pt}}
 \newcommand{\Note}[2]{{\sffamily\bfseries\fontsize{10}{12}\selectfont #1}\par\vspace{2pt}{\sffamily\fontsize{9.5}{12}\selectfont #2\par}\vspace{7pt}}
 \newcommand{\Sources}[2]{\vfill\rule{\linewidth}{.6pt}\par\vspace{3pt}{\sffamily\fontsize{8}{10}\selectfont #1\par\vspace{2pt}\textbf{#2}\quad v1 / 2026-10-04. Identity and publication qualification pending.\par}}
+\newcommand{\PothosDiagram}{%
+\begin{tikzpicture}[x=1in,y=1in,font=\sffamily\fontsize{9.5}{11}\selectfont]
+\path[use as bounding box] (0,0) rectangle (6.7,.52);
+\draw[line width=.8pt] (.15,.16)--(1.55,.16);
+\draw[dashed] (0,.27)--(1.7,.27);
+\draw (.35,.09)--(.35,.23);
+\draw (.82,.16) circle (.035);
+\draw (.82,.16)--(1.05,.44)--(1.32,.44);
+\node[anchor=west] at (1.8,.4) {Leaf above water; node below water line.};
+\node[anchor=west] at (1.8,.13) {Cut retains node + bud. Schematic, not to scale.};
+\end{tikzpicture}\par\vspace{3pt}}
 \begin{document}\input{page.tex}\end{document}
