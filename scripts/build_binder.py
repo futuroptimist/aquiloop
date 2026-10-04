@@ -156,6 +156,9 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         if kind in ANIMAL_PAGE_KINDS:
             # Add source links only to animal pages; existing PDF bytes/layouts stay stable.
             content = (tmp / "template.tex").read_text(encoding="utf-8")
+            # Inset animal rules from the exact safe edge; PDF transform arithmetic
+            # can otherwise put a full-width writing rule fractionally outside it.
+            content = content.replace("right=.55in", "right=.56in", 1)
             content = content.replace(r"\begin{document}", r"\usepackage[hidelinks]{hyperref}" + "\n" + r"\begin{document}")
             (tmp / "template.tex").write_text(content, encoding="utf-8")
         page_name = f"{kind}.tex" if kind in COMPANION_LABELS else "page.tex"

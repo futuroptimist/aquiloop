@@ -63,7 +63,9 @@ typography, white paper, unfilled cards, one-inch punch clearance and existing
 safe rectangle. Body remains 9.5 pt and sources 8 pt. No specimen photograph is
 available or invented; no new asset catalog is needed. Animal pages add clickable
 source links through a build-local hyperref addition, leaving the shared template
-and existing rendered pages unchanged. Category color accents are separate work.
+and existing rendered pages unchanged. Their right margin is inset to 0.56 inches
+so writing rules stay strictly inside the safe rectangle even after PDF coordinate
+arithmetic. No bounds tolerance is relaxed. Category color accents are separate work.
 
 Animal worksheets use `care_method` and life stages `adult`, `egg`, `juvenile`,
 or `all`; they never need a plant propagation field, soil recipe, USDA zone or
