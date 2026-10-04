@@ -3,7 +3,7 @@
 from __future__ import annotations
 import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
-from binder_evidence import load_companions
+from binder_evidence import ANIMAL_PAGE_KINDS, load_animal, load_companions
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {"id", "path", "kind", "subjects", "alt", "caption", "source"}
@@ -30,6 +30,12 @@ EXPECTED_EXPANDED_MANIFEST = tuple(
     for entry, _ in EXPECTED_MANIFEST[:-1]
     for kind in ("profile", "numbers", "propagation")
 ) + (("watering-log", "supplemental"),)
+EXPECTED_ANIMAL_MANIFEST = EXPECTED_EXPANDED_MANIFEST + tuple(
+    ("kuhli-loach", kind) for kind in ANIMAL_PAGE_KINDS
+)
+COMPANION_LABELS = {"numbers": "NUMBERS & PACIFICA", "propagation": "PROPAGATION",
+                    "animal-care": "ANIMAL CARE", "tank-setup": "TANK SETUP",
+                    "reproduction": "REPRODUCTION"}
 
 
 def _nonempty(value: object) -> bool:
@@ -145,9 +151,14 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="binder-") as tmp_name:
         tmp = Path(tmp_name)
-        template = "companion-template.tex" if kind in {"numbers", "propagation"} else "template.tex"
+        template = "companion-template.tex" if kind in COMPANION_LABELS else "template.tex"
         shutil.copyfile(ROOT / "binder" / template, tmp / "template.tex")
-        page_name = f"{kind}.tex" if kind in {"numbers", "propagation"} else "page.tex"
+        if kind in ANIMAL_PAGE_KINDS:
+            # Add source links only to animal pages; existing PDF bytes/layouts stay stable.
+            content = (tmp / "template.tex").read_text(encoding="utf-8")
+            content = content.replace(r"\begin{document}", r"\usepackage[hidelinks]{hyperref}" + "\n" + r"\begin{document}")
+            (tmp / "template.tex").write_text(content, encoding="utf-8")
+        page_name = f"{kind}.tex" if kind in COMPANION_LABELS else "page.tex"
         page_text = (base / page_name).read_text(encoding="utf-8")
         if expanded and kind == "profile":
             # Only the existing footer's revision label changes in v2.
@@ -180,7 +191,7 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
                 sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
         log = (tmp / "template.log").read_text(encoding="utf-8", errors="replace")
         if "Overfull" in log:
-            if kind in {"numbers", "propagation"}:
+            if kind in COMPANION_LABELS:
                 shutil.copyfile(tmp / "template.pdf", output.with_suffix(".failed.pdf"))
             details = "\n".join(line for line in log.splitlines() if "Overfull" in line)
             raise RuntimeError(f"LuaLaTeX reported an overfull box in {base.name}/{page_name}: {details}")
@@ -188,13 +199,13 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         from pypdf import PdfReader
         reader = PdfReader(pdf)
         if len(reader.pages) != 1:
-            if kind in {"numbers", "propagation"}:
+            if kind in COMPANION_LABELS:
                 shutil.copyfile(pdf, output.with_suffix(".failed.pdf"))
             raise RuntimeError(f"entry rendered {len(reader.pages)} pages, expected 1 ({base.name}/{page_name})")
         _validate_page(reader.pages[0], base.name)
-        if kind in {"numbers", "propagation"}:
+        if kind in COMPANION_LABELS:
             extracted = reader.pages[0].extract_text()
-            label = "NUMBERS & PACIFICA" if kind == "numbers" else "PROPAGATION"
+            label = COMPANION_LABELS[kind]
             if label not in extracted or f"{base.name} / {kind}" not in extracted:
                 raise RuntimeError("companion page identity missing")
         shutil.copyfile(pdf, output)
@@ -218,7 +229,8 @@ def compile_supplemental(name: str, mode: str, output: Path) -> None:
 def load_manifest(path: Path) -> list[dict]:
     manifest_path = path.resolve()
     supported = {(ROOT / "binder" / "manifest.yaml").resolve(): 1,
-                 (ROOT / "binder" / "manifest-v2.yaml").resolve(): 2}
+                 (ROOT / "binder" / "manifest-v2.yaml").resolve(): 2,
+                 (ROOT / "binder" / "manifest-v3.yaml").resolve(): 3}
     if manifest_path not in supported:
         raise ValueError("only the versioned binder assembly manifests are supported")
     version = supported[manifest_path]
@@ -233,14 +245,14 @@ def load_manifest(path: Path) -> list[dict]:
             raise ValueError("each manifest entry must define only id, kind, and page_budget")
         if not _nonempty(item["id"]) or not ID.fullmatch(item["id"]):
             raise ValueError(f"malformed manifest entry ID: {item['id']!r}")
-        if item["kind"] not in {"profile", "supplemental", "numbers", "propagation"}:
+        if item["kind"] not in {"profile", "supplemental", *COMPANION_LABELS}:
             raise ValueError(f"unsupported manifest kind: {item['kind']}")
         if type(item["page_budget"]) is not int or item["page_budget"] != 1:
             raise ValueError("manifest page_budget must be integer 1")
     actual = tuple((item["id"], item["kind"]) for item in entries)
-    expected = EXPECTED_MANIFEST if version == 1 else EXPECTED_EXPANDED_MANIFEST
+    expected = {1: EXPECTED_MANIFEST, 2: EXPECTED_EXPANDED_MANIFEST, 3: EXPECTED_ANIMAL_MANIFEST}[version]
     if actual != expected:
-        label = "six-entry" if version == 1 else "sixteen-entry"
+        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry"}[version]
         raise ValueError(f"manifest entries must match the canonical {label} order and kinds")
     return entries
 
@@ -260,6 +272,26 @@ def compile_companion(entry: str, kind: str, mode: str, output: Path) -> None:
     # placement rather than silently bypassing catalog/rights validation.
     if "% binder-placement" in page or r"\includegraphics" in page:
         raise ValueError("companion photograph placement is not supported; use a native vector schematic")
+    compile_entry(base, {}, {}, output, kind=kind, expanded=True)
+
+
+def compile_animal(entry: str, kind: str, mode: str, output: Path) -> None:
+    if mode != "draft":
+        raise ValueError("animal pages remain provisional and draft-only")
+    if kind not in ANIMAL_PAGE_KINDS or (entry, kind) not in EXPECTED_ANIMAL_MANIFEST:
+        raise ValueError("unknown animal page")
+    evidence = load_animal(ROOT, entry)
+    base = ROOT / "binder/entries" / entry
+    page = (base / f"{kind}.tex").read_text(encoding="utf-8")
+    references = re.findall(r"^% claim-ref: (\S+)$", page, re.MULTILINE)
+    if not references or not set(references) <= evidence["valid_refs"]:
+        raise ValueError("animal layout must cite resolved claims")
+    if "% binder-placement" in page or r"\includegraphics" in page:
+        raise ValueError("animal photograph placement requires a future reviewed asset workflow")
+    links = re.findall(r"\\href\{([^{}]+)\}", page)
+    source_urls = {s["url"] for s in evidence["sources"].values()}
+    if not links or not set(links) <= source_urls:
+        raise ValueError("animal source links must resolve to bibliography URLs")
     compile_entry(base, {}, {}, output, kind=kind, expanded=True)
 
 
@@ -285,8 +317,8 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
         raise ValueError("manifest assembly is currently available only in draft mode")
     from pypdf import PdfReader, PdfWriter
     entries = load_manifest(path)
-    expanded = path.name == "manifest-v2.yaml"
-    expected_pages = len(EXPECTED_EXPANDED_MANIFEST) if expanded else EXPECTED_BINDER_PAGES
+    expanded = path.name != "manifest.yaml"
+    expected_pages = len(entries)
     output.parent.mkdir(parents=True, exist_ok=True)
     writer = PdfWriter()
     with tempfile.TemporaryDirectory(prefix="binder-manifest-") as tmp_name:
@@ -299,6 +331,8 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
                     compile_entry(*load_entry(item["id"], mode), individual)
             elif item["kind"] in {"numbers", "propagation"}:
                 compile_companion(item["id"], item["kind"], mode, individual)
+            elif item["kind"] in ANIMAL_PAGE_KINDS:
+                compile_animal(item["id"], item["kind"], mode, individual)
             else:
                 if expanded:
                     compile_entry(supplemental_path(item["id"]), {}, {}, individual,
@@ -336,12 +370,14 @@ def main() -> int:
     source.add_argument("--manifest", type=Path)
     parser.add_argument("--mode", choices=("draft", "final"), required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--kind", choices=("profile", "numbers", "propagation"), default="profile")
+    parser.add_argument("--kind", choices=("profile", *COMPANION_LABELS), default="profile")
     args = parser.parse_args()
     try:
         if args.entry:
             if args.kind == "profile":
                 compile_entry(*load_entry(args.entry, args.mode), args.output)
+            elif args.kind in ANIMAL_PAGE_KINDS:
+                compile_animal(args.entry, args.kind, args.mode, args.output)
             else:
                 compile_companion(args.entry, args.kind, args.mode, args.output)
         elif args.supplemental:

@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "entry": "kuhli-loach",
+  "worksheet": "animal-care",
+  "claims": [
+    {
+      "claim_id": "trade-identity",
+      "metric": "trade-identity",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Kuhli is a trade name spanning Pangio species; do not identify the owner fish as P. kuhlii from that label.",
+      "provenance": {
+        "source_refs": [
+          "KUH-SF"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "trade-temperature",
+      "metric": "trade-temperature",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 74,
+        "maximum": 80,
+        "unit": "degrees Fahrenheit"
+      },
+      "provenance": {
+        "source_refs": [
+          "KUH-COOP"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "social-guidance",
+      "metric": "social-guidance",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Co-Op suggests at least 3-6 in 20 gallons or more; Seriously Fish suggests at least 5-6 for P. semicincta. Neither is a guarantee or stocking permission.",
+      "provenance": {
+        "source_refs": [
+          "KUH-COOP",
+          "KUH-SF"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "adult-size",
+      "metric": "adult-size",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 4,
+        "unit": "inches; trade-group adult length"
+      },
+      "provenance": {
+        "source_refs": [
+          "KUH-COOP"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "direct-feeding",
+      "metric": "direct-feeding",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Offer sinking food deliberately, with varied suitable frozen/live foods; observe feeding after lights dim if competition prevents access.",
+      "provenance": {
+        "source_refs": [
+          "KUH-COOP",
+          "KUH-LOL"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "stocking-review",
+      "metric": "stocking-review",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Review the existing pair separately: footprint, stock, health, water, habitat and quarantine before considering companions.",
+      "provenance": {
+        "source_refs": [
+          "KUH-COOP",
+          "KUH-VET"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown",
+        "derivation": "Owner reports two fish; published social guidance prompts a welfare review, not an arithmetic instruction to buy more."
+      }
+    },
+    {
+      "claim_id": "individual-longevity",
+      "metric": "individual-longevity",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Three years in the owner tank is reported residence, not age or a validated lifespan. No reliable species-matched longevity was established."
+      },
+      "provenance": {}
+    },
+    {
+      "claim_id": "current-water",
+      "metric": "current-water",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No measured temperature, pH, GH, KH, ammonia, nitrite or nitrate supplied."
+      },
+      "provenance": {}
+    }
+  ]
+}

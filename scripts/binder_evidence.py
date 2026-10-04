@@ -43,13 +43,14 @@ def claim_references(value):
             yield from claim_references(child)
 
 
-def validate_claim(c: dict, sources: dict) -> None:
+def validate_claim(c: dict, sources: dict, *, animal: bool = False) -> None:
     require(isinstance(c, dict), "claim must be an object")
-    for field in ("claim_id", "metric", "applicable_taxon", "propagation_method",
+    for field in ("claim_id", "metric", "applicable_taxon", "care_method" if animal else "propagation_method",
                   "life_stage", "growing_conditions", "geographic_context", "evidence_category"):
         require(text(c.get(field)), f"claim requires {field}")
     require(ID.fullmatch(c["claim_id"]), "invalid claim ID")
-    require(c["life_stage"] in {"established", "seed", "cutting", "division", "fragment"}, "invalid life stage")
+    stages = {"adult", "egg", "juvenile", "all"} if animal else {"established", "seed", "cutting", "division", "fragment"}
+    require(c["life_stage"] in stages, "invalid life stage")
     require(sum(k in c for k in ("quantity", "description", "recipe")) == 1, "exactly one payload required")
     evidence, provenance = c["evidence_category"], c.get("provenance")
     require(isinstance(provenance, dict), "provenance must be an object")
@@ -140,3 +141,45 @@ def load_companions(root: Path, entry: str) -> dict:
     for source in read(base / "sources.yaml")["sources"]:
         require(source["key"] in used or source.get("background_only") is True, "unused non-background entry source")
     return {"documents": documents, "claims": claims, "sources": sources, "valid_refs": valid_refs}
+
+
+ANIMAL_PAGE_KINDS = ("animal-care", "tank-setup", "reproduction")
+
+
+def load_animal(root: Path, entry: str) -> dict:
+    """Animal claims reuse evidence rules without plant stages or climate context."""
+    require(isinstance(entry, str) and ID.fullmatch(entry), "invalid animal entry ID")
+    base = root / "binder/entries" / entry
+    bibliography = read(base / "sources.yaml")
+    require(bibliography.get("schema_version") == 1 and bibliography.get("entry") == entry,
+            "animal bibliography identity mismatch")
+    sources = {}
+    for source in bibliography.get("sources", []):
+        require(isinstance(source, dict), "source must be an object")
+        require(all(text(source.get(k)) for k in ("key", "authority", "title", "accessed", "url", "applicability")),
+                "invalid animal bibliography record")
+        require(source["url"].startswith("https://"), "source requires HTTPS")
+        require(source["key"] not in sources, "duplicate source key")
+        date.fromisoformat(source["accessed"])
+        sources[source["key"]] = source
+    require(sources, "animal bibliography required")
+    documents, claims, used = {}, {}, set()
+    for kind in ANIMAL_PAGE_KINDS:
+        document = read(base / f"{kind}.yaml")
+        require(document.get("schema_version") == 1 and document.get("entry") == entry
+                and document.get("worksheet") == kind, "animal worksheet identity mismatch")
+        require(isinstance(document.get("claims"), list) and document["claims"], "claims array required")
+        for claim in document["claims"]:
+            validate_claim(claim, sources, animal=True)
+            require("recipe" not in claim, "animal worksheet does not support substrate recipes")
+            ref = entry + "#" + claim["claim_id"]
+            require(ref not in claims, "duplicate animal claim ID")
+            claims[ref] = claim
+            used.update(claim["provenance"].get("source_refs", []))
+        documents[kind] = document
+    for document in documents.values():
+        for ref in claim_references(document):
+            require(ref in claims, "unresolved animal claim reference")
+    for key, source in sources.items():
+        require(key in used or source.get("background_only") is True, "unused non-background animal source")
+    return {"documents": documents, "claims": claims, "sources": sources, "valid_refs": set(claims)}

@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "entry": "kuhli-loach",
+  "worksheet": "tank-setup",
+  "claims": [
+    {
+      "claim_id": "semicincta-temperature",
+      "metric": "semicincta-temperature",
+      "applicable_taxon": "Pangio semicincta specialist care profile",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 21,
+        "maximum": 26,
+        "unit": "degrees Celsius"
+      },
+      "provenance": {
+        "source_refs": [
+          "KUH-SF"
+        ],
+        "applicability": "Pangio semicincta specialist care profile"
+      }
+    },
+    {
+      "claim_id": "semicincta-ph",
+      "metric": "semicincta-ph",
+      "applicable_taxon": "Pangio semicincta specialist care profile; broad published range, not proposed home target",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3.5,
+        "maximum": 7,
+        "unit": "pH"
+      },
+      "provenance": {
+        "source_refs": [
+          "KUH-SF"
+        ],
+        "applicability": "Pangio semicincta specialist care profile; broad published range, not proposed home target"
+      }
+    },
+    {
+      "claim_id": "semicincta-hardness",
+      "metric": "semicincta-hardness",
+      "applicable_taxon": "Pangio semicincta specialist care profile; not a target of zero minerals",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 0,
+        "maximum": 8,
+        "unit": "dGH"
+      },
+      "provenance": {
+        "source_refs": [
+          "KUH-SF"
+        ],
+        "applicability": "Pangio semicincta specialist care profile; not a target of zero minerals"
+      }
+    },
+    {
+      "claim_id": "source-disagreement",
+      "metric": "source-disagreement",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Loaches Online gives P. semicincta 25.5-28 C and pH 6.2-7.0 with soft water; retain this separate from the cooler Seriously Fish range.",
+      "provenance": {
+        "source_refs": [
+          "KUH-LOL"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "tank-floor",
+      "metric": "tank-floor",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Seriously Fish recommends at least 60 x 30 cm base for P. semicincta. Actual tank footprint is unknown; this minimum is not a capacity calculation.",
+      "provenance": {
+        "source_refs": [
+          "KUH-SF"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "safe-habitat",
+      "metric": "safe-habitat",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Provide soft sand, sheltered areas, gentle circulation, covered intakes and a secure lid.",
+      "provenance": {
+        "source_refs": [
+          "KUH-SF"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "plant-plan",
+      "metric": "plant-plan",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Retain reported hornwort/guppy grass where healthy and clear of intakes. Consider Java moss, Java fern or Cryptocoryne for shaded cover; Anubias nana is an optional shelter plant, not an essential requirement.",
+      "provenance": {
+        "source_refs": [
+          "KUH-SF",
+          "KUH-MOSS",
+          "KUH-COOP"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown",
+        "derivation": "Plant suggestions adapt shaded-habitat guidance; current planting and light are unmeasured. Co-Op describes Anubias-root shelter; recommending nana is a size-conscious optional design choice."
+      }
+    },
+    {
+      "claim_id": "water-gate",
+      "metric": "water-gate",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Require undetectable ammonia and nitrite on working tests before additions; record nitrate trends and replacement-water chemistry. Avoid abrupt correction of established fish water.",
+      "provenance": {
+        "source_refs": [
+          "KUH-VET"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown",
+        "derivation": "Applies general biofilter and old-tank cautions to future additions; no species-specific nitrate ceiling or GH/KH target invented."
+      }
+    },
+    {
+      "claim_id": "quarantine",
+      "metric": "quarantine",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Separate new fish with dedicated equipment; general veterinary minimum quarantine is 30 days, sometimes longer.",
+      "provenance": {
+        "source_refs": [
+          "KUH-VET"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "kh-target",
+      "metric": "kh-target",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No species-matched numeric KH target established; measure buffering and consult stock-specific guidance rather than chase acidic endpoints."
+      },
+      "provenance": {}
+    }
+  ]
+}
