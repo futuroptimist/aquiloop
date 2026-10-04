@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "entry": "kuhli-loach",
+  "sources": [
+    {
+      "key": "KUH-COOP",
+      "authority": "Aquarium Co-Op",
+      "title": "Care Guide for Kuhli Loaches",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/care-guide-for-kuhli-loaches",
+      "accessed": "2026-10-04",
+      "applicability": "Practical trade-group husbandry; not confirmation of specimen identity or a predation trial."
+    },
+    {
+      "key": "KUH-SF",
+      "authority": "Seriously Fish",
+      "title": "Pangio semicincta",
+      "url": "https://www.seriouslyfish.com/species/pangio-semicincta/",
+      "accessed": "2026-10-04",
+      "applicability": "Species account and specialist synthesis. Its soft acidic water ranges apply to P. semicincta, not every unidentified Pangio."
+    },
+    {
+      "key": "KUH-LOL",
+      "authority": "Loaches Online, Mark in Vancouver",
+      "title": "Pangio semicincta",
+      "url": "https://www.loaches.com/species-index/pangio-semicincta",
+      "accessed": "2026-10-04",
+      "applicability": "Historical specialist account (2007); warmer temperature guidance differs from Seriously Fish. Breeding reports are anecdotal."
+    },
+    {
+      "key": "KUH-VET",
+      "authority": "MSD Veterinary Manual; Petty, Francis-Floyd and Yanong",
+      "title": "Management of Aquarium Fish",
+      "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/aquarium-fish/management-of-aquarium-fish",
+      "accessed": "2026-10-04",
+      "applicability": "Veterinary general aquarium management, updated June 2026; not species-specific medication dosing."
+    },
+    {
+      "key": "KUH-SEX",
+      "authority": "Universitas Airlangga; Budi et al. (2024)",
+      "title": "Primary and Secondary Sexual Characteristics of Kuhli Loach (Pangio kuhlii)",
+      "url": "https://scholar.unair.ac.id/en/publications/primary-and-secondary-sexual-characteristics-of-kuhli-loach-pangi/",
+      "accessed": "2026-10-04",
+      "applicability": "University abstract of peer-reviewed study of 50 fish under its published name; no inference that owner fish share that identity. Abstract inspected, not full paper."
+    },
+    {
+      "key": "KUH-MOSS",
+      "authority": "Aquarium Co-Op",
+      "title": "Care Guide for Java Moss",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/java-moss",
+      "accessed": "2026-10-04",
+      "applicability": "Practical plant guide supporting moss cover for small animals; no guarantee of protection from fish."
+    },
+    {
+      "key": "KUH-SHRIMP",
+      "authority": "Aquarium Co-Op",
+      "title": "Care Guide for Cherry Shrimp",
+      "url": "https://www.aquariumcoop.com/blogs/aquarium/cherry-shrimp-care",
+      "accessed": "2026-10-04",
+      "applicability": "Shrimp-keeper advice on juvenile vulnerability and cover; not a controlled Kuhli predation rate."
+    }
+  ]
+}

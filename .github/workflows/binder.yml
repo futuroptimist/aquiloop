@@ -161,6 +161,11 @@ jobs:
                   builder.compile_companion(entry, kind, 'draft', Path('build/binder/layouts') / f'{entry}-{kind}.pdf')
               except (ValueError, RuntimeError) as error:
                   errors.append(str(error))
+          for kind in builder.ANIMAL_PAGE_KINDS:
+              try:
+                  builder.compile_animal('kuhli-loach', kind, 'draft', Path('build/binder/layouts') / f'kuhli-loach-{kind}.pdf')
+              except (ValueError, RuntimeError) as error:
+                  errors.append(str(error))
           if errors:
               raise SystemExit('\n'.join(errors))
           PY
@@ -255,3 +260,26 @@ jobs:
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
+
+      - name: Build nineteen-page animal extension and proofs
+        run: |
+          set -euo pipefail
+          python scripts/build_binder.py --manifest binder/manifest-v3.yaml --mode draft \
+            --output build/binder/aquiloop-binder-kuhli-draft.pdf
+          mkdir -p build/binder/kuhli-color build/binder/kuhli-gray
+          pdftoppm -r 150 -png build/binder/aquiloop-binder-kuhli-draft.pdf build/binder/kuhli-color/page
+          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-kuhli-draft.pdf build/binder/kuhli-gray/page
+          test "$(find build/binder/kuhli-color -name '*.png' | wc -l)" -eq 19
+          test "$(find build/binder/kuhli-gray -name '*.png' | wc -l)" -eq 19
+          sha256sum build/binder/aquiloop-binder-kuhli-draft.pdf
+
+      - name: Upload animal extension and review proofs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-kuhli-proof
+          path: |
+            build/binder/aquiloop-binder-kuhli-draft.pdf
+            build/binder/kuhli-color/
+            build/binder/kuhli-gray/
+          if-no-files-found: error
+          retention-days: 14

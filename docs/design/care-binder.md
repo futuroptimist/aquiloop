@@ -14,6 +14,12 @@ and remaining uncertainties. The default six-page build remains available.
 
 ## Purpose and sequence
 
+The opt-in animal extension is documented in
+[Kuhli loach care and binder extension](kuhli-loach-binder.md). Its versioned
+nineteen-page assembly inserts three animal-appropriate pages after the fifteen
+plant pages and keeps the unchanged watering log last. The existing six- and
+sixteen-page assemblies remain available and unchanged; the binder is not renamed.
+
 The first release is one directly printable, six-page PDF in this exact order:
 
 1. Sedum “Love’s Fire” profile (reported Lowe’s label; outdoor grow bag).

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "entry": "kuhli-loach",
+  "worksheet": "reproduction",
+  "claims": [
+    {
+      "claim_id": "breeding-evidence",
+      "metric": "breeding-evidence",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Captive breeding is uncommon in trade-group advice; the P. semicincta profile regards reports as insufficiently documented. No reproducible protocol established here.",
+      "provenance": {
+        "source_refs": [
+          "KUH-COOP",
+          "KUH-SF"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "sex-study",
+      "metric": "sex-study",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Budi et al. studied 50 fish labeled P. kuhlii and reported body/pectoral-fin differences and internal gonadal examinations. The abstract is not a noninvasive identification key for this pair.",
+      "provenance": {
+        "source_refs": [
+          "KUH-SEX"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown"
+      }
+    },
+    {
+      "claim_id": "observation-sequence",
+      "metric": "observation-sequence",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Document identity evidence and normal feeding first; prepare a separate species-appropriate nursery and food plan before attempting breeding. Record eggs, hatch and feeding separately if observed.",
+      "provenance": {
+        "source_refs": [
+          "KUH-VET",
+          "KUH-SEX"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown",
+        "derivation": "Welfare-first observation plan, not a published induction or hatching recipe. No hormones, stripping, handling for sexing, abrupt temperature/pH changes or deliberate overfeeding."
+      }
+    },
+    {
+      "claim_id": "community-choice",
+      "metric": "community-choice",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Consider small peaceful rasboras or tetras only after water, footprint and food competition review; exclude aggressive, nipping, predatory or incompatible-temperature companions from this plan.",
+      "provenance": {
+        "source_refs": [
+          "KUH-COOP",
+          "KUH-SF"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown",
+        "derivation": "Peaceful community examples are candidates, not universal species compatibility guarantees or instructions to add fish."
+      }
+    },
+    {
+      "claim_id": "shrimp-risk",
+      "metric": "shrimp-risk",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Adult cherry shrimp may coexist; tiny juveniles, eggs and freshly molted shrimp remain vulnerable. Shelter does not guarantee recruitment.",
+      "provenance": {
+        "source_refs": [
+          "KUH-SHRIMP",
+          "KUH-SF",
+          "KUH-COOP"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown",
+        "derivation": "Combines general shrimp vulnerability and micropredator diet with keeper reports of peaceful Kuhlis. No quantified Kuhli-specific loss rate or claim that these fish attacked shrimp."
+      }
+    },
+    {
+      "claim_id": "nursery-separation",
+      "metric": "nursery-separation",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "adult",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "The possible 10-gallon cherry nursery and adult transfers belong to the later shrimp plan, not a Kuhli breeding setup or quarantine tank by default.",
+      "provenance": {
+        "source_refs": [
+          "KUH-VET",
+          "KUH-SHRIMP"
+        ],
+        "applicability": "Trade-group Pangio spp.; exact owner species unknown",
+        "derivation": "Owner expressed future shrimp intent. Separate purposes, capacity, chemistry and biosecurity must be reviewed before reuse or transfer."
+      }
+    },
+    {
+      "claim_id": "hatch-interval",
+      "metric": "hatch-interval",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "egg",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No species-confirmed home incubation interval established; record observed eggs and hatch separately."
+      },
+      "provenance": {}
+    },
+    {
+      "claim_id": "maturity-age",
+      "metric": "maturity-age",
+      "applicable_taxon": "Trade-group Pangio spp.; exact owner species unknown",
+      "care_method": "Freshwater aquarium husbandry; no live action authorized",
+      "life_stage": "juvenile",
+      "growing_conditions": "Established freshwater aquarium; published guidance is not a household measurement",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No justified age-at-maturity estimate for the unidentified owner fish."
+      },
+      "provenance": {}
+    }
+  ]
+}
