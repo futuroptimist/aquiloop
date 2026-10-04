@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "entry": "cherry-shrimp",
+  "worksheet": "animal-care",
+  "claims": [
+    {
+      "claim_id": "selected-identity",
+      "metric": "selected-identity",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Cherry shrimp are the selected red color form of Neocaridina davidi; a choice of species is not proof of stock already present.",
+      "provenance": {
+        "source_refs": [
+          "CS-UF"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "adult-size",
+      "metric": "adult-size",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "adult",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 3,
+        "maximum": 4,
+        "unit": "centimetres; reported maximum adult size, not every individual"
+      },
+      "provenance": {
+        "source_refs": [
+          "CS-UF"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "preferred-temperature",
+      "metric": "preferred-temperature",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 72,
+        "maximum": 76,
+        "unit": "degrees Fahrenheit; Co-Op preferred range, source rounds to 22-24 C"
+      },
+      "provenance": {
+        "source_refs": [
+          "CS-COOP"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "broad-temperature",
+      "metric": "broad-temperature",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 60,
+        "maximum": 82,
+        "unit": "degrees Fahrenheit; broad Co-Op husbandry range, source rounds to 16-28 C"
+      },
+      "provenance": {
+        "source_refs": [
+          "CS-COOP"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "grazing",
+      "metric": "grazing",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Graze biofilm and organic material; molting permits growth and cast shells may be consumed.",
+      "provenance": {
+        "source_refs": [
+          "CS-UF"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "feeding-plan",
+      "metric": "feeding-plan",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Retain grazing surfaces; offer modest varied shrimp food, observe access and remove uneaten excess. Feed juveniles sparingly near cover; never compensate for fish predation by overfeeding.",
+      "provenance": {
+        "source_refs": [
+          "CS-COOP",
+          "CS-FARM"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "Published supplemental and fine-food guidance plus overfeeding caution become an observation-led routine; no universal ration is supported."
+      }
+    },
+    {
+      "claim_id": "molt-cover",
+      "metric": "molt-cover",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Provide shelter during the vulnerable period after molting.",
+      "provenance": {
+        "source_refs": [
+          "CS-COOP"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "medicine-review",
+      "metric": "medicine-review",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Check treatment history and proposed products for invertebrate compatibility; copper medication can harm shrimp and biofiltration. Seek aquatic veterinary advice for sick fish sharing the system.",
+      "provenance": {
+        "source_refs": [
+          "CS-VET"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "General veterinary copper and biofilter warnings apply to the proposed invertebrate-containing aquarium; no treatment or dose is prescribed."
+      }
+    },
+    {
+      "claim_id": "individual-lifespan",
+      "metric": "individual-lifespan",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "A colony persisting is not an individual lifespan. No dependable stock-matched longevity estimate was established."
+      },
+      "provenance": {}
+    },
+    {
+      "claim_id": "current-water",
+      "metric": "current-water",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Neither tank has supplied measured temperature, pH, GH, KH, ammonia, nitrite or nitrate."
+      },
+      "provenance": {}
+    }
+  ]
+}

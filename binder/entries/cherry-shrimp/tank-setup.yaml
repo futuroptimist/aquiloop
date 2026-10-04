@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "entry": "cherry-shrimp",
+  "worksheet": "tank-setup",
+  "claims": [
+    {
+      "claim_id": "published-ph",
+      "metric": "published-ph",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 6.5,
+        "maximum": 8.5,
+        "unit": "pH; broad Co-Op husbandry range"
+      },
+      "provenance": {
+        "source_refs": [
+          "CS-COOP"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "hardness-minima",
+      "metric": "hardness-minima",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Co-Op gives GH at least 6 dGH and KH at least 2 dKH; these are minima, not measured values or implied upper limits.",
+      "provenance": {
+        "source_refs": [
+          "CS-COOP"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "specialist-chemistry",
+      "metric": "specialist-chemistry",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "The Shrimp Farm describes ideal pH 7.0-7.6, GH 9-11 and KH 4-6 degrees; keep this narrower advice separate from Co-Op ranges.",
+      "provenance": {
+        "source_refs": [
+          "CS-FARM"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "test-hardness-separately",
+      "metric": "test-hardness-separately",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "GH principally reflects calcium/magnesium; KH reflects carbonate/bicarbonate buffering. Record both in degrees; pH alone cannot establish either.",
+      "provenance": {
+        "source_refs": [
+          "CS-GH",
+          "CS-KH"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "nursery-proposal",
+      "metric": "nursery-proposal",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "A possible 10-gallon shrimp-only nursery is a plan, not a verified cycled tank or stocking allowance. Confirm fishless cycle completion, stable replacement water, mature grazing surfaces and safe filtration before animals.",
+      "provenance": {
+        "source_refs": [
+          "CS-COOP",
+          "CS-VET"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "Owner proposes 10 gallons; Co-Op prefers 10 gallons or more for colonies and mature grazing surfaces. Veterinary cycling guidance supplies the no-animal cycle gate; elapsed days or one clean test do not prove processing capacity."
+      }
+    },
+    {
+      "claim_id": "water-gate",
+      "metric": "water-gate",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Demonstrate functioning biofiltration without live shrimp; require undetectable ammonia/nitrite on functioning tests and record nitrate trend and units. Maintain dechlorinated, compatible replacement water; do not chase pH or dose minerals without testing.",
+      "provenance": {
+        "source_refs": [
+          "CS-VET",
+          "CS-FARM"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "General fishless cycling and pH/ammonia cautions plus stable shrimp husbandry guide the proposed gate. No universal nitrate ceiling or additive recipe established."
+      }
+    },
+    {
+      "claim_id": "substrate-intake",
+      "metric": "substrate-intake",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "An inert substrate can suit Neocaridina. Use a sponge filter or protected intake; maintain flow without exposing tiny shrimp to suction.",
+      "provenance": {
+        "source_refs": [
+          "CS-FARM"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "plant-plan",
+      "metric": "plant-plan",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Use healthy hornwort and guppy grass as cover/grazing surfaces; Java moss is an optional finer refuge. Keep feeding areas and intakes accessible. Plant transfers require pest/product-history review.",
+      "provenance": {
+        "source_refs": [
+          "CS-FARM",
+          "CS-COOP"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "Owner reports hornwort/guppy grass in the 20-gallon; specialist plant-cover guidance informs their proposed use. Neither a new plant entry nor attachment/glue instructions are included."
+      }
+    },
+    {
+      "claim_id": "possible-temperature-overlap",
+      "metric": "possible-temperature-overlap",
+      "applicable_taxon": "Selected Neocaridina davidi plus unidentified trade-group Pangio; applicability to actual pair unverified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "quantity": {
+        "kind": "range",
+        "minimum": 74,
+        "maximum": 76,
+        "unit": "degrees Fahrenheit; discussion interval only"
+      },
+      "provenance": {
+        "source_refs": [
+          "CS-COOP",
+          "CS-KUH"
+        ],
+        "applicability": "Selected Neocaridina davidi plus unidentified trade-group Pangio; applicability to actual pair unverified",
+        "derivation": "Intersection [72,76] preferred shrimp and [74,80] trade Kuhli ranges is [74,76]. Not a heater setting; no analogous shared pH/GH/KH target is established."
+      }
+    },
+    {
+      "claim_id": "nursery-cycle-status",
+      "metric": "nursery-cycle-status",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "The possible 10-gallon tank has no supplied cycling record, equipment specification or measured processing capacity."
+      },
+      "provenance": {}
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "entry": "cherry-shrimp",
+  "worksheet": "reproduction",
+  "claims": [
+    {
+      "claim_id": "direct-development",
+      "metric": "direct-development",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "egg",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Females carry eggs under the abdomen; hatchlings are miniature shrimp in freshwater. No free-swimming saline larval rearing stage is needed.",
+      "provenance": {
+        "source_refs": [
+          "CS-UF"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "incubation-disagreement",
+      "metric": "incubation-disagreement",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "egg",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "UF/IFAS reports 16-19 days from cited literature; Co-Op describes about a month depending on temperature. Neither is a deadline for an unmeasured home colony.",
+      "provenance": {
+        "source_refs": [
+          "CS-UF",
+          "CS-COOP"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "newborn-size",
+      "metric": "newborn-size",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "juvenile",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 2,
+        "unit": "millimetres; UF/IFAS hatchling account"
+      },
+      "provenance": {
+        "source_refs": [
+          "CS-UF"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "maturity-uncertainty",
+      "metric": "maturity-uncertainty",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "juvenile",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "UF/IFAS reports maturity around 30 days, without a matching home setup here. Record development; do not promise a calendar date or use heat to accelerate breeding.",
+      "provenance": {
+        "source_refs": [
+          "CS-UF"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "Retains the extension report as context while declining to extrapolate its timing to unknown stock and conditions."
+      }
+    },
+    {
+      "claim_id": "breeding-sequence",
+      "metric": "breeding-sequence",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "After nursery readiness, confirm healthy adults of both sexes; observe carried eggs without handling. Record eggs seen, hatchlings seen, feeding and growth separately. Preserve biofilm and accessible fine food; plan humane rehoming before expansion.",
+      "provenance": {
+        "source_refs": [
+          "CS-UF",
+          "CS-FARM"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "Direct development and small-juvenile feeding needs support an observation-led sequence; a purchase count cannot guarantee both sexes or successful breeding."
+      }
+    },
+    {
+      "claim_id": "fish-risk",
+      "metric": "fish-risk",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Keep the proposed nursery fish-free. Peaceful fish can still consume tiny shrimp; adult coexistence does not demonstrate juvenile safety.",
+      "provenance": {
+        "source_refs": [
+          "CS-FARM"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "kuhli-risk",
+      "metric": "kuhli-risk",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Kuhli keeper reports are reassuring but are not predation trials. Micropredator feeding and shrimp vulnerability justify caution for juveniles and fresh molts; cover cannot guarantee survival.",
+      "provenance": {
+        "source_refs": [
+          "CS-KUH",
+          "CS-SF",
+          "CS-COOP"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "Species-account diet and general shrimp vulnerability support a risk inference, not an observed attack rate or identification of the owner Pangio."
+      }
+    },
+    {
+      "claim_id": "adult-transfer-gate",
+      "metric": "adult-transfer-gate",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "proposed",
+      "description": "Consider later adult transfers from the nursery to the 20-gallon only after checking both systems, full stock/footprint, health history and compatible water. Arrange acclimation for actual transport/water differences, protected intakes and a fallback home. Retain a breeding group in the nursery.",
+      "provenance": {
+        "source_refs": [
+          "CS-FARM",
+          "CS-VET",
+          "CS-KUH"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+        "derivation": "Owner idea is a conditional future plan. Separate source chemistry and community risk require review; adult size reduces neither all predation nor post-molt risk to zero. Nursery is not simultaneously a fish quarantine."
+      }
+    },
+    {
+      "claim_id": "no-release",
+      "metric": "no-release",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "all",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "published",
+      "description": "Rehome surplus responsibly; do not release shrimp or aquarium contents outdoors. Introduced Neocaridina populations are documented.",
+      "provenance": {
+        "source_refs": [
+          "CS-UF"
+        ],
+        "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
+      }
+    },
+    {
+      "claim_id": "transfer-size",
+      "metric": "transfer-size",
+      "applicable_taxon": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
+      "care_method": "Freshwater aquarium husbandry; planning only",
+      "life_stage": "adult",
+      "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
+      "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
+      "evidence_category": "unknown",
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No validated predation-safe length or safe transfer count is established for the unidentified Kuhli pair."
+      },
+      "provenance": {}
+    }
+  ]
+}
