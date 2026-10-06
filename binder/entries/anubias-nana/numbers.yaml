@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "entry": "anubias-nana",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "light",
+      "metric": "light",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "AN-TROP",
+          "AN-DEN"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Tropica describes shade tolerance; Dennerle lists medium-low light. Neither provides this aquarium a lamp schedule."
+    },
+    {
+      "claim_id": "commercial-temperature",
+      "metric": "commercial_temperature",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "AN-DEN"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "quantity": {
+        "kind": "range",
+        "minimum": 22,
+        "maximum": 28,
+        "unit": "degC"
+      }
+    },
+    {
+      "claim_id": "commercial-ph",
+      "metric": "commercial_ph",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "AN-DEN"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "quantity": {
+        "kind": "range",
+        "minimum": 5,
+        "maximum": 9,
+        "unit": "pH"
+      }
+    },
+    {
+      "claim_id": "size-scope",
+      "metric": "size_scope",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "AN-TROP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Grower narrative: 5-10 cm height; rhizome 10-15 cm or longer. Tropica separately lists 5-15+ cm height after two months; not a promise."
+    },
+    {
+      "claim_id": "growth",
+      "metric": "growth",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "AN-TROP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Slow growth. Long-lived leaves can accumulate algae; inspect light and debris before changing the whole tank."
+    },
+    {
+      "claim_id": "placement",
+      "metric": "placement",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "AN-DEN"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
+        "derivation": "Apply the published placement method to a contained aquarium; floating guppy grass needs no attachment, and buried Anubias rhizomes are excluded."
+      },
+      "description": "Fix to wood or stone. Keep the thick horizontal rhizome exposed, including when roots enter substrate; burial can cause rot."
+    },
+    {
+      "claim_id": "life-history",
+      "metric": "life_history",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "AN-TROP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Tropica reports underwater flowers and leaves persisting for years. Leaf longevity is not the lifespan of the whole plant or a flowering deadline."
+    },
+    {
+      "claim_id": "seed-protocol",
+      "metric": "seed_protocol",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "seed",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Flowering is documented, but no practical seed-germination or age-to-flower interval was established. Rhizome division is the method here."
+      }
+    },
+    {
+      "claim_id": "individual-lifespan",
+      "metric": "individual_lifespan",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No universal individual/clonal lifespan or maturity deadline is established for this unverified aquarium stock."
+      }
+    },
+    {
+      "claim_id": "establishment-time",
+      "metric": "establishment_time",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "division",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Observe continued new growth and attachment where relevant; retained sources establish no universal days-to-success."
+      }
+    },
+    {
+      "claim_id": "household-water",
+      "metric": "household_water",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No current temperature, pH, GH/KH, nitrogen tests, light measurements or additive regimen supplied for this plant."
+      }
+    },
+    {
+      "claim_id": "terrestrial-watering",
+      "metric": "terrestrial_watering",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "not_applicable",
+      "provenance": {},
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "Submerged aquarium care has no terrestrial watering interval or potting-mixture recipe."
+      }
+    }
+  ]
+}

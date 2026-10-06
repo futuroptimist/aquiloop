@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "entry": "anubias-nana",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "method",
+      "metric": "method",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "division",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "AN-DEN"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
+        "derivation": "Convert the source regrowth/attachment method into an observable aquarium workflow without inventing cutting size, leaf count or a timetable."
+      },
+      "description": "Dennerle lists rhizome cuttings. Retain viable rhizome, roots and leaves on each planned division; no minimum leaf count or regrowth interval is established here."
+    },
+    {
+      "claim_id": "contain-discard",
+      "metric": "contain_discard",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "fragment",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "DEC"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Inspect incoming material; capture and seal unwanted plant fragments in trash. Do not release or compost aquarium plants."
+    },
+    {
+      "claim_id": "glue-product",
+      "metric": "glue_product",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "fragment",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GLUE"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Optional attachment uses aquarium-labeled Seachem Flourish Glue cyanoacrylate gel; product permissions do not establish suitability of an unknown household adhesive."
+    },
+    {
+      "claim_id": "glue-hold",
+      "metric": "glue_hold",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "fragment",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GLUE"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "quantity": {
+        "kind": "value",
+        "value": 20,
+        "unit": "seconds"
+      }
+    },
+    {
+      "claim_id": "glue-contact",
+      "metric": "glue_contact",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "fragment",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "GLUE",
+          "AN-DEN"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
+        "derivation": "Use manufacturer root/moss contact instructions with grower attachment guidance; protect live rhizome and tips by limiting contact to roots or small moss contact points."
+      },
+      "description": "Use a small amount on moss or plant roots, press onto wood/stone; never coat a rhizome or growing tips. Do not glue to glass. Underwater use is allowed by this label."
+    },
+    {
+      "claim_id": "glue-safety",
+      "metric": "glue_safety",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "fragment",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GLUE"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Follow the chosen product label: cyanoacrylate rapidly bonds skin/eyes and irritates them; keep away from children. Manufacturer hold time is not a full-cure or biological attachment deadline."
+    },
+    {
+      "claim_id": "observe-success",
+      "metric": "observe_success",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "fragment",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "AN-DEN"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
+        "derivation": "Use source growth and attachment characteristics as observation cues; no fixed interval or force test is inferred."
+      },
+      "description": "Record intact continued new growth; for attached plants, also observe natural hold without pulling. Do not equate a glue bond with biological establishment."
+    },
+    {
+      "claim_id": "tie-attachment",
+      "metric": "tie_attachment",
+      "applicable_taxon": "Anubias barteri var. nana; specimen unverified",
+      "propagation_method": "rhizome division and attachment",
+      "life_stage": "division",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "AN-TROP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
+        "derivation": "Translate the grower fishing-line attachment into an observed home step; loop inspection is a proposed precaution, not a sourced timetable."
+      },
+      "description": "Tropica recommends attaching to stone or a root with fishing line until natural hold. Tie gently to decor, check loose loops and keep the rhizome exposed."
+    }
+  ]
+}

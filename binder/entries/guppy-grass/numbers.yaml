@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "entry": "guppy-grass",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "light",
+      "metric": "light",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GG-AA"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Aquatic Arts: low to moderate light for its stock; no measured lamp runtime or intensity for this tank."
+    },
+    {
+      "claim_id": "commercial-temperature",
+      "metric": "commercial_temperature",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GG-AA"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "quantity": {
+        "kind": "range",
+        "minimum": 64,
+        "maximum": 86,
+        "unit": "degF"
+      }
+    },
+    {
+      "claim_id": "commercial-ph",
+      "metric": "commercial_ph",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GG-AA"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "quantity": {
+        "kind": "range",
+        "minimum": 5.5,
+        "maximum": 7.5,
+        "unit": "pH"
+      }
+    },
+    {
+      "claim_id": "size-scope",
+      "metric": "size_scope",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GG-TAM"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "AquaPlant describes pond stems about 2 feet long. This is not a tank maximum or trimming deadline."
+    },
+    {
+      "claim_id": "growth",
+      "metric": "growth",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GG-AA"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Aquatic Arts describes rapid growth. Thin crowded floating masses and capture loose stems; no growth rate per day is established."
+    },
+    {
+      "claim_id": "placement",
+      "metric": "placement",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "GG-AA"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
+        "derivation": "Apply the published placement method to a contained aquarium; floating guppy grass needs no attachment, and buried Anubias rhizomes are excluded."
+      },
+      "description": "Float a loose submerged mass, as the seller recommends; planting is an alternative. Attachment glue is unnecessary for the primary floating method."
+    },
+    {
+      "claim_id": "life-history",
+      "metric": "life_history",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "GG-CAL",
+          "GG-MSU"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "An annual in the Calflora field record; tiny flowers and seeds are documented by MSU. This does not date a continuously propagated aquarium clone."
+    },
+    {
+      "claim_id": "seed-protocol",
+      "metric": "seed_protocol",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "submerged stem fragments",
+      "life_stage": "seed",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Flowering and seeds exist, but no practical home germination interval or protocol was established in the reviewed sources."
+      }
+    },
+    {
+      "claim_id": "individual-lifespan",
+      "metric": "individual_lifespan",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No universal individual/clonal lifespan or maturity deadline is established for this unverified aquarium stock."
+      }
+    },
+    {
+      "claim_id": "establishment-time",
+      "metric": "establishment_time",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "submerged stem fragments",
+      "life_stage": "fragment",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Observe continued new growth and attachment where relevant; retained sources establish no universal days-to-success."
+      }
+    },
+    {
+      "claim_id": "household-water",
+      "metric": "household_water",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No current temperature, pH, GH/KH, nitrogen tests, light measurements or additive regimen supplied for this plant."
+      }
+    },
+    {
+      "claim_id": "terrestrial-watering",
+      "metric": "terrestrial_watering",
+      "applicable_taxon": "Najas guadalupensis; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "not_applicable",
+      "provenance": {},
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "Submerged aquarium care has no terrestrial watering interval or potting-mixture recipe."
+      }
+    }
+  ]
+}

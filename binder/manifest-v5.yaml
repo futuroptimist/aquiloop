@@ -1,0 +1,160 @@
+{
+  "schema_version": 5,
+  "entries": [
+    {
+      "id": "sedum-loves-fire",
+      "kind": "profile",
+      "page_budget": 1
+    },
+    {
+      "id": "sedum-loves-fire",
+      "kind": "numbers",
+      "page_budget": 1
+    },
+    {
+      "id": "sedum-loves-fire",
+      "kind": "propagation",
+      "page_budget": 1
+    },
+    {
+      "id": "kalanchoe-desert",
+      "kind": "profile",
+      "page_budget": 1
+    },
+    {
+      "id": "kalanchoe-desert",
+      "kind": "numbers",
+      "page_budget": 1
+    },
+    {
+      "id": "kalanchoe-desert",
+      "kind": "propagation",
+      "page_budget": 1
+    },
+    {
+      "id": "pothos",
+      "kind": "profile",
+      "page_budget": 1
+    },
+    {
+      "id": "pothos",
+      "kind": "numbers",
+      "page_budget": 1
+    },
+    {
+      "id": "pothos",
+      "kind": "propagation",
+      "page_budget": 1
+    },
+    {
+      "id": "bird-of-paradise",
+      "kind": "profile",
+      "page_budget": 1
+    },
+    {
+      "id": "bird-of-paradise",
+      "kind": "numbers",
+      "page_budget": 1
+    },
+    {
+      "id": "bird-of-paradise",
+      "kind": "propagation",
+      "page_budget": 1
+    },
+    {
+      "id": "aquarium-hornwort",
+      "kind": "profile",
+      "page_budget": 1
+    },
+    {
+      "id": "aquarium-hornwort",
+      "kind": "numbers",
+      "page_budget": 1
+    },
+    {
+      "id": "aquarium-hornwort",
+      "kind": "propagation",
+      "page_budget": 1
+    },
+    {
+      "id": "kuhli-loach",
+      "kind": "animal-care",
+      "page_budget": 1
+    },
+    {
+      "id": "kuhli-loach",
+      "kind": "tank-setup",
+      "page_budget": 1
+    },
+    {
+      "id": "kuhli-loach",
+      "kind": "reproduction",
+      "page_budget": 1
+    },
+    {
+      "id": "cherry-shrimp",
+      "kind": "animal-care",
+      "page_budget": 1
+    },
+    {
+      "id": "cherry-shrimp",
+      "kind": "tank-setup",
+      "page_budget": 1
+    },
+    {
+      "id": "cherry-shrimp",
+      "kind": "reproduction",
+      "page_budget": 1
+    },
+    {
+      "id": "guppy-grass",
+      "kind": "profile",
+      "page_budget": 1
+    },
+    {
+      "id": "guppy-grass",
+      "kind": "numbers",
+      "page_budget": 1
+    },
+    {
+      "id": "guppy-grass",
+      "kind": "propagation",
+      "page_budget": 1
+    },
+    {
+      "id": "java-moss",
+      "kind": "profile",
+      "page_budget": 1
+    },
+    {
+      "id": "java-moss",
+      "kind": "numbers",
+      "page_budget": 1
+    },
+    {
+      "id": "java-moss",
+      "kind": "propagation",
+      "page_budget": 1
+    },
+    {
+      "id": "anubias-nana",
+      "kind": "profile",
+      "page_budget": 1
+    },
+    {
+      "id": "anubias-nana",
+      "kind": "numbers",
+      "page_budget": 1
+    },
+    {
+      "id": "anubias-nana",
+      "kind": "propagation",
+      "page_budget": 1
+    },
+    {
+      "id": "watering-log",
+      "kind": "supplemental",
+      "page_budget": 1
+    }
+  ]
+}

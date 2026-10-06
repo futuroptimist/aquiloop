@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "entry": "java-moss",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "light",
+      "metric": "light",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "JM-TROP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Tropica rates its Bogor Moss stock low-demand. This is a qualitative category, not zero light or exact lamp hours."
+    },
+    {
+      "claim_id": "commercial-temperature",
+      "metric": "commercial_temperature",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Reviewed primary grower page does not establish a numeric temperature interval; do not substitute unrelated moss species or generic tolerance."
+      }
+    },
+    {
+      "claim_id": "commercial-ph",
+      "metric": "commercial_ph",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No defensible numeric pH interval in the retained grower evidence; current aquarium chemistry is also unmeasured."
+      }
+    },
+    {
+      "claim_id": "size-scope",
+      "metric": "size_scope",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "JM-TROP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Tropica describes 3-10 cm mat thickness; its separate 3-10+ cm two-month height category is not a guaranteed establishment time."
+    },
+    {
+      "claim_id": "growth",
+      "metric": "growth",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "JM-TROP",
+          "JM-COOP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "Tropica rates growth medium and recommends scissors for excess growth. Co-Op describes lighter tips as new growth."
+    },
+    {
+      "claim_id": "placement",
+      "metric": "placement",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "JM-TROP",
+          "GLUE"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified.",
+        "derivation": "Apply the published placement method to a contained aquarium; floating guppy grass needs no attachment, and buried Anubias rhizomes are excluded."
+      },
+      "description": "Attach a loose portion to wood or stone with cotton thread or line until it holds. Aquarium cyanoacrylate gel is an optional alternative; see propagation."
+    },
+    {
+      "claim_id": "life-history",
+      "metric": "life_history",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "JM-TROP",
+          "JM-COOP"
+        ],
+        "applicability": "Working taxon only; source scope retained in entry bibliography. Household values and exact specimen identity are unverified."
+      },
+      "description": "The working plant is a moss, not a rooted flowering plant. Co-Op describes attachment to decor rather than rooting into gravel."
+    },
+    {
+      "claim_id": "seed-protocol",
+      "metric": "seed_protocol",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "moss portions attached to decor",
+      "life_stage": "seed",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "not_applicable",
+      "provenance": {},
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "Seed germination and flowering are not applicable to moss; a spore culture protocol is outside this fragment-based plan."
+      }
+    },
+    {
+      "claim_id": "individual-lifespan",
+      "metric": "individual_lifespan",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No universal individual/clonal lifespan or maturity deadline is established for this unverified aquarium stock."
+      }
+    },
+    {
+      "claim_id": "establishment-time",
+      "metric": "establishment_time",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "moss portions attached to decor",
+      "life_stage": "fragment",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Observe continued new growth and attachment where relevant; retained sources establish no universal days-to-success."
+      }
+    },
+    {
+      "claim_id": "household-water",
+      "metric": "household_water",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No current temperature, pH, GH/KH, nitrogen tests, light measurements or additive regimen supplied for this plant."
+      }
+    },
+    {
+      "claim_id": "terrestrial-watering",
+      "metric": "terrestrial_watering",
+      "applicable_taxon": "Taxiphyllum barbieri; specimen unverified",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "freshwater aquarium; proposed home application unless source commercial/field scope is stated",
+      "geographic_context": "Tank conditions govern; Pacifica outdoor climate is not a water measurement",
+      "evidence_category": "not_applicable",
+      "provenance": {},
+      "quantity": {
+        "kind": "not_applicable",
+        "reason": "Submerged aquarium care has no terrestrial watering interval or potting-mixture recipe."
+      }
+    }
+  ]
+}

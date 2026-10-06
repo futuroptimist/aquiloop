@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "entry": "guppy-grass",
+  "display_name": "Guppy grass",
+  "reported_label": "Guppy grass",
+  "identity": {
+    "status": "provisional working taxon",
+    "working_name": "Najas guadalupensis",
+    "confidence": "specimen unverified",
+    "alternatives": [
+      "trade-name or cultivar mismatch"
+    ],
+    "decision": "Owner reports guppy grass in the aquarium; species and present condition unverified.",
+    "sources": [
+      "GG-AA"
+    ]
+  },
+  "environmental_variability": "Watering interval is N/A. Tank readings and livestock needs govern; no household targets inferred.",
+  "unresolved_fields": [
+    "identity/source",
+    "owner photograph",
+    "temperature and chemistry",
+    "light/flow/additives",
+    "observed establishment"
+  ],
+  "cards": {
+    "light": [
+      {
+        "claim": "Aquatic Arts: low to moderate light for its stock; no measured lamp runtime or intensity for this tank.",
+        "sources": [
+          "GG-AA"
+        ]
+      }
+    ],
+    "water_parameters_temperature": [
+      {
+        "claim": "Aquatic Arts stock: 64-86 F (18-30 C as published). Broad care range, not a heater setting. Watering interval is N/A.",
+        "sources": [
+          "GG-AA"
+        ]
+      }
+    ],
+    "placement_anchoring_floating": [
+      {
+        "claim": "Float a loose submerged mass, as the seller recommends; planting is an alternative. Attachment glue is unnecessary for the primary floating method.",
+        "sources": [
+          "GG-AA"
+        ]
+      }
+    ],
+    "nutrient_context": [
+      {
+        "claim": "Local nutrient and CO2 requirements are unknown. Record the existing regimen; a grower rating does not authorize dosing this livestock tank.",
+        "sources": [
+          "GG-AA"
+        ]
+      }
+    ],
+    "growth_trimming": [
+      {
+        "claim": "Aquatic Arts describes rapid growth. Thin crowded floating masses and capture loose stems; no growth rate per day is established.",
+        "sources": [
+          "GG-AA"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "Fragments and remaining roots can regrow (AquaPlant pond account). Adapt this capability to an observed floating cutting; no exact cutting length or rooting deadline is established.",
+        "sources": [
+          "GG-PROP",
+          "GG-AA"
+        ],
+        "method": "submerged stem fragments",
+        "starting_material": "healthy identified plant material",
+        "establishment_condition": "continued intact growth under recorded tank conditions",
+        "pitfall": "fragment loss or buried/smothered live tissue"
+      }
+    ],
+    "aquarium_compatibility_troubleshooting": [
+      {
+        "claim": "Inspect incoming plants and capture unwanted fragments. No plant cover guarantees survival of shrimp or fry; record changes and review livestock needs separately.",
+        "sources": [
+          "DEC"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "An annual in the Calflora field record; tiny flowers and seeds are documented by MSU. This does not date a continuously propagated aquarium clone.",
+        "sources": [
+          "GG-CAL",
+          "GG-MSU"
+        ]
+      }
+    ]
+  }
+}

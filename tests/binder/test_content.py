@@ -243,7 +243,7 @@ class ContentWorksheetTests(unittest.TestCase):
                     self.assertAquaticGuidance(content)
 
     def test_source_support_metadata_covers_every_citation(self):
-        for slug in ENTRIES:
+        for slug in (*ENTRIES, "guppy-grass", "java-moss", "anubias-nana"):
             with self.subTest(entry=slug):
                 source_doc = self.load(slug, "sources.yaml")
                 content = self.load(slug, "content.yaml")
