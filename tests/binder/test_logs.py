@@ -24,7 +24,7 @@ class LogTests(unittest.TestCase):
         batches = logs.paginate_species(logs.tracked_species(entries))
         self.assertEqual([len(page) for page in batches], [3, 3, 3, 1])
         self.assertEqual([entry for page in batches for entry in page], expected)
-        self.assertEqual(set(expected), set(logs.LABELS))
+        self.assertLessEqual(set(expected), set(logs.LABELS))
 
     def test_pagination_never_truncates_or_duplicates(self):
         for count in (0, 1, 3, 4, 10, 11, 30, 31):
@@ -87,7 +87,8 @@ class LogRenderingTests(unittest.TestCase):
 
     def test_coverage_order_and_blank_names_in_actual_pdf(self):
         self.assertEqual(len(self.reader.pages), 35)
-        for number, batch in enumerate(logs.paginate_species(list(logs.LABELS)), 30):
+        entries = builder.load_manifest(ROOT / "binder/manifest-v6.yaml")
+        for number, batch in enumerate(logs.paginate_species(logs.tracked_species(entries)), 30):
             # LuaLaTeX's TeX ligatures render an ASCII apostrophe as U+2019.
             text = self.reader.pages[number].extract_text().replace("\u2019", "'")
             self.assertIn("TRACKED SPECIES", text)

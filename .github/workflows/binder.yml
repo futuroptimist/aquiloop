@@ -157,6 +157,18 @@ jobs:
           import build_binder as builder
           from binder_logs import tracked_species, paginate_species, log_page_tex
           errors = []
+          for entry in builder.SUCCULENT_ENTRIES:
+              for kind in ('profile', 'numbers', 'propagation'):
+                  output = Path('build/binder/layouts') / f'{entry}-{kind}.pdf'
+                  try:
+                      if kind == 'profile':
+                          builder.compile_entry(*builder.load_entry(entry, 'draft'), output,
+                                                expanded=True, category='TERRESTRIAL PLANT')
+                      else:
+                          builder.compile_companion(entry, kind, 'draft', output,
+                                                    category='TERRESTRIAL PLANT')
+                  except (ValueError, RuntimeError) as error:
+                      errors.append(str(error))
           entries = builder.load_manifest(Path('binder/manifest-v6.yaml'))
           batches = paginate_species(tracked_species(entries))
           for number, species in enumerate([*batches, []], 1):
@@ -365,5 +377,28 @@ jobs:
             build/binder/aquiloop-binder-reusable-draft.pdf
             build/binder/reusable-color/
             build/binder/reusable-gray/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Build photographed succulent extension and proofs
+        run: |
+          set -euo pipefail
+          python scripts/build_binder.py --manifest binder/manifest-v7.yaml --mode draft \
+            --output build/binder/aquiloop-binder-succulents-draft.pdf
+          mkdir -p build/binder/succulents-color build/binder/succulents-gray
+          pdftoppm -f 31 -l 41 -r 150 -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/succulents-color/page
+          pdftoppm -f 31 -l 41 -r 150 -gray -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/succulents-gray/page
+          test "$(find build/binder/succulents-color -name '*.png' | wc -l)" -eq 11
+          test "$(find build/binder/succulents-gray -name '*.png' | wc -l)" -eq 11
+          sha256sum build/binder/aquiloop-binder-succulents-draft.pdf
+
+      - name: Upload photographed succulent binder and proofs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-succulents-proof
+          path: |
+            build/binder/aquiloop-binder-succulents-draft.pdf
+            build/binder/succulents-color/
+            build/binder/succulents-gray/
           if-no-files-found: error
           retention-days: 14

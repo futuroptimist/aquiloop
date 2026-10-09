@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "pachyveria-powder-puff-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "foreground specimen",
+        "growth habit",
+        "nursery label"
+      ],
+      "alt": "Silvery pointed succulent rosettes with reddish leaf tips in a black nursery pot; the nursery label names Powder Puff.",
+      "caption": "Daniel-owned photograph; nursery-label identity remains provisional.",
+      "source": {
+        "photographer": "Daniel",
+        "provenance": "Owner-supplied Downloads photo IMG_7622.jpg; explicitly authorized square crop, profile conversion and metadata-stripped JPEG copy.",
+        "rights": "Permission granted for inclusion in this repository and generated binder.",
+        "rights_reviewed": true,
+        "owner_supplied": true,
+        "original_filename": "IMG_7622.jpg",
+        "original_sha256": "fc700c6cb1d282bf582ffb0c73b659826d150aba121bc9567628c60c41332c8e"
+      },
+      "preparation": {
+        "entry": "pachyveria-powder-puff",
+        "original_filename": "IMG_7622.jpg",
+        "original_bytes": 241726,
+        "original_sha256": "fc700c6cb1d282bf582ffb0c73b659826d150aba121bc9567628c60c41332c8e",
+        "original_dimensions": [
+          954,
+          1271
+        ],
+        "source_profile": "Display P3",
+        "crop": [
+          0,
+          0,
+          954,
+          954
+        ],
+        "dimensions": [
+          954,
+          954
+        ],
+        "effective_ppi": 289.0909090909091,
+        "bytes": 99174,
+        "quality": 51,
+        "sha256": "5e8e523a006777f9a79948183edb3c4e514a33d8f08e09efc94a7fb0e97439ae",
+        "jpeg_application_markers": [
+          "APP0"
+        ],
+        "metadata": "Only standard JFIF APP0; no EXIF/GPS, XMP, IPTC/Photoshop, ICC, MPF or comment markers. Converted from embedded source profile to sRGB before stripping.",
+        "original_unchanged": true
+      }
+    }
+  ]
+}

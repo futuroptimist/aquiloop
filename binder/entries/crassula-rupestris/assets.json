@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "crassula-rupestris-overview-001",
+      "path": "assets/overview.jpg",
+      "kind": "photograph",
+      "subjects": [
+        "foreground specimen",
+        "growth habit",
+        "nursery label"
+      ],
+      "alt": "Green succulent stems with paired fleshy leaves in a black nursery pot; the label clearly reads Crassula rupestris.",
+      "caption": "Daniel-owned photograph; nursery-label identity remains provisional.",
+      "source": {
+        "photographer": "Daniel",
+        "provenance": "Owner-supplied Downloads photo IMG_7621.jpg; explicitly authorized square crop, profile conversion and metadata-stripped JPEG copy.",
+        "rights": "Permission granted for inclusion in this repository and generated binder.",
+        "rights_reviewed": true,
+        "owner_supplied": true,
+        "original_filename": "IMG_7621.jpg",
+        "original_sha256": "32dbcbadb4d62b416ed44792fb403dcdde9692595769f43179c484ad59b2c56a"
+      },
+      "preparation": {
+        "entry": "crassula-rupestris",
+        "original_filename": "IMG_7621.jpg",
+        "original_bytes": 204597,
+        "original_sha256": "32dbcbadb4d62b416ed44792fb403dcdde9692595769f43179c484ad59b2c56a",
+        "original_dimensions": [
+          954,
+          1271
+        ],
+        "source_profile": "Display P3",
+        "crop": [
+          0,
+          0,
+          954,
+          954
+        ],
+        "dimensions": [
+          954,
+          954
+        ],
+        "effective_ppi": 289.0909090909091,
+        "bytes": 99794,
+        "quality": 60,
+        "sha256": "b0424a7e1438a256a4e9a849d17dac32a2abad02d1aa6dcd0a8456291a96f820",
+        "jpeg_application_markers": [
+          "APP0"
+        ],
+        "metadata": "Only standard JFIF APP0; no EXIF/GPS, XMP, IPTC/Photoshop, ICC, MPF or comment markers. Converted from embedded source profile to sRGB before stripping.",
+        "original_unchanged": true
+      }
+    }
+  ]
+}

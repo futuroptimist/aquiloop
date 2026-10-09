@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "entry": "pachyveria-powder-puff",
+  "display_name": "Pachyveria 'Powder Puff'",
+  "reported_label": "Pachyveria 'Powder Puff' ('Exotica')",
+  "identity": {
+    "status": "provisional",
+    "working_name": "x Pachyveria 'Powder Puff'",
+    "confidence": "nursery-label evidence; independent specimen review pending",
+    "alternatives": [
+      "unresolved look-alike or mislabeled nursery stock"
+    ],
+    "decision": "The photographed nursery label reads Pachyveria 'Powder Puff' ('Exotica'). RHS recognizes x Pachyveria 'Powder Puff'; 'Exotica' is retained as label wording, not independently established here as a synonym. Specimen/cultivar match remains provisional.",
+    "sources": [
+      "PP-RHS"
+    ]
+  },
+  "environmental_variability": "Indoor pots are pictured; permanent location, measured light, pot volume, medium and dry-down remain unknown. General succulent advice is not cultivar-specific experimental evidence.",
+  "unresolved_fields": [
+    "independent identity",
+    "permanent location and exposure",
+    "pot volume and medium",
+    "observed dry-down",
+    "temperatures",
+    "physical print acceptance"
+  ],
+  "cards": {
+    "light_exposure": [
+      {
+        "claim": "Sun or partial shade; increase exposure gradually. Actual window exposure is unmeasured.",
+        "sources": [
+          "PP-RHS",
+          "SU-MSU"
+        ]
+      }
+    ],
+    "soil_substrate": [
+      {
+        "claim": "Use free-draining cactus compost in a pot with drainage. The existing nursery mix is unknown; do not assume the saucer drains itself.",
+        "sources": [
+          "SU-RHS"
+        ]
+      }
+    ],
+    "water": [
+      {
+        "claim": "General succulent guidance: let the medium dry, then water through and empty the saucer. No calendar interval is established for this pot.",
+        "sources": [
+          "SU-MSU",
+          "SU-RHS"
+        ]
+      }
+    ],
+    "temperature_season": [
+      {
+        "claim": "Protect from freezing. RHS H2 is a UK minimum-temperature category, not a preferred growth range or Pacifica winter guarantee.",
+        "sources": [
+          "PP-RHS"
+        ]
+      }
+    ],
+    "feeding_maintenance": [
+      {
+        "claim": "RHS suggests balanced feeding once or twice in summer. Apply only during active growth and follow the product label.",
+        "sources": [
+          "PP-RHS"
+        ]
+      }
+    ],
+    "propagation": [
+      {
+        "claim": "RHS supports leaf or stem cuttings; stems root faster, with no guaranteed interval. General technique: allow a cut stem to callus before rooting in draining medium.",
+        "sources": [
+          "PP-RHS",
+          "SU-ISU"
+        ],
+        "method": "stem cutting",
+        "starting_material": "healthy stem with leaves",
+        "establishment_condition": "callused cut end in freely draining rooting medium",
+        "pitfall": "planting a wet wound or keeping unrooted material saturated can cause rot"
+      }
+    ],
+    "troubleshooting": [
+      {
+        "claim": "Stretched growth: check light. Persistent wetness or soft tissue: inspect drainage and roots before adding water. A photograph alone does not diagnose disease.",
+        "sources": [
+          "SU-MSU"
+        ]
+      }
+    ],
+    "natural_history_trivia": [
+      {
+        "claim": "A Pachyphytum x Echeveria hybrid; summer flowers may be apricot-orange. Colour varies with light and temperature.",
+        "sources": [
+          "PP-RHS"
+        ]
+      }
+    ]
+  }
+}

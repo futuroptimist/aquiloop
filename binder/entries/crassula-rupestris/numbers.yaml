@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "entry": "crassula-rupestris",
+  "worksheet": "numbers",
+  "claims": [
+    {
+      "claim_id": "light",
+      "metric": "light",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "CR-RHS",
+          "SU-MSU"
+        ],
+        "applicability": "Source species/cultivar scope or explicitly general succulent guidance; no household measurement."
+      },
+      "description": "Bright filtered light or full sun; acclimate before increasing direct exposure."
+    },
+    {
+      "claim_id": "cold-category",
+      "metric": "cold_category",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "CR-RHS"
+        ],
+        "applicability": "Source species/cultivar scope or explicitly general succulent guidance; no household measurement."
+      },
+      "quantity": {
+        "kind": "range",
+        "minimum": 1,
+        "maximum": 5,
+        "unit": "degrees Celsius; RHS H2 UK minimum band, not growth temperature"
+      }
+    },
+    {
+      "claim_id": "growth-temperature",
+      "metric": "growth_temperature",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No cultivar/species-specific preferred growth temperature established in reviewed sources."
+      }
+    },
+    {
+      "claim_id": "water-trigger",
+      "metric": "water_trigger",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "SU-MSU",
+          "SU-RHS"
+        ],
+        "applicability": "Source species/cultivar scope or explicitly general succulent guidance; no household measurement."
+      },
+      "description": "General succulent guidance: let the medium dry, then water through and empty the saucer. No calendar interval is established for this pot."
+    },
+    {
+      "claim_id": "chemistry",
+      "metric": "chemistry",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "CR-RHS"
+        ],
+        "applicability": "Source species/cultivar scope or explicitly general succulent guidance; no household measurement."
+      },
+      "description": "RHS lists acid, neutral or alkaline soil; no narrow numeric pH target."
+    },
+    {
+      "claim_id": "seed-scope",
+      "metric": "seed_scope",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "CR-RHS"
+        ],
+        "applicability": "Source species/cultivar scope or explicitly general succulent guidance; no household measurement."
+      },
+      "description": "RHS: sow in early spring at 59-64 F (15-18 C, rounded). Germination interval and pretreatment are not established here."
+    },
+    {
+      "claim_id": "germination-time",
+      "metric": "germination_time",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No species/cultivar-scoped germination interval established."
+      }
+    },
+    {
+      "claim_id": "maturity",
+      "metric": "maturity",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "CR-RHS"
+        ],
+        "applicability": "Source species/cultivar scope or explicitly general succulent guidance; no household measurement."
+      },
+      "quantity": {
+        "kind": "range",
+        "minimum": 5,
+        "maximum": 10,
+        "unit": "years to ultimate size; RHS UK scope, not lifespan"
+      }
+    },
+    {
+      "claim_id": "size",
+      "metric": "size",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "CR-RHS"
+        ],
+        "applicability": "Source species/cultivar scope or explicitly general succulent guidance; no household measurement."
+      },
+      "description": "RHS describes a bushy plant to about 18 in (45 cm); ultimate height/spread categories are each 0.1-0.5 m. Pot size and conditions alter results."
+    },
+    {
+      "claim_id": "lifespan",
+      "metric": "lifespan",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No individual lifespan or reliable age-to-flower interval established."
+      }
+    },
+    {
+      "claim_id": "root-initiation",
+      "metric": "root_initiation",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "No verified local root-initiation interval; do not borrow another species or cultivar timetable."
+      }
+    },
+    {
+      "claim_id": "current-medium",
+      "metric": "current_medium",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "unknown",
+      "provenance": {},
+      "quantity": {
+        "kind": "unknown",
+        "reason": "Photograph does not establish nursery medium ingredients or proportions."
+      }
+    },
+    {
+      "claim_id": "pacifica-adjustment",
+      "metric": "pacifica_adjustment",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-MSU",
+          "CLIMATE-UCANR-SMSF",
+          "CLIMATE-USDA-PHZM-ZIP-94044"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "For an outdoor trial, acclimate gradually and provide rain/frost protection; cool coastal conditions may delay dry-down. Indoor conditions must be measured separately."
+    },
+    {
+      "claim_id": "established-recipe",
+      "metric": "established_recipe",
+      "applicable_taxon": "Crassula rupestris (specimen provisional)",
+      "propagation_method": "not_applicable",
+      "life_stage": "established",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-RHS"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "recipe": {
+        "recipe_basis": "percent_by_volume",
+        "batch_volume_litres": 10,
+        "recipe_evidence": "adapted",
+        "components": [
+          {
+            "name": "peat-free loam-based potting compost",
+            "purpose": "structure and moisture/nutrient reservoir",
+            "percent_by_volume": 70,
+            "litres_per_10_litre_batch": 7
+          },
+          {
+            "name": "horticultural grit",
+            "purpose": "air space and drainage",
+            "percent_by_volume": 30,
+            "litres_per_10_litre_batch": 3
+          }
+        ]
+      }
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "crassula-rupestris#light"
+    },
+    {
+      "claim_ref": "crassula-rupestris#cold-category"
+    },
+    {
+      "claim_ref": "crassula-rupestris#growth-temperature"
+    },
+    {
+      "claim_ref": "crassula-rupestris#water-trigger"
+    },
+    {
+      "claim_ref": "crassula-rupestris#chemistry"
+    },
+    {
+      "claim_ref": "crassula-rupestris#seed-scope"
+    },
+    {
+      "claim_ref": "crassula-rupestris#germination-time"
+    },
+    {
+      "claim_ref": "crassula-rupestris#maturity"
+    },
+    {
+      "claim_ref": "crassula-rupestris#size"
+    },
+    {
+      "claim_ref": "crassula-rupestris#lifespan"
+    },
+    {
+      "claim_ref": "crassula-rupestris#root-initiation"
+    },
+    {
+      "claim_ref": "crassula-rupestris#current-medium"
+    },
+    {
+      "claim_ref": "crassula-rupestris#pacifica-adjustment"
+    },
+    {
+      "claim_ref": "crassula-rupestris#established-recipe"
+    }
+  ]
+}

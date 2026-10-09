@@ -110,7 +110,9 @@ class BinderWorkflowTests(unittest.TestCase):
             "binder-apt-diagnostics.log",
         ):
             self.assertIn(expected, self.workflow)
-        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 8)
+        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 9)
+        self.assertIn("--manifest binder/manifest-v7.yaml --mode draft", self.workflow)
+        self.assertIn("name: aquiloop-binder-succulents-proof", self.workflow)
         self.assertIn("--manifest binder/manifest-v4.yaml --mode draft", self.workflow)
         self.assertIn("name: aquiloop-binder-shrimp-proof", self.workflow)
         self.assertIn("build/binder/shrimp-color/", self.workflow)
