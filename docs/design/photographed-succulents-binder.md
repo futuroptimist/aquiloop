@@ -18,6 +18,10 @@ The white background, thin category rules, 3.30-inch square hero, punch clearanc
 and readable type remain. A draft PDF is not a claim of physical print acceptance
 or final taxonomic identification.
 
+The standalone `--supplemental watering-log-tracked` command also uses all twelve
+entries. Building the historical v6 manifest still uses its original ten-entry
+coverage; the blank standalone sheet remains unchanged.
+
 ## Photo and identity evidence
 
 Daniel supplied local Downloads copies and authorized repository/binder use,

@@ -295,7 +295,7 @@ def compile_supplemental(name: str, mode: str, output: Path) -> None:
     if mode != "draft":
         raise ValueError("supplemental pages are currently available only in draft mode")
     if name in {"watering-log-tracked", "watering-log-blank"}:
-        entries = load_manifest(ROOT / "binder/manifest-v6.yaml")
+        entries = load_manifest(ROOT / "binder/manifest-v7.yaml")
         compile_logs(entries, output, blank=name == "watering-log-blank")
     else:
         compile_entry(supplemental_path(name), {}, {}, output)
