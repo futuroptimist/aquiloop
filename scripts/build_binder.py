@@ -173,6 +173,10 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         tmp = Path(tmp_name)
         template = "companion-template.tex" if kind in COMPANION_LABELS else "template.tex"
         shutil.copyfile(ROOT / "binder" / template, tmp / "template.tex")
+        if page_text_override is not None:
+            # Keep full-width writing rules inside the safe edge after PDF rounding.
+            content = (tmp / "template.tex").read_text(encoding="utf-8")
+            (tmp / "template.tex").write_text(content.replace("right=.55in", "right=.56in", 1), encoding="utf-8")
         if kind in ANIMAL_PAGE_KINDS:
             # Add source links only to animal pages; existing PDF bytes/layouts stay stable.
             content = (tmp / "template.tex").read_text(encoding="utf-8")
