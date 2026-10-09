@@ -33,6 +33,7 @@ class BinderWorkflowTests(unittest.TestCase):
             "actions/checkout",
             "actions/setup-python",
             "actions/upload-artifact",
+            "actions/download-artifact",
         ):
             self.assertIn(required_action, action_names)
         for action in actions:
@@ -64,10 +65,11 @@ class BinderWorkflowTests(unittest.TestCase):
             "actions/checkout",
             "actions/setup-python",
             "actions/upload-artifact",
+            "actions/download-artifact",
         ):
             with self.subTest(missing=required_action):
                 without_required = re.sub(
-                    rf"(?m)^\s*uses: {re.escape(required_action)}@\S+.*$",
+                    rf"(?m)^\s*(?:-\s*)?uses: {re.escape(required_action)}@\S+.*$",
                     "",
                     self.workflow,
                 )
@@ -108,11 +110,22 @@ class BinderWorkflowTests(unittest.TestCase):
             "if: ${{ failure() && steps.apt_install.outcome == 'failure' }}",
             "binder-apt-install.log",
             "binder-apt-diagnostics.log",
+            "name: aquiloop-binder-publication",
+            "path: build/binder/publication/",
+            "python scripts/binder_publication.py manifest",
         ):
             self.assertIn(expected, self.workflow)
-        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 9)
+        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 10)
         self.assertIn("--manifest binder/manifest-v7.yaml --mode draft", self.workflow)
         self.assertIn("name: aquiloop-binder-succulents-proof", self.workflow)
+
+        self.assertIn("--manifest binder/manifest-v6.yaml --mode draft", self.workflow)
+        self.assertIn("name: aquiloop-binder-reusable-proof", self.workflow)
+        self.assertIn("cp build/binder/aquiloop-binder-succulents-draft.pdf build/binder/publication/", self.workflow)
+        self.assertIn("cp build/binder/succulents-color/page-*.png build/binder/publication-color/", self.workflow)
+        self.assertIn("pdftoppm -f 1 -l 30 -r 150 -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/publication-color/page", self.workflow)
+        self.assertLess(self.workflow.index("Build photographed succulent extension and proofs"),
+                        self.workflow.index("Package validated publication candidate"))
         self.assertIn("--manifest binder/manifest-v4.yaml --mode draft", self.workflow)
         self.assertIn("name: aquiloop-binder-shrimp-proof", self.workflow)
         self.assertIn("build/binder/shrimp-color/", self.workflow)

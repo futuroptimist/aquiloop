@@ -1,8 +1,11 @@
 # Photographed succulents: Powder Puff and Crassula rupestris
 
 The opt-in v7 draft adds the two owner-photographed plants to the v6 reusable
-log edition. It depends on PR #112's existing log implementation. No publication
-automation from PR #113 is copied or activated. Versions 1-6 remain available.
+log edition. It reuses PR #112's merged log implementation. PR #113 merged while
+this work was in progress. Its safety gates remain unchanged; the candidate
+filename, page count and proof inputs advance to v7 so its existing latest-
+manifest regression remains valid. This change does not activate publication.
+Versions 1-6 remain available.
 
 ## Binder index
 
