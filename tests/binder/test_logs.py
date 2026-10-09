@@ -88,7 +88,8 @@ class LogRenderingTests(unittest.TestCase):
     def test_coverage_order_and_blank_names_in_actual_pdf(self):
         self.assertEqual(len(self.reader.pages), 35)
         for number, batch in enumerate(logs.paginate_species(list(logs.LABELS)), 30):
-            text = self.reader.pages[number].extract_text()
+            # LuaLaTeX's TeX ligatures render an ASCII apostrophe as U+2019.
+            text = self.reader.pages[number].extract_text().replace("\u2019", "'")
             self.assertIn("TRACKED SPECIES", text)
             for label in logs.LABELS.values():
                 self.assertEqual(text.count(label), int(label in [logs.LABELS[e] for e in batch]))

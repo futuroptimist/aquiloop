@@ -44,7 +44,7 @@ def log_page_tex(species: list[str], page_number: int, page_count: int,
     mode = "BLANK EDITION / copy as needed" if blank else f"TRACKED SPECIES / {page_number} of {page_count}"
     header = r"""\newcommand{\Choice}{\raisebox{0pt}{\fbox{\rule{0pt}{5pt}\rule{5pt}{0pt}}}}
 \newcommand{\WriteLine}{\rule{\linewidth}{.3pt}}
-\newcommand{\NameCell}[1]{\parbox[c][.65in][t]{\linewidth}{\vspace{2pt}\textbf{#1}\par\vfill\WriteLine\par\vspace{10pt}\WriteLine}}
+\newcommand{\NameCell}[1]{\parbox[c][.65in][t]{\linewidth}{\vspace{2pt}\textbf{#1}\par\vfill\WriteLine\par\vspace{10pt}\WriteLine\par\vspace{4pt}}}
 \newcommand{\PreferenceCell}{\parbox[c][2.8in][t]{\linewidth}{\vspace{3pt}
 \textbf{Watering frequency}\par
 Every \rule{.30in}{.3pt} days \quad\Choice\ N/A\par
