@@ -213,6 +213,8 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
             content = (tmp / "template.tex").read_text(encoding="utf-8")
             content = content.replace(r"\begin{document}", r"\usepackage[hidelinks]{hyperref}" + "\n" + r"\begin{document}")
             content = content.replace("right=.55in", "right=.56in", 1)
+            if base.name in SUCCULENT_ENTRIES:
+                content = content.replace("v1 / 2026-10-04", "v1 / 2026-10-09")
             (tmp / "template.tex").write_text(content, encoding="utf-8")
         if category is not None:
             if category != CATEGORY_BY_ENTRY.get(base.name):

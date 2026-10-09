@@ -46,6 +46,10 @@ class SucculentTests(unittest.TestCase):
                     self.assertIn(entry + " / " + kind, page)
                     self.assertEqual(page.count(r"\CardRow{") if kind == "numbers" else page.count(r"\Step{"),
                                      4 if kind == "numbers" else 8)
+                for layout in ("page.tex", "numbers.tex", "propagation.tex"):
+                    links = re.findall(r"\\href\{([^{}]+)\}", (base / layout).read_text())
+                    self.assertEqual(len(links), 4)
+                    self.assertTrue(set(links) <= {s["url"] for s in data["sources"].values()})
                 self.assertEqual(data["claims"][entry + "#root-initiation"]["evidence_category"], "unknown")
                 self.assertEqual(data["claims"][entry + "#established-recipe"]["evidence_category"], "proposed")
                 self.assertIn("UK minimum", data["claims"][entry + "#cold-category"]["quantity"]["unit"])
@@ -150,6 +154,7 @@ class SucculentRenderingTests(unittest.TestCase):
                 builder._validate_page(page, entry)
                 self.assertIn(kind, page.extract_text())
                 self.assertIn("TERRESTRIAL PLANT", page.extract_text())
+                self.assertTrue(page.get("/Annots"))
                 sizes = []
                 page.extract_text(visitor_text=lambda text, cm, tm, font, size:
                                   sizes.append(size) if text.strip() else None)
