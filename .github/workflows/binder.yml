@@ -6,6 +6,7 @@ on:
       - 'binder/**'
       - 'scripts/build_binder.py'
       - 'scripts/binder_evidence.py'
+      - 'scripts/binder_logs.py'
       - 'scripts/prepare_binder_photo.py'
       - 'tests/binder/**'
       - 'docs/design/care-binder.md'
@@ -17,6 +18,7 @@ on:
       - 'binder/**'
       - 'scripts/build_binder.py'
       - 'scripts/binder_evidence.py'
+      - 'scripts/binder_logs.py'
       - 'scripts/prepare_binder_photo.py'
       - 'tests/binder/**'
       - 'docs/design/care-binder.md'
@@ -144,7 +146,7 @@ jobs:
             texlive-latex-base texlive-luatex texlive-pictures
 
       - name: Compile-check binder Python
-        run: python -m compileall -q scripts/build_binder.py scripts/prepare_binder_photo.py tests/binder
+        run: python -m compileall -q scripts/build_binder.py scripts/binder_logs.py scripts/prepare_binder_photo.py tests/binder
 
       - name: Render companion layout diagnostics
         run: |
@@ -329,5 +331,28 @@ jobs:
             build/binder/aquiloop-binder-aquatic-draft.pdf
             build/binder/aquatic-color/
             build/binder/aquatic-gray/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Build complete species logs and blank edition
+        run: |
+          set -euo pipefail
+          python scripts/build_binder.py --manifest binder/manifest-v6.yaml --mode draft \
+            --output build/binder/aquiloop-binder-reusable-draft.pdf
+          mkdir -p build/binder/reusable-color build/binder/reusable-gray
+          pdftoppm -f 31 -l 35 -r 150 -png build/binder/aquiloop-binder-reusable-draft.pdf build/binder/reusable-color/page
+          pdftoppm -f 31 -l 35 -r 150 -gray -png build/binder/aquiloop-binder-reusable-draft.pdf build/binder/reusable-gray/page
+          test "$(find build/binder/reusable-color -name '*.png' | wc -l)" -eq 5
+          test "$(find build/binder/reusable-gray -name '*.png' | wc -l)" -eq 5
+          sha256sum build/binder/aquiloop-binder-reusable-draft.pdf
+
+      - name: Upload reusable binder and log proofs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-reusable-proof
+          path: |
+            build/binder/aquiloop-binder-reusable-draft.pdf
+            build/binder/reusable-color/
+            build/binder/reusable-gray/
           if-no-files-found: error
           retention-days: 14

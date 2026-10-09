@@ -1066,7 +1066,44 @@ Before final identity/care review, collect:
   and CO2 use, source water, measured pH/GH/KH/ammonia/nitrite/nitrate as
   available, maintenance history, and hornwort acquisition/behavior.
 
-## Watering-log page contract
+## Reusable watering-log edition (v6)
+
+`binder/manifest-v6.yaml` preserves the thirty species pages from v5, followed
+by four tracked-species log sheets and one reusable blank sheet (35 pages).
+The v1-v5 manifests and their historical five-column log remain reproducible.
+Use v6 for complete current coverage; the older logs omit later additions.
+
+The builder deduplicates non-supplemental manifest entries in first-appearance
+order and paginates them three species per sheet, without truncating the last
+batch. Every tracked entry has its own column, including aquarium animals;
+aquarium events are explicitly distinguished from watering. The final named
+sheet has one species column. Names remain provisional labels. The reusable
+blank edition follows every named sheet, has three entirely empty name cells
+with two writing lines each, and can be photocopied independently.
+
+Each species column has user-selected watering frequency (days, condition-based
+or N/A), check/trigger, amount/method, propagation/breeding (none planned, N/A,
+or a written method/timing), and light/location. These are blank preferences,
+not universal care prescriptions. No checkbox is preselected. Eight recurring
+date/time rows provide amount/method or aquarium event and observation space;
+rain and propagation updates can be written in observations. The white paper,
+thin dark rules, 9-point labels, 1.94-inch species cells, and .43-inch record
+rows preserve a practical toner-saving layout and the existing binder margins.
+
+```sh
+python scripts/build_binder.py --manifest binder/manifest-v6.yaml --mode draft \
+  --output build/binder/aquiloop-binder-reusable-draft.pdf
+python scripts/build_binder.py --supplemental watering-log-blank --mode draft \
+  --output build/binder/watering-log-blank.pdf
+```
+
+`tests/binder/test_logs.py` checks species coverage, unbounded batch pagination,
+blank names, unselected choices, final placement and manifest budgets. Rendered
+checks cover extracted names and text size, safe text/paint bounds, physical
+writing-rule and row dimensions, plus color/grayscale white-paper proofs.
+CI uploads the full v6 PDF and 150-DPI proofs of its five log pages.
+
+## Historical watering-log page contract (v1-v5)
 
 Use landscape-like information density within the same US Letter **portrait**
 page and safe margins. The table has a **0.72-inch date/time** column
