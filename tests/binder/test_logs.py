@@ -97,6 +97,15 @@ class LogRenderingTests(unittest.TestCase):
         for label in logs.LABELS.values():
             self.assertNotIn(label, blank)
 
+    def test_species_pages_preserve_v5_painted_content(self):
+        from pypdf import PdfReader
+        original = self.base / "v5.pdf"
+        builder.compile_manifest(ROOT / "binder/manifest-v5.yaml", "draft", original)
+        old = PdfReader(original)
+        for number in range(30):
+            self.assertEqual(self.reader.pages[number].get_contents().get_data(),
+                             old.pages[number].get_contents().get_data(), number)
+
     def test_readable_text_rules_margins_and_writing_space(self):
         from test_binder import (_assert_pdf_text_inside_safe_rectangle,
                                  _assert_essential_painted_content_inside_safe_rectangle,

@@ -321,6 +321,7 @@ def load_manifest(path: Path) -> list[dict]:
             raise ValueError(f"malformed manifest entry ID: {item['id']!r}")
         if item["kind"] not in {"profile", "supplemental", *COMPANION_LABELS}:
             raise ValueError(f"unsupported manifest kind: {item['kind']}")
+    for item in entries:
         budget = (len(paginate_species(tracked_species(entries)))
                   if version == 6 and item["id"] == "watering-log-tracked" else 1)
         if type(item["page_budget"]) is not int or item["page_budget"] != budget:
