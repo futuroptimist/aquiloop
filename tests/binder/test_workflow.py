@@ -33,6 +33,7 @@ class BinderWorkflowTests(unittest.TestCase):
             "actions/checkout",
             "actions/setup-python",
             "actions/upload-artifact",
+            "actions/download-artifact",
         ):
             self.assertIn(required_action, action_names)
         for action in actions:
@@ -64,10 +65,11 @@ class BinderWorkflowTests(unittest.TestCase):
             "actions/checkout",
             "actions/setup-python",
             "actions/upload-artifact",
+            "actions/download-artifact",
         ):
             with self.subTest(missing=required_action):
                 without_required = re.sub(
-                    rf"(?m)^\s*uses: {re.escape(required_action)}@\S+.*$",
+                    rf"(?m)^\s*(?:-\s*)?uses: {re.escape(required_action)}@\S+.*$",
                     "",
                     self.workflow,
                 )
@@ -108,9 +110,12 @@ class BinderWorkflowTests(unittest.TestCase):
             "if: ${{ failure() && steps.apt_install.outcome == 'failure' }}",
             "binder-apt-install.log",
             "binder-apt-diagnostics.log",
+            "name: aquiloop-binder-publication",
+            "path: build/binder/publication/",
+            "python scripts/binder_publication.py manifest",
         ):
             self.assertIn(expected, self.workflow)
-        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 7)
+        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 8)
         self.assertIn("--manifest binder/manifest-v4.yaml --mode draft", self.workflow)
         self.assertIn("name: aquiloop-binder-shrimp-proof", self.workflow)
         self.assertIn("build/binder/shrimp-color/", self.workflow)
