@@ -247,7 +247,7 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
                 sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
         log = (tmp / "template.log").read_text(encoding="utf-8", errors="replace")
         if "Overfull" in log:
-            if kind in COMPANION_LABELS:
+            if kind in COMPANION_LABELS or page_text_override is not None:
                 shutil.copyfile(tmp / "template.pdf", output.with_suffix(".failed.pdf"))
             details = "\n".join(line for line in log.splitlines() if "Overfull" in line)
             raise RuntimeError(f"LuaLaTeX reported an overfull box in {base.name}/{page_name}: {details}")
@@ -255,7 +255,7 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         from pypdf import PdfReader
         reader = PdfReader(pdf)
         if len(reader.pages) != 1:
-            if kind in COMPANION_LABELS:
+            if kind in COMPANION_LABELS or page_text_override is not None:
                 shutil.copyfile(pdf, output.with_suffix(".failed.pdf"))
             raise RuntimeError(f"entry rendered {len(reader.pages)} pages, expected 1 ({base.name}/{page_name})")
         _validate_page(reader.pages[0], base.name)

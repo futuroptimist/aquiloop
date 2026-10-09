@@ -44,8 +44,8 @@ def log_page_tex(species: list[str], page_number: int, page_count: int,
     mode = "BLANK EDITION / copy as needed" if blank else f"TRACKED SPECIES / {page_number} of {page_count}"
     header = r"""\newcommand{\Choice}{\raisebox{0pt}{\fbox{\rule{0pt}{5pt}\rule{5pt}{0pt}}}}
 \newcommand{\WriteLine}{\rule{\linewidth}{.3pt}}
-\newcommand{\NameCell}[1]{\parbox[t][.65in][t]{\linewidth}{\vspace{2pt}\textbf{#1}\par\vfill\WriteLine\par\vspace{10pt}\WriteLine}}
-\newcommand{\PreferenceCell}{\parbox[t][2.8in][t]{\linewidth}{\vspace{3pt}
+\newcommand{\NameCell}[1]{\parbox[c][.65in][t]{\linewidth}{\vspace{2pt}\textbf{#1}\par\vfill\WriteLine\par\vspace{10pt}\WriteLine}}
+\newcommand{\PreferenceCell}{\parbox[c][2.8in][t]{\linewidth}{\vspace{3pt}
 \textbf{Watering frequency}\par
 Every \rule{.30in}{.3pt} days \quad\Choice\ N/A\par
 \Choice\ Condition-based\par\vspace{4pt}
@@ -55,8 +55,8 @@ Every \rule{.30in}{.3pt} days \quad\Choice\ N/A\par
 \Choice\ None planned \quad\Choice\ N/A\par
 Method / timing:\par\vspace{9pt}\WriteLine\par\vspace{4pt}
 \textbf{Light / location}\par\vspace{9pt}\WriteLine}}
-\newcommand{\RecordCell}{\parbox[t][.43in][t]{\linewidth}{\vspace{2pt}A/M or Evt \hrulefill\par\vspace{7pt}Obs \hrulefill}}
-\newcommand{\WhenCell}{\parbox[t][.43in][t]{\linewidth}{\vspace{2pt}D \hrulefill\par\vspace{7pt}T \hrulefill}}
+\newcommand{\RecordCell}{\parbox[c][.43in][t]{\linewidth}{\vspace{2pt}A/M or Evt \hrulefill\par\vspace{7pt}Obs \hrulefill}}
+\newcommand{\WhenCell}{\parbox[c][.43in][t]{\linewidth}{\vspace{2pt}D \hrulefill\par\vspace{7pt}T \hrulefill}}
 {\sffamily\bfseries\fontsize{9}{11}\selectfont DRAFT / HANDWRITTEN CARE RECORD / MODE}\par\vspace{4pt}
 {\fontsize{24}{27}\selectfont Watering \& aquarium log}\par\vspace{5pt}
 {\sffamily\fontsize{9}{11}\selectfont Choose preferences for each species; these are not universal care instructions.
