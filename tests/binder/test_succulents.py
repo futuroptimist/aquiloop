@@ -31,6 +31,10 @@ class SucculentTests(unittest.TestCase):
                 content = json.loads((base / "content.yaml").read_text())
                 self.assertEqual(content["entry"], entry)
                 self.assertEqual(content["identity"]["status"], "provisional")
+                if entry == "crassula-rupestris":
+                    scope = data["sources"]["SU-ISU"]["applicability"]
+                    self.assertIn("Crassula rupestris", scope)
+                    self.assertNotIn("Powder Puff", scope)
                 self.assertEqual(set(content["cards"]), TERRESTRIAL)
                 self.assertTrue(content["unresolved_fields"])
                 for cards in content["cards"].values():
@@ -162,6 +166,8 @@ class SucculentRenderingTests(unittest.TestCase):
                 builder._validate_page(page, entry)
                 self.assertIn(kind, page.extract_text())
                 self.assertIn("TERRESTRIAL PLANT", page.extract_text())
+                self.assertNotIn("2026-10-04", page.extract_text())
+                self.assertIn("2026-10-09", page.extract_text())
                 self.assertTrue(page.get("/Annots"))
                 sizes = []
                 page.extract_text(visitor_text=lambda text, cm, tm, font, size:
