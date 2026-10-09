@@ -301,7 +301,7 @@ validation should distinguish those record types and enforce the corresponding
 fields without weakening or replacing existing overview validation. Initial
 research should begin with the [USDA Plant Hardiness Zone Map](https://planthardiness.ars.usda.gov/),
 its [usage guidance](https://planthardiness.ars.usda.gov/pages/how-to-use-the-maps),
-[UC ANR's San Mateo/San Francisco climate material](https://ucanr.edu/site/mgsmsf/climate),
+[UC ANR's San Mateo/San Francisco climate material](https://ucanr.edu/site/uc-master-gardeners-san-mateo-san-francisco-counties/climate),
 and the existing `sources.yaml` inventories, then use relevant university
 extension, botanical-garden, RHS, breeder, and identifiable aquarium-grower
 sources. Practical source-backed instructions remain possible when specimen
