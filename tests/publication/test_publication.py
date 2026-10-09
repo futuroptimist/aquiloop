@@ -15,7 +15,7 @@ def record(content="a", commit="1"):
     return {"schema": publication.SCHEMA, "repository": publication.REPOSITORY,
             "commit": commit * 40, "content_sha256": content * 64,
             "pdf_sha256": "b" * 64, "run_id": "123", "run_attempt": "1",
-            "pdf_name": publication.PDF_NAME, "pages": 31}
+            "pdf_name": publication.PDF_NAME, "pages": publication.PAGE_COUNT}
 
 
 class FakeServices:
@@ -67,6 +67,13 @@ class RecoveryTests(unittest.TestCase):
 
     def publish(self, value=None):
         return publication.publish(self.api, value or record(), b"%PDF-fixture")
+
+    def test_publication_page_count_matches_latest_manifest(self):
+        binder = Path(__file__).resolve().parents[2] / "binder"
+        latest = max(binder.glob("manifest-v*.yaml"),
+                     key=lambda path: int(path.stem.removeprefix("manifest-v")))
+        entries = json.loads(latest.read_text())["entries"]
+        self.assertEqual(publication.PAGE_COUNT, sum(entry["page_budget"] for entry in entries))
 
     def test_first_upload_and_repeat(self):
         self.publish()
@@ -170,14 +177,14 @@ class FingerprintTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
         self.pdf = self.root / "binder.pdf"
-        for number in range(1, 32):
+        for number in range(1, publication.PAGE_COUNT + 1):
             Image.new("RGB", (4, 4), "white").save(self.root / f"page-{number:02}.png")
 
     def write_pdf(self, date, link="https://example.com/a"):
         from pypdf import PdfWriter
         from pypdf.annotations import Link
         writer = PdfWriter()
-        for _ in range(31):
+        for _ in range(publication.PAGE_COUNT):
             writer.add_blank_page(width=612, height=792)
         writer.add_metadata({"/CreationDate": date, "/ModDate": date})
         writer.add_annotation(0, Link(rect=(1, 1, 2, 2), url=link))

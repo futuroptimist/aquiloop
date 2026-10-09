@@ -18,7 +18,8 @@ REPOSITORY = "futuroptimist/aquiloop"
 CHANNEL = "C0C8T7FDAAC"
 TEAM = "T0C80NYUHHP"
 STATE_BRANCH = "binder-publication-state"
-PDF_NAME = "aquiloop-binder-aquatic-draft.pdf"
+PDF_NAME = "aquiloop-binder-reusable-draft.pdf"
+PAGE_COUNT = 35
 SCHEMA = "aquiloop-rendered-binder-v1"
 
 
@@ -33,7 +34,7 @@ def encoded(value):
 def fingerprint(pdf, proof_dir):
     """Hash ordered RGB pixels, text and link targets, excluding PDF metadata.
 
-    Uses the build's existing pinned 150-DPI color proofs; PNG container metadata
+    Uses the build's complete pinned 150-DPI color proofs; PNG container metadata
     and PDF CreationDate/ModDate/document IDs are deliberately irrelevant.
     """
     from PIL import Image
@@ -42,8 +43,8 @@ def fingerprint(pdf, proof_dir):
     reader = PdfReader(pdf)
     proofs = sorted(proof_dir.glob("page-*.png"),
                     key=lambda path: int(path.stem.split("-")[-1]))
-    if len(reader.pages) != 31 or len(proofs) != 31:
-        raise ValueError("Expected the validated 31-page aquatic binder and proofs")
+    if len(reader.pages) != PAGE_COUNT or len(proofs) != PAGE_COUNT:
+        raise ValueError(f"Expected the validated {PAGE_COUNT}-page reusable binder and proofs")
     pages = []
     for number, (page, proof) in enumerate(zip(reader.pages, proofs), 1):
         if int(proof.stem.split("-")[-1]) != number:
@@ -74,7 +75,7 @@ def manifest(pdf, proof_dir):
             "pdf_sha256": digest(pdf.read_bytes()), "pdf_name": PDF_NAME,
             "repository": REPOSITORY, "commit": os.environ["GITHUB_SHA"],
             "run_id": os.environ["GITHUB_RUN_ID"],
-            "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"], "pages": 31}
+            "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"], "pages": PAGE_COUNT}
 
 
 def validate(bundle):
@@ -83,7 +84,7 @@ def validate(bundle):
     if (record.get("schema") != SCHEMA or record.get("repository") != REPOSITORY
             or record.get("commit") != os.environ["GITHUB_SHA"]
             or record.get("run_id") != os.environ["GITHUB_RUN_ID"]
-            or record.get("pdf_name") != PDF_NAME or record.get("pages") != 31
+            or record.get("pdf_name") != PDF_NAME or record.get("pages") != PAGE_COUNT
             or not re.fullmatch(r"[0-9a-f]{64}", record.get("content_sha256", ""))
             or record.get("pdf_sha256") != digest(pdf.read_bytes())
             or not pdf.read_bytes().startswith(b"%PDF-")):
@@ -186,7 +187,7 @@ class Services:
         self.slack("files.completeUploadExternal", {
             "files": [{"id": record["file_id"], "title": "Aquiloop care binder — draft"}],
             "channel_id": CHANNEL,
-            "initial_comment": f"Updated 31-page care binder (draft). Build: {run}\n"
+            "initial_comment": f"Updated {record['pages']}-page care binder (draft). Build: {run}\n"
                                f"Commit: {record['commit']}\nPDF SHA-256: {record['pdf_sha256']}\n"
                                f"Content fingerprint: {record['content_sha256']}"})
 
@@ -229,7 +230,7 @@ def main():
     args = parser.parse_args()
     if args.command == "manifest":
         pdf = args.bundle / PDF_NAME
-        record = manifest(pdf, args.bundle.parent / "aquatic-color")
+        record = manifest(pdf, args.bundle.parent / "publication-color")
         (args.bundle / "provenance.json").write_bytes(encoded(record))
     else:
         if (os.environ.get("GITHUB_EVENT_NAME") != "push"

@@ -1,10 +1,10 @@
 # Publishing the care binder to Slack
 
-The binder workflow prepares the latest **31-page aquatic draft** from
-`binder/manifest-v5.yaml` for native file upload to **#automation**
+The binder workflow prepares the latest **35-page reusable draft** from
+`binder/manifest-v6.yaml` for native file upload to **#automation**
 (`C0C8T7FDAAC`) in workspace `T0C80NYUHHP`. This implements Daniel's request
-in #aquiloop (`C0C7TGSCSP7`) on 2026-10-09. Older six-, sixteen-, nineteen-
-and twenty-two-page review artifacts remain available in the build.
+in #aquiloop (`C0C7TGSCSP7`) on 2026-10-09. The older 6-, 16-, 19-, 22-, and
+31-page review artifacts remain available in the build.
 
 ## Owner setup — disabled until explicitly enabled
 
@@ -59,9 +59,11 @@ HTTP 503 failures block the PDF prerequisite and must not be bypassed.
 
 ## What counts as a content change
 
-`aquiloop-rendered-binder-v1` hashes the ordered RGB pixel bytes of the existing
-pinned Poppler 150-DPI color proofs, extracted page text and URI link targets.
-It checks 31 ordered proof pages, Letter media/crop boxes and zero rotation.
+`aquiloop-rendered-binder-v1` hashes the ordered RGB pixel bytes of pinned Poppler
+150-DPI color proofs, extracted page text and URI link targets. It reuses the
+v6 log proofs for pages 31–35 and renders pages 1–30 from that same validated
+v6 PDF; it never substitutes another edition's proofs or rebuilds the PDF.
+It checks 35 ordered proof pages, Letter media/crop boxes and zero rotation.
 PDF timestamps, document IDs, compression, object numbering and PNG container
 metadata do not affect this digest. Changes to visible proofs, extracted text,
 link destinations or page ordering do. Unsupported interactive destinations

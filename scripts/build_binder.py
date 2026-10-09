@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 from binder_evidence import ANIMAL_PAGE_KINDS, load_animal, load_companions
+from binder_logs import tracked_species, paginate_species, log_page_tex
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {"id", "path", "kind", "subjects", "alt", "caption", "source"}
@@ -40,6 +41,10 @@ EXPECTED_AQUATIC_MANIFEST = EXPECTED_SHRIMP_MANIFEST[:-1] + tuple(
     (entry, kind) for entry in AQUATIC_PLANT_ENTRIES
     for kind in ("profile", "numbers", "propagation")
 ) + (EXPECTED_SHRIMP_MANIFEST[-1],)
+EXPECTED_LOG_MANIFEST = EXPECTED_AQUATIC_MANIFEST[:-1] + (
+    ("watering-log-tracked", "supplemental"),
+    ("watering-log-blank", "supplemental"),
+)
 CATEGORY_BY_ENTRY = {
     **{entry: "TERRESTRIAL PLANT" for entry, _ in EXPECTED_MANIFEST[:4]},
     **{entry: "AQUATIC PLANT" for entry in ("aquarium-hornwort", *AQUATIC_PLANT_ENTRIES)},
@@ -159,7 +164,8 @@ def load_entry(entry: str, mode: str, *, layout_name: str = "page.tex") -> tuple
 
 
 def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str], output: Path,
-                  *, kind: str = "profile", expanded: bool = False, category: str | None = None) -> None:
+                  *, kind: str = "profile", expanded: bool = False, category: str | None = None,
+                  page_text_override: str | None = None) -> None:
     if not shutil.which("lualatex"):
         raise RuntimeError("lualatex is required")
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -167,6 +173,10 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         tmp = Path(tmp_name)
         template = "companion-template.tex" if kind in COMPANION_LABELS else "template.tex"
         shutil.copyfile(ROOT / "binder" / template, tmp / "template.tex")
+        if page_text_override is not None:
+            # Keep full-width writing rules inside the safe edge after PDF rounding.
+            content = (tmp / "template.tex").read_text(encoding="utf-8")
+            (tmp / "template.tex").write_text(content.replace("right=.55in", "right=.56in", 1), encoding="utf-8")
         if kind in ANIMAL_PAGE_KINDS:
             # Add source links only to animal pages; existing PDF bytes/layouts stay stable.
             content = (tmp / "template.tex").read_text(encoding="utf-8")
@@ -203,7 +213,7 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
             content = content.replace(r"\textbf{#2}\quad", r"\textbf{" + category + r" / #2}\quad")
             (tmp / "template.tex").write_text(content, encoding="utf-8")
         page_name = f"{kind}.tex" if kind in COMPANION_LABELS else "page.tex"
-        page_text = (base / page_name).read_text(encoding="utf-8")
+        page_text = (base / page_name).read_text(encoding="utf-8") if page_text_override is None else page_text_override
         if expanded and kind == "profile":
             # Only the existing footer's revision label changes in v2.
             page_text = page_text.replace(r"\textbf{REVISION}", r"\textbf{OVERVIEW / REVISION}", 1)
@@ -237,7 +247,7 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
                 sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
         log = (tmp / "template.log").read_text(encoding="utf-8", errors="replace")
         if "Overfull" in log:
-            if kind in COMPANION_LABELS:
+            if kind in COMPANION_LABELS or page_text_override is not None:
                 shutil.copyfile(tmp / "template.pdf", output.with_suffix(".failed.pdf"))
             details = "\n".join(line for line in log.splitlines() if "Overfull" in line)
             raise RuntimeError(f"LuaLaTeX reported an overfull box in {base.name}/{page_name}: {details}")
@@ -245,7 +255,7 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         from pypdf import PdfReader
         reader = PdfReader(pdf)
         if len(reader.pages) != 1:
-            if kind in COMPANION_LABELS:
+            if kind in COMPANION_LABELS or page_text_override is not None:
                 shutil.copyfile(pdf, output.with_suffix(".failed.pdf"))
             raise RuntimeError(f"entry rendered {len(reader.pages)} pages, expected 1 ({base.name}/{page_name})")
         _validate_page(reader.pages[0], base.name)
@@ -269,7 +279,26 @@ def supplemental_path(name: str) -> Path:
 def compile_supplemental(name: str, mode: str, output: Path) -> None:
     if mode != "draft":
         raise ValueError("supplemental pages are currently available only in draft mode")
-    compile_entry(supplemental_path(name), {}, {}, output)
+    if name in {"watering-log-tracked", "watering-log-blank"}:
+        entries = load_manifest(ROOT / "binder/manifest-v6.yaml")
+        compile_logs(entries, output, blank=name == "watering-log-blank")
+    else:
+        compile_entry(supplemental_path(name), {}, {}, output)
+
+
+def compile_logs(entries: list[dict], output: Path, *, blank: bool = False) -> None:
+    from pypdf import PdfReader, PdfWriter
+    batches = [[]] if blank else paginate_species(tracked_species(entries))
+    writer = PdfWriter()
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="binder-logs-") as directory:
+        for number, species in enumerate(batches, 1):
+            page = Path(directory) / f"log-{number}.pdf"
+            compile_entry(supplemental_path("watering-log"), {}, {}, page,
+                          page_text_override=log_page_tex(species, number, len(batches), blank=blank))
+            writer.add_page(PdfReader(page).pages[0])
+        with output.open("wb") as stream:
+            writer.write(stream)
 
 
 def load_manifest(path: Path) -> list[dict]:
@@ -278,7 +307,8 @@ def load_manifest(path: Path) -> list[dict]:
                  (ROOT / "binder" / "manifest-v2.yaml").resolve(): 2,
                  (ROOT / "binder" / "manifest-v3.yaml").resolve(): 3,
                  (ROOT / "binder" / "manifest-v4.yaml").resolve(): 4,
-                 (ROOT / "binder" / "manifest-v5.yaml").resolve(): 5}
+                 (ROOT / "binder" / "manifest-v5.yaml").resolve(): 5,
+                 (ROOT / "binder" / "manifest-v6.yaml").resolve(): 6}
     if manifest_path not in supported:
         raise ValueError("only the versioned binder assembly manifests are supported")
     version = supported[manifest_path]
@@ -295,14 +325,17 @@ def load_manifest(path: Path) -> list[dict]:
             raise ValueError(f"malformed manifest entry ID: {item['id']!r}")
         if item["kind"] not in {"profile", "supplemental", *COMPANION_LABELS}:
             raise ValueError(f"unsupported manifest kind: {item['kind']}")
-        if type(item["page_budget"]) is not int or item["page_budget"] != 1:
-            raise ValueError("manifest page_budget must be integer 1")
+    for item in entries:
+        budget = (len(paginate_species(tracked_species(entries)))
+                  if version == 6 and item["id"] == "watering-log-tracked" else 1)
+        if type(item["page_budget"]) is not int or item["page_budget"] != budget:
+            raise ValueError(f"manifest page_budget must be integer {budget}")
     actual = tuple((item["id"], item["kind"]) for item in entries)
     expected = {1: EXPECTED_MANIFEST, 2: EXPECTED_EXPANDED_MANIFEST,
                 3: EXPECTED_ANIMAL_MANIFEST, 4: EXPECTED_SHRIMP_MANIFEST,
-                5: EXPECTED_AQUATIC_MANIFEST}[version]
+                5: EXPECTED_AQUATIC_MANIFEST, 6: EXPECTED_LOG_MANIFEST}[version]
     if actual != expected:
-        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry", 4: "twenty-two-entry", 5: "thirty-one-entry"}[version]
+        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry", 4: "twenty-two-entry", 5: "thirty-one-entry", 6: "thirty-two-entry"}[version]
         raise ValueError(f"manifest entries must match the canonical {label} order and kinds")
     return entries
 
@@ -385,8 +418,8 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
     from pypdf import PdfReader, PdfWriter
     entries = load_manifest(path)
     expanded = path.name != "manifest.yaml"
-    accented = path.name == "manifest-v5.yaml"
-    expected_pages = len(entries)
+    accented = path.name in {"manifest-v5.yaml", "manifest-v6.yaml"}
+    expected_pages = sum(item["page_budget"] for item in entries)
     output.parent.mkdir(parents=True, exist_ok=True)
     writer = PdfWriter()
     with tempfile.TemporaryDirectory(prefix="binder-manifest-") as tmp_name:
@@ -403,7 +436,9 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
             elif item["kind"] in ANIMAL_PAGE_KINDS:
                 compile_animal(item["id"], item["kind"], mode, individual, **style)
             else:
-                if expanded:
+                if item["id"] in {"watering-log-tracked", "watering-log-blank"}:
+                    compile_logs(entries, individual, blank=item["id"] == "watering-log-blank")
+                elif expanded:
                     compile_entry(supplemental_path(item["id"]), {}, {}, individual,
                                   kind="supplemental", expanded=True)
                 else:

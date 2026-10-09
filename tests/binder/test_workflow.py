@@ -115,7 +115,14 @@ class BinderWorkflowTests(unittest.TestCase):
             "python scripts/binder_publication.py manifest",
         ):
             self.assertIn(expected, self.workflow)
-        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 8)
+        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 9)
+        self.assertIn("--manifest binder/manifest-v6.yaml --mode draft", self.workflow)
+        self.assertIn("name: aquiloop-binder-reusable-proof", self.workflow)
+        self.assertIn("cp build/binder/aquiloop-binder-reusable-draft.pdf build/binder/publication/", self.workflow)
+        self.assertIn("cp build/binder/reusable-color/page-*.png build/binder/publication-color/", self.workflow)
+        self.assertIn("pdftoppm -f 1 -l 30 -r 150 -png build/binder/aquiloop-binder-reusable-draft.pdf build/binder/publication-color/page", self.workflow)
+        self.assertLess(self.workflow.index("Build complete species logs and blank edition"),
+                        self.workflow.index("Package validated publication candidate"))
         self.assertIn("--manifest binder/manifest-v4.yaml --mode draft", self.workflow)
         self.assertIn("name: aquiloop-binder-shrimp-proof", self.workflow)
         self.assertIn("build/binder/shrimp-color/", self.workflow)
