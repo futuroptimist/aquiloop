@@ -3,7 +3,8 @@ max_concurrency = 6
 max_redirects = 5
 max_retries = 2
 retry_wait_time = 2
-timeout = 20
+# Allow slow canonical references to finish; timeouts still fail the check.
+timeout = 30
 scheme = ["https", "file"]
 
 # HTTP statuses that won't break CI
