@@ -155,6 +155,13 @@ class RecoveryTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     publication.validate(bundle)
 
+    def test_file_reconciliation_uses_documented_get_endpoint(self):
+        with patch.dict(os.environ, {"SLACK_BOT_TOKEN": "test-placeholder"}, clear=True), \
+                patch.object(publication, "request", return_value={"ok": True}) as request:
+            publication.Services().slack("files.info", {"file": "F1"})
+        self.assertEqual(request.call_args.args[:3],
+                         ("https://slack.com/api/files.info?file=F1", "GET", None))
+
 
 class FingerprintTests(unittest.TestCase):
     def setUp(self):

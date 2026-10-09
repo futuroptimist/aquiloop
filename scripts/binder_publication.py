@@ -129,8 +129,12 @@ class Services:
                        data, os.environ["GH_TOKEN"])
 
     def slack(self, method, data):
-        result = request(f"https://slack.com/api/{method}", "POST", data,
-                         os.environ["SLACK_BOT_TOKEN"])
+        url = f"https://slack.com/api/{method}"
+        verb = "POST"
+        if method == "files.info":
+            url += "?" + urllib.parse.urlencode(data)
+            verb, data = "GET", None
+        result = request(url, verb, data, os.environ["SLACK_BOT_TOKEN"])
         if not result.get("ok"):
             # Error codes are allowlisted, never dump the potentially sensitive body.
             raise ApiError("Slack", "api_error")
