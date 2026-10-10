@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "entry": "pachyveria-powder-puff",
+  "sources": [
+    {
+      "key": "PP-RHS",
+      "authority": "Royal Horticultural Society",
+      "title": "x Pachyveria 'Powder Puff'",
+      "url": "https://www.rhs.org.uk/plants/522442/-pachyveria-powder-puff/details",
+      "accessed": "2026-10-09",
+      "supports": [
+        "care",
+        "propagation",
+        "numbers"
+      ],
+      "applicability": "Species/cultivar listing and UK horticultural guidance; not independent specimen identity or Pacifica performance."
+    },
+    {
+      "key": "SU-MSU",
+      "authority": "Montana State University Extension",
+      "title": "Growing Succulents",
+      "url": "https://extension-store.montana.edu/montguides/growing-succulents",
+      "accessed": "2026-10-09",
+      "supports": [
+        "care",
+        "propagation",
+        "numbers"
+      ],
+      "applicability": "General succulent care and acclimation, not cultivar-specific thresholds or a household watering interval."
+    },
+    {
+      "key": "SU-ISU",
+      "authority": "Iowa State University Extension and Outreach",
+      "title": "How to Propagate Succulents",
+      "url": "https://yardandgarden.extension.iastate.edu/how-to/how-propagate-succulents",
+      "accessed": "2026-10-09",
+      "supports": [
+        "care",
+        "propagation",
+        "numbers"
+      ],
+      "applicability": "General stem/leaf technique for succulents including Crassula, Echeveria and Pachyphytum; not a verified Powder Puff rooting timetable."
+    },
+    {
+      "key": "SU-RHS",
+      "authority": "Royal Horticultural Society",
+      "title": "How to grow houseplant cacti and succulents",
+      "url": "https://www.rhs.org.uk/plants/types/cacti-succulents/houseplants/growing-guide",
+      "accessed": "2026-10-09",
+      "supports": [
+        "care",
+        "propagation",
+        "numbers"
+      ],
+      "applicability": "General free-draining media and container care; 70/30 recipe below is an adapted starting point, not a species-tested optimum."
+    }
+  ]
+}

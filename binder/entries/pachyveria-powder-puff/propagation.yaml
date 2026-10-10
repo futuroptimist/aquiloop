@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "entry": "pachyveria-powder-puff",
+  "worksheet": "propagation",
+  "claims": [
+    {
+      "claim_id": "method",
+      "metric": "method",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem or leaf cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "published",
+      "provenance": {
+        "source_refs": [
+          "PP-RHS"
+        ],
+        "applicability": "Source species/cultivar scope or explicitly general succulent guidance; no household measurement."
+      },
+      "description": "RHS supports leaf or stem cuttings; stems root faster, with no guaranteed interval."
+    },
+    {
+      "claim_id": "prepare",
+      "metric": "prepare",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-ISU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Use clean sharp snips, a labeled draining pot, a dry tray and fresh cactus rooting mix. Work with a healthy plant."
+    },
+    {
+      "claim_id": "select",
+      "metric": "select",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "PP-RHS",
+          "SU-ISU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Choose a healthy stem that can be removed without dismantling the plant. If there is too little stem, postpone; leaf cuttings are an alternate."
+    },
+    {
+      "claim_id": "cut",
+      "metric": "cut",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-ISU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "General ISU stem method: 3-6 in (7.6-15.2 cm), where the plant permits. Remove lower leaves; retain healthy upper foliage."
+    },
+    {
+      "claim_id": "callus",
+      "metric": "callus",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-ISU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Rest the cut stem on a dry tray for several days. Continue only when the cut surface is dry; this is a wound stage, not rooting."
+    },
+    {
+      "claim_id": "set",
+      "metric": "set",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-ISU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Place the callused base into freely draining rooting mix; keep foliage above it. Label parent, method and start date."
+    },
+    {
+      "claim_id": "root",
+      "metric": "root",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-MSU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Provide bright indirect light initially. Keep rooting medium only slightly moist; avoid saturation and standing water. Do not use an adult watering calendar."
+    },
+    {
+      "claim_id": "readiness",
+      "metric": "readiness",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-MSU",
+          "SU-ISU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Wait for roots and continuing healthy growth. Gentle resistance can indicate anchoring; avoid repeated pulling. No fixed transplant date is promised."
+    },
+    {
+      "claim_id": "transfer",
+      "metric": "transfer",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-MSU",
+          "SU-ISU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Once rooted, move to a draining container; gradually adjust to established-plant light and watering. Record outcomes and delays."
+    },
+    {
+      "claim_id": "leaf-alternate",
+      "metric": "leaf_alternate",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "leaf cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-ISU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Remove one whole healthy leaf including its attachment, set at the surface of slightly damp draining medium and monitor for new roots/growth. Incomplete leaves may fail."
+    },
+    {
+      "claim_id": "failure-check",
+      "metric": "failure_check",
+      "applicable_taxon": "x Pachyveria 'Powder Puff' (specimen provisional)",
+      "propagation_method": "stem cutting",
+      "life_stage": "cutting",
+      "growing_conditions": "Container care; actual household conditions unmeasured",
+      "geographic_context": "Pacifica context; source scopes remain distinct",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SU-MSU"
+        ],
+        "applicability": "General succulent technique adapted to the nursery-labeled specimen.",
+        "derivation": "Practical starting procedure combining cited drainage/cutting guidance with observed container setting; not experimentally validated for this home."
+      },
+      "description": "Check wetness, light, tissue firmness and new growth. Soft dark tissue is a reason to inspect, not proof of one disease."
+    }
+  ],
+  "claim_refs": [
+    {
+      "claim_ref": "pachyveria-powder-puff#method"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#prepare"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#select"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#cut"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#callus"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#set"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#root"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#readiness"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#transfer"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#leaf-alternate"
+    },
+    {
+      "claim_ref": "pachyveria-powder-puff#failure-check"
+    }
+  ]
+}

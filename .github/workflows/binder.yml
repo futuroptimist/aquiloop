@@ -54,7 +54,7 @@ jobs:
     needs: publication-tests
     name: Validate and build draft PDF
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Check out repository
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
@@ -179,6 +179,18 @@ jobs:
           import build_binder as builder
           from binder_logs import tracked_species, paginate_species, log_page_tex
           errors = []
+          for entry in builder.SUCCULENT_ENTRIES:
+              for kind in ('profile', 'numbers', 'propagation'):
+                  output = Path('build/binder/layouts') / f'{entry}-{kind}.pdf'
+                  try:
+                      if kind == 'profile':
+                          builder.compile_entry(*builder.load_entry(entry, 'draft'), output,
+                                                expanded=True, category='TERRESTRIAL PLANT')
+                      else:
+                          builder.compile_companion(entry, kind, 'draft', output,
+                                                    category='TERRESTRIAL PLANT')
+                  except (ValueError, RuntimeError) as error:
+                      errors.append(str(error))
           entries = builder.load_manifest(Path('binder/manifest-v6.yaml'))
           batches = paginate_species(tracked_species(entries))
           for number, species in enumerate([*batches, []], 1):
@@ -390,14 +402,37 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Build photographed succulent extension and proofs
+        run: |
+          set -euo pipefail
+          python scripts/build_binder.py --manifest binder/manifest-v7.yaml --mode draft \
+            --output build/binder/aquiloop-binder-succulents-draft.pdf
+          mkdir -p build/binder/succulents-color build/binder/succulents-gray
+          pdftoppm -f 31 -l 41 -r 150 -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/succulents-color/page
+          pdftoppm -f 31 -l 41 -r 150 -gray -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/succulents-gray/page
+          test "$(find build/binder/succulents-color -name '*.png' | wc -l)" -eq 11
+          test "$(find build/binder/succulents-gray -name '*.png' | wc -l)" -eq 11
+          sha256sum build/binder/aquiloop-binder-succulents-draft.pdf
+
+      - name: Upload photographed succulent binder and proofs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-succulents-proof
+          path: |
+            build/binder/aquiloop-binder-succulents-draft.pdf
+            build/binder/succulents-color/
+            build/binder/succulents-gray/
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Package validated publication candidate
         run: |
           set -euo pipefail
           mkdir -p build/binder/publication build/binder/publication-color
-          cp build/binder/aquiloop-binder-reusable-draft.pdf build/binder/publication/
-          # Reuse v6 log proofs; render its remaining pages for a complete fingerprint.
-          cp build/binder/reusable-color/page-*.png build/binder/publication-color/
-          pdftoppm -f 1 -l 30 -r 150 -png build/binder/aquiloop-binder-reusable-draft.pdf build/binder/publication-color/page
+          cp build/binder/aquiloop-binder-succulents-draft.pdf build/binder/publication/
+          # Reuse v7 new-entry/log proofs; render the remaining pages for a complete fingerprint.
+          cp build/binder/succulents-color/page-*.png build/binder/publication-color/
+          pdftoppm -f 1 -l 30 -r 150 -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/publication-color/page
           python scripts/binder_publication.py manifest
 
       - name: Upload publication candidate with provenance

@@ -18,8 +18,8 @@ REPOSITORY = "futuroptimist/aquiloop"
 CHANNEL = "C0C8T7FDAAC"
 TEAM = "T0C80NYUHHP"
 STATE_BRANCH = "binder-publication-state"
-PDF_NAME = "aquiloop-binder-reusable-draft.pdf"
-PAGE_COUNT = 35
+PDF_NAME = "aquiloop-binder-succulents-draft.pdf"
+PAGE_COUNT = 41
 SCHEMA = "aquiloop-rendered-binder-v1"
 
 
@@ -44,7 +44,7 @@ def fingerprint(pdf, proof_dir):
     proofs = sorted(proof_dir.glob("page-*.png"),
                     key=lambda path: int(path.stem.split("-")[-1]))
     if len(reader.pages) != PAGE_COUNT or len(proofs) != PAGE_COUNT:
-        raise ValueError(f"Expected the validated {PAGE_COUNT}-page reusable binder and proofs")
+        raise ValueError(f"Expected the validated {PAGE_COUNT}-page succulent binder and proofs")
     pages = []
     for number, (page, proof) in enumerate(zip(reader.pages, proofs), 1):
         if int(proof.stem.split("-")[-1]) != number:

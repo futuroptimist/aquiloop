@@ -14,6 +14,8 @@ LABELS = {
     "guppy-grass": "Guppy grass",
     "java-moss": "Java moss",
     "anubias-nana": "Anubias nana",
+    "pachyveria-powder-puff": "Pachyveria (Powder Puff)",
+    "crassula-rupestris": "Crassula rupestris",
 }
 
 

@@ -23,6 +23,9 @@ The complementary [Aquiloop platform roadmap](docs/design/aquiloop-platform-road
 describes the longer-term multi-vessel and hydroponics direction.
 The [care binder design brief](docs/design/care-binder.md) defines a future
 printable set of plant profiles and a handwritten watering log.
+The [photographed succulent extension and binder index](docs/design/photographed-succulents-binder.md)
+adds Powder Puff and Crassula rupestris with care, Pacifica context, propagation
+and complete species logs in the opt-in v7 draft.
 Start with the supervised, dry-bench
 [SST + LED Phase 0 experiment](firmware/auto_top_off/experiments/sst_led/README.md).
 
