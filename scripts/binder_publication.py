@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import re
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -21,6 +22,73 @@ STATE_BRANCH = "binder-publication-state"
 PDF_NAME = "aquiloop-binder-succulents-draft.pdf"
 PAGE_COUNT = 41
 SCHEMA = "aquiloop-rendered-binder-v1"
+
+# Only constants from these tables may reach publication diagnostics.
+SLACK_METHODS = frozenset({"auth.test", "files.info", "files.getUploadURLExternal",
+                           "files.completeUploadExternal", "upload_bytes"})
+SLACK_HINTS = {
+    "api_error": "Review the method documentation and installed app configuration.",
+    "missing_scope": "Verify the installed token's effective file scopes; configured scopes alone are not proof.",
+    "invalid_auth": "Have the owner verify the installed credential and network policy without logging it.",
+    "not_authed": "Have the owner verify the configured bot credential without logging it.",
+    "not_allowed_token_type": "Verify the installed credential is an approved bot token.",
+    "token_revoked": "Have the owner verify the app installation and credential status.",
+    "token_expired": "Have the owner verify the app installation and credential status.",
+    "account_inactive": "Have the owner verify the app and workspace are active.",
+    "no_permission": "Verify installed file permissions and target channel membership.",
+    "channel_not_found": "Verify the configured target channel and bot membership.",
+    "not_in_channel": "Verify bot membership in the configured target channel.",
+    "file_not_found": "Reconcile the pending file with the owner; do not allocate a replacement.",
+    "invalid_arguments": "Check the method's required arguments and payload types.",
+    "missing_argument": "Check the method's required arguments and nonzero file length.",
+    "ratelimited": "Wait for rate limits to recover, then rerun to reconcile the checkpoint.",
+    "internal_error": "Wait for service recovery, then rerun to reconcile the checkpoint.",
+    "service_unavailable": "Wait for service recovery, then rerun to reconcile the checkpoint.",
+    "file_uploads_disabled": "Have the owner inspect workspace file upload policy.",
+    "file_uploads_except_images_disabled": "Have the owner inspect workspace PDF upload policy.",
+    "file_type_not_allowed": "Have the owner inspect workspace PDF upload policy.",
+    "file_upload_size_restricted": "Check the PDF size against workspace upload policy.",
+    "storage_limit_reached": "Have the owner inspect workspace file storage limits.",
+    "http_error": "Check service availability and access policy, then reconcile before retrying.",
+    "transport_error": "The outcome may be uncertain; rerun only through checkpoint reconciliation.",
+    "invalid_response": "Check service health; reconcile the checkpoint before retrying.",
+}
+
+
+class SlackError(RuntimeError):
+    def __init__(self, method, code):
+        method = method if isinstance(method, str) and method in SLACK_METHODS else "unknown_method"
+        code = code if isinstance(code, str) and code in SLACK_HINTS else "api_error"
+        super().__init__(f"Slack {method} failed ({code}). {SLACK_HINTS[code]}")
+
+
+SAFE_ERRORS = {
+    "page_count": f"Expected the validated {PAGE_COUNT}-page succulent binder and proofs",
+    "proof_order": "Proof page order is incomplete",
+    "geometry": "Unexpected page geometry",
+    "pdf_action": "Unsupported PDF action",
+    "pdf_destination": "Unsupported internal PDF destination",
+    "provenance": "Artifact provenance or PDF digest mismatch",
+    "upload_host": "Unexpected Slack upload host",
+    "workspace": "Slack workspace mismatch",
+    "checkpoint": "Invalid publication checkpoint; owner reconciliation required",
+    "history": "Diverged publication history; owner reconciliation required",
+    "trust": "Only trusted repository main push builds can publish",
+    "manifest": "Binder manifest failed; verify local PDF, proofs and build provenance environment",
+    "unexpected": "Binder command failed; verify validated inputs and configured environment",
+}
+
+
+class SafeError(ValueError):
+    """Deliberate failures select fixed messages, never arbitrary exception text."""
+    def __init__(self, code):
+        code = code if isinstance(code, str) and code in SAFE_ERRORS else "unexpected"
+        super().__init__(SAFE_ERRORS[code])
+
+
+def slack_failure_code(status):
+    return {"uncertain": "transport_error", "invalid_response": "invalid_response",
+            429: "ratelimited"}.get(status, "http_error")
 
 
 def digest(data):
@@ -44,13 +112,13 @@ def fingerprint(pdf, proof_dir):
     proofs = sorted(proof_dir.glob("page-*.png"),
                     key=lambda path: int(path.stem.split("-")[-1]))
     if len(reader.pages) != PAGE_COUNT or len(proofs) != PAGE_COUNT:
-        raise ValueError(f"Expected the validated {PAGE_COUNT}-page succulent binder and proofs")
+        raise SafeError("page_count")
     pages = []
     for number, (page, proof) in enumerate(zip(reader.pages, proofs), 1):
         if int(proof.stem.split("-")[-1]) != number:
-            raise ValueError("Proof page order is incomplete")
+            raise SafeError("proof_order")
         if list(page.mediabox) != [0, 0, 612, 792] or list(page.cropbox) != [0, 0, 612, 792] or page.get("/Rotate", 0):
-            raise ValueError("Unexpected page geometry")
+            raise SafeError("geometry")
         links = []
         for annotation in page.get("/Annots", []):
             item = annotation.get_object()
@@ -59,10 +127,10 @@ def fingerprint(pdf, proof_dir):
                 action = action.get_object()
                 # Binder links are URI links. Fail closed on new interaction types.
                 if action.get("/S") != "/URI":
-                    raise ValueError("Unsupported PDF action")
+                    raise SafeError("pdf_action")
                 links.append(str(action.get("/URI", "")))
             elif item.get("/Dest"):
-                raise ValueError("Unsupported internal PDF destination")
+                raise SafeError("pdf_destination")
         with Image.open(proof) as source:
             image = source.convert("RGB")
             pages.append({"size": image.size, "pixels": digest(image.tobytes()),
@@ -88,7 +156,7 @@ def validate(bundle):
             or not re.fullmatch(r"[0-9a-f]{64}", record.get("content_sha256", ""))
             or record.get("pdf_sha256") != digest(pdf.read_bytes())
             or not pdf.read_bytes().startswith(b"%PDF-")):
-        raise ValueError("Artifact provenance or PDF digest mismatch")
+        raise SafeError("provenance")
     return record, pdf.read_bytes()
 
 
@@ -119,6 +187,8 @@ def request(url, method="GET", data=None, token=None, raw=False):
         raise ApiError("HTTP", error.code) from None
     except (urllib.error.URLError, TimeoutError):
         raise ApiError("Transport", "uncertain") from None
+    except (ValueError, UnicodeError):
+        raise ApiError("Response", "invalid_response") from None
 
 
 class Services:
@@ -135,10 +205,14 @@ class Services:
         if method == "files.info":
             url += "?" + urllib.parse.urlencode(data)
             verb, data = "GET", None
-        result = request(url, verb, data, os.environ["SLACK_BOT_TOKEN"])
+        try:
+            result = request(url, verb, data, os.environ["SLACK_BOT_TOKEN"])
+        except ApiError as error:
+            raise SlackError(method, slack_failure_code(error.status)) from None
+        if not isinstance(result, dict):
+            raise SlackError(method, "invalid_response")
         if not result.get("ok"):
-            # Error codes are allowlisted, never dump the potentially sensitive body.
-            raise ApiError("Slack", "api_error")
+            raise SlackError(method, result.get("error"))
         return result
 
     def load(self):
@@ -174,8 +248,11 @@ class Services:
         ticket = self.slack("files.getUploadURLExternal", {"filename": PDF_NAME, "length": len(pdf)})
         url = urllib.parse.urlparse(ticket["upload_url"])
         if url.scheme != "https" or url.hostname != "files.slack.com" or url.username or url.password:
-            raise ValueError("Unexpected Slack upload host")
-        request(ticket["upload_url"], "POST", pdf, raw=True)
+            raise SafeError("upload_host")
+        try:
+            request(ticket["upload_url"], "POST", pdf, raw=True)
+        except ApiError as error:
+            raise SlackError("upload_bytes", slack_failure_code(error.status)) from None
         return ticket["file_id"]
 
     def shared(self, file_id):
@@ -194,11 +271,11 @@ class Services:
 
 def publish(api, record, pdf):
     if api.slack("auth.test", {})["team_id"] != TEAM:
-        raise ValueError("Slack workspace mismatch")
+        raise SafeError("workspace")
     previous = api.load()
     if previous:
         if previous.get("status") not in ("pending", "published") or not re.fullmatch(r"F[A-Z0-9]+", previous.get("file_id", "")):
-            raise ValueError("Invalid publication checkpoint; owner reconciliation required")
+            raise SafeError("checkpoint")
         if previous["status"] == "pending":
             # A crash after sharing is reconciled before any new file is allocated.
             # Slack completion is a one-shot operation on this persisted file ID.
@@ -210,7 +287,7 @@ def publish(api, record, pdf):
         if relation == "behind":
             return "Skipped stale build"
         if relation not in ("ahead", "identical"):
-            raise ValueError("Diverged publication history; owner reconciliation required")
+            raise SafeError("history")
         if previous["content_sha256"] == record["content_sha256"]:
             api.save(dict(previous, checked_commit=record["commit"]))
             return "Unchanged binder content"
@@ -229,17 +306,35 @@ def main():
     parser.add_argument("--bundle", type=Path, default=Path("build/binder/publication"))
     args = parser.parse_args()
     if args.command == "manifest":
-        pdf = args.bundle / PDF_NAME
-        record = manifest(pdf, args.bundle.parent / "publication-color")
-        (args.bundle / "provenance.json").write_bytes(encoded(record))
+        try:
+            pdf = args.bundle / PDF_NAME
+            record = manifest(pdf, args.bundle.parent / "publication-color")
+            (args.bundle / "provenance.json").write_bytes(encoded(record))
+        except SafeError:
+            raise
+        except Exception:
+            raise SafeError("manifest") from None
     else:
         if (os.environ.get("GITHUB_EVENT_NAME") != "push"
                 or os.environ.get("GITHUB_REF") != "refs/heads/main"
                 or os.environ.get("GITHUB_REPOSITORY") != REPOSITORY):
-            raise ValueError("Only trusted repository main push builds can publish")
+            raise SafeError("trust")
         record, pdf = validate(args.bundle)
         print(publish(Services(), record, pdf))
 
 
+def cli():
+    try:
+        main()
+    except (SlackError, SafeError) as error:
+        print(f"::error::{error}", file=sys.stderr)
+        return 1
+    except Exception:
+        # No traceback: even parser/transport exceptions may contain response data.
+        print(f"::error::{SAFE_ERRORS['unexpected']}", file=sys.stderr)
+        return 1
+    return 0
+
+
 if __name__ == "__main__":
-    main()
+    sys.exit(cli())
