@@ -125,3 +125,28 @@ Run tests with `python -m unittest discover -s tests/publication -v` using the
 existing pinned binder requirements. The publication test job runs independently
 of Ubuntu APT so snapshot outages do not conceal its result. Tests use synthetic
 PDFs/proofs and fake services; they never contact Slack or GitHub.
+
+## Safe failure diagnostics
+
+Publication failures emit a single bounded Actions error annotation. Slack API
+methods and error codes come from fixed allowlists; unknown codes become
+`api_error`. Hints never interpolate Slack response fields (including `needed`
+and `provided`), headers, tokens, signed upload URLs or exception text. HTTP,
+transport and malformed-response failures use fixed categories. Unexpected
+failures use a generic annotation without a traceback. No automatic retry or
+checkpoint transition is added by diagnostics.
+
+For `missing_scope`, verify the installed token's effective file permissions;
+scopes shown in the app configuration do not establish what the installed token
+can do. Do not add scopes or rotate credentials based on a generic error.
+See the [Slack upload method reference](https://docs.slack.dev/reference/methods/files.getUploadURLExternal/)
+for the method's required scope and supported errors.
+
+After owner review and merge, the existing trusted main-push workflow builds and
+validates a new candidate before publication. Inspect that run's safe method and
+error code, and diagnose only the indicated prerequisite. Any separately
+approved retry should rerun that failed publish job within artifact retention,
+using its original candidate and checkpoint. A rerun of an older run uses the
+older diagnostic code. Manual dispatch is build-only; never widen its gate or
+reset the ledger to force a post. Verify a successful share against the saved
+file ID and candidate digest before considering reproduction complete.

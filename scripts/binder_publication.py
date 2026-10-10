@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import re
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -21,6 +22,44 @@ STATE_BRANCH = "binder-publication-state"
 PDF_NAME = "aquiloop-binder-succulents-draft.pdf"
 PAGE_COUNT = 41
 SCHEMA = "aquiloop-rendered-binder-v1"
+
+# Only constants from these tables may reach publication diagnostics.
+SLACK_METHODS = frozenset({"auth.test", "files.info", "files.getUploadURLExternal",
+                           "files.completeUploadExternal", "upload_bytes"})
+SLACK_HINTS = {
+    "api_error": "Review the method documentation and installed app configuration.",
+    "missing_scope": "Verify the installed token's effective file scopes; configured scopes alone are not proof.",
+    "invalid_auth": "Have the owner verify the installed credential and network policy without logging it.",
+    "not_authed": "Have the owner verify the configured bot credential without logging it.",
+    "not_allowed_token_type": "Verify the installed credential is an approved bot token.",
+    "token_revoked": "Have the owner verify the app installation and credential status.",
+    "token_expired": "Have the owner verify the app installation and credential status.",
+    "account_inactive": "Have the owner verify the app and workspace are active.",
+    "no_permission": "Verify installed file permissions and target channel membership.",
+    "channel_not_found": "Verify the configured target channel and bot membership.",
+    "not_in_channel": "Verify bot membership in the configured target channel.",
+    "file_not_found": "Reconcile the pending file with the owner; do not allocate a replacement.",
+    "invalid_arguments": "Check the method's required arguments and payload types.",
+    "missing_argument": "Check the method's required arguments and nonzero file length.",
+    "ratelimited": "Wait for rate limits to recover, then rerun to reconcile the checkpoint.",
+    "internal_error": "Wait for service recovery, then rerun to reconcile the checkpoint.",
+    "service_unavailable": "Wait for service recovery, then rerun to reconcile the checkpoint.",
+    "file_uploads_disabled": "Have the owner inspect workspace file upload policy.",
+    "file_uploads_except_images_disabled": "Have the owner inspect workspace PDF upload policy.",
+    "file_type_not_allowed": "Have the owner inspect workspace PDF upload policy.",
+    "file_upload_size_restricted": "Check the PDF size against workspace upload policy.",
+    "storage_limit_reached": "Have the owner inspect workspace file storage limits.",
+    "http_error": "Check service availability and access policy, then reconcile before retrying.",
+    "transport_error": "The outcome may be uncertain; rerun only through checkpoint reconciliation.",
+    "invalid_response": "Check service health; reconcile the checkpoint before retrying.",
+}
+
+
+class SlackError(RuntimeError):
+    def __init__(self, method, code):
+        method = method if isinstance(method, str) and method in SLACK_METHODS else "unknown_method"
+        code = code if isinstance(code, str) and code in SLACK_HINTS else "api_error"
+        super().__init__(f"Slack {method} failed ({code}). {SLACK_HINTS[code]}")
 
 
 def digest(data):
@@ -119,6 +158,8 @@ def request(url, method="GET", data=None, token=None, raw=False):
         raise ApiError("HTTP", error.code) from None
     except (urllib.error.URLError, TimeoutError):
         raise ApiError("Transport", "uncertain") from None
+    except (ValueError, UnicodeError):
+        raise ApiError("Response", "invalid_response") from None
 
 
 class Services:
@@ -135,10 +176,16 @@ class Services:
         if method == "files.info":
             url += "?" + urllib.parse.urlencode(data)
             verb, data = "GET", None
-        result = request(url, verb, data, os.environ["SLACK_BOT_TOKEN"])
+        try:
+            result = request(url, verb, data, os.environ["SLACK_BOT_TOKEN"])
+        except ApiError as error:
+            code = {"uncertain": "transport_error", "invalid_response": "invalid_response",
+                    429: "ratelimited"}.get(error.status, "http_error")
+            raise SlackError(method, code) from None
+        if not isinstance(result, dict):
+            raise SlackError(method, "invalid_response")
         if not result.get("ok"):
-            # Error codes are allowlisted, never dump the potentially sensitive body.
-            raise ApiError("Slack", "api_error")
+            raise SlackError(method, result.get("error"))
         return result
 
     def load(self):
@@ -175,7 +222,11 @@ class Services:
         url = urllib.parse.urlparse(ticket["upload_url"])
         if url.scheme != "https" or url.hostname != "files.slack.com" or url.username or url.password:
             raise ValueError("Unexpected Slack upload host")
-        request(ticket["upload_url"], "POST", pdf, raw=True)
+        try:
+            request(ticket["upload_url"], "POST", pdf, raw=True)
+        except ApiError as error:
+            code = "transport_error" if error.status == "uncertain" else "http_error"
+            raise SlackError("upload_bytes", code) from None
         return ticket["file_id"]
 
     def shared(self, file_id):
@@ -241,5 +292,19 @@ def main():
         print(publish(Services(), record, pdf))
 
 
+def cli():
+    try:
+        main()
+    except SlackError as error:
+        print(f"::error::{error}", file=sys.stderr)
+        return 1
+    except Exception:
+        # No traceback: even parser/transport exceptions may contain response data.
+        print("::error::Binder publication failed; verify provenance, service health and checkpoint state.",
+              file=sys.stderr)
+        return 1
+    return 0
+
+
 if __name__ == "__main__":
-    main()
+    sys.exit(cli())
