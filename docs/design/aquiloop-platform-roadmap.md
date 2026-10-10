@@ -4,12 +4,13 @@
 
 **Status:** Proposed platform roadmap
 
-**Last reviewed:** 2026-08-11
+**Last reviewed:** 2026-10-10
 
 Repository evidence shows a compile-validated Phase 0 sketch for the
 Espressif ESP32-S3-DevKitC-1-N8R8 and SparkFun SST liquid-level sensor, but all
 physical Phase 0 validation remains pending. No wet/dry result or aquarium
-installation is inferred from compilation.
+installation is inferred from compilation. The smaller learning iterations,
+onboard RGB support and two-sensor behavior are proposed, not implemented.
 
 The recommendation is **one vessel first, fleet later**. Prove the dry bench
 rig, then use the existing 20-gallon garage aquarium—the aquarium also contains
@@ -40,10 +41,11 @@ and its [practical Phase 0 experiment](../../firmware/auto_top_off/experiments/s
 
 - Controller: Espressif ESP32-S3-DevKitC-1-N8R8.
 - Sensor: SparkFun SST binary liquid-level sensor through the documented
-  protected, fault-conservative input concept; its raw output is not an ESP32
-  input.
-- Output: an external LED and change-only serial reporting. Phase 0 has no pump,
-  network, enclosure, or aquarium installation.
+  proposed interface on a regulated 5 V rail, separate from the future 12 V
+  pump rail. The three-resistor candidate remains electrically unqualified;
+  its raw output is not an ESP32 input.
+- Existing output: an external LED and change-only serial reporting. Phase 0
+  has no pump, network, enclosure, or aquarium installation.
 - Evidence: firmware compilation has passed; the physical circuit, voltages,
   and repeated wet/dry cycles remain unrecorded and pending.
 - First installation target: the 20-gallon garage aquarium, after bench
@@ -431,19 +433,35 @@ roadmap.
 
 **Entry:** Current repository baseline.
 
-**Work:** Receive and inspect the SST sensor; use a known data-capable USB cable;
-assemble the documented protected input and LED circuit; upload the pinned
-sketch; complete the documented wet/dry cycles and voltage checks; record actual
-observations.
+**Work:** Follow the [small learning iterations and prerequisites](aquarium-auto-top-off.md#small-learning-iterations-and-prerequisites)
+in order: 0a board/USB/serial, 0b revision-verified onboard RGB, 0c electrically
+qualified SST bucket indication, then 0d separate external LED/330 ohm resistor.
+Use each row's objective, smallest BoM and measurable gate. Before connecting
+a GPIO, learn datasheet limits, worst-case rail/resistor tolerances, measured
+interface margins and safe independent power sequencing/backfeed behavior.
+Mandatory per-channel protection stays in every SST BoM even without the external
+LED. The candidate divider is not a qualified 5 V +/-5% interface and must
+never be reused at 12 V. No physical result is inferred from the existing build.
 
 **Exit:** Every existing Phase 0 exit criterion is recorded as passed. No
 physical result is inferred from compilation alone.
 
 ### Horizon 1: supervised 20-gallon auto-top-off
 
-**Work:** Implement only the existing Phase 1 scope; select and calibrate pump
-and tubing; build parametric mounts and enclosure; exercise every supervised
-fault case; collect stable baseline evaporation and delivery data.
+**Work:** After Horizon 0, do Phase 1 as smaller iterations: 1a a simple
+parametric hang-on-back mount; 1b a second SST with its own qualified protection,
+parametric spacing and pretend-pump LED; 1c supervised calibrated pumping.
+Two sensors indicate below/between/above bands and contradictory states, not
+continuous height or independent overflow redundancy. The present sketch
+cannot implement this two-input logic or distinguish disconnected from wet.
+Preserve all Phase 1 firmware, CAD and enclosure requirements.
+
+Before any real pumping, pass the authoritative first-pump gate: bounded time
+and volume, default-off, local DISABLE and inspection/manual reset after faults.
+Keep reservoir maximum source level below the secured outlet and the outlet
+above maximum aquarium waterline; measure pump-off/power-loss residual flow.
+Then exercise every supervised fault case and collect calibration and baseline
+evaporation/delivery data.
 
 **Exit:** The authoritative Phase 1 criteria are satisfied; operation remains
 supervised; fleet expansion has not begun.
@@ -456,7 +474,9 @@ containment, and the complete fault matrix.
 
 **Exit:** The local hardware, firmware, cutoff, containment, persistence, and
 fault-matrix criteria receive independent review. Horizon 2 alone does not
-constitute completion of the authoritative Phase 2 criteria. Unattended
+constitute completion of the authoritative Phase 2 criteria. Independent
+overflow, Phase 3 source-low/leak protection and containment must also pass
+their validation gates before unattended use can be considered. Unattended
 operation remains a deliberate decision, not an automatic consequence.
 
 ### Horizon 3: observability
@@ -569,7 +589,8 @@ facts:
 
 ## Near-term next actions
 
-1. Complete and record Phase 0 physical validation.
+1. Complete the smaller Phase 0 learning steps, including electrical
+   qualification before GPIO connection, and record physical validation.
 2. Preserve the existing auto-top-off document as the implementation authority.
 3. Capture actual tank, rim, reservoir, lift, freeboard, temperature, and
    evaporation measurements.
