@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 import binder_publication as publication
+from test_publication import FakeServices, record
 
 
 class DiagnosticsTests(unittest.TestCase):
@@ -94,6 +95,64 @@ class DiagnosticsTests(unittest.TestCase):
     def test_success_is_unchanged(self):
         with patch.object(publication, "main", return_value=None):
             self.assertEqual(publication.cli(), 0)
+
+    def test_signed_upload_http_errors_keep_safe_categories(self):
+        for status, code in ((429, "ratelimited"), (403, "http_error"), (500, "http_error")):
+            api = publication.Services()
+            error = urllib.error.HTTPError(self.poison, status, self.poison,
+                                           {"Retry-After": self.poison}, io.BytesIO(self.poison.encode()))
+            with patch.object(api, "slack", return_value={
+                    "upload_url": "https://files.slack.com/private", "file_id": "F1"}), \
+                    patch.object(publication.urllib.request, "build_opener") as opener:
+                opener.return_value.open.side_effect = error
+                output = self.capture(lambda: api.upload(b"%PDF-test"))
+                opener.return_value.open.assert_called_once()
+            self.assertIn(f"upload_bytes failed ({code})", output)
+
+    def test_safe_errors_only_emit_fixed_messages(self):
+        for code, message in publication.SAFE_ERRORS.items():
+            output = self.capture(lambda: self.raise_error(publication.SafeError(code)))
+            self.assertEqual(output, f"::error::{message}\n")
+        for code in (self.poison, [], {}, None):
+            output = self.capture(lambda: self.raise_error(publication.SafeError(code)))
+            self.assertIn(publication.SAFE_ERRORS["unexpected"], output)
+
+    def test_owner_actionable_publication_failures_reach_annotation(self):
+        for code in ("workspace", "checkpoint", "history"):
+            api = FakeServices()
+            if code == "workspace":
+                api.team = self.poison
+            elif code == "checkpoint":
+                api.state = dict(record(), status=self.poison, file_id=self.poison)
+            else:
+                api.state = dict(record(), status="published", file_id="F1")
+                api.status = self.poison
+            output = self.capture(lambda: publication.publish(api, record(), b"%PDF-test"))
+            self.assertIn(publication.SAFE_ERRORS[code], output)
+            self.assertEqual((api.uploads, api.posts), (0, 0))
+
+    def test_trust_failure_remains_actionable_without_network(self):
+        main = publication.main
+        with patch.object(sys, "argv", ["publisher", "publish"]), \
+                patch.dict(os.environ, {"GITHUB_EVENT_NAME": self.poison}, clear=True), \
+                patch.object(publication, "Services") as services:
+            output = self.capture(main)
+        self.assertIn(publication.SAFE_ERRORS["trust"], output)
+        services.assert_not_called()
+
+    def test_manifest_failures_have_local_guidance_without_leaking(self):
+        main = publication.main
+        for error in (ValueError(self.poison), OSError(self.poison),
+                      publication.SafeError("geometry")):
+            with patch.object(sys, "argv", ["publisher", "manifest"]), \
+                    patch.object(publication, "manifest", side_effect=error), \
+                    patch.object(publication, "Services") as services:
+                output = self.capture(main)
+            expected = "geometry" if isinstance(error, publication.SafeError) else "manifest"
+            self.assertIn(publication.SAFE_ERRORS[expected], output)
+            self.assertNotIn("service health", output)
+            self.assertNotIn("checkpoint", output)
+            services.assert_not_called()
 
     def test_workflow_keeps_publication_gates(self):
         workflow = (Path(__file__).resolve().parents[2] / ".github/workflows/binder.yml").read_text()

@@ -150,3 +150,10 @@ using its original candidate and checkpoint. A rerun of an older run uses the
 older diagnostic code. Manual dispatch is build-only; never widen its gate or
 reset the ledger to force a post. Verify a successful share against the saved
 file ID and candidate digest before considering reproduction complete.
+
+Signed-upload HTTP 429 failures use the same `ratelimited` category as Slack API
+calls. Deliberate validation failures select a dedicated fixed-message table,
+so workspace mismatches, invalid checkpoints, divergent history and untrusted
+publication attempts retain owner-actionable diagnostics. Unexpected manifest
+failures point to local PDF/proof inputs and the build environment; neither
+manifest nor publication failures echo arbitrary exception text.
