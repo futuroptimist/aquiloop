@@ -1,6 +1,6 @@
 # SST + LED Phase 0 experiment
 
-The [authoritative learning plan](../../../../docs/design/aquarium-auto-top-off.md#81-phase-0---sst-water-detection-hello-world)
+The [authoritative learning plan](../../../../docs/design/aquarium-auto-top-off.md#81-phase-0--sst-water-detection-hello-world)
 now separates board/USB/serial, onboard RGB, protected SST bucket indication,
 and external LED/resistor learning. Later steps add a parametric hang-on-back
 mount, two sensors with adjustable spacing and a pretend-pump LED, supervised

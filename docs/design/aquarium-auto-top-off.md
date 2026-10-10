@@ -224,7 +224,7 @@ boot-count telemetry help detect loops, but do not relax local behavior.
 
 Costs are planning ranges in 2026 USD before shipping/tax, not quotations.
 
-### 8.1 Phase 0 - SST water-detection hello world
+### 8.1 Phase 0 — SST water-detection hello world
 
 **Status: existing external-LED sketch compile validation passed; electrical
 qualification and all physical validation are pending.** The smaller iterations
