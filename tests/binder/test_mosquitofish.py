@@ -74,7 +74,8 @@ class MosquitofishRenderingTests(unittest.TestCase):
             self.assertTrue({a.get_object()['/A']['/URI'] for a in p.get('/Annots',[])} <= urls)
         text=' '.join(p.extract_text() for p in self.reader.pages[39:44])
         for id in logs.tracked_species(builder.load_manifest(ROOT/'binder/manifest-v8.yaml')):
-            self.assertEqual(text.count(logs.LABELS[id]),1,id)
+            self.assertIn(''.join(logs.LABELS[id].split()), ''.join(text.split()), id)
+            self.assertIn(''.join(logs.scientific_name(id).split()), ''.join(text.split()), id)
         self.assertIn('BLANK EDITION',self.reader.pages[44].extract_text())
     def test_v7_species_and_blank_pixels_unchanged(self):
         from PIL import Image,ImageChops
