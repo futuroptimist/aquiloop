@@ -4,7 +4,8 @@
 **Target:** A 20-gallon garage aquarium supplied from a five-gallon freshwater
 reservoir.
 **Safety posture:** Phases 0 and 1 are **supervised experimental use only**. Unattended
-operation is not considered until the Phase 2 exit criteria are met.
+operation is not considered until the Phase 2 exit criteria and the Phase 3
+source-water/leak protection gates are met.
 
 ## 1. Problem statement
 
@@ -37,7 +38,7 @@ measurable phases.
   freeboard, not either label.
 - Freshwater is appropriate top-off water. This system does not dose salt,
   medication, fertilizer, or food.
-- The reservoir can normally sit below aquarium water level. The measured
+- The reservoir maximum water surface will stay below the delivery outlet. The measured
   vertical lift and tubing losses will be recorded before pump selection.
 - A fixed bracket can reach a calm normal-level location and a separate higher
   location. Garage temperature and humidity ranges remain open measurements.
@@ -123,13 +124,17 @@ falsely wet after withdrawal, concealing a low level. Motorized dipping adds
 motion, cable, alignment, and software failure modes without fixing that
 retained-droplet ambiguity.
 
-The SST requires **4.5-15.4 V** and has a push-pull output. It must never connect
+The SST requires **4.5-15.4 V** and has a push-pull output. The proposed SST
+rail remains regulated **5 V**, separate from the **12 V pump rail**. It must never connect
 directly to a 3.3 V ESP32 GPIO. The hardware design must choose and document one
-qualified interface: for example, a resistor divider with input protection and
-worst-case tolerance analysis, a 3.3 V logic buffer rated for the input voltage,
-or an optocoupler. A pull resistor on the ESP32 side establishes the configured
-fault/inactive state for an open wire or unpowered sensor. Firmware treats an
-out-of-range/unstable input as uncertainty and inhibits filling. Phase 2 adds a
+qualified interface, including worst-case tolerances and powered-off behavior,
+using manufacturer evidence. No replacement interface is selected here; the
+existing divider remains unqualified under the section 8.1 gate. A pull resistor
+on the ESP32 side establishes the configured
+fault/inactive state for an open wire or unpowered sensor only after electrical
+verification. Future firmware must inhibit on detectable uncertainty; the current
+digital sketch cannot identify out-of-range voltage or distinguish wet from a
+disconnected input with intact pull-down. Phase 2 adds a
 separately wired, independently powered-down-safe high-high layer.
 
 ### 5.2 Pump, driver, and fluid path
@@ -176,13 +181,18 @@ separately wired, independently powered-down-safe high-high layer.
 
 ### 6.1 State-machine outline
 
+For iterations 1b and 1c, the **lower SST is the normal-level fill-stop point**.
+The upper SST is a diagnostic high-level guard, not a second fill target or the
+independent Phase 2 high-high cutoff. The two-input contract below governs this
+state machine; the existing one-input Phase 0 sketch does not implement it.
+
 | State | Entry/action | Allowed transition |
 | --- | --- | --- |
 | **Boot self-test** | Force output off; verify configuration CRC/ranges, persistent fault and delivery ledger, reset cause, GPIO plausibility, sensors, watchdog, and ARM state. | `Idle` only when healthy and explicitly armed; otherwise `Maintenance` or `Latched fault`. |
-| **Idle** | Pump off; sample sensors; account rolling budget. A wet SST is normal. | Sustained dry samples to `Low debounce`; DISABLE to `Maintenance`; anomaly to fault. |
-| **Low debounce** | Pump off; require a configurable run of readings over a minimum duration, rejecting chatter. | Confirmed low to `Filling`; wet back to `Idle`; uncertainty/time limit to fault. |
-| **Filling** | Command one calibrated short pulse while watchdog, cutoff, input health, per-pulse runtime and volume limits remain valid. | Always to `Settling` when pulse ends; any invariant breach to fault. |
-| **Settling** | Pump off; wait for wave/ripple and sensor response, then debounce. | Wet to `Idle`; still dry to next bounded retry; retry/attempt/budget limit or contradiction to fault. |
+| **Idle** | Pump off; sample both SSTs; account rolling budget. Lower wet/upper dry is normal. | Both dry to `Low debounce`; upper wet to `Latched fault`; DISABLE to `Maintenance`; uncertainty to fault. |
+| **Low debounce** | Pump off; require both dry continuously for the configured sample count and minimum duration. | Confirmed both dry plus all enable conditions to `Filling`; lower wet/upper dry back to `Idle`; upper wet or uncertainty/time limit to fault. |
+| **Filling** | Command one calibrated short pulse only while both SSTs are dry and watchdog, cutoff, input health, runtime and volume limits remain valid. | Lower wet/upper dry stops the pulse immediately to `Settling`; upper wet stops immediately to `Latched fault`. Normal pulse completion goes to `Settling`; any invariant breach stops and faults. |
+| **Settling** | Pump off; retain the attempt and charged delivery; wait the full settling interval, then reassess both SSTs. | Lower wet/upper dry ends the attempt to `Idle`; both dry may return to `Low debounce` for a bounded retry; upper wet, uncertainty or exhausted attempt/retry/budget limits to fault. |
 | **Maintenance** | Pump positively inhibited; allow local diagnostics and calibration steps, never unrestricted remote run. | Local ARM plus self-test to `Idle`; anomaly to fault. |
 | **Latched fault** | Pump off; persist reason, counters, and timestamp/monotonic context; indicate locally and export telemetry. | Local reset only after DISABLE, inspection, healthy self-test, and documented acknowledgement. |
 
@@ -193,6 +203,81 @@ mandatory settling interval of at least 10 seconds; installation calibration
 must lower these where needed and establish safe volume limits from aquarium
 freeboard. The task watchdog must be serviced only by a healthy control loop,
 not blindly by a timer callback.
+
+#### Two-SST pump permission and transition contract
+
+Read each pair as **lower, upper** after the approved interface interpretation
+(DRY = HIGH, WET = LOW). These are observed point-switch states, not verified
+continuous height or wiring health. All start/continue permissions require local
+ARM, healthy self-test, qualified inputs, no latch, valid persistence/watchdog,
+remaining time/volume/retry budgets and all applicable safety enables. DISABLE,
+reset, detected uncertainty or any safety fault overrides the table to pump off;
+reboot never restores a running pulse or clears a latch/budget.
+
+| Lower SST | Upper SST | Observed band | May start a pulse from off? | If a pulse is already active | Subsequent state |
+| --- | --- | --- | --- | --- | --- |
+| DRY | DRY | Below lower | Only after `Low debounce` confirms both dry and all enable conditions pass; after an earlier pulse, complete `Settling` first. | May continue only to the existing pulse deadline/volume cap while all enables remain valid. | On normal pulse completion, off to `Settling`; another pulse requires a fresh debounce and remaining retry/attempt/daily budgets. |
+| WET | DRY | Between sensors; normal stop band | **No.** Keep off; do not fill toward the upper sensor. | **Stop on the first observed lower-wet sample**, without waiting for start debounce or the pulse deadline. | Off to `Settling`; if this pair remains after settling, end the attempt to `Idle`. If both become dry, re-debounce for a bounded retry; do not resume the interrupted pulse. |
+| WET | WET | At/above upper; abnormal high | **No.** Inhibit and latch. | **Stop on the first observed upper-wet sample.** | `Latched fault` with high-level reason; inspection and local/manual reset required even if the pair later becomes normal. |
+| DRY | WET | Contradictory pair | **No.** Inhibit and latch. | **Stop on the first observed upper-wet sample.** | `Latched fault` with contradiction reason; inspection and local/manual reset required even if the pair later becomes normal. |
+
+Stop on a wet observation takes priority over pulse continuation in that control
+iteration. Record the maximum sensing/control-loop stop latency and its possible
+delivered volume before calibration; bound residual delivery and freeboard using
+that latency. Start debounce may delay energizing, never delay this stop. Chatter
+cannot extend a pulse deadline, erase charged delivery or replenish retries.
+After any early stop, retain conservative pulse accounting and the full settling
+interval. If a safe latency/volume bound cannot be established, keep the pump
+disconnected. The 50 ms polling of the existing sketch is not this implementation
+or proof of its timing. Missing/open wiring can still look wet; this contract
+does not create fault diagnostics or independent overflow protection.
+
+#### Iteration 1b acceptance tests before pump calibration
+
+Use the future two-input implementation and **pretend-pump LED only**. Here
+LED ON means pump commanded, unlike the Phase 0 wet-status LED. Exercise inputs
+through reviewed safe fixtures or a host model; never directly short SST outputs
+or bypass their mandatory voltage/power-off protection.
+
+1. Record sensor spacing, normal stop height, configured dry debounce, maximum
+   control-loop latency, settling time and all time/volume/retry limits. Test
+   every input pair from all seven states: `Boot self-test`, `Idle`,
+   `Low debounce`, `Filling`, `Settling`, `Maintenance` and `Latched fault`
+   (28 state/input cases).
+   Every observed LED/state/latch result must match the table and default-off
+   boot behavior; no pulse starts in either wet band or the contradiction.
+   Both dry alone must not clear maintenance or a fault latch. During
+   `Low debounce`, test each pair immediately before and at the configured
+   start boundary: lower wet/upper dry cancels the pending start to `Idle`;
+   either upper-wet pair inhibits and latches; only continuously both dry may
+   complete debounce with all enables valid. A return to both dry after a
+   cancellation restarts the full debounce, never the partially elapsed timer.
+2. Run five below-to-between fill simulations. Both dry starts only after the
+   recorded debounce; lower wet/upper dry extinguishes the LED in the same
+   control iteration and within the recorded latency. Keep upper dry throughout:
+   the controller must not wait for upper wet. After settling in the between
+   band, the attempt ends and the LED stays off.
+3. While off and during a pulse, inject each upper-wet pair separately. Require
+   immediate inhibition/stop, the correct fault reason, persistence through
+   reboot, and no restart on returning to both dry. Only DISABLE, inspection,
+   healthy self-test and deliberate local/manual reset may clear the latch.
+4. Exercise both dry through normal pulse expiry and settling: retry only after
+   a fresh debounce, with the previous delivery charged. Repeatedly toggle the
+   lower input around wet/dry: verify immediate stops, full settling and no
+   deadline, attempt, retry or rolling-budget reset. Test ordinary per-pulse
+   runtime expiry and per-pulse volume-cap completion separately: each stops
+   to `Settling` without a fault latch if no other fault limit is reached.
+   Exhaust attempt runtime/volume, retry count and rolling daily runtime/volume
+   limits separately: each inhibits further delivery and latches, including
+   when coincident with normal pulse completion. A missed stop deadline is a
+   fault, not normal expiry. Reaching wet never erases consumed delivery. Test
+   DISABLE, watchdog, brownout and corrupt persistence.
+5. Record five full fill/drain band cycles, including all four logical pairs
+   via the safe test fixture for the contradictory case. Record expected/actual
+   state, command, latency, charged volume, latch and reset for every case. All
+   must pass before iteration 1c, including its first calibration pulse. Physical
+   tests and this future implementation remain pending; model results alone do
+   not establish hardware timing or electrical qualification.
 
 ### 6.2 Persistence and reset behavior
 
@@ -221,213 +306,173 @@ Costs are planning ranges in 2026 USD before shipping/tax, not quotations.
 
 ### 8.1 Phase 0 — SST water-detection hello world
 
-**Status: firmware compile validation passed; all physical validation is pending.**
-Phase 0 is a supervised, low-energy, dry-bench experiment. It proves only a
-protected binary SST input, an external LED, and change-only serial reporting.
-It has no pump, relay, MOSFET, other sensor, Wi-Fi, metrics, enclosure, or
-aquarium installation. Passing it does not authorize unattended operation or
-aquarium installation.
+**Status: existing external-LED sketch compile validation passed; electrical
+qualification and all physical validation are pending.** The smaller iterations
+below are a learning plan, not implemented firmware or completed experiments.
+Phase 0 has no pump, relay, MOSFET, Wi-Fi, enclosure, or aquarium installation.
+The existing sketch does not drive the onboard RGB LED or support two sensors.
 
-Use a separate cup of water, not the aquarium. Only the SST optical prism tip
-may contact water. Keep the ESP32, breadboard, USB cable, bench supply, and all
-exposed conductors dry; wear eye protection if available and turn power off
-before rewiring. No pump or other actuator may be connected. There is no
-independent high-water cutoff, and this experiment cannot distinguish water
-from disconnected wiring or lost sensor power. No enclosure or structural part
-is needed, so Phase 0 creates no OpenSCAD or STL files; the PLA/OpenSCAD
-requirements begin when later phases add structural components.
+Use a separate freshwater cup/bucket and keep electronics, USB, supplies, and
+exposed conductors dry. Only the optical prism tip contacts water. Isolate all
+power before rewiring. No actuator may be connected through iterations 0a-1b.
+An LED result is never permission to operate unattended.
 
-#### Required hardware
+#### Small learning iterations and prerequisites
 
-- 1 × Espressif ESP32-S3-DevKitC-1-N8R8.
-- 1 × SparkFun SST Liquid Level Sensor, `SEN-13835` /
-  `LLC200D3SH-LLPK1`.
-- 1 × solderless breadboard and suitable jumper wires or test leads.
-- 1 × data-capable Standard-A-to-Micro-B cable for the board's USB-to-UART port.
-- 1 × regulated bench power supply.
-- 3 × 10 kΩ, ¼ W, 5% resistors: one upper-divider resistor and two in series
-  for the 20 kΩ lower-divider resistance. Their four-band code is
-  brown-black-orange, typically followed by a gold tolerance band.
-- 1 × 330 Ω, ¼ W, 5% resistor. Its four-band code is orange-orange-brown,
-  typically followed by a gold tolerance band.
-- 1 × ordinary external LED.
-- 1 × clean cup containing fresh water.
+Each row inherits the preceding gates and hardware; its BoM is the smallest
+addition, not a replacement inventory. Record date, board revision, firmware
+revision, measurements, instrument uncertainty, and pass/fail for each gate.
+Future firmware/CAD work must implement each missing capability separately.
 
-Resistor orientation does not matter. The LED anode is normally its longer
-lead; the cathode is normally its shorter lead and corresponds to the package's
-flat side. Recommended but not required: a digital multimeter, eye protection,
-and a lint-free cloth for drying the sensor tip. No capacitor is required for
-this minimal experiment.
+| Iteration / objective | Smallest added BoM | Why it matters | Measurable pass criteria (all physical results pending) |
+| --- | --- | --- | --- |
+| **0a: board, USB, serial** | One ESP32-S3-DevKitC-1-N8R8 and known data-capable USB cable; computer reused. | Separate port, power, upload and serial learning from external wiring. Verify actual board/module and revision against its Espressif schematic before any GPIO instructions. | Record revision, connector and selected port; complete three upload/reset cycles and obtain the expected serial banner at 115200 baud each time, with no external circuit attached. Sensor text from a floating input is not evidence. |
+| **0b: onboard RGB LED** | None beyond 0a. | Learn addressable LED control without breadboard wiring; distinguish RGB from the power LED. Use the verified revision's RGB pin and matching example, not generic blink assumptions. | A future board-only example displays red, green, blue and off in the recorded order for five cycles; serial confirms each command. No SST or actuator connected. |
+| **0c: protected SST wet/dry bucket indication** | One LLC200D3SH-LLPK1, regulated 5 V sensor supply, breadboard/leads, mandatory per-channel interface/protection package below, freshwater cup/bucket, meter and transient-measurement access. Reuse onboard RGB/serial. | Learn datasheet limits, worst-case tolerances, verification before GPIO connection, and safe power-off behavior. The external LED is unnecessary for this step; protection is not optional. | Pass the electrical qualification gate first; then record at least five dry/wet/blotted-dry cycles and steady-state observations without unexplained transitions, plus the approved power-sequence tests. Future RGB indication must agree with serial. Existing firmware cannot distinguish disconnected sensor from wet. |
+| **0d: separate external LED/resistor** | One ordinary LED and one separate 330 ohm, 1/4 W, 5% current-limiting resistor. Retain all SST protection parts. | Learn polarity, external current limiting and output wiring independently of sensor interfacing. | Verify LED current against selected LED and GPIO ratings; after 0c qualification, existing sketch reports dry/HIGH/LED off and wet/LOW/LED on for five cycles. No pump. |
+| **1a: simple parametric hang-on-back mount** | Small PLA print and required fasteners/retainer; reuse one qualified SST channel. | Learn rim fit, secure horizontal tip placement, manual height adjustment and cable strain relief before moving water. | Commit editable OpenSCAD with rim thickness, offset, sensor fit and height parameters; render minimum/nominal/maximum intended fit cases; on the test vessel record ten wet/dry transitions and no slipping or height change during a supervised one-hour fit test. This is not long-term PLA qualification. |
+| **1b: two sensors, adjustable spacing, pretend-pump LED** | Second SST plus its own complete qualified interface/protection package; parametric second holder/spacing; reuse external LED/resistor as pretend pump. | Learn discrete bands, disagreement, debounce and bounded state transitions without an actuator. Two identical optical sensors are not an independent overflow cutoff. | Pass the section 6.1 [two-SST acceptance tests](#iteration-1b-acceptance-tests-before-pump-calibration): both dry permits only debounced bounded pulses; lower wet/upper dry stops at the lower setpoint; either upper-wet pair stops and latches until manual reset. Record all 28 state/input cases and five fill/drain cycles, latency, timeout/volume budgets and chatter behavior. Do not claim continuous height or reliable open-wire detection. |
+| **1c: supervised calibrated pumping** | Selected 12 V pump, tubing/secured outlet, fused default-off driver/flyback, listed supply/conversion, local ARM/DISABLE, containment and calibration vessel; retain regulated 5 V SST rail and every channel's protection. | Replace the pretend actuator only after proving bounds. Reservoir maximum water surface stays below the delivery outlet; secure outlet above maximum aquarium waterline. | Pass first-pump gate below, all Phase 1 tests and its 100-cycle exit criteria. Record calibrated runtime/volume bounds, pump-off flow, fault stops and manual reset. Observer remains present; no unattended use. |
+| **2/3 observability iteration** | No new sensor required; reuse controller/network and existing Prometheus/Grafana infrastructure. Independent overflow, source and leak protection remain mandatory additions before unattended use. | Learn trustworthy telemetry and alerts after local states and limits exist. | Reconcile ten local events with telemetry; deliberately lose Wi-Fi, ingestion, dashboards and alert routing without changing shutdown/budgets; pass controller-down and runbook drills. Complete Phase 2 and Phase 3 protection gates before considering unattended use. |
 
-#### Exact circuit
+Iterations 1a-1c belong to Phase 1; they do not authorize aquarium installation
+before Phase 0 qualification. Their mount sources and PLA inspection policy are
+in section 8.2. Two sensors report bands, never a continuous water height.
 
-```text
-Bench +5.00 V ---------------- SST red
+#### Required hardware and protection BoM
 
-Bench GND -------------------- SST blue
-    |
-    +------------------------- ESP32 GND
-    |
-    +------------------------- LED cathode
+For **every SST channel**, including an onboard-RGB-only experiment, retain:
 
-SST green ---- 10 kΩ ----+---- GPIO4
-                         |
-                       10 kΩ
-                         |
-                       10 kΩ
-                         |
-                        GND
+- One SparkFun SEN-13835 / SST LLC200D3SH-LLPK1 and a **regulated 5 V** sensor
+  rail whose actual tolerance, startup and shutdown behavior must be qualified.
+  The **12 V rail is for the later pump**, not this input circuit.
+- One complete voltage-interface and power-off-protection package, with its
+  rated parts and quantities recorded before assembly. This is mandatory and
+  currently **selection/qualification pending**, not an optional accessory.
+- The existing analysis candidate is **three 10 kohm, 1/4 W, +/-5% resistors per
+  channel**: one upper and two series lower (20 kohm), also providing a lower-leg
+  pull-down. These resistors alone are **not a qualified protection package**.
+  Keep them in the candidate BoM until a reviewed replacement supersedes it;
+  any additional protection or replacement interface needs manufacturer evidence.
+- Breadboard/leads or rated connectors, defined ground/reference routing and
+  strain relief. Reuse a meter; arrange appropriate transient measurement to
+  assess noise/overshoot. Measurements are required, not optional.
 
-GPIO5 ---- 330 Ω ---- LED anode
-```
+The optional **external indicator** adds one LED and its **separate 330 ohm,
+1/4 W, +/-5% resistor**; this is not an SST divider/protection resistor. Omitting
+the external LED removes only those two items. Board, USB cable, freshwater
+test vessel and measurement equipment are shared. No new buffer, clamp,
+isolator, capacitor or wiring recipe is selected by this document. Final parts,
+ratings and cost remain open until manufacturer-supported interface review.
 
-1. Put the unpowered ESP32, breadboard, and bench supply on a dry surface.
-2. Leave the USB cable disconnected and the bench-supply output OFF while
-   making or changing connections.
-3. Identify the ESP32 header pins labeled GPIO4, GPIO5, and GND; use the printed
-   labels rather than counting header positions.
-4. Set the bench supply to exactly 5.00 V with an approximately 50 mA current
-   limit, keep its output OFF, and reserve it for powering only the SST.
-5. Connect bench ground to the breadboard ground rail.
-6. Connect an ESP32 pin labeled GND to that rail to establish common ground.
-7. Connect the SST blue wire separately to the common-ground rail.
-8. Connect the LED cathode separately to the common-ground rail.
-9. Connect two 10 kΩ resistors in series from a new divider junction to common
-   ground; together they form the 20 kΩ lower leg and external pull-down.
-10. Connect that divider junction to the ESP32 header pin labeled GPIO4.
-11. Connect the SST green wire through the remaining 10 kΩ resistor to the
-    divider junction. Never connect the raw SST output directly to GPIO4 or any
-    other ESP32 GPIO.
-12. Connect GPIO5 through the 330 Ω resistor to the LED anode.
-13. Connect the SST red wire separately to bench +5.00 V.
-14. Reinspect every connection, then power the ESP32-S3 only through its
-    USB-to-UART Micro-USB (Micro-B) connector with the data-capable cable. Do
-    **not** connect bench +5 V to the ESP32 5 V pin while USB powers the board.
+#### Electrical qualification gate - before any GPIO connection
 
-The SST is a 5 V-class push-pull source. The upper resistance is 10 kΩ and the
-lower resistance is 20 kΩ:
+The previous direct assembly recipe is withdrawn pending qualification. Do not
+connect the candidate divider to GPIO4 or any ESP32 input for initial tests.
+Never connect raw SST output to a GPIO, supply the SST from 3.3 V, or reuse this
+divider at 12 V. Do not tie bench +5 V to the board's 5 V pin while USB powers it.
 
-`Vgpio = Vsensor_out × 20 kΩ / (10 kΩ + 20 kΩ)`
+**Read the exact parts first.** The [SST LLC200D3SH-LLPK1 datasheet,
+DS-0141 rev 1](https://cdn.sparkfun.com/datasheets/Sensors/Infrared/DS0141rev1_LLDigital-LLC200D3SH-LLPK1.pdf)
+specifies 4.5-15.4 V supply, push-pull HIGH in air, and output values at 100 mA:
+HIGH has at most a 1 V drop from supply; LOW is at most 0.5 V. Its red/green/blue
+leads are supply/output/ground. The analysis below assumes dry output from
+Vs - 1 V to Vs and wet output from 0 to 0.5 V. Confirm the output limits apply
+at the actual divider load, temperature and transients; the stated test load
+does not establish every application condition or powered-off behavior.
 
-Thus a nominal 5.00 V sensor HIGH becomes approximately 3.33 V. With nominal
-resistor values and the documented sensor output range, expect 2.67–3.33 V when
-dry and 0–0.33 V when wet. Accounting for the specified 5% tolerance of all
-three divider resistors, approximately 2.58–3.44 V dry and 0–0.34 V wet are
-possible for a correctly assembled circuit. These tolerance-inclusive ranges,
-not only the nominal-resistor expectations, determine voltage validation. The
-divider protects the 3.3 V ESP32 input from the output; the GPIO absolute
-maximum is 3.6 V. The SST must not be powered from 3.3 V, which is below its
-documented operating range, and its output must always pass through the
-divider.
+The [ESP32-S3 datasheet v2.2, section 5.4, Table 5-4](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+gives HIGH minimum **0.75 x VDD**, upper input operating bound **VDD + 0.3 V**,
+and LOW maximum **0.25 x VDD** (lower bound -0.3 V), where VDD is the respective
+GPIO power domain. Table 5-1's 3.6 V **input power-pin** absolute maximum is not
+a complete GPIO qualification. The DC table is specified at 3.3 V, 25 C; its
+limits are not proof of safe input injection when unpowered.
 
-The 20 kΩ lower resistance also pulls GPIO4 LOW when the SST is disconnected or
-unpowered. Consequently, disconnected/unpowered reads as WET and illuminates
-the LED. This is conservative for future pump safety, but Phase 0 cannot tell
-actual water from a power or wiring failure.
+**Reproduce the tolerance calculation.** Let Ru be the 10 kohm upper resistor
+and Rl the sum of the two lower resistors; Vnode = Vout x Rl / (Ru + Rl).
+With independent +/-5% tolerances, kmin = 19 / (10.5 + 19) = 0.644068 and
+kmax = 21 / (9.5 + 21) = 0.688525. The lower pair's worst-case sum is 19-21 kohm;
+do not assume their errors cancel.
 
-#### Arduino IDE 2.x setup and upload
+| Assumed rails / corner | Calculated node | Relevant bound / result |
+| --- | --- | --- |
+| Exactly Vs = 5.00 V, VDD = 3.30 V, dry minimum | 4 x kmin = 2.57627 V | HIGH minimum 2.475 V; only **0.10127 V margin** before noise/load effects. |
+| Same exact rails, dry maximum | 5 x kmax = 3.44262 V | Upper bound 3.600 V; 0.15738 V margin. |
+| Same exact rails, wet maximum | 0.5 x kmax = 0.34426 V | LOW maximum 0.825 V. |
+| Vs = 4.75 V (-5%), VDD = 3.30 V | 3.75 x kmin = 2.41525 V | Below HIGH minimum by 0.05975 V. |
+| Vs = 5.25 V (+5%), VDD = 3.30 V | 5.25 x kmax = 3.61475 V | Above upper bound by 0.01475 V. |
+| Vs = 4.75 V, illustrative VDD = 3.465 V (+5%) | 2.41525 V | HIGH minimum 2.59875 V; fails by 0.18350 V. |
+| Vs = 5.25 V, illustrative VDD = 3.135 V (-5%) | 3.61475 V | Upper bound 3.435 V; fails by 0.17975 V. |
+| Accidental Vs = 12 V, nominal ratio 2/3 | Dry 7.333-8.000 V | Incompatible with this ESP32 interface. |
 
-1. Install Arduino IDE 2.x.
-2. In **Preferences > Additional Boards Manager URLs**, add
-   `https://espressif.github.io/arduino-esp32/package_esp32_index.json`.
-3. In Boards Manager, install `esp32` by Espressif Systems and select version
-   **3.3.8** for this reproducible environment.
-4. Open `sst_led.ino`, then select **ESP32S3 Dev Module** and these Tools values:
-   **Flash Size: 8 MB**, **Partition Scheme: 8M with spiffs**,
-   **Flash Mode: QIO 80MHz**, **PSRAM: OPI PSRAM**, and
-   **Upload Mode: UART0 / Hardware CDC**.
-5. Select the serial port belonging to the ESP32 USB-to-UART connection and
-   click Upload. If upload fails, confirm that the cable carries data, reselect
-   the port, and use Espressif's BOOT/reset sequence: hold BOOT, press and
-   release RESET, release BOOT, then retry upload.
+The illustrative VDD tolerances are not measured board specifications. An exact
+bench display is not an exact rail. This static calculation omits resistor drift,
+output loading, leakage, ground offset, startup, cable pickup and overshoot.
+The present circuit is **unqualified**, even though one nominal calculation fits.
 
-#### Bring-up and test procedure
+**Measure and review before connection.** Record exact board revision and
+schematic, supply min/max and uncertainty, GPIO-domain rail under load, output
+limits, resistor values/tolerances, noise and transient envelope. Keep the MCU
+input physically isolated while checking the sensor/interface node into an
+appropriate representative load. Check dry, wet, disconnect, startup/shutdown,
+brownout, and both independent power orders. Do not intentionally expose the
+GPIO to an out-of-range signal to test it. Define positive HIGH/LOW and upper/
+lower voltage margins including all uncertainties before accepting results.
 
-1. Put the breadboard, ESP32, supply, and exposed wiring on a dry surface away
-   from the aquarium.
-2. Leave USB disconnected and the bench-supply output OFF while wiring.
-3. Configure 5.00 V and an approximately 50 mA limit with the output still OFF.
-4. Identify header labels GPIO4, GPIO5, and GND; do not count physical pin
-   positions, because board layouts and viewing direction can mislead.
-5. Build and inspect the 10 kΩ/20 kΩ voltage divider.
-6. Build and inspect the GPIO5–330 Ω–LED circuit, including LED polarity.
-7. Connect the common bench/ESP32/LED ground.
-8. Connect the red, blue, and green SST wires last.
-9. If available, use a multimeter to verify resistor values and that +5 V is
-   not accidentally shorted to ground.
-10. Connect USB while leaving SST power OFF.
-11. Install core 3.3.8, configure the IDE, and upload the sketch as above.
-12. Open Serial Monitor at 115200 baud.
-13. Press RESET after opening Serial Monitor to see the banner and initial state.
-14. With SST power OFF, verify GPIO4 LOW/WET and LED ON. This is a
-    fault-conservative electrical state, not proof that water is present.
-15. Turn on the 5.00 V SST supply with its optical tip dry.
-16. Verify GPIO4 HIGH/DRY, LED OFF, and the corresponding serial transition.
-17. If available, measure GPIO4 to common ground: expect approximately
-    2.58–3.44 V dry (the nominal-resistor expectation is 2.67–3.33 V). Stop
-    immediately and turn power off if it exceeds 3.6 V.
-18. Touch or dip only the optical prism tip into the fresh-water cup. Never
-    immerse its wire exit, connector, breadboard, or electronics.
-19. Verify GPIO4 LOW/WET, LED ON, and the serial transition.
-20. If available, verify approximately 0–0.34 V at GPIO4 while wet (the
-    nominal-resistor expectation is 0–0.33 V).
-21. Remove the SST and gently blot only the optical tip dry.
-22. Verify return to GPIO4 HIGH/DRY and LED OFF.
-23. Repeat at least five wet/dry cycles and record every result below.
-24. Turn the bench-supply output OFF before changing or disconnecting wiring.
-25. Disconnect USB, dry the sensor, empty the cup, and store electronics dry.
+**Power-off is a separate gate.** With sensor on and MCU off, a divider can
+drive the dead input and backfeed its supply. A pull-down and a preferred manual
+power sequence do not prove safety against unplugging or a supply failure.
+Review manufacturer-supported powered-off input, injection/current and reverse-
+power limits for the selected interface and board; prove safe behavior with
+either rail absent, including MCU on/sensor off. No GPIO connection until the
+reviewed solution covers these states and the measured envelope passes. Unknown
+limits keep the gate open; no unverified substitute component is recommended.
 
-Expected output contains the initial state and transitions only (aside from the
-startup banner); steady polling does not repeat lines:
+#### Firmware and physical evidence
 
-```text
-Aquiloop SST + LED Phase 0
-GPIO4: LOW -> WET; GPIO5 LED: ON
-GPIO4: HIGH -> DRY; GPIO5 LED: OFF
-```
+The practical [experiment README](../../firmware/auto_top_off/experiments/sst_led/README.md)
+retains the existing sketch settings and a pending validation record. Its
+GPIO4 input and GPIO5 external output require verification against the actual
+board before use. For onboard RGB, consult the matching Espressif
+[v1.0 guide](https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32s3/esp32-s3-devkitc-1/user_guide_v1.0.html)
+or [v1.1 guide](https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32s3/esp32-s3-devkitc-1/user_guide_v1.1.html):
+their RGB connections differ. Do not infer revision from N8R8 memory marking.
 
-#### Troubleshooting
+The existing digital-only sketch polls every 50 ms and reports initial state
+and changes; it cannot diagnose analog overvoltage or distinguish a disconnected
+sensor with intact pull-down from wet. LOW maps to WET/LED on, HIGH to DRY/LED
+off. Sensor-power loss is expected to pull low only if the unpowered output
+does not defeat that bias; this remains a measurement gate. These are intended
+interpretations, not proof of fault detection or electrical safety. A broken
+lower leg/ground can behave differently. No physical result is claimed here.
 
-| Symptom | Checks and action |
-| --- | --- |
-| No serial port appears | Use the USB-to-UART connector and a known data cable; try another USB port, inspect the connector, and install any host driver required for the board's USB bridge. |
-| Upload fails | Select the correct port and settings, close programs using the port, and retry the BOOT/reset sequence above. |
-| No serial text appears | Set 115200 baud, open the correct port, and press RESET; the sketch prints steady states only once. |
-| LED never turns on | Test with SST power OFF; check GPIO5, the 330 Ω value, common ground, and a reversed LED (short cathode/flat side belongs at ground). |
-| LED is always on | Dry/blot the tip, confirm SST has 5.00 V and common ground, and inspect the green-wire divider; an unpowered/disconnected SST intentionally reads WET. |
-| LED behavior is inverted | Confirm GPIO4 is the divider junction, GPIO5 drives the anode, and LOW means WET while HIGH means DRY; do not reverse this in firmware. |
-| GPIO4 is above 3.6 V | Turn both supplies off immediately. Do not continue until one 10 kΩ upper and two series 10 kΩ lower resistors, their connections, and meter reference are corrected. Never bypass the divider. |
-| State changes on power-up but not when dipped | Verify red/blue/green wire functions, use fresh water, clean the prism, dip only the optical tip, and check for a sound 5.00 V supply. |
-| SST remains WET after removal | A retained droplet can keep the optical tip wet; gently blot it with a lint-free cloth. |
-| State is noisy or rapidly changing | Stabilize the tip at the test boundary, check loose leads, common ground, supply current limiting, resistor junctions, and moisture near electronics. The small sketch intentionally adds no debounce beyond 50 ms polling. |
-| Results are implausible | Power off and verify the 10 kΩ brown-black-orange and 330 Ω orange-orange-brown values, LED polarity, shared ground, and SST red = +5 V, blue = ground, green = output. Do not troubleshoot by swapping powered wires. |
+#### First-pump gate (iteration 1c)
 
-#### Validation record
+Before replacing the pretend-pump LED, qualify both SST channels, implement and
+pass the [two-SST acceptance tests](#iteration-1b-acceptance-tests-before-pump-calibration)
+and Phase 1 state machine. Calibrate to the **lower SST stop point**, never a
+fill-to-upper interpretation. Record positive **runtime and calibrated
+volume** ceilings for pulse, attempt, retries and rolling 24 hours. The section
+6 ceilings (at most 5 s per pulse, 3 pulses/attempt, at least 10 s settling) are
+upper bounds to lower after calibration, not authorization for a first run.
+Use a supervised non-livestock test vessel and a source volume smaller than its
+measured safe freeboard; account for residual tube delivery. Establish an initial
+conservative delivery bound from pump evidence before even the first calibration
+pulse. Missing calibration/configuration means no automatic pumping.
 
-**Physical validation is pending.** A person must complete this table; no
-physical observations have been claimed.
+Prove default-off at boot/reset, loss of control power and watchdog expiry,
+timeout stop, exhausted-volume inhibition, persistent fault/budget across power
+cycles, local DISABLE, and inspection plus manual reset after a latch. Require
+an observer within reach of power removal for every powered pump test.
 
-| Test | Expected GPIO4 | Expected interpretation | Expected LED | Observed result | Pass/fail | Notes |
-| --- | --- | --- | --- | --- | --- | --- |
-| Sensor supply OFF | LOW | WET (fault-conservative) | ON |  |  |  |
-| Sensor powered and dry | HIGH; 2.58–3.44 V if measured (2.67–3.33 V nominal) | DRY | OFF |  |  |  |
-| Sensor tip wet | LOW; 0–0.34 V if measured (0–0.33 V nominal) | WET | ON |  |  |  |
-| Sensor removed and blotted dry | HIGH | DRY | OFF |  |  |  |
-| Five repeated wet/dry cycles | Alternating HIGH/LOW without unexpected transitions | DRY/WET | OFF/ON |  |  |  |
-
-#### Exit criteria
-
-- The sketch compiles for the ESP32-S3 N8R8 configuration.
-- Dry produces HIGH/DRY and LED OFF; wet produces LOW/WET and LED ON.
-- SST power OFF produces the documented conservative LOW/WET state.
-- A person records at least five cycles without unexpected transitions.
-- GPIO4 never exceeds 3.6 V when measured, if a multimeter is available.
-- Wiring and observations are recorded.
-
-All physical criteria remain pending until the table is completed. Phase 0's
-estimated hardware range is **$45–$75**, including the reusable ESP32 and SST.
-Phase 1 builds on this verified protected input path and adds pump driving and
-the first supervised top-off behavior; it is not part of this experiment.
+Daniel's accepted placement is reservoir **maximum water surface below the
+delivery outlet**, with that outlet secured above the aquarium's maximum
+waterline and a visible air gap. At worst-case source fill and installed tube
+routing, collect and measure delivery after pump-off and power removal; record
+test duration and residual volume against the calibrated allowance, with no
+continuing gravity flow. Do not assume a peristaltic pump or check valve seals.
+Repeat after tube/outlet changes. Independent overflow cutoff, source-low and
+leak protection plus containment must pass before unattended use is considered.
 
 ### 8.2 Phase 1 - supervised minimal prototype
 
@@ -440,7 +485,8 @@ even if that amount is far below five gallons.
 
 #### Included hardware/software
 
-- ESP32-S3 development board; 12 V SST; protected level-shifting input; 12 V
+- ESP32-S3 development board; regulated 5 V SST rail and separately qualified
+  interface/protection for each SST channel; separate 12 V
   peristaltic pump selected from measured lift; default-off fused MOSFET/flyback
   driver; listed supply and 12-to-5/3.3 V conversion as required.
 - Local maintained ARM/DISABLE control and simple local status (power/armed,
@@ -451,7 +497,11 @@ even if that amount is far below five gallons.
   per-attempt runtime/volume, rolling daily budget, watchdog, persistent latch,
   and conservative reboot behavior described above.
 - GFCI, drip loops, fused low voltage, air-gapped secured outlet, strain relief,
-  and reservoir below tank where practical.
+  and reservoir maximum water surface below the delivery outlet.
+
+Iteration 1b adds a second SST for band learning; it does not replace the
+Phase 2 diverse high-high cutoff. The present one-input sketch cannot implement
+that iteration or Phase 1 pump control.
 
 #### Phase 1 printed-part inventory and exact planned source
 
@@ -462,7 +512,7 @@ required editable source; optional STL output is never the sole CAD artifact.
 | --- | --- | --- |
 | Electronics enclosure body/lid | `tools/auto_top_off/enclosure.scad` | Splash-resistant separated housing, ventilation strategy, fasteners, strain relief. |
 | Aquarium rim bracket/clamp | `tools/auto_top_off/rim_bracket.scad` | Manual height adjustment and secure top-rim attachment. |
-| SST holder and optical-tip guard | `tools/auto_top_off/sst_sensor_holder.scad` | Fixed horizontal alignment; shields bumps without trapping water at the tip. |
+| SST holder, optical-tip guard and adjustable second-sensor spacing | `tools/auto_top_off/sst_sensor_holder.scad` | Fixed horizontal alignment; shields bumps without trapping water at the tip. |
 | Pump mount and vibration feet | `tools/auto_top_off/pump_mount.scad` | Secures the selected pump above containment where possible. |
 | Air-gap outlet-tube clip | `tools/auto_top_off/outlet_tube_clip.scad` | Locks tubing above maximum waterline and prevents submersion. |
 | Reservoir lid insert/grommet | `tools/auto_top_off/reservoir_lid_insert.scad` | Routes suction tube without sealing the vent or weakening the bucket. |
@@ -496,10 +546,19 @@ blocked/kinked tubing, calibration drift, structural creep, or remote alarm.
 
 #### BOM delta
 
-Phase 1 incremental cost is approximately $60-$190; cumulative cost through
-Phase 1 remains approximately $105-$265: ESP32-S3 (1, $10-$25), SST (1,
-$25-$55), pump (1, $20-$60), driver/protection/converter parts (1 set,
-$10-$30), listed supply (1, $15-$35), ARM control/indicators/connectors/fuse
+Previous Phase 1 planning ranges were $60-$190 incremental and $105-$265
+cumulative; these are incomplete until qualified interface parts and the second
+SST are costed. Retain the Phase 0 mandatory per-channel protection BoM (including
+the three-resistor candidate until superseded) and regulated 5 V sensor supply;
+iteration 1b adds one SST and one complete protection package. The 330 ohm LED
+resistor stays a separate indicator item. Through iteration 1b, the cumulative
+sensor inventory is two SSTs and two complete qualified protection packages
+(six candidate 10 kohm resistors until superseded), reusing one board and
+indicator. The second SST was not included in the old totals.
+
+Other Phase 1 additions are pump (1, historical $20-$60),
+driver/protection/converter parts (1 set, $10-$30), listed supply
+(1, $15-$35), ARM control/indicators/connectors/fuse
 (1 set, $10-$20), tubing/check-compatible fittings without relying on a check
 valve for safety (1 set, $5-$15), and PLA/fasteners (1 set, $10-$25).
 
@@ -611,7 +670,8 @@ safe freeboard; alarms and runbook drills pass; electrical, plumbing, mount,
 GFCI, air-gap, source-height or validated anti-siphon protection, containment
 plan, and maintenance records receive a documented human review. “Considered”
 is not blanket approval: the specific installation
-requires a risk review, and Phase 3 protections are strongly preferred.
+requires a risk review, and the Phase 3 independent source-water and leak
+protections, containment and their validation are mandatory before unattended use.
 
 ### 8.4 Phase 3 - source-water and leak protection
 
@@ -727,13 +787,18 @@ fit, creep, splash, temperature, and 100-cycle mounting tests.
 
 | Phase | Main additions | Approx. phase cost | Approx. cumulative cost |
 | --- | --- | ---: | ---: |
-| 0 | ESP32-S3, protected SST interface, LED, bench validation | $45-$75 | $45-$75 |
-| 1 | Pump/driver, listed supply, controls, tubing, PLA fixtures | $60-$190 | $105-$265 |
+| 0 | Board/USB, onboard RGB; SST regulated 5 V rail and mandatory per-channel qualified interface/protection; optional external LED + separate 330 ohm resistor | $45-$75 | $45-$75 |
+| 1 | Second SST + complete qualified interface/protection, parametric spacing/mount, separate 12 V pump/driver, controls, tubing, fixtures | $60-$190 | $105-$265 |
 | 2 | Dual NC high-high floats, supervised safety controller/relay and isolated feedback, observability integration | $85-$235 | $190-$500 |
 | 3 | Reservoir-low, two leak zones, containment, optional load cell | $45-$160 | $235-$660 |
 | 4 | VL53L4CD, waterproof temperature probe, baffle/material validation | $25-$90 | $260-$750 |
 
-Quantities and ranges are preliminary. Before purchase, the BOM must identify
+These are historical preliminary ranges, **not complete costed BoMs**: add the
+unpriced qualified protection package for every SST channel, measurement access,
+and second SST; revised totals are pending. Mandatory protection never disappears
+when the external LED is omitted. The actual BoM is recorded in these sections;
+`hardware/auto_top_off/bom.csv` is only a planned path and does not yet exist.
+Before purchase, the BoM must identify
 manufacturer part number, voltage/current/contact ratings, wetted materials,
 temperature range, tubing life, listed supply certification, fuse values, wire
 gauge, connector ingress strategy, and whether optional items are included.
