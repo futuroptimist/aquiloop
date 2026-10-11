@@ -166,13 +166,18 @@ class ApiError(RuntimeError):
         super().__init__(f"{service} request failed ({status}); rerun to reconcile")
 
 
-def request(url, method="GET", data=None, token=None, raw=False):
+def request(url, method="GET", data=None, token=None, raw=False, form=False):
     headers = {"User-Agent": "aquiloop-binder-publication"}
     if token:
         headers["Authorization"] = f"Bearer {token}"
     if data is not None:
-        headers["Content-Type"] = "application/octet-stream" if raw else "application/json"
-        if not raw:
+        if raw:
+            headers["Content-Type"] = "application/octet-stream"
+        elif form:
+            headers["Content-Type"] = "application/x-www-form-urlencoded"
+            data = urllib.parse.urlencode(data).encode("utf-8")
+        else:
+            headers["Content-Type"] = "application/json"
             data = encoded(data)
     # Do not follow redirects carrying Authorization or log signed upload URLs.
     class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -206,7 +211,10 @@ class Services:
             url += "?" + urllib.parse.urlencode(data)
             verb, data = "GET", None
         try:
-            result = request(url, verb, data, os.environ["SLACK_BOT_TOKEN"])
+            # Match Slack's synchronous SDK wire format for ticket allocation.
+            # JSON is documented too; this is a scoped compatibility adjustment.
+            result = request(url, verb, data, os.environ["SLACK_BOT_TOKEN"],
+                             form=method == "files.getUploadURLExternal")
         except ApiError as error:
             raise SlackError(method, slack_failure_code(error.status)) from None
         if not isinstance(result, dict):

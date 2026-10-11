@@ -157,3 +157,47 @@ so workspace mismatches, invalid checkpoints, divergent history and untrusted
 publication attempts retain owner-actionable diagnostics. Unexpected manifest
 failures point to local PDF/proof inputs and the build environment; neither
 manifest nor publication failures echo arbitrary exception text.
+
+## Upload-ticket request compatibility investigation
+
+Trusted main-push run [38093200429](https://github.com/futuroptimist/aquiloop/actions/runs/38093200429)
+for merge `6baffeaec902d229969a8adbb1d5e4c0daa31a8b` built successfully, then
+failed with `files.getUploadURLExternal: invalid_arguments`. It stopped before
+byte upload or completion; the publication-state branch returned 404 both before
+and after the attempt. No retry was performed. Artifact `11685088089` was retained
+until 2026-10-24 23:23:07 UTC and preserved locally for offline inspection.
+
+The candidate has 41 pages and 1,916,014 bytes. Its SHA-256 is
+`fe32096238bed0b551df17d8896d2b2f0a10cf382d0ac23cf40ef5d8cc4bd760`;
+its provenance matches the merge and run. Intercepting the actual urllib request
+confirmed the filename is `aquiloop-binder-succulents-draft.pdf`, length is a
+positive integer equal to the byte count, and the only payload fields are
+`filename` and `length`. The token remains exclusively in the Authorization
+header. Neither credentials nor raw request/response bodies were printed.
+
+The [method contract](https://docs.slack.dev/reference/methods/files.getUploadURLExternal/)
+lists both JSON and form content types. Therefore the observed error does **not**
+prove JSON is unsupported or identify which argument Slack rejected. Offline
+comparison with the official Python `slack_sdk==3.45.0` found a wire-format
+difference: its synchronous `files_getUploadURLExternal` passes `params`, which
+[BaseClient](https://docs.slack.dev/tools/python-slack-sdk/reference/web/base_client.html)
+serializes into a UTF-8 form body. Both network transports were intercepted before
+I/O (`build_opener().open` and `_perform_urllib_http_request_internal`) using a
+fixture credential and synthetic responses. After the scoped change, the POST
+method, content type and body bytes match that SDK for the retained candidate.
+The repository does not add an SDK dependency or adopt its logging/retry behavior.
+
+Only upload-ticket allocation now uses form encoding. GitHub writes, Slack
+completion and auth retain JSON; file reconciliation retains GET; binary uploads
+retain the exact validated PDF bytes. Offline contract tests lock the SDK wire
+fixture, byte length, credential placement, unchanged neighboring requests and
+single-attempt failure behavior. Existing privacy and recovery tests remain.
+These tests reproduce the request difference, **not** the remote Slack rejection.
+
+No live diagnostic is executed by this compatibility PR. The bounded live plan,
+after owner review/merge, is one normal trusted main-push build/publication attempt
+with that run's validated candidate and existing checkpoint reconciliation. Do
+not reuse old provenance with new code, reset a checkpoint, retry the old run to
+exercise new code, or add a JSON/form fallback. If the same error persists, stop
+and propose a further fixed, allowlisted diagnostic before any live probe; never
+dump Slack response metadata or change tokens/scopes speculatively.
