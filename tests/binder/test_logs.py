@@ -184,9 +184,11 @@ class LogRenderingTests(unittest.TestCase):
             row_heights = [b-a for a, b in zip(edges, edges[1:]) if 30 <= b-a <= 40]
             self.assertEqual(len(row_heights), logs.LOG_ROWS)
             # Name and preference writing rules are at least 1.9 inches long.
+            # Tracked names use one identity rule; blank names retain two.
+            rules_per_column = 6 if "BLANK EDITION" in text else 5
             self.assertGreaterEqual(sum(136 <= x1-x0 <= 142
                                         for x0, y0, x1, y1 in horizontal),
-                                    6 * (1 if "4 of 4" in text else 3))
+                                    rules_per_column * (1 if "4 of 4" in text else 3))
 
     def test_white_paper_color_and_grayscale(self):
         from PIL import Image, ImageChops
