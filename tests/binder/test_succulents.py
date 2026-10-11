@@ -174,7 +174,8 @@ class SucculentRenderingTests(unittest.TestCase):
                                   sizes.append(size) if text.strip() else None)
                 self.assertGreaterEqual(min(sizes), 7.9)
         text = "".join(p.extract_text() for p in self.reader.pages[36:40]).replace("\u2019", "'")
-        for label in logs.LABELS.values():
+        for entry in logs.tracked_species(builder.load_manifest(ROOT / "binder/manifest-v7.yaml")):
+            label = logs.LABELS[entry]
             # Crassula's existing common label is also its scientific name.
             self.assertEqual(text.count(label), 2 if label == "Crassula rupestris" else 1)
         from test_logs import SCIENTIFIC_NAMES, normalized, extracted_name_text
