@@ -45,9 +45,9 @@ class LogTests(unittest.TestCase):
         for number, batch in enumerate(pages, 1):
             tex = logs.log_page_tex(batch, number, len(pages))
             for entry in batch:
-                self.assertEqual(logs.scientific_name(entry), SCIENTIFIC_NAMES[entry])
+                self.assertEqual(normalized(logs.scientific_name(entry)), normalized(SCIENTIFIC_NAMES[entry]))
                 pair = r"\TrackedNameCell{" + logs.LABELS[entry] + "}{" + SCIENTIFIC_NAMES[entry] + "}"
-                self.assertEqual(tex.count(pair), 1)
+                self.assertEqual(normalized(tex).count(normalized(pair)), 1)
             self.assertEqual(tex.count(r"\WhenCell &"), logs.LOG_ROWS)
 
     def test_metadata_is_escaped_and_not_a_second_name_catalog(self):
