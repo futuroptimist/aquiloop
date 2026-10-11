@@ -454,6 +454,10 @@ parametric spacing and pretend-pump LED; 1c supervised calibrated pumping.
 Two sensors indicate below/between/above bands and contradictory states, not
 continuous height or independent overflow redundancy. The present sketch
 cannot implement this two-input logic or distinguish disconnected from wet.
+Follow the [two-SST pump permission contract](aquarium-auto-top-off.md#two-sst-pump-permission-and-transition-contract):
+both dry may request a debounced bounded pulse; lower wet/upper dry stops at
+the normal lower setpoint; either upper-wet pair stops and latches. Pass the
+pretend-pump acceptance tests before any real-pump calibration.
 Preserve all Phase 1 firmware, CAD and enclosure requirements.
 
 Before any real pumping, pass the authoritative first-pump gate: bounded time

@@ -181,13 +181,18 @@ separately wired, independently powered-down-safe high-high layer.
 
 ### 6.1 State-machine outline
 
+For iterations 1b and 1c, the **lower SST is the normal-level fill-stop point**.
+The upper SST is a diagnostic high-level guard, not a second fill target or the
+independent Phase 2 high-high cutoff. The two-input contract below governs this
+state machine; the existing one-input Phase 0 sketch does not implement it.
+
 | State | Entry/action | Allowed transition |
 | --- | --- | --- |
 | **Boot self-test** | Force output off; verify configuration CRC/ranges, persistent fault and delivery ledger, reset cause, GPIO plausibility, sensors, watchdog, and ARM state. | `Idle` only when healthy and explicitly armed; otherwise `Maintenance` or `Latched fault`. |
-| **Idle** | Pump off; sample sensors; account rolling budget. A wet SST is normal. | Sustained dry samples to `Low debounce`; DISABLE to `Maintenance`; anomaly to fault. |
-| **Low debounce** | Pump off; require a configurable run of readings over a minimum duration, rejecting chatter. | Confirmed low to `Filling`; wet back to `Idle`; uncertainty/time limit to fault. |
-| **Filling** | Command one calibrated short pulse while watchdog, cutoff, input health, per-pulse runtime and volume limits remain valid. | Always to `Settling` when pulse ends; any invariant breach to fault. |
-| **Settling** | Pump off; wait for wave/ripple and sensor response, then debounce. | Wet to `Idle`; still dry to next bounded retry; retry/attempt/budget limit or contradiction to fault. |
+| **Idle** | Pump off; sample both SSTs; account rolling budget. Lower wet/upper dry is normal. | Both dry to `Low debounce`; upper wet to `Latched fault`; DISABLE to `Maintenance`; uncertainty to fault. |
+| **Low debounce** | Pump off; require both dry continuously for the configured sample count and minimum duration. | Confirmed both dry plus all enable conditions to `Filling`; lower wet/upper dry back to `Idle`; upper wet or uncertainty/time limit to fault. |
+| **Filling** | Command one calibrated short pulse only while both SSTs are dry and watchdog, cutoff, input health, runtime and volume limits remain valid. | Lower wet/upper dry stops the pulse immediately to `Settling`; upper wet stops immediately to `Latched fault`. Normal pulse completion goes to `Settling`; any invariant breach stops and faults. |
+| **Settling** | Pump off; retain the attempt and charged delivery; wait the full settling interval, then reassess both SSTs. | Lower wet/upper dry ends the attempt to `Idle`; both dry may return to `Low debounce` for a bounded retry; upper wet, uncertainty or exhausted attempt/retry/budget limits to fault. |
 | **Maintenance** | Pump positively inhibited; allow local diagnostics and calibration steps, never unrestricted remote run. | Local ARM plus self-test to `Idle`; anomaly to fault. |
 | **Latched fault** | Pump off; persist reason, counters, and timestamp/monotonic context; indicate locally and export telemetry. | Local reset only after DISABLE, inspection, healthy self-test, and documented acknowledgement. |
 
@@ -198,6 +203,68 @@ mandatory settling interval of at least 10 seconds; installation calibration
 must lower these where needed and establish safe volume limits from aquarium
 freeboard. The task watchdog must be serviced only by a healthy control loop,
 not blindly by a timer callback.
+
+#### Two-SST pump permission and transition contract
+
+Read each pair as **lower, upper** after the approved interface interpretation
+(DRY = HIGH, WET = LOW). These are observed point-switch states, not verified
+continuous height or wiring health. All start/continue permissions require local
+ARM, healthy self-test, qualified inputs, no latch, valid persistence/watchdog,
+remaining time/volume/retry budgets and all applicable safety enables. DISABLE,
+reset, detected uncertainty or any safety fault overrides the table to pump off;
+reboot never restores a running pulse or clears a latch/budget.
+
+| Lower SST | Upper SST | Observed band | May start a pulse from off? | If a pulse is already active | Subsequent state |
+| --- | --- | --- | --- | --- | --- |
+| DRY | DRY | Below lower | Only after `Low debounce` confirms both dry and all enable conditions pass; after an earlier pulse, complete `Settling` first. | May continue only to the existing pulse deadline/volume cap while all enables remain valid. | On normal pulse completion, off to `Settling`; another pulse requires a fresh debounce and remaining retry/attempt/daily budgets. |
+| WET | DRY | Between sensors; normal stop band | **No.** Keep off; do not fill toward the upper sensor. | **Stop on the first observed lower-wet sample**, without waiting for start debounce or the pulse deadline. | Off to `Settling`; if this pair remains after settling, end the attempt to `Idle`. If both become dry, re-debounce for a bounded retry; do not resume the interrupted pulse. |
+| WET | WET | At/above upper; abnormal high | **No.** Inhibit and latch. | **Stop on the first observed upper-wet sample.** | `Latched fault` with high-level reason; inspection and local/manual reset required even if the pair later becomes normal. |
+| DRY | WET | Contradictory pair | **No.** Inhibit and latch. | **Stop on the first observed upper-wet sample.** | `Latched fault` with contradiction reason; inspection and local/manual reset required even if the pair later becomes normal. |
+
+Stop on a wet observation takes priority over pulse continuation in that control
+iteration. Record the maximum sensing/control-loop stop latency and its possible
+delivered volume before calibration; bound residual delivery and freeboard using
+that latency. Start debounce may delay energizing, never delay this stop. Chatter
+cannot extend a pulse deadline, erase charged delivery or replenish retries.
+After any early stop, retain conservative pulse accounting and the full settling
+interval. If a safe latency/volume bound cannot be established, keep the pump
+disconnected. The 50 ms polling of the existing sketch is not this implementation
+or proof of its timing. Missing/open wiring can still look wet; this contract
+does not create fault diagnostics or independent overflow protection.
+
+#### Iteration 1b acceptance tests before pump calibration
+
+Use the future two-input implementation and **pretend-pump LED only**. Here
+LED ON means pump commanded, unlike the Phase 0 wet-status LED. Exercise inputs
+through reviewed safe fixtures or a host model; never directly short SST outputs
+or bypass their mandatory voltage/power-off protection.
+
+1. Record sensor spacing, normal stop height, configured dry debounce, maximum
+   control-loop latency, settling time and all time/volume/retry limits. Test
+   every table row from `Idle`, `Filling`, `Settling` and after reboot (16 cases).
+   Every observed LED/state/latch result must match the table and default-off
+   boot behavior; no pulse starts in either wet band or the contradiction.
+2. Run five below-to-between fill simulations. Both dry starts only after the
+   recorded debounce; lower wet/upper dry extinguishes the LED in the same
+   control iteration and within the recorded latency. Keep upper dry throughout:
+   the controller must not wait for upper wet. After settling in the between
+   band, the attempt ends and the LED stays off.
+3. While off and during a pulse, inject each upper-wet pair separately. Require
+   immediate inhibition/stop, the correct fault reason, persistence through
+   reboot, and no restart on returning to both dry. Only DISABLE, inspection,
+   healthy self-test and deliberate local/manual reset may clear the latch.
+4. Exercise both dry through normal pulse expiry and settling: retry only after
+   a fresh debounce, with the previous delivery charged. Repeatedly toggle the
+   lower input around wet/dry: verify immediate stops, full settling and no
+   deadline, attempt, retry or rolling-budget reset. Exhaust each runtime/volume
+   limit and verify off plus the specified latch; reaching wet never erases
+   consumed delivery. Test DISABLE, watchdog, brownout and corrupt persistence.
+5. Record five full fill/drain band cycles, including all four logical pairs
+   via the safe test fixture for the contradictory case. Record expected/actual
+   state, command, latency, charged volume, latch and reset for every case. All
+   must pass before iteration 1c, including its first calibration pulse. Physical
+   tests and this future implementation remain pending; model results alone do
+   not establish hardware timing or electrical qualification.
 
 ### 6.2 Persistence and reset behavior
 
@@ -251,7 +318,7 @@ Future firmware/CAD work must implement each missing capability separately.
 | **0c: protected SST wet/dry bucket indication** | One LLC200D3SH-LLPK1, regulated 5 V sensor supply, breadboard/leads, mandatory per-channel interface/protection package below, freshwater cup/bucket, meter and transient-measurement access. Reuse onboard RGB/serial. | Learn datasheet limits, worst-case tolerances, verification before GPIO connection, and safe power-off behavior. The external LED is unnecessary for this step; protection is not optional. | Pass the electrical qualification gate first; then record at least five dry/wet/blotted-dry cycles and steady-state observations without unexplained transitions, plus the approved power-sequence tests. Future RGB indication must agree with serial. Existing firmware cannot distinguish disconnected sensor from wet. |
 | **0d: separate external LED/resistor** | One ordinary LED and one separate 330 ohm, 1/4 W, 5% current-limiting resistor. Retain all SST protection parts. | Learn polarity, external current limiting and output wiring independently of sensor interfacing. | Verify LED current against selected LED and GPIO ratings; after 0c qualification, existing sketch reports dry/HIGH/LED off and wet/LOW/LED on for five cycles. No pump. |
 | **1a: simple parametric hang-on-back mount** | Small PLA print and required fasteners/retainer; reuse one qualified SST channel. | Learn rim fit, secure horizontal tip placement, manual height adjustment and cable strain relief before moving water. | Commit editable OpenSCAD with rim thickness, offset, sensor fit and height parameters; render minimum/nominal/maximum intended fit cases; on the test vessel record ten wet/dry transitions and no slipping or height change during a supervised one-hour fit test. This is not long-term PLA qualification. |
-| **1b: two sensors, adjustable spacing, pretend-pump LED** | Second SST plus its own complete qualified interface/protection package; parametric second holder/spacing; reuse external LED/resistor as pretend pump. | Learn discrete bands, disagreement, debounce and bounded state transitions without an actuator. Two identical optical sensors are not an independent overflow cutoff. | Record spacing in mm; exercise all four input combinations and five fill/drain cycles. Both dry = below lower; lower wet/upper dry = between; both wet = at/above upper; lower dry/upper wet = contradiction. Test boot/reset, timeout, budgets, chatter and faults using LED only; contradiction inhibits and latches until manual reset. Do not claim continuous height or reliable open-wire detection. |
+| **1b: two sensors, adjustable spacing, pretend-pump LED** | Second SST plus its own complete qualified interface/protection package; parametric second holder/spacing; reuse external LED/resistor as pretend pump. | Learn discrete bands, disagreement, debounce and bounded state transitions without an actuator. Two identical optical sensors are not an independent overflow cutoff. | Pass the section 6.1 [two-SST acceptance tests](#iteration-1b-acceptance-tests-before-pump-calibration): both dry permits only debounced bounded pulses; lower wet/upper dry stops at the lower setpoint; either upper-wet pair stops and latches until manual reset. Record all 16 state/input cases and five fill/drain cycles, latency, timeout/volume budgets and chatter behavior. Do not claim continuous height or reliable open-wire detection. |
 | **1c: supervised calibrated pumping** | Selected 12 V pump, tubing/secured outlet, fused default-off driver/flyback, listed supply/conversion, local ARM/DISABLE, containment and calibration vessel; retain regulated 5 V SST rail and every channel's protection. | Replace the pretend actuator only after proving bounds. Reservoir maximum water surface stays below the delivery outlet; secure outlet above maximum aquarium waterline. | Pass first-pump gate below, all Phase 1 tests and its 100-cycle exit criteria. Record calibrated runtime/volume bounds, pump-off flow, fault stops and manual reset. Observer remains present; no unattended use. |
 | **2/3 observability iteration** | No new sensor required; reuse controller/network and existing Prometheus/Grafana infrastructure. Independent overflow, source and leak protection remain mandatory additions before unattended use. | Learn trustworthy telemetry and alerts after local states and limits exist. | Reconcile ten local events with telemetry; deliberately lose Wi-Fi, ingestion, dashboards and alert routing without changing shutdown/budgets; pass controller-down and runbook drills. Complete Phase 2 and Phase 3 protection gates before considering unattended use. |
 
@@ -369,7 +436,9 @@ lower leg/ground can behave differently. No physical result is claimed here.
 #### First-pump gate (iteration 1c)
 
 Before replacing the pretend-pump LED, qualify both SST channels, implement and
-test the Phase 1 state machine, and record positive **runtime and calibrated
+pass the [two-SST acceptance tests](#iteration-1b-acceptance-tests-before-pump-calibration)
+and Phase 1 state machine. Calibrate to the **lower SST stop point**, never a
+fill-to-upper interpretation. Record positive **runtime and calibrated
 volume** ceilings for pulse, attempt, retries and rolling 24 hours. The section
 6 ceilings (at most 5 s per pulse, 3 pulses/attempt, at least 10 s settling) are
 upper bounds to lower after calibration, not authorization for a first run.

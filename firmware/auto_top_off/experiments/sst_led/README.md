@@ -73,6 +73,11 @@ These settings preserve the previously compiled configuration. Board-only
 upload/serial checks may leave all external circuits disconnected; disregard
 floating-input sensor text. The onboard RGB lesson needs a separate future
 revision-specific example. Do not treat this sketch as the two-sensor lesson.
+That future lesson uses the [two-SST pump permission contract](../../../../docs/design/aquarium-auto-top-off.md#two-sst-pump-permission-and-transition-contract)
+and its acceptance tests: start only on debounced both-dry, stop at lower wet,
+and stop/latch on either upper-wet pair. Its pretend-pump LED means command ON;
+this existing sketch's LED means WET. Neither firmware nor physical results for
+that lesson are supplied here.
 
 ### Arduino IDE 2.x setup and upload
 
