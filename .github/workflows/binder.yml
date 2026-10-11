@@ -195,7 +195,7 @@ jobs:
                                                     category='TERRESTRIAL PLANT')
                   except (ValueError, RuntimeError) as error:
                       errors.append(str(error))
-          entries = builder.load_manifest(Path('binder/manifest-v6.yaml'))
+          entries = builder.load_manifest(Path('binder/manifest-v8.yaml'))
           batches = paginate_species(tracked_species(entries))
           for number, species in enumerate([*batches, []], 1):
               try:

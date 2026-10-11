@@ -20,6 +20,16 @@ class MosquitofishTests(unittest.TestCase):
         self.assertEqual([len(x) for x in batches],[3,3,3,3,1])
         self.assertEqual(logs.scientific_name('mosquitofish'),'Gambusia affinis')
         self.assertIn('Mosquitofish',logs.log_page_tex(batches[-1],5,5))
+    def test_standalone_logs_use_latest_inventory(self):
+        expected=logs.tracked_species(builder.load_manifest(ROOT/'binder/manifest-v8.yaml'))
+        for name,blank in [('watering-log-tracked',False),('watering-log-blank',True)]:
+            with mock.patch.object(builder,'compile_logs') as call:
+                builder.compile_supplemental(name,'draft',Path('unused.pdf'))
+            actual=logs.tracked_species(call.call_args.args[0])
+            self.assertEqual(actual,expected)
+            self.assertEqual(len(logs.paginate_species(actual)),5)
+            self.assertEqual(call.call_args.kwargs['blank'],blank)
+
     def test_evidence_and_compile_contract(self):
         data=evidence.load_animal(ROOT,'mosquitofish')
         for kind in evidence.ANIMAL_PAGE_KINDS:

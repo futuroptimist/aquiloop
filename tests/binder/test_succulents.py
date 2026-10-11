@@ -134,8 +134,8 @@ class SucculentTests(unittest.TestCase):
         with mock.patch.object(builder, "compile_logs") as compile_logs:
             builder.compile_supplemental("watering-log-tracked", "draft", Path("unused.pdf"))
         entries = compile_logs.call_args.args[0]
-        self.assertEqual(logs.tracked_species(entries)[-2:], list(NEW))
-        self.assertEqual(len(logs.tracked_species(entries)), 12)
+        self.assertEqual(logs.tracked_species(entries)[-3:-1], list(NEW))
+        self.assertEqual(len(logs.tracked_species(entries)), 13)
         self.assertFalse(compile_logs.call_args.kwargs["blank"])
 
 
