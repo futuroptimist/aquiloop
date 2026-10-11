@@ -256,9 +256,14 @@ or bypass their mandatory voltage/power-off protection.
 4. Exercise both dry through normal pulse expiry and settling: retry only after
    a fresh debounce, with the previous delivery charged. Repeatedly toggle the
    lower input around wet/dry: verify immediate stops, full settling and no
-   deadline, attempt, retry or rolling-budget reset. Exhaust each runtime/volume
-   limit and verify off plus the specified latch; reaching wet never erases
-   consumed delivery. Test DISABLE, watchdog, brownout and corrupt persistence.
+   deadline, attempt, retry or rolling-budget reset. Test ordinary per-pulse
+   runtime expiry and per-pulse volume-cap completion separately: each stops
+   to `Settling` without a fault latch if no other fault limit is reached.
+   Exhaust attempt runtime/volume, retry count and rolling daily runtime/volume
+   limits separately: each inhibits further delivery and latches, including
+   when coincident with normal pulse completion. A missed stop deadline is a
+   fault, not normal expiry. Reaching wet never erases consumed delivery. Test
+   DISABLE, watchdog, brownout and corrupt persistence.
 5. Record five full fill/drain band cycles, including all four logical pairs
    via the safe test fixture for the contradictory case. Record expected/actual
    state, command, latency, charged volume, latch and reset for every case. All
