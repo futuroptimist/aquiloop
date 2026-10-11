@@ -1,5 +1,6 @@
 """Coverage, ordering and physical print geometry for the reusable log edition."""
 import json
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -13,8 +14,56 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import build_binder as builder
 import binder_logs as logs
 
+SCIENTIFIC_NAMES = {
+    "sedum-loves-fire": "Sedum adolphi Raym.-Hamet `Love's Fire'",
+    "kalanchoe-desert": "Candidate: Kalanchoe humilis `Desert Surprise'",
+    "pothos": "Epipremnum aureum",
+    "bird-of-paradise": "Strelitzia sp.",
+    "aquarium-hornwort": "Ceratophyllum demersum",
+    "kuhli-loach": "Pangio spp.",
+    "cherry-shrimp": "Neocaridina davidi",
+    "guppy-grass": "Najas guadalupensis",
+    "java-moss": "Taxiphyllum barbieri",
+    "anubias-nana": "Anubias barteri var. nana",
+    "pachyveria-powder-puff": "x Pachyveria 'Powder Puff'",
+    "crassula-rupestris": "Crassula rupestris",
+}
+
+
+def normalized(text):
+    text = text.replace("\u2018", "'").replace("\u2019", "'").replace("`", "'")
+    return re.sub(r"-\s+", "-", " ".join(text.split()))
+
+
+def extracted_name_text(text):
+    # PDF extractors can add spaces at italic kerning pairs (e.g. T axiphyllum)
+    # as well as at line wraps. Check every name character without those gaps.
+    return "".join(normalized(text).split())
+
 
 class LogTests(unittest.TestCase):
+    def test_all_twelve_paired_names_and_qualified_identities(self):
+        entries = builder.load_manifest(ROOT / "binder/manifest-v7.yaml")
+        species = logs.tracked_species(entries)
+        self.assertEqual(set(species), set(SCIENTIFIC_NAMES))
+        pages = logs.paginate_species(species)
+        self.assertEqual([len(page) for page in pages], [3, 3, 3, 3])
+        for number, batch in enumerate(pages, 1):
+            tex = logs.log_page_tex(batch, number, len(pages))
+            for entry in batch:
+                self.assertEqual(normalized(logs.scientific_name(entry)), normalized(SCIENTIFIC_NAMES[entry]))
+                pair = r"\TrackedNameCell{" + logs.LABELS[entry] + "}{" + SCIENTIFIC_NAMES[entry] + "}"
+                self.assertEqual(normalized(tex).count(normalized(pair)), 1)
+            self.assertEqual(tex.count(r"\WhenCell &"), logs.LOG_ROWS)
+
+    def test_metadata_is_escaped_and_not_a_second_name_catalog(self):
+        data = {"identity": {"working_name": r"Genus species & 50% {trial}_#1 $x$ \test ~ ^"}}
+        with mock.patch("binder_logs.json.loads", return_value=data):
+            tex = logs.log_page_tex(["pothos"], 1, 1)
+        self.assertIn(r"Genus species \& 50\% \{trial\}\_\#1 \$x\$ \textbackslash{}test \textasciitilde{} \textasciicircum{}", tex)
+        with self.assertRaises(ValueError):
+            logs.scientific_name("../unknown")
+
     def test_every_tracked_entry_once_in_manifest_order(self):
         entries = builder.load_manifest(ROOT / "binder/manifest-v6.yaml")
         expected = ["sedum-loves-fire", "kalanchoe-desert", "pothos",
@@ -40,6 +89,9 @@ class LogTests(unittest.TestCase):
         self.assertEqual(tex.count(r"\NameCell{}"), 3)
         for label in logs.LABELS.values():
             self.assertNotIn(label, tex)
+        self.assertNotIn(r"\TrackedNameCell", tex)
+        for name in SCIENTIFIC_NAMES.values():
+            self.assertNotIn(name, tex)
         for field in ("Watering frequency", "Check / trigger", "Amount / method",
                       "Propagation / breeding", "Light / location"):
             self.assertIn(field, tex)
@@ -94,6 +146,8 @@ class LogRenderingTests(unittest.TestCase):
             self.assertIn("TRACKED SPECIES", text)
             for label in logs.LABELS.values():
                 self.assertEqual(text.count(label), int(label in [logs.LABELS[e] for e in batch]))
+            for entry in batch:
+                self.assertIn(extracted_name_text(SCIENTIFIC_NAMES[entry]), extracted_name_text(text))
         blank = self.reader.pages[-1].extract_text()
         self.assertIn("BLANK EDITION", blank)
         for label in logs.LABELS.values():
@@ -136,9 +190,11 @@ class LogRenderingTests(unittest.TestCase):
             row_heights = [b-a for a, b in zip(edges, edges[1:]) if 30 <= b-a <= 40]
             self.assertEqual(len(row_heights), logs.LOG_ROWS)
             # Name and preference writing rules are at least 1.9 inches long.
+            # Tracked names use one identity rule; blank names retain two.
+            rules_per_column = 6 if "BLANK EDITION" in text else 5
             self.assertGreaterEqual(sum(136 <= x1-x0 <= 142
                                         for x0, y0, x1, y1 in horizontal),
-                                    6 * (1 if "4 of 4" in text else 3))
+                                    rules_per_column * (1 if "4 of 4" in text else 3))
 
     def test_white_paper_color_and_grayscale(self):
         from PIL import Image, ImageChops

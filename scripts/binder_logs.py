@@ -1,6 +1,11 @@
 """Printable, user-selected care records; no default care prescriptions."""
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
 COLUMNS_PER_PAGE = 3
 LOG_ROWS = 8
 LABELS = {
@@ -30,6 +35,31 @@ def paginate_species(species: list[str]) -> list[list[str]]:
             for i in range(0, len(species), COLUMNS_PER_PAGE)]
 
 
+def scientific_name(entry: str) -> str:
+    """Reuse the evidence-backed working identity, including its qualifiers."""
+    if entry not in LABELS:
+        raise ValueError(f"unknown tracked entry: {entry}")
+    base = ROOT / "binder/entries" / entry
+    if entry in {"kuhli-loach", "cherry-shrimp"}:
+        claim_id = "trade-identity" if entry == "kuhli-loach" else "selected-identity"
+        data = json.loads((base / "animal-care.yaml").read_text(encoding="utf-8"))
+        identity = next(c for c in data["claims"] if c["claim_id"] == claim_id)
+        # The metadata separates the taxon from stock/planning context with
+        # punctuation. Keep Pangio at its explicitly unresolved trade-group rank.
+        name = identity["applicable_taxon"].split(";", 1)[0].split(",", 1)[0]
+        return name.removeprefix("Trade-group ")
+    data = json.loads((base / "content.yaml").read_text(encoding="utf-8"))
+    return data["identity"]["working_name"]
+
+
+def tex_text(value: str) -> str:
+    """Render metadata as text, never as TeX commands."""
+    escapes = {"\\": r"\textbackslash{}", "&": r"\&", "%": r"\%",
+               "$": r"\$", "#": r"\#", "_": r"\_", "{": r"\{",
+               "}": r"\}", "~": r"\textasciitilde{}", "^": r"\textasciicircum{}"}
+    return "".join(escapes.get(char, char) for char in value)
+
+
 def log_page_tex(species: list[str], page_number: int, page_count: int,
                  *, blank: bool = False) -> str:
     if blank:
@@ -42,7 +72,9 @@ def log_page_tex(species: list[str], page_number: int, page_count: int,
         names = [LABELS[entry] for entry in species]
     # Pad the last named sheet with unused space, never extra species columns.
     count = len(names)
-    headers = [r"\NameCell{" + name + "}" for name in names]
+    headers = ([r"\NameCell{}"] * count if blank else [
+        r"\TrackedNameCell{" + tex_text(name) + "}{" + tex_text(scientific_name(entry)) + "}"
+        for entry, name in zip(species, names)])
     mode = "BLANK EDITION / copy as needed" if blank else f"TRACKED SPECIES / {page_number} of {page_count}"
     header = r"""\newcommand{\Choice}{\raisebox{0pt}{\fbox{\rule{0pt}{5pt}\rule{5pt}{0pt}}}}
 \newcommand{\WriteLine}{\rule{\linewidth}{.3pt}}
@@ -67,6 +99,10 @@ Check condition, moisture, rain and season before watering. Aquarium events are 
 \begingroup\sffamily\fontsize{9}{11}\selectfont
 \setlength{\tabcolsep}{4pt}\setlength{\arrayrulewidth}{.4pt}
 """.replace("MODE", mode)
+    if not blank:
+        # Reserve room for wrapped cultivar/author names at the same readable
+        # 9 pt size. Keep one identity write-in rule and all eight event rows.
+        header += r"\newcommand{\TrackedNameCell}[2]{\parbox[c][.8in][t]{\linewidth}{\raggedright\vspace{2pt}\textbf{#1}\par{\itshape #2\par}\vfill\WriteLine\par\vspace{4pt}}}" + "\n"
     table = r"\begin{tabular}{|p{.64in}|" + "p{1.94in}|" * count + "}\n\\hline\n"
     table += r"Species / name & " + " & ".join(headers) + r"\\\hline" + "\n"
     table += r"My plan & " + " & ".join([r"\PreferenceCell"] * count) + r"\\\hline" + "\n"

@@ -114,7 +114,7 @@ class SucculentTests(unittest.TestCase):
         self.assertEqual([len(x) for x in batches], [3, 3, 3, 3])
         rendered = "".join(logs.log_page_tex(batch, i, 4) for i, batch in enumerate(batches, 1))
         for entry in species:
-            self.assertEqual(rendered.count(r"\NameCell{" + logs.LABELS[entry] + "}"), 1)
+            self.assertEqual(rendered.count(r"\TrackedNameCell{" + logs.LABELS[entry] + "}"), 1)
 
     def test_bad_page_order_missing_species_and_wrong_log_budget_fail(self):
         original = json.loads((ROOT / "binder/manifest-v7.yaml").read_text())
@@ -175,7 +175,16 @@ class SucculentRenderingTests(unittest.TestCase):
                 self.assertGreaterEqual(min(sizes), 7.9)
         text = "".join(p.extract_text() for p in self.reader.pages[36:40]).replace("\u2019", "'")
         for label in logs.LABELS.values():
-            self.assertEqual(text.count(label), 1)
+            # Crassula's existing common label is also its scientific name.
+            self.assertEqual(text.count(label), 2 if label == "Crassula rupestris" else 1)
+        from test_logs import SCIENTIFIC_NAMES, normalized, extracted_name_text
+        species = logs.tracked_species(builder.load_manifest(ROOT / "binder/manifest-v7.yaml"))
+        for number, batch in enumerate(logs.paginate_species(species), 36):
+            page_text = normalized(self.reader.pages[number].extract_text())
+            for entry in batch:
+                self.assertIn(normalized(logs.LABELS[entry]), page_text)
+                self.assertIn(extracted_name_text(SCIENTIFIC_NAMES[entry]), extracted_name_text(page_text))
+            self.assertEqual(page_text.count("A/M or Evt"), 3 * logs.LOG_ROWS)
         self.assertIn("BLANK EDITION", self.reader.pages[-1].extract_text())
 
     def test_white_margins_in_color_and_grayscale(self):
