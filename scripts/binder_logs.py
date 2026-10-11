@@ -16,6 +16,7 @@ LABELS = {
     "aquarium-hornwort": "Hornwort",
     "kuhli-loach": "Kuhli loach",
     "cherry-shrimp": "Cherry shrimp",
+    "mosquitofish": "Mosquitofish",
     "guppy-grass": "Guppy grass",
     "java-moss": "Java moss",
     "anubias-nana": "Anubias nana",
@@ -40,8 +41,11 @@ def scientific_name(entry: str) -> str:
     if entry not in LABELS:
         raise ValueError(f"unknown tracked entry: {entry}")
     base = ROOT / "binder/entries" / entry
-    if entry in {"kuhli-loach", "cherry-shrimp"}:
-        claim_id = "trade-identity" if entry == "kuhli-loach" else "selected-identity"
+    animal_identity_claim = {"kuhli-loach": "trade-identity",
+                             "cherry-shrimp": "selected-identity",
+                             "mosquitofish": "program-identity"}
+    if entry in animal_identity_claim:
+        claim_id = animal_identity_claim[entry]
         data = json.loads((base / "animal-care.yaml").read_text(encoding="utf-8"))
         identity = next(c for c in data["claims"] if c["claim_id"] == claim_id)
         # The metadata separates the taxon from stock/planning context with

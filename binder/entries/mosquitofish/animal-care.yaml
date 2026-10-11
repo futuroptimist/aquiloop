@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "entry": "mosquitofish",
+  "worksheet": "animal-care",
+  "claims": [
+    {
+      "claim_id": "program-identity",
+      "metric": "program-identity",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Western mosquitofish, Gambusia affinis, is the local program species. Do not substitute eastern G. holbrooki evidence or identify an unseen specimen. Planning only; no stock acquired or authorized by this entry.",
+      "provenance": {
+        "source_refs": [
+          "MF-SM"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "exposure",
+      "metric": "exposure",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Day-active surface feeding; provide some sun, submerged refuge and open water, adjusting shade to actual measured heat. Avoid a shallow exposed container or permanent dense shade.",
+      "provenance": {
+        "source_refs": [
+          "MF-SM",
+          "MF-MO"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "seasonal-plan",
+      "metric": "seasonal-plan",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Start with an unheated design only conditionally: local outdoor overwintering supports consideration, not proof of this container. Monitor min/max water at fish depth near dawn and sunny afternoons through seasons. Air averages and USDA plant zones do not measure fish water. Have a prepared protected contingency before freezing; avoid abrupt temperature changes. Survival extremes are not welfare targets.",
+      "provenance": {
+        "source_refs": [
+          "MF-SM",
+          "MF-VET"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "feeding",
+      "metric": "feeding",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Natural food varies. San Mateo discourages routine supplementary feeding in productive warm ponds; San Joaquin allows small flakes where food is lacking. Observe condition and feeding access, offer modest appropriate food if needed, remove leftovers and reduce with cold appetite. Do not force growth.",
+      "provenance": {
+        "source_refs": [
+          "MF-SM",
+          "MF-SJ"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "routine-health",
+      "metric": "routine-health",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Proposed daily checks: behavior, food access, water level, temperature, equipment and casualties. Weekly and after weather/equipment changes: chemistry, screens, cover and population. Persistent gulping with rapid gills, imbalance, injuries or deaths require prompt water/equipment checks and district or aquatic-vet advice; surface feeding alone is not diagnosis. Preserve biofilter media; conditioned temperature-matched partial changes follow testing.",
+      "provenance": {
+        "source_refs": [
+          "MF-VET",
+          "MF-UF"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "compatibility",
+      "metric": "compatibility",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Do not infer safety with shrimp, Kuhli loaches or amphibians. Predation and aggression matter; do not use in an amphibian conservation pond. Keep equipment/product history separate and review biosecurity before transfers.",
+      "provenance": {
+        "source_refs": [
+          "MF-FWS",
+          "MF-VET"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    }
+  ]
+}

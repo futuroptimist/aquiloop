@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "id": "aquiloop-entry-quality-v1",
+  "frozen": "2026-10-11",
+  "subcheck_points": 2.5,
+  "checks": [
+    {
+      "id": "I1",
+      "subchecks": [
+        {
+          "id": "I1a",
+          "text": "Common and scientific working name at defensible rank"
+        },
+        {
+          "id": "I1b",
+          "text": "Qualifiers and candidate alternatives consistent throughout"
+        }
+      ]
+    },
+    {
+      "id": "I2",
+      "subchecks": [
+        {
+          "id": "I2a",
+          "text": "Owned, reported or planning status stated"
+        },
+        {
+          "id": "I2b",
+          "text": "Source environment and life stage distinguished from unmeasured local conditions"
+        }
+      ]
+    },
+    {
+      "id": "C1",
+      "subchecks": [
+        {
+          "id": "C1a",
+          "text": "Light, activity or exposure need addressed"
+        },
+        {
+          "id": "C1b",
+          "text": "Usable placement or behavior-based adjustment"
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "subchecks": [
+        {
+          "id": "C2a",
+          "text": "Water or moisture resource need addressed"
+        },
+        {
+          "id": "C2b",
+          "text": "Maintenance cue avoids unsupported fixed schedules"
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "subchecks": [
+        {
+          "id": "C3a",
+          "text": "Nutrition or feeding addressed"
+        },
+        {
+          "id": "C3b",
+          "text": "Stage-appropriate access and excess/deficiency caution"
+        }
+      ]
+    },
+    {
+      "id": "C4",
+      "subchecks": [
+        {
+          "id": "C4a",
+          "text": "Routine maintenance actionable"
+        },
+        {
+          "id": "C4b",
+          "text": "Observable troubleshooting signs and safe next decision"
+        }
+      ]
+    },
+    {
+      "id": "H1",
+      "subchecks": [
+        {
+          "id": "H1a",
+          "text": "Medium, substrate, refuge or equipment described"
+        },
+        {
+          "id": "H1b",
+          "text": "Readiness and important hazards covered"
+        }
+      ]
+    },
+    {
+      "id": "H2",
+      "subchecks": [
+        {
+          "id": "H2a",
+          "text": "Relevant supported environmental facts have units and scope"
+        },
+        {
+          "id": "H2b",
+          "text": "Tolerance, preference, study condition and actual measurement kept distinct"
+        }
+      ]
+    },
+    {
+      "id": "H3",
+      "subchecks": [
+        {
+          "id": "H3a",
+          "text": "Actual local conditions or explicit unmeasured fields listed"
+        },
+        {
+          "id": "H3b",
+          "text": "Safe observation plan before changing conditions"
+        }
+      ]
+    },
+    {
+      "id": "R1",
+      "subchecks": [
+        {
+          "id": "R1a",
+          "text": "Reproductive mode, feasibility and scope correct"
+        },
+        {
+          "id": "R1b",
+          "text": "Starting material or parent readiness, or justified no-attempt boundary"
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "subchecks": [
+        {
+          "id": "R2a",
+          "text": "Ordered preparation-to-aftercare procedure or evidence for no safe protocol"
+        },
+        {
+          "id": "R2b",
+          "text": "Stage-specific pitfalls and stop/review cues"
+        }
+      ]
+    },
+    {
+      "id": "R3",
+      "subchecks": [
+        {
+          "id": "R3a",
+          "text": "Success milestones distinct from elapsed-time claims"
+        },
+        {
+          "id": "R3b",
+          "text": "Record fields and surplus, disposal or transfer decisions"
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "subchecks": [
+        {
+          "id": "S1a",
+          "text": "Relevant toxicity, medication, product or handling risks identified"
+        },
+        {
+          "id": "S1b",
+          "text": "Safe avoidance or escalation advice"
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "subchecks": [
+        {
+          "id": "S2a",
+          "text": "Spread, release, escape or disposal risks addressed"
+        },
+        {
+          "id": "S2b",
+          "text": "Legal/invasive-use limitations sourced or verification-before-action gate"
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "subchecks": [
+        {
+          "id": "S3a",
+          "text": "Relevant cohabitants, livestock or other plants considered"
+        },
+        {
+          "id": "S3b",
+          "text": "Biosecurity, humane capacity and compatibility uncertainty explicit"
+        }
+      ]
+    },
+    {
+      "id": "E1",
+      "subchecks": [
+        {
+          "id": "E1a",
+          "text": "Substantive actionable claims resolve to inspected evidence"
+        },
+        {
+          "id": "E1b",
+          "text": "Exact source identifiers and relevant passage/claim locations recorded"
+        }
+      ]
+    },
+    {
+      "id": "E2",
+      "subchecks": [
+        {
+          "id": "E2a",
+          "text": "Source quality and taxon/life-stage/environment applicability stated"
+        },
+        {
+          "id": "E2b",
+          "text": "Published facts, adaptations, inference, observations and unknowns distinct"
+        }
+      ]
+    },
+    {
+      "id": "E3",
+      "subchecks": [
+        {
+          "id": "E3a",
+          "text": "Publication/version, content inspection and URL-check dates recorded separately"
+        },
+        {
+          "id": "E3b",
+          "text": "Contradictions, corrections and currency triggers resolved or caveated"
+        }
+      ]
+    },
+    {
+      "id": "V1",
+      "subchecks": [
+        {
+          "id": "V1a",
+          "text": "Intended image slot with accurate caption/alt and no misleading substitute"
+        },
+        {
+          "id": "V1b",
+          "text": "Useful authorized owner image with verified permission, privacy, dimensions and color status"
+        }
+      ]
+    },
+    {
+      "id": "Q1",
+      "subchecks": [
+        {
+          "id": "Q1a",
+          "text": "Exactly one entry with correct order, sources, name and log coverage in final PDF"
+        },
+        {
+          "id": "Q1b",
+          "text": "Exact-head checks and manual color/grayscale/print-size digital inspection passed"
+        }
+      ]
+    }
+  ],
+  "categories": {
+    "I": 10,
+    "C": 20,
+    "H": 15,
+    "R": 15,
+    "S": 15,
+    "E": 15,
+    "V": 5,
+    "Q": 5
+  },
+  "gate_caps": {
+    "pass": 100,
+    "pending": 69,
+    "fail": 49
+  }
+}

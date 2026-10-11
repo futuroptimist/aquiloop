@@ -1365,3 +1365,23 @@ detail), prefers 300 ppi (990 × 990 or 615 × 405), and rejects files above the
 JPEG quality and reports when it is unmet; failure to meet that soft goal alone
 is not an error. Every final selection requires `source.rights_reviewed: true`;
 unselected, structurally valid draft records may retain honest unknown rights.
+
+## V8 outdoor mosquitofish and quality audit
+
+`binder/manifest-v8.yaml` appends three animal pages, giving 13 entries, 39
+species pages, five tracked logs and a final blank log (45 pages). The new
+entry uses a labeled owner-photo placeholder and remains draft-only. Existing
+shrimp reproduction is expanded in place; historical manifests share sources
+and therefore rebuild with the corrected shrimp page and current plant
+cross-references. Unchanged pages retain their existing layout.
+
+Build with `python scripts/build_binder.py --manifest binder/manifest-v8.yaml
+--mode draft --output build/binder/aquiloop-binder-mosquitofish-draft.pdf`
+(on one shell line). CI renders all 45 pages at 150 DPI in color and grayscale.
+Publication candidate metadata follows v8, but main-only and explicit-enable
+guards remain unchanged; generating a candidate does not publish it.
+
+The unified plant/animal rubric is frozen in
+`docs/design/entry-quality-rubric-v1.md`. A scored sidecar must identify the
+exact commit and PDF digest, all 40 subchecks per entry and separate readiness
+unknowns. Physical print/color/punch/handwriting acceptance remains pending.

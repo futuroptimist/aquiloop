@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "entry": "mosquitofish",
+  "worksheet": "reproduction",
+  "claims": [
+    {
+      "claim_id": "livebearing-sexing",
+      "metric": "livebearing-sexing",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "adult",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "published",
+      "description": "Internal fertilization; free-swimming fry, not an externally laid egg clutch. Adult males have an elongated modified anal fin (gonopodium); females usually larger with fan-shaped anal fin. Juvenile size or dark patch alone is not reliable sexing.",
+      "provenance": {
+        "source_refs": [
+          "MF-MO"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container."
+      }
+    },
+    {
+      "claim_id": "stored-sperm",
+      "metric": "stored-sperm",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "adult",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "published",
+      "description": "Females retain sperm and may produce later broods after separation. A previously mixed female-only group cannot be assumed birth-free.",
+      "provenance": {
+        "source_refs": [
+          "MF-FWS"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container."
+      }
+    },
+    {
+      "claim_id": "variable-timing",
+      "metric": "variable-timing",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Federal synthesis reports 21-28 day gestation, with variable brood sizes and environmental effects. Experimental abstract reports mean first reproduction at 191 days at 20 C and 56 days at 30 C; these study endpoints are not targets. No guaranteed monthly brood or heating to force reproduction.",
+      "provenance": {
+        "source_refs": [
+          "MF-FWS",
+          "MF-VON"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "responsible-sequence",
+      "metric": "responsible-sequence",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Decide on breeding and a district-coordinated surplus plan first. Verify spare prepared capacity and healthy adults. Observe courtship and births without forced pairing or routine tiny breeder boxes. Support fry with fine refuge, protected intakes and accessible small food. Separate nursery only when cycled with suitable matched water. Record births, feeding, growth and later reproductive adults separately.",
+      "provenance": {
+        "source_refs": [
+          "MF-MO",
+          "MF-FWS",
+          "MF-VET"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "capacity-stop",
+      "metric": "capacity-stop",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Review approximate adults/fry weekly during breeding. Harassment, poor feeding, losses or unstable water pause expansion and transfer; check conditions and seek help. Never regulate population through starvation, poor water or deliberate predation.",
+      "provenance": {
+        "source_refs": [
+          "MF-VET",
+          "MF-FWS"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "no-release",
+      "metric": "no-release",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "No release into natural waters or drains. Coordinate unwanted fish with San Mateo district at 650-344-8592; confirm return arrangements before breeding. Verify current local permissions before any placement or transfer; inclusion is not permission to stock.",
+      "provenance": {
+        "source_refs": [
+          "MF-RETURN"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    }
+  ]
+}

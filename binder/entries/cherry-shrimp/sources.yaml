@@ -8,7 +8,10 @@
       "title": "Cherry Shrimp Neocaridina davidi (Bouvier 1904)",
       "url": "https://ask.ifas.ufl.edu/publication/IN1301",
       "accessed": "2026-10-04",
-      "applicability": "University extension synthesis: identity, direct development, size, biofilm grazing and release risk. Its 16-19-day incubation is a literature report, not a home deadline; underlying full study not inspected."
+      "applicability": "Extension identity, direct development and release context. Its approximately 30-day maturity summary is superseded here by distinct ovarian and embryo-carrying endpoints in CS-PAN; not a home timetable.",
+      "content_inspected": "2026-10-11",
+      "url_checked": "2026-10-11",
+      "next_review_trigger": "Changed care advice, conflicting evidence, or annual practical-care review"
     },
     {
       "key": "CS-COOP",
@@ -16,7 +19,10 @@
       "title": "Care Guide for Cherry Shrimp - Tank Setup, Food, and Breeding",
       "url": "https://www.aquariumcoop.com/blogs/aquarium/cherry-shrimp-care",
       "accessed": "2026-10-04",
-      "applicability": "Firsthand practical husbandry; broad tolerances versus preferred temperature remain separate. Hardness minima are not closed ranges. About-month incubation differs from UF synthesis. No stocking, sex-ratio or compatibility guarantee adopted."
+      "applicability": "Firsthand practical husbandry; broad tolerances versus preferred temperature remain separate. Hardness minima are not closed ranges. About-month incubation differs from UF synthesis. No stocking, sex-ratio or compatibility guarantee adopted.",
+      "content_inspected": "2026-10-11",
+      "url_checked": "2026-10-11",
+      "next_review_trigger": "Changed care advice, conflicting evidence, or annual practical-care review"
     },
     {
       "key": "CS-FARM",
@@ -48,7 +54,10 @@
       "title": "Management of Aquarium Fish",
       "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/aquarium-fish/management-of-aquarium-fish",
       "accessed": "2026-10-04",
-      "applicability": "Veterinary aquarium management updated June 2026: biofiltration, fishless cycling, abrupt pH/ammonia risk and copper toxicity to invertebrates. Applied as proposed shared-system gates, not shrimp-specific drug dosing."
+      "applicability": "Veterinary aquarium management updated June 2026: biofiltration, fishless cycling, abrupt pH/ammonia risk and copper toxicity to invertebrates. Applied as proposed shared-system gates, not shrimp-specific drug dosing.",
+      "content_inspected": "2026-10-11",
+      "url_checked": "2026-10-11",
+      "next_review_trigger": "Changed care advice, conflicting evidence, or annual practical-care review"
     },
     {
       "key": "CS-KUH",
@@ -65,6 +74,34 @@
       "url": "https://www.seriouslyfish.com/species/pangio-semicincta/",
       "accessed": "2026-10-04",
       "applicability": "Species-specific micropredator diet informs a cautious compatibility inference, not a claim that the owner loaches are P. semicincta."
+    },
+    {
+      "key": "CS-PAN",
+      "authority": "Pantaleao et al.",
+      "title": "Post-hatching development of the ornamental Red Cherry Shrimp Neocaridina davidi under laboratorial conditions",
+      "url": "https://doi.org/10.1111/are.12903",
+      "accessed": "2026-10-11",
+      "published": "2015 online / 2017 volume 48:553-569",
+      "content_inspected": "2026-10-11",
+      "url_checked": null,
+      "refresh_note": "DOI fetch failed; author-uploaded full text inspected through ResearchGate.",
+      "inspected_url": "https://www.researchgate.net/publication/282593833_Post-hatching_development_of_the_ornamental_'Red_Cherry_Shrimp'_Neocaridina_davidi_Bouvier_1904_Crustacea_Caridea_Atyidae_under_laboratorial_conditions",
+      "passage": "Methods pp. 2-3; Results pp. 5-6: temperature, ovarian development, first embryos and incubation.",
+      "applicability": "Primary laboratory study at 25 +/- 1 C. Separate endpoints only; no transfer of intensive culture or sampling methods into home care.",
+      "next_review_trigger": "Correction, changed identification, or conflicting developmental evidence"
+    },
+    {
+      "key": "CS-TRO",
+      "authority": "Tropea, Stumpf and Lopez Greco",
+      "title": "Effect of Temperature on Biochemical Composition, Growth and Reproduction of the Ornamental Red Cherry Shrimp",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0119468",
+      "accessed": "2026-10-11",
+      "published": "2015-03-13",
+      "content_inspected": "2026-10-11",
+      "url_checked": "2026-10-11",
+      "passage": "Abstract and growth-phase reproductive results: females maturing and mating at 32 C lost eggs.",
+      "applicability": "Primary experiment under the historical name Neocaridina heteropoda heteropoda; supports caution, not a home heater setting.",
+      "next_review_trigger": "Correction or changed thermal advice"
     }
   ]
 }

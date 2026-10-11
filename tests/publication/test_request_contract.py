@@ -44,7 +44,7 @@ class RequestContractTests(unittest.TestCase):
         self.assertEqual(allocation.get_header("Content-type"), "application/x-www-form-urlencoded")
         # Independently captured from slack_sdk 3.45.0 with its HTTP transport mocked.
         self.assertEqual(allocation.data,
-                         b"filename=aquiloop-binder-succulents-draft.pdf&length=1916014")
+                         b"filename=aquiloop-binder-mosquitofish-draft.pdf&length=1916014")
         self.assertEqual(parse_qs(allocation.data.decode()),
                          {"filename": [publication.PDF_NAME], "length": [str(len(pdf))]})
         self.assertEqual(allocation.get_header("Authorization"), "Bearer " + self.token)

@@ -50,11 +50,15 @@ EXPECTED_SUCCULENT_MANIFEST = EXPECTED_AQUATIC_MANIFEST[:-1] + tuple(
     (entry, kind) for entry in SUCCULENT_ENTRIES
     for kind in ("profile", "numbers", "propagation")
 ) + EXPECTED_LOG_MANIFEST[-2:]
+EXPECTED_MOSQUITOFISH_MANIFEST = EXPECTED_SUCCULENT_MANIFEST[:-2] + tuple(
+    ("mosquitofish", kind) for kind in ANIMAL_PAGE_KINDS
+) + EXPECTED_LOG_MANIFEST[-2:]
 CATEGORY_BY_ENTRY = {
     **{entry: "TERRESTRIAL PLANT" for entry in SUCCULENT_ENTRIES},
     **{entry: "TERRESTRIAL PLANT" for entry, _ in EXPECTED_MANIFEST[:4]},
     **{entry: "AQUATIC PLANT" for entry in ("aquarium-hornwort", *AQUATIC_PLANT_ENTRIES)},
     "kuhli-loach": "AQUATIC ANIMAL", "cherry-shrimp": "AQUATIC ANIMAL",
+    "mosquitofish": "AQUATIC ANIMAL",
 }
 COMPANION_LABELS = {"numbers": "NUMBERS & PACIFICA", "propagation": "PROPAGATION",
                     "animal-care": "ANIMAL CARE", "tank-setup": "TANK SETUP",
@@ -324,7 +328,8 @@ def load_manifest(path: Path) -> list[dict]:
                  (ROOT / "binder" / "manifest-v4.yaml").resolve(): 4,
                  (ROOT / "binder" / "manifest-v5.yaml").resolve(): 5,
                  (ROOT / "binder" / "manifest-v6.yaml").resolve(): 6,
-                 (ROOT / "binder" / "manifest-v7.yaml").resolve(): 7}
+                 (ROOT / "binder" / "manifest-v7.yaml").resolve(): 7,
+                 (ROOT / "binder" / "manifest-v8.yaml").resolve(): 8}
     if manifest_path not in supported:
         raise ValueError("only the versioned binder assembly manifests are supported")
     version = supported[manifest_path]
@@ -343,16 +348,16 @@ def load_manifest(path: Path) -> list[dict]:
             raise ValueError(f"unsupported manifest kind: {item['kind']}")
     for item in entries:
         budget = (len(paginate_species(tracked_species(entries)))
-                  if version in {6, 7} and item["id"] == "watering-log-tracked" else 1)
+                  if version in {6, 7, 8} and item["id"] == "watering-log-tracked" else 1)
         if type(item["page_budget"]) is not int or item["page_budget"] != budget:
             raise ValueError(f"manifest page_budget must be integer {budget}")
     actual = tuple((item["id"], item["kind"]) for item in entries)
     expected = {1: EXPECTED_MANIFEST, 2: EXPECTED_EXPANDED_MANIFEST,
                 3: EXPECTED_ANIMAL_MANIFEST, 4: EXPECTED_SHRIMP_MANIFEST,
                 5: EXPECTED_AQUATIC_MANIFEST, 6: EXPECTED_LOG_MANIFEST,
-                7: EXPECTED_SUCCULENT_MANIFEST}[version]
+                7: EXPECTED_SUCCULENT_MANIFEST, 8: EXPECTED_MOSQUITOFISH_MANIFEST}[version]
     if actual != expected:
-        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry", 4: "twenty-two-entry", 5: "thirty-one-entry", 6: "thirty-two-entry", 7: "thirty-eight-entry"}[version]
+        label = {1: "six-entry", 2: "sixteen-entry", 3: "nineteen-entry", 4: "twenty-two-entry", 5: "thirty-one-entry", 6: "thirty-two-entry", 7: "thirty-eight-entry", 8: "forty-one-entry"}[version]
         raise ValueError(f"manifest entries must match the canonical {label} order and kinds")
     return entries
 
@@ -379,7 +384,7 @@ def compile_companion(entry: str, kind: str, mode: str, output: Path, *, categor
 def compile_animal(entry: str, kind: str, mode: str, output: Path, *, category: str | None = None) -> None:
     if mode != "draft":
         raise ValueError("animal pages remain provisional and draft-only")
-    if kind not in ANIMAL_PAGE_KINDS or (entry, kind) not in EXPECTED_SHRIMP_MANIFEST:
+    if kind not in ANIMAL_PAGE_KINDS or (entry, kind) not in EXPECTED_MOSQUITOFISH_MANIFEST:
         raise ValueError("unknown animal page")
     evidence = load_animal(ROOT, entry)
     base = ROOT / "binder/entries" / entry
@@ -435,7 +440,7 @@ def compile_manifest(path: Path, mode: str, output: Path) -> None:
     from pypdf import PdfReader, PdfWriter
     entries = load_manifest(path)
     expanded = path.name != "manifest.yaml"
-    accented = path.name in {"manifest-v5.yaml", "manifest-v6.yaml", "manifest-v7.yaml"}
+    accented = path.name in {"manifest-v5.yaml", "manifest-v6.yaml", "manifest-v7.yaml", "manifest-v8.yaml"}
     expected_pages = sum(item["page_budget"] for item in entries)
     output.parent.mkdir(parents=True, exist_ok=True)
     writer = PdfWriter()

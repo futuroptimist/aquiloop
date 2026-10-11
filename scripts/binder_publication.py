@@ -19,8 +19,8 @@ REPOSITORY = "futuroptimist/aquiloop"
 CHANNEL = "C0C8T7FDAAC"
 TEAM = "T0C80NYUHHP"
 STATE_BRANCH = "binder-publication-state"
-PDF_NAME = "aquiloop-binder-succulents-draft.pdf"
-PAGE_COUNT = 41
+PDF_NAME = "aquiloop-binder-mosquitofish-draft.pdf"
+PAGE_COUNT = 45
 SCHEMA = "aquiloop-rendered-binder-v1"
 
 # Only constants from these tables may reach publication diagnostics.
@@ -63,7 +63,7 @@ class SlackError(RuntimeError):
 
 
 SAFE_ERRORS = {
-    "page_count": f"Expected the validated {PAGE_COUNT}-page succulent binder and proofs",
+    "page_count": f"Expected the validated {PAGE_COUNT}-page mosquitofish binder and proofs",
     "proof_order": "Proof page order is incomplete",
     "geometry": "Unexpected page geometry",
     "pdf_action": "Unsupported PDF action",

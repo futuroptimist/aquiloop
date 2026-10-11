@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "entry": "mosquitofish",
+  "worksheet": "tank-setup",
+  "claims": [
+    {
+      "claim_id": "dimensions",
+      "metric": "dimensions",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "District recommends at least 24 inches water depth, steep sides and cover. About 50 US gallons actual water is a conservative planning proposal, not an official minimum or population guarantee. Measure footprint, usable depth and displaced water; technician must assess the real system.",
+      "provenance": {
+        "source_refs": [
+          "MF-SM"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "water-preparation",
+      "metric": "water-preparation",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "published",
+      "description": "Pre-treat every tap addition for chloramine using a suitable product as directed; standing water alone is insufficient. Prevent chemical/runoff contamination.",
+      "provenance": {
+        "source_refs": [
+          "MF-SM",
+          "MF-RETURN"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container."
+      }
+    },
+    {
+      "claim_id": "readiness",
+      "metric": "readiness",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Establish fishless biofiltration; require evidence of processing a controlled waste load, not just zero readings in unused water or elapsed weeks. Require undetectable ammonia and nitrite on appropriate tests; record units, pH, alkalinity and temperature. Stable conditions matter; no universal species optimum or capacity is established here.",
+      "provenance": {
+        "source_refs": [
+          "MF-UF",
+          "MF-VET"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "containment",
+      "metric": "containment",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Protect intakes and screen overflow to retain fry; provide sufficient flow, freeboard and routine clearing before storms so blocked screens do not cause overtopping. No escape connection to drains or natural waters. Provide predator protection, stable fish-safe container and safe access for children/pets.",
+      "provenance": {
+        "source_refs": [
+          "MF-FAO",
+          "MF-SM"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "equipment",
+      "metric": "equipment",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Gentle circulation/aeration with calm feeding areas and open surface. Verify outdoor-rated equipment and safe power; use GFCI/weatherproof connections and follow manufacturer instructions. If heat becomes necessary use only equipment approved for the actual outdoor use, not an improvised indoor heater.",
+      "provenance": {
+        "source_refs": [
+          "MF-CPSC",
+          "MF-VET"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    },
+    {
+      "claim_id": "stocking-gate",
+      "metric": "stocking-gate",
+      "applicable_taxon": "Gambusia affinis; local program identity, unseen specimen unverified",
+      "care_method": "Contained outdoor freshwater planning only",
+      "life_stage": "all",
+      "growing_conditions": "Pacifica outdoor planning; actual water and container unmeasured",
+      "geographic_context": "San Mateo County, California; verify local program before action",
+      "evidence_category": "proposed",
+      "description": "Before stocking verify supplier identity, dimensions, monitored water, cycle, containment, equipment, capacity and permission. Ask district to assess starting number and acclimation for actual water/transport conditions; no default stocking count.",
+      "provenance": {
+        "source_refs": [
+          "MF-SM",
+          "MF-RETURN",
+          "MF-VET"
+        ],
+        "applicability": "Western mosquitofish program identity; unverified specimen and outdoor container.",
+        "derivation": "Conservative planning adaptation of the cited biology or general husbandry; no actual habitat measurement or stocking approval."
+      }
+    }
+  ]
+}
