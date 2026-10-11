@@ -52,7 +52,7 @@ def score(outcomes, gate):
         require(state in {'pass', 'fail', 'na'}, 'unknown is not a scoring state or N/A')
         require(nonempty(result.get('reason')), 'outcome reason required')
         if state == 'na':
-            require(key[0] not in 'ISEQ', 'identity, safety, evidence and proof cannot be N/A')
+            require(key[0] not in 'ISEQV', 'identity, safety, evidence, imagery and proof cannot be N/A')
             require(nonempty(result.get('reviewer')) and nonempty(result.get('biological_reason')), 'N/A needs biological reason and reviewer sign-off')
             applicable -= Decimal('2.5')
         elif state == 'pass':

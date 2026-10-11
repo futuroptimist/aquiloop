@@ -14,7 +14,8 @@ Functional equivalents apply (water for fish, soil/media for terrestrial plants)
 Reproduction is never wholly N/A because breeding is unwanted or difficult;
 biological feasibility and a justified safe observation-only path can satisfy it.
 N/A requires biological irrelevance, a concrete reason and reviewer sign-off.
-Identity, safety, evidence and final-PDF tests can never be N/A.
+Identity, safety, evidence, imagery and final-PDF tests can never be N/A.
+A missing owner image is a V1b failure, not biological irrelevance.
 
 Score = round-half-up(100 * earned / applicable points). Retain earned and
 applicable points in increments of 2.5 and publish the denominator. Record raw

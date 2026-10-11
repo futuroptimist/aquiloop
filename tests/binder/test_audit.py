@@ -24,7 +24,7 @@ class AuditTests(unittest.TestCase):
         outcomes['R1a'].update(biological_reason='Synthetic irrelevant subcheck',reviewer='Synthetic reviewer')
         self.assertEqual(audit.score(outcomes,'pass')['applicable'],97.5)
         self.assertEqual(audit.score(outcomes,'pass')['raw'],100)
-        for key in ['I1a','S1a','E1a','Q1a']:
+        for key in ['I1a','S1a','E1a','Q1a','V1a','V1b']:
             altered=copy.deepcopy(outcomes);altered[key]=outcomes['R1a']
             with self.assertRaises(ValueError):audit.score(altered,'pass')
     def test_missing_evidence_unknown_and_duplicates_rejected(self):
