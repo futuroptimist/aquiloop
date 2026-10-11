@@ -7,6 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 from build_binder import ROOT, load_manifest
 from binder_logs import tracked_species
 
@@ -18,6 +19,18 @@ def require(condition, message):
 
 def nonempty(value):
     return isinstance(value, str) and bool(value.strip())
+
+def parse_report(text):
+    def unique_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result, 'duplicate JSON member: ' + key)
+            result[key] = value
+        return result
+    def reject_constant(value):
+        raise ValueError('non-finite JSON number: ' + value)
+    return json.loads(text, object_pairs_hook=unique_pairs, parse_constant=reject_constant)
+
 
 def rubric_checks():
     rubric = json.loads(RUBRIC_PATH.read_text(encoding='utf-8'))
@@ -90,8 +103,13 @@ def validate(report, root=ROOT):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('report',type=Path)
+    parser.add_argument('--pdf',type=Path,required=True,help='Exact inspected PDF')
     args=parser.parse_args()
-    records=validate(json.loads(args.report.read_text(encoding='utf-8')))
+    report=parse_report(args.report.read_text(encoding='utf-8'))
+    records=validate(report)
+    require(hashlib.sha256(args.pdf.read_bytes()).hexdigest() == report['pdf_sha256'], 'PDF digest mismatch')
+    head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    require(report['commit'] == head, 'audit commit is not checkout HEAD')
     print(f'Validated {len(records)} entry records; arithmetic and references only, not factual or visual certification.')
 
 if __name__ == '__main__':

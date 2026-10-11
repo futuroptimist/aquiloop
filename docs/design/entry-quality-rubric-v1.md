@@ -50,7 +50,7 @@ release, publication or deployment.
 
 ## Record contract
 
-`python scripts/binder_audit.py REPORT.json` validates record structure, exact
+`python scripts/binder_audit.py REPORT.json --pdf PROOF.pdf` validates record structure, exact
 manifest coverage, score arithmetic, gate caps and traceable evidence fields.
 It does not verify biology, rights, source truth or visual quality automatically.
 Records contain entry ID, working name/status, rubric version, source commit,

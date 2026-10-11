@@ -31,3 +31,30 @@ class AuditTests(unittest.TestCase):
         for mutate in [lambda d:d.pop('I1a'),lambda d:d['I1a'].update(state='unknown'),lambda d:d['I1a'].update(evidence=[]),lambda d:d['I1a'].update(state='fail',next_step='')]:
             d=self.outcomes();mutate(d)
             with self.assertRaises(ValueError):audit.score(d,'pass')
+
+    def report(self):
+        import hashlib
+        from binder_logs import tracked_species
+        from build_binder import load_manifest
+        root=audit.ROOT
+        ids=tracked_species(load_manifest(root/'binder/manifest-v8.yaml'))
+        outcomes=self.outcomes('fail')
+        for item in outcomes.values():item.pop('evidence')
+        return dict(schema_version=1,rubric='aquiloop-entry-quality-v1',commit='a'*40,pdf_sha256='b'*64,audited='2026-10-11',manifest='binder/manifest-v8.yaml',source_snapshots={'binder/audit/rubric-v1.json':hashlib.sha256(audit.RUBRIC_PATH.read_bytes()).hexdigest()},entries=[dict(id=id,working_name='Synthetic working name',status='Synthetic fixture only',gate='pending',gate_reason='Synthetic unverified case',document_status='Synthetic draft',pages=list(range(i*3+1,i*3+4)),sections=['Care','Conditions','Reproduction'],unknowns=['Synthetic unknown'],improvements=['Inspect evidence'],outcomes=copy.deepcopy(outcomes),totals=audit.score(outcomes,'pending')) for i,id in enumerate(ids)])
+    def test_exact_inventory_and_snapshot_links(self):
+        report=self.report();self.assertEqual(len(audit.validate(report)),13)
+        for mutate in [lambda d:d['entries'].pop(),lambda d:d['entries'].append(d['entries'][0]),lambda d:d['source_snapshots'].update({'binder/audit/rubric-v1.json':'0'*64}),lambda d:d['entries'][0]['totals'].update(raw=100),lambda d:d['entries'][0].update(pages=[4,5,6])]:
+            changed=copy.deepcopy(report);mutate(changed)
+            with self.assertRaises(ValueError):audit.validate(changed)
+    def test_pass_requires_resolvable_versioned_evidence(self):
+        report=self.report();record=report['entries'][0]
+        record['outcomes']['I1a'].update(state='pass',evidence=['missing/source.json#claim'])
+        record['totals']=audit.score(record['outcomes'],'pending')
+        with self.assertRaises(ValueError):audit.validate(report)
+        record['outcomes']['I1a']['evidence']=['pdf:46']
+        with self.assertRaises(ValueError):audit.validate(report)
+
+    def test_json_duplicate_keys_and_nonfinite_values_rejected(self):
+        for raw in ['{"outcomes":{"I1a":{"state":"pass"},"I1a":{"state":"fail"}}}', '{"commit":"a","commit":"b"}', '{"raw":NaN}', '{"raw":Infinity}']:
+            with self.assertRaises(ValueError):audit.parse_report(raw)
+        self.assertEqual(audit.parse_report('{"value":2.5}'),{'value':2.5})

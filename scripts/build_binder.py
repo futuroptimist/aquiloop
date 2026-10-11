@@ -200,6 +200,12 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
             # Inset animal rules from the exact safe edge; PDF transform arithmetic
             # can otherwise put a full-width writing rule fractionally outside it.
             content = content.replace("right=.55in", "right=.56in", 1)
+            if base.name == "mosquitofish":
+                content = content.replace("v1 / 2026-10-04", "v1 / 2026-10-11")
+            elif (base.name, kind) in {("cherry-shrimp", "reproduction"),
+                                       ("cherry-shrimp", "tank-setup"),
+                                       ("kuhli-loach", "tank-setup")}:
+                content = content.replace("v1 / 2026-10-04", "v2 / 2026-10-11")
             content = content.replace(r"\begin{document}", r"\usepackage[hidelinks]{hyperref}" + "\n" + r"\begin{document}")
             if selected:
                 # Reuse the existing square hero geometry and prepared-asset path.
