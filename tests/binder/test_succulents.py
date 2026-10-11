@@ -177,13 +177,13 @@ class SucculentRenderingTests(unittest.TestCase):
         for label in logs.LABELS.values():
             # Crassula's existing common label is also its scientific name.
             self.assertEqual(text.count(label), 2 if label == "Crassula rupestris" else 1)
-        from test_logs import SCIENTIFIC_NAMES, normalized
+        from test_logs import SCIENTIFIC_NAMES, normalized, extracted_name_text
         species = logs.tracked_species(builder.load_manifest(ROOT / "binder/manifest-v7.yaml"))
         for number, batch in enumerate(logs.paginate_species(species), 36):
             page_text = normalized(self.reader.pages[number].extract_text())
             for entry in batch:
                 self.assertIn(normalized(logs.LABELS[entry]), page_text)
-                self.assertIn(normalized(SCIENTIFIC_NAMES[entry]), page_text)
+                self.assertIn(extracted_name_text(SCIENTIFIC_NAMES[entry]), extracted_name_text(page_text))
             self.assertEqual(page_text.count("A/M or Evt"), 3 * logs.LOG_ROWS)
         self.assertIn("BLANK EDITION", self.reader.pages[-1].extract_text())
 

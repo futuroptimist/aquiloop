@@ -35,6 +35,12 @@ def normalized(text):
     return re.sub(r"-\s+", "-", " ".join(text.split()))
 
 
+def extracted_name_text(text):
+    # PDF extractors can add spaces at italic kerning pairs (e.g. T axiphyllum)
+    # as well as at line wraps. Check every name character without those gaps.
+    return "".join(normalized(text).split())
+
+
 class LogTests(unittest.TestCase):
     def test_all_twelve_paired_names_and_qualified_identities(self):
         entries = builder.load_manifest(ROOT / "binder/manifest-v7.yaml")
@@ -141,7 +147,7 @@ class LogRenderingTests(unittest.TestCase):
             for label in logs.LABELS.values():
                 self.assertEqual(text.count(label), int(label in [logs.LABELS[e] for e in batch]))
             for entry in batch:
-                self.assertIn(normalized(SCIENTIFIC_NAMES[entry]), normalized(text))
+                self.assertIn(extracted_name_text(SCIENTIFIC_NAMES[entry]), extracted_name_text(text))
         blank = self.reader.pages[-1].extract_text()
         self.assertIn("BLANK EDITION", blank)
         for label in logs.LABELS.values():
