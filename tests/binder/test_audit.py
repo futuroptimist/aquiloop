@@ -58,3 +58,20 @@ class AuditTests(unittest.TestCase):
         for raw in ['{"outcomes":{"I1a":{"state":"pass"},"I1a":{"state":"fail"}}}', '{"commit":"a","commit":"b"}', '{"raw":NaN}', '{"raw":Infinity}']:
             with self.assertRaises(ValueError):audit.parse_report(raw)
         self.assertEqual(audit.parse_report('{"value":2.5}'),{'value':2.5})
+
+    def test_lossless_numbers_and_total_comparison(self):
+        from decimal import Decimal
+        import json
+        parsed=audit.parse_report('{"small":1e-999,"large":1e999,"precise":97.5000000000000001}')
+        self.assertEqual(parsed['small'],Decimal('1e-999'))
+        self.assertTrue(parsed['large'].is_finite())
+        self.assertEqual(parsed['precise'],Decimal('97.5000000000000001'))
+        report=self.report()
+        for value in [Decimal('1e-999'),Decimal('1e999'),False]:
+            changed=copy.deepcopy(report)
+            changed['entries'][0]['totals']['earned']=value
+            with self.assertRaises(ValueError):audit.validate(changed)
+        changed=copy.deepcopy(report)
+        changed['entries'][0]['totals']['applicable']=Decimal('100.0000000000000001')
+        with self.assertRaises(ValueError):audit.validate(changed)
+        audit.validate(audit.parse_report(json.dumps(report)))

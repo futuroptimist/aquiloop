@@ -29,7 +29,7 @@ def parse_report(text):
         return result
     def reject_constant(value):
         raise ValueError('non-finite JSON number: ' + value)
-    return json.loads(text, object_pairs_hook=unique_pairs, parse_constant=reject_constant)
+    return json.loads(text, object_pairs_hook=unique_pairs, parse_constant=reject_constant, parse_float=Decimal)
 
 
 def rubric_checks():
@@ -89,7 +89,13 @@ def validate(report, root=ROOT):
         require(isinstance(record.get('sections'), list) and len(record['sections']) == 3 and all(nonempty(s) for s in record['sections']), 'three section names required')
         for key in ('unknowns','improvements'):
             require(isinstance(record.get(key), list) and all(nonempty(x) for x in record[key]), 'missing '+key)
-        require(record.get('totals') == score(record.get('outcomes'),record.get('gate')), 'score arithmetic mismatch')
+        expected = score(record.get('outcomes'),record.get('gate'))
+        totals = record.get('totals')
+        require(isinstance(totals, dict) and set(totals) == set(expected), 'score fields mismatch')
+        for key, value in totals.items():
+            require(isinstance(value, (int, float, Decimal)) and not isinstance(value, bool), 'score must be numeric')
+            exact = Decimal(str(value))
+            require(exact.is_finite() and exact == Decimal(str(expected[key])), 'score arithmetic mismatch: '+key)
         for outcome in record['outcomes'].values():
             for ref in outcome.get('evidence', []):
                 if ref.startswith('pdf:'):
