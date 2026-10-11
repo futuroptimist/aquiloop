@@ -62,7 +62,8 @@ def score(outcomes, gate):
             require(nonempty(result.get('next_step')), 'failure needs next step')
     require(applicable > 0, 'no applicable points')
     raw = int((100 * earned / applicable).quantize(Decimal('1'), rounding=ROUND_HALF_UP))
-    return dict(earned=float(earned), applicable=float(applicable), raw=raw,
+    return dict(earned=float(earned), applicable=float(applicable),
+                normalized=float((100 * earned / applicable).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)), raw=raw,
                 effective=min(raw, {'pass':100, 'pending':69, 'fail':49}[gate]))
 
 def validate(report, root=ROOT):

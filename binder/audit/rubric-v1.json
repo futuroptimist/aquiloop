@@ -256,7 +256,7 @@
       "subchecks": [
         {
           "id": "Q1a",
-          "text": "Exactly one entry with correct order, sources, name and log coverage in final PDF"
+          "text": "Exactly one entry with correct order, source links, name and log coverage in final PDF"
         },
         {
           "id": "Q1b",

@@ -18,7 +18,7 @@ Identity, safety, evidence and final-PDF tests can never be N/A.
 
 Score = round-half-up(100 * earned / applicable points). Retain earned and
 applicable points in increments of 2.5 and publish the denominator. Record raw
-and effective integers separately. A confirmed content safety/accuracy failure
+and effective integers separately; retain normalized percentage to one decimal internally. A confirmed content safety/accuracy failure
 caps effective score at 49 (REQUIRES CORRECTION); pending verification caps it
 at 69 (UNVERIFIED). Passing gates do not imply habitat or print readiness.
 

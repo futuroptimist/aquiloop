@@ -14,7 +14,7 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(audit.score(self.outcomes(),'pass')['raw'],100)
         self.assertEqual(audit.score(self.outcomes('fail'),'pass')['raw'],0)
         results=self.outcomes();results['V1b']['state']='fail'
-        self.assertEqual(audit.score(results,'pass'),dict(earned=97.5,applicable=100.0,raw=98,effective=98))
+        self.assertEqual(audit.score(results,'pass'),dict(earned=97.5,applicable=100.0,normalized=97.5,raw=98,effective=98))
     def test_caps(self):
         self.assertEqual(audit.score(self.outcomes(),'fail')['effective'],49)
         self.assertEqual(audit.score(self.outcomes(),'pending')['effective'],69)
