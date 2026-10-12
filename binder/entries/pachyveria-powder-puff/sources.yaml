@@ -62,7 +62,7 @@
       "accessed": "2026-10-12",
       "supports": [
         "pachyveria-powder-puff#containment-and-product-safety",
-        "troubleshooting"
+        "propagation"
       ],
       "background_only": false,
       "publication_version": "Undated live page; publication date not established",
@@ -80,6 +80,7 @@
       "accessed": "2026-10-12",
       "supports": [
         "pachyveria-powder-puff#containment-and-product-safety",
+        "feeding_maintenance",
         "troubleshooting"
       ],
       "background_only": false,
