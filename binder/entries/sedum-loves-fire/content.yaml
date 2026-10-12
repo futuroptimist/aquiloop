@@ -68,13 +68,14 @@
     ],
     "propagation": [
       {
-        "claim": "Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves; placing the cutting in medium before the cut end has dried and callused raises rot risk.",
+        "claim": "Planning only: confirm candidate cultivar identity and propagation permission before cutting. Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves; placing the cutting in medium before the cut end has dried and callused raises rot risk.",
         "method": "stem cutting",
         "starting_material": "a healthy stem cutting with its lower leaves removed",
         "establishment_condition": "let the cut end dry and callus, then place it in well-drained medium",
         "pitfall": "placing the cutting in medium before the cut end has dried and callused raises rot risk",
         "sources": [
-          "SED-IA"
+          "SED-IA",
+          "SAFE-USPTO"
         ]
       }
     ],
