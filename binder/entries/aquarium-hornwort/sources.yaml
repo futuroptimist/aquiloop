@@ -112,9 +112,10 @@
       "url": "https://www.rhs.org.uk/prevention-protection/invasive-non-native-plants",
       "accessed": "2026-10-12",
       "supports": [
-        "aquarium-hornwort#containment-and-product-safety"
+        "aquarium-hornwort#containment-and-product-safety",
+        "aquarium_compatibility_troubleshooting"
       ],
-      "background_only": true,
+      "background_only": false,
       "publication_version": "Undated live page; publication date not established",
       "content_inspected": "2026-10-12",
       "last_successful_url_check": "2026-10-12",
@@ -129,10 +130,11 @@
       "url": "https://www.fws.gov/sites/default/files/documents/ANSTF-Classroom-Guidelines-Final.pdf",
       "accessed": "2026-10-12",
       "supports": [
-        "aquarium-hornwort#containment-and-product-safety"
+        "aquarium-hornwort#containment-and-product-safety",
+        "aquarium_compatibility_troubleshooting"
       ],
-      "background_only": true,
-      "publication_version": "Undated live page; publication date not established",
+      "background_only": false,
+      "publication_version": "Undated two-page PDF; publication date not established",
       "content_inspected": "2026-10-12",
       "last_successful_url_check": "2026-10-12",
       "passage": "Page 1: When obtaining a live study specimen; page 2: What to do with unwanted plants and animals",

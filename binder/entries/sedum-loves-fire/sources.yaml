@@ -78,9 +78,10 @@
       "url": "https://www.rhs.org.uk/prevention-protection/invasive-non-native-plants",
       "accessed": "2026-10-12",
       "supports": [
-        "sedum-loves-fire#containment-and-product-safety"
+        "sedum-loves-fire#containment-and-product-safety",
+        "troubleshooting"
       ],
-      "background_only": true,
+      "background_only": false,
       "publication_version": "Undated live page; publication date not established",
       "content_inspected": "2026-10-12",
       "last_successful_url_check": "2026-10-12",
@@ -95,9 +96,10 @@
       "url": "https://extension.umn.edu/garden-and-home/yard-and-garden/yard-and-garden-insects/insects-on-indoor-plants",
       "accessed": "2026-10-12",
       "supports": [
-        "sedum-loves-fire#containment-and-product-safety"
+        "sedum-loves-fire#containment-and-product-safety",
+        "troubleshooting"
       ],
-      "background_only": true,
+      "background_only": false,
       "publication_version": "Undated live page; publication date not established",
       "content_inspected": "2026-10-12",
       "last_successful_url_check": "2026-10-12",
@@ -113,9 +115,10 @@
       "accessed": "2026-10-12",
       "supports": [
         "sedum-loves-fire#containment-and-product-safety",
-        "propagation"
+        "propagation",
+        "troubleshooting"
       ],
-      "background_only": true,
+      "background_only": false,
       "publication_version": "Undated live page; publication date not established",
       "content_inspected": "2026-10-12",
       "last_successful_url_check": "2026-10-12",
