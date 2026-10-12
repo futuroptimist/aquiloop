@@ -66,18 +66,25 @@
           "POT-WISC",
           "POT-NCSU"
         ]
+      },
+      {
+        "claim": "Homemade soap sprays can burn plants; avoid them. Identify problems and check product/plant applicability before treatment.",
+        "sources": [
+          "SAFE-UMN"
+        ]
       }
     ],
     "propagation": [
       {
-        "claim": "Take a stem section with a node, leaf, and axillary bud—not a detached leaf alone. Put the node in moist medium, bud upward and covered, while the leaf stays exposed; or submerge the node in water while keeping foliage above water.",
+        "claim": "Take a stem section with a node, leaf, and axillary bud—not a detached leaf alone. Put the node in moist medium, bud upward and covered, while the leaf stays exposed; or submerge the node in water while keeping foliage above water. Collect node-bearing trimmings; contain waste for local disposal, never dump outdoors. Verify identity and current origin/destination rules before propagation/transfer. Proposed safeguards.",
         "method": "single-node stem cutting in medium or water",
         "starting_material": "a stem section containing a node, leaf, and axillary bud; not a detached leaf alone",
         "establishment_condition": "place the rooting node in moist medium with the bud upward and leaf exposed, or under water with foliage above water",
         "pitfall": "a detached leaf without a node and bud cannot make the instructed single-node cutting; submerged foliage can decay",
         "sources": [
           "POT-NCSU-PROP",
-          "POT-WISC"
+          "POT-WISC",
+          "SAFE-RHS"
         ]
       }
     ],
@@ -88,6 +95,12 @@
           "POT-PSU",
           "POT-WISC",
           "POT-NCSU"
+        ]
+      },
+      {
+        "claim": "Inspect leaves/pots; isolate incoming or infested material from other plants. Reserve separate space; defer propagation if capacity or compatibility is uncertain.",
+        "sources": [
+          "SAFE-UMN"
         ]
       }
     ],

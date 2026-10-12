@@ -63,6 +63,50 @@
         "propagation"
       ],
       "applicability": "General propagation chapter expressly listing devil’s ivy for single-node/leaf-bud cuttings; supports a node with axillary bud, bud-up placement in medium, and exposed leaf. It provides no pothos-specific rooting or transplant interval."
+    },
+    {
+      "key": "SAFE-RHS",
+      "authority": "Royal Horticultural Society",
+      "title": "Invasive non-native plants",
+      "url": "https://www.rhs.org.uk/prevention-protection/invasive-non-native-plants",
+      "accessed": "2026-10-12",
+      "supports": [
+        "pothos#containment-and-product-safety",
+        "propagation"
+      ],
+      "background_only": false,
+      "publication_version": "Undated live page; publication date not established",
+      "content_inspected": "2026-10-12",
+      "last_successful_url_check": "2026-10-12",
+      "passage": "Controlling invasive non-native plants; How should I dispose of these invasive weeds?; Action by gardeners",
+      "applicability": "UK horticultural prevention guidance. Supports escape prevention and avoiding home weedkillers near water; UK lists do not establish status or permission in another jurisdiction.",
+      "next_review": "Review mutable guidance by 2027-10-12; sooner before transfer, product use, a new identity, or a substantive edition."
+    },
+    {
+      "key": "SAFE-UMN",
+      "authority": "University of Minnesota Extension",
+      "title": "Managing insects on indoor plants",
+      "url": "https://extension.umn.edu/garden-and-home/yard-and-garden/yard-and-garden-insects/insects-on-indoor-plants",
+      "accessed": "2026-10-12",
+      "supports": [
+        "pothos#containment-and-product-safety",
+        "feeding_maintenance",
+        "troubleshooting"
+      ],
+      "background_only": false,
+      "publication_version": "Undated live page; publication date not established",
+      "content_inspected": "2026-10-12",
+      "last_successful_url_check": "2026-10-12",
+      "passage": "Early detection is key to managing pests; Using pesticides: Potassium fatty acids and Precautions",
+      "applicability": "General container-houseplant pest prevention, not evidence of species toxicity or an instruction to apply chemicals; adapted to inspection of these plants and their containers.",
+      "next_review": "Review mutable guidance by 2027-10-12; sooner before transfer, product use, a new identity, or a substantive edition."
     }
-  ]
+  ],
+  "edition_review": {
+    "date": "2026-10-12",
+    "scope": "New safety passages inspected; retained biological sources have NOT all been reinspected. HTTP success alone does not verify content.",
+    "entry_specific_trigger": "Recheck identification and pet access before relocation; an aquarium-supported vine is not evidence that submerged leaves or roots are safe for every livestock setup.",
+    "currency_policy": "Revisit high-consequence or changed claims each substantive edition; verify current local restrictions before action; inspect mutable care pages annually, next 2027-10-12. Stable biology has no automatic expiry.",
+    "contradiction_handling": "Keep stated source scopes and unresolved identity explicit. Conflicting or unavailable evidence must remain caveated; stop the affected action until reviewed."
+  }
 }

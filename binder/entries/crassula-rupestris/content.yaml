@@ -65,14 +65,21 @@
         "sources": [
           "CR-RHS"
         ]
+      },
+      {
+        "claim": "Homemade soap sprays can burn plants; avoid them. Identify problems and check product/plant applicability before treatment.",
+        "sources": [
+          "SAFE-UMN"
+        ]
       }
     ],
     "propagation": [
       {
-        "claim": "RHS supports stem or leaf cuttings in spring or early summer; no species-specific rooting interval is asserted. General technique: allow a cut stem to callus before rooting in draining medium.",
+        "claim": "RHS supports stem or leaf cuttings in spring or early summer; no species-specific rooting interval is asserted. General technique: allow a cut stem to callus before rooting in draining medium. Collect leaves/cuttings; contain waste for local disposal, never dump outdoors. Verify identity and current origin/destination rules before propagation/transfer. Proposed safeguards.",
         "sources": [
           "CR-RHS",
-          "SU-ISU"
+          "SU-ISU",
+          "SAFE-RHS"
         ],
         "method": "stem cutting",
         "starting_material": "healthy stem with leaves",
@@ -85,6 +92,12 @@
         "claim": "Stretched growth: check light. Persistent wetness or soft tissue: inspect drainage and roots before adding water. A photograph alone does not diagnose disease.",
         "sources": [
           "SU-MSU"
+        ]
+      },
+      {
+        "claim": "Inspect leaves/pots; isolate incoming or infested material from other plants. Reserve separate space; defer propagation if capacity or compatibility is uncertain.",
+        "sources": [
+          "SAFE-UMN"
         ]
       }
     ],

@@ -54,6 +54,12 @@
         "sources": [
           "GG-AA"
         ]
+      },
+      {
+        "claim": "Avoid home weedkillers near tank water. Pond-control advice is not a tank protocol; defer unidentified products for aquarium-specific review. Proposed safeguard.",
+        "sources": [
+          "SAFE-RHS"
+        ]
       }
     ],
     "growth_trimming": [
@@ -62,14 +68,21 @@
         "sources": [
           "GG-AA"
         ]
+      },
+      {
+        "claim": "Never release fragments or tank contents outdoors. Inspect trimmings for animals; seal unwanted plants for locally permitted trash, not compost.",
+        "sources": [
+          "SAFE-FWS"
+        ]
       }
     ],
     "propagation": [
       {
-        "claim": "Fragments and remaining roots can regrow (AquaPlant pond account). Adapt this capability to an observed floating cutting; no exact cutting length or rooting deadline is established.",
+        "claim": "Fragments and remaining roots can regrow (AquaPlant pond account). Adapt this capability to an observed floating cutting; no exact cutting length or rooting deadline is established. Before transfer, verify species and current origin/destination rules; sale listings are not permission.",
         "sources": [
           "GG-PROP",
-          "GG-AA"
+          "GG-AA",
+          "SAFE-FWS"
         ],
         "method": "submerged stem fragments",
         "starting_material": "healthy identified plant material",

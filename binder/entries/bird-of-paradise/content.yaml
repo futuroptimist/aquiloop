@@ -69,17 +69,24 @@
           "BOP-REG",
           "BOP-NIC"
         ]
+      },
+      {
+        "claim": "Homemade soap sprays can burn plants; avoid them. Identify problems and check product/plant applicability before treatment.",
+        "sources": [
+          "SAFE-UMN"
+        ]
       }
     ],
     "propagation": [
       {
-        "claim": "Candidate example for S. reginae: divide an old clump with four to five shoots into single-stem divisions in late spring or early summer. Replant at the original depth and keep moist until rooted; dry or soggy establishment conditions can kill foliage.",
+        "claim": "Candidate example for S. reginae: divide an old clump with four to five shoots into single-stem divisions in late spring or early summer. Replant at the original depth and keep moist until rooted; dry or soggy establishment conditions can kill foliage. Collect seeds/divisions; contain waste for local disposal, never dump outdoors. Verify identity and current origin/destination rules before propagation/transfer. Proposed safeguards.",
         "method": "division (candidate S. reginae example)",
         "starting_material": "an old S. reginae clump with four to five shoots, separated into single-stem divisions",
         "establishment_condition": "replant at the original depth and keep the soil moist until roots establish",
         "pitfall": "dry or soggy establishment conditions can yellow and kill leaves",
         "sources": [
-          "BOP-UF"
+          "BOP-UF",
+          "SAFE-RHS"
         ]
       }
     ],
@@ -89,6 +96,12 @@
         "sources": [
           "BOP-REG",
           "BOP-NIC"
+        ]
+      },
+      {
+        "claim": "Inspect leaves/pots; isolate incoming or infested material from other plants. Reserve separate space; defer propagation if capacity or compatibility is uncertain.",
+        "sources": [
+          "SAFE-UMN"
         ]
       }
     ],

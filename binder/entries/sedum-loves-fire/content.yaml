@@ -64,17 +64,25 @@
         "sources": [
           "SED-MSU"
         ]
+      },
+      {
+        "claim": "Homemade soap sprays can burn plants; avoid them. Identify problems and check product/plant applicability before treatment.",
+        "sources": [
+          "SAFE-UMN"
+        ]
       }
     ],
     "propagation": [
       {
-        "claim": "Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves; placing the cutting in medium before the cut end has dried and callused raises rot risk.",
+        "claim": "Planning only: confirm candidate cultivar identity and propagation permission before cutting. Method/material: take a healthy stem cutting with clean, sharp pruners. Remove lower leaves; placing the cutting in medium before the cut end has dried and callused raises rot risk. Collect leaves/cuttings; contain waste for local disposal, never dump outdoors. Verify identity and current origin/destination rules before propagation/transfer. Proposed safeguards.",
         "method": "stem cutting",
         "starting_material": "a healthy stem cutting with its lower leaves removed",
         "establishment_condition": "let the cut end dry and callus, then place it in well-drained medium",
         "pitfall": "placing the cutting in medium before the cut end has dried and callused raises rot risk",
         "sources": [
-          "SED-IA"
+          "SED-IA",
+          "SAFE-USPTO",
+          "SAFE-RHS"
         ]
       }
     ],
@@ -83,6 +91,12 @@
         "claim": "Spindly growth → light may be inadequate → verify exposure before gradually increasing sun. Persistent wetness or poor drainage → root-rot risk → check the grow bag, medium, and recent rain.",
         "sources": [
           "SED-MSU"
+        ]
+      },
+      {
+        "claim": "Inspect leaves/pots; isolate incoming or infested material from other plants. Reserve separate space; defer propagation if capacity or compatibility is uncertain.",
+        "sources": [
+          "SAFE-UMN"
         ]
       }
     ],

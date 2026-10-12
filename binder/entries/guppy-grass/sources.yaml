@@ -87,6 +87,50 @@
         "guppy-grass#contain-discard"
       ],
       "applicability": "Aquarium containment/disposal and receipt inspection; not a plant culture protocol."
+    },
+    {
+      "key": "SAFE-RHS",
+      "authority": "Royal Horticultural Society",
+      "title": "Invasive non-native plants",
+      "url": "https://www.rhs.org.uk/prevention-protection/invasive-non-native-plants",
+      "accessed": "2026-10-12",
+      "supports": [
+        "guppy-grass#containment-and-product-safety",
+        "nutrient_context"
+      ],
+      "background_only": false,
+      "publication_version": "Undated live page; publication date not established",
+      "content_inspected": "2026-10-12",
+      "last_successful_url_check": "2026-10-12",
+      "passage": "Controlling invasive non-native plants; How should I dispose of these invasive weeds?; Action by gardeners",
+      "applicability": "UK horticultural prevention guidance. Supports escape prevention and avoiding home weedkillers near water; UK lists do not establish status or permission in another jurisdiction.",
+      "next_review": "Review mutable guidance by 2027-10-12; sooner before transfer, product use, a new identity, or a substantive edition."
+    },
+    {
+      "key": "SAFE-FWS",
+      "authority": "Aquatic Nuisance Species Task Force / U.S. Fish and Wildlife Service",
+      "title": "Classroom Guidelines for Preventing the Introduction and Spread of Aquatic Invasive Species",
+      "url": "https://www.fws.gov/sites/default/files/documents/ANSTF-Classroom-Guidelines-Final.pdf",
+      "accessed": "2026-10-12",
+      "supports": [
+        "guppy-grass#containment-and-product-safety",
+        "growth_trimming",
+        "propagation"
+      ],
+      "background_only": false,
+      "publication_version": "Undated two-page PDF; publication date not established",
+      "content_inspected": "2026-10-12",
+      "last_successful_url_check": "2026-10-12",
+      "passage": "Page 1: When obtaining a live study specimen; page 2: What to do with unwanted plants and animals",
+      "applicability": "Classroom prevention principles adapted to aquarium plants; inspect identity and hitchhikers and verify current local restrictions. No chemical water-disposal recipe or live-animal disposal instruction is adopted.",
+      "next_review": "Review mutable guidance by 2027-10-12; sooner before transfer, product use, a new identity, or a substantive edition."
     }
-  ]
+  ],
+  "edition_review": {
+    "date": "2026-10-12",
+    "scope": "New safety passages inspected; retained biological sources have NOT all been reinspected. HTTP success alone does not verify content.",
+    "entry_specific_trigger": "Review identity and source scope before changing conditions: retailer aquarium ranges and field/pond management describe different settings; pond chemical-control advice is not an aquarium protocol.",
+    "currency_policy": "Revisit high-consequence or changed claims each substantive edition; verify current local restrictions before action; inspect mutable care pages annually, next 2027-10-12. Stable biology has no automatic expiry.",
+    "contradiction_handling": "Keep stated source scopes and unresolved identity explicit. Conflicting or unavailable evidence must remain caveated; stop the affected action until reviewed."
+  }
 }

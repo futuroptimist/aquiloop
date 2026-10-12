@@ -208,6 +208,25 @@
         "kind": "not_applicable",
         "reason": "Submerged aquarium care has no terrestrial watering interval or potting-mixture recipe."
       }
+    },
+    {
+      "claim_id": "containment-and-product-safety",
+      "metric": "safety",
+      "description": "Do not use home weedkillers near aquarium water; pond-control advice is not a tank treatment. With an unidentified product or plant decline, defer treatment and obtain aquarium-specific review. Before transfer, verify species and current origin/destination restrictions; a sale listing is not permission. Never release fragments or tank contents outdoors. Inspect trimmings for animals before sealing unwanted plant material for locally permitted trash disposal; do not compost it. Proposed aquarium safeguards; no action authorized. [SAFE-RHS, SAFE-FWS]",
+      "applicable_taxon": "Najas guadalupensis",
+      "propagation_method": "planning only",
+      "life_stage": "established",
+      "growing_conditions": "Unmeasured container or aquarium conditions; no intervention authorized",
+      "geographic_context": "Verify applicable local jurisdiction before action",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SAFE-RHS",
+          "SAFE-FWS"
+        ],
+        "applicability": "General prevention guidance applied conservatively to this provisional entry; no claim of species-specific toxicity, invasive status or habitat readiness.",
+        "derivation": "Combine inspected prevention guidance with existing reproductive mode and identity uncertainty to prevent unintended spread, pest transfer and inappropriate product use."
+      }
     }
   ]
 }

@@ -454,6 +454,25 @@
       "geographic_context": "not_applicable",
       "evidence_category": "unknown",
       "provenance": {}
+    },
+    {
+      "claim_id": "containment-and-product-safety",
+      "metric": "safety",
+      "description": "Collect seeds and removed divisions; never dump them outdoors. Keep waste contained pending local disposal guidance. Before propagation or transfer, verify identity and current restrictions at origin/destination. Inspect leaf undersides and pots; isolate incoming or infested material from other plants. Reserve separate space for new plants; if space or compatibility is uncertain, defer propagation. Homemade soap sprays can burn plants: avoid them; identify the problem and check plant/product applicability before any treatment. Proposed container safeguards. [SAFE-UMN, SAFE-RHS]",
+      "applicable_taxon": "Strelitzia sp.",
+      "propagation_method": "planning only",
+      "life_stage": "established",
+      "growing_conditions": "Unmeasured container or aquarium conditions; no intervention authorized",
+      "geographic_context": "Verify applicable local jurisdiction before action",
+      "evidence_category": "proposed",
+      "provenance": {
+        "source_refs": [
+          "SAFE-UMN",
+          "SAFE-RHS"
+        ],
+        "applicability": "General prevention guidance applied conservatively to this provisional entry; no claim of species-specific toxicity, invasive status or habitat readiness.",
+        "derivation": "Combine inspected prevention guidance with existing reproductive mode and identity uncertainty to prevent unintended spread, pest transfer and inappropriate product use."
+      }
     }
   ],
   "claim_refs": [

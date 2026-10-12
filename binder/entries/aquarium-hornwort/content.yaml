@@ -58,6 +58,12 @@
         "sources": [
           "HOR-WA"
         ]
+      },
+      {
+        "claim": "Avoid home weedkillers near tank water. Pond-control advice is not a tank protocol; defer unidentified products for aquarium-specific review. Proposed safeguard.",
+        "sources": [
+          "SAFE-RHS"
+        ]
       }
     ],
     "growth_trimming": [
@@ -66,17 +72,24 @@
         "sources": [
           "HOR-WA"
         ]
+      },
+      {
+        "claim": "Never release fragments or tank contents outdoors. Inspect trimmings for animals; seal unwanted plants for locally permitted trash, not compost.",
+        "sources": [
+          "SAFE-FWS"
+        ]
       }
     ],
     "propagation": [
       {
-        "claim": "For candidate C. demersum, use a plant fragment and let it float freely below the surface. Its stems break easily, so handle it gently and remove unintended loose fragments rather than spreading them through the tank.",
+        "claim": "For candidate C. demersum, use a plant fragment and let it float freely below the surface. Its stems break easily, so handle it gently and remove unintended loose fragments rather than spreading them through the tank. Before transfer, verify species and current origin/destination rules; sale listings are not permission.",
         "method": "fragment propagation (candidate C. demersum example)",
         "starting_material": "a C. demersum plant fragment",
         "establishment_condition": "float the fragment freely below the water surface",
         "pitfall": "stems break easily and handling can create unintended loose fragments",
         "sources": [
-          "HOR-WA"
+          "HOR-WA",
+          "SAFE-FWS"
         ]
       }
     ],
