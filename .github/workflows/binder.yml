@@ -5,6 +5,9 @@ on:
     paths:
       - 'binder/**'
       - 'scripts/build_binder.py'
+      - 'scripts/binder_reuse.py'
+      - 'scripts/render_binder_proofs.py'
+      - 'docs/design/binder-build-reuse.md'
       - 'scripts/binder_evidence.py'
       - 'scripts/binder_publication.py'
       - 'tests/publication/**'
@@ -22,6 +25,9 @@ on:
     paths:
       - 'binder/**'
       - 'scripts/build_binder.py'
+      - 'scripts/binder_reuse.py'
+      - 'scripts/render_binder_proofs.py'
+      - 'docs/design/binder-build-reuse.md'
       - 'scripts/binder_evidence.py'
       - 'scripts/binder_publication.py'
       - 'tests/publication/**'
@@ -172,7 +178,7 @@ jobs:
             texlive-latex-base texlive-luatex texlive-pictures
 
       - name: Compile-check binder Python
-        run: python -m compileall -q scripts/build_binder.py scripts/binder_logs.py scripts/prepare_binder_photo.py tests/binder
+        run: python -m compileall -q scripts/build_binder.py scripts/binder_reuse.py scripts/render_binder_proofs.py scripts/binder_logs.py scripts/prepare_binder_photo.py tests/binder
 
       - name: Render companion layout diagnostics
         run: |
@@ -239,9 +245,15 @@ jobs:
           grep -Eq '^Ran [1-9][0-9]* tests? in ' build-binder-tests.log
           ! grep -Eq 'skipped=[1-9][0-9]*' build-binder-tests.log
 
+      - name: Start disposable job-local reuse after cold tests
+        run: |
+          set -euo pipefail
+          session="$(python scripts/binder_reuse.py init)"
+          printf 'BINDER_REUSE_SESSION=%s\n' "$session" >> "$GITHUB_ENV"
+
       - name: Build combined six-page draft
         run: |
-          python scripts/build_binder.py --manifest binder/manifest.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest.yaml --mode draft \
             --output build/binder/aquiloop-binder-draft.pdf
           printf 'validated PDF SHA-256: '
           sha256sum build/binder/aquiloop-binder-draft.pdf | cut -d' ' -f1
@@ -270,8 +282,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p build/binder/render-color build/binder/render-gray
-          pdftoppm -r 150 -png build/binder/aquiloop-binder-draft.pdf build/binder/render-color/page >/dev/null
-          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-draft.pdf build/binder/render-gray/page >/dev/null
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -png build/binder/aquiloop-binder-draft.pdf build/binder/render-color/page >/dev/null
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -gray -png build/binder/aquiloop-binder-draft.pdf build/binder/render-gray/page >/dev/null
           test "$(find build/binder/render-color -type f -name '*.png' | wc -l)" -eq 6
           test "$(find build/binder/render-gray -type f -name '*.png' | wc -l)" -eq 6
 
@@ -285,11 +297,11 @@ jobs:
       - name: Build expanded sixteen-page draft and proofs
         run: |
           set -euo pipefail
-          python scripts/build_binder.py --manifest binder/manifest-v2.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest-v2.yaml --mode draft \
             --output build/binder/aquiloop-binder-expanded-draft.pdf
           mkdir -p build/binder/expanded-color build/binder/expanded-gray
-          pdftoppm -r 150 -png build/binder/aquiloop-binder-expanded-draft.pdf build/binder/expanded-color/page
-          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-expanded-draft.pdf build/binder/expanded-gray/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -png build/binder/aquiloop-binder-expanded-draft.pdf build/binder/expanded-color/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -gray -png build/binder/aquiloop-binder-expanded-draft.pdf build/binder/expanded-gray/page
           test "$(find build/binder/expanded-color -name '*.png' | wc -l)" -eq 16
           test "$(find build/binder/expanded-gray -name '*.png' | wc -l)" -eq 16
           sha256sum build/binder/aquiloop-binder-expanded-draft.pdf
@@ -317,11 +329,11 @@ jobs:
       - name: Build nineteen-page animal extension and proofs
         run: |
           set -euo pipefail
-          python scripts/build_binder.py --manifest binder/manifest-v3.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest-v3.yaml --mode draft \
             --output build/binder/aquiloop-binder-kuhli-draft.pdf
           mkdir -p build/binder/kuhli-color build/binder/kuhli-gray
-          pdftoppm -r 150 -png build/binder/aquiloop-binder-kuhli-draft.pdf build/binder/kuhli-color/page
-          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-kuhli-draft.pdf build/binder/kuhli-gray/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -png build/binder/aquiloop-binder-kuhli-draft.pdf build/binder/kuhli-color/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -gray -png build/binder/aquiloop-binder-kuhli-draft.pdf build/binder/kuhli-gray/page
           test "$(find build/binder/kuhli-color -name '*.png' | wc -l)" -eq 19
           test "$(find build/binder/kuhli-gray -name '*.png' | wc -l)" -eq 19
           sha256sum build/binder/aquiloop-binder-kuhli-draft.pdf
@@ -340,11 +352,11 @@ jobs:
       - name: Build twenty-two-page shrimp extension and proofs
         run: |
           set -euo pipefail
-          python scripts/build_binder.py --manifest binder/manifest-v4.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest-v4.yaml --mode draft \
             --output build/binder/aquiloop-binder-shrimp-draft.pdf
           mkdir -p build/binder/shrimp-color build/binder/shrimp-gray
-          pdftoppm -r 150 -png build/binder/aquiloop-binder-shrimp-draft.pdf build/binder/shrimp-color/page
-          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-shrimp-draft.pdf build/binder/shrimp-gray/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -png build/binder/aquiloop-binder-shrimp-draft.pdf build/binder/shrimp-color/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -gray -png build/binder/aquiloop-binder-shrimp-draft.pdf build/binder/shrimp-gray/page
           test "$(find build/binder/shrimp-color -name '*.png' | wc -l)" -eq 22
           test "$(find build/binder/shrimp-gray -name '*.png' | wc -l)" -eq 22
           sha256sum build/binder/aquiloop-binder-shrimp-draft.pdf
@@ -363,11 +375,11 @@ jobs:
       - name: Build thirty-one-page aquatic extension and proofs
         run: |
           set -euo pipefail
-          python scripts/build_binder.py --manifest binder/manifest-v5.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest-v5.yaml --mode draft \
             --output build/binder/aquiloop-binder-aquatic-draft.pdf
           mkdir -p build/binder/aquatic-color build/binder/aquatic-gray
-          pdftoppm -r 150 -png build/binder/aquiloop-binder-aquatic-draft.pdf build/binder/aquatic-color/page
-          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-aquatic-draft.pdf build/binder/aquatic-gray/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -png build/binder/aquiloop-binder-aquatic-draft.pdf build/binder/aquatic-color/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -gray -png build/binder/aquiloop-binder-aquatic-draft.pdf build/binder/aquatic-gray/page
           test "$(find build/binder/aquatic-color -name '*.png' | wc -l)" -eq 31
           test "$(find build/binder/aquatic-gray -name '*.png' | wc -l)" -eq 31
           sha256sum build/binder/aquiloop-binder-aquatic-draft.pdf
@@ -386,11 +398,11 @@ jobs:
       - name: Build complete species logs and blank edition
         run: |
           set -euo pipefail
-          python scripts/build_binder.py --manifest binder/manifest-v6.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest-v6.yaml --mode draft \
             --output build/binder/aquiloop-binder-reusable-draft.pdf
           mkdir -p build/binder/reusable-color build/binder/reusable-gray
-          pdftoppm -f 31 -l 35 -r 150 -png build/binder/aquiloop-binder-reusable-draft.pdf build/binder/reusable-color/page
-          pdftoppm -f 31 -l 35 -r 150 -gray -png build/binder/aquiloop-binder-reusable-draft.pdf build/binder/reusable-gray/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -f 31 -l 35 -r 150 -png build/binder/aquiloop-binder-reusable-draft.pdf build/binder/reusable-color/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -f 31 -l 35 -r 150 -gray -png build/binder/aquiloop-binder-reusable-draft.pdf build/binder/reusable-gray/page
           test "$(find build/binder/reusable-color -name '*.png' | wc -l)" -eq 5
           test "$(find build/binder/reusable-gray -name '*.png' | wc -l)" -eq 5
           sha256sum build/binder/aquiloop-binder-reusable-draft.pdf
@@ -409,11 +421,11 @@ jobs:
       - name: Build photographed succulent extension and proofs
         run: |
           set -euo pipefail
-          python scripts/build_binder.py --manifest binder/manifest-v7.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest-v7.yaml --mode draft \
             --output build/binder/aquiloop-binder-succulents-draft.pdf
           mkdir -p build/binder/succulents-color build/binder/succulents-gray
-          pdftoppm -f 31 -l 41 -r 150 -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/succulents-color/page
-          pdftoppm -f 31 -l 41 -r 150 -gray -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/succulents-gray/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -f 31 -l 41 -r 150 -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/succulents-color/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -f 31 -l 41 -r 150 -gray -png build/binder/aquiloop-binder-succulents-draft.pdf build/binder/succulents-gray/page
           test "$(find build/binder/succulents-color -name '*.png' | wc -l)" -eq 11
           test "$(find build/binder/succulents-gray -name '*.png' | wc -l)" -eq 11
           sha256sum build/binder/aquiloop-binder-succulents-draft.pdf
@@ -432,11 +444,11 @@ jobs:
       - name: Build mosquitofish edition and complete proofs
         run: |
           set -euo pipefail
-          python scripts/build_binder.py --manifest binder/manifest-v8.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest-v8.yaml --mode draft \
             --output build/binder/aquiloop-binder-mosquitofish-draft.pdf
           mkdir -p build/binder/mosquitofish-color build/binder/mosquitofish-gray
-          pdftoppm -r 150 -png build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/mosquitofish-color/page
-          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/mosquitofish-gray/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -png build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/mosquitofish-color/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -gray -png build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/mosquitofish-gray/page
           test "$(find build/binder/mosquitofish-color -name '*.png' | wc -l)" -eq 45
           test "$(find build/binder/mosquitofish-gray -name '*.png' | wc -l)" -eq 45
           sha256sum build/binder/aquiloop-binder-mosquitofish-draft.pdf
@@ -455,11 +467,11 @@ jobs:
       - name: Build red-wiggler edition and complete proofs
         run: |
           set -euo pipefail
-          python scripts/build_binder.py --manifest binder/manifest-v9.yaml --mode draft \
+          python scripts/build_binder.py --reuse-session "$BINDER_REUSE_SESSION" --manifest binder/manifest-v9.yaml --mode draft \
             --output build/binder/aquiloop-binder-red-wiggler-draft.pdf
           mkdir -p build/binder/red-wiggler-color build/binder/red-wiggler-gray
-          pdftoppm -r 150 -png build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/red-wiggler-color/page
-          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/red-wiggler-gray/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -png build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/red-wiggler-color/page
+          python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -gray -png build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/red-wiggler-gray/page
           test "$(find build/binder/red-wiggler-color -name '*.png' | wc -l)" -eq 48
           test "$(find build/binder/red-wiggler-gray -name '*.png' | wc -l)" -eq 48
           sha256sum build/binder/aquiloop-binder-red-wiggler-draft.pdf
