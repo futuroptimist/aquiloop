@@ -77,7 +77,7 @@ def score(outcomes, gate):
                 effective=min(raw, rubric['gate_caps'][gate]))
 
 def validate(report, root=ROOT):
-    require(isinstance(report, dict) and report.get('schema_version') == 1, 'unsupported audit schema')
+    require(isinstance(report, dict) and type(report.get('schema_version')) is int and report['schema_version'] == 1, 'unsupported audit schema')
     require(report.get('rubric') == 'aquiloop-entry-quality-v1', 'rubric mismatch')
     for name, length in [('commit',40), ('pdf_sha256',64)]:
         require(isinstance(report.get(name), str) and re.fullmatch('[0-9a-f]{'+str(length)+'}', report[name]), 'invalid '+name)
@@ -89,11 +89,14 @@ def validate(report, root=ROOT):
     pages = sum(e['page_budget'] for e in entries)
     snapshots = report.get('source_snapshots')
     require(isinstance(snapshots, dict) and snapshots, 'source-version linkage required')
+    require({'binder/audit/rubric-v1.json', report['manifest']} <= set(snapshots), 'canonical rubric and manifest snapshots required')
     for path, digest in snapshots.items():
         target = (root / path).resolve()
         require(root.resolve() in target.parents and target.is_file(), 'invalid snapshot path')
         require(hashlib.sha256(target.read_bytes()).hexdigest() == digest, 'source snapshot mismatch: '+path)
     for index, record in enumerate(records):
+        for key in ('rubric', 'commit', 'manifest', 'pdf_sha256', 'audited'):
+            require(record.get(key) == report[key], 'entry provenance mismatch: ' + key)
         require(all(nonempty(record.get(k)) for k in ('working_name','status','gate_reason','document_status')), 'missing identity/status/gate evidence')
         require(record.get('pages') == list(range(3*index+1,3*index+4)), 'entry pages mismatch')
         require(isinstance(record.get('sections'), list) and len(record['sections']) == 3 and all(nonempty(s) for s in record['sections']), 'three section names required')

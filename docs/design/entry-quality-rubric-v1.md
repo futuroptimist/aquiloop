@@ -75,3 +75,7 @@ ignored output alone does not invalidate committed-source provenance.
 Each cited snapshot also must match the blob at the recorded commit after Git
 clean conversion (including configured line endings). This catches modified
 snapshots hidden by assume-unchanged or skip-worktree index flags.
+
+The canonical rubric and selected manifest are mandatory source snapshots.
+Each entry repeats the report's rubric, commit, manifest, PDF digest and audit
+date, and the validator rejects missing or contradictory entry provenance.

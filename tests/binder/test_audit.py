@@ -88,7 +88,7 @@ class AuditTests(unittest.TestCase):
         outcomes = self.outcomes('fail')
         for item in outcomes.values():
             item.pop('evidence')
-        return dict(schema_version=1, rubric='aquiloop-entry-quality-v1', commit='a' * 40, pdf_sha256='b' * 64, audited='2026-10-11', manifest='binder/manifest-v8.yaml', source_snapshots={'binder/audit/rubric-v1.json': hashlib.sha256(audit.RUBRIC_PATH.read_bytes()).hexdigest()}, entries=[dict(id=id, working_name='Synthetic working name', status='Synthetic fixture only', gate='pending', gate_reason='Synthetic unverified case', document_status='Synthetic draft', pages=list(range(i * 3 + 1, i * 3 + 4)), sections=['Care', 'Conditions', 'Reproduction'], unknowns=['Synthetic unknown'], improvements=['Inspect evidence'], outcomes=copy.deepcopy(outcomes), totals=audit.score(outcomes, 'pending')) for i, id in enumerate(ids)])
+        return dict(schema_version=1, rubric='aquiloop-entry-quality-v1', commit='a' * 40, pdf_sha256='b' * 64, audited='2026-10-11', manifest='binder/manifest-v8.yaml', source_snapshots={path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in ['binder/audit/rubric-v1.json', 'binder/manifest-v8.yaml']}, entries=[dict(id=id, rubric='aquiloop-entry-quality-v1', commit='a' * 40, manifest='binder/manifest-v8.yaml', pdf_sha256='b' * 64, audited='2026-10-11', working_name='Synthetic working name', status='Synthetic fixture only', gate='pending', gate_reason='Synthetic unverified case', document_status='Synthetic draft', pages=list(range(i * 3 + 1, i * 3 + 4)), sections=['Care', 'Conditions', 'Reproduction'], unknowns=['Synthetic unknown'], improvements=['Inspect evidence'], outcomes=copy.deepcopy(outcomes), totals=audit.score(outcomes, 'pending')) for i, id in enumerate(ids)])
 
     def test_exact_inventory_and_snapshot_links(self):
         report = self.report()
@@ -98,6 +98,29 @@ class AuditTests(unittest.TestCase):
             mutate(changed)
             with self.assertRaises(ValueError):
                 audit.validate(changed)
+
+    def test_canonical_inputs_cannot_be_omitted(self):
+        for path in ('binder/audit/rubric-v1.json', 'binder/manifest-v8.yaml'):
+            with self.subTest(path=path):
+                report = self.report()
+                report['source_snapshots'].pop(path)
+                with self.assertRaisesRegex(ValueError, 'canonical rubric and manifest'):
+                    audit.validate(report)
+
+    def test_entry_provenance_must_match_report(self):
+        for key in ('rubric', 'commit', 'manifest', 'pdf_sha256', 'audited'):
+            with self.subTest(key=key):
+                report = self.report()
+                report['entries'][0][key] = 'synthetic mismatch'
+                with self.assertRaisesRegex(ValueError, 'entry provenance mismatch'):
+                    audit.validate(report)
+                report['entries'][0].pop(key)
+                with self.assertRaisesRegex(ValueError, 'entry provenance mismatch'):
+                    audit.validate(report)
+        report = self.report()
+        report['schema_version'] = True
+        with self.assertRaisesRegex(ValueError, 'unsupported audit schema'):
+            audit.validate(report)
 
     def test_pass_requires_resolvable_versioned_evidence(self):
         report = self.report()
