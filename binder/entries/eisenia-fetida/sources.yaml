@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "entry": "eisenia-fetida",
+  "sources": [
+    {
+      "key": "EF-EPA",
+      "authority": "US EPA",
+      "title": "Composting at Home",
+      "url": "https://www.epa.gov/recycle/composting-home",
+      "published": "2025-12-08 update",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Worm Composting, Steps 1-5",
+      "applicability": "Public-agency household protocol; feedback-based feeding, bin and exclusions.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    },
+    {
+      "key": "EF-N1",
+      "authority": "Rhonda Sherman, NC State Extension",
+      "title": "Worms Can Recycle Your Garbage, AG-473-18",
+      "url": "https://content.ces.ncsu.edu/worms-can-recycle-your-garbage",
+      "published": "2017-03-29",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Equipment and Supplies: Worm Bin, Bedding, Composting Worms, Food Scraps; Troubleshooting",
+      "applicability": "Extension household red-wiggler guidance; not observations of this stock.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    },
+    {
+      "key": "EF-N2",
+      "authority": "Rhonda Sherman, NC State Extension",
+      "title": "Raising Earthworms (Eisenia fetida) for a Commercial Enterprise, AG-641",
+      "url": "https://content.ces.ncsu.edu/raising-earthworms-successfully",
+      "published": "2021-09-28; reviewed/revised 2026-10-05",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Classification; Biology; Potential Markets; Earthworm Pests",
+      "applicability": "Species-named commercial context. Conditional biology examples, not Pacifica yields. Categorical hybrid/self-fertilization exclusions rejected in light of T2.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    },
+    {
+      "key": "EF-O1",
+      "authority": "Sam Angima, Michael Noack and Sally Noack, OSU Extension",
+      "title": "Composting with worms, EM 9034",
+      "url": "https://extension.oregonstate.edu/catalog/em-9034-composting-worms",
+      "published": "unknown; no date displayed in inspected HTML",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Worm Bin; The Worms; Bedding; Food; Winter Care; More About Worm Health",
+      "applicability": "Peer-reviewed Extension home-bin guidance. Startup feed is a weekly example, not a daily ration or stocking guarantee.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    },
+    {
+      "key": "EF-U1",
+      "authority": "UC ANR / UC Master Gardeners, Orange County",
+      "title": "Vermicomposting & Vermiculture - Orange County",
+      "url": "https://ucanr.edu/node/161011/printable/print",
+      "published": "unknown; no date displayed",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Bedding Material; Care and Maintenance; Harvesting Worm Castings",
+      "applicability": "Household guidance. Orange County year-round placement and population-doubling claims not extrapolated to Pacifica.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    },
+    {
+      "key": "EF-S1",
+      "authority": "San Mateo County Sustainability Department",
+      "title": "Composting at Home",
+      "url": "https://www.smcsustainability.org/waste-reduction/compost/composting-at-home/",
+      "published": "unknown; no date displayed",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Worm Composting FAQs: type of worms; build a bin; where to put bin",
+      "applicability": "Regionally relevant temperature and placement advice, not measured bedding conditions.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    },
+    {
+      "key": "EF-F1",
+      "authority": "Tia Saracino, UF/IFAS Extension Orange County",
+      "title": "Vermicomposting (Using Worms for Composting)",
+      "url": "https://blogs.ifas.ufl.edu/orangeco/2020/12/10/vermicomposting-using-worms-for-composting/",
+      "published": "2020-12-10; updated 2021-03-01",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Beware of Worm Leachate; Troubleshooting",
+      "applicability": "Extension household guidance used narrowly for leachate and cohabitants; weekly turning is not adopted.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    },
+    {
+      "key": "EF-M1",
+      "authority": "Angela Gupta and Laura Van Riper, University of Minnesota Extension",
+      "title": "Jumping worms",
+      "url": "https://extension.umn.edu/natural-resources/forestry-and-wildlife/invasive-species/jumping-worms",
+      "published": "reviewed 2026",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Prevention: anglers, gardeners, composters; plant-sale prevention",
+      "applicability": "Minnesota jumping-worm prevention only. Precautionary containment adaptation; no California legal designation for E. fetida.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    },
+    {
+      "key": "EF-T2",
+      "authority": "Plytycz et al., PLOS ONE",
+      "title": "The existence of fertile hybrids of closely related model earthworm species, Eisenia andrei and E. fetida",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0191711",
+      "published": "2018-01-25",
+      "accessed": "2026-10-12",
+      "content_inspected": "2026-10-12",
+      "url_checked": "2026-10-12",
+      "passage": "Abstract; Introduction; Discussion: hybrid fertility and pigmentation",
+      "applicability": "Primary laboratory study, DOI 10.1371/journal.pone.0191711; supports exceptions to categorical isolation claims, not household breeding yields.",
+      "next_review_trigger": "Annual practical-care review; changed stock identity, mortality, placement, import/transfer or live-feed proposal; verify applicable requirements before action."
+    }
+  ],
+  "evidence_notes": [
+    "No owner observations or acquired stock. All local fields remain unmeasured.",
+    "Feeding rates and preferred/tolerated temperature endpoints differ. Use 15-25 C county home-bin guidance and actual consumption, not combined best-case numbers.",
+    "N2 no-hybrid/self-fertilization assertions conflict with T2 primary evidence; do not repeat the absolutes.",
+    "F1 and N2 leachate contamination cautions take precedence over loose tea/fertilizer language in other sources. No aquatics or live-feed safety claim.",
+    "N1 advises no turning; F1 suggests weekly turning. Adopt N1 gentle no-whole-bin-turning approach. Bedding recipe conservatively excludes coated/glossy and contaminated material.",
+    "Brief T1 (Pedobiologia 2005 DOI 10.1016/j.pedobi.2004.08.005) refresh failed at ScienceDirect on 2026-10-12. Not used as entry evidence; T2 provides inspected pigmentation/identity context."
+  ]
+}

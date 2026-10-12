@@ -82,7 +82,7 @@ def validate(report, root=ROOT):
     for name, length in [('commit',40), ('pdf_sha256',64)]:
         require(isinstance(report.get(name), str) and re.fullmatch('[0-9a-f]{'+str(length)+'}', report[name]), 'invalid '+name)
     require(date.fromisoformat(report['audited']).isoformat() == report['audited'], 'invalid audit date')
-    require(report.get('manifest') == 'binder/manifest-v8.yaml', 'audit requires v8 manifest')
+    require(report.get('manifest') in {'binder/manifest-v8.yaml', 'binder/manifest-v9.yaml'}, 'audit requires v8 or v9 manifest')
     entries = load_manifest(root / report['manifest'])
     records = report.get('entries')
     require(isinstance(records, list) and [e.get('id') for e in records] == tracked_species(entries), 'exact manifest coverage and order required')

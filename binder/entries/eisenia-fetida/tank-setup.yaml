@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "entry": "eisenia-fetida",
+  "worksheet": "tank-setup",
+  "claims": [
+    {
+      "claim_id": "bin-bedding",
+      "metric": "bin-bedding",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "Use a clean opaque lidded bin, upper ventilation, bottom drainage and a separate catch tray; never airtight. Suitable plastic or untreated wood, screened vents and outdoor rodent protection. A shallow bin about 30 cm (12 in) deep is a design example, not a minimum volume. Start with 10-15 cm (4-6 in) fluffed moist bedding. Avoid fresh grass heating, pesticide contamination and unknown outdoor organisms.",
+      "provenance": {
+        "source_refs": [
+          "EF-EPA",
+          "EF-O1",
+          "EF-U1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    },
+    {
+      "claim_id": "temperature",
+      "metric": "temperature",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "Practical home-bin target 15-25 C (59-77 F), from San Mateo County guidance. Shelter from sun, rain and excessive cold without blocking airflow. Check bedding rather than assume Pacifica air or shade ensures safety. Record morning and warmest-period readings before stock and after weather changes. Feeding slows below about 10 C (50 F), not a lower care target. Move or insulate before hazardous cold; move to cooler shelter in heat. Never force breeding by heating, chilling, drying or flooding.",
+      "provenance": {
+        "source_refs": [
+          "EF-S1",
+          "EF-O1",
+          "EF-N1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    },
+    {
+      "claim_id": "startup-feed",
+      "metric": "startup-feed",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "published",
+      "description": "OSU startup example: 0.11-0.23 kg scraps per 0.45 kg worms per week (1/4-1/2 lb per 1 lb). Not a daily ration or guaranteed throughput. Later additions depend on observed consumption. No initial stock quantity or maximum capacity is established for an unmeasured bin.",
+      "provenance": {
+        "source_refs": [
+          "EF-O1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured."
+      }
+    },
+    {
+      "claim_id": "readiness-record",
+      "metric": "readiness-record",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "Before stock arrives verify bedding, moisture, ventilation, drainage, shade and safe temperature; obtain traceable composting worms from a grower, not unidentified yard/bait worms. Place worms gently on bedding; allow settling before small feedings. Record dimensions/volume, bedding/depth, site, source/date/identity, stock estimate/life stages, bedding min/max temperature, squeeze test, feed offered/remaining, odor/pests/escapes. All actual values unmeasured.",
+      "provenance": {
+        "source_refs": [
+          "EF-EPA",
+          "EF-N1",
+          "EF-O1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    }
+  ]
+}

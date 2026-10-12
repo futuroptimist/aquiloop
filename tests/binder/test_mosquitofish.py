@@ -30,7 +30,7 @@ class MosquitofishTests(unittest.TestCase):
         self.assertIn('Mosquitofish', logs.log_page_tex(batches[-1], 5, 5))
 
     def test_standalone_logs_use_latest_inventory(self):
-        expected = logs.tracked_species(builder.load_manifest(ROOT / 'binder/manifest-v8.yaml'))
+        expected = logs.tracked_species(builder.load_manifest(ROOT / 'binder/manifest-v9.yaml'))
         for name, blank in [('watering-log-tracked', False), ('watering-log-blank', True)]:
             with mock.patch.object(builder, 'compile_logs') as call:
                 builder.compile_supplemental(name, 'draft', Path('unused.pdf'))

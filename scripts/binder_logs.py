@@ -17,6 +17,7 @@ LABELS = {
     "kuhli-loach": "Kuhli loach",
     "cherry-shrimp": "Cherry shrimp",
     "mosquitofish": "Mosquitofish",
+    "eisenia-fetida": "Red wiggler",
     "guppy-grass": "Guppy grass",
     "java-moss": "Java moss",
     "anubias-nana": "Anubias nana",
@@ -43,7 +44,8 @@ def scientific_name(entry: str) -> str:
     base = ROOT / "binder/entries" / entry
     animal_identity_claim = {"kuhli-loach": "trade-identity",
                              "cherry-shrimp": "selected-identity",
-                             "mosquitofish": "program-identity"}
+                             "mosquitofish": "program-identity",
+                             "eisenia-fetida": "working-identity"}
     if entry in animal_identity_claim:
         claim_id = animal_identity_claim[entry]
         data = json.loads((base / "animal-care.yaml").read_text(encoding="utf-8"))
@@ -116,4 +118,10 @@ Check condition, moisture, rain and season before watering. Aquarium events are 
 Leave unperformed actions blank. Record rain, results or propagation updates in Obs.}\par\vspace{6pt}
 {\sffamily\fontsize{9}{11}\selectfont Notes: \hrulefill\par\vspace{12pt}\hrulefill}
 """
-    return header + table + row * LOG_ROWS + footer
+    result = header + table + row * LOG_ROWS + footer
+    if "eisenia-fetida" in species:
+        result = result.replace(r"Watering \& aquarium log", r"Watering \& animal care log")
+        result = result.replace("Evt = aquarium event", "Evt = animal care event")
+        result = result.replace("Aquarium events are not watering; choose N/A where appropriate.",
+                                "Animal events are not watering; for worms choose condition-based moisture checks.")
+    return result

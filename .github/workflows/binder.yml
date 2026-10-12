@@ -212,7 +212,7 @@ jobs:
                   builder.compile_companion(entry, kind, 'draft', Path('build/binder/layouts') / f'{entry}-{kind}.pdf')
               except (ValueError, RuntimeError) as error:
                   errors.append(str(error))
-          for entry, kind in builder.EXPECTED_MOSQUITOFISH_MANIFEST:
+          for entry, kind in builder.EXPECTED_WORM_MANIFEST:
               if kind not in builder.ANIMAL_PAGE_KINDS:
                   continue
               try:
@@ -452,13 +452,36 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Build red-wiggler edition and complete proofs
+        run: |
+          set -euo pipefail
+          python scripts/build_binder.py --manifest binder/manifest-v9.yaml --mode draft \
+            --output build/binder/aquiloop-binder-red-wiggler-draft.pdf
+          mkdir -p build/binder/red-wiggler-color build/binder/red-wiggler-gray
+          pdftoppm -r 150 -png build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/red-wiggler-color/page
+          pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/red-wiggler-gray/page
+          test "$(find build/binder/red-wiggler-color -name '*.png' | wc -l)" -eq 48
+          test "$(find build/binder/red-wiggler-gray -name '*.png' | wc -l)" -eq 48
+          sha256sum build/binder/aquiloop-binder-red-wiggler-draft.pdf
+
+      - name: Upload red-wiggler binder and complete proofs
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: aquiloop-binder-red-wiggler-proof
+          path: |
+            build/binder/aquiloop-binder-red-wiggler-draft.pdf
+            build/binder/red-wiggler-color/
+            build/binder/red-wiggler-gray/
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Package validated publication candidate
         run: |
           set -euo pipefail
           mkdir -p build/binder/publication build/binder/publication-color
-          cp build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/publication/
-          # Reuse the complete v8 color proof set; publishing remains separately gated.
-          cp build/binder/mosquitofish-color/page-*.png build/binder/publication-color/
+          cp build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/publication/
+          # Reuse the complete v9 color proof set; publishing remains separately gated.
+          cp build/binder/red-wiggler-color/page-*.png build/binder/publication-color/
           python scripts/binder_publication.py manifest
 
       - name: Upload publication candidate with provenance

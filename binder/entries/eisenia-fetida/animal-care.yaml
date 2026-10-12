@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "entry": "eisenia-fetida",
+  "worksheet": "animal-care",
+  "claims": [
+    {
+      "claim_id": "working-identity",
+      "metric": "working-identity",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "published",
+      "description": "Red wiggler / tiger worm, Eisenia fetida. Surface-organic-matter earthworm for an aerated terrestrial bedding bin, not aquarium stocking. E. andrei is a distinct close relative: striped versus more uniform red pigmentation is suggestive, not genetic identification. Older literature may use Eisenia foetida. Record supplier scientific identity and uncertainty; no Daniel-owned worms, life stage or bin measurements are established.",
+      "provenance": {
+        "source_refs": [
+          "EF-N2",
+          "EF-O1",
+          "EF-T2"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured."
+      }
+    },
+    {
+      "claim_id": "feeding",
+      "metric": "feeding",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "Offer chopped vegetable/fruit scraps, small coffee-ground portions with plain paper filters, and finely crushed eggshells. Cover with about 5 cm (2 in) bedding. Exclude meat, fish, bones, dairy, oils, pet waste, citrus, onion and garlic. Add more only after checking consumption; divert excess. Bedding also supplies slow food to the colony. No forced juvenile growth.",
+      "provenance": {
+        "source_refs": [
+          "EF-EPA",
+          "EF-N1",
+          "EF-O1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    },
+    {
+      "claim_id": "moisture",
+      "metric": "moisture",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "Keep bedding loose and damp; squeezing gives only a few drops. Add plain uncoated shredded cardboard and non-glossy newspaper as bedding is consumed. Mist gradually if dry; add dry bedding and restore drainage/airflow if soggy. Do not pour water or turn the whole bin like hot compost.",
+      "provenance": {
+        "source_refs": [
+          "EF-N1",
+          "EF-U1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    },
+    {
+      "claim_id": "routine-stop",
+      "metric": "routine-stop",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "At feeding inspect food remaining, moisture, smell, temperature, drainage and escapes. Rotten odor: pause feeding, remove unsuitable food, add bedding and correct excess water/poor airflow. Investigate escapes before confinement. Persistent distress or unexplained mortality: pause expansion, review conditions and consult local Extension. Small decomposers may be normal; excess insects call for less feed and fresh bedding, never insecticide.",
+      "provenance": {
+        "source_refs": [
+          "EF-N1",
+          "EF-N2",
+          "EF-F1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    },
+    {
+      "claim_id": "hygiene-boundary",
+      "metric": "hygiene-boundary",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "Drainage is leachate, not reliably safe worm tea; it may contain harmful microbes. Keep it off edible plant surfaces; wash hands after handling. Keep bin tools separate from aquarium tools. Never route household-bin leachate or compost into aquaria; this protocol does not establish live-feed safety. Review a controlled feedstock plan and species-specific evidence before such use.",
+      "provenance": {
+        "source_refs": [
+          "EF-N2",
+          "EF-F1",
+          "EF-O1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    }
+  ]
+}

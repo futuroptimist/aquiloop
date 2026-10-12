@@ -1,10 +1,10 @@
 # Publishing the care binder to Slack
 
-The binder workflow prepares the latest **45-page mosquitofish draft** from
-`binder/manifest-v8.yaml` for native file upload to **#automation**
+The binder workflow prepares the latest **48-page red-wiggler draft** from
+`binder/manifest-v9.yaml` for native file upload to **#automation**
 (`C0C8T7FDAAC`) in workspace `T0C80NYUHHP`. This implements Daniel's request
 in #aquiloop (`C0C7TGSCSP7`) on 2026-10-09. The older 6-, 16-, 19-, 22-,
-31-, 35-, and 41-page review artifacts remain available in the build.
+31-, 35-, 41-, and 45-page review artifacts remain available in the build.
 
 ## Owner setup — disabled until explicitly enabled
 
@@ -60,11 +60,11 @@ HTTP 503 failures block the PDF prerequisite and must not be bypassed.
 ## What counts as a content change
 
 `aquiloop-rendered-binder-v1` hashes the ordered RGB pixel bytes of pinned Poppler
-150-DPI color proofs, extracted page text and URI link targets. It reuses all 45
-ordered color proofs rendered from the same validated v8 PDF,
-`aquiloop-binder-mosquitofish-draft.pdf`; it never substitutes another
-edition's proofs or rebuilds the PDF. Species pages are 1-39, tracked logs
-40-44, and the reusable blank log is page 45. It checks all 45 ordered
+150-DPI color proofs, extracted page text and URI link targets. It reuses all 48
+ordered color proofs rendered from the same validated v9 PDF,
+`aquiloop-binder-red-wiggler-draft.pdf`; it never substitutes another
+edition's proofs or rebuilds the PDF. Species pages are 1-42, tracked logs
+43-47, and the reusable blank log is page 48. It checks all 48 ordered
 proof pages, Letter media/crop boxes and zero rotation.
 PDF timestamps, document IDs, compression, object numbering and PNG container
 metadata do not affect this digest. Changes to visible proofs, extracted text,

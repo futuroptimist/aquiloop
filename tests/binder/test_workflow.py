@@ -115,14 +115,14 @@ class BinderWorkflowTests(unittest.TestCase):
             "python scripts/binder_publication.py manifest",
         ):
             self.assertIn(expected, self.workflow)
-        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 11)
+        self.assertEqual(self.workflow.count("actions/upload-artifact@"), 12)
         self.assertIn("--manifest binder/manifest-v7.yaml --mode draft", self.workflow)
         self.assertIn("name: aquiloop-binder-succulents-proof", self.workflow)
 
         self.assertIn("--manifest binder/manifest-v6.yaml --mode draft", self.workflow)
         self.assertIn("name: aquiloop-binder-reusable-proof", self.workflow)
-        self.assertIn("cp build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/publication/", self.workflow)
-        self.assertIn("cp build/binder/mosquitofish-color/page-*.png build/binder/publication-color/", self.workflow)
+        self.assertIn("cp build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/publication/", self.workflow)
+        self.assertIn("cp build/binder/red-wiggler-color/page-*.png build/binder/publication-color/", self.workflow)
         self.assertIn("pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/mosquitofish-gray/page", self.workflow)
         self.assertLess(self.workflow.index("Build photographed succulent extension and proofs"),
                         self.workflow.index("Package validated publication candidate"))
