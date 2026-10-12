@@ -29,10 +29,10 @@
       "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
       "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
       "evidence_category": "published",
-      "description": "UF/IFAS reports 16-19 days from cited literature; Co-Op describes about a month depending on temperature. Neither is a deadline for an unmeasured home colony.",
+      "description": "Pantaleao et al. reports 16-19 days incubation at 25 +/- 1 C. Co-Op describes about a month depending on temperature. Keep study and practical estimates separate; neither is a home hatch deadline.",
       "provenance": {
         "source_refs": [
-          "CS-UF",
+          "CS-PAN",
           "CS-COOP"
         ],
         "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified"
@@ -69,13 +69,14 @@
       "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
       "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
       "evidence_category": "proposed",
-      "description": "UF/IFAS reports maturity around 30 days, without a matching home setup here. Record development; do not promise a calendar date or use heat to accelerate breeding.",
+      "description": "At 25 +/- 1 C, Pantaleao et al. observed ovarian development from day 30 (mean 36.6 days) and the first embryo-carrying female at day 49 (mean 55.18 days). Separate laboratory endpoints, not universal maturity or home deadlines. Tropea et al. found growth-phase females maturing and mating at 32 C lost eggs; do not heat to hurry breeding.",
       "provenance": {
         "source_refs": [
-          "CS-UF"
+          "CS-PAN",
+          "CS-TRO"
         ],
         "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
-        "derivation": "Retains the extension report as context while declining to extrapolate its timing to unknown stock and conditions."
+        "derivation": "Separate primary-study endpoints correct the extension shorthand; thermal reproductive failure supports conservative observation rather than production heating."
       }
     },
     {
@@ -87,11 +88,14 @@
       "growing_conditions": "Mature freshwater aquarium; source guidance is not measured household water",
       "geographic_context": "Aquarium conditions, not Pacifica outdoor climate",
       "evidence_category": "proposed",
-      "description": "After nursery readiness, confirm healthy adults of both sexes; observe carried eggs without handling. Record eggs seen, hatchlings seen, feeding and growth separately. Preserve biofilm and accessible fine food; plan humane rehoming before expansion.",
+      "description": "Decide on breeding and humane surplus capacity first. Prepare a fish-free nursery with verified cycle, stable water, grazing surfaces and protected intakes. Establish healthy adults of both sexes; adult female shape and saddle are clues, while juvenile size or red color alone cannot guarantee sex. A saddle is ovarian development, distinct from carried eggs. Observe eggs without handling; support small juveniles with accessible fine food sparingly. Record eggs, hatchlings, feeding, growth and later egg-bearing adults separately. Pause expansion or transfer for unusual losses, failure to feed, molt problems or unstable water; review water, equipment, products and health with appropriate help.",
       "provenance": {
         "source_refs": [
           "CS-UF",
-          "CS-FARM"
+          "CS-FARM",
+          "CS-COOP",
+          "CS-VET",
+          "CS-PAN"
         ],
         "applicability": "Neocaridina davidi, selected red cherry line; no acquired specimen verified",
         "derivation": "Direct development and small-juvenile feeding needs support an observation-led sequence; a purchase count cannot guarantee both sexes or successful breeding."

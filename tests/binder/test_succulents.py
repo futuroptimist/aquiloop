@@ -109,7 +109,7 @@ class SucculentTests(unittest.TestCase):
         species = logs.tracked_species(entries)
         self.assertEqual(species, logs.tracked_species(old) + list(NEW))
         self.assertEqual(len(species), 12)
-        self.assertEqual(set(species), set(logs.LABELS))
+        self.assertEqual(set(species), set(logs.LABELS) - {"mosquitofish"})
         batches = logs.paginate_species(species)
         self.assertEqual([len(x) for x in batches], [3, 3, 3, 3])
         rendered = "".join(logs.log_page_tex(batch, i, 4) for i, batch in enumerate(batches, 1))
@@ -134,8 +134,8 @@ class SucculentTests(unittest.TestCase):
         with mock.patch.object(builder, "compile_logs") as compile_logs:
             builder.compile_supplemental("watering-log-tracked", "draft", Path("unused.pdf"))
         entries = compile_logs.call_args.args[0]
-        self.assertEqual(logs.tracked_species(entries)[-2:], list(NEW))
-        self.assertEqual(len(logs.tracked_species(entries)), 12)
+        self.assertEqual(logs.tracked_species(entries)[-3:-1], list(NEW))
+        self.assertEqual(len(logs.tracked_species(entries)), 13)
         self.assertFalse(compile_logs.call_args.kwargs["blank"])
 
 
@@ -174,7 +174,8 @@ class SucculentRenderingTests(unittest.TestCase):
                                   sizes.append(size) if text.strip() else None)
                 self.assertGreaterEqual(min(sizes), 7.9)
         text = "".join(p.extract_text() for p in self.reader.pages[36:40]).replace("\u2019", "'")
-        for label in logs.LABELS.values():
+        for entry in logs.tracked_species(builder.load_manifest(ROOT / "binder/manifest-v7.yaml")):
+            label = logs.LABELS[entry]
             # Crassula's existing common label is also its scientific name.
             self.assertEqual(text.count(label), 2 if label == "Crassula rupestris" else 1)
         from test_logs import SCIENTIFIC_NAMES, normalized, extracted_name_text
