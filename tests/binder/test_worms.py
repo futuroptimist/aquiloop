@@ -88,7 +88,7 @@ class WormRenderingTests(unittest.TestCase):
         self.assertNotIn('TANK SETUP',self.reader.pages[40].extract_text())
         self.assertEqual(len(self.reader.pages[39].images),0)
         self.assertIn('live-feed safety',self.reader.pages[39].extract_text())
-        self.assertIn('not California law',self.reader.pages[41].extract_text())
+        self.assertIn('not California law',' '.join(self.reader.pages[41].extract_text().split()))
         self.assertIn('Red wiggler',self.reader.pages[46].extract_text())
         self.assertIn('Eisenia fetida',self.reader.pages[46].extract_text())
         self.assertIn('BLANK EDITION',self.reader.pages[47].extract_text())
