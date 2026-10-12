@@ -122,6 +122,16 @@ def verify_checkout(commit, root=ROOT, source_paths=()):
         ['git', 'ls-files', '-z'], cwd=root, text=True,
     ).split('\0'))
     require(all(path in tracked for path in source_paths), 'audit source snapshots must be tracked inputs')
+    for path in source_paths:
+        recorded = subprocess.check_output(
+            ['git', 'rev-parse', f'{commit}:{path}'], cwd=root, text=True,
+        ).strip()
+        actual = subprocess.check_output(
+            ['git', 'hash-object', f'--path={path}', '--', path], cwd=root, text=True,
+        ).strip()
+        # Git's clean conversion preserves legitimate Windows CRLF checkouts.
+        require(actual == recorded, 'snapshot content differs from recorded commit: ' + path)
+
 
 
 def main():

@@ -140,3 +140,20 @@ class CheckoutProvenanceTests(unittest.TestCase):
         (self.root / 'untracked.txt').write_text('synthetic new input')
         with self.assertRaisesRegex(ValueError, 'clean checkout'):
             audit.verify_checkout(self.head, self.root)
+
+    def test_hidden_index_flags_cannot_hide_modified_source(self):
+        source = self.root / 'source.txt'
+        for flag in ('assume-unchanged', 'skip-worktree'):
+            with self.subTest(flag=flag):
+                self.git('update-index', '--' + flag, 'source.txt')
+                source.write_text('synthetic hidden modification')
+                self.assertEqual(self.git('status', '--porcelain').strip(), '')
+                with self.assertRaisesRegex(ValueError, 'differs from recorded commit'):
+                    audit.verify_checkout(self.head, self.root, ['source.txt'])
+                self.git('update-index', '--no-' + flag, 'source.txt')
+                self.git('restore', 'source.txt')
+
+    def test_canonical_blob_comparison_accepts_crlf_checkout(self):
+        self.git('config', 'core.autocrlf', 'true')
+        (self.root / 'source.txt').write_bytes(b'synthetic committed source\r\n')
+        audit.verify_checkout(self.head, self.root, ['source.txt'])

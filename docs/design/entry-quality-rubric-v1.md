@@ -71,3 +71,7 @@ The audit CLI requires a clean checkout, including no staged, unstaged or
 untracked inputs, and every source snapshot must be Git-tracked. Keep generated
 PDFs and report sidecars in an ignored output directory or outside the checkout;
 ignored output alone does not invalidate committed-source provenance.
+
+Each cited snapshot also must match the blob at the recorded commit after Git
+clean conversion (including configured line endings). This catches modified
+snapshots hidden by assume-unchanged or skip-worktree index flags.
