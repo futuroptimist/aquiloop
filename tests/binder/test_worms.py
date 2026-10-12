@@ -15,7 +15,7 @@ import build_binder as builder
 import binder_evidence as evidence
 import binder_logs as logs
 import binder_audit as audit
-from test_audit import AuditTests
+import test_audit
 
 class WormTests(unittest.TestCase):
     def test_versioned_assembly_and_log_identity(self):
@@ -49,7 +49,7 @@ class WormTests(unittest.TestCase):
         self.assertEqual(catalog[selected['hero']]['kind'], 'placeholder')
 
     def test_v9_audit_uses_same_scoring_and_exact_inventory(self):
-        report = AuditTests().report()
+        report = test_audit.AuditTests().report()
         report['manifest'] = 'binder/manifest-v9.yaml'
         report['source_snapshots'][report['manifest']] = hashlib.sha256((ROOT/report['manifest']).read_bytes()).hexdigest()
         extra = copy.deepcopy(report['entries'][-1])
@@ -84,6 +84,8 @@ class WormRenderingTests(unittest.TestCase):
             builder._validate_page(p,'v9')
             self.assertIn('eisenia-fetida / '+k,p.extract_text())
             self.assertTrue({a.get_object()['/A']['/URI'] for a in p.get('/Annots',[])} <= urls)
+        self.assertIn('BIN SETUP',self.reader.pages[40].extract_text())
+        self.assertNotIn('TANK SETUP',self.reader.pages[40].extract_text())
         self.assertEqual(len(self.reader.pages[39].images),0)
         self.assertIn('live-feed safety',self.reader.pages[39].extract_text())
         self.assertIn('not California law',self.reader.pages[41].extract_text())

@@ -292,7 +292,8 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         _validate_page(reader.pages[0], base.name)
         if kind in COMPANION_LABELS:
             extracted = reader.pages[0].extract_text()
-            label = COMPANION_LABELS[kind]
+            label = ("BIN SETUP" if base.name == "eisenia-fetida" and kind == "tank-setup"
+                     else COMPANION_LABELS[kind])
             if label not in extracted or f"{base.name} / {kind}" not in extracted:
                 raise RuntimeError("companion page identity missing")
         shutil.copyfile(pdf, output)
