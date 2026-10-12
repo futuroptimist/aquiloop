@@ -5,6 +5,7 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 import hashlib
 import importlib
+import importlib.metadata
 import json
 import os
 from pathlib import Path
@@ -14,6 +15,7 @@ import subprocess
 import sys
 import sysconfig
 import tempfile
+import time
 
 ACTIVE = ContextVar('binder_reuse', default=None)
 OWNER_KEYS = ('GITHUB_REPOSITORY', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT', 'GITHUB_JOB')
@@ -51,10 +53,27 @@ class Session:
                 or Path(os.environ['RUNNER_TEMP']).resolve() not in root.parents):
             raise ValueError('reuse session is not owned by this job')
         self.root = root
+        self._file_hashes = {}
 
     def file_digest(self, path):
-        # Content identity, including same-size edits with preserved timestamps.
-        return digest(Path(path).read_bytes())
+        path = Path(path)
+        before = path.stat()
+        def identity(stat):
+            return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+        signature = identity(before)
+        cached = self._file_hashes.get(path)
+        # Linux ctime changes on writes, including same-size edits followed by
+        # restoring mtime. Never persist this optimization across processes/jobs.
+        # Rehash recently changed files to avoid same-clock-tick (racy stat)
+        # collisions. CI uses Linux's local filesystem; elsewhere always read.
+        old_enough = time.time_ns() - before.st_ctime_ns > 1_000_000_000
+        if sys.platform == 'linux' and old_enough and cached is not None and cached[0] == signature:
+            return cached[1]
+        value = digest(path.read_bytes())
+        if identity(path.stat()) != signature:
+            raise RuntimeError(f'input changed while hashing: {path}')
+        self._file_hashes[path] = (signature, value)
+        return value
 
     def snapshot(self, roots):
         records = []
@@ -85,9 +104,15 @@ class Session:
         # Actual bytes, binaries, shared libraries and Python packages enter the key.
         roots = [Path('/etc/texmf'), Path('/var/lib/texmf'), Path('/usr/share/texlive'),
                  Path('/usr/share/texmf'), Path('/etc/fonts'), Path('/usr/share/fonts'),
+                 Path('/usr/share/poppler'), Path('/usr/share/color'),
                  Path('/usr/local/share/fonts'), Path.home() / '.fonts',
                  Path.home() / '.local/share/fonts', Path.home() / '.cache/fontconfig',
+                 Path.home() / '.config/fontconfig',
                  Path(sys.executable), Path(sysconfig.get_path('stdlib'))]
+        for variable, suffix in [('XDG_DATA_HOME', 'fonts'), ('XDG_CONFIG_HOME', 'fontconfig'),
+                                 ('XDG_CACHE_HOME', 'fontconfig')]:
+            if os.environ.get(variable):
+                roots.append(Path(os.environ[variable]) / suffix)
         versions = {'python': sys.version, 'platform': sys.platform}
         for tool, flag in [('lualatex', '--version'), ('pdftoppm', '-v'), ('kpsewhich', '--version')]:
             executable = shutil.which(tool)
@@ -98,6 +123,8 @@ class Session:
             versions[tool] = (result.stdout + result.stderr).decode('utf8', errors='replace')
             linked = subprocess.run(['ldd', executable], capture_output=True, check=True, text=True).stdout
             roots.extend(Path(p) for p in re.findall(r'(/[^\s()]+)', linked) if Path(p).is_file())
+        linked = subprocess.run(['ldd', sys.executable], capture_output=True, check=True, text=True).stdout
+        roots.extend(Path(p) for p in re.findall(r'(/[^\s()]+)', linked) if Path(p).is_file())
         for variable in ('TEXMFDIST', 'TEXMFLOCAL', 'TEXMFHOME', 'TEXMFVAR', 'TEXMFSYSVAR',
                          'TEXMFCONFIG', 'TEXMFSYSCONFIG'):
             value = subprocess.check_output(['kpsewhich', '--var-value=' + variable], text=True).strip()
@@ -108,6 +135,10 @@ class Session:
             module = importlib.import_module(name)
             versions[name] = module.__version__
             roots.append(Path(module.__file__).parent)
+            # Wheels can place native libraries beside their import package.
+            distribution = importlib.metadata.distribution('Pillow' if name == 'PIL' else name)
+            roots.extend(distribution.locate_file(p) for p in distribution.files or ()
+                         if p.suffix not in {'.pyc', '.pyo'})
         environment = {k: v for k, v in os.environ.items()
                        if k.startswith(('TEX', 'LUATEX', 'FONT', 'XDG_', 'LC_', 'LD_', 'GS_'))
                        or k in {'PATH', 'HOME', 'LANG', 'PYTHONPATH', 'PYTHONHOME'}}
@@ -130,8 +161,14 @@ class Session:
         try:
             metadata = json.loads((folder / 'record.json').read_text(encoding='utf8'))
             data = (folder / 'payload').read_bytes()
+            if not isinstance(metadata, dict) or not isinstance(metadata.get('dependencies'), list):
+                raise ValueError('invalid reuse record')
+            dependencies = metadata['dependencies']
+            if any(not isinstance(item, list) or len(item) != 2
+                   or not all(isinstance(value, str) for value in item) for item in dependencies):
+                raise ValueError('invalid reuse dependency record')
             if (metadata.get('key') != key or metadata.get('sha256') != digest(data)
-                    or any(self.file_digest(Path(p)) != h for p, h in metadata.get('dependencies', []))):
+                    or any(self.file_digest(Path(p)) != h for p, h in dependencies)):
                 raise ValueError('reuse payload digest mismatch')
         except (OSError, ValueError):
             print(f'reuse {namespace} miss {key}')

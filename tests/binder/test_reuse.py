@@ -6,6 +6,8 @@ from pathlib import Path
 import shutil
 import sys
 import tempfile
+import time
+from types import SimpleNamespace
 import unittest
 from unittest import mock
 
@@ -45,6 +47,10 @@ class ReuseTests(unittest.TestCase):
         dependency.write_text('one')
         (self.session.root/'compile'/key/'payload').write_bytes(b'corrupt')
         self.assertFalse(self.session.restore('compile', key, target))
+        self.session.save('compile', key, source)
+        for record in ('[]', '{}', '{"dependencies":[1]}', 'not JSON'):
+            (self.session.root/'compile'/key/'record.json').write_text(record)
+            self.assertFalse(self.session.restore('compile', key, target))
 
     def test_each_source_asset_option_generated_input_and_toolchain_invalidates(self):
         for folder in ('binder/entries/example/assets', 'scripts', 'staged'):
@@ -100,6 +106,57 @@ class ReuseTests(unittest.TestCase):
         folder=self.root/'inputs';folder.mkdir();(folder/'one').write_text('one')
         before=self.session.snapshot([folder]);(folder/'two').write_text('two')
         self.assertNotEqual(self.session.snapshot([folder]),before)
+
+    def test_process_hash_reuse_keeps_same_size_timestamp_restored_edits_visible(self):
+        path = self.root/'input'; path.write_bytes(b'one')
+        original_read = Path.read_bytes
+        with mock.patch.object(Path, 'read_bytes', autospec=True, side_effect=original_read) as read:
+            before = self.session.file_digest(path)
+            self.assertEqual(self.session.file_digest(path), before)
+            self.assertEqual(read.call_count, 2)  # Recent files are always rehashed.
+            if sys.platform == 'linux':
+                time.sleep(1.1)  # Cross the explicit racy-stat safety window.
+            self.assertEqual(self.session.file_digest(path), before)
+            expected_reads = 2 if sys.platform == 'linux' else 3
+            self.assertEqual(read.call_count, expected_reads)
+            stat = path.stat(); path.write_bytes(b'two')
+            os.utime(path, ns=(stat.st_atime_ns,stat.st_mtime_ns))
+            self.assertNotEqual(self.session.file_digest(path), before)
+            self.assertEqual(read.call_count, expected_reads+1)
+
+    def test_real_toolchain_content_changes_invalidate_without_version_changes(self):
+        paths = ['bin/lualatex', 'bin/pdftoppm', 'bin/kpsewhich', 'bin/python',
+                 'lib/linked.so', 'tex/fonts/custom.otf', 'packages/PIL/__init__.py',
+                 'packages/pypdf/__init__.py', 'packages/pillow.libs/native.so']
+        for name in paths:
+            path = self.root / name; path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b'one')
+        snapshot = self.session.snapshot
+        def local_snapshot(roots):
+            return snapshot(p for p in roots if self.root in Path(p).resolve().parents)
+        def run(command, **kwargs):
+            if command[0] == 'ldd':
+                path = self.root/'lib/linked.so'
+                linux_path = path.as_posix()[len(path.drive):]
+                return SimpleNamespace(stdout=linux_path+' (0x1)')
+            return SimpleNamespace(stdout=b'fixed version', stderr=b'')
+        distribution = SimpleNamespace(files=[Path('pillow.libs/native.so')],
+                                       locate_file=lambda p:self.root/'packages'/p)
+        with mock.patch.object(reuse.shutil, 'which', side_effect=lambda name:str(self.root/'bin'/name)), \
+             mock.patch.object(reuse.subprocess, 'run', side_effect=run), \
+             mock.patch.object(reuse.subprocess, 'check_output', return_value=str(self.root/'tex')), \
+             mock.patch.object(reuse.sys, 'executable', str(self.root/'bin/python')), \
+             mock.patch.object(reuse.sysconfig, 'get_path', return_value=str(self.root/'stdlib')), \
+             mock.patch.object(reuse.importlib, 'import_module', side_effect=lambda name:SimpleNamespace(
+                 __version__='fixed version', __file__=str(self.root/'packages'/name/'__init__.py'))), \
+             mock.patch.object(reuse.importlib.metadata, 'distribution', return_value=distribution), \
+             mock.patch.object(self.session, 'snapshot', side_effect=local_snapshot):
+            before = self.session.toolchain()
+            for name in paths:
+                path = self.root/name; stat = path.stat(); path.write_bytes(b'two')
+                os.utime(path, ns=(stat.st_atime_ns,stat.st_mtime_ns))
+                self.assertNotEqual(self.session.toolchain(), before, name)
+                path.write_bytes(b'one')
 
     def test_page_normalization_preserves_distinct_resources_and_geometry(self):
         writer=PdfWriter();writer.add_blank_page(612,792);writer.add_blank_page(612,792)

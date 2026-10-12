@@ -20,8 +20,13 @@ the selected asset records and files, generated TeX buffers, page options,
 fixed source-date environment and compiler arguments/pass count. The toolchain
 identity includes executable/shared-library bytes, versions, Python runtime and
 package trees, full TeX/font/configuration search trees, and relevant environment
-variables. File contents are hashed, not just size or timestamps. New search-tree
-files/directories and symlink targets affect the key. Unsupported custom search
+variables. Keys use file-content SHA-256. Within one process, Linux hashes may be
+reused only while device, inode, size, mtime and ctime all match, and ctime is more
+than one second old (recent files are rehashed to avoid same-tick stat races).
+Linux ctime makes same-size edits with restored mtime visible; other platforms rehash bytes. A file
+changing during hashing fails explicitly. This hash memo is never persisted.
+Every lookup still walks the trees, so new search-tree files/directories and
+symlink targets affect the key. Unsupported custom search
 path expressions fail explicitly rather than silently omitting inputs.
 
 Input/rights/evidence resolution still runs before lookup. Reused PDFs still pass
@@ -52,7 +57,9 @@ The build job took **34m43s**, regression **19m03s**, and production build/proof
 stages **12m43s**. Dependency caching already hit. These are measured wall-clock
 stages, not CPU benchmarks; runner/network differences can affect comparisons.
 
-Candidate measurements and complete artifact comparisons are pending the first
-CI run. No speedup is claimed yet. The unchanged cold regression stage remains
-a deliberate performance floor. Final acceptance requires exact-head CI, actual
-reuse hits, unchanged PDF/proof outputs and in-scope review findings resolved.
+Run-specific candidate measurements, CI links and complete artifact comparisons
+are recorded in [PR #122](https://github.com/futuroptimist/aquiloop/pull/122).
+The unchanged cold regression stage remains a deliberate performance floor.
+Acceptance requires exact-head CI, actual reuse hits, unchanged PDF/proof outputs
+and in-scope review findings resolved; a cache hit alone is not evidence of a
+net speedup. Reporting new run measurements does not require changing build inputs.
