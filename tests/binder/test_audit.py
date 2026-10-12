@@ -23,6 +23,41 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(audit.score(self.outcomes(), 'fail')['effective'], 49)
         self.assertEqual(audit.score(self.outcomes(), 'pending')['effective'], 69)
 
+    def test_gate_caps_are_read_from_canonical_rubric(self):
+        import json
+        import tempfile
+        from unittest import mock
+        rubric = json.loads(audit.RUBRIC_PATH.read_text(encoding='utf8'))
+        rubric['gate_caps'] = {'pass': 100, 'pending': 61, 'fail': 31}
+        with tempfile.TemporaryDirectory(prefix='synthetic-rubric-') as directory:
+            path = Path(directory) / 'rubric.json'
+            path.write_text(json.dumps(rubric), encoding='utf8')
+            with mock.patch.object(audit, 'RUBRIC_PATH', path):
+                outcomes = self.outcomes()
+                self.assertEqual(audit.score(outcomes, 'pass')['effective'], 100)
+                self.assertEqual(audit.score(outcomes, 'pending')['effective'], 61)
+                self.assertEqual(audit.score(outcomes, 'fail')['effective'], 31)
+
+    def test_malformed_rubric_caps_are_rejected(self):
+        import json
+        import tempfile
+        from unittest import mock
+        rubric = json.loads(audit.RUBRIC_PATH.read_text(encoding='utf8'))
+        bad_caps = [None, {'pass': 100, 'pending': 69},
+                    {'pass': 100, 'pending': True, 'fail': 49},
+                    {'pass': 100, 'pending': 101, 'fail': 49},
+                    {'pass': 100, 'pending': 69, 'fail': -1},
+                    {'pass': 100, 'pending': 49, 'fail': 69}]
+        with tempfile.TemporaryDirectory(prefix='synthetic-rubric-') as directory:
+            path = Path(directory) / 'rubric.json'
+            for caps in bad_caps:
+                with self.subTest(caps=caps):
+                    rubric['gate_caps'] = caps
+                    path.write_text(json.dumps(rubric), encoding='utf8')
+                    with mock.patch.object(audit, 'RUBRIC_PATH', path):
+                        with self.assertRaises(ValueError):
+                            audit.load_rubric()
+
     def test_na_needs_biological_reason_and_signoff(self):
         outcomes = self.outcomes()
         outcomes['R1a']['state'] = 'na'

@@ -32,8 +32,17 @@ def parse_report(text):
     return json.loads(text, object_pairs_hook=unique_pairs, parse_constant=reject_constant, parse_float=Decimal)
 
 
-def rubric_checks():
+def load_rubric():
     rubric = json.loads(RUBRIC_PATH.read_text(encoding='utf-8'))
+    caps = rubric.get('gate_caps')
+    require(isinstance(caps, dict) and set(caps) == {'pass', 'pending', 'fail'}, 'invalid gate cap states')
+    require(all(type(value) is int and 0 <= value <= 100 for value in caps.values()), 'invalid gate cap values')
+    require(caps['fail'] <= caps['pending'] <= caps['pass'] == 100, 'invalid gate cap order')
+    return rubric
+
+
+def rubric_checks(rubric=None):
+    rubric = load_rubric() if rubric is None else rubric
     checks = {s['id']: s['text'] for c in rubric['checks'] for s in c['subchecks']}
     require(len(checks) == 40 and rubric['subcheck_points'] == 2.5, 'invalid rubric weight')
     require(sum(rubric['categories'].values()) == 100, 'invalid category total')
@@ -43,7 +52,8 @@ def rubric_checks():
 
 def score(outcomes, gate):
     require(gate in {'pass', 'pending', 'fail'}, 'invalid gate')
-    require(isinstance(outcomes, dict) and set(outcomes) == set(rubric_checks()), 'forty exact outcomes required')
+    rubric = load_rubric()
+    require(isinstance(outcomes, dict) and set(outcomes) == set(rubric_checks(rubric)), 'forty exact outcomes required')
     earned = Decimal(0)
     applicable = Decimal(100)
     for key, result in outcomes.items():
@@ -64,7 +74,7 @@ def score(outcomes, gate):
     raw = int((100 * earned / applicable).quantize(Decimal('1'), rounding=ROUND_HALF_UP))
     return dict(earned=float(earned), applicable=float(applicable),
                 normalized=float((100 * earned / applicable).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)), raw=raw,
-                effective=min(raw, {'pass':100, 'pending':69, 'fail':49}[gate]))
+                effective=min(raw, rubric['gate_caps'][gate]))
 
 def validate(report, root=ROOT):
     require(isinstance(report, dict) and report.get('schema_version') == 1, 'unsupported audit schema')
