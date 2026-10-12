@@ -155,5 +155,6 @@ class CheckoutProvenanceTests(unittest.TestCase):
 
     def test_canonical_blob_comparison_accepts_crlf_checkout(self):
         self.git('config', 'core.autocrlf', 'true')
-        (self.root / 'source.txt').write_bytes(b'synthetic committed source\r\n')
+        self.git('checkout-index', '--force', '--index', '--', 'source.txt')
+        self.assertEqual((self.root / 'source.txt').read_bytes(), b'synthetic committed source\r\n')
         audit.verify_checkout(self.head, self.root, ['source.txt'])
