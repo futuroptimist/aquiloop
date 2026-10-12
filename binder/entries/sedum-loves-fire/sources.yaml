@@ -70,6 +70,64 @@
         "transplant_after_rooting"
       ],
       "applicability": "General propagation guidance explicitly listing Sedum for stem and leaf cuttings. Supports 3–6 inch stems, lower-leaf removal, several-day callusing, draining media, and post-rooting transfer; these are not cultivar-specific timings or proof of specimen identity."
+    },
+    {
+      "key": "SAFE-RHS",
+      "authority": "Royal Horticultural Society",
+      "title": "Invasive non-native plants",
+      "url": "https://www.rhs.org.uk/prevention-protection/invasive-non-native-plants",
+      "accessed": "2026-10-12",
+      "supports": [
+        "sedum-loves-fire#containment-and-product-safety"
+      ],
+      "background_only": true,
+      "publication_version": "Undated live page; publication date not established",
+      "content_inspected": "2026-10-12",
+      "last_successful_url_check": "2026-10-12",
+      "passage": "Controlling invasive non-native plants; How should I dispose of these invasive weeds?; Action by gardeners",
+      "applicability": "UK horticultural prevention guidance. Supports escape prevention and avoiding home weedkillers near water; UK lists do not establish status or permission in another jurisdiction.",
+      "next_review": "Review mutable guidance by 2027-10-12; sooner before transfer, product use, a new identity, or a substantive edition."
+    },
+    {
+      "key": "SAFE-UMN",
+      "authority": "University of Minnesota Extension",
+      "title": "Managing insects on indoor plants",
+      "url": "https://extension.umn.edu/garden-and-home/yard-and-garden/yard-and-garden-insects/insects-on-indoor-plants",
+      "accessed": "2026-10-12",
+      "supports": [
+        "sedum-loves-fire#containment-and-product-safety"
+      ],
+      "background_only": true,
+      "publication_version": "Undated live page; publication date not established",
+      "content_inspected": "2026-10-12",
+      "last_successful_url_check": "2026-10-12",
+      "passage": "Early detection is key to managing pests; Using pesticides: Potassium fatty acids and Precautions",
+      "applicability": "General container-houseplant pest prevention, not evidence of species toxicity or an instruction to apply chemicals; adapted to inspection of these plants and their containers.",
+      "next_review": "Review mutable guidance by 2027-10-12; sooner before transfer, product use, a new identity, or a substantive edition."
+    },
+    {
+      "key": "SAFE-USPTO",
+      "authority": "United States Patent and Trademark Office",
+      "title": "General Information About 35 U.S.C. 161 Plant Patents",
+      "url": "https://www.uspto.gov/patents/basics/apply/plant-patent",
+      "accessed": "2026-10-12",
+      "supports": [
+        "sedum-loves-fire#containment-and-product-safety"
+      ],
+      "background_only": true,
+      "publication_version": "Undated live page; publication date not established",
+      "content_inspected": "2026-10-12",
+      "last_successful_url_check": "2026-10-12",
+      "passage": "What is a plant patent?",
+      "applicability": "U.S. plant patent rights include asexual reproduction. Candidate identity and permission remain unresolved; no legal clearance is inferred from the published cultivar protocol.",
+      "next_review": "Review mutable guidance by 2027-10-12; sooner before transfer, product use, a new identity, or a substantive edition."
     }
-  ]
+  ],
+  "edition_review": {
+    "date": "2026-10-12",
+    "scope": "New safety passages inspected; retained biological sources have NOT all been reinspected. HTTP success alone does not verify content.",
+    "entry_specific_trigger": "Recheck cultivar identity and propagation permission before any cutting; nursery tolerance and root-initiation figures remain trial conditions, not local targets.",
+    "currency_policy": "Revisit high-consequence or changed claims each substantive edition; verify current local restrictions before action; inspect mutable care pages annually, next 2027-10-12. Stable biology has no automatic expiry.",
+    "contradiction_handling": "Keep stated source scopes and unresolved identity explicit. Conflicting or unavailable evidence must remain caveated; stop the affected action until reviewed."
+  }
 }
