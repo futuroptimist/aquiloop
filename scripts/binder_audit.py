@@ -107,6 +107,23 @@ def validate(report, root=ROOT):
                         require(ref.split('#',1)[1] in (root/path).read_text(encoding='utf-8'), 'claim or passage evidence missing')
     return records
 
+def verify_checkout(commit, root=ROOT, source_paths=()):
+    """Bind an audit to committed inputs, including otherwise untracked files."""
+    status = subprocess.check_output(
+        ['git', 'status', '--porcelain', '--untracked-files=all'],
+        cwd=root, text=True,
+    )
+    require(not status.strip(), 'audit requires a clean checkout (tracked and untracked files)')
+    head = subprocess.check_output(
+        ['git', 'rev-parse', 'HEAD'], cwd=root, text=True,
+    ).strip()
+    require(commit == head, 'audit commit is not checkout HEAD')
+    tracked = set(subprocess.check_output(
+        ['git', 'ls-files', '-z'], cwd=root, text=True,
+    ).split('\0'))
+    require(all(path in tracked for path in source_paths), 'audit source snapshots must be tracked inputs')
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('report',type=Path)
@@ -114,9 +131,8 @@ def main():
     args=parser.parse_args()
     report=parse_report(args.report.read_text(encoding='utf-8'))
     records=validate(report)
+    verify_checkout(report['commit'], source_paths=report['source_snapshots'])
     require(hashlib.sha256(args.pdf.read_bytes()).hexdigest() == report['pdf_sha256'], 'PDF digest mismatch')
-    head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-    require(report['commit'] == head, 'audit commit is not checkout HEAD')
     print(f'Validated {len(records)} entry records; arithmetic and references only, not factual or visual certification.')
 
 if __name__ == '__main__':

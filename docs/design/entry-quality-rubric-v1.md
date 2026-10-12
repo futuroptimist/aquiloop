@@ -66,3 +66,8 @@ Reports are sidecars: never embed a PDF hash in that same PDF. Generate them
 after the final content commit and preserve prior sidecars when scores change.
 No actual private habitat values, approval data or household details belong in
 public audit fixtures. Use synthetic data in tests.
+
+The audit CLI requires a clean checkout, including no staged, unstaged or
+untracked inputs, and every source snapshot must be Git-tracked. Keep generated
+PDFs and report sidecars in an ignored output directory or outside the checkout;
+ignored output alone does not invalidate committed-source provenance.
