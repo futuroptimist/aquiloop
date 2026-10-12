@@ -83,9 +83,13 @@ class MosquitofishRenderingTests(unittest.TestCase):
             self.assertIn('mosquitofish / '+k,p.extract_text())
             self.assertTrue({a.get_object()['/A']['/URI'] for a in p.get('/Annots',[])} <= urls)
         text=' '.join(p.extract_text() for p in self.reader.pages[39:44])
+        # TeX renders straight apostrophes as typographic quotes. Compare labels,
+        # not that representational difference or line wrapping.
+        def normalized(value):
+            return ''.join(value.replace('\u2018', chr(39)).replace('\u2019', chr(39)).split())
         for id in logs.tracked_species(builder.load_manifest(ROOT/'binder/manifest-v8.yaml')):
-            self.assertIn(''.join(logs.LABELS[id].split()), ''.join(text.split()), id)
-            self.assertIn(''.join(logs.scientific_name(id).split()), ''.join(text.split()), id)
+            self.assertIn(normalized(logs.LABELS[id]), normalized(text), id)
+            self.assertIn(normalized(logs.scientific_name(id)), normalized(text), id)
         self.assertIn('BLANK EDITION',self.reader.pages[44].extract_text())
     def test_v7_species_and_blank_pixels_unchanged(self):
         from PIL import Image,ImageChops
