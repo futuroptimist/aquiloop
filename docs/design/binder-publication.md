@@ -1,10 +1,10 @@
 # Publishing the care binder to Slack
 
-The binder workflow prepares the latest **45-page mosquitofish draft** from
-`binder/manifest-v8.yaml` for native file upload to **#automation**
+The binder workflow prepares the latest **48-page red-wiggler draft** from
+`binder/manifest-v9.yaml` for native file upload to **#automation**
 (`C0C8T7FDAAC`) in workspace `T0C80NYUHHP`. This implements Daniel's request
 in #aquiloop (`C0C7TGSCSP7`) on 2026-10-09. The older 6-, 16-, 19-, 22-,
-31-, 35-, and 41-page review artifacts remain available in the build.
+31-, 35-, 41-, and 45-page review artifacts remain available in the build.
 
 ## Owner setup — disabled until explicitly enabled
 

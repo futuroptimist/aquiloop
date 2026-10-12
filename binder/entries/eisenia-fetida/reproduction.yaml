@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "entry": "eisenia-fetida",
+  "worksheet": "reproduction",
+  "claims": [
+    {
+      "claim_id": "biology",
+      "metric": "biology",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "adult",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "published",
+      "description": "Simultaneous hermaphrodites commonly exchange sperm; the clitellum produces cocoons. Stable home bins can reproduce. Self-fertilization and fertile E. andrei x E. fetida hybrids have been documented in laboratory work; absolute impossibility claims are incorrect. Record species uncertainty with the colony.",
+      "provenance": {
+        "source_refs": [
+          "EF-N2",
+          "EF-T2"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured."
+      }
+    },
+    {
+      "claim_id": "cocoon-timing",
+      "metric": "cocoon-timing",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "egg",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "published",
+      "description": "Yellowish cocoons darken. NC State examples: about three hatchlings per cocoon, 30-75 days to hatch, then another 53-76 days to sexual maturity. Conditional published ranges, not local deadlines or guarantees. A short observation without hatching does not establish death.",
+      "provenance": {
+        "source_refs": [
+          "EF-N2"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured."
+      }
+    },
+    {
+      "claim_id": "colony-protocol",
+      "metric": "colony-protocol",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "1. Begin with traceable stock, prepared habitat and a record of mature clitellate adults. 2. Stabilize consumption, moisture and temperature. 3. Maintain gentle care; leave cocoons in moist aerated bedding, without frequent sorting. 4. Observe adults feeding, cocoons, live juveniles, growth and later mature worms as distinct milestones. 5. Pause expansion for accumulating food, odor, unsuitable temperature or repeated escapes; correct conditions rather than add feed. 6. Prepare capacity before splitting; retain bedding, adults and juveniles in suitable conditions for both groups. No fixed doubling promise. Record first-seen dates, approximate counts, feed, environment and next review.",
+      "provenance": {
+        "source_refs": [
+          "EF-N1",
+          "EF-N2",
+          "EF-U1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    },
+    {
+      "claim_id": "harvest-surplus",
+      "metric": "harvest-surplus",
+      "applicable_taxon": "Eisenia fetida; planning identity, supplier and stock unverified",
+      "care_method": "Contained terrestrial household vermicomposting planning",
+      "life_stage": "all",
+      "growing_conditions": "Aerated bedding bin; actual habitat unmeasured",
+      "geographic_context": "Pacifica, San Mateo County, California; proposed placement only",
+      "evidence_category": "proposed",
+      "description": "Harvest when material is dark/crumbly and bedding needs renewal. UC gives about 2.5-6 months, varying with conditions. Offer fresh bedding/food on one side and allow migration before taking finished material from the other; return remaining worms and some old material to fresh bedding. Do not intentionally release worms, cocoons or unsorted culture material into natural areas, drains or waterways. Keep surplus in suitable additional capacity or arrange an identified contained transfer. Otherwise ask local Extension for humane disposal/local waste advice. Verify origin/destination requirements before import or transfer; this entry establishes no legal permission. Minnesota jumping-worm guidance supports only a precautionary adaptation, not a California designation of E. fetida.",
+      "provenance": {
+        "source_refs": [
+          "EF-U1",
+          "EF-M1"
+        ],
+        "applicability": "Source household/commercial/laboratory scope is recorded in sources.yaml; Pacifica colony unobserved and unmeasured.",
+        "derivation": "Conservative household planning adaptation of cited guidance; no owner observations, measured bin or safe capacity inferred."
+      }
+    }
+  ]
+}
