@@ -123,7 +123,7 @@ class BinderWorkflowTests(unittest.TestCase):
         self.assertIn("name: aquiloop-binder-reusable-proof", self.workflow)
         self.assertIn("cp build/binder/aquiloop-binder-red-wiggler-draft.pdf build/binder/publication/", self.workflow)
         self.assertIn("cp build/binder/red-wiggler-color/page-*.png build/binder/publication-color/", self.workflow)
-        self.assertIn("pdftoppm -r 150 -gray -png build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/mosquitofish-gray/page", self.workflow)
+        self.assertIn('python scripts/render_binder_proofs.py --reuse-session "$BINDER_REUSE_SESSION" -r 150 -gray -png build/binder/aquiloop-binder-mosquitofish-draft.pdf build/binder/mosquitofish-gray/page', self.workflow)
         self.assertLess(self.workflow.index("Build photographed succulent extension and proofs"),
                         self.workflow.index("Package validated publication candidate"))
         self.assertIn("--manifest binder/manifest-v4.yaml --mode draft", self.workflow)

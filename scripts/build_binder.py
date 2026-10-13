@@ -5,6 +5,7 @@ import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 from binder_evidence import ANIMAL_PAGE_KINDS, load_animal, load_companions
 from binder_logs import tracked_species, paginate_species, log_page_tex
+from binder_reuse import ACTIVE, activate, compile_key
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {"id", "path", "kind", "subjects", "alt", "caption", "source"}
@@ -271,17 +272,24 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
         details = [rf"\{commands[r]}" for r in ("detail1", "detail2") if r in selected]
         lines.append(r"\newcommand{\AssetDetails}{" + (r"\par\vspace{.08in}\hfill" + r"\hfill".join(details) if details else "") + "}")
         (tmp / "resolved-assets.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
-        env = {**os.environ, "SOURCE_DATE_EPOCH": "0", "FORCE_SOURCE_DATE": "1"}
-        for _ in range(2):
-            result = subprocess.run(["lualatex", "-no-shell-escape", "-halt-on-error", "-interaction=nonstopmode", "template.tex"], cwd=tmp, text=True, encoding="utf-8", capture_output=True, env=env)
-            if result.returncode:
-                sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
-        log = (tmp / "template.log").read_text(encoding="utf-8", errors="replace")
-        if "Overfull" in log:
-            if kind in COMPANION_LABELS or page_text_override is not None:
-                shutil.copyfile(tmp / "template.pdf", output.with_suffix(".failed.pdf"))
-            details = "\n".join(line for line in log.splitlines() if "Overfull" in line)
-            raise RuntimeError(f"LuaLaTeX reported an overfull box in {base.name}/{page_name}: {details}")
+        session = ACTIVE.get()
+        key = None if session is None else compile_key(
+            session, ROOT, tmp, records, selected,
+            dict(base=str(base.resolve()), kind=kind, expanded=expanded, category=category,
+                 page_text_override=page_text_override))
+        reused = session is not None and session.restore('compile', key, tmp / 'template.pdf')
+        if not reused:
+            env = {**os.environ, "SOURCE_DATE_EPOCH": "0", "FORCE_SOURCE_DATE": "1"}
+            for _ in range(2):
+                result = subprocess.run(["lualatex", *(["-recorder"] if session is not None else []), "-no-shell-escape", "-halt-on-error", "-interaction=nonstopmode", "template.tex"], cwd=tmp, text=True, encoding="utf-8", capture_output=True, env=env)
+                if result.returncode:
+                    sys.stderr.write(result.stdout[-4000:]); raise RuntimeError("LuaLaTeX compilation failed")
+            log = (tmp / "template.log").read_text(encoding="utf-8", errors="replace")
+            if "Overfull" in log:
+                if kind in COMPANION_LABELS or page_text_override is not None:
+                    shutil.copyfile(tmp / "template.pdf", output.with_suffix(".failed.pdf"))
+                details = "\n".join(line for line in log.splitlines() if "Overfull" in line)
+                raise RuntimeError(f"LuaLaTeX reported an overfull box in {base.name}/{page_name}: {details}")
         pdf = tmp / "template.pdf"
         from pypdf import PdfReader
         reader = PdfReader(pdf)
@@ -297,6 +305,17 @@ def compile_entry(base: Path, records: dict[str, dict], selected: dict[str, str]
             if label not in extracted or f"{base.name} / {kind}" not in extracted:
                 raise RuntimeError("companion page identity missing")
         shutil.copyfile(pdf, output)
+        if session is not None and not reused:
+            dependencies = set()
+            for line in (tmp / 'template.fls').read_text(encoding='utf8').splitlines():
+                if line.startswith('INPUT '):
+                    dependency = Path(line[6:])
+                    if not dependency.is_absolute():
+                        dependency = tmp / dependency
+                    dependency = dependency.resolve()
+                    if dependency.is_file() and tmp not in dependency.parents:
+                        dependencies.add(dependency)
+            session.save('compile', key, output, sorted(dependencies))
         print(f"built {output} (1 page, 612 x 792 pt, sha256 {hashlib.sha256(output.read_bytes()).hexdigest()})")
 
 
@@ -511,19 +530,21 @@ def main() -> int:
     parser.add_argument("--mode", choices=("draft", "final"), required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--kind", choices=("profile", *COMPANION_LABELS), default="profile")
+    parser.add_argument("--reuse-session", type=Path, help="Explicit disposable session from binder_reuse.py init")
     args = parser.parse_args()
     try:
-        if args.entry:
-            if args.kind == "profile":
-                compile_entry(*load_entry(args.entry, args.mode), args.output)
-            elif args.kind in ANIMAL_PAGE_KINDS:
-                compile_animal(args.entry, args.kind, args.mode, args.output)
+        with activate(args.reuse_session):
+            if args.entry:
+                if args.kind == "profile":
+                    compile_entry(*load_entry(args.entry, args.mode), args.output)
+                elif args.kind in ANIMAL_PAGE_KINDS:
+                    compile_animal(args.entry, args.kind, args.mode, args.output)
+                else:
+                    compile_companion(args.entry, args.kind, args.mode, args.output)
+            elif args.supplemental:
+                compile_supplemental(args.supplemental, args.mode, args.output)
             else:
-                compile_companion(args.entry, args.kind, args.mode, args.output)
-        elif args.supplemental:
-            compile_supplemental(args.supplemental, args.mode, args.output)
-        else:
-            compile_manifest(args.manifest, args.mode, args.output)
+                compile_manifest(args.manifest, args.mode, args.output)
     except (OSError,ValueError,RuntimeError,json.JSONDecodeError) as exc: parser.exit(1,f"error: {exc}\n")
     return 0
 if __name__ == "__main__": raise SystemExit(main())
