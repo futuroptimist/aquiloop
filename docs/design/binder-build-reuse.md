@@ -26,7 +26,10 @@ than one second old (recent files are rehashed to avoid same-tick stat races).
 Linux ctime makes same-size edits with restored mtime visible; other platforms rehash bytes. A file
 changing during hashing fails explicitly. This hash memo is never persisted.
 Every lookup still walks the trees, so new search-tree files/directories and
-symlink targets affect the key. Unsupported custom search
+symlink targets affect the key. Traversal uses directory-entry stat information
+and device/inode cycle detection, avoiding repeated ancestor resolution. Overlapping
+trees are walked once, while explicitly included package roots below otherwise
+excluded `site-packages` directories remain covered. Unsupported custom search
 path expressions fail explicitly rather than silently omitting inputs.
 
 Input/rights/evidence resolution still runs before lookup. Reused PDFs still pass

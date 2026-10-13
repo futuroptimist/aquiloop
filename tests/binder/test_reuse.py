@@ -106,6 +106,24 @@ class ReuseTests(unittest.TestCase):
         folder=self.root/'inputs';folder.mkdir();(folder/'one').write_text('one')
         before=self.session.snapshot([folder]);(folder/'two').write_text('two')
         self.assertNotEqual(self.session.snapshot([folder]),before)
+        if sys.platform == 'linux':
+            before = self.session.snapshot([folder])
+            (folder/'cycle').symlink_to(folder, target_is_directory=True)
+            self.assertNotEqual(self.session.snapshot([folder]), before)
+            target = self.root/'external'; target.mkdir(); (target/'font').write_text('one')
+            (folder/'linked').symlink_to(target, target_is_directory=True)
+            before = self.session.snapshot([folder])
+            (target/'font').write_text('two')
+            self.assertNotEqual(self.session.snapshot([folder]), before)
+
+    def test_overlapping_roots_keep_explicit_excluded_packages(self):
+        root = self.root/'stdlib'; package = root/'site-packages/PIL'
+        package.mkdir(parents=True); file = package/'native.so'; file.write_bytes(b'one')
+        (root/'module.py').write_bytes(b'code')
+        before = self.session.snapshot([root, package, file])
+        file.write_bytes(b'two')
+        self.assertNotEqual(self.session.snapshot([root, package, file]), before)
+        self.assertEqual(self.session.snapshot([root, package, file]), self.session.snapshot([root, package]))
 
     def test_process_hash_reuse_keeps_same_size_timestamp_restored_edits_visible(self):
         path = self.root/'input'; path.write_bytes(b'one')

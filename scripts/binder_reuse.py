@@ -55,9 +55,9 @@ class Session:
         self.root = root
         self._file_hashes = {}
 
-    def file_digest(self, path):
+    def file_digest(self, path, before=None):
         path = Path(path)
-        before = path.stat()
+        before = path.stat() if before is None else before
         def identity(stat):
             return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
         signature = identity(before)
@@ -77,26 +77,48 @@ class Session:
 
     def snapshot(self, roots):
         records = []
+        excluded = {'__pycache__', 'site-packages'}
+        directories = []
         for root in sorted(set(Path(p).resolve() for p in roots)):
+            # A containing tree already covers these bytes, except paths below
+            # deliberately excluded package/cache directories. Explicit package
+            # roots below site-packages must still be included.
+            if any(parent in root.parents and not excluded.intersection(root.relative_to(parent).parts)
+                   for parent in directories):
+                continue
             if not root.exists():
                 records.append((str(root), None))
                 continue
             if root.is_file():
                 records.append((str(root), self.file_digest(root)))
                 continue
+            directories.append(root)
             visited = set()
-            for directory, dirs, names in os.walk(root, followlinks=True):
-                real = Path(directory).resolve()
-                records.append((str(Path(directory)), 'directory', str(real)))
-                if real in visited:
-                    dirs[:] = []
+            pending = [(root, root.stat(), None)]
+            while pending:
+                directory, info, link = pending.pop()
+                records.append((str(directory), 'directory', link))
+                identity = (info.st_dev, info.st_ino)
+                if identity in visited:
                     continue
-                visited.add(real)
-                dirs[:] = sorted(d for d in dirs if d not in {'__pycache__', 'site-packages'})
-                for name in sorted(names):
-                    path = Path(directory) / name
-                    if path.is_file() and path.suffix not in {'.pyc', '.pyo'}:
-                        records.append((str(path), self.file_digest(path)))
+                visited.add(identity)
+                # DirEntry reuses filesystem type/stat information. Tracking
+                # device/inode avoids resolving every ancestor of every folder
+                # and still terminates directory-symlink cycles.
+                with os.scandir(directory) as scan:
+                    entries = sorted(scan, key=lambda entry: entry.name)
+                children = []
+                for entry in entries:
+                    path = Path(entry.path)
+                    if entry.is_dir(follow_symlinks=True):
+                        if entry.name not in excluded:
+                            # Windows DirEntry.stat omits inode/device information.
+                            info = entry.stat() if sys.platform == 'linux' else path.stat()
+                            children.append((path, info, os.readlink(path) if entry.is_symlink() else None))
+                    elif entry.is_file(follow_symlinks=True) and path.suffix not in {'.pyc', '.pyo'}:
+                        info = entry.stat() if sys.platform == 'linux' else path.stat()
+                        records.append((str(path), self.file_digest(path, info)))
+                pending.extend(reversed(children))
         return digest(encoded(records))
 
     def toolchain(self):
