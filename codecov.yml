@@ -1,0 +1,10 @@
+comment: false
+coverage:
+  status:
+    project: false
+    patch:
+      default:
+        only_pulls: true
+        informational: true
+        paths:
+          - scripts/
