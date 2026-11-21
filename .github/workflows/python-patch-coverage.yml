@@ -94,49 +94,79 @@ jobs:
         if: ${{ failure() }}
         run: echo '::warning::Advisory coverage generation failed. No partial report was sent to Codecov.'
 
-  upload:
-    name: Upload Python patch coverage (advisory)
+  upload_trusted:
+    name: Upload trusted Python patch coverage via OIDC (advisory)
     needs: report
-    if: ${{ needs.report.outputs.report_ready == 'true' && github.repository == 'futuroptimist/aquiloop' }}
+    if: >-
+      ${{ needs.report.outputs.report_ready == 'true' &&
+          github.repository == 'futuroptimist/aquiloop' &&
+          github.actor != 'dependabot[bot]' &&
+          !endsWith(github.actor, '[bot]') &&
+          ((github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+           (github.event_name == 'pull_request' &&
+            github.event.pull_request.head.repo.full_name == github.repository &&
+            github.event.pull_request.user.login != 'dependabot[bot]' &&
+            github.event.pull_request.user.type == 'User')) }}
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     continue-on-error: true
     steps:
-      - name: Decide whether Codecov upload is configured
-        id: upload
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
-          UPSTREAM_REPOSITORY: ${{ github.repository }}
-          CODECOV_TOKEN: ${{ (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && secrets.CODECOV_TOKEN || '' }}
-        run: |
-          set -euo pipefail
-          if [[ "$EVENT_NAME" == pull_request && -n "$HEAD_REPOSITORY" && "$HEAD_REPOSITORY" != "$UPSTREAM_REPOSITORY" ]]; then
-            echo 'mode=fork' >> "$GITHUB_OUTPUT"
-          elif [[ -n "$CODECOV_TOKEN" ]]; then
-            echo 'mode=trusted' >> "$GITHUB_OUTPUT"
-          else
-            echo '::warning::Codecov upload skipped because this upstream event has no configured upload token. The coverage report remains available in Actions.'
-          fi
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-        if: ${{ steps.upload.outputs.mode != '' }}
         with:
           persist-credentials: false
           fetch-depth: 0
       - name: Download the report from this run
-        if: ${{ steps.upload.outputs.mode != '' }}
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: aquiloop-python-coverage
-          path: build/coverage
+          path: ${{ runner.temp }}/aquiloop-coverage
       - name: Upload the Python coverage report
-        if: ${{ steps.upload.outputs.mode != '' }}
         uses: codecov/codecov-action@0fb7174895f61a3b6b78fc075e0cd60383518dac # v5.5.5
         with:
-          files: build/coverage/python.xml
+          files: ${{ runner.temp }}/aquiloop-coverage/python.xml
           disable_search: true
           fail_ci_if_error: true
-          token: ${{ steps.upload.outputs.mode == 'trusted' && secrets.CODECOV_TOKEN || '' }}
+          use_oidc: true
+      - name: Explain the advisory upload failure
+        if: ${{ failure() }}
+        run: echo '::warning::Advisory Codecov upload failed. The coverage report remains available in Actions.'
+
+  upload_fork:
+    name: Upload public fork Python patch coverage without a token (advisory)
+    needs: report
+    if: >-
+      ${{ needs.report.outputs.report_ready == 'true' &&
+          github.repository == 'futuroptimist/aquiloop' &&
+          github.event_name == 'pull_request' &&
+          toJSON(github.event.repository.private) == 'false' &&
+          github.event.pull_request.head.repo.full_name != '' &&
+          github.event.pull_request.head.repo.full_name != github.repository &&
+          github.actor != 'dependabot[bot]' &&
+          github.event.pull_request.user.login != 'dependabot[bot]' }}
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Download the report from this run
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: aquiloop-python-coverage
+          path: ${{ runner.temp }}/aquiloop-coverage
+      - name: Upload the Python coverage report
+        uses: codecov/codecov-action@0fb7174895f61a3b6b78fc075e0cd60383518dac # v5.5.5
+        with:
+          files: ${{ runner.temp }}/aquiloop-coverage/python.xml
+          disable_search: true
+          fail_ci_if_error: true
       - name: Explain the advisory upload failure
         if: ${{ failure() }}
         run: echo '::warning::Advisory Codecov upload failed. The coverage report remains available in Actions.'
