@@ -301,7 +301,7 @@ validation should distinguish those record types and enforce the corresponding
 fields without weakening or replacing existing overview validation. Initial
 research should begin with the [USDA Plant Hardiness Zone Map](https://planthardiness.ars.usda.gov/),
 its [usage guidance](https://planthardiness.ars.usda.gov/pages/how-to-use-the-maps),
-[UC ANR's San Mateo/San Francisco climate material](https://ucanr.edu/site/uc-master-gardeners-san-mateo-san-francisco-counties/climate),
+[UC ANR's San Mateo/San Francisco climate material](https://www.ucanr.edu/sites/default/files/2025-03/259005.pdf),
 and the existing `sources.yaml` inventories, then use relevant university
 extension, botanical-garden, RHS, breeder, and identifiable aquarium-grower
 sources. Practical source-backed instructions remain possible when specimen
@@ -1022,7 +1022,7 @@ cultivar denominations, and patent status.
 | *Kalanchoe humilis* “Desert Surprise” | [RHS](https://www.rhs.org.uk/plants/310184/kalanchoe-humilis-desert-surprise/details) records *K. humilis* ‘Desert Surprise’ in Crassulaceae and describes a compact perennial succulent with patterned fleshy leaves. | Verify the specimen and exact label spelling from photos. The supplied Greg retailer page is inaccessible, so it cannot corroborate the purchase label. Cultivar styling should become ‘Desert Surprise’ only after label/specimen review. |
 | Pothos | *Epipremnum aureum* is a provisional identity. [NC State Extension](https://plants.ces.ncsu.edu/plants/epipremnum-aureum/) identifies it as an Araceae climbing/trailing evergreen native to the Society Islands. | “Pothos” covers plants and cultivars that can be confused in trade. Obtain whole vine, nodes, petiole, upper/lower leaf and label photos; record variegation without assigning a cultivar from color alone. |
 | Bird of paradise | Common name alone cannot choose between *Strelitzia reginae* and *S. nicolai*. NC State treats [*S. reginae*](https://plants.ces.ncsu.edu/plants/strelitzia-reginae/) as a clumping South African species and [*S. nicolai*](https://plants.ces.ncsu.edu/plants/strelitzia-nicolai/) as a much larger, woody-stemmed species with a different native range. | Keep the page title at genus/common-name level until label, full habit, base/stem, leaf and (if present) flower photos support species identification. A future indoor/outdoor comparison is out of the initial page budget and needs recorded paired conditions. |
-| Aquarium hornwort | *Ceratophyllum demersum* is provisional. [Tropica](https://tropica.com/en/plants/plantdetails/?id=4434) describes a rootless *C. demersum* form that may float or be placed at the bottom; this is identifiable-grower guidance, not proof of the specimen or universal aquarium performance. | Obtain package/source and close photographs of nodes, forked leaves and stem. Confirm with a botanical authority before final copy and do not transfer claims about Tropica's particular selection to an unknown specimen. |
+| Aquarium hornwort | *Ceratophyllum demersum* is provisional. [Tropica](https://tropica.com/products/ceratophyllum-demersum) describes a rootless *C. demersum* form that may float or be placed at the bottom; this is identifiable-grower guidance, not proof of the specimen or universal aquarium performance. | Obtain package/source and close photographs of nodes, forked leaves and stem. Confirm with a botanical authority before final copy and do not transfer claims about Tropica's particular selection to an unknown specimen. |
 
 ### Source and claim rules
 
