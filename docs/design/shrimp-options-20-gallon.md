@@ -166,7 +166,7 @@ No retail “beginner-proof,” unlimited-stocking, or guaranteed-compatibility 
 is adopted. The unknowns above remain open for the later selection/setup discussion.
 
 [cherry]: https://www.aquariumcoop.com/blogs/aquarium/cherry-shrimp-care
-[neo-university]: https://ask.ifas.ufl.edu/publication/IN1301
+[neo-university]: https://ask.ifas.ufl.edu/publication/IN1301/pdf
 [amano]: https://www.aquariumcoop.com/blogs/aquarium/amano-shrimp
 [amano-farm]: https://www.theshrimpfarm.com/posts/amano-shrimp-care-sheet/
 [neo-farm]: https://www.theshrimpfarm.com/posts/neocaridina-shrimp-care-breeding/
