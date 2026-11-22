@@ -8,10 +8,10 @@ record physical qualification for the SST interface.
 
 ## Beginner quick start: no external wiring
 
-**You need:** An ESP32-S3-DevKitC-1, a USB data cable, a computer, and a dry,
-nonconductive work surface. Keep the session away from the aquarium and do
-not open or modify any power supply. No breadboard, external LED, water, sensor power
-supply, or pump is needed for this session.
+**You need:** An ESP32-S3-DevKitC-1-N8R8, a USB data cable, a computer, and a
+dry, nonconductive work surface. Keep the session away from the aquarium and
+do not open or modify any power supply. No breadboard, external LED, water,
+sensor power supply, or pump is needed for this session.
 
 1. Leave the ESP32 USB unplugged and the sensor supply off and unplugged. If
    connected from an earlier experiment, remove external wires only after both
@@ -20,8 +20,10 @@ supply, or pump is needed for this session.
    module name and memory marking. **N8R8 identifies memory, not the board
    revision.** Match the board to the Espressif guide and schematic linked in
    the [design's board notes](../../../../docs/design/aquarium-auto-top-off.md#firmware-and-physical-evidence).
-   If the revision or USB connector is uncertain, stop at the inventory; do
-   not guess a pin or port.
+   Confirm the N8R8 variant (8 MB flash and 8 MB octal PSRAM) separately from
+   the board revision. If the variant, revision, or USB-to-UART connector is
+   different or uncertain, stop at the inventory. Do not guess a pin, port,
+   or upload setting.
 3. If you have the SST, record its exact part number and the supply label in
    your notes. Keep both unpowered. This is an inventory, not a shopping list
    or a wiring check.
@@ -128,12 +130,19 @@ that lesson are supplied here.
    **3.3.8** for this reproducible environment.
 4. Open `sst_led.ino`, then select **ESP32S3 Dev Module** and these Tools values:
    **Flash Size: 8 MB**, **Partition Scheme: 8M with spiffs**,
-   **Flash Mode: QIO 80MHz**, **PSRAM: OPI PSRAM**, and
-   **Upload Mode: UART0 / Hardware CDC**.
+   **Flash Mode: QIO 80MHz**, **PSRAM: OPI PSRAM**,
+   **Upload Mode: UART0 / Hardware CDC**, and **USB CDC On Boot: Disabled**.
+   These values are for the N8R8 board using its USB-to-UART connector.
+   Disabling CDC on boot sends the sketch's serial output to that connector.
 5. Select the serial port belonging to the ESP32 USB-to-UART connection and
    click Upload. If upload fails, confirm that the cable carries data, reselect
    the port, and use Espressif's BOOT/reset sequence: hold BOOT, press and
    release RESET, release BOOT, then retry upload.
+6. If upload succeeds but the monitor is blank, confirm the same USB-to-UART
+   port is selected and the monitor is set to **115200 baud**. If **USB CDC On
+   Boot** was enabled, disable it and upload again before reopening the monitor.
+   Press RESET without holding BOOT to see the banner. If it still does not
+   appear, record the check as pending. Keep all external wiring disconnected.
 
 ## Conditional physical procedure and pending record
 
