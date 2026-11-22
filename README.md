@@ -26,8 +26,11 @@ printable set of plant profiles and a handwritten watering log.
 The [photographed succulent extension and binder index](docs/design/photographed-succulents-binder.md)
 adds Powder Puff and Crassula rupestris with care, Pacifica context, propagation
 and complete species logs in the opt-in v7 draft.
-Start with the supervised, dry-bench
-[SST + LED Phase 0 experiment](firmware/auto_top_off/experiments/sst_led/README.md).
+Start with the [no-wiring Phase 0 quick start](firmware/auto_top_off/experiments/sst_led/README.md#beginner-quick-start-no-external-wiring).
+You can identify the board and verify USB/serial today. Keep the SST and any
+pump disconnected from the ESP32. Sensor wiring is blocked until the
+[electrical qualification gate](docs/design/aquarium-auto-top-off.md#electrical-qualification-gate---before-any-gpio-connection)
+passes for the exact board and interface.
 
 ### Duckweed Scooper
 
