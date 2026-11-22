@@ -1,37 +1,75 @@
 # SST + LED Phase 0 experiment
 
-The [authoritative learning plan](../../../../docs/design/aquarium-auto-top-off.md#81-phase-0--sst-water-detection-hello-world)
-now separates board/USB/serial, onboard RGB, protected SST bucket indication,
-and external LED/resistor learning. Later steps add a parametric hang-on-back
-mount, two sensors with adjustable spacing and a pretend-pump LED, supervised
-calibrated pumping, then observability. Each step has its own BoM and pass gate.
+**Start with USB only. Do not connect the SST level signal, a sensor-supply
+monitor, or any SST circuit to an ESP32 pin. Do not connect a pump.** The
+earlier divider recipes are not approved wiring, even if a meter shows less
+than 3.2 V. The existing sketch compiled, but this repository does not yet
+record physical qualification for the SST interface.
 
-**Status: existing sketch compile validation passed; electrical qualification
-and all physical validation remain pending.** This PR changes documentation
-only. The sketch drives GPIO5 external LED from GPIO4 digital input; it does
-not implement onboard RGB, two sensors, pump control or fault diagnosis.
+## Beginner quick start: no external wiring
 
-## Stop before connecting the SST input
+**You need:** An ESP32-S3-DevKitC-1, a USB data cable, a computer, and a dry,
+nonconductive work surface. Keep the session away from the aquarium and do
+not open or modify any power supply. No breadboard, external LED, water, sensor power
+supply, or pump is needed for this session.
 
-The previous assembly recipe is withdrawn. Read and complete the
-[electrical qualification gate](../../../../docs/design/aquarium-auto-top-off.md#electrical-qualification-gate---before-any-gpio-connection)
-before any SST/interface connection to an ESP32 GPIO. Initial interface-node
-measurements use an isolated MCU input and an appropriate representative load.
-Verify exact board/module revision and manufacturer schematic before GPIO or
-RGB instructions; N8R8 does not identify the board revision.
+1. Leave the ESP32 USB unplugged and the sensor supply off and unplugged. If
+   connected from an earlier experiment, remove external wires only after both
+   supplies are disconnected. Keep the header pins empty for this session.
+2. Photograph the markings on the board and module. Record the board revision,
+   module name and memory marking. **N8R8 identifies memory, not the board
+   revision.** Match the board to the Espressif guide and schematic linked in
+   the [design's board notes](../../../../docs/design/aquarium-auto-top-off.md#firmware-and-physical-evidence).
+   If the revision or USB connector is uncertain, stop at the inventory; do
+   not guess a pin or port.
+3. If you have the SST, record its exact part number and the supply label in
+   your notes. Keep both unpowered. This is an inventory, not a shopping list
+   or a wiring check.
+4. If the board and USB-to-UART port match the guide, follow the
+   [board-only upload steps below](#arduino-ide-2x-setup-and-upload).
+   Use only USB power. No sensor, jumper, LED or common-ground wire should be
+   attached. If you already completed this lesson on the same documented
+   board and setup, keep that result instead of repeating it.
+5. Open Serial Monitor at **115200 baud**, reset the bare board, and look for
+   `Aquiloop SST + LED Phase 0`. Repeat for three successful upload/reset
+   cycles if recording the 0a gate. The pin has no signal attached: ignore any
+   WET/DRY text. It cannot tell you anything about water or a sensor.
+
+**Finish:** Keep the revision, USB port, sketch revision, and banner results.
+Mark the board-only check passed only if the expected banner appeared each
+time; otherwise record the step as pending. Unplug USB when done. Both
+supplies, all sensor wires and the pump remain disconnected. Board-only RGB
+success is a separate result, not permission to wire a sensor.
+
+## Stop before connecting either SST input
+
+The [electrical qualification gate](../../../../docs/design/aquarium-auto-top-off.md#electrical-qualification-gate---before-any-gpio-connection)
+applies to **every** SST-related junction, including a divider intended to
+monitor the sensor's 5 V supply. It applies to GPIO3, GPIO4 and any other pin,
+whether read digitally or as an analog input. GPIO3 is sampled at reset for
+a chip setting; don't use it as a default spare analog pin.
+
+A meter shows a steady voltage; it may miss brief spikes. Backfeed means
+the sensor circuit can send current into an ESP32 that is supposed to be off.
+A preferred plug-in order does not prevent an accidental unplug or power
+loss. The next step is a reviewed interface and disconnected test plan, not
+a live hookup. If you cannot confirm the limits or do not have the instruments
+or help to check them, **stop here**. Do not try it on the ESP32 to find out.
 
 The proposed sensor rail is regulated **5 V**; the future pump rail is separate
 **12 V**. Never connect raw sensor output to a GPIO, run this SST at 3.3 V, or
-reuse the three-resistor divider at 12 V. Do not connect bench +5 V to the
-ESP32 5 V pin while USB powers it. Keep all electronics dry, use a separate
-freshwater cup/bucket, and isolate all power before rewiring. Only the optical
-tip contacts water. No actuator or aquarium installation belongs in Phase 0.
+reuse the three-resistor divider at 12 V. Do not tie bench +5 V to the board's
+5 V pin while USB powers it. Keep electronics dry. Any later approved wet
+test uses a separate freshwater vessel and wets only the optical tip; it
+does not take place in the aquarium. No actuator belongs in Phase 0.
 
-## Smallest SST BoM still includes protection
+## Future SST parts: planning only
 
 - Reuse the verified ESP32-S3-DevKitC-1-N8R8, data USB cable and computer.
 - One SEN-13835 / LLC200D3SH-LLPK1, regulated 5 V sensor supply,
   breadboard/leads, defined ground/reference and strain relief.
+- This is not a purchase or assembly list. Numeric resistor values below
+  describe an unqualified analysis candidate only.
 - **Mandatory per SST channel:** complete qualified voltage-interface and
   power-off-protection package, selection pending. The existing candidate has
   three 10 kohm, 1/4 W, +/-5% resistors (10 kohm upper; two series resistors
@@ -47,7 +85,9 @@ tip contacts water. No actuator or aquarium installation belongs in Phase 0.
 No new protection part or wiring recipe is selected here. Actual BoMs are in
 this README and the design document; the design's future bom.csv is not present.
 
-## Electrical learning checklist
+## Electrical learning checklist (review only)
+
+This is background for a qualified review, not an assembly procedure.
 
 1. Read the part-specific SST output limits and ESP32-S3 GPIO DC table linked
    in the authoritative gate, not a generic sensor or power-pin maximum.
@@ -67,10 +107,10 @@ this README and the design document; the design's future bom.csv is not present.
 5. Only after the gate is reviewed and passed may a later physical experiment
    use the approved wiring and record wet/dry results. No such result exists yet.
 
-## Existing external-LED sketch setup
+## Existing sketch: USB-only upload setup
 
 These settings preserve the previously compiled configuration. Board-only
-upload/serial checks may leave all external circuits disconnected; disregard
+upload/serial checks must keep all external circuits disconnected; disregard
 floating-input sensor text. The onboard RGB lesson needs a separate future
 revision-specific example. Do not treat this sketch as the two-sensor lesson.
 That future lesson uses the [two-SST pump permission contract](../../../../docs/design/aquarium-auto-top-off.md#two-sst-pump-permission-and-transition-contract)
@@ -95,10 +135,9 @@ that lesson are supplied here.
    the port, and use Espressif's BOOT/reset sequence: hold BOOT, press and
    release RESET, release BOOT, then retry upload.
 
-
 ## Conditional physical procedure and pending record
 
-After the electrical gate passes, use the reviewed interface/wiring record,
+**Not ready to run.** After the electrical gate passes, use the reviewed interface/wiring record,
 with board GPIO assignments verified, to repeat the dry/wet/blotted-dry cycle
 at least five times. Capture serial at 115200 baud, voltage envelope and LED
 state. With the existing sketch, HIGH means DRY/LED off and LOW means WET/LED

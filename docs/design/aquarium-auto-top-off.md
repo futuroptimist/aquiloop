@@ -311,6 +311,8 @@ qualification and all physical validation are pending.** The smaller iterations
 below are a learning plan, not implemented firmware or completed experiments.
 Phase 0 has no pump, relay, MOSFET, Wi-Fi, enclosure, or aquarium installation.
 The existing sketch does not drive the onboard RGB LED or support two sensors.
+For an executable first session, use the [no-wiring quick start](../../firmware/auto_top_off/experiments/sst_led/README.md#beginner-quick-start-no-external-wiring).
+This phase plan is not a start-to-finish wiring recipe.
 
 Use a separate freshwater cup/bucket and keep electronics, USB, supplies, and
 exposed conductors dry. Only the optical prism tip contacts water. Isolate all
@@ -367,8 +369,15 @@ ratings and cost remain open until manufacturer-supported interface review.
 
 #### Electrical qualification gate - before any GPIO connection
 
-The previous direct assembly recipe is withdrawn pending qualification. Do not
-connect the candidate divider to GPIO4 or any ESP32 input for initial tests.
+The previous direct assembly recipe is withdrawn pending qualification.
+**Keep every SST circuit disconnected from the ESP32 during initial tests.**
+This includes the level signal, an optional supply-sense junction, and any
+second channel, whether the destination is a digital input or an ADC. Neither
+GPIO4 nor GPIO3 nor any other input is approved by a nominal voltage check
+or a manual power sequence. [Espressif's GPIO table](https://docs.espressif.com/projects/esp-idf/en/release-v5.3/esp32s3/api-reference/peripherals/gpio.html)
+lists GPIO3 as a strapping pin (sampled at reset). Choose and review each
+pin against the exact board schematic, including reset behavior.
+
 Never connect raw SST output to a GPIO, supply the SST from 3.3 V, or reuse this
 divider at 12 V. Do not tie bench +5 V to the board's 5 V pin while USB powers it.
 
@@ -427,6 +436,15 @@ power limits for the selected interface and board; prove safe behavior with
 either rail absent, including MCU on/sensor off. No GPIO connection until the
 reviewed solution covers these states and the measured envelope passes. Unknown
 limits keep the gate open; no unverified substitute component is recommended.
+
+**Record the decision for each input.** Include the board and sensor part
+numbers, schematic revision, pin function at reset, test load and instruments,
+measured worst-case bounds with uncertainty, and evidence for safe behavior
+during both power sequences and with either rail missing. Record pass or
+blocked and why. The worked example above applies only to its stated divider
+and assumptions; it cannot qualify a different level or supply-sense circuit.
+A beginner without a reviewed record and the needed equipment should stop
+after the board-only lesson, not improvise a circuit or a powered-off test.
 
 #### Firmware and physical evidence
 
